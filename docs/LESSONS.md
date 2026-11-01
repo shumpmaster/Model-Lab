@@ -193,3 +193,10 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** drafting from the memos' short answers without reading each claim against the confirmation's hold list and the memo's own grades; section numbers written from memory.
 - **Correction proposed:** before a drafted claim cites research, look up the entry's filing status in the confirmation (or the library, once filed) and cite only fileable entries, with their caveats; copy section numbers from the memo, never from memory.
 - **Status:** fixed here (redrafted); model change open.
+
+### LL-27 A question's pull request opened with a body that failed the form check
+- **What happened:** the value-target question's pull request (#9) was opened with Context bullets ending in a full stop after the source; the pr-body check requires each bullet to end with its closing bracket, and failed. The body was corrected in place.
+- **Caught by:** the pr-body check, read after opening.
+- **Cause:** the body was written by hand and not run through the repository's own pr-body check before the pull request was opened.
+- **Correction proposed:** run `governance_checks.py pr-body` on the drafted body locally before opening any pull request (the Chief of Staff now does so with a saved event file).
+- **Status:** fixed here (practice changed); model change open (the check's message could name the trailing-character rule).
