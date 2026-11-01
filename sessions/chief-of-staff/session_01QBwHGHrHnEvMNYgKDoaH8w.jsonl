@@ -4,3 +4,6 @@
 {"event": "helper", "session": "session_01QBwHGHrHnEvMNYgKDoaH8w", "role": "critic", "started": "2026-11-01T19:41:10Z", "ended": "2026-11-01T19:43:12Z", "reported": {"tokens": 94530, "tool_uses": 18, "duration_ms": 122214}}
 {"event": "helper", "session": "session_01QBwHGHrHnEvMNYgKDoaH8w", "role": "source-checker", "started": "2026-11-01T19:38:30Z", "ended": "2026-11-01T19:45:41Z", "reported": {"tokens": 231701, "tool_uses": 37, "duration_ms": 430431}}
 {"event": "helper", "session": "session_01QBwHGHrHnEvMNYgKDoaH8w", "role": "critic", "started": "2026-11-01T19:47:00Z", "ended": "2026-11-01T19:47:21Z", "reported": {"tokens": 46195, "tool_uses": 5, "duration_ms": 20686}}
+{"event": "helper", "session": "session_01QBwHGHrHnEvMNYgKDoaH8w", "role": "critic", "started": "2026-11-01T19:48:10Z", "ended": "2026-11-01T19:49:02Z", "reported": {"tokens": 50397, "tool_uses": 7, "duration_ms": 52397}}
+{"event": "helper", "session": "session_01QBwHGHrHnEvMNYgKDoaH8w", "role": "critic", "started": "2026-11-01T19:47:00Z", "ended": "2026-11-01T19:48:05Z", "reported": {"tokens": 114414, "tool_uses": 8, "duration_ms": 61455}}
+{"event": "helper", "session": "session_01QBwHGHrHnEvMNYgKDoaH8w", "role": "critic", "started": "2026-11-01T19:52:00Z", "ended": "2026-11-01T19:52:15Z", "reported": {"tokens": 120262, "tool_uses": 3, "duration_ms": 15245}}
