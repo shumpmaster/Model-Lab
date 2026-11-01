@@ -133,3 +133,10 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** staging everything before committing by lane.
 - **Correction proposed:** stage by lane only; run the surface guard's diff check before every push, not only before merging a builder's branch.
 - **Status:** fixed here; model change open.
+
+### LL-19 Source checkers sent to a checkout on the wrong branch
+- **What happened:** to write the lessons log, the Chief of Staff switched the shared Model-Lab checkout to a branch without the research memos, then dispatched three source checkers at that checkout. One returned unable to find the memos; the others were told mid-run.
+- **Caught by:** the Source checker on Q-002 to Q-004.
+- **Cause:** one working copy shared between the Chief of Staff's own edits and its helpers' reads.
+- **Correction proposed:** helpers read from a fixed path or worktree for the branch they need; the Chief of Staff edits other branches in their own worktrees.
+- **Status:** fixed here (separate worktree for the lessons branch); model change open.
