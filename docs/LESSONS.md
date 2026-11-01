@@ -140,3 +140,25 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** one working copy shared between the Chief of Staff's own edits and its helpers' reads.
 - **Correction proposed:** helpers read from a fixed path or worktree for the branch they need; the Chief of Staff edits other branches in their own worktrees.
 - **Status:** fixed here (separate worktree for the lessons branch); model change open.
+
+### LL-20 A merge made under the default identity again (LL-13 recurred)
+- **What happened:** updating Service-Desk's answer branch from main made a merge commit under the environment's default name; fixed before it was pushed.
+- **Caught by:** the Chief of Staff, checking the commit's author before pushing.
+- **Cause:** `git merge` without the identity flags; the same slip as LL-13.
+- **Correction proposed:** LL-13 is reopened. Set the identity once per repository for the session's lane, and have the surface guard's diff check run before every push (LL-18).
+- **Status:** open (recurred).
+
+### LL-21 A new project would have shown on the desk as finished
+- **What happened:** the Design reviewer found that once Model-Lab is readable, its Home tile would read "Next: no milestone left to reach", because its project document had no milestone lines yet, as is normal early in Discovery.
+- **Caught by:** the Design reviewer, by rendering the desk with Model-Lab's real records.
+- **Cause:** two at once. The desk reads "no milestone line" as "all reached" (Service-Desk src/public/lib/home.js:645), and the Chief of Staff added the project to the desk before drafting its milestones.
+- **Correction proposed:** draft a project's milestones before it goes on the desk; and a desk fix so a project with no milestone lines shows "not recorded", put to the owner as its own change to the graduated desk.
+- **Status:** open (milestones being drafted; the desk fix not yet put to the owner).
+
+### LL-22 No check of the environment's network before research begins
+- **What happened:** the owner asked for this entry, after LL-12: research ran for hours before anyone found that the cloud environment's network blocked most research sources, and the owner then had to change the environment's settings mid-project.
+- **The owner's words, verbatim (2026-11-01):** "a lesson learned that needs to be added is a Claude code environment assessment to determine if sources for research need to be given access."
+- **Caught by:** the owner.
+- **Cause:** nothing in the model asks for the session's environment (its network access, tools and limits) to be checked against what the work will need before the work starts.
+- **Correction proposed:** an environment assessment at the start of any project's Discovery, and before research is dispatched: list the kinds of sources the research will need, test that the environment can reach them, and put any needed change to the owner first, with the exact steps. The same step can cover the other things a session needs (tools, repositories, permissions).
+- **Status:** open; to become a model change at the end of the cycle.

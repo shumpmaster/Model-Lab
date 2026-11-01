@@ -1,8 +1,20 @@
-# Research memo: Q-005. Written procedures that pass work between people: when they help, when they make no difference, when they harm, and how fields add and retire rules (2026-11-01)
+# Research memo: Q-005. Written procedures that pass work between people: when they help, when they make no difference, when they harm, and how fields add and retire rules (2026-11-01, revision 1)
 
 **Depth:** 3 (graded memo). **Researcher session:** fresh, blind (D-055).
 
 **Question:** research/Q-005.md. It serves the Discovery of P-001. It asks which principles from other fields transfer to the written instructions passed between agents of the operating model, under which conditions, and what limits they set on adding and retiring instructions.
+
+**Revision 1 (2026-11-01).** This revision changes only what research/Q-005-source-check-2.md found:
+- the Sumwalt sentence is dropped from F15;
+- the F2 and F22 wordings are marked as paraphrase, and F22 now uses IHI's own words;
+- the Urbach PMID is corrected to 24620866;
+- F5 is resolved, and P-2 and P-8 (with §1, §3.1, LP-02 and LP-07) are revisited against it;
+- the "high baseline quality" remark in F3 is reworded as my own inference;
+- LP-03 is reworded;
+- LP-06 is marked opinion;
+- regrades, filing status and the split of LF-Q005-05 and -06 are recorded as the check lists them (§5 and §8).
+
+No new web pages were opened for this revision (L-0005). Nothing else is changed.
 
 ---
 
@@ -23,8 +35,8 @@ Every statement is marked **Fact**, **Estimate** or **Opinion**.
 **Access limits in this session:**
 - `www.nejm.org` and `www.sciencedirect.com` did not resolve when fetched.
 - `pmc.ncbi.nlm.nih.gov` and `psnet.ahrq.gov` were blocked, as the brief warned.
-- After the second resolution failure, the environment said to stop trying further hosts. I did, so **no web page was opened directly**. Every web claim below is drawn from search-result extracts and is graded C or D.
-- To raise the key items to grade B, the Source checker needs `nejm.org`, `sciencedirect.com`, `qualitysafety.bmj.com`, `bmjopen.bmj.com`, `jamanetwork.com`, `ntrs.nasa.gov`, `tsb.gc.ca`, `sec.gov` and `apps.dtic.mil` allowed.
+- After the second resolution failure, the environment said to stop trying further hosts. I did, so **no web page was opened directly by me**. Every web claim below is drawn from search-result extracts and is graded C or D.
+- The second source check opened many of the primary records (§8). Its results are recorded there. It changed no grades, and I do not mark my own facts as checked.
 
 **No model memory is used as a source.** Where I know of evidence but found no source for it this session, I leave it out or list it as a gap.
 
@@ -34,13 +46,20 @@ Every statement is marked **Fact**, **Estimate** or **Opinion**.
 
 ## 1. Short answer
 
-1. **Opinion (H).** Written procedures improved outcomes where three things held:
+1. **Opinion (M).** Written procedures improved outcomes where three things held:
    - the failures they targeted were common at baseline;
    - the procedure was actually carried out in full;
    - it came inside a wider package: training, team routines, coaching, measurement and peer pressure.
 
-   The same written instrument showed **no effect** where baseline quality was already high, or where it was mandated without real use. Procedures caused **harm** where the situation differed from the one the authors assumed, so following the text used up the scarce resource, time. The evidence is in §3.1–§3.3.
-2. **Opinion (H).** The strongest evidence in every field comes from *before-after* studies. The better-controlled studies usually found smaller effects than the first uncontrolled reports. A pipeline that can replay the same task under two instruction versions can measure much more cleanly than any of these fields could. This is the clearest transferable *method* lesson (§3.1, §4 P-8).
+   The same written instrument showed **no effect** in a mandated province-wide rollout (Ontario).
+   - Whether high baseline quality is what removes the effect is **not established**. That reading is my own inference. Against it, a controlled study in six hospitals described as having "high standards of care" found a large effect (F5).
+
+   Procedures caused **harm** where the situation differed from the one the authors assumed, so following the text used up the scarce resource, time. The evidence is in §3.1–§3.3.
+2. **Opinion (M).** The strongest evidence in every field comes from *before-after* studies.
+   - Some better-controlled studies found smaller effects than the first uncontrolled reports: the randomised mortality result (F3) and the English replication (F9).
+   - Not all did: SURPASS, with a concurrent control, found a large fall (F5).
+
+   The lesson is that, without a control, you cannot tell which case you are in. A pipeline that can replay the same task under two instruction versions can measure much more cleanly than any of these fields could. This is the clearest transferable *method* lesson (§3.1, §4 P-8).
 3. **Opinion (M).** On adding rules: fields that studied their own response to single incidents found the response was usually the **weakest kind of fix**, meaning training, a policy reminder or a process tweak. The same kinds of event then recurred.
 
    The stronger fixes were those that do not depend on someone remembering a written rule: forcing functions and engineered controls. Aviation filters incident-driven proposals through a second body that weighs cost. Some proposals are rejected there.
@@ -61,7 +80,7 @@ Every statement is marked **Fact**, **Estimate** or **Opinion**.
 
 **Chosen**, in order of evidence strength for this question:
 
-1. **Surgical and intensive-care checklists.** There is a stepped-wedge randomised trial, several multi-site before-after studies, a province-wide natural experiment, systematic reviews, and a qualitative study of *why* one programme worked.
+1. **Surgical and intensive-care checklists.** There is a stepped-wedge randomised trial, several multi-site before-after studies, a controlled multi-site study, a province-wide natural experiment, systematic reviews, and a qualitative study of *why* one programme worked.
 2. **Clinical handover between shifts.** There is a nine-site and a 32-site multi-site study of one bundle, plus a systematic review of a second tool.
 3. **Aviation checklists and procedures.** There are NASA field studies, accident investigations where a procedure did not fit, and line audits of non-compliance.
 4. **Cross-industry rule management.** This covers safety-science reviews, research on corrective actions after root-cause analysis, guideline obsolescence, organisational rule dynamics and sunset clauses. It is the evidence most directly about *adding and retiring* rules.
@@ -79,23 +98,24 @@ Every statement is marked **Fact**, **Estimate** or **Opinion**.
 
 ## 3. Findings
 
-### 3.1 Surgical and ICU checklists: the same text, three different results
+### 3.1 Surgical and ICU checklists: the same text, different results
 
 - **F1 ★ Fact (C).** In the WHO 19-item Surgical Safety Checklist study (Haynes et al., NEJM 2009;360:491-9), eight hospitals in eight cities were measured before and after, with no concurrent control. Inpatient deaths fell from 1.5% to 0.8% and complications from 11% to 7%. The sample was 7,688 patients, 3,733 before and 3,955 after.
   - Sources: https://news.harvard.edu/gazette/story/2009/01/surgical-safety-checklist-drops-deaths-and-complications-by-more-than-one-third/ ; https://www.hsph.harvard.edu/news/press-releases/hospital-sites-demonstrate-surgical-safety-checklist-drops-deaths-and-complications/ (both press releases from the authors' institution, so not fully independent of the authors); https://www.reliasmedia.com/articles/112170-study-safety-checklist-reduces-mortality .
-- **F2 ★ Fact (C).** After mandatory adoption in 101 Ontario hospitals (Urbach et al., NEJM 2014;370:1029-38, administrative data, before-after), there was no significant change:
+- **F2 ★ Fact (C).** After mandatory adoption in 101 Ontario hospitals (Urbach et al., NEJM 2014;370:1029-38, PMID 24620866, administrative data, before-after), there was no significant change:
   - operative mortality went from 0.71% to 0.65%;
   - complications went from 3.86% to 3.82%;
   - no hospital changed significantly, and no subgroup benefited.
 
-  Leape's editorial argued the checklist "was not actually used".
+  Leape's editorial argued, *in my paraphrase*, that the checklist was not actually used. These are not his words.
   - Sources: https://www.fiercehealthcare.com/healthcare/surgical-safety-checklists-may-not-improve-patient-outcomes-after-all ; https://mdedge.com/content/surgical-checklists-failed-improve-outcomes ; https://theincidentaleconomist.com/wordpress/?p=54007 .
 - **F3 ★ Fact (C).** A stepped-wedge cluster-randomised trial in 2 Norwegian hospitals and 5 surgical specialties (Haugen et al., Ann Surg 2015;261(5):821-8) found:
   - complications fell from 19.9% to 11.5% (P<0.001);
   - length of stay fell by 0.8 days;
   - overall mortality went from 1.6% to 1.0%, which was not significant. One hospital alone fell from 1.9% to 0.2%.
 
-  Commentary raised "checklist fatigue", and suggested that checklists may do little where baseline quality is high.
+  Commentary raised "checklist fatigue".
+  - **Opinion (L), my own inference, not found in any opened source:** checklists may do little where baseline quality is already high. F5 cuts against it.
   - Sources: https://bora.uib.no/handle/1956/8501 ; https://www.uib.no/en/node/79979 ; https://www.patientsafetysolutions.com/docs/May_2015_The_Great_Checklist_Debate.htm .
 - **F4 ★ Fact (C).** In a 25,513-patient cohort at one Dutch hospital (van Klei et al., Ann Surg 2012;255(1):44-9):
   - adjusted mortality fell (OR 0.85, 95% CI 0.73-0.98), while crude mortality did not (3.13%→2.85%, P=0.19);
@@ -105,8 +125,11 @@ Every statement is marked **Fact**, **Estimate** or **Opinion**.
 
   This is observational. Sicker emergency patients were less often fully checked, which is a possible confounder.
   - Sources: https://pubmed.ncbi.nlm.nih.gov/22123159/ (index record, from search extract) ; https://beckersasc.com/asc-quality-infection-control/who-surgery-checklist-may-yield-varying-results-depending-on-level-of-compliance.html .
-- **F5 Fact (C).** The SURPASS multi-step checklist in six Dutch hospitals (de Vries et al., NEJM 2010;363:1928-37) reduced complications from 27.3 to 16.7 per 100 patients. Mortality was reported as falling from 1.5% to 0.8%, but one newsletter attaches those same figures to the WHO study, so the mortality figure is unconfirmed. Whether a control arm existed is unclear in the extracts.
-  - Sources: https://hcplive.com/view/more-evidence-supports-the-use-of-surgical-checklists ; https://www.patientsafetysolutions.com/docs/February_2011_SURPASS_Checklist_Reduces_Malpractice_Claims.htm .
+- **F5 Fact (C).** The SURPASS multi-step checklist in six Dutch hospitals (de Vries et al., NEJM 2010;363:1928-37) reduced complications from 27.3 to 16.7 per 100 patients. **Resolved by source check 2** (PubMed 21067384):
+  - in-hospital mortality fell from 1.5% to 0.8%, and these are SURPASS's own figures; they coincide with the WHO study's;
+  - there was a concurrent control of 5 hospitals, where outcomes did not change;
+  - the six intervention hospitals had "high standards of care".
+  - Sources: https://hcplive.com/view/more-evidence-supports-the-use-of-surgical-checklists ; https://www.patientsafetysolutions.com/docs/February_2011_SURPASS_Checklist_Reduces_Malpractice_Claims.htm ; PubMed 21067384 (opened by source check 2).
 - **F6 Fact (C).** Two later syntheses:
   - A 2016 review of 25 studies (de Jager et al.) judged them too heterogeneous for meta-analysis. It found complications fell in resource-poor settings but the checklist "did not appear to be effective in developed nations".
   - A 2024 quality assessment rated confidence in the pooled checklist meta-analyses "critically low".
@@ -127,10 +150,11 @@ Every statement is marked **Fact**, **Estimate** or **Opinion**.
 
 **Opinions on §3.1:**
 
-- **Opinion (H).** Taken together, F1–F10 show that the *written checklist* is neither sufficient nor reliably effective.
-  - The large effects came with uncontrolled designs, low-resource settings or wide social programmes (F1, F6, F7, F8).
-  - Effects shrank or vanished with mandated rollout into high-quality systems (F2, F6), with concurrent comparison (F9), and with randomisation (F3, where mortality was not significant overall).
+- **Opinion (M).** Taken together, F1–F10 show that the *written checklist* is neither sufficient nor reliably effective.
+  - Large effects came with uncontrolled designs, low-resource settings, wide social programmes, and in one controlled study (F1, F5, F6, F7, F8).
+  - Effects shrank or vanished with mandated rollout (F2), with concurrent comparison in one replication (F9), and with randomisation for mortality (F3).
   - Within-site effects followed actual, full completion (F4).
+  - That baseline quality is the moderator is my own inference, and F5 cuts against it.
 - **Opinion (M).** The mechanisms named by the field, namely team communication, culture and peer pressure, are *social*. An agent has none of them. That reading is mine, not the sources'.
 
 ### 3.2 Clinical handover
@@ -167,7 +191,7 @@ Every statement is marked **Fact**, **Estimate** or **Opinion**.
 ### 3.3 Aviation: procedures that did not fit, and procedures not followed
 
 - **F15 ★ Fact (C).** For US Airways 1549 (Hudson River, 2009), the NTSB found the dual-engine-failure procedure had been designed for a failure at cruise altitude above 20,000 ft, where there is time to complete it. At low altitude the first officer completed only a fraction of it before the ditching.
-  - The NTSB recommended a low-altitude dual-engine checklist. Vice Chairman Sumwalt suggested instead a single remembered procedure rather than a long checklist.
+  - The NTSB recommended a low-altitude dual-engine checklist.
   - In 2016, 6 of 35 recommendations were completed. The low-altitude checklist recommendation was marked closed-unacceptable.
   - Sources: https://www.faa.gov/sites/faa.gov/files/2025-04/usairways1549_recommendations.pdf ; https://amp.insurancejournal.com/news/national/2016/09/19/426808.htm ; https://globalnews.ca/news/2941901/miracle-on-the-hudson-only-6-of-35-safety-recommendations-implemented-after-2009-crash/amp/ .
   - *Shelf life is short on the implementation status: no update after 2016 was found.*
@@ -212,7 +236,7 @@ Every statement is marked **Fact**, **Estimate** or **Opinion**.
   - **intermediate:** checklists, cognitive aids, software changes, staffing;
   - **weaker:** retraining, policy updates.
 
-  The stated reason is that "strong recommendations … rely less on people's actions and memories".
+  In my paraphrase, the stated reason is that stronger actions depend less on people remembering. IHI's own words: stronger actions "require less reliance on humans to remember to perform the task correctly" (IHI RCA2 report, as quoted by source check 2).
 
   In one study of 20 children's-hospital RCAs, 10.3% of 78 action plans were stronger. A VA study (Hughes 2006) is reported as finding 30% of RCA actions were never implemented.
   - Sources: https://health.state.mn.us/facilities/patientsafety/adverseevents/toolkit/docs/safetytoolkit_actionhierarchy.pdf ; https://www.ahrq.gov/patient-safety/settings/hospital/candor/modules/guide4/aph.html ; https://stg.ihi.org/sites/default/files/SafetyToolkit_ActionHierarchy.pdf .
@@ -328,14 +352,14 @@ Every statement is marked **Fact**, **Estimate** or **Opinion**.
 
 | # | Principle (origin) | Conditions it depends on | Transfer check against AI agents | Verdict (Opinion) |
 |---|---|---|---|---|
-| P-1 | **A written procedure helps only when actually carried out in full** (F4, F2 editorial, F18) | The effect runs through execution. Partial or nominal use gives no benefit. Compliance is observable. | It holds in form: an agent can skip or misread instructions (D4). It differs in cause: there is no motivated non-compliance (D1). Full execution can be *checked* from the transcript (D5). | **Transfers (M).** Measure whether each instruction was followed before judging its effect. |
-| P-2 | **Benefit depends on the baseline failure rate** (F2, F3, F6) | The targeted failure must be common. In high-quality systems added procedure shows no measurable effect. | Holds logically for any system. Requires knowing the base rate of the failure class in this pipeline, which is not known (Q-001 L1). | **Transfers (H)** as a condition. Measure the base rate before adding a rule. |
-| P-3 | **The checklist was a vehicle for a social intervention; copying the text is a "cargo cult"** (F8, F10, F11, F12) | The effect works through culture, team communication, coaching and peer networks. | Those mechanisms are absent (D1, D2). For agents the text plus the checks *is* nearly the whole intervention. The lesson that survives is the inverse: do not expect human-field effect sizes to carry over, because their causes were not textual. | **Does not transfer as a mechanism (M).** As a caution, transfer human effect sizes only with care. |
+| P-1 | **A written procedure helps only when actually carried out in full** (F4, F2 editorial in paraphrase, F18) | The effect runs through execution. Partial or nominal use gives no benefit. Compliance is observable. | It holds in form: an agent can skip or misread instructions (D4). It differs in cause: there is no motivated non-compliance (D1). Full execution can be *checked* from the transcript (D5). | **Transfers (M).** Measure whether each instruction was followed before judging its effect. |
+| P-2 | **Benefit depends on the baseline rate of the targeted failure** (F2, F3). Revised against F5. | The targeted failure must be common. SURPASS (F5) found a large controlled effect in hospitals with "high standards of care" and a baseline of 27.3 complications per 100. So a high *quality label* does not remove the effect. Whether a low *measured rate of the targeted failure* does is untested. That is my own inference (L). F6 is not relied on. | Holds logically for any system, as a reason to measure before adding a rule. Requires knowing the base rate of the failure class in this pipeline, which is not known (Q-001 L1). | **Transfers (M), weakened from H** as a condition. Measure the base rate before adding a rule; do not treat "already good" as a reason to skip measuring. |
+| P-3 | **The checklist was a vehicle for a social intervention; copying the text is a "cargo cult"** (F8, F10, F11, F12) | The effect works through culture, team communication, coaching and peer networks. | Those mechanisms are absent (D1, D2). For agents the text plus the checks *is* nearly the whole intervention. The lesson that survives is the inverse: do not assume human-field effect sizes carry over, because their causes were not textual. | **Does not transfer as a mechanism (M).** As a caution, transfer human effect sizes only with care. |
 | P-4 | **A procedure designed for an assumed situation misfires, and can harm, when the situation differs** (F15, F16, F19, F20) | The procedure's authors assumed conditions such as altitude, time or fire spread. Following it consumed the scarce resource. | Holds plausibly. An agent follows text literally (D3), and its scarce resources are turns, time and context (Q-001 G4). Rules carrying exceptions dated to old versions (S5) are a sign that rules are bound to a situation. Untested here. | **Transfers (M).** State each rule's intended conditions; prefer short rules that fit the situation. |
 | P-5 | **Written intent is often misread; intent works with shared experience** (F35, F36) | Shared training and trust between sender and receiver. | No shared experience (D2). Written intent would then be *more* at risk of misreading, but an agent can be asked cheaply to restate intent before acting, which can be tested. | **Transfers partly (L).** The evidence is one simulation; test it before relying on it. |
 | P-6 | **Rule sets accumulate past the point of usability; warnings multiply and get overridden** (F26–F29, F34) | Human attention, memory and fatigue limits; override as a coping behaviour. | Fatigue does not apply (D1). An analogue does: compliance falls with instruction count and context size (D4, assumed). The mechanism differs, so the threshold will differ. | **Transfers in altered form (M).** Set a size or count budget per role file, tested against compliance in this pipeline. |
 | P-7 | **Fixes after incidents are mostly weak (training, policy reminders); events recur. Prefer fixes that don't rely on memory** (F21–F23) | Weak fixes depend on people remembering. Stronger fixes engineer the failure out. | "Training" does not exist for agents; "policy" equals instruction text. "Forcing functions" have direct equivalents: tool permissions, mechanised checks, schema validation (D7). The gate already says an execution failure is fixed by making the rule checkable (S2). | **Transfers strongly (H).** Prefer a check or permission over another sentence of instruction. |
-| P-8 | **Uncontrolled before-after studies overstate effects; concurrent controls and randomisation shrink them** (F1 vs F3 vs F2; F9) | Secular trends, Hawthorne effects and selection. | Holds. Model or version changes act like secular trends (Q-001 C4, F1). Paired replay (D6) and the on/off alternation already written in S3 are the remedy. | **Transfers (H).** |
+| P-8 | **Uncontrolled before-after studies can mislead in either direction; only a concurrent control tells which.** Some controlled designs found smaller effects (F3 mortality, F9). One found a large effect (F5). Revised against F5. | Secular trends, Hawthorne effects and selection. | Holds. Model or version changes act like secular trends (Q-001 C4, F1). Paired replay (D6) and the on/off alternation already written in S3 are the remedy. | **Transfers (H).** The need for a control holds whichever way the controlled result falls. |
 | P-9 | **Rules proposed after an incident are filtered by a second body weighing cost** (F24) | A separate body with authority and cost analysis; some proposals rejected. | The pipeline has an analogue: the Critic checks and the owner decides by card (S1), and the generality review reads the proposal without the incident story (S2). Whether the filter rejects anything is not known. | **Transfers (M).** Record the rejection rate as a health measure. |
 | P-10 | **One severe incident can expose a real general gap** (F15, F16, F25) | High severity; the gap is general, not specific to the case. | Holds plausibly. The rule of two already allows a severity argument (S2). | **Transfers (M).** Keep the severity route, with the same experiment and kill criterion. |
 | P-11 | **Rules go stale on a measurable clock; review on a schedule** (F30, F31) | The underlying knowledge changes. Clinical guidelines: half outdated by 5.8 years. | Agent instructions are tied to model versions, which change much faster than clinical evidence (Q-001 F1, assumed). The clock will be shorter; its length is unknown. | **Transfers (M)** as a principle. The interval must be set from this pipeline's own data. |
@@ -349,34 +373,39 @@ Every statement is marked **Fact**, **Estimate** or **Opinion**.
 
 Each entry gives source, grade, shelf life and topics. Every pattern also states its origin, conditions and transfer check. Grades are proposals for the Source checker. **None is self-checked.**
 
+The **Filing** column records source check 2's ruling as it lists it (research/Q-005-source-check-2.md). The check changed no grades.
+
 ### Fact entries
 
-| Id (proposed) | Statement | Sources | Grade | Shelf life | Topics |
-|---|---|---|---|---|---|
-| LF-Q005-01 | The WHO surgical checklist study (8 hospitals, before-after, no concurrent control) reported deaths falling from 1.5% to 0.8% and complications from 11% to 7%. | F1 URLs; NEJM 2009;360:491 | C | 10 years | checklists, procedures |
-| LF-Q005-02 | Mandatory checklist adoption in 101 Ontario hospitals showed no significant change in mortality (0.71%→0.65%) or complications (3.86%→3.82%). | F2 URLs | C | 10 years | checklists, rules |
-| LF-Q005-03 | A stepped-wedge randomised trial (2 hospitals) found complications falling from 19.9% to 11.5%; overall mortality (1.6%→1.0%) was not significant. | F3 URLs | C | 10 years | checklists |
-| LF-Q005-04 | In one hospital cohort, the mortality association held for full checklist completion (OR 0.44) but not for partial or no completion. | F4 URLs | C | 10 years | checklists, procedures |
-| LF-Q005-05 | Michigan's ICU infection results were attributed by an ex-post study to a social intervention, not "a simple checklist". The English replication saw equal falls in units not yet enrolled. | F8, F9 URLs | C | 10 years | checklists, process-improvement |
-| LF-Q005-06 | I-PASS handover bundles reported 23% (9 sites) and 47% (32 sites) falls in errors or events. Written handoffs with all key elements rose from 10% to 74%. The bundles included training and coaching. | F11, F12 URLs | C | 8 years | handoffs |
-| LF-Q005-07 | SBAR: moderate evidence and a lack of high-quality research (systematic review, 2018). | F13 URLs | C | 5 years | handoffs |
-| LF-Q005-08 | US Airways 1549: the dual-engine procedure assumed a cruise-altitude failure and could not be completed at low altitude. | F15 URLs | C | 10 years for the finding; 2 years for implementation status | procedures, checklists |
-| LF-Q005-09 | Swissair 111: TSB asked that smoke checklists be designed for completion in a time that limits fire development. | F16 URLs | C | 10 years | procedures, checklists |
-| LF-Q005-10 | LOSA: intentional non-compliance was reported on 49% of archived flights and travelled with more unintentional errors. | F18 URLs | C | 5 years | procedures |
-| LF-Q005-11 | Of 731 solutions from 302 hospital RCAs, the commonest were training (20%), process change (19.6%) and policy reinforcement (15.2%). Event types recurred. | F21 URLs | C | 8 years | rules, process-improvement |
-| LF-Q005-12 | The action hierarchy ranks forcing functions above checklists, and checklists above retraining and policy updates. | F22 URLs | C | 10 years | rules, process-improvement |
-| LF-Q005-13 | Three NHS trusts each held 192–457 policy documents. | F26 URLs | C | 10 years | rules |
-| LF-Q005-14 | Drug-safety alerts are overridden in 49–96% of cases (review, 2006). | F27 URLs | C | 10 years | rules |
-| LF-Q005-15 | Half of 17 AHRQ guidelines were outdated by 5.8 years; reassessment every 3 years was recommended. | F30 URLs | C | 10 years | rules |
-| LF-Q005-16 | In a simulation, company commanders matched battalion intent in 34% of 32 episodes. | F35 URLs | C | 10 years | handoffs, procedures |
-| LF-Q005-17 | No controlled comparison of intent-based against detailed orders was found (as of 2026-11-01). | F36 URLs | D | 2 years | procedures |
-| LF-Q005-18 | The "3x MTTR" playbook claim is a practitioner assertion with no study found; MTTR itself is reported to be unreliable. | F37, F38 URLs | C | 3 years | procedures, process-improvement |
-| LF-Q005-19 | NTSB recommendations to the FAA: about 82% accepted (around 2008); about 25% closed unacceptable or superseded (since 2000, 2025 analysis). | F24 URLs | C | 3 years | rules |
-| LF-Q005-20 | No study measuring the net effect of incident-driven rules as a class was found (as of 2026-11-01). | absence across §3.4 searches | D | 2 years | rules, process-improvement |
+| Id (proposed) | Statement | Sources | Grade | Shelf life | Topics | Filing (source check 2) |
+|---|---|---|---|---|---|---|
+| LF-Q005-01 | The WHO surgical checklist study (8 hospitals, before-after, no concurrent control) reported deaths falling from 1.5% to 0.8% and complications from 11% to 7%. | F1 URLs; NEJM 2009;360:491 | C | 10 years | checklists, procedures | **Hold**: second independent source not opened |
+| LF-Q005-02 | Mandatory checklist adoption in 101 Ontario hospitals showed no significant change in adjusted mortality (0.71%→0.65%) or adjusted complications (3.86%→3.82%). | F2 URLs; PMID 24620866 | C | 10 years | checklists, rules | **Fileable** (with "adjusted") |
+| LF-Q005-03 | A stepped-wedge randomised trial (2 hospitals) found complications falling from 19.9% to 11.5%; overall mortality (1.6%→1.0%) was not significant. | F3 URLs | C | 10 years | checklists | **Fileable** |
+| LF-Q005-04 | In one hospital cohort, the mortality association held for full checklist completion (OR 0.44) but not for partial or no completion. | F4 URLs | C | 10 years | checklists, procedures | **Hold**: one source only |
+| LF-Q005-05a | In the English replication of Michigan, the adult ICU infection rate fell from 3.7 to 1.48 per 1,000 catheter-days, equally in units not yet enrolled; the authors attributed this to a secular trend. | F9 URLs | C | 10 years | checklists, process-improvement | **Fileable** (split from LF-Q005-05) |
+| LF-Q005-05b | An ex-post study attributed Michigan's ICU infection results to a complex social intervention, not "a simple checklist". | F8 URLs | C | 10 years | checklists, process-improvement | **Hold**: one paper only (split from LF-Q005-05) |
+| LF-Q005-06a | I-PASS handover bundle (9 sites) reported a 23% fall in medical errors and a 30% fall in preventable adverse events, with no added handoff time; the bundle included training. | F11 URLs | C | 8 years | handoffs | **Fileable** (split from LF-Q005-06) |
+| LF-Q005-06b | Mentored I-PASS implementation (32 hospitals, 18 months of coaching) reported a 47% fall in handoff-related adverse events. | F12 URLs | C | 8 years | handoffs | **Fileable** (split from LF-Q005-06) |
+| LF-Q005-06c | In the same 32-hospital study, written handoffs with all key elements rose from 10% to 74%. | F12 URLs | C | 8 years | handoffs | **Hold**: one source only (split from LF-Q005-06) |
+| LF-Q005-07 | SBAR: moderate evidence and a lack of high-quality research (systematic review, 2018). | F13 URLs | C | 5 years | handoffs | **Fileable** |
+| LF-Q005-08 | US Airways 1549: the NTSB found the dual-engine checklist was designed assuming a dual-engine failure at high altitude (above 20,000 ft), and could not be completed at low altitude. | F15 URLs; NTSB AAR-10/03 | C | 10 years for the finding; 2 years for implementation status | procedures, checklists | **Fileable** (restated as the NTSB finding; no Sumwalt sentence) |
+| LF-Q005-09 | Swissair 111: TSB asked that smoke checklists be designed for completion in a time that limits fire development. | F16 URLs | C | 10 years | procedures, checklists | **Hold**: unreachable |
+| LF-Q005-10 | LOSA: intentional non-compliance was reported on 49% of archived flights and travelled with more unintentional errors. | F18 URLs | C | 5 years | procedures | **Fileable** |
+| LF-Q005-11 | Of 731 solutions from 302 hospital RCAs, the commonest were training (20%), process change (19.6%) and policy reinforcement (15.2%). Event types recurred. | F21 URLs | C | 8 years | rules, process-improvement | **Hold**: one source only |
+| LF-Q005-12 | The action hierarchy ranks forcing functions above checklists, and checklists above retraining and policy updates. | F22 URLs | C | 10 years | rules, process-improvement | **Hold**: one source only |
+| LF-Q005-13 | Three NHS trusts each held 192–457 policy documents. | F26 URLs | C | 10 years | rules | **Hold**: unreachable |
+| LF-Q005-14 | Drug-safety alerts are overridden in 49–96% of cases (review, 2006). | F27 URLs | C | 10 years | rules | **Fileable** (without the 91% figure; second source weak) |
+| LF-Q005-15 | Half of 17 AHRQ guidelines were outdated by 5.8 years; reassessment every 3 years was recommended. | F30 URLs | C | 10 years | rules | **Fileable** |
+| LF-Q005-16 | In a simulation, company commanders matched battalion intent in 34% of 32 episodes. | F35 URLs | C | 10 years | handoffs, procedures | **Hold**: unreachable |
+| LF-Q005-17 | No controlled comparison of intent-based against detailed orders was found (as of 2026-11-01). | F36 URLs | D | 2 years | procedures | **Hold**: absence claim, needs a search record |
+| LF-Q005-18 | The "3x MTTR" playbook claim is a practitioner assertion with no study found; MTTR itself is reported to be unreliable. | F37, F38 URLs | C | 3 years | procedures, process-improvement | **Hold**: unreachable |
+| LF-Q005-19 | NTSB recommendations to the FAA: about 82% accepted (around 2008); about 25% closed unacceptable or superseded (since 2000, 2025 analysis). | F24 URLs | C | 3 years | rules | **Hold**: unopened |
+| LF-Q005-20 | No study measuring the net effect of incident-driven rules as a class was found (as of 2026-11-01). | absence across §3.4 searches | D | 2 years | rules, process-improvement | **Hold**: absence claim, needs a search record |
 
 ### Pattern entries (borrowed principles)
 
-**LP-Q005-01: Check execution before judging a rule.**
+**LP-Q005-01: Check execution before judging a rule.** *Filing: hold, because an origin fact (LF-04) is held.*
 - **Statement:** a written procedure's effect is conditional on full execution. Measure whether it was followed before judging it.
 - **Origin:** surgical checklists (LF-04, LF-02), aviation LOSA (LF-10).
 - **Conditions:** execution varies and is observable.
@@ -384,23 +413,23 @@ Each entry gives source, grade, shelf life and topics. Every pattern also states
 - **Grade:** C (sources) / Opinion M (transfer).
 - **Shelf life:** 3 years. **Topics:** procedures, checklists.
 
-**LP-Q005-02: Measure the base rate before adding a rule.**
-- **Statement:** an added procedure pays off only where the failure it targets is common.
-- **Origin:** checklist results across settings (LF-02, LF-03; F6).
-- **Conditions:** a measurable base rate.
-- **Transfer check:** holds logically. The pipeline's base rates are unknown. *Transfers (H).*
-- **Grade:** C / Opinion H.
+**LP-Q005-02: Measure the base rate before adding a rule.** *Filing, per the check: its origin facts LF-02 and LF-03 are fileable; drop F6 and check against F5 first. Done in this revision.*
+- **Statement:** an added procedure pays off only where the failure it targets is common enough to measure a fall. A high quality *label* is not evidence that the failure is rare: SURPASS (F5) found a large controlled effect in hospitals with "high standards of care".
+- **Origin:** checklist results across settings (LF-02, LF-03), tested against F5. F6 dropped.
+- **Conditions:** a measurable base rate of the targeted failure.
+- **Transfer check:** holds logically. The pipeline's base rates are unknown. *Transfers (M), weakened from H.*
+- **Grade:** C / Opinion M.
 - **Shelf life:** 5 years. **Topics:** rules, process-improvement.
 
-**LP-Q005-03: Don't import effect sizes whose mechanism was social.**
-- **Statement:** effects in human fields that ran through culture, coaching or peer pressure will not carry over to agents.
-- **Origin:** Explaining Michigan (LF-05), I-PASS bundles (LF-06).
+**LP-Q005-03: Do not assume effect sizes whose mechanism was social carry over.** *Filing: hold (F8 single paper, F10 unopened).*
+- **Statement:** do not assume that effects in human fields that ran through culture, coaching or peer pressure carry over to agents.
+- **Origin:** Explaining Michigan (LF-05b), I-PASS bundles (LF-06a, LF-06b).
 - **Conditions:** a social mechanism.
 - **Transfer check:** agents lack it (no fatigue, no peers, fresh sessions). *The mechanism does not transfer; the caution does (M).*
 - **Grade:** C / Opinion M.
 - **Shelf life:** 3 years. **Topics:** checklists, handoffs.
 
-**LP-Q005-04: State the conditions a rule assumes.**
+**LP-Q005-04: State the conditions a rule assumes.** *Filing: hold (F16 unreachable, F19 unopened).*
 - **Statement:** write down the situation each rule is designed for. A rule followed outside its designed situation can consume the scarce resource and do harm.
 - **Origin:** NTSB 1549, TSB Swissair 111 (LF-08, LF-09); Dekker (F19).
 - **Conditions:** the situation varies, and the procedure costs time.
@@ -408,7 +437,7 @@ Each entry gives source, grade, shelf life and topics. Every pattern also states
 - **Grade:** C / Opinion M.
 - **Shelf life:** 3 years. **Topics:** procedures, rules.
 
-**LP-Q005-05: Prefer a check or permission over another written rule.**
+**LP-Q005-05: Prefer a check or permission over another written rule.** *Filing: hold (LF-11, LF-12 single source).*
 - **Statement:** weak fixes depend on memory and fail to stop recurrence. Prefer a mechanised check or tool permission to another instruction sentence.
 - **Origin:** RCA corrective-action research and the VA action hierarchy (LF-11, LF-12).
 - **Conditions:** a stronger, engineered option exists.
@@ -416,23 +445,23 @@ Each entry gives source, grade, shelf life and topics. Every pattern also states
 - **Grade:** C / Opinion H.
 - **Shelf life:** 5 years. **Topics:** rules, process-improvement.
 
-**LP-Q005-06: Give each role file a size budget.**
-- **Statement:** rule and warning sets accumulate past usability. Set an explicit budget, and retire a rule when adding one.
+**LP-Q005-06: Give each role file a size budget.** *This is an opinion, not a fact. Filing: hold (LF-13 unreachable; F28, F29 unopened).*
+- **Statement (Opinion, M):** rule and warning sets accumulate past usability. Set an explicit budget, and retire a rule when adding one.
 - **Origin:** NHS policy counts, alert override, safety clutter, checklist fatigue (LF-13, LF-14; F28, F29).
 - **Conditions:** a limit on attention.
 - **Transfer check:** human fatigue does not apply. Agent compliance and recall limits (Q-001 A3, A5, assumed) are the analogue, with an unknown threshold. *Transfers in altered form (M).* The budget must be set from this pipeline's data.
-- **Grade:** C / Opinion M.
+- **Grade:** C (origin facts) / Opinion M.
 - **Shelf life:** 2 years. **Topics:** rules, procedures.
 
-**LP-Q005-07: Use concurrent controls, not before-after comparisons.**
-- **Statement:** uncontrolled before-after comparisons overstate procedure effects. Use concurrent controls, randomised or paired.
-- **Origin:** checklist literature (LF-01, LF-02, LF-03, LF-05).
+**LP-Q005-07: Use concurrent controls, not before-after comparisons.** *Filing: hold (LF-01 held).*
+- **Statement:** uncontrolled before-after comparisons can over- or understate procedure effects. Use concurrent controls, randomised or paired. In this literature some controlled studies found smaller effects (LF-03 mortality, LF-05a) and one found a large effect (F5). Only a control tells which.
+- **Origin:** checklist literature (LF-01, LF-02, LF-03, LF-05a, F5).
 - **Conditions:** secular trends and confounding.
 - **Transfer check:** model and version changes act like secular trends. Paired replay (Q-001 B4) and the on/off alternation (OPERATING_MODEL_v2.5.1.md:633, grade A) apply. *Transfers (H).*
 - **Grade:** C / Opinion H.
 - **Shelf life:** 5 years. **Topics:** process-improvement.
 
-**LP-Q005-08: Keep a severity route through a separate filter.**
+**LP-Q005-08: Keep a severity route through a separate filter.** *Filing: hold (LF-19 unopened).*
 - **Statement:** a single severe incident may justify a rule, provided it passes a separate filter that weighs cost and can reject it.
 - **Origin:** NTSB/FAA (LF-19), Knight Capital (F25), Hudson (LF-08).
 - **Conditions:** the filter is independent and has power to reject.
@@ -440,7 +469,7 @@ Each entry gives source, grade, shelf life and topics. Every pattern also states
 - **Grade:** C / Opinion M.
 - **Shelf life:** 3 years. **Topics:** rules.
 
-**LP-Q005-09: Review rules on a schedule set from data.**
+**LP-Q005-09: Review rules on a schedule set from data.** *Filing: fileable on LF-15 only; F31 is unopened.*
 - **Statement:** rules go stale on a measurable clock. Review them on a schedule set from data.
 - **Origin:** clinical guidelines (LF-15); Hale & Borys (F31).
 - **Conditions:** the underlying knowledge changes over time.
@@ -448,7 +477,7 @@ Each entry gives source, grade, shelf life and topics. Every pattern also states
 - **Grade:** C / Opinion M.
 - **Shelf life:** 3 years. **Topics:** rules.
 
-**LP-Q005-10: Test that written intent was understood.**
+**LP-Q005-10: Test that written intent was understood.** *Filing: hold (LF-16 unreachable).*
 - **Statement:** written intent is often misread. Test understanding, for example by having the receiver restate the intent, rather than assuming it.
 - **Origin:** military intent simulation (LF-16).
 - **Conditions:** no shared experience.
@@ -470,14 +499,45 @@ Each entry gives source, grade, shelf life and topics. Every pattern also states
 
 ## 7. Gaps, and what the Source checker needs
 
-1. **No page was opened directly** (§0). Every web item is C or D. The ★ items should be raised to B by opening the journal or agency pages once `nejm.org`, `sciencedirect.com`, `qualitysafety.bmj.com`, `bmjopen.bmj.com`, `jamanetwork.com`, `ntrs.nasa.gov`, `tsb.gc.ca`, `sec.gov` and `apps.dtic.mil` are allowed. `pmc.ncbi.nlm.nih.gov` and `psnet.ahrq.gov` would also help.
+1. **No page was opened directly by me** (§0). Every web item is C or D. Source check 2 opened many primary records (§8), but held several ★ items for lack of a second independent opened source.
 2. **Specific values not confirmed:**
-   - SURPASS mortality figures (F5), possibly mixed up with Haynes in one source;
    - the Shattuck venue (F35);
    - the full Rae et al. author list (F28);
    - Bergs 2014 pooled estimates (F6).
+
+   The SURPASS question (F5) is resolved by source check 2.
 3. **Agent-side conditions D4 and D6** rest on the Q-001 map's *assumed* items (IFScale, context-recall guidance, replay records). Transfer verdicts that use them are only as strong as those items.
 4. **The pipeline's own evidence** (Q-001 L1, rounds, first-pass rates) was not used. It is outside this question's scope, and §4 judges transfer only, not effect.
+5. **The two absence claims** (LF-17, LF-20) need a search record before they can be filed.
+
+---
+
+## 8. Source check 2: results as recorded
+
+Taken from research/Q-005-source-check-2.md. **Regrades: none.** The check upgraded no grade, so every grade above stands as proposed. I do not mark my own facts as checked.
+
+**Per item:**
+- **Supported, two independent opened sources:** F2 (figures), F3, F9, F11, F15 (NTSB finding and AP status; the Sumwalt sentence was *not* supported and is dropped), F27, F30.
+- **Supported, one opened source only:**
+  - F1, F4, F7, F8, F21;
+  - F22, partly: the tier contents differ in detail, and the quote was not verbatim, now fixed;
+  - F12: the 47% figure has two sources, but the 20%→66% and 10%→74% figures have one.
+- **Supported, not ★:** F5 (resolved: own figures, 5-hospital concurrent control, "high standards of care"), F13, F17, F18, F25.
+- **Corrections recorded:**
+  - the Urbach PMID is 24620866;
+  - the F2 Leape wording and the F22 wording are paraphrase;
+  - the F3 "high baseline quality" remark is my own inference;
+  - the F2 clause "no hospital changed significantly" and the F4 confounder remark were not found in what the check opened. The confounder remark is mine.
+- **Unreachable or unopened:** F6, F10, F14, F16, F19, F20, F23, F24, F26, F28, F29, F31–F39.
+
+**Filing status:**
+- **Fileable:** LF-Q005-02 (with "adjusted"), -03, -05a, -06a, -06b, -07, -08 (as the NTSB finding), -10, -14 (without 91%), -15; LP-Q005-02 (after the F5 revision above) and LP-Q005-09 (on LF-15 only).
+- **Held:** LF-Q005-01, -04, -05b, -06c, -09, -11, -12, -13, -16, -17, -18, -19, -20; LP-Q005-01, -03, -04, -05, -06, -07, -08, -10.
+- **Splits:**
+  - LF-Q005-05 becomes 05a (English replication, fileable) and 05b (Explaining Michigan, held);
+  - LF-Q005-06 becomes 06a (9-site, fileable), 06b (47%, fileable) and 06c (written handoff 10%→74%, held).
+
+---
 
 **Sources opened in the repository (grade A):**
 - /home/user/Model-Lab/research/Q-005.md
@@ -486,5 +546,6 @@ Each entry gives source, grade, shelf life and topics. Every pattern also states
 - /home/user/Personal-Org-Operating-Model/docs/archive/OPERATING_MODEL_v2.5.1.md (:633-647)
 - /home/user/Personal-Org-Operating-Model/template-v3/governance/BRIEFS.toml
 - /home/user/Personal-Org-Operating-Model/template-v3/.claude/agents/critic.md
+- /home/user/ml-lessons/research/Q-005-source-check-2.md (for revision 1)
 
-**Web sources:** all are cited inline above. They were seen only as search-result extracts on 2026-11-01, not opened.
+**Web sources:** all are cited inline above. They were seen only as search-result extracts on 2026-11-01, not opened by me. No new web pages were opened for revision 1.

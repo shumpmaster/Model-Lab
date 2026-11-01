@@ -1,16 +1,30 @@
-# Research memo — Q-003: how good work is judged, how reliable model checkers are, and what tens of runs can detect — 2026-11-01
+# Research memo — Q-003: how good work is judged, how reliable model checkers are, and what tens of runs can detect — 2026-11-01 (revised)
 
 **Researcher session, depth 3 (graded memo).** Blind: I did not open portfolio/, decisions/, questions/ or docs/ in Model-Lab. I did not open the library: my brief did not list it among the files I may read, so I do not know which existing entries share these topics. The Source checker should run that comparison.
+
+**Revision note (2026-11-01).** This revision makes only the changes asked for by two source checks:
+- the first source check: /home/user/Model-Lab/research/Q-003-source-check.md, four slips;
+- the second source check: /home/user/ml-lessons/research/Q-002-to-Q-004-source-check-2.md, its Q-003 section.
+
+The changes are:
+- The code-review false-positive claim is removed.
+- The 0.3–0.7 correlation figure is dropped from F-a.
+- Wataoka et al. is marked as a workshop paper, and my extension of it is marked as my inference.
+- Items the Source checker opened are regraded, and the library entries are restated as that check allows.
+- The four slips are corrected.
+
+I opened no new web pages for this revision.
 
 ## Grades used
 - **A** — a primary record I opened in /home/user/Personal-Org-Operating-Model or /home/user/Service-Desk. Cited by file:line.
 - **B** — a page I opened from the publisher's or authors' own site: anthropic.com, platform.claude.com, or the authors' github.com repository. These are untrusted text, reported as claims with their URL and date.
-- **C** — seen only in search-result text or secondary summaries; I could not open the paper. **Unconfirmed.** The Source checker must open it before it is filed.
+- **C** — seen only in search-result text or secondary summaries; I could not open the paper. **Unconfirmed.**
+- **C✓** — a grade-C item that the Source checker later opened and found to support the claim (source check 2). I did not open these pages myself. The grade records the checker's result, not my own check.
 - **Calc** — my own arithmetic from a stated distribution, shown so it can be checked. It is not a literature claim.
 
 Each statement is also marked **[F]** fact, **[E]** estimate or **[O]** opinion.
 
-**Network limits in this session.** These hosts did not resolve: arxiv.org, export.arxiv.org, openreview.net, neurips.cc, papers.nips.cc, proceedings.mlr.press, mlanthology.org, aclanthology.org, huggingface.co, api.semanticscholar.org, allenai.org, epoch.ai, en.wikipedia.org, lmsys.org, alignmentforum.org, greaterwrong.com, mpi.nl, discovery.ucl.ac.uk, clp.ling.uni-potsdam.de, hal.cs.princeton.edu, agents.cs.princeton.edu and alphaxiv.org. Every item that rests on those hosts is grade C. Only anthropic.com, platform.claude.com, github.com and raw.githubusercontent.com opened.
+**Network limits in my session.** These hosts did not resolve: arxiv.org, export.arxiv.org, openreview.net, neurips.cc, papers.nips.cc, proceedings.mlr.press, mlanthology.org, aclanthology.org, huggingface.co, api.semanticscholar.org, allenai.org, epoch.ai, en.wikipedia.org, lmsys.org, alignmentforum.org, greaterwrong.com, mpi.nl, discovery.ucl.ac.uk, clp.ling.uni-potsdam.de, hal.cs.princeton.edu, agents.cs.princeton.edu and alphaxiv.org. Only anthropic.com, platform.claude.com, github.com and raw.githubusercontent.com opened. The Source checker's second pass reached arxiv.org, aclanthology.org, proceedings.mlr.press and papers.nips.cc.
 
 ---
 
@@ -20,10 +34,10 @@ Each statement is also marked **[F]** fact, **[E]** estimate or **[O]** opinion.
    - Model judges can reach human-level agreement on some tasks.
    - Agreement varies widely by task.
    - Vendors advise grading with a different model from the one that produced the work, and calibrating model graders against human experts.
-   - **[F, C]** Self-preference by judges for their own outputs or own family is reported in several papers, but I could not open any of them.
-   - **[F, A]** In Service-Desk, doer and checker are different models from the same provider and family. (§3)
+   - **[F, C✓]** Self-preference by judges for their own outputs or own family is reported in three papers the Source checker opened.
+   - **[F, A]** In Service-Desk, doer and checker are different models. From their names, I infer they come from the same provider and family. (§3)
 3. **[E, Calc]** With about 100 runs, a **paired** design on the same tasks can detect only large effects:
-   - 50 tasks × 2 arms gives about 75% power for a 20-point gain with few reversals.
+   - 50 tasks × 2 arms gives about 70–77% power for a 20-point gain with few reversals.
    - It gives about 25% power for a 10-point gain.
    - An unpaired 50-vs-50 design needs about a 28-point gain for 80% power.
    - Reviewer verdicts that are themselves noisy shrink these figures further. (§4)
@@ -37,11 +51,13 @@ Each statement is also marked **[F]** fact, **[E]** estimate or **[O]** opinion.
 
 ## 2. How "good work" is defined and judged in the pipeline under study
 
-**What counts as passing, by work type**
-- **[F, A]** Software is judged by "Locked tests (visible) and hidden holdouts", checked by Reviewer plus CI (OPERATING_MODEL.md:313).
-- **[F, A]** Research is judged by "The question and evidence standard, set in advance", checked by the Source checker (:314).
-- **[F, A]** Experiments are judged against "The pre-registration", with analysis by the Reviewer (:315).
-- **[F, A]** Writing is judged by "A reader test against the rubric" (:316).
+**What counts as passing, by work type** (OPERATING_MODEL.md:313-316, criterion column then check column)
+| Work type | Criterion | Independent check | Source |
+|---|---|---|---|
+| Software | "Locked tests (visible) and hidden holdouts" | Reviewer, plus CI | :313 [F, A] |
+| Research | "The question and evidence standard, set in advance" | Source checker | :314 [F, A] |
+| Experiment | "The pre-registration" | Reviewer (analysis) | :315 [F, A] |
+| Writing | "Audience, purpose, a scoring rubric" | "A reader test against the rubric" | :316 [F, A] |
 
 **What the checkers return**
 - **[F, A]** The checker's return is one line, `Verdict: PASS` or `Verdict: FAIL`, then evidence per finding. "An unverifiable claim is a FAIL" (template-v3/governance/BRIEFS.toml:13; reviewer.md:37).
@@ -67,25 +83,31 @@ Each statement is also marked **[F]** fact, **[E]** estimate or **[O]** opinion.
   - **[O]** A catch rate the Reviewer seeds and scores for itself is not independent evidence of its catch rate. Defects seeded by another role, such as the Check author, would be.
 - **[F, A]** The owner's recorded verdicts cannot calibrate the reviewers:
   - 45 `reviews/*/owner.md` files exist, and all 45 open with `Verdict: PASS` (grep, 2026-11-01).
-  - One example reads in full: "Reviewed: PR #56, adopting the model's S-021 proof fix" (reviews/56/owner.md:1-3).
+  - One example reads: "Reviewer: owner" and "Reviewed: PR #56, adopting the model's S-021 proof fix (one governance file, identical to the model's copy)" (reviews/56/owner.md:1-3).
   - **[E]** These look like final approvals recorded after the checks, not independent blind grades. They therefore carry no owner–reviewer disagreement data.
 
 ## 3. How reliable are model-run checkers?
 
 **Agreement with humans**
 - **[F, B]** The authors' repository for Zheng et al., "Judging LLM-as-a-judge with MT-Bench and Chatbot Arena" (2023), says "humans and GPT-4 judge achieve over 80% agreement, the same level of agreement between humans". The basis is 3.3K human annotations of 6 models on 80 questions (github.com/lm-sys/FastChat/tree/main/fastchat/llm_judge, opened 2026-11-01).
-  - **[F, C]** The paper also studies position, verbosity and self-enhancement bias (search results for arXiv 2306.05685; NeurIPS 2023 poster page, not opened).
+  - **[F, C✓]** The paper studies position, verbosity and self-enhancement bias. Venue: NeurIPS 2023 Datasets and Benchmarks (arXiv 2306.05685, per source check 2).
   - Note: this is chat-preference judging. It is not judging of agent work products.
-- **[F, C]** Bavaresco et al., "LLMs instead of Human Judges?", ACL 2025 (Judge-Bench: 20 datasets, 11 models), is reported to find large variance across datasets in correlation with humans, and to recommend validating LLM judges against humans per task. Sources: search results citing aclanthology.org/2025.acl-short.20 and arXiv 2406.18403. Not opened.
-- **[F, C]** Agent-as-a-Judge (Zhuge et al., ICML 2025) is reported at about 90% agreement with human-expert consensus on DevAI, against about 70% for an LLM judge (search result citing the ICML poster).
-  - The same search result says that single human experts agreed with the later consensus 76–92% of the time.
+- **[F, C✓]** Bavaresco et al., "LLMs instead of Human Judges?", ACL 2025 short paper (Judge-Bench: 20 datasets, 11 models), finds large variance across datasets in correlation with humans. It recommends validating LLM judges against humans per task (arXiv 2406.18403; aclanthology 2025.acl-short.20, per source check 2).
+- **[F, C✓]** Agent-as-a-Judge (Zhuge et al.) on DevAI: the paper says the agent judge "aligns more closely with the consensus of our human judges (90%) as compared to LLM-as-a-Judge (70%)" (arXiv 2410.10934, per source check 2).
+  - **[F, C]** The search-result figure that single human experts agreed with the later consensus 76–92% of the time was not found by the checker. It is **unconfirmed**.
   - **[F, B]** The authors' repository confirms DevAI's size, 55 tasks and 365 requirements. It gives no agreement figure (github.com/metauto-ai/agent-as-a-judge, opened).
 - **[F, C]** JudgeBench (Tan et al. 2024) is a benchmark of hard paired responses for judges. The claim that strong judges score near chance on it was **not** confirmed: the README I opened gives no accuracy (github.com/ScalerLab/JudgeBench).
 
 **Self-preference and same-family checkers**
-- **[F, C]** Panickssery, Bowman & Feng (NeurIPS 2024) are reported to find that LLM evaluators favour their own generations. The strength of that preference is reported to correlate linearly with self-recognition ability, shown by fine-tuning. Source: search results. arXiv 2404.13076 and papers.nips.cc not opened.
-- **[F, C]** Wataoka et al. (2024) attribute self-preference to lower perplexity: judges favour text that is familiar to them. This would extend to models with similar training (arXiv 2410.21819; search result only).
-- **[F, C]** A 2026 rubric-based study (arXiv 2604.06996) is reported to find that judges favour their own outputs, or their family's, even with objective rubrics. The authors caution that a high self-preference rate alone may be leniency rather than bias. Source: search-result summary.
+- **[F, C✓]** Panickssery, Bowman & Feng (NeurIPS 2024) find that LLM evaluators favour their own generations. The strength of that preference correlates linearly with self-recognition ability, shown by fine-tuning (arXiv 2404.13076; papers.nips.cc, per source check 2).
+- **[F, C✓]** Wataoka et al. (2024) tie self-preference to lower perplexity: judges favour text that is familiar to them (arXiv 2410.21819v2, per source check 2).
+  - This is a **workshop paper**: NeurIPS 2024 Safe Generative AI Workshop.
+  - **[E]** That this would extend to models with similar training is **my own inference**. It is not in the paper's abstract.
+- **[F, C✓]** A 2026 rubric-based study (arXiv 2604.06996v3, per source check 2) reports four things:
+  - Judges favour their own or their family's outputs even with objective rubrics.
+  - Judges "can be more than 50% more likely" to mark a failed rubric item as satisfied when the output is their own.
+  - Ensembling helps but does not eliminate the bias.
+  - A high self-preference rate alone "does not constitute bias".
 - **[F, B]** Vendor guidance:
   - "Generally best practice to evaluate with a different model from the one used to generate the evaluated output" (platform.claude.com/docs/en/test-and-evaluate/develop-tests, opened 2026-11-01).
   - LLM-based grading: "Test to ensure reliability first, then scale". Use detailed rubrics, binary or 1–5 outputs, and reasoning before the score (same page).
@@ -96,9 +118,9 @@ Each statement is also marked **[F]** fact, **[E]** estimate or **[O]** opinion.
 - **[F, A]** In Service-Desk's Q-001 control records:
   - The researcher ran on `claude-opus-5-5` (reviews/Q-001/_control/0-5adedb5ae23d.json:73; 0-22dc0e573e9a.json:54; 0-bcdb1d743941.json:62).
   - The source-checker ran on `claude-sonnet-5-5` (0-62b8dda7dcf2.json:60; 0-539436038d0a.json:67; 0-fb83607369a3.json:78).
-  - These are different models from the same provider and family.
+  - These are different models. That they share a provider and family is an inference from the model names; the records do not say so.
   - Whether the records state that no alternative provider existed was not checked.
-- **[E]** If the self-preference findings hold (grade C), a same-family checker may be more lenient towards a same-family doer than an outside judge would be. Any such leniency would affect both arms of an instruction experiment.
+- **[E]** If these self-preference findings carry over to the pipeline's models, a same-family checker may be more lenient towards a same-family doer than an outside judge would be. Any such leniency would affect both arms of an instruction experiment.
   - It would mostly add bias to absolute pass rates. It would add less bias to *differences* between arms, unless the change moves outputs towards or away from the checker's own style.
   - This is untested here.
 
@@ -108,7 +130,6 @@ Each statement is also marked **[F]** fact, **[E]** estimate or **[O]** opinion.
   - "You won't know if your graders are working well unless you read the transcripts."
   - "A good task is one where two domain experts would independently reach the same pass/fail verdict."
   - "Ambiguity in task specifications becomes noise in metrics."
-- **[F, C]** On LLM code review specifically, one controlled study is reported at 14–22% false-positive rates for GPT-4o and Gemini 2.0 Flash (arXiv 2505.20206 via a secondary summary). I found no independent production measure.
 
 **[O] Overall judgement:** a model checker is a usable yardstick only after it has been calibrated on this pipeline's own items. Calibration means measuring its agreement against a small human-graded or mechanically known set:
 - seeded defects;
@@ -120,15 +141,16 @@ Its agreement with humans in published work varies too much by task to borrow.
 ## 4. Methods for detecting a change with tens of runs, and the sample sizes they need
 
 **Methods (sources)**
-- **[F, B]** Anthropic's "A statistical approach to model evaluations" (2024-11-19; paper arXiv 2411.00640, not opened) recommends five things:
-  - **Paired differences on shared questions**, described as a "free" variance reduction. The standard error shrinks as the between-arm correlation rises. Frontier models' question-score correlations are reported at 0.3–0.7.
+- **[F, B]** Anthropic's "A statistical approach to model evaluations" (2024-11-19) recommends five things:
+  - **Paired differences on shared questions**, described as a "free" variance reduction. The standard error shrinks as the between-arm correlation rises.
+    - The blog puts frontier models' question-score correlations at 0.3–0.7. Source check 2 found this figure only in the blog, not in the paper.
   - **Clustered standard errors** "on the unit of randomization". Clustered errors on popular evals can be "over three times as large as naive standard errors".
   - **Resampling each item several times** and using item means.
   - **Power analysis** to set the number of items.
   - Reporting pairwise results.
-- **[F, B/C]** Bowyer, Aitchison & Ivanova, ICML 2025 position paper, argue that central-limit-theorem error bars "dramatically" understate uncertainty below a few hundred datapoints. They recommend Bayesian or exact alternatives.
-  - The paper itself is C (proceedings.mlr.press and arXiv 2503.01747 not opened).
-  - **[F, B]** The authors' library implements `paired_comparisons` for binary results on shared questions (github.com/sambowyer/bayes_evals, opened).
+  - **[F, C✓]** The paper (arXiv 2411.00640) confirms the paired "free" reduction, the "over 3X" clustered errors and power planning (per source check 2). It is the same work as the blog, not an independent source.
+- **[F, C✓]** Bowyer, Aitchison & Ivanova (ICML 2025 spotlight position paper, PMLR pp. 81143–81184) argue that central-limit-theorem error bars understate uncertainty below a few hundred items. They recommend Bayesian or frequentist alternatives (arXiv 2503.01747; proceedings.mlr.press/v267/bowyer25a, per source check 2).
+  - **[F, B]** The authors' library README gives only the paper's title, "Position: Don't use the CLT in LLM evals with fewer than a few hundred datapoints". It implements `paired_comparisons` for binary results on shared questions (github.com/sambowyer/bayes_evals, opened).
 - **[F, B]** The McNemar test for paired binary outcomes uses an exact binomial "if exact is True". The chi-square version is "the approximation … for large sample sizes" (statsmodels source docstring, raw.githubusercontent.com/statsmodels/statsmodels/main/statsmodels/stats/contingency_tables.py, opened).
 
 **Noise sources besides the model**
@@ -150,7 +172,7 @@ Its agreement with humans in published work varies too much by task to borrow.
 2. **Example A: 50 tasks × 2 arms = 100 runs, true gain 20 points.**
    - [E] Suppose 25% of tasks pass only under the new arm and 5% only under the old.
    - [Calc] That gives about 15 discordant tasks, with a win share of 0.83.
-   - [Calc] P(≥12 of 15) ≈ 0.77, so power is **about 75%**.
+   - [Calc] P(≥12 of 15) ≈ 0.77 for exactly 15 discordant tasks. It is about 0.70 if the number of discordant tasks itself varies (Bin(50, 0.30)). So power is **about 0.70–0.77**.
 3. **Example B: 50 tasks × 2 arms, true gain 10 points.**
    - [E] Suppose 15% of tasks pass only under the new arm and 5% only under the old.
    - [Calc] That gives about 10 discordant tasks, with a win share of 0.75.
@@ -183,7 +205,7 @@ Its agreement with humans in published work varies too much by task to borrow.
 Under this design:
 - **[O]** Repeats then estimate variance. They are not a search for a passing output. This matches "record the result as it came out" (:299-300).
 - **[O]** Any re-run after seeing results is a new registration, labelled "exploratory, unconfirmed" until confirmed (:301).
-- **[F, C]** One caution: sampling the same model repeatedly can raise accuracy on its own. Kapoor et al., "AI Agents That Matter" (TMLR 2025; arXiv 2407.01502 not opened), report this and argue for evaluation that controls cost. That is why choosing the best of k runs is forbidden, while a mean over k runs is not.
+- **[F, C✓]** One caution: sampling the same model repeatedly can raise accuracy on its own. Kapoor et al., "AI Agents That Matter" (arXiv 2407.01502, per source check 2), report this, covering retry, warming and majority vote, and argue for evaluation that controls cost. That is why choosing the best of k runs is forbidden, while a mean over k runs is not.
 
 ## 6. When this scale cannot separate a change from noise
 - **[E]** From §4: below about a 15–20-point gain in pass rate, 100 runs give a coin-flip chance or less of detection, even with pairing.
@@ -211,74 +233,87 @@ Under this design:
 - RQ-c: What do published studies report on self-preference by LLM judges between models of the same provider family, including on verifiable tasks such as code? *Decision:* whether a different provider is required for judging. *Depth:* 3, requiring arxiv.org, papers.nips.cc and aclanthology.org to be reachable.
 
 ## 8. Proposed library entries
-Shelf lives are proposals. The "checked on" date is left for the Source checker.
+Shelf lives are proposals. The "checked on" date is left for the Source checker. Fileability follows the two source checks.
 
 **Facts**
 1. **F-a.**
    - *Statement:* Paired comparison on shared items reduces the variance of a difference in eval scores. Clustered standard errors on related items can be over three times naive ones. Power analysis can set the number of items.
-   - *Sources:* anthropic.com/research/statistical-approach-to-model-evals (2024-11-19) [B]; arXiv 2411.00640 [C, not opened].
-   - *Grade:* B (one independent source opened; a second is needed).
+   - *Sources:* anthropic.com/research/statistical-approach-to-model-evals (2024-11-19) [B]; arXiv 2411.00640 [C✓]. These are the same work, so they count as one origin.
+   - *Grade:* B, single-origin. *Fileable:* only as single-origin. A second independent source is needed before it is load-bearing.
    - *Shelf life:* 3 years. *Topics:* statistics, evaluation, measurement.
 2. **F-b.**
-   - *Statement:* CLT-based error bars understate uncertainty on evals with fewer than a few hundred items. Bayesian or exact paired methods are recommended.
-   - *Sources:* github.com/sambowyer/bayes_evals [B]; ICML 2025 / arXiv 2503.01747 [C].
-   - *Grade:* B/C. *Shelf life:* 3 years. *Topics:* statistics, evaluation.
+   - *Statement:* CLT-based error bars understate uncertainty on evals with fewer than a few hundred items. Bayesian or frequentist alternatives are recommended. The authors' library implements paired comparisons for binary results.
+   - *Sources:* Bowyer, Aitchison & Ivanova, ICML 2025, arXiv 2503.01747 / PMLR v267 [C✓], whose abstract states the claim; github.com/sambowyer/bayes_evals [B], which gives the title and the `paired_comparisons` function only. Same authors, so one origin.
+   - *Grade:* C✓/B, single-origin. *Fileable:* only as single-origin.
+   - *Shelf life:* 3 years. *Topics:* statistics, evaluation.
 3. **F-c.**
    - *Statement:* Infrastructure configuration alone moved Terminal-Bench 2.0 scores by 6 points (p < 0.01). Differences under about 3 points warrant scepticism until configurations match.
    - *Source:* anthropic.com/engineering/infrastructure-noise (2026-02-05) [B].
-   - *Grade:* B. *Shelf life:* 1 year. *Topics:* evaluation, agents, measurement.
+   - *Grade:* B. *Fileable:* single source only. *Shelf life:* 1 year. *Topics:* evaluation, agents, measurement.
 4. **F-d.**
    - *Statement:* Agent consistency falls across repeated trials. On τ-bench retail, Claude 3.5 Sonnet (20241022) scored Pass^1 0.692 and Pass^4 0.462.
    - *Source:* github.com/sierra-research/tau-bench [B].
-   - *Grade:* B. *Shelf life:* 1 year (the model is dated). *Topics:* agents, evaluation, statistics.
+   - *Grade:* B. *Fileable:* single source only; it is one leaderboard row. *Shelf life:* 1 year (the model is dated). *Topics:* agents, evaluation, statistics.
 5. **F-e.**
    - *Statement:* GPT-4 as judge agreed with human preferences over 80% of the time on MT-bench, about the level of human–human agreement. This was chat-preference judging, not agent work.
-   - *Sources:* github.com/lm-sys/FastChat llm_judge README [B]; arXiv 2306.05685 [C].
-   - *Grade:* B. *Shelf life:* 2 years. *Topics:* reviewers, evaluation.
+   - *Sources:* github.com/lm-sys/FastChat llm_judge README [B]; arXiv 2306.05685 [C✓]. Same authors, so one origin.
+   - *Grade:* B, single-origin. *Fileable:* single-origin, with the chat-preference caveat.
+   - *Shelf life:* 2 years. *Topics:* reviewers, evaluation.
 6. **F-f.**
-   - *Statement:* LLM judges are reported to favour their own generations. The strength of this tracks self-recognition.
-   - *Sources:* Panickssery, Bowman & Feng, NeurIPS 2024 [C]; Wataoka et al. 2024 [C].
-   - *Grade:* C, **unconfirmed**. Do not file until opened. *Shelf life:* 2 years. *Topics:* reviewers, evaluation, agents.
+   - *Statement:* LLM judges favour their own generations. The strength of this tracks self-recognition. It is tied to lower perplexity, that is, familiar text. It persists under objective rubrics, and ensembling reduces it but does not eliminate it.
+   - *Sources (independent):*
+     - Panickssery, Bowman & Feng, NeurIPS 2024 [C✓];
+     - Wataoka et al. 2024, a NeurIPS 2024 workshop paper (Safe Generative AI Workshop) [C✓];
+     - arXiv 2604.06996v3 [C✓].
+   - *Grade:* C✓, three independent sources opened by the Source checker. *Fileable:* yes. Note that Wataoka is a workshop paper. Any extension to same-family models is an inference.
+   - *Shelf life:* 2 years. *Topics:* reviewers, evaluation, agents.
 7. **F-g.**
    - *Statement:* Vendor guidance: grade with a different model from the generator; test an LLM grader's reliability before scaling; calibrate LLM graders against human experts; read transcripts.
    - *Sources:* platform.claude.com/docs/en/test-and-evaluate/develop-tests [B]; anthropic.com/engineering/demystifying-evals-for-ai-agents (2026-01-09) [B]. Both are from the same publisher, so not independent.
-   - *Grade:* B. *Shelf life:* 1 year. *Topics:* reviewers, evaluation.
-8. **F-h.**
-   - *Statement:* In Service-Desk's Q-001 control records, the Researcher ran on claude-opus-5-5 and the Source checker on claude-sonnet-5-5: different models, same provider. All 45 owner verdict files in reviews/ read PASS.
-   - *Source:* Service-Desk records cited in §2–3 [A].
-   - *Grade:* A. *Shelf life:* until the records change; re-check per project. *Topics:* reviewers, agents, measurement.
-9. **F-i.**
-   - *Statement:* Paired McNemar-type arithmetic at two-sided α = 0.05:
-     - 10 discordant pairs need 9 in one direction; 20 need 15.
-     - 50 paired tasks give about 75% power for a 20-point gain with few reversals, and about 25% for 10 points.
-     - Unpaired 50 vs 50 detects about 28 points at 80% power.
-   - *Source:* own exact-binomial and normal-approximation arithmetic (§4) [Calc]. Exact-vs-approximate usage per the statsmodels docstring [B].
-   - *Grade:* Calc. The Source checker should recompute it. *Shelf life:* permanent (mathematics), but the assumed discordance rates are estimates. *Topics:* statistics, measurement.
+   - *Grade:* B. *Fileable:* only as non-load-bearing vendor guidance, labelled single-publisher; this is the caller's decision.
+   - *Shelf life:* 1 year. *Topics:* reviewers, evaluation.
+8. **F-h1.**
+   - *Statement:* In Service-Desk's Q-001 control records, the Researcher ran on claude-opus-5-5 and the Source checker on claude-sonnet-5-5: different models. That they share a provider and family is an inference from the model names.
+   - *Source:* reviews/Q-001/_control/*.json, as cited in §3 [A].
+   - *Grade:* A. *Fileable:* yes. *Shelf life:* until the records change; re-check per project. *Topics:* reviewers, agents.
+9. **F-h2.**
+   - *Statement:* All 45 `reviews/*/owner.md` files in Service-Desk open with `Verdict: PASS`.
+   - *Source:* grep of Service-Desk reviews/ [A].
+   - *Grade:* A. *Fileable:* yes. *Shelf life:* until the records change. *Topics:* reviewers, measurement.
+10. **F-i.**
+    - *Statement:* Paired McNemar-type arithmetic at two-sided α = 0.05:
+      - 10 discordant pairs need 9 in one direction; 20 need 15.
+      - Example A: 50 paired tasks give about 0.70–0.77 power for a 20-point gain, assuming 25% of tasks pass only under the new arm and 5% only under the old.
+      - Example B: about 0.24–0.25 power for a 10-point gain, assuming 15% and 5%.
+      - Unpaired 50 vs 50 detects about 28 points at 80% power.
+    - *Source:* own exact-binomial and normal-approximation arithmetic (§4) [Calc], recomputed by the first source check. Exact-vs-approximate usage per the statsmodels docstring [B].
+    - *Grade:* Calc. *Fileable:* as a Calc fact, with the discordance rates stated as assumptions.
+    - *Shelf life:* permanent (mathematics); the assumptions are estimates. *Topics:* statistics, measurement.
 
-**Patterns**
+**Patterns** (opinion-grade)
 1. **P-a: Freeze the repeats.**
    - *Problem:* repeated runs needed to measure variance look like re-running for a better answer.
    - *Principle:* pre-register k, the aggregate (mean or pass^k, never best-of-k), run order, stopping rule and infrastructure-failure rule, and report every run.
-   - *Origin:* OPERATING_MODEL.md experiment playbook [A], plus the multi-trial practice in demystifying-evals [B].
+   - *Origin:* OPERATING_MODEL.md experiment playbook [A]; the multi-trial practice in demystifying-evals [B]; Kapoor et al. on repeated sampling [C✓].
    - *Where it worked:* not yet shown here.
    - *Conditions:* isolated trials from a clean environment; the checker held fixed.
-   - *Grade:* opinion built on B. *Shelf life:* 3 years. *Topics:* measurement, statistics, agents.
+   - *Grade:* opinion built on A, B and C✓. *Fileable:* as an opinion-grade pattern. *Shelf life:* 3 years. *Topics:* measurement, statistics, agents.
 2. **P-b: Calibrate the judge before trusting it.**
    - *Problem:* a model checker's verdict is used as ground truth.
    - *Principle:* measure the checker's agreement against known answers on this pipeline's own items before it judges an experiment. Known answers can be seeded defects placed by another role, hidden holdouts, or a blind owner-graded sample. Also measure its repeatability on the same work. Prefer a different provider when available.
-   - *Origin:* platform.claude.com develop-tests and demystifying-evals [B]; Judge-Bench task variance [C].
+   - *Origin:* platform.claude.com develop-tests and demystifying-evals [B]; Judge-Bench task variance [C✓].
    - *Conditions:* needs ground truth that is independent of the checker.
-   - *Grade:* opinion built on B/C. *Shelf life:* 2 years. *Topics:* reviewers, evaluation.
+   - *Grade:* opinion built on B and C✓. *Fileable:* as an opinion-grade pattern. *Shelf life:* 2 years. *Topics:* reviewers, evaluation.
 3. **P-c: Pair, then widen the outcome.**
    - *Problem:* a binary pass/fail on tens of runs cannot detect moderate effects.
    - *Principle:* replay the same tasks under both arms. Prefer more distinct tasks over more repeats per task. Use graded or count outcomes, or mechanical checks, instead of one checker verdict. Report an interval and claim only what it excludes.
    - *Origin:* the statistical-approach post [B]; §4 arithmetic [Calc].
    - *Conditions:* replay must be faithful (Q-001 B4, open).
-   - *Grade:* opinion built on B and Calc. *Shelf life:* 3 years. *Topics:* statistics, measurement, evaluation.
+   - *Grade:* opinion built on B and Calc. *Fileable:* **hold** until F-a gains an independent second source. *Shelf life:* 3 years. *Topics:* statistics, measurement, evaluation.
 
 ## Sources
 
-**Opened** (untrusted text, reported as claims)
+**Opened by me** (untrusted text, reported as claims)
 - https://www.anthropic.com/research/statistical-approach-to-model-evals (2024-11-19)
 - https://anthropic.com/engineering/demystifying-evals-for-ai-agents (2026-01-09)
 - https://www.anthropic.com/engineering/infrastructure-noise (2026-02-05)
@@ -293,11 +328,11 @@ Shelf lives are proposals. The "checked on" date is left for the Source checker.
 - https://github.com/wlchen0206/llm-sp (README says code not yet released; no findings)
 - https://raw.githubusercontent.com/statsmodels/statsmodels/main/statsmodels/stats/contingency_tables.py
 
+**Opened by the Source checker, not by me** (C✓, per /home/user/ml-lessons/research/Q-002-to-Q-004-source-check-2.md)
+- arXiv 2306.05685, 2404.13076 (and papers.nips.cc), 2410.21819v2, 2604.06996v3, 2406.18403 (and aclanthology 2025.acl-short.20), 2503.01747 (and proceedings.mlr.press/v267/bowyer25a), 2411.00640, 2407.01502, 2410.10934
+
 **Seen only in search results, not opened** (grade C)
-- arXiv 2411.00640, 2503.01747, 2306.05685, 2404.13076, 2410.21819, 2604.06996, 2406.18403, 2410.10934, 2410.12784, 2505.20206, 2407.01502, 2503.13657
-- https://proceedings.mlr.press/v267/bowyer25a.html
-- https://aclanthology.org/2025.acl-short.20/
-- https://papers.nips.cc/paper_files/paper/2024/hash/7f1f0218e45f5414c79c0679633e47bc-Abstract-Conference.html
+- arXiv 2410.12784, 2503.13657
 
 **Repository records opened**
 - /home/user/Personal-Org-Operating-Model/OPERATING_MODEL.md (:185-329, :422-426)
@@ -309,3 +344,7 @@ Shelf lives are proposals. The "checked on" date is left for the Source checker.
 - /home/user/Service-Desk/reviews/Q-001/_control/*.json (role and model lines)
 - grep of /home/user/Service-Desk/reviews/*/owner.md
 - /home/user/Model-Lab/research/Q-001-memo.md
+
+**Source checks applied in this revision**
+- /home/user/Model-Lab/research/Q-003-source-check.md
+- /home/user/ml-lessons/research/Q-002-to-Q-004-source-check-2.md
