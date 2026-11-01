@@ -24,7 +24,14 @@
     - Added in passing, and disclosed: SD reviews/P-001/_launch-gate-1-critic.md is a gate check with no verdict line. It is listed under the gate kind.
 11. **Library entries changed** as the check asked (§7).
 
-The rules in §1.3 and §1.4 are unchanged. Nothing else changed.
+I said the rules in §1.3 and §1.4 were unchanged, but they were edited when I re-wrote them for this revision:
+- **Added to §1.4:** the residual "does not depend on the avoidability mark". This only states what the first memo already did: PR 10 was marked "cannot say" with residual capability as its primary cause. In this revision the clause is also applied to S-018 r1.
+- **Dropped by mistake, not by intent:**
+  - "(with evidence, not later withdrawn)" from the avoidable test in §1.3;
+  - the examples under "Not avoidable" in §1.3 (input changed after the work; conflicting rulings; the checker's own wording or suggestion; the checker unable to open sources or files);
+  - the sentence "Upstream causes come first because capability is usually only inferred" in §1.4.
+
+The rules as first stated still govern, and every classification in this memo was made under them. For example, the Q-006 first check treats the checker's withdrawn error as the check's fault (Q-006-source-check.md:92-95, :156). No classification changes as a result of any of these edits. Nothing else changed.
 
 **Depth:** 3 (graded memo). **Topics:** records, baseline, reviews, rework, agents.
 **Grades:** **A** means a primary record I opened, cited by path and line. **B** means a count or derivation I made, with the method stated. **C** means my own judgement. Each statement is tagged Fact, Estimate or Opinion, written in short form as [F-A], [E-B], [O-C] and so on.
@@ -437,7 +444,7 @@ Of the 26, three show a recorded material gap: the revising researcher's pack la
   - S-014 build r1: mixed. B2 is a spec-versus-check conflict (:8-9). Primary material by tie-break.
   - Proof-diag r1 (:8-9) and r3 (:8): avoidable, capability.
   - S-032 build r2: avoidable, capability (:3).
-- **POOM S-002 (3):** no record of findings.
+- **POOM S-002 (3):** there is no record of findings in reviews/. reviews/1/reviewer.md:7 only points to docs/LEDGER.md L-0012 and L-0013 for rounds 1–3. That ledger is outside the named records, and I did not open it.
 
 **Critic (14):**
 - 11 are avoidable, with capability (residual) as primary:
