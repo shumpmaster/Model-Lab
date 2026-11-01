@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-The Critic's check of the problem statement (docs/PROJECT.md section 2) and the pre-mortem (section 7), on a different model from their writer (brief: docs/briefs/08-critic.md), verbatim. Recorded by the orchestrator. Session session_01QBwHGHrHnEvMNYgKDoaH8w, 2026-11-01.
+The Critic's check of the problem statement (docs/PROJECT.md section 2) and the pre-mortem (section 7), on a different model from their writer (brief: docs/briefs/08-critic.md), verbatim: rounds 1 and 2 (FAIL), round 3, a focused check of the round-2 fix (PASS). Recorded by the orchestrator. Session session_01QBwHGHrHnEvMNYgKDoaH8w, 2026-11-01.
 
 ## Round 1
 Verdict: FAIL
@@ -102,3 +102,72 @@ I checked the Section 2 problem paragraph and the "How other fields solved it" l
     - R1's early sign depends on M1 being able to assign causes, which R7 says may not be possible for conversational work. The table should say so.
 
 **To clear the FAIL:** fix findings 2, 3, 4 (first claim), 7, 8 and 13. The cleanest route is to attribute each bullet to its source with the memo's own caveats, drop or mark each claim that rests on a held entry, add a "conditions and transfer" clause to each bullet, and re-source R4.
+
+## Round 2
+Verdict: FAIL
+
+The redraft fixes all 15 earlier findings except one point on sourcing. I re-read section 2 (lines 16–24) and section 7 (lines 68–82) of /home/user/wt/ml-cos/docs/PROJECT.md against the Q-002 to Q-007 memos, the corrections confirmation, and Q-006's source check with its Round 2 PASS. One new blocking finding (N1) fails the round.
+
+**Status of my 15 earlier findings**
+
+1. Resolved. The paragraph now separates returns that caught a real fault from avoidable ones, and the count is tied to the milestone. "Solved it" became "found".
+2. Resolved. The checklist and handover bullet uses only LF-02, LF-03, LF-06a, LF-06b and LF-07, all fileable. It states the bundle and coaching condition, that no study separates the written tool's own effect, and that why Ontario saw nothing is not established.
+3. Resolved. The single-incident bullet is gone and nothing in its place rests on held entries.
+4. Resolved. The rules-out-of-date bullet says plainly that LF-15 is the authors' recommendation and not evidence that scheduled review works. The overrides and non-compliance bullet uses LF-10 and LF-14, both fileable.
+5. Resolved. LF-05a is worded as the paper words it ("did not accelerate", "likely part of a wider secular trend"). "May mislead" replaces "misled in both directions", and replay fidelity is stated as not yet known (Q-003 §7).
+6. Resolved. The reasoning-prompts and vague-delegation claims are gone. The agent-pipelines bullet uses F-f, P-e, F-g, F-h and F-c (fileable) and F-d (single source, labelled). Q-002 §1 items 4–5 is marked as the Researcher's estimate and not a filed fact.
+7. Mostly resolved. Each bullet now has conditions, transfer and "may mean here" as a candidate. The remaining defect is how the transfer lines are sourced (see N1).
+8. Resolved in substance. R4 now cites Q-007 bottom line 3, quoted verbatim and labelled the Researcher's opinion, and the dangling "second value target" is removed. One small residue remains (N2).
+9. Resolved. The Q-003 section numbers are correct (§1 item 3, §4, §6, §7). The opposite risk of discarding real moderate gains is added, with the report "not shown, with its range". The run-budget unit is fixed before testing.
+10. Resolved. R3 now covers the different-family or provider judge, a panel, repeat judgements to measure consistency, and inconsistent verdicts. It cites Q-003 §7 and Q-006 §0 item 5. Q-006's check confirms item 5 once it is read as "packs also differed", and R3 does not over-read it.
+11. Resolved. R5 adds the mid-test setting shift, and states there is no study on long hand-written role instructions (Q-004 §1 item 1). R6 labels the agent mechanism as assumed.
+12. Resolved. R7 now covers missing records of dropped work, a third of dispatches, and nothing after 8 October (Q-006 §7). "A third" is 37 of 104, about 36%, which is acceptable.
+13. Resolved. The Section 2 draft now uses only cleared facts, so it no longer contradicts R8. R8 says "many outside sources", and LL-12 and LL-22 are explained in words.
+14. Resolved. R9 (replay), checker noise (R3), setting shift (R5) and budget unit (R2) are added. The long-input confound (Q-002 §3.3) is still absent, but that is non-blocking.
+15. Mostly resolved. "First-time pass rate" and "paired test" are defined, and R2 no longer uses "points". Residual jargon is noted at N3.
+
+**New findings**
+
+N1. BLOCKING. Several transfer lines cite Q-005's own principle labels (P-3, P-4, P-8, P-6, D1) as support. They are the memo's unfiled opinions (M) and are not library entries.
+   - P-3, P-4 and P-8 correspond to LP-Q005-03, -04 and -07, all held by the confirmation. P-6 corresponds to LP-Q005-06, also held and marked opinion. D1 is stated as opinion.
+   - Examples: "agents have no training, culture or peer pressure (Q-005 D1, P-3)… effect sizes… cannot be carried over"; "(Q-005 P-4)"; "a model or version change… acts like such a trend (Q-005 P-8)" in section 2, and "Q-005 P-6" in R6.
+   - The only transfer cite that is on solid ground is P-11, which rests on fileable LP-Q005-09 (on LF-15 only).
+   - The section's lead says only cleared findings are used, and these cites are not findings.
+   - The draft should either label each as "the Researcher's transfer opinion, unfiled (Q-005 §4)" or drop the cite. The P-8 line's agent-side premise rests on Q-001 C4/F1, which are assumed.
+
+N2. NON-BLOCKING. R4 also cites Q-002 P-e. That pattern is about telling wording noise from an effect, and it does not support over-fitting or a held-out set. The memo's own "held-out check" wording in Q-007 bottom line 3 is the real support.
+
+N3. NON-BLOCKING. Small plain-language and completeness points.
+   - "mechanised check", "Source checker", "model family" and "chance" are still unexplained for the owner.
+   - The first bullet omits the randomised trial's own caveat that its mortality result was not significant (LF-Q005-03).
+   - The Q-007 single-source finding that changing a checker's instructions shifts verdicts (c6) is a possible pre-mortem line, but it is not required.
+
+**To clear:** resolve N1 only. N2 and N3 may be fixed at the writer's discretion.
+
+## Round 3 (focused)
+Verdict: PASS
+
+I could not run `git diff`. I hold only Read, Grep and Glob, so I re-read the full text of section 2 (lines 16–24) and the section 7 pre-mortem (lines 68–82) of /home/user/wt/ml-cos/docs/PROJECT.md. I checked the three named fixes in that text. I cannot independently confirm that nothing else changed. Of the lines I read, the problem paragraph and the section 7 intro, table, and closing paragraph match what I passed in round 2, apart from the fixes below. Whoever dispatched me should confirm "nothing else changed" from the diff.
+
+**N1, resolved.**
+- Every transfer judgement now carries the label "the Researcher's opinion, unfiled, Q-005 §4", or for the rules-out-of-date bullet "the Researcher's opinion, Q-005 §4 P-11".
+- The intro line now says the transfer judgements are opinions, not filed facts.
+- The P-8 line says "resting on an assumed premise" and is softened to "may act like such a trend".
+- R6's source cell now reads "the Researcher's unfiled opinion that rule growth transfers in altered form, its agent mechanism assumed (Q-005 §4)", with Q-002 F-d labelled single source.
+- The P-3, P-4, P-6 and P-8 label cites are gone from the text.
+- Q-002 F-d is described as "a filed single-source fact", which matches the confirmation.
+
+**N2, resolved.**
+- R4 no longer cites Q-002 P-e.
+- Its source now quotes Q-007 bottom line 3 as the Researcher's opinion. The quotes "when there is a reliable outcome signal and a held-out check" and "can bloat instructions and overfit" match the memo verbatim.
+
+**N3, resolved for the parts the writer took on.**
+- The randomised trial now says its fall in deaths was not significant, which matches LF-Q005-03.
+- "Mechanised check", "model family" and "Source checker" are now explained.
+
+**New, non-blocking.**
+1. R9 still cites "Q-005 §4 D6", which is the memo's opinion-grade condition. It is unlabelled, though the claim is only that replay "may be possible" and the row's wording stays conditional.
+2. The explanation of "mechanised check" sits in the section 2 bullet about rules not being followed, while the term next appears in R6 in section 7. A short repeat at R6 would help the owner, but this does not block.
+3. The long-input confound (Q-002 §3.3) is still not in the pre-mortem. I had already marked this as not required.
+
+*Orchestrator's note:* the Critic asked for confirmation from the diff. `git diff HEAD~1` of commit "Problem statement: label the transfer judgements…" on cos/p001-discovery-2 changes only docs/PROJECT.md, in the twelve replaced lines named in the round-3 message; nothing else changed.
