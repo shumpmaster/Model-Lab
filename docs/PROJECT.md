@@ -30,9 +30,9 @@ stays living. The Critic checks Part 1 against the definition of ready.*
 **Design**
 - Design-1 (standard) · taken on · why: success must be set in scenarios the owner can approve
 - Design-2 (standard) · taken on · why: the change touches how every role hands work to the next
-- Design-3 (standard) · taken on · why: whether instruction changes help is unknown and must be tested, not assumed
+- Design-3 (standard) · taken on · why: whether the candidate changes help is unknown and must be tested, not assumed
 - Design-4 (standard) · taken on · why: much of the outside evidence was hard to confirm, so every fact relied on needs its source
-- Design-5 (standard) · taken on · why: the agents' instructions, their records and their checks must fit together
+- Design-5 (standard) · taken on · why: the agents' instructions, inputs, records and checks must fit together
 - Design-6 (standard) · taken on · why: the plan changes the model's own rules and must pass review before anything is built
 - A fair test of the changes is ready (M2) · done when a test comparing each candidate change with leaving things as they are, on the same past tasks, is written down before any run, with its measure, its size within the owner's 100-run limit and a group where nothing changes · phase: Design · why: the owner accepted that no change may be the result, and the research found that about 100 paired runs can only show large gains, so the test must be set up before it is run
 
