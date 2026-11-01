@@ -18,14 +18,14 @@ stays living. The Critic checks Part 1 against the definition of ready.*
 
 **Discovery**
 - Discovery-1 (standard) · taken on · why: the owner logged the idea and agreed on 2026-11-01 to take it up first
-- Discovery-2 (standard) · taken on · why: the project needs its own measure of success and a point at which it stops
+- Discovery-2 (standard) · taken on · why: the owner wants fewer review rounds and better research, and the project needs a point at which it stops
 - Discovery-3 (standard) · taken on · why: the groundwork map's questions shape the research and the owner has answered its short list
 - Discovery-4 (standard) · taken on · why: the research found the instructions may not be the main cause of rework, so the problem must be stated before it is solved
-- Discovery-5 (standard) · taken on · why: six research questions were asked and every finding must be source-checked before it is relied on
+- Discovery-5 (standard) · taken on · why: seven research questions were asked, the groundwork map among them, and every finding must be source-checked before it is relied on
 - Discovery-6 (standard) · taken on · why: the research names design traps that could make the project measure the wrong thing
 - Discovery-7 (standard) · taken on · why: the owner set a testing budget and the work touches every project's agents, so its limits must be agreed
 - Discovery-8 (standard) · taken on · why: the owner rules the Design gate on a checked brief
-- The causes of rework are known (M1) · done when the causes of work being sent back across the model's past work are measured by kind of task, with a starting point the project can compare later changes against · phase: Discovery · why: the owner wants to close the gaps in how work passes between agents, and the research found that wording may matter less than inputs and how work is split
+- The causes of rework are known (M1) · done when the share of work sent back is counted from past records for each kind of task, each kind has a stated cause, and a starting figure is on record for later comparison · phase: Discovery · why: the owner wants to close the gaps in how work passes between agents, and the research found that wording may matter less than inputs and how work is split
 
 **Design**
 - Design-1 (standard) · taken on · why: success must be set in scenarios the owner can approve
@@ -34,15 +34,14 @@ stays living. The Critic checks Part 1 against the definition of ready.*
 - Design-4 (standard) · taken on · why: much of the outside evidence was hard to confirm, so every fact relied on needs its source
 - Design-5 (standard) · taken on · why: the agents' instructions, their records and their checks must fit together
 - Design-6 (standard) · taken on · why: the plan changes the model's own rules and must pass review before anything is built
-- A fair test of instruction changes is ready (M2) · done when a test comparing instruction versions on the same past tasks is registered in advance, with its measure, its sample within the owner's 100-run limit and a no-change arm · phase: Design · why: the owner accepted that no change may be the result, and the research found that only a paired test of this size can tell a real gain from noise
+- A fair test of the changes is ready (M2) · done when a test comparing each candidate change with leaving things as they are, on the same past tasks, is written down before any run, with its measure, its size within the owner's 100-run limit and a group where nothing changes · phase: Design · why: the owner accepted that no change may be the result, and the research found that about 100 paired runs can only show large gains, so the test must be set up before it is run
 
 **Build**
-- Every agent's brief and model on record (M3) · done when every agent session, whether started by the automatic pipeline or from a conversation, records the brief it was given and the model that ran it · phase: Build · why: the owner ruled this should hold across the model, and without it no one can tell which instructions led to clean first passes
-- Instruction changes proven or ruled out (M4) · done when the registered test has run and each tested change is kept, dropped or found to make no difference · phase: Build · why: the owner wants a refined prompt engine that is not redundant with the model's existing checks, so each change must earn its place
+- Every agent's brief and model on record (M3) · done when every agent session, whether started by the automatic pipeline or from a conversation, records the brief it was given and the model that ran it, and each brief can be read against how its work went (review rounds, fails, rework) · phase: Build · why: the owner ruled that conversation-started agents keep this record across the model and approved recording each brief against how its work went, and the automatic pipeline already records it, so the record covers every session
+- Each tested change has a result (M4) · done when every tested change has a recorded result, kept, dropped or no difference found, from runs within the testing budget the owner sets at the Build gate · phase: Build · why: the owner wants a refined prompt engine that is not redundant with the model's existing checks, so each change must earn its place
 
-**Launch**
-- The operating model runs on what worked (M5) · done when the changes that proved themselves, and the rules for recording and testing instructions, are part of the operating model under its own rules and Service-Desk has adopted that version · phase: Launch · why: the owner wants the result integrated into the operating model completely, not kept in a separate repository
-- Every slip in this work corrected (M6) · done when each entry in the lessons log is corrected in the operating model or closed with its reason · phase: Launch · why: the owner asked that every slip, error and miss be tracked and corrected within this workflow at the end
+- The operating model runs on what worked (M5) · done when the changes that proved themselves and the rule for recording each brief are part of the operating model under its own rules, and nothing of the result is left only in the work repository · phase: Build · why: the owner wants the result integrated into the operating model completely and ruled that each result moves fully into the model repository
+- Every slip in this work corrected (M6) · done when each entry in the lessons log is corrected in the operating model or closed with its reason · phase: Build · why: the owner asked that every slip, error and miss be tracked and corrected within this workflow at the end
 
 ## 4. Owners
 *An owner for every deliverable, including anything that needs the owner or an outside party.*
