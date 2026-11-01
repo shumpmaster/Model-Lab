@@ -10,7 +10,7 @@
   - **The right problem chosen (Discovery-4)** and **the risks known (Discovery-6):** problem statement in section 2, pre-mortem R1–R9 in section 7. Critic: reviews/P-001-problem-premortem/critic.md (PASS at round 3).
   - **The rest of the brief** (sections 1, 2 chain, 4, 5, 7 groundwork and unknowns U1–U5, 8, 9 "The owner is the user.") and **Part 2, the intent.** Critic: reviews/P-001-brief/critic.md (PASS at round 2). M2's done-when reworded (decisions/questions/P-001-milestones-m2-runs-critic.md).
   - **The owner's unasked ruling:** the desk notifies the owner when a conversation must move to a new session, in the model and the desk (decisions/questions/P-001-session-move-notice.md; lessons log LL-25).
-  - Lessons log LL-25 to LL-27.
+  - Lessons log LL-25 to LL-28.
   - Research question Q-008 (the count of past rework, M1) drafted and passed by the Critic at round 2 (reviews/Q-008/critic.md); not yet dispatched.
 - **Branches** (all pushed): cos/p001-discovery-2 (the brief, two decision records), orch/p001-discovery-2 (briefs 06–10, review records, lessons, Q-008, this handoff), cos/session-01QBwHGHrHnEvMNYgKDoaH8w (session lines). Their pull requests are listed in the owner's closing message.
 
@@ -22,7 +22,7 @@
    - whether researchers may read the web directly (LL-07);
    - who approves role-file changes, and whether instructions are re-checked on model changes (withdrawn earlier, to come with evidence);
    - the library's open choices from the Source checker: shelf lives (OPERATING_MODEL §6 [open]), mapping the memos' letter grades to strong/moderate/weak (Q-007's "A" means opened, not strong), and fields the pattern form lacks;
-   - the desk follow-ups (LL-21; deploysNeedOwner on one project only; the "default branch not found" wording, Service-Desk reviews/263) and the route for the desk's part of the session-move notice (LL-25; the desk is graduated, so the owner approves the route).
+   - the desk follow-ups (LL-21; deploysNeedOwner on one project only; the "default branch not found" wording, Service-Desk reviews/263) and the route for the desk's part of the session-move notice (LL-25; the desk is graduated, so the owner approves the route); and the desk showing the portfolio's pull requests that wait on the owner, and counting library patterns beside facts (LL-28; the owner agreed on 2026-11-01 to add it to these follow-ups).
 3. **The brief's last pieces and the definition-of-ready check:** the Discovery-1 to -8 and Design lines in section 3 stand; after M1, the Critic checks the whole brief against the definition of ready, then the Design gate case (docs/gates/, the gate form) goes to the owner.
 4. **Before the second idea starts:** the tools assume one project per repository (LL-16); bring the owner options.
 

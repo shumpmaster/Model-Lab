@@ -214,3 +214,25 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** the figures were written from memory, not counted from the Source checker's table.
 - **Correction proposed:** count before stating any figure to the owner; corrected to the owner in the same session.
 - **Status:** fixed here (owner told); closed for the model unless it recurs.
+
+### LL-28 A portfolio pull request waiting on the owner does not show on the desk
+- **What happened:** the library's pull request (portfolio #3) waits for the owner's merge, but the desk reads the portfolio repository only for its idea log, decision queue, rulings, intent and library fact names, not its pull requests, so nothing on the desk shows it waiting. The desk also counts library facts but not library patterns.
+- **The owner's words, verbatim (2026-11-01):** asked "Does the portfolio have desk access?", and on being told of the gap, "Yes." to logging it and adding it to the desk follow-ups.
+- **Caught by:** the owner's question; the Chief of Staff, reading the desk's configuration and portfolio reader (Service-Desk src/config/projects.json; src/public/lib/portfolio.js, RARE_DIRS).
+- **Cause:** the desk was built to read the portfolio's records, not to treat it as a project with work in flight (Service-Desk decisions/questions/P-001-portfolio-read.md); the model has the Source checker open pull requests in the portfolio, which the desk was not designed for.
+- **Correction proposed:** a desk follow-up, put to the owner with the Design gate: show the portfolio's open pull requests that wait on the owner, and count library patterns beside facts. Until then, the Chief of Staff gives the owner the link to every portfolio pull request that waits on them, in the same message (as for deploys, LL-23).
+- **Status:** open; to the owner with the Design gate (desk follow-ups).
+
+### LL-29 A push went ahead after a red governance check (LL-06 recurred)
+- **What happened:** adding LL-28, the Chief of Staff ran the governance checks, committed and pushed in one command; the checks reported FAILED and the push went ahead. The failure was `record_checks merges`, which, run locally on a branch, judges the orchestrator's record commits as if they were on the default branch; in a pull request and after a merge commit it judges only the merge, and CI passed on the same branch (PR #13). So nothing wrong was pushed, but the push did not wait for the check.
+- **Caught by:** the Chief of Staff, reading the command's output.
+- **Cause:** the check's result was piped into `tail` inside a `set -e` command, so its failure did not stop the push; the same slip as LL-06.
+- **Correction proposed:** LL-06 is reopened. Push only in a separate step after reading a passing result; and, for the model, run the local governance check the way CI does (against a test merge, or with the branch named) so a local run does not report a false failure that teaches people to ignore red.
+- **Status:** open (recurred).
+
+### LL-32 The owner was told two lessons were in a pull request that had already merged without them
+- **What happened:** LL-28 and LL-29, and the handoff's new desk follow-up, were pushed to the branch of PR #13 and the owner was told "Both entries are in Model-Lab #13". The owner merged #13 before that push reached it, so the entries never reached the default branch; the Critic found the missing LL-28 while checking a question that cites it. Restored here, after LL-31 (so the log reads LL-27, LL-30, LL-31, LL-28, LL-29, LL-32).
+- **Caught by:** the Critic (reviews/P-001-desk-follow-ups/critic.md, finding 1).
+- **Cause:** commits were pushed to a pull request the owner was already merging, and the claim was made without checking the merged commit; the same family as LL-11.
+- **Correction proposed:** never add commits to a pull request already put to the owner; open a new one instead. Before telling the owner that something is in a pull request, check the pull request's head, and after a merge, check the default branch.
+- **Status:** fixed here (restored); model change open.
