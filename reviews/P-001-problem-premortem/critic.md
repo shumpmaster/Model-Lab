@@ -170,4 +170,4 @@ I could not run `git diff`. I hold only Read, Grep and Glob, so I re-read the fu
 2. The explanation of "mechanised check" sits in the section 2 bullet about rules not being followed, while the term next appears in R6 in section 7. A short repeat at R6 would help the owner, but this does not block.
 3. The long-input confound (Q-002 §3.3) is still not in the pre-mortem. I had already marked this as not required.
 
-*Orchestrator's note:* the Critic asked for confirmation from the diff. `git diff HEAD~1` of commit "Problem statement: label the transfer judgements…" on cos/p001-discovery-2 changes only docs/PROJECT.md, in the twelve replaced lines named in the round-3 message; nothing else changed.
+*Orchestrator's note:* the Critic asked for confirmation from the diff. `git diff HEAD~1` of commit "Problem statement: label the transfer judgements…" on cos/p001-discovery-2 changes only docs/PROJECT.md, in ten lines, the fixes named in the round-3 message; nothing else changed.
