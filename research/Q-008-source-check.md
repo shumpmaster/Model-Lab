@@ -1,6 +1,9 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Source checker's check of research/Q-008-memo.md (brief: docs/briefs/13-source-checker.md), on a different model from the Researcher, verbatim. Recorded by the orchestrator. Session session_01QBwHGHrHnEvMNYgKDoaH8w, 2026-11-01.*
+*The Source checker's check of research/Q-008-memo.md (brief: docs/briefs/13-source-checker.md), on a different model from the Researcher, verbatim: round 1 (FAIL), round 2 on the revised memo (PASS). Recorded by the orchestrator. Session session_01QBwHGHrHnEvMNYgKDoaH8w, 2026-11-01.*
+
+## Round 1
+Verdict: FAIL
 
 The memo is a careful piece of work and most of its figures hold. Four load-bearing figures do not reproduce, and one stated rule was not followed. Filing should wait for a corrected memo. No files were written and no entries were filed. I did not open the barred paths.
 
@@ -112,6 +115,85 @@ I opened the cited record lines for 30 classified returns:
 Files checked, all read-only:
 - /home/user/wt/ml-orch/research/Q-008-memo.md
 - /home/user/Service-Desk/dispatch-log/2026-10.jsonl
+- /home/user/Service-Desk/reviews, triage and research
+- /home/user/Personal-Org-Operating-Model/reviews
+- /home/user/Model-Lab/reviews and research
+
+## Round 2
+Verdict: PASS
+
+The revision resolves every finding from my first record. The changed totals reproduce from the records and from the memo's own tables. Remaining slips are small and listed below. Nothing written or filed.
+
+## Findings from the first record
+
+| Finding | Status |
+|---|---|
+| S-002 is build, not plan | Resolved. Plans 150 became 148 (147 plus S-004), POOM built is 29 pieces and 17 returns, first try 17 of 29 (12 of 24). |
+| PR 222 and POOM PR 32 missed | Resolved. Both are counted. The frame rule in §1.1 is stated, and its search (39 SD files, 36 POOM files) reproduces. The SD files that remain outside series folders are 10, 11, 14, 27, 37, 44, 49, 52, 222 and 263. The 36 POOM files are all accounted for in §2. |
+| 117, 41/81/58 wrong | Resolved. 125 classified, 84 with findings (21 outside the worker, 2 named slips, 61 residual), 41 with no record. These sum correctly and agree with §5. |
+| POOM build sample drawn in numeric order | Resolved. My ASCII ordering gives odd positions S-017 r1, S-023/24 r1, PR5 r1, S-014 r1, diag r1, diag r3, S-032 r2, which is exactly the redrawn sample. S-020 and S-025/27 are dropped from the tallies. |
+| Q-001-diverse reasoning and cites | Resolved. The restatement is correct. Finding 1 (diverse :17-21) accepts the first Critic's "whether" wording (Q-001/critic.md:13). Finding 2 (diverse :23-27) faults passages the first Critic asked for (Q-001/critic.md:38-39 and :19-20). The class (check, by tie-break) is supported. |
+| Smaller slips (3 triage files plus Q-015, 3 mixed in Other, Q-007 wording, split rule, ML 9 vs 7) | Resolved. |
+| Pieces with no check record per kind | Resolved as lower bounds. The Critic figure of 15 SD questions with no Critic file and 0 of 8 ML questions checks out. |
+
+## Re-derived totals
+
+- **Returns:** 148 plans, 82 built, 40 research, 28 other, 14 Critic, 3 gate, total 315. The stratum table sums to 315 returns and 125 classified.
+- **Per-kind tallies:** I recounted each kind's avoidable, not avoidable, cannot-say and no-record columns, and the cause table.
+  - The totals are 64 avoidable (9 mixed), 10 not avoidable, 10 cannot say and 41 no record.
+  - By cause: 61 residual capability, 2 named capability, 10 check, 8 material, 1 instructions, 1 split, 1 something else and 41 no record.
+  - Both tables sum to 125.
+  - §5's residual-by-kind figures (4 of 14, 17 of 18, 10 of 16, 12 of 14, 18 of 22) sum to 61 of 84.
+- **First-try figures:** SD built 15 of 51, POOM built 17 of 29, SD other PRs 4 of 13. These reproduce.
+
+## Newly classified returns
+
+I opened the cited lines for each of these:
+- **S-017 r1** (reviews/20/reviewer.md:4): cannot say, material primary. It is defensible, since the supersession table omitted the locked pins and the owner ruling L-0124 covered them.
+- **S-023/24 r1** (reviews/26:21-23): the two blockers are loopholes in the built checks, so avoidable, capability.
+- **PR 222** (reviews/222/reviewer.md:12-17): the owner paragraph omits the skipped step and makes an unverifiable claim. Avoidable, capability.
+- **PR 32** (B1 id used as subject, B2 wrong reason for approval): avoidable, capability. This agrees with AGENTS.md:37-38.
+- **S-004 confirmation** (:5-8): AC6 lacks the commits it diffs, given AC4's own checkout. Avoidable, capability.
+- **Summary-only strata:**
+  - S-017, S-018 and S-019 plans: 6 returns have no finding text. S-018 r1 has the one line "first draft skipped scheduled runs", so it is cannot-say, capability.
+  - S-002: 3 returns, no record in reviews/.
+
+## The six disagreements in §6
+
+1. **One return unit (research 40, not 42): accept.** The check asked for a single convention. ML research is now 7 files, and the Critic is already per section. Joint POOM files count per spec section, which fits the same rule.
+2. **PR 263 in frame (built 82): accept.** It has no series folder and is its own source under the frame rule.
+3. **S-004 under plans (148 and 28, not 147 and 29): accept.** It is a plan check like S-013's confirmation.
+4. **Total 315, not 316: accept.** The difference is points 1 to 3.
+5. **Q-001-diverse cites: accept.** Verified above.
+6. **PR 10 as capability residual: accept on the substance.** The record gives the fault, "the memo carried the researcher's own summary", and points nowhere else. That meets the §1.4 residual definition as it stood originally.
+
+## Remaining slips (none moves a figure or a class)
+
+- The revision note says "The rules in §1.3 and §1.4 are unchanged", but they were edited.
+  - §1.4 gained the clause "and it does not depend on the avoidability mark", added to support the PR 10 call.
+  - §1.3 and §1.4 lost the "(with evidence, not later withdrawn)" qualifier, the examples under "Not avoidable", and the "Upstream causes come first" sentence.
+  - The substance is close to the original, but the "unchanged" claim should be corrected, or the edits disclosed.
+- S-002's causes are in docs/LEDGER.md L-0012 and L-0013 (weakened test, digest traceback, line-ending regression), which is outside the named records. "No record of findings" holds only as "none in reviews/". Say so in §4.
+- The §4 note on the three material-gap returns cites the library entry F-q006-06 second-hand. I did not re-open it in this pass.
+
+## Per-entry filing call for §7
+
+| Entry | Call |
+|---|---|
+| F-q008-01 | Fileable. The split rule is stated, and 70/64/13 reproduce. |
+| F-q008-02 | Fileable. |
+| F-q008-03 | Fileable. The exclusions are stated. 67 returns by spec section and median 3 over 21 specs reproduce. |
+| F-q008-04 | Fileable. The unit rule is stated. The 14 and 1 of 20 reproduce. |
+| F-q008-05 | Fileable. 3 of 7, 2 of the 7 returns and the Q-007 wording are right. |
+| F-q008-06 | Fileable. 125 is right. I ran the model-name search (3 SD hits, 2 POOM hits, 0 ML hits, none a cause). I ran the brief search too. For classified returns, only the M3C Triage blames a worker's brief. |
+| P-q008-01 | Fileable. The Q-001 instance is now correctly cited. |
+| P-q008-02 | Fileable. |
+| P-q008-03 | Fileable. 61 of 84 is correct. |
+
+All nine entries may be filed once the "unchanged" wording in the revision note is fixed. That wording is not a figure and does not hold the entries.
+
+Records checked, all read-only:
+- /home/user/wt/ml-orch/research/Q-008-memo.md
 - /home/user/Service-Desk/reviews, triage and research
 - /home/user/Personal-Org-Operating-Model/reviews
 - /home/user/Model-Lab/reviews and research
