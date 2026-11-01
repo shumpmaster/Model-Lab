@@ -1,0 +1,6 @@
+kind = "research"
+# Groundwork map for P-001 (model S-020). The full question, checked by the Critic for neutral
+# phrasing (reviews/Q-001/critic.md), is research/Q-001.md.
+question = """
+Groundwork map: the written instructions that pass work between roles in a multi-step pipeline of AI agents under one human owner. See research/Q-001.md for the full question, the decision it serves and its depth.
+"""
