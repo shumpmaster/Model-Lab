@@ -214,3 +214,46 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** the figures were written from memory, not counted from the Source checker's table.
 - **Correction proposed:** count before stating any figure to the owner; corrected to the owner in the same session.
 - **Status:** fixed here (owner told); closed for the model unless it recurs.
+
+### LL-28 A portfolio pull request waiting on the owner does not show on the desk
+- **What happened:** the library's pull request (portfolio #3) waits for the owner's merge, but the desk reads the portfolio repository only for its idea log, decision queue, rulings, intent and library fact names, not its pull requests, so nothing on the desk shows it waiting. The desk also counts library facts but not library patterns.
+- **The owner's words, verbatim (2026-11-01):** asked "Does the portfolio have desk access?", and on being told of the gap, "Yes." to logging it and adding it to the desk follow-ups.
+- **Caught by:** the owner's question; the Chief of Staff, reading the desk's configuration and portfolio reader (Service-Desk src/config/projects.json; src/public/lib/portfolio.js, RARE_DIRS).
+- **Cause:** the desk was built to read the portfolio's records, not to treat it as a project with work in flight (Service-Desk decisions/questions/P-001-portfolio-read.md); the model has the Source checker open pull requests in the portfolio, which the desk was not designed for.
+- **Correction proposed:** a desk follow-up, put to the owner with the Design gate: show the portfolio's open pull requests that wait on the owner, and count library patterns beside facts. Until then, the Chief of Staff gives the owner the link to every portfolio pull request that waits on them, in the same message (as for deploys, LL-23).
+- **Status:** open; to the owner with the Design gate (desk follow-ups).
+
+### LL-29 A push went ahead after a red governance check (LL-06 recurred)
+- **What happened:** adding LL-28, the Chief of Staff ran the governance checks, committed and pushed in one command; the checks reported FAILED and the push went ahead. The failure was `record_checks merges`, which, run locally on a branch, judges the orchestrator's record commits as if they were on the default branch; in a pull request and after a merge commit it judges only the merge, and CI passed on the same branch (PR #13). So nothing wrong was pushed, but the push did not wait for the check.
+- **Caught by:** the Chief of Staff, reading the command's output.
+- **Cause:** the check's result was piped into `tail` inside a `set -e` command, so its failure did not stop the push; the same slip as LL-06.
+- **Correction proposed:** LL-06 is reopened. Push only in a separate step after reading a passing result; and, for the model, run the local governance check the way CI does (against a test merge, or with the branch named) so a local run does not report a false failure that teaches people to ignore red.
+- **Status:** open (recurred).
+
+### LL-32 The owner was told two lessons were in a pull request that had already merged without them
+- **What happened:** LL-28 and LL-29, and the handoff's new desk follow-up, were pushed to the branch of PR #13 and the owner was told "Both entries are in Model-Lab #13". The owner merged #13 before that push reached it, so the entries never reached the default branch; the Critic found the missing LL-28 while checking a question that cites it. Restored here, after LL-31 (so the log reads LL-27, LL-30, LL-31, LL-28, LL-29, LL-32).
+- **Caught by:** the Critic (reviews/P-001-desk-follow-ups/critic.md, finding 1).
+- **Cause:** commits were pushed to a pull request the owner was already merging, and the claim was made without checking the merged commit; the same family as LL-11.
+- **Correction proposed:** never add commits to a pull request already put to the owner; open a new one instead. Before telling the owner that something is in a pull request, check the pull request's head, and after a merge, check the default branch.
+- **Status:** fixed here (restored); model change open.
+
+### LL-33 The owner was told asks pull requests would merge on their own; none can here
+- **What happened:** three times this session the Chief of Staff told the owner that a question, answer or session-lines pull request "should merge on their own" through the asks-merge workflow. The workflow's log for Model-Lab says "no asks-merge grant stands in docs/LEDGER.md; nothing is merged": the owner merged #9, #10, #11 and #14 themselves, and #16 sat waiting.
+- **Caught by:** the Chief of Staff, reading the workflow's log when #16 did not merge.
+- **Cause:** the model's asks-merge delegation needs the owner's grant in each project's ledger; Model-Lab has none, and the Chief of Staff assumed it from the workflow's presence and from #9 closing quickly.
+- **Correction proposed:** check the project's ledger for the grant before telling the owner anything will merge without them; offer the owner the grant as a question if they want it.
+- **Status:** fixed here (owner told); the grant is the owner's choice.
+
+### LL-34 The owner's token checkpoint double-counted helpers sent back for another round
+- **What happened:** when a helper is sent a further round (a Critic's round 2, a Researcher's revision), the figure it reports is its running total, not that round's use. The Chief of Staff logged each running total as a new helper line and summed them, telling the owner "about 900,000" tokens for the first part of the session; the true figure was about 499,000. The session lines already on the default branch hold those running totals.
+- **Caught by:** the Chief of Staff, logging the Researcher's revision, whose reported figure was larger than its first.
+- **Cause:** the reported figure's meaning was not checked; the S-033 helper line has no field to mark a running total.
+- **Correction proposed:** log only the increase for a resumed helper (done from the Researcher's revision on), and correct the figure to the owner; for the model, the session line should say whether a figure is a running total or one round's.
+- **Status:** fixed here (owner told the corrected figure); model change open.
+
+### LL-35 The desk's milestone screen is confusing, and for this project its standard milestones can never show as reached
+- **What happened:** the owner, looking at Model-Lab's project page on the desk: "This milestone look is confusing, 1 milestone but 6/8 5 standard but none look like that in the desk?" Each phase's headline ("0 of 6 reached") adds the project's own milestones to the standard ones the desk can track, leaving out those the model marks "not recorded" (for Discovery, 1 own plus 5 of 8 standard). The words "taken on, not recorded by the model" are not explained. And although this Discovery has met several standard milestones (the value target, the groundwork answers, the research), every standard milestone reads "not recorded", because the checks read standard milestones only from the automatic pipeline's dispatch log, and this project's Discovery has run from a conversation with no dispatch-log entries (Personal-Org-Operating-Model tools/v3_checks.py, the `lines` method: with no item blocks, every standard milestone is "not recorded").
+- **Caught by:** the owner.
+- **Cause:** two at once. The desk's counts and wording were designed for the pipeline path; and the model gives a conversation-run project no record the standard milestones can be read from.
+- **Correction proposed:** a desk change (counts that separate the project's own milestones from the standard checklist, and plain words for "not recorded") joins the desk work the owner ruled for after the Design gate (decisions/questions/P-001-desk-follow-ups.md); a model change gives conversation-run work a record the standard milestones read from, or reads them from the project's own records, as Discovery-2's rule already does when an item exists.
+- **Status:** open; desk part routed by the owner's ruling, model part with this project's lessons.
