@@ -1,0 +1,5 @@
+kind = "project"
+# The prompt engine: how the prompts that pass work between the model's agents (role cards and each
+# task's brief) are written, measured and improved, without duplicating the model's existing reviews
+# and checks. From the portfolio idea log's 2026-10-29 idea, taken up first on 2026-11-01.
+# Filed by the Chief of Staff (session_01QBwHGJH9m3A4Ray7WpHzBo); Discovery starts with Q-001.
