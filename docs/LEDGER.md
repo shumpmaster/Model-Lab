@@ -53,3 +53,16 @@ licenses_next: The redrafted research questions and their Critic check.
 decided_by: chief-of-staff (a correction to its own work; no ruling)
 proposed_by: chief-of-staff
 reversibility: reversible
+
+## L-0004 — Correction: Q-001's model-diverse Critic record is at reviews/Q-001-diverse/critic.md
+date: 2026-11-01
+type: correction
+supersedes: []
+scope: P-001
+expires: never
+asked: L-0003 cites reviews/Q-001/critic-diverse.md, a name the review check refuses (a review file is named for its reviewer's roster id).
+decision: The record moved, unchanged, to reviews/Q-001-diverse/critic.md; read L-0003's citation as that path.
+licenses_next: nothing new.
+decided_by: chief-of-staff (a correction to its own record; no ruling)
+proposed_by: chief-of-staff
+reversibility: reversible
