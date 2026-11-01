@@ -140,3 +140,11 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** one working copy shared between the Chief of Staff's own edits and its helpers' reads.
 - **Correction proposed:** helpers read from a fixed path or worktree for the branch they need; the Chief of Staff edits other branches in their own worktrees.
 - **Status:** fixed here (separate worktree for the lessons branch); model change open.
+
+### LL-22 No check of the environment's network before research begins
+- **What happened:** the owner asked for this entry, after LL-12: research ran for hours before anyone found that the cloud environment's network blocked most research sources, and the owner then had to change the environment's settings mid-project.
+- **The owner's words, verbatim (2026-11-01):** "a lesson learned that needs to be added is a Claude code environment assessment to determine if sources for research need to be given access."
+- **Caught by:** the owner.
+- **Cause:** nothing in the model asks for the session's environment (its network access, tools and limits) to be checked against what the work will need before the work starts.
+- **Correction proposed:** an environment assessment at the start of any project's Discovery, and before research is dispatched: list the kinds of sources the research will need, test that the environment can reach them, and put any needed change to the owner first, with the exact steps. The same step can cover the other things a session needs (tools, repositories, permissions).
+- **Status:** open; to become a model change at the end of the cycle.
