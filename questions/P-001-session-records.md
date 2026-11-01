@@ -13,6 +13,6 @@ DEFAULT: B   TIMEOUT: 168
 
 ## Context
 - Proposal put to the owner: "Record each agent brief and role card against how its work went (review rounds, fails, rework), find which prompts work, and improve the weak ones. Ongoing." The owner: "I think that should probably be in there too." (source: portfolio ideas/IDEAS.md, 2026-11-01)
-- Script-started sessions record the brief text, the agent file's hash and the model (source: research/Q-001-memo.md, C1, confirmed in research/Q-001-source-check.md)
+- Script-started sessions record the brief text, the agent file's hash and the model (source: research/Q-001-memo.md, C1)
 - Service-Desk's brief folder holds only its README, and the Chief of Staff's session file records no brief or model (source: research/Q-001-memo.md, C2)
 - The Chief of Staff's own account (2026-10-30): briefs are written by hand for each dispatch and nothing records which led to clean first passes (source: portfolio ideas/IDEAS.md, "Evidence from the Service Desk's launch")
