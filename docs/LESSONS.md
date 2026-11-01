@@ -236,3 +236,10 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** commits were pushed to a pull request the owner was already merging, and the claim was made without checking the merged commit; the same family as LL-11.
 - **Correction proposed:** never add commits to a pull request already put to the owner; open a new one instead. Before telling the owner that something is in a pull request, check the pull request's head, and after a merge, check the default branch.
 - **Status:** fixed here (restored); model change open.
+
+### LL-33 The owner was told asks pull requests would merge on their own; none can here
+- **What happened:** three times this session the Chief of Staff told the owner that a question, answer or session-lines pull request "should merge on their own" through the asks-merge workflow. The workflow's log for Model-Lab says "no asks-merge grant stands in docs/LEDGER.md; nothing is merged": the owner merged #9, #10, #11 and #14 themselves, and #16 sat waiting.
+- **Caught by:** the Chief of Staff, reading the workflow's log when #16 did not merge.
+- **Cause:** the model's asks-merge delegation needs the owner's grant in each project's ledger; Model-Lab has none, and the Chief of Staff assumed it from the workflow's presence and from #9 closing quickly.
+- **Correction proposed:** check the project's ledger for the grant before telling the owner anything will merge without them; offer the owner the grant as a question if they want it.
+- **Status:** fixed here (owner told); the grant is the owner's choice.
