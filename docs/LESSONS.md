@@ -186,3 +186,10 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** the model's stopping-point rule (OPERATING_MODEL.md, AGENTS.md "Working rules") says to write a handoff and tell the owner in the conversation, but gives the handoff no form the desk can read, and the desk has no notice for it.
 - **Correction proposed:** in the operating model, a handoff written at a stopping point takes a fixed place and form in the project, naming the next step and the message to start the new session with; on the desk, a notice to the owner when a project's latest handoff waits for a new session, with that message ready to copy. Ruled by the owner (decisions/questions/P-001-session-move-notice.md): the change goes into both the model and the desk.
 - **Status:** open; to the model and the desk under their own rules (the desk is graduated, so its part is new work the Chief of Staff files and the owner approves the route for).
+
+### LL-26 The problem statement and pre-mortem cited findings the source checks had held back
+- **What happened:** the Chief of Staff's first draft of the problem statement drew its "how other fields solved it" lines from Q-005's principles, several of which rest on entries the source-check confirmation holds back; it gave no transfer check on conditions, stated opinions as findings, and cited sections that do not support the claim (R4) or do not exist ("Q-003 §0"). The value-target question carried the same wrong section number.
+- **Caught by:** the Critic (reviews/P-001-problem-premortem/critic.md, findings 2–4, 7, 8, 13; reviews/P-001-value-target/critic.md).
+- **Cause:** drafting from the memos' short answers without reading each claim against the confirmation's hold list and the memo's own grades; section numbers written from memory.
+- **Correction proposed:** before a drafted claim cites research, look up the entry's filing status in the confirmation (or the library, once filed) and cite only fileable entries, with their caveats; copy section numbers from the memo, never from memory.
+- **Status:** fixed here (redrafted); model change open.

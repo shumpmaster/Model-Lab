@@ -62,3 +62,78 @@ The figures check out against their records. Those are the 70–77% and ~25% pow
     - M-codes should follow the plain milestone name, not lead it.
 
 13. Non-blocking. The "Context" section has 8 bullets, against the ≤5-line background rule in §2. Check whether the template's Context is exempt. Consider trimming.
+
+## Round 2
+Verdict: FAIL
+
+One new blocking finding (N1): the keep rule in Option A does not match the odds quoted for it. Of my 13 round-1 findings, 12 are resolved and 1 is partly resolved. I recomputed the new figures; they are below.
+
+**Round-1 findings**
+1. Miss and stop rule did not fit all three options: resolved. Each option now has its own Miss line, and the shared items are labelled proposals.
+2. No date, and the ruling stretched to cover it: resolved. The new "date under every option" paragraph says the earlier ruling did not cover the target's date. It makes choosing an option the ruling on "no calendar date" and offers a calendar date as an alternative.
+3. Card parts missing: resolved in form. Confidence, what would change it, who checked it, and "if you do not decide the project waits" are all present. The cited record (reviews/P-001-value-target/critic.md) does not exist yet. The Orchestrator should write this verdict there; as it stands the line is a forward reference.
+4. Option A overclaimed "believable": resolved in intent. Detection odds and false-alarm odds are now stated, but see N1.
+5. Options not even: resolved. The tilt is gone from C's cost, B's logic is cleaner, and each option has gain, cost and reversibility. B says "how well it can detect a one-round fall has not been worked out yet". That is honest, but it leaves A with figures and B without. It is non-blocking, and the recommendation says so.
+6. Target too loose: partly resolved. The baseline is now "the recounted figure", 50 tasks per kind is stated, and 300 runs for three kinds is disclosed (50 × 2 × 3 = 300, correct). The target is still not stated in a form the stated odds support (N1).
+7. The "gaps" gloss: resolved. The owner's words are quoted whole, including his spelling.
+8. Question count in status updates: resolved. It is removed. See N3 on "remaining".
+9. Miss outcome presented as a ruling: resolved. It is now under "Proposed… your ruling makes them so".
+10. Fewer than 30 pieces: resolved. A six-month rule is added, labelled a proposal.
+11. Baseline limited to conversation-started records: resolved. The text now says so, and that causes cannot be shown.
+12. Jargon: mostly resolved. "Paired" is explained, "AI model" is spelled out, and milestones are named in words. R3 stays in the risk line. The quotation "Killed, not tuned" is still not found verbatim in OPERATING_MODEL.md. Verify it or drop the quotation marks. Non-blocking.
+13. Context length: resolved. There are 5 bullets.
+
+**Recomputed figures**
+- **Paired test, "wrongly kept about 1 time in 40":** supported. Q-003 §4 uses a two-sided exact test at α = 0.05, which is 2.5% one-sided.
+- **30 pieces, one-sided 5%, against the starting figures** (my own binomial calculation):
+
+| Kind | Baseline → target | Passes needed to count as a gain | False alarm | Chance a real 20-point gain shows |
+|---|---|---|---|---|
+| Plans | 1/17 → about 26% | 5 or more of 30 | about 3% | about 90% |
+| Research | 2/12 → about 37% | 9 or more | about 4–5% | about 80% |
+| Build | 3/10 → 50% | 14 or more | about 4% | about 70% |
+
+  - "About 7 in 10" is therefore the worst case (build). It is not correct for plans or research.
+  - "About 1 in 25" is fair.
+  - These odds treat the starting figures as exact. Research (2 of 12) is not, and the recount will replace them. This is stated only loosely.
+
+**New findings**
+- **N1. Blocking. The rule in Option A does not match the odds quoted for it.**
+  - A keeps a change only if the pass rate is "at least 20 points" higher.
+  - The odds quoted ("catches a real 20-point gain about 7 times in 10", "about 3 in 10 real 20-point gains are missed") are for a statistical significance test, not a raw 20-point cutoff.
+  - If the true gain is exactly 20 points, a raw "observed at least 20" rule passes only about half the time. In real use on plans it needs 8 of 30 against the 5-of-30 significance cutoff, and power at that cutoff is about 50%.
+  - The "7 in 10" and "3 in 10 missed" figures therefore do not describe the rule as written.
+  - Fix: either define the keep rule as the significance test (observed gain large enough that the false-alarm chance is at most the stated 1 in 40 or 1 in 25), or restate the odds for the raw 20-point rule.
+  - Q-003's power figures also rest on assumed discordance (25% and 5%). Say they are assumptions.
+- **N2. Non-blocking.** Context bullet 4 cites the Chief of Staff's own calculation as the source of the 30-piece odds, with no filed record. File the calculation, or give its inputs. Say the odds differ by kind.
+- **N3. Non-blocking.** "Each status update shows the tokens used and remaining, as you asked." The test-budget ruling's Note says the Chief of Staff cannot read the owner's remaining plan allowance. It can report only whether the weekly limit currently allows use and when it resets. Reword to what can actually be reported.
+- **N4. Non-blocking.** The recommendation says a test of about 100 runs per kind. The 100 runs the owner allowed through Design cover only one kind. The body discloses this, but the recommendation should not read as if the allowance suffices.
+
+*Orchestrator's note on round 2, item 12:* "Killed, not tuned." is at OPERATING_MODEL.md line 46 (§1, spine item 4), in bold with a capital K; the quotation stands.
+
+## Round 3
+Verdict: FAIL
+
+The failure is one wording defect in the keep rule (new finding N5). It is a quick fix. N1 to N4 are resolved, and I confirmed that "Killed, not tuned" is at OPERATING_MODEL.md line 46.
+
+**Round-2 findings**
+- N1 (keep rule did not match the quoted odds): resolved in substance. The rule is now the significance rule: 1 in 40 in the test and 1 in 25 in real use. Twenty points is the gain the test is sized to see. The odds are stated for that rule, and the assumption behind the test's discordance is stated too.
+  - I recomputed the real-use odds, using exact binomial one-sided 5% with n = 30.
+  - Plans: 5 passes of 30, false alarm about 3%, detection about 92%. Matches.
+  - Research: 10 passes, false alarm about 2%, detection about 71%. The 10-pass choice is sound, since 9 passes gives about 5.4%, over the 5% rule.
+  - Build: 14 passes, false alarm about 4%, detection about 71%. Matches.
+  - The "9 in 10 plans, 7 in 10 research and build" text agrees with this. So does "1 in 25", which is the largest of the false-alarm figures.
+- N2 (calculation not filed): resolved. Context now gives the calculation's inputs and results per kind. One caveat is that it cites "reviews/P-001-value-target/critic.md, round 2". The Orchestrator must record my round-2 verdict there for that citation to hold. Until then it points at a file that does not exist.
+- N3 (token "remaining" overpromise): resolved. The text now reports what the helpers use and says the plan's remaining allowance cannot be read, which matches the test-budget ruling's Note.
+- N4 (100 runs per kind vs. the 100-run allowance): resolved. The recommendation now says all three kinds need about 300 runs, beyond the 100 allowed, and that the test budget comes to the owner at the Build gate.
+- Item 12: confirmed. "Killed, not tuned" appears at OPERATING_MODEL.md line 46. The Q-003 citation was corrected to §1 item 3 and §4, which is right.
+
+**New findings**
+- N5. Blocking, one-line fix. The wording of the keep rule is inverted.
+  - The test paragraph says: "larger than chance alone would produce more than 1 time in 40."
+  - Option A (2) says: "more than chance would give 1 time in 25."
+  - Read plainly, these say chance often produces the difference, which is the opposite of what is meant.
+  - The intended meaning is that chance alone would produce a difference this large no more than 1 time in 40 (test) or 1 in 25 (real use).
+  - This is the rule the owner is being asked to rule on, so it must be unambiguous in plain English.
+  - Fix: reword both so the meaning is "so large that chance alone would produce it at most 1 time in 40 (or 1 in 25)."
+- N6. Non-blocking. The Option A real-use rule is judged against "the recounted figure". The quoted odds use today's figures, and the text says the recount will move them. That is acceptable, but the card could add that the real-use odds will be restated once the recount is in.
