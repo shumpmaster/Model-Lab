@@ -257,3 +257,10 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** two at once. The desk's counts and wording were designed for the pipeline path; and the model gives a conversation-run project no record the standard milestones can be read from.
 - **Correction proposed:** a desk change (counts that separate the project's own milestones from the standard checklist, and plain words for "not recorded") joins the desk work the owner ruled for after the Design gate (decisions/questions/P-001-desk-follow-ups.md); a model change gives conversation-run work a record the standard milestones read from, or reads them from the project's own records, as Discovery-2's rule already does when an item exists.
 - **Status:** open; desk part routed by the owner's ruling, model part with this project's lessons.
+
+### LL-36 The real-use odds were worked out at the wrong cutoff
+- **What happened:** writing the count's starting figures into the brief, the Chief of Staff computed the "gain counts at" thresholds at a 5% chance cutoff while the same sentence, and the owner's ruling, say "at most 1 time in 25" (4%). Two of four thresholds, and their odds, were wrong.
+- **Caught by:** the Critic (reviews/P-001-after-the-count/critic.md, finding 1).
+- **Cause:** the calculation reused the earlier script's cutoff without re-reading the ruled one.
+- **Correction proposed:** state the cutoff in the calculation itself and check it against the ruling before quoting a figure.
+- **Status:** fixed here (recomputed at 1 in 25); closed for the model unless it recurs.
