@@ -154,3 +154,11 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** two at once. The desk reads "no milestone line" as "all reached" (Service-Desk src/public/lib/home.js:645), and the Chief of Staff added the project to the desk before drafting its milestones.
 - **Correction proposed:** draft a project's milestones before it goes on the desk; and a desk fix so a project with no milestone lines shows "not recorded", put to the owner as its own change to the graduated desk.
 - **Status:** open (milestones being drafted; the desk fix not yet put to the owner).
+
+### LL-22 No check of the environment's network before research begins
+- **What happened:** the owner asked for this entry, after LL-12: research ran for hours before anyone found that the cloud environment's network blocked most research sources, and the owner then had to change the environment's settings mid-project.
+- **The owner's words, verbatim (2026-11-01):** "a lesson learned that needs to be added is a Claude code environment assessment to determine if sources for research need to be given access."
+- **Caught by:** the owner.
+- **Cause:** nothing in the model asks for the session's environment (its network access, tools and limits) to be checked against what the work will need before the work starts.
+- **Correction proposed:** an environment assessment at the start of any project's Discovery, and before research is dispatched: list the kinds of sources the research will need, test that the environment can reach them, and put any needed change to the owner first, with the exact steps. The same step can cover the other things a session needs (tools, repositories, permissions).
+- **Status:** open; to become a model change at the end of the cycle.
