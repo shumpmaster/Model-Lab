@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-The Critic's check of the rest of the brief (docs/PROJECT.md sections 1, 2 chain, 4, 5, 7 groundwork and unknowns, 8, 9) and the intent (Part 2), on a different model from their writer (brief: docs/briefs/09-critic.md), verbatim. Recorded by the orchestrator. Session session_01QBwHGHrHnEvMNYgKDoaH8w, 2026-11-01.
+The Critic's check of the rest of the brief (docs/PROJECT.md sections 1, 2 chain, 4, 5, 7 groundwork and unknowns, 8, 9) and the intent (Part 2), on a different model from their writer (brief: docs/briefs/09-critic.md), verbatim: round 1 (FAIL), round 2 (PASS). Recorded by the orchestrator. Session session_01QBwHGHrHnEvMNYgKDoaH8w, 2026-11-01.
 
 ## Round 1
 Verdict: FAIL
@@ -61,3 +61,47 @@ Findings:
    - The six-month "too few pieces" rule in section 6 is a calendar limit beside "no fixed timeline". It was owner-adopted in the value-target ruling, so no contradiction.
 
 No other item decides something for the owner. The scope narrowing in finding 2 is the one candidate. The spend ceiling is correctly left to the owner.
+
+## Round 2
+Verdict: PASS
+
+I could not run git, so I re-read the current sections of /home/user/wt/ml-cos/docs/PROJECT.md. No blocking finding remains. One non-blocking finding (8) is carried forward, and the new points below are non-blocking.
+
+Per finding, from round 1:
+
+1. RESOLVED (was blocking), section 4. Each owner now matches the role's write lane.
+   - The Researcher's memos and the M1 count are "recorded by the Orchestrator" (research/** is the orchestrator's surface).
+   - Candidate changes are written by the Definer into experiments/**, which is the Definer's surface, as copies, with "no live role file changes until M5".
+   - The Builder owns only the test harness, in src/** and tests/**.
+   - The Reviewer's verdict is recorded by the Orchestrator.
+   - The Source checker, which holds a shell, re-derives counts.
+   - Remaining nit, non-blocking: the row does not say where the Source checker's re-derivation is recorded. Its own surface is library/** only.
+
+2. RESOLVED (was blocking), sections 1 and 8. "Kind of work" is now open-ended. It counts three kinds today, and M1 lists any further kind. "None is dropped from scope" and "a kind with too few past tasks … is reported as such, not dropped" are consistent with the owner's "everything should be touched". The terms no longer narrow the owner's ruling.
+
+3. RESOLVED (non-blocking), section 7. U5 ("Whether the past records can show why work was sent back at all") is added, closed by M1, with a fallback. U1 and U5 close in Discovery. U2, U3 and U4 are stated as open into Design and Build only if the owner accepts them, a ruling recorded in decisions/ with the Design gate. That matches definition of ready item 7.
+
+4. RESOLVED (non-blocking). M2 is reworded. Section 8 now says that Design's only runs are the replay check (U2) and the judge-consistency repeats (U3), "together planned at no more than 40". It also says the fair test's run count is written down in Design and its budget is ruled at the Build gate. The 100-versus-300 gap is reconciled. The "40" is the Chief of Staff's plan, not an owner figure. It is worded as "planned", which is acceptable.
+
+5. RESOLVED (non-blocking). Section 1 Out now lists Service Desk adoption of the new model version. It splits the session-move notice: the desk's part is new work for the desk, and the operating model's part is corrected here. Section 4 gains a row for the LL-25 operating-model part and states the Service Desk row as out of scope.
+
+6. RESOLVED (non-blocking). Section 5 now gives a proposed ceiling: no spending beyond the owner's existing AI plan, plus the run rulings. It is labelled "a proposal, not a record of the owner's view".
+
+7. RESOLVED (non-blocking), Part 2.
+   - The "Spending tokens is fine" bullet is now "Test runs, with visibility", quoting "I'm okay with 100 runs".
+   - The success bullet quotes "obviously there are trade offs" and labels the review-rounds-and-research gloss "the Chief of Staff's reading".
+   - The "hate" bullet becomes "What the owner has objected to". It quotes the owner for the repositories line and labels LL-11 and LL-17 "the Chief of Staff's record rather than the owner's words". The no-status-pages line is attributed to the handoff.
+
+8. NOT RESOLVABLE BY THE WRITER, still non-blocking. decisions/questions/P-001-value-target.md is cited in section 8 and Part 2 but is not yet on this branch. I read the record at /home/user/wt/ml-ans/decisions/questions/P-001-value-target.md. It exists and says option A, with the wording the document uses. I cannot see pull request #10. The cited records must be in place before the gate, and the Citation check should look again then.
+
+9. No change needed. The terms are still sound and the constraints do not contradict.
+
+New findings, all non-blocking:
+- N1. Section 6 still says "testing all three kinds … about 300 runs", while section 8 now allows more kinds if M1 finds them. Say that the 300 grows with the kinds found, so the owner sees the right budget at the Build gate.
+- N2. Section 4's note "no live role file changes until M5" sits beside the row that gives M3 (the brief-and-model record rule) to the operating model's own roles. M3 is a Build deliverable that lands before M5 and changes the template and tools. Clarify that the note covers candidate changes only.
+
+The M2 line, rewording: PASS.
+- It reads as an achievement: a test "is written down before any run", with its measure, its size and the number of runs it needs, and a group where nothing changes. It is a state reached, not something someone does, and it is needed to reach the Design gate.
+- "For the owner to set its budget at the Build gate" does not make it an action.
+- Its why is still true and in plain words. The owner accepted that no change may be the result, and the research found about 100 paired runs can only show large gains. Nothing in it contradicts the removal of "within the owner's 100-run limit".
+- It keeps the ` · phase: Design · why:` form, with no ` · ` inside the reason.
