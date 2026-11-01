@@ -35,3 +35,14 @@ Helpers this session used about 499,000 tokens in all; the session lines for hel
 
 ## Working rules carried forward
 Those in the first handoff, plus: run `governance_checks.py pr-body` on a drafted body before opening a pull request (LL-27); before citing research, look up the entry's filing status in the confirmation or the library (LL-26).
+
+## Update at the second stopping point (late on 1 November)
+- **Done since:** the count of past rework (Q-008, M1) researched and source-checked (two rounds), its nine entries filed in the portfolio library; the owner's four Design-gate rulings recorded (spend: the existing plan unless the owner overrides; only the Input reader reads the web; the desk gaps, plus the milestone screen, into one desk item after the Design gate; fixed library shelf lives and labels); the count's results written into the brief (section 6 starting figures, section 7 U1 and U5); the owner's ruling after the count: **A, go on now** (decisions/questions/P-001-after-the-count.md, once recorded); the pull-request briefing idea logged with its kick-off (portfolio ideas/KICKOFF-pr-briefing.md), to run in its own session; lessons LL-28 to LL-36.
+- **Next, in order:**
+  1. Record the owner's after-count answer (the text is ready in the session; PR #20 files the question and must merge first).
+  2. M1's "done when" says "each kind has a stated cause", which the records cannot give; reword it (Critic check, no owner ruling) or put it to the owner as not reachable as written, then ask the owner to accept M1.
+  3. Ask the owner to accept U2, U3 and U4 as open into Design (definition of ready item 7).
+  4. The whole-brief definition-of-ready check by the Critic, then the Design gate case (docs/gates/, gate form).
+  5. Carry the two rule-change rulings (researchers and the web; library shelf lives and labels) and LL-01 to LL-36 into the operating model at the end of the cycle (M5, M6).
+  6. Before the second idea starts: the tools assume one project per repository (LL-16).
+- **Every pull request here needs the owner's merge:** Model-Lab has no asks-merge grant (LL-33).
