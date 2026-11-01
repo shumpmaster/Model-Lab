@@ -243,3 +243,10 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** the model's asks-merge delegation needs the owner's grant in each project's ledger; Model-Lab has none, and the Chief of Staff assumed it from the workflow's presence and from #9 closing quickly.
 - **Correction proposed:** check the project's ledger for the grant before telling the owner anything will merge without them; offer the owner the grant as a question if they want it.
 - **Status:** fixed here (owner told); the grant is the owner's choice.
+
+### LL-34 The owner's token checkpoint double-counted helpers sent back for another round
+- **What happened:** when a helper is sent a further round (a Critic's round 2, a Researcher's revision), the figure it reports is its running total, not that round's use. The Chief of Staff logged each running total as a new helper line and summed them, telling the owner "about 900,000" tokens for the first part of the session; the true figure was about 499,000. The session lines already on the default branch hold those running totals.
+- **Caught by:** the Chief of Staff, logging the Researcher's revision, whose reported figure was larger than its first.
+- **Cause:** the reported figure's meaning was not checked; the S-033 helper line has no field to mark a running total.
+- **Correction proposed:** log only the increase for a resumed helper (done from the Researcher's revision on), and correct the figure to the owner; for the model, the session line should say whether a figure is a running total or one round's.
+- **Status:** fixed here (owner told the corrected figure); model change open.

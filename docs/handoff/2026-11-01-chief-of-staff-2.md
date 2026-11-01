@@ -31,7 +31,7 @@
 - Portfolio PR #3 (the library) waits for the owner: the portfolio repository has no asks-merge workflow.
 
 ## Token checkpoint
-Helpers this session reported about 900,000 tokens in all (the session lines hold each figure). This session's own tokens and the owner's remaining plan allowance cannot be read; the plan's weekly limit allowed use at the time of writing.
+Helpers this session used about 499,000 tokens in all; the session lines for helpers sent back for further rounds hold running totals, not each round's use (lessons log LL-34). This session's own tokens and the owner's remaining plan allowance cannot be read; the plan's weekly limit allowed use at the time of writing.
 
 ## Working rules carried forward
 Those in the first handoff, plus: run `governance_checks.py pr-body` on a drafted body before opening a pull request (LL-27); before citing research, look up the entry's filing status in the confirmation or the library (LL-26).
