@@ -162,3 +162,17 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** nothing in the model asks for the session's environment (its network access, tools and limits) to be checked against what the work will need before the work starts.
 - **Correction proposed:** an environment assessment at the start of any project's Discovery, and before research is dispatched: list the kinds of sources the research will need, test that the environment can reach them, and put any needed change to the owner first, with the exact steps. The same step can cover the other things a session needs (tools, repositories, permissions).
 - **Status:** open; to become a model change at the end of the cycle.
+
+### LL-23 A waiting deploy reached the owner with no notice
+- **What happened:** after the owner merged #263 in Service-Desk, the preview deploy started and waited for approval, but the owner saw no request and said "Merged but no deployment request". The Chief of Staff found the waiting run and sent its link.
+- **Caught by:** the owner.
+- **Cause:** GitHub's own notice of a waiting deployment did not reach the owner, and the desk's operating notes ("Approving a deploy") assume it does; the Chief of Staff also did not send the run's link when asking for the merge.
+- **Correction proposed:** whenever the Chief of Staff asks for a merge that starts a deploy, it finds the waiting run and gives the owner its link in the same message; and the desk's operating notes say where to find a waiting run when no notice comes.
+- **Status:** fixed here (practice changed); a correction to the desk's notes is open.
+
+### LL-24 Helper session lines lapsed again (LL-04 recurred)
+- **What happened:** after LL-04 was fixed for the first three helpers, the next 26 helpers were again not logged at dispatch; they were backfilled from their transcripts, with start and end times only and every usage figure null.
+- **Caught by:** the Chief of Staff, at a natural stopping point.
+- **Cause:** logging stays manual and is skipped when many helpers run at once; the reported token figures were not copied as they arrived.
+- **Correction proposed:** LL-04 is reopened. The session line and the brief are written in the same step as the dispatch (the brief-recording ruling); and the line takes the figures the helper reports when it returns.
+- **Status:** open (recurred).
