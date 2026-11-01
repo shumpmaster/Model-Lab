@@ -78,3 +78,79 @@ Proposed library entries (not filed; I was told to write no files)
 - P-q006-04 (re-checking identical work tests the checker): may be filed only as grade C and only if it records that the Q-005 pack was not held fixed (item 10). Otherwise hold.
 
 Files read: /home/user/Model-Lab/research/Q-006-memo.md, /home/user/Model-Lab/research/Q-006.md, and in /home/user/Service-Desk: dispatch-log/2026-10.jsonl, reviews/** (rounds, 69 control records, README.md), sessions/chief-of-staff/session_012RJPVKAoLga2RkqLYRDcBY.jsonl, specs/S-001.md:578-610, research/ and triage/ file lists; in /home/user/Personal-Org-Operating-Model: OPERATING_MODEL.md:196-210 and template-v3/governance/PACKS.toml:50-70.
+
+---
+
+## Round 2 — focused confirmation on the revised memo (recorded verbatim)
+
+Verdict: PASS
+
+Confirmation of /home/user/Model-Lab/research/Q-006-memo.md after revision. I checked only the items I raised. I wrote no files.
+
+**Findings**
+
+- **The desk-v2 point: the Researcher is right and I was wrong.**
+  - /home/user/Service-Desk/reviews/S-001-desk-v2/_confirmation-draft4-verbatim.md is a fresh Reviewer's check of draft 4. It was run under the owner's answer A ("a fresh reviewer checks only those fixes; then building starts").
+  - It has `Verdict: PASS` at :7. My earlier script missed it because its file name did not match my pattern.
+  - So the plan items with a recorded pass are 16 and only S-001-notifications has none. This is the original memo's 16-value list, with desk-v2 at 4.
+  - I re-ran the numbers on that basis.
+    - The median is 3 and the mean is 4.06 (65 over 16).
+    - "More than three check dispatches by one checker" gives 7 of 17: M3B, M3G, records, notifications, M3C, trial-view-2 and desk-v2.
+    - Without focused, recheck and confirmation checks it gives 4 of 17: M3B, M3G, records, notifications.
+    - Both figures hold, and the memo states the counting rule (§4 Method and stop-rule list).
+  - Item 17 is resolved.
+
+- **Item 18, build estimate: holds.**
+  - The memo now gives the method and the units. Its pass list is 12 stage-unit passes plus followups, LA2 and `_reviewer-build`.
+  - That matches my 12 stage-unit first-passes (M3E 8, M3B vt2, M3D 1 and 8, M3G qw2) plus followups. I confirmed `S-001/_reviewer-build.md` begins PASS.
+  - Result: 15 of 50, with sensitivity 13 of 47 to 17 of 52.
+
+- **Item 19, past-the-stop-rule list: holds.** It now includes M3C 4, notifications (Critic 6, plan review 4), trial-view-2 4 and desk-v2 4. It also gives desk-v2 1a design and review at 4.
+
+- **Item 10, Q-005: holds.**
+  - I checked every hash and line the memo now cites.
+  - BRIEF.md differs: 074d1f… (fe151, :55) against 16ef73… (218e3, :55).
+  - The pack also differs in the source-check file (:84/:86) and in three added files: sources.md (:57), a library fact (:83) and the question (:87).
+  - The Triage (:69) and the owner "confirm" ruling (:75) sit between the two checks.
+  - F-q006-05 and P-q006-04 now say the pack was not held fixed.
+
+- **Items 21 and 22: fixed.**
+  - The §0 kinds list now sums to 24 and matches the §5 table.
+  - The M3C Triage's "brief or orchestration gap" and its recommendation of a fresh brief are stated as an exception to "no reviewer blamed the brief".
+
+- **Item 23: fixed.** The memo now says it counted 11 PASS-then-FAIL reversals and opened 4. VT3 r3→r4 is reported as following a Builder fix, not a draft, and P-q006-02 is narrowed to match.
+
+- **Item 24: fixed.** The "far apart" example now uses M3B r1 B2 (:12773 against :11002) and B1 (:12789 against :13606), which are far apart.
+
+- **Item 25: fixed.** The memo says 2 of 330 files name the model (desk-v2 1b r1:13 and r2:11), and "82 of 154" S-001-* files with no header, which matches my count. F-q006-04 now says "almost never".
+
+- **Item 28: fixed.** The Definer helper at :5 is now said to overlap the 9 helper lines starting during it (:6–:14).
+
+- **Cause-class rows: now follow §2.**
+  - design-reviewer-setup #1 is "Doer, by default", and #4 is untraceable.
+  - sync r1 and r6 are "Doer, by default; no checker names a cause". The memo says R1 and R2 are not about the reviews and R3–R6 are.
+  - M3B r7 B1 and records r4 #1 are "Doer, by default", since the record shows only that the draft held owner answers.
+  - HD1 r2 and VT3 r2 stay Inputs, with the "another branch" nuance quoted.
+
+- **Library entries.**
+  - May be filed as written:
+    - F-q006-01 (the grade split between A and B is stated).
+    - F-q006-02 (grade B, line references, and the extra Q-006 session noted).
+    - F-q006-03 (cause stated as not established).
+    - F-q006-05 (the differences listed).
+    - F-q006-06.
+    - F-q006-07 (7 of 17 and 4 of 17 with the rule stated, one item with no pass, build range).
+    - F-q006-08 (grade A for the example only).
+    - P-q006-01 (grade C, cause not claimed).
+    - P-q006-02 (grade C, 4 of 11 opened).
+    - P-q006-03 (R1, R2 and R3–R6 separated).
+    - P-q006-04 (grade C, confounded).
+  - F-q006-04 may be filed with one grade fix: it is labelled "Grade A", but its "2 of 330" is a count, which the memo's own rules grade B.
+
+**Remaining minor points (neither blocks the PASS)**
+- §7 item 3 still reads as if the anomaly lines name the two undispatched sessions (Q-006 01:25:01, Q-013 21:36:11). They name the neighbouring sessions (01:28:40 and 21:42:17). F-q006-02 states the Q-006 case correctly.
+- The sessions-without-dispatch-line count and its control records are right. Only the wording about which session the anomaly names is loose.
+
+No conclusion in §0 or §8 now rests on a figure that failed my recomputation.
+
+My earlier FAIL report is superseded for items 10, 17, 18, 19, 21–25 and 28. Items 17 and the "two items with no pass" claim were my error and are withdrawn.
