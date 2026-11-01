@@ -176,3 +176,27 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** logging stays manual and is skipped when many helpers run at once; the reported token figures were not copied as they arrived.
 - **Correction proposed:** LL-04 is reopened. The session line and the brief are written in the same step as the dispatch (the brief-recording ruling); and the line takes the figures the helper reports when it returns.
 - **Status:** open (recurred).
+
+## 2026-11-01 — Discovery of P-001, session_01QBwHGHrHnEvMNYgKDoaH8w
+
+### LL-25 The desk does not tell the owner when work must move to a new session
+- **What happened:** the owner asked for this entry. A long piece of work has to stop at a natural point and carry on in a fresh session (the model's "stopping point before compaction"); the previous session did so with a handoff file, and the owner had to start the new session from it by hand. Nothing on the desk told the owner that the move was due, or where the handoff was.
+- **The owner's words, verbatim (2026-11-01):** "One thing for the lessons learned - I would like the desk to notify me when the conversation needs to move from one session to another. Let’s ensure that change becomes part of the operating model and desk"
+- **Caught by:** the owner.
+- **Cause:** the model's stopping-point rule (OPERATING_MODEL.md, AGENTS.md "Working rules") says to write a handoff and tell the owner in the conversation, but gives the handoff no form the desk can read, and the desk has no notice for it.
+- **Correction proposed:** in the operating model, a handoff written at a stopping point takes a fixed place and form in the project, naming the next step and the message to start the new session with; on the desk, a notice to the owner when a project's latest handoff waits for a new session, with that message ready to copy. Ruled by the owner (decisions/questions/P-001-session-move-notice.md): the change goes into both the model and the desk.
+- **Status:** open; to the model and the desk under their own rules (the desk is graduated, so its part is new work the Chief of Staff files and the owner approves the route for).
+
+### LL-26 The problem statement and pre-mortem cited findings the source checks had held back
+- **What happened:** the Chief of Staff's first draft of the problem statement drew its "how other fields solved it" lines from Q-005's principles, several of which rest on entries the source-check confirmation holds back; it gave no transfer check on conditions, stated opinions as findings, and cited sections that do not support the claim (R4) or do not exist ("Q-003 §0"). The value-target question carried the same wrong section number.
+- **Caught by:** the Critic (reviews/P-001-problem-premortem/critic.md, findings 2–4, 7, 8, 13; reviews/P-001-value-target/critic.md).
+- **Cause:** drafting from the memos' short answers without reading each claim against the confirmation's hold list and the memo's own grades; section numbers written from memory.
+- **Correction proposed:** before a drafted claim cites research, look up the entry's filing status in the confirmation (or the library, once filed) and cite only fileable entries, with their caveats; copy section numbers from the memo, never from memory.
+- **Status:** fixed here (redrafted); model change open.
+
+### LL-27 A question's pull request opened with a body that failed the form check
+- **What happened:** the value-target question's pull request (#9) was opened with Context bullets ending in a full stop after the source; the pr-body check requires each bullet to end with its closing bracket, and failed. The body was corrected in place.
+- **Caught by:** the pr-body check, read after opening.
+- **Cause:** the body was written by hand and not run through the repository's own pr-body check before the pull request was opened.
+- **Correction proposed:** run `governance_checks.py pr-body` on the drafted body locally before opening any pull request (the Chief of Staff now does so with a saved event file).
+- **Status:** fixed here (practice changed); model change open (the check's message could name the trailing-character rule).
