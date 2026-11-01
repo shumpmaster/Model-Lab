@@ -27,3 +27,16 @@ licenses_next: Writing MISSION.md and SCOPE.md, then opening the first sprint.
 decided_by: owner
 proposed_by: orchestrator
 reversibility: reversible
+
+## L-0002 — Incident: this session's checkers ran on the same model as the work they checked
+date: 2026-11-01
+type: incident
+supersedes: []
+scope: P-001
+expires: never
+asked: Saving each helper's brief and model (decisions/questions/P-001-session-records.md) showed that every helper the Chief of Staff started on 2026-11-01 ran on the same model as the Chief of Staff and as each other: the Critic on the Chief of Staff's research question and owner questions, and the Source checker on the Researcher's map (docs/briefs/01 to 05). Model diversity (OPERATING_MODEL.md §5, D-056) requires each checker to run on a different model from what it checks; another model was available, so no waiver applies.
+decision: The checks that still bear on open work are re-run on a different model: the Source checker on the revised groundwork map, and the Critic on research question Q-001. The owner questions had already been put and answered; their Critic check stands as recorded, with this entry noting it was not model-diverse. From now on each brief in docs/briefs/ names the model it asked for, and checkers are started on a different model from the doer.
+licenses_next: The re-run checks; evidence for P-001 (the same gap shows in Service-Desk's records: reviews/259/reviewer.md, line 48, in that repository).
+decided_by: chief-of-staff (an incident record; no ruling)
+proposed_by: chief-of-staff
+reversibility: reversible
