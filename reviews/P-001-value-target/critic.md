@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-The Critic's check of the value-target question (questions/P-001-value-target.md), on a different model from its writer (brief: docs/briefs/07-critic.md), verbatim. Recorded by the orchestrator. Session session_01QBwHGHrHnEvMNYgKDoaH8w, 2026-11-01.
+The Critic's check of the value-target question (questions/P-001-value-target.md), on a different model from its writer (brief: docs/briefs/07-critic.md), verbatim: rounds 1 to 3 (FAIL), round 4, a focused check of the round-3 fix (PASS). Recorded by the orchestrator. Session session_01QBwHGHrHnEvMNYgKDoaH8w, 2026-11-01.
 
 ## Round 1
 Verdict: FAIL
@@ -137,3 +137,20 @@ The failure is one wording defect in the keep rule (new finding N5). It is a qui
   - This is the rule the owner is being asked to rule on, so it must be unambiguous in plain English.
   - Fix: reword both so the meaning is "so large that chance alone would produce it at most 1 time in 40 (or 1 in 25)."
 - N6. Non-blocking. The Option A real-use rule is judged against "the recounted figure". The quoted odds use today's figures, and the text says the recount will move them. That is acceptable, but the card could add that the real-use odds will be restated once the recount is in.
+
+## Round 4 (focused)
+Verdict: PASS
+
+I have no git tool here. So I re-read the whole file and compared it with the round-3 text I read. The only differences are the two keep-rule sentences (N5) and the restated-odds clause (N6). I found nothing else changed.
+
+1. N5 (inverted keep-rule wording): resolved, non-blocking now.
+   - The "How the test works" paragraph now reads "so large that chance alone would produce it at most 1 time in 40".
+   - Option A (2) now reads "by so much that chance alone would produce it at most 1 time in 25".
+   - Both now say what the rule means, and the figures match the recomputed odds: 3%, 2% and 4% false alarms, which are all at most 1 in 25.
+2. N6 (odds to be restated after the recount): resolved. Option A (2) now says the real-use odds "treat today's figures as exact; they will be restated once the recount is in".
+3. Nothing else changed.
+   - Options B and C, the date paragraph and the proposed miss and stop rules are the same.
+   - The recommendation, the check line, the risk line and the Context bullets are the same.
+   - My earlier checks therefore still hold, including "Killed, not tuned" at OPERATING_MODEL.md line 46.
+   - The Context citation to my round-2 recomputation now resolves, since you say rounds 1–3 are recorded in reviews/P-001-value-target/critic.md.
+4. New findings: none.
