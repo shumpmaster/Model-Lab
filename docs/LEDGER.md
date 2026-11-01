@@ -40,3 +40,16 @@ licenses_next: The re-run checks; evidence for P-001 (the same gap shows in Serv
 decided_by: chief-of-staff (an incident record; no ruling)
 proposed_by: chief-of-staff
 reversibility: reversible
+
+## L-0003 — Q-001's model-diverse Critic check failed; its findings are carried into the research shortlist, not a new map
+date: 2026-11-01
+type: correction
+supersedes: []
+scope: P-001
+expires: never
+asked: Re-run on a different model (L-0002), the Critic failed research question Q-001 (reviews/Q-001/critic-diverse.md): its framing leans towards instructions being the thing to change and is sceptical of written procedure; it leaves out instruction design (length, structure, examples), levers other than instructions, how "good work" is defined and judged, handoff losses and injection, and a statement of what is out of scope. The groundwork map (research/Q-001-memo.md) was made from the failed question.
+decision: The map stands as a map of questions, read with this entry. Its research shortlist is not sent as written: the Chief of Staff redrafts the research questions so that, together, they cover the map's five and the Critic's findings 1, 2 and 4 to 7, with benefits and risks put evenly; the redraft goes to the Critic on a different model before any Researcher sees it. The map already holds some of the ground (B1, I1, I2 on measures and checkers; M1, M2 on visibility and injection).
+licenses_next: The redrafted research questions and their Critic check.
+decided_by: chief-of-staff (a correction to its own work; no ruling)
+proposed_by: chief-of-staff
+reversibility: reversible
