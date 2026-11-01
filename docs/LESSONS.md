@@ -208,3 +208,10 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** the desk was built to read the portfolio's records, not to treat it as a project with work in flight (Service-Desk decisions/questions/P-001-portfolio-read.md); the model has the Source checker open pull requests in the portfolio, which the desk was not designed for.
 - **Correction proposed:** a desk follow-up, put to the owner with the Design gate: show the portfolio's open pull requests that wait on the owner, and count library patterns beside facts. Until then, the Chief of Staff gives the owner the link to every portfolio pull request that waits on them, in the same message (as for deploys, LL-23).
 - **Status:** open; to the owner with the Design gate (desk follow-ups).
+
+### LL-29 A push went ahead after a red governance check (LL-06 recurred)
+- **What happened:** adding LL-28, the Chief of Staff ran the governance checks, committed and pushed in one command; the checks reported FAILED and the push went ahead. The failure was `record_checks merges`, which, run locally on a branch, judges the orchestrator's record commits as if they were on the default branch; in a pull request and after a merge commit it judges only the merge, and CI passed on the same branch (PR #13). So nothing wrong was pushed, but the push did not wait for the check.
+- **Caught by:** the Chief of Staff, reading the command's output.
+- **Cause:** the check's result was piped into `tail` inside a `set -e` command, so its failure did not stop the push; the same slip as LL-06.
+- **Correction proposed:** LL-06 is reopened. Push only in a separate step after reading a passing result; and, for the model, run the local governance check the way CI does (against a test merge, or with the branch named) so a local run does not report a false failure that teaches people to ignore red.
+- **Status:** open (recurred).
