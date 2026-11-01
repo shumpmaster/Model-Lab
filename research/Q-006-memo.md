@@ -1,6 +1,8 @@
-# Research memo: Q-006, what the Service-Desk records show about rework, by kind of task (2026-11-01)
+# Research memo: Q-006, what the Service-Desk records show about rework, by kind of task (2026-11-01, revised)
 
 **Depth:** 3 (graded memo). **Topics:** records, baseline, reviews, rework, agents.
+
+**Revision note.** This revision answers the source check at research/Q-006-source-check.md, items 10, 17, 18, 19, 21, 22, 23, 24, 25 and 28, its "Cause-class check", and its library-entry notes. I re-derived every changed count from the records myself. Where my count differs from the checker's, I give the record that decides it (§4). Nothing else has changed.
 
 **Grades.** Each statement is marked **Fact**, **Estimate** or **Opinion**, and carries one of these grades:
 - **A:** a primary record I opened, cited by path and line.
@@ -13,24 +15,31 @@ No web sources were used, and model memory is not a source. Text inside the reco
 
 ## 0. Bottom line
 
-1. **A rework baseline can be drawn from history, but only a descriptive one.** The records give rounds per item and first-pass rates by kind of task. For the conversational path they cannot say whether the instructions caused a finding, because the conversational path records neither the brief the agent got nor the model that ran it. [Opinion, C; it rests on §5 and §6]
+1. **A rework baseline can be drawn from history, but only a descriptive one.** The records give rounds per item and first-pass rates by kind of task. For the conversational path they cannot say whether the instructions caused a finding, because the conversational path records neither the brief the agent got nor, apart from 2 files, the model that ran it. [Opinion, C; it rests on §5 and §6]
 2. **Definition (plan) work shows the most rework.**
    - Only 1 of 17 plan items in conversational records passed every checker at round 1.
-   - The median is 3 rounds to a pass. 7 of 17 went past three rounds; the longest, M3B, ran 14.
+   - The median is 3 rounds to a pass.
+   - 7 of 17 had more than three check rounds. Of these, 4 ran more than three ordinary rounds. The other 3 failed round 3 and then passed on a focused or confirmation check.
+   - The longest, M3B, ran 14 rounds. One item has no recorded pass.
    - In the scripted path, the one definition item failed 3 plan rounds out of 3 and was closed.
    - Research comes next: 2 of 12 items passed the source check first time, and 3 were dropped after Triage.
-   - Build stages passed first time in about 30% of cases (15 of 50).
+   - Build stages passed first time in about 30% of cases (15 of 50 by the method in §4; between 13 of 47 and 17 of 52 under the other ways of counting there).
    [Estimate, B; §3–§4]
-3. **The most common findings were about the content, not the doer's obedience to instructions.** In my sample of 13 failed rounds (24 blocking findings):
+3. **Most findings were about the content of the work.** In my sample of 13 failed rounds (24 blocking findings):
    - plans that contradict themselves or leave something undefined: 6;
    - criteria with no test locking them: 4;
    - unmet frozen criteria: 3;
-   - inputs that were missing or changed mid-loop: 3, plus 1 case of new owner answers leaving gaps;
+   - inputs incomplete or missing: 2;
    - wrong facts: 2;
    - owner questions put unfairly, or settled without the owner: 2;
-   - inaccurate record or pull-request descriptions: 2.
+   - inaccurate record or pull-request descriptions: 2;
+   - a gap left when owner answers were written in: 1;
+   - an untestable checklist item: 1;
+   - a fix that brought back a fault: 1.
 
-   None of the 24 was blamed by its checker on the brief from the dispatcher. Brief errors show up only as non-blocking notes, and in one checker's admission of its own earlier miss. [Estimate, B; §5]
+   That makes 24.
+
+   No reviewer in those rounds blamed a finding on the brief it was dispatched with. One Triage did: M3C's Triage calls M3C round 1's B3 "a brief or orchestration gap", and recommends a fresh brief. It also says "I could not see the brief" (M3C/_triage-r3-critic-verbatim.md:9, :21, :45). So in one case, the instructions were named as a possible cause but could not be confirmed. Elsewhere, brief errors appear only as non-blocking notes. [Estimate, B; §5]
 4. **The scripted path is recorded far better, but it is short and narrow.**
    - It covers 2026-10-01 to 10-08 only.
    - It holds research, one readiness check, one plan loop and Triage, with no build work.
@@ -40,7 +49,7 @@ No web sources were used, and model memory is not a source. Text inside the reco
    So the two paths cannot be compared directly: they differ in kind of task, dates and record form all at once. [Fact, A/B; §6–§7]
 5. **The records hold two near-natural experiments.**
    - In 3 research revisions, the revising agent was not handed its own memo, and all three re-checks then failed.
-   - In 1 case, a memo with an identical file hash failed the source check and then passed it, with no researcher session in between.
+   - In 1 case, a memo with an identical file hash failed the source check and then passed it, with no researcher session in between. Its pack, its brief, a Triage and an owner ruling all changed between the two checks.
 
    Each comes from a single small batch. They point at inputs and checker consistency as levers, but they are not tests of either. [Fact on the records, A; the causal reading is Estimate, C]
 
@@ -68,6 +77,12 @@ No web sources were used, and model memory is not a source. Text inside the reco
 - in POOM: OPERATING_MODEL.md:196-320 and template-v3/governance/BRIEFS.toml;
 - in Model-Lab: the question and research/Q-001-memo.md.
 
+For this revision I also opened:
+- the head of S-001-desk-v2/_confirmation-draft4-verbatim.md (lines 1-20);
+- line 11 of S-001-desk-v2/_build-1b-review-round2-verbatim.md;
+- the file lists of reviews/Q-005/_control/1-fe151d6987ac.json and 1-218e36411c3b.json;
+- the source-check record.
+
 **Searched across, not read line by line:**
 - every file under reviews/ that has content (586 files), including all 69 control records;
 - specs/S-001.md (22,883 lines) and the headings of specs/_TEMPLATE.md;
@@ -82,7 +97,7 @@ The searches pulled: the first `Verdict:` line of every file; the "Dispatched by
   - both paths;
   - the longest loops (M3B, the sync series);
   - the one series that has a session record (S-001-model-3.5.0-records);
-  - every PASS-then-FAIL reversal I found;
+  - several PASS-then-FAIL reversals: 4 of the 11 I count (§5);
   - the only Triage written in a conversation (M3C).
 
 **Not opened** (outside what this question names, or held back for blindness):
@@ -107,7 +122,7 @@ I gave a class only when:
 - (a) the checker named the cause itself (for example "a fault in the spec, not the Builder's", HD1/_stage-hd1-review-r1-verbatim.md:9); or
 - (b) a record shows it directly (for example a pack's file list, a commit timeline, a draft note).
 
-Otherwise the cause is "doer, by default" or untraceable. Where a cause could be told or inputs, and nothing records the brief, I marked it **untraceable**. **Model** could not be assigned anywhere (see §6). [Opinion, C: method]
+Otherwise I used a fallback label, **"Doer, by default"**, which is not one of the six classes. It applies when the work was faulty and nothing recorded points elsewhere. Where a cause could be told or inputs, and nothing records the brief, I marked it **untraceable**. **Model** could not be assigned anywhere (see §6). [Opinion, C: method]
 
 ---
 
@@ -158,10 +173,15 @@ The control records' 30-minute session limit (reviews/Q-001/_control/0-62b8dda7d
 
    [Fact, A. That the missing memo caused the failures: Estimate, C. The check findings are not in scope.]
 2. **The same memo got two different verdicts.**
-   - Q-005's memo had hash 766515… at its third check (reviews/Q-005/_control/1-fe151d6987ac.json:83) and at the confirmation check (1-218e36411c3b.json:85).
+   - Q-005's memo had hash 766515… both at its third check (session 14:48:25; reviews/Q-005/_control/1-fe151d6987ac.json:83) and at the confirmation check (16:23:47; 1-218e36411c3b.json:85).
    - The first gave FAIL (:67) and the second PASS (:79), with no researcher session between them.
-   - The confirmation check's pack also held the question (1-218e36411c3b.json:87), and the earlier one's did not. [Fact, A]
-   - The cause is **untraceable** from what I may read: it could be checker variance, the pack difference, or an owner ruling. [Opinion, C]
+   - The work was the same, but the inputs and context were not held fixed. Between the two checks:
+     - **The brief differed** (BRIEF.md hash 074d1f… at 1-fe151d6987ac.json:55; 16ef73… at 1-218e36411c3b.json:55).
+     - **The pack held a different earlier source check** (381b53… at 1-fe151d6987ac.json:84; f528ce… at 1-218e36411c3b.json:86).
+     - **The confirmation check's pack added three files:** the question, research/Q-005.md (:87); governance/standards/sources.md (:57); and one more library fact (:83).
+     - **A Triage ran** (:69, :71), and an **owner "confirm" ruling** was made by proxy (:75).
+
+   [Fact, A] The cause of the flip is **untraceable** from what I may read. It could be checker variance, the brief or pack differences (including the added sources standard), or the owner ruling. [Opinion, C]
    - By contrast, Q-006's memo 23b09b… failed both times (reviews/Q-006/_control/0-bcb320bfac82.json:101, 0-4794c1dacad6.json:101; dispatch-log:98, :104). [Fact, A]
 3. **Pack contents changed during the week.**
    - The template's source-checker pack does not include the question (POOM template-v3/governance/PACKS.toml:60-61).
@@ -184,19 +204,57 @@ The control records' 30-minute session limit (reviews/Q-001/_control/0-62b8dda7d
 [Fact, B: search for `^Verdict:` over reviews/**/_*.md]
 
 ### Definition (plan review by the Reviewer, the Critic and the Design reviewer)
+
+**Method.** A plan item is a series folder that has plan-review, plan-critic, critic, plan-design or plan-confirmation files. Each recorded check dispatch counts as one round, including focused, recheck and confirmation checks.
+
 - **17 plan items.** All checkers passed at round 1 only for HD1 (HD1/_plan-review-r1-verbatim.md:7, _plan-design-r1-verbatim.md:7).
 - Counting each checker separately: 2 of 29 passed first time. [Estimate, B: series classified by file name]
-- **Rounds to a recorded pass** for the 16 items that have one: 1, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 6, 8, 14. The median is 3 and the mean 4.1. [Estimate, B]
-  - M3B: 14 plan-review and 14 plan-design rounds over drafts 1–13 (M3B/_plan-review-r1…r14-verbatim.md:3).
-  - M3G: Critic round 8.
-  - S-001-model-3.5.0-records: plan review round 6.
+- **Rounds to a recorded pass**, for the 16 items that have one [Estimate, B]:
+
+  | Item | Rounds |
+  |---|---|
+  | HD1 | 1 |
+  | followups | 2 |
+  | lab | 2 |
+  | tile-clip | 2 |
+  | after-glance | 3 |
+  | after-md3 | 3 |
+  | trial-view-1 | 3 |
+  | m3a | 3 |
+  | job-prs-recorded | 3 |
+  | design-lab-answers | 3 |
+  | M3C (r4 "focused") | 4 |
+  | trial-view-2 (r3 FAIL, then "round3-recheck" PASS) | 4 |
+  | S-001-desk-v2 (r1–r3 FAIL; "confirmation-draft4" PASS) | 4 |
+  | records | 6 |
+  | M3G | 8 |
+  | M3B | 14 |
+
+  The median is 3 and the mean 4.1.
+- **The desk-v2 confirmation counts as a plan pass.** The record is S-001-desk-v2/_confirmation-draft4-verbatim.md:1-13: "the Reviewer's confirmation check" of specs/S-001.md draft 4, with "Verdict: PASS" at :7. So I count it, and differ from the source check's "two items with no pass". [Fact, A]
+- **More than three check rounds: 7 of 17.**
+  - Four ran more than three ordinary rounds: M3B, M3G, records, and S-001-notifications (Critic round 6).
+  - Three failed round 3 and passed on a focused or confirmation check: M3C, trial-view-2, desk-v2.
+  - If focused, recheck and confirmation checks are not counted as rounds, the figure is 4 of 17. [Estimate, B]
 - **One item has no recorded pass.** S-001-notifications ends on plan-review round 4 FAIL and Critic round 6 FAIL, yet its build reviews exist. [Fact, B]
 
 ### Build (stage review by the Reviewer, Design reviewer or Security reviewer)
-- **About 15 of 50 stage units passed every checker at round 1.** [Estimate, B]
-  - Excluded: M3D stages 3 and 6b, whose combined files cannot be split by stage.
-  - M3E: 8 of 15.
-  - S-001-desk-v2: 0 of 10.
+
+**Method.** One unit is:
+- each build stage that has `_stage-<x>-*` or `_build-<n>-*` files; or
+- each build series without stages: `_build-review-*` files, LA1, LA2 and S-001/_reviewer-build.md.
+
+A unit passes first time when every checker's round-1 file begins PASS. I excluded M3D stages 3 and 6b: each has only one checker file, or a combined multi-stage file (_stage-3-4-5-design-r1) whose verdicts cannot be split by stage.
+
+- **15 of 50 units passed first time.** [Estimate, B]
+  - PASS (15): followups, M3G qw2, M3E (8), M3B vt2, M3D stages 1 and 8, LA2, and S-001/_reviewer-build.
+  - FAIL (35): HD1, md-sandbox, records, M3G qw1 and qw3, trial-view-2, trial-view-1, M3E (7), desk-v2 (10), M3B vt1 and vt3, m3a, job-prs-recorded, design-lab-answers, M3D stages 2, 4, 6a and 7, notifications, LA1.
+- **Sensitivity:**
+  - counting M3D 3 and 6b as first-pass gives 17 of 52;
+  - dropping LA1, LA2 and S-001/_reviewer-build (not labelled build) gives 13 of 47.
+
+  So the rate is about 26–33%. [Estimate, B]
+- M3E: 8 of 15. S-001-desk-v2: 0 of 10.
 - **Rounds per stage** ranged from 1 to 5; M3B VT3 reached 5 (M3B/_stage-vt3-review-r5-verbatim.md:3). [Fact, A]
 
 ### Other work reviewed (Orchestrator and Chief of Staff pull requests, checker setup)
@@ -211,25 +269,44 @@ The control records' 30-minute session limit (reviews/Q-001/_control/0-62b8dda7d
 One conversational Triage exists (M3C/_triage-r3-critic-verbatim.md). It is not checked. [Fact, A]
 
 ### Rounds past the stop rule
-- The rule is three plan rounds and three build rounds (POOM OPERATING_MODEL.md:203-206).
-- Conversational series past it: M3B 14, M3G 8, the sync series 7, records 6, design-reviewer-setup 6, VT3 5, and M3D 6a 4. [Fact, B]
-- In one case the spec's own draft notes cite an owner ruling for the 4th round (specs/S-001.md:600-602). [Fact, A]
-- For the others, whether a ruling allowed the extra rounds is in decisions/, which is outside my access. **Untraceable.**
+The rule is three plan rounds and three build rounds (POOM OPERATING_MODEL.md:203-206). "Past it" here means more than three check dispatches by one checker on one item, focused and confirmation checks included.
+
+**Plan:**
+- M3B: 14 (plan-review and plan-design each);
+- M3G: Critic 8;
+- S-001-model-3.5.0-records: plan review 6;
+- S-001-notifications: Critic 6, plan review 4;
+- M3C: 4 (r4 focused);
+- trial-view-2: 4 (r3 plus recheck);
+- S-001-desk-v2: 4 (r3 plus confirmation-draft4).
+
+**Build:**
+- M3B VT3: 5;
+- M3D 6a review: 4 (files r1 and r4; r2–r3 missing);
+- S-001-desk-v2 1a: design 4 and review 4 (r1–r3 FAIL, plus a confirmation).
+
+**Other:**
+- S-001-model-3.5.0-sync: 7;
+- design-reviewer-setup: 6.
+
+[Fact, B]
+
+In one case the spec's own draft notes cite an owner ruling for the 4th round (specs/S-001.md:600-602). The desk-v2 confirmation names an owner answer in its header (S-001-desk-v2/_confirmation-draft4-verbatim.md:3). [Fact, A] For the others, whether a ruling allowed the extra rounds is in decisions/, which is outside my access. **Untraceable.**
 
 ---
 
 ## 5. Kinds of finding that sent work back, and their causes (sample of 13 FAIL rounds, 24 blocking findings)
 
-| Kind of finding | n | Examples (path:line) | Cause as recorded |
+| Kind of finding | n | Examples (path:line) | Cause as recorded (§2 method) |
 |---|---|---|---|
-| Plan contradicts itself or leaves something undefined | 6 | M3B r1 B1, B2, B4, B5 (M3B/_plan-review-r1-verbatim.md:20-49); records r1 #1 (_plan-review-round1-verbatim.md:27-38); M3C r1 B1 (:23-28) | Doer, by default. The contradictions sit far apart in a 22,883-line spec, for example :11002 against :12773 and :13574 against :13606 (M3B r1:27-29, :21-23). That makes **division** plausible. [Opinion, C] |
-| Criterion not locked by any test | 4 | records r4 #1 (:43-48); HD1 r1 B1 (:19-24); HD1 r2 B2 (reviews/253/reviewer.md:130-145); VT3 r2 F1 (:19-24) | Two are **inputs** (a spec draft merged into the branch mid-build): HD1 r2 says "It isn't the Builder's slip: draft 3 … landed … four minutes before the Builder's B1 commit" (reviews/253/reviewer.md:112), and VT3 r2 says "draft 13's VT3 row now lists…" (:9). One followed an owner answer (records r4: draft 4 wrote in owner answers, specs/S-001.md:592-599). One is the doer's. |
+| Plan contradicts itself or leaves something undefined | 6 | M3B r1 B1, B2, B4, B5 (M3B/_plan-review-r1-verbatim.md:20-49); records r1 #1 (_plan-review-round1-verbatim.md:27-38); M3C r1 B1 (:23-28) | Doer, by default. Some contradictions sit far apart in a 22,883-line spec: B2 sets :12773-12774 against :11002-11003, and B1 sets :12789 against :13606-13607 (M3B r1:21-29). That makes **division** plausible. [Opinion, C] |
+| Criterion not locked by any test | 4 | records r4 #1 (:43-48); HD1 r1 B1 (:19-24); HD1 r2 B2 (reviews/253/reviewer.md:130-145); VT3 r2 F1 (:19-24) | HD1 r2 and VT3 r2 are **inputs**, a spec draft merged into the branch mid-build. HD1 r2 says "It isn't the Builder's slip: draft 3 … landed … four minutes before the Builder's B1 commit … and on another branch" (reviews/253/reviewer.md:112). VT3 r2 was dispatched "with draft 13 merged" (:3, :9). HD1 r1 is Doer. records r4 #1 is Doer, by default: the draft it reviewed wrote in owner answers (specs/S-001.md:592-599), but nothing records that this caused the missing test. |
 | Unmet frozen criterion | 3 | desk-v2 1a r1 #1-#3 (S-001-desk-v2/_build-1a-review-round1-verbatim.md:21-40) | Doer (Builder) |
-| Inputs incomplete or missing | 2 | design-reviewer-setup r1 #1, #4 (:13-25, :40-45) | Inputs |
-| Owner question unfair, or an open owner question settled by the work | 2 | M3C r1 B3 (:38-44); design-reviewer-setup r1 #2 (:27-31) | M3C's Triage calls it "a brief or orchestration gap that rests on wrong facts" but adds "I could not see the brief" (M3C/_triage-r3-critic-verbatim.md:9, :21). **Untraceable** between told and inputs. |
+| Inputs incomplete or missing | 2 | design-reviewer-setup r1 #1, #4 (:13-25, :40-45) | #1, the ruling list is incomplete: Doer, by default (the checker names no cause, and no pack list is recorded). #4, it relies on documents not on main: **untraceable**, since what the writer was handed is not recorded. |
+| Owner question unfair, or an open owner question settled by the work | 2 | M3C r1 B3 (:38-44); design-reviewer-setup r1 #2 (:27-31) | M3C's Triage calls it "a brief or orchestration gap that rests on wrong facts" but adds "I could not see the brief" (M3C/_triage-r3-critic-verbatim.md:9, :21). So it is **untraceable** between told and inputs. design-reviewer-setup #2: Doer, by default. |
 | Wrong fact | 2 | M3B r1 B3 (:33-37); M3C r1 B2 (:30-36) | Doer, or an upstream fact. Untraceable. |
-| Record or pull-request description inaccurate | 2 | sync r1 #1 (:5); sync r6 #1 (:5-13) | **Division**: all 6 blocking findings concerned the description's account of its own reviews, "never on the sync itself" (sync r6:15-21) |
-| Gap left by owner answers written in | 1 | M3B r7 B1 (:41-45), after the r6 PASS on draft 6 | **Inputs (moving target)** |
+| Record or pull-request description inaccurate | 2 | sync r1 #1 (:5); sync r6 #1 (:5-13) | Doer, by default; no checker names a cause. Of the 6 blocking findings in the series, all concern the description and none "the sync itself" (sync r6:15-21). R1 (the test change left out) and R2 (an opening that said nothing had failed) are not about the reviews. R3–R6 concern the description's account of its own reviews (r6:16-20, :5). |
+| Gap in a new draft that wrote in owner answers | 1 | M3B r7 B1 (:41-45), after the r6 PASS on draft 6 | Doer, by default. The finding is a plan inconsistency in draft 7. The record shows only that draft 7 wrote in owner answers (:9), not that this caused the gap. |
 | Untestable checklist item | 1 | design-reviewer-setup r1 #3 (:33-38) | Doer |
 | Fix brought back a fault | 1 | VT3 r4 F2 (:29-37) | Doer (the fix) |
 
@@ -237,28 +314,40 @@ One conversational Triage exists (M3C/_triage-r3-critic-verbatim.md). It is not 
 
 ### Cross-cutting evidence
 
-**What the agent was told.** No blocking finding in the sample was blamed on the dispatcher's brief. Brief errors appear as non-blocking notes:
+**What the agent was told.** No reviewer in the sampled rounds blamed a blocking finding on the dispatcher's brief. Brief errors appear as non-blocking notes:
 - "Your brief said 23 forced", where the reviewer counted 20 (HD1/_stage-hd1-review-r1-verbatim.md:63);
 - a commit hash in the brief that does not exist (HD1/_stage-hd1-review-r2-verbatim.md:52; M3G/_stage-qw3-review-r1-verbatim.md:11);
 - "seven" where there were eight (M3B/_stage-vt1-review-r1-verbatim.md:60);
 - "digest regenerated" when it was not (S-001-model-3.5.0-sync/_review-round2-verbatim.md:35).
 
-One checker blamed its own round-1 miss on accepting "the brief's framing" (M3B/_plan-critic-r2-verbatim.md:43). [Fact, A]
+The exception is the M3C Triage. It names "a brief or orchestration gap" for round 1's B3, says the Definer "apparently got none of the rules behind it", and recommends a fresh brief that names the governing sources. It also says it could not see the brief (M3C/_triage-r3-critic-verbatim.md:9, :21, :45). Separately, one checker blamed its own round-1 miss on accepting "the brief's framing" (M3B/_plan-critic-r2-verbatim.md:43). [Fact, A]
 
 The briefs the Definer writes into the spec for the Builder were caught at plan stage, before any build. The worst case:
 - the brief told the Builder to use the private project's files "as real records" (S-001-m3a/_critic-round2-verbatim.md:34-36);
 - that was fixed in round 3 (_critic-round3-verbatim.md:9). [Fact, A]
 
-**Inputs changing under a loop:** spec drafts merged into build branches (HD1, VT3), and owner answers written into plans (M3B r7, records r4).
-- The M3C Triage counts 5 of 5 blockers in rounds 2–3 as tracing to the owner's switch to gate first (M3C/_triage-r3-critic-verbatim.md:18).
-- In every PASS-then-FAIL reversal I opened, the FAIL followed a new draft (M3B r6→r7; records r3→r4). None was a re-check of the same draft.
+**Inputs changing under a loop:** spec drafts merged into build branches (HD1, VT3), and owner answers written into plans (M3B r7, records r4). The M3C Triage counts 5 of 5 blockers in rounds 2–3 as tracing to the owner's switch to gate first (M3C/_triage-r3-critic-verbatim.md:18). [Fact, A]
 
-[Fact, A, for the cases opened. That this holds generally: Estimate, C.]
+**PASS-then-FAIL reversals.** I count 11 places where one checker's PASS on an item was followed by a FAIL from the same checker [Fact, B]:
+- records plan review r3→r4;
+- M3G Critic r5→r6;
+- M3B plan review r6→r7;
+- M3B plan design r6→r7 and r10→r11;
+- M3B VT3 review r1→r2 and r3→r4;
+- M3E g9 review r1→r2;
+- S-001-notifications plan review r3→r4 and Critic r4→r5;
+- M3D 6a design r1→r2.
+
+I opened 4 of them:
+- Three followed a new draft: M3B r7 against draft 7 (M3B/_plan-review-r7-verbatim.md:3, :9); records r4 against draft 4 (specs/S-001.md:592-599); VT3 r2 "with draft 13 merged" (:3).
+- One, VT3 r3→r4, followed a Builder fix commit (4f509ed, "VT3 round 4"; "The production fix for N9 works", M3B/_stage-vt3-review-r4-verbatim.md:3, :9).
+
+[Fact, A] What drove the other 7 is not established. [Fact]
 
 **The checker:**
 - Checkers admit misses that cost a round: S-001-desk-v2/_build-6b-review-round2-verbatim.md:11; _build-2-review-round2-verbatim.md:63; S-001-m3a/_plan-review-round3-verbatim.md:16; S-001-model-3.5.0-sync/_review-round6-verbatim.md:7.
 - A checker's own suggested fix caused the next blocker (M3C/_triage-r3-critic-verbatim.md:23).
-- The Q-005 verdict flip is described in §3. [Fact, A]
+- The Q-005 verdict flip is described in §3, where the pack was not held fixed. [Fact, A]
 
 **Division:** the same process finding recurs as a non-blocking note. surface_guard fails over a whole branch once definer or chief-of-staff commits are merged in:
 - M3B/_stage-vt3-review-r2-verbatim.md:27;
@@ -274,8 +363,8 @@ The briefs the Definer writes into the spec for the Builder were caught at plan 
 
 | | Scripted | Conversational |
 |---|---|---|
-| Brief text recorded | Yes, verbatim in each control record (for example reviews/Q-001/_control/0-62b8dda7dcf2.json:3) | No. Headers give only date, branch and commit (239 files begin "Dispatched by the orchestrator on …"); about 90 S-001-* round files have no header at all |
-| Model recorded | Yes. Researcher claude-opus-5-5, source-checker and Triage claude-sonnet-5-5 (0-22dc0e573e9a.json:54; 0-62b8dda7dcf2.json:60; 0-6c728513a012.json:116) | Named in 1 of 330 round files ("Session: Opus 5.5", S-001-desk-v2/_build-1b-review-round1-verbatim.md:13) |
+| Brief text recorded | Yes, verbatim in each control record (for example reviews/Q-001/_control/0-62b8dda7dcf2.json:3) | No. 239 files begin "Dispatched by the orchestrator on …", giving date, branch and commit only. In the S-001-* series folders (S-001/ excluded), 82 of 154 files have no such header; 2 of those 82 are orchestrator notes, not rounds. |
+| Model recorded | Yes. Researcher claude-opus-5-5, source-checker and Triage claude-sonnet-5-5 (0-22dc0e573e9a.json:54; 0-62b8dda7dcf2.json:60; 0-6c728513a012.json:116) | Named in 2 of 330 round files, both in desk-v2 stage 1b: "Session: Opus 5.5" (S-001-desk-v2/_build-1b-review-round1-verbatim.md:13; _build-1b-review-round2-verbatim.md:11) |
 | Inputs recorded | The pack's files, with hashes (manifest) | No |
 | Usage | Not in what I read | One session file. Tokens null on 10 of 15 helper lines; end usage all null (session_…jsonl:2-10, :13, :17) |
 | Kinds of task | Research, readiness check, one plan loop, Triage, cards | Plan, build and pull-request review, one Triage |
@@ -322,7 +411,7 @@ All rows are [Fact, A/B].
 6. **"Round" does not always mean rework.** M3E runs a round 2 after both round-1 verdicts were PASS (for example g1: _stage-g1-review-r1 and -r2 both PASS). M3B r12 re-reviews draft 11 at a new commit (M3B/_plan-review-r12-verbatim.md:3). [Fact, A] So rounds overstate rework unless they are tied to drafts. [Opinion, C]
 7. **The one session file covers one series only.**
    - Its 12 checker helper lines match the 12 round files of S-001-model-3.5.0-records in number. [Estimate, B]
-   - One Definer helper overlaps three later rounds (22:42 to 00:55, session_…jsonl:5-9), so helper lines cannot be matched to rounds one-to-one. [Fact, A]
+   - The Definer helper at :5 (22:42 to 00:55) overlaps the 9 helper lines that start during it (:6–:14), so helper lines cannot be matched to rounds one-to-one. [Fact, A]
    - Two later "start" lines have no helpers and no end line (:18-19). [Fact, A]
    - The other conversational round files have no session record at all. [Fact, B]
 
@@ -344,7 +433,7 @@ All rows are [Fact, A/B].
 - **Where to start, by kind of task:** definition (plan) shows the most rework, then research. Both are heavily affected by inputs changing mid-loop and by the size of the spec. [Estimate, B/C]
 
 ## 9. What cannot be traced
-- Any finding's link to the model: no variation was recorded in one path, and nothing was recorded in the other.
+- Any finding's link to the model. The scripted path recorded no variation in model. The conversational path names a model in only 2 of 330 round files.
 - The conversational briefs: not recorded anywhere I may read.
 - What the scripted path's checks and Triage said: they sit in research/*-source-check.md and triage/*.md, outside this question's named records; and for closed items, those files are gone.
 - Why Q-005's identical memo flipped to PASS.
@@ -357,7 +446,7 @@ All rows are [Fact, A/B].
 2. Can the records of closed items (Q-003, Q-009, Q-010, Q-012, P-001) be recovered from git history, and is removing them on close intended? *Decision: whether survivorship bias can be removed from a historical baseline.*
 3. Is there dispatch history after 2026-10-08, in another month file or another path, and how were Q-014 and Q-015 dispatched? *Decision: the extent of the scripted record.*
 4. Can the conversational briefs and models be recovered from the Claude Code session transcripts? *Decision: whether conversational history can support attribution.*
-5. How should a "round" be counted for the stop rule and as a measure: per draft, per checker, or per dispatch? *Decision: definition of the main measure.*
+5. How should a "round" be counted for the stop rule and as a measure: per draft, per checker, or per dispatch, and do focused, recheck and confirmation checks count? *Decision: definition of the main measure.*
 
 ---
 
@@ -368,35 +457,45 @@ Every entry is checked on 2026-11-01. The topic "records, baseline" means the en
 ### Facts
 
 **F-q006-01. The dispatch log covers 2026-10-01 to 2026-10-08 only.**
-- The one month file, dispatch-log/2026-10.jsonl, holds 263 entries; the last is at :263, 2026-10-08T21:52:08Z.
-- It has 104 dispatch lines.
-- Source: dispatch-log/2026-10.jsonl. Grade A.
+- The one month file, dispatch-log/2026-10.jsonl, holds 263 entries; the last is at :263, 2026-10-08T21:52:08Z. Grade A.
+- It has 104 dispatch lines. Grade B (my count).
+- Source: dispatch-log/2026-10.jsonl.
 - Shelf life: until the log changes; re-check before each use.
 - Topics: records, baseline.
 
 **F-q006-02. Scripted research items: 2 of 12 passed the first source check.**
-- 41 checks in all: 32 FAIL, 9 PASS. 3 items were dropped after Triage, and 10 Triage dispatches in all were never checked.
-- Source: dispatch-log/2026-10.jsonl, outcome and dispatch lines.
-- Grade A (my count).
+- The first-time passes are Q-008 (:135) and Q-013 (:262).
+- There were 41 logged source-check outcomes: 32 FAIL, 9 PASS.
+- 3 items were dropped after Triage (:160, :225, :257).
+- 10 Triage dispatches were never checked.
+- Q-006 had one more source-checker session: the dispatch at 01:28:40 (:119), whose outcome the log ignored (:121).
+- Source: dispatch-log/2026-10.jsonl.
+- Grade B (my count).
 - Shelf life: fixed history; re-check if records are restored.
 - Topics: rework, reviews, baseline.
 
 **F-q006-03. Records and control records of closed or dropped items are absent.**
 - 37 of 104 dispatches have no control record, and all belong to items closed by drop, re-scope or error.
+- The cause is not established.
 - Source: reviews/*/_control/ against dispatch-log/2026-10.jsonl.
-- Grade A/B.
+- Grade B.
 - Shelf life: 3 months.
 - Topics: records, baseline.
 
-**F-q006-04. The conversational path records neither brief nor model.**
-- A model is named in 1 of 330 round files (S-001-desk-v2/_build-1b-review-round1-verbatim.md:13).
+**F-q006-04. The conversational path records no brief and almost never the model.**
+- A model is named in 2 of 330 round files, both in desk-v2 stage 1b (S-001-desk-v2/_build-1b-review-round1-verbatim.md:13; _build-1b-review-round2-verbatim.md:11).
 - The scripted control records hold the brief verbatim, the model, and the pack's file hashes (reviews/Q-001/_control/0-62b8dda7dcf2.json:3, :53-60).
 - Grade A.
 - Shelf life: 3 months.
 - Topics: records, agents.
 
-**F-q006-05. A hash-identical memo failed one source check and passed the next, with no revision between.**
-- Item Q-005: reviews/Q-005/_control/1-fe151d6987ac.json:83 and 1-218e36411c3b.json:85; dispatch-log:67, :79.
+**F-q006-05. A hash-identical memo failed one source check and passed the next, with no researcher revision between (item Q-005).**
+- Sources: reviews/Q-005/_control/1-fe151d6987ac.json:83 and 1-218e36411c3b.json:85; dispatch-log:67, :79.
+- What differed between the two checks:
+  - the brief (:55 in each);
+  - the earlier source-check file (:84 against :86);
+  - the confirmation pack added the question, governance/standards/sources.md and one library fact (1-218e36411c3b.json:57, :83, :87).
+- A Triage (:69) and an owner "confirm" ruling by proxy (:75) came between the two checks.
 - Grade A. Cause unknown.
 - Shelf life: fixed history.
 - Topics: reviews, agents.
@@ -408,53 +507,63 @@ Every entry is checked on 2026-11-01. The topic "records, baseline" means the en
 - Topics: agents, rework.
 
 **F-q006-07. Conversational plan items: 1 of 17 passed every checker at round 1.**
-- Median 3 rounds to a pass; 7 of 17 went past three; M3B ran 14.
-- Build stages: about 15 of 50 passed first time.
-- Source: `^Verdict:` lines in reviews/**/_*.md.
+- 16 items have a recorded pass, with a median of 3 rounds; M3B ran 14.
+- 7 of 17 had more than three check dispatches, counting focused and confirmation checks. Without those, it is 4 of 17.
+- One item, S-001-notifications, has no recorded pass.
+- Build: about 30% of units passed first time. That is 15 of 50 by the §4 method (units are stages or series; first pass means every checker's round 1 was PASS; M3D 3 and 6b excluded), within a range of 13 of 47 to 17 of 52.
+- Source: `^Verdict:` lines in reviews/**/_*.md; S-001-desk-v2/_confirmation-draft4-verbatim.md:7.
 - Grade B (classified by file name).
 - Shelf life: 3 months.
 - Topics: rework, reviews, baseline.
 
-**F-q006-08. Pull-request verdict files from about #220 on duplicate the series' round files verbatim.**
-- reviews/253/reviewer.md:3-6 against HD1/_stage-hd1-review-r1-verbatim.md:7-9.
-- Grade A.
+**F-q006-08. Pull-request verdict files can duplicate a series' round files verbatim.**
+- For example, reviews/253/reviewer.md:3-6 repeats HD1/_stage-hd1-review-r1-verbatim.md:7-9 (rounds 1–3).
+- Other pairs were not compared one by one.
+- Grade A for the example.
 - Shelf life: 3 months.
 - Topics: records.
 
 ### Patterns
 
-**P-q006-01. Records of failed work vanish, and the baseline flatters.**
+**P-q006-01. Records of closed items are absent, and the baseline flatters.**
 - Problem: baselines built from surviving run records.
+- What the records show: the records and control records of closed items are absent (F-q006-03). Why is not established (§10, question 2).
 - Principle: keep the records of dropped or closed items, or report survivorship next to every rate.
-- Origin: Service-Desk, F-q006-03.
-- Conditions: work items are pruned on close.
-- Grade B.
+- Origin: Service-Desk.
+- Grade C.
 - Shelf life: 12 months.
 - Topics: records, baseline.
 
-**P-q006-02. A new draft reopens review.**
+**P-q006-02. A new draft can reopen review.**
 - Problem: reading rounds as checker inconsistency.
-- Principle: the PASS-then-FAIL reversals I opened followed redrafts that wrote in owner answers or merged spec drafts. Count rounds per triggering draft, and separate "the target moved" from "the doer failed".
-- Sources: M3B/_plan-review-r7-verbatim.md:9; specs/S-001.md:592-602; reviews/253/reviewer.md:112; M3C/_triage-r3-critic-verbatim.md:18.
-- Grade B.
+- What the records show: of 11 PASS-then-FAIL reversals, I opened 4.
+  - 3 followed a new draft: M3B r6→r7, records r3→r4, VT3 r1→r2.
+  - 1 followed a Builder fix: VT3 r3→r4.
+  - The other 7 are not established.
+- Principle: for each round, record what triggered it (a new draft, an owner answer, a merge, or a fix), and count rounds per trigger.
+- Sources: M3B/_plan-review-r7-verbatim.md:3, :9; specs/S-001.md:592-599; M3B/_stage-vt3-review-r2-verbatim.md:3; M3B/_stage-vt3-review-r4-verbatim.md:3, :9.
+- Grade C.
 - Shelf life: 12 months.
 - Topics: rework, reviews.
 
-**P-q006-03. A self-referential description keeps failing review.**
-- Problem: a pull-request description that narrates its own review history.
-- What happened: 6 consecutive FAILs, every blocking finding about the description and none about the change (S-001-model-3.5.0-sync/_review-round6-verbatim.md:15-21).
+**P-q006-03. A pull-request description can keep failing review on its own wording.**
+- Problem: a pull-request description that is reviewed for truth.
+- What happened: the sync series had 6 consecutive FAILs (r1–r6, then PASS at r7), and every blocking finding concerned the description, none the change.
+  - R1 left out a test change.
+  - R2 had an opening that said nothing had failed.
+  - R3–R6 concerned the description's account of its own reviews (S-001-model-3.5.0-sync/_review-round6-verbatim.md:5, :15-21).
 - Principle: describe the change, not the review history.
 - Conditions: a reviewer must certify that the description is true.
 - Grade B.
 - Shelf life: 12 months.
 - Topics: rework, records.
 
-**P-q006-04. Re-checking identical work tests the checker.**
+**P-q006-04. Re-checking identical work, with the pack held fixed, tests the checker.**
 - Problem: telling checker noise from doer quality.
-- Principle: re-check hash-identical work, keeping the pack fixed or varying it on purpose.
-- Origin: Q-005 (F-q006-05).
+- Principle: re-check hash-identical work with the brief and pack held fixed, or varied on purpose and recorded.
+- Origin: Q-005 (F-q006-05). There the memo was identical but the brief, pack, a Triage and an owner ruling all changed, so it does not isolate the checker.
 - Conditions: the work product's hash is recorded with the verdict.
-- Grade C (one instance).
+- Grade C (one instance, confounded).
 - Shelf life: 12 months.
 - Topics: reviews, baseline, agents.
 
