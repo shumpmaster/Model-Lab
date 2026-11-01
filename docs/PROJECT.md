@@ -43,7 +43,7 @@ stays living. The Critic checks Part 1 against the definition of ready.*
 - Discovery-6 (standard) · taken on · why: the research names design traps that could make the project measure the wrong thing
 - Discovery-7 (standard) · taken on · why: the owner set a testing budget and the work touches every project's agents, so its limits must be agreed
 - Discovery-8 (standard) · taken on · why: the owner rules the Design gate on a checked brief
-- The causes of rework are known (M1) · done when the share of work sent back is counted from past records for each kind of task, each kind has a stated cause, and a starting figure is on record for later comparison · phase: Discovery · why: the owner wants to close the gaps in how work passes between agents, and the research found that wording may matter less than inputs and how work is split
+- The causes of rework are known (M1) · done when the share of work sent back is counted from past records for each kind of task, with what the records show about why it was sent back and what they cannot show, and a starting figure is on record for later comparison · phase: Discovery · why: the owner wants to close the gaps in how work passes between agents, and the research found that wording may matter less than inputs and how work is split
 
 **Design**
 - Design-1 (standard) · taken on · why: success must be set in scenarios the owner can approve
