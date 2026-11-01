@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-The Critic's check of questions/P-001-after-the-count.md and the brief's updated sections 5, 6 and 7, on a different model from their writer (brief: docs/briefs/15-critic.md), verbatim. Recorded by the orchestrator. Session session_01QBwHGHrHnEvMNYgKDoaH8w, 2026-11-01.
+The Critic's check of questions/P-001-after-the-count.md and the brief's updated sections 5, 6 and 7, on a different model from their writer (brief: docs/briefs/15-critic.md), verbatim: round 1 (FAIL), round 2 (PASS). Recorded by the orchestrator. Session session_01QBwHGHrHnEvMNYgKDoaH8w, 2026-11-01.
 
 ## Round 1
 Verdict: FAIL
@@ -58,3 +58,52 @@ I could not run `git diff` because I have no shell tool. I read sections 5, 6 an
     - U1: 10 + 8 + 1 + 1 + 1 = 21, plus 2 worker slips, plus 61 residual = 84. This matches memo bottom lines 3-4.
     - U5: "61 of 84" and "41 more" match memo §5.
     - Nothing in these lines is attributed to the owner without a record.
+
+## Round 2
+Verdict: PASS
+
+Round 2. I re-read the rewritten question and the "Starting figures" line in PROJECT.md section 6. I re-derived the thresholds and odds myself.
+
+Round-1 findings
+
+1. Resolved. The thresholds and power figures now use the ruled 1-in-25 cutoff.
+   - My exact binomial at n = 30 gives plans 5 at about 1.1%, which matches your figure. The power at the 20-point gain comes to about 0.89-0.90, which matches.
+   - Built work at 18 gives about 2.1%, which matches. The alternative 27/75 -> 16 at about 3.9% is consistent with my approximation (about 3.7%).
+   - Research 13 and the alternative 2/19 -> 7 are consistent with my normal approximation, but I did not compute them exactly. The 5-of-19 threshold of 13 is the one I flagged as unconfirmed in round 1. I now accept it as plausible, not verified.
+   - The sentence no longer says "5%". The Critic line is stated as outside V2's three kinds.
+2. Resolved. The options are now even.
+   - A's cost now names the roughly 300 runs, the open replay question, the open "can the test see a gain" question, and the accepted "no change helps" closure.
+   - The brief-and-model record is stated once, as common to all options and already ruled.
+   - A, B and C are each about the same length. Each has a gain, a cost and a reversibility line.
+3. Resolved. The research is now cited in full.
+   - "One lever among several, not the main one" is quoted. The model and context points appear alongside the instruction point.
+   - Option C and the "what would change it" line now give the research as a reason to stop.
+4. Resolved. The count's limits are now stated.
+   - The question says 315 returns, 125 classified (many by sampling), 41 with no findings, and 84 with findings.
+   - It says the model is almost never recorded.
+5. Resolved. The starting figures now disclose the alternatives.
+   - Research is given as 5 of 19 or 2 of 19, and built work as 32 of 80 or 27 of 75.
+   - Both alternatives carry their own thresholds and power.
+   - The small-count uncertainty is stated.
+6. Resolved. The Critic figure is explained as "recorded for reference" and not one of V2's kinds.
+7. Resolved. The record reviews/P-001-after-the-count/critic.md exists at /home/user/wt/ml-orch.
+8. Resolved. The question now says "If you do not decide, nothing moves and no test is designed."
+9. Partly resolved.
+   - "Source checker" is now explained.
+   - "Stop rule", "candidates" and "fair test" are explained in place.
+   - "R3" in the risk line is still unexplained. That is the form's field, so it is acceptable.
+10. Still holds.
+    - decisions/questions/P-001-test-budget.md confirms the roughly 100 runs through Discovery and Design, with checkpoints.
+    - The section 5 spend ceiling and the U1 and U5 figures are unchanged and still match.
+
+New findings, all non-blocking
+
+11. The question says "no checker saw the brief the worker was given". The memo supports less than that. It says only that the M3C Triage, which blamed a brief, could not see it, and that worker briefs are not recorded for conversational work. Suggested wording: "the briefs workers were given are mostly not recorded".
+12. The WHY line says the stop rule "is reached". The rule fires only if the count shows instructions are not a meaningful cause, and the same paragraph says the count could not show that. PROJECT.md U1's fallback sends the case to the owner anyway, so the route is sound. Suggested wording: "the count could not settle the question your stop rule asks, so it comes back to you".
+13. The quoted "one lever among several, not the main one" is the memo's bottom line 7, tagged [opinion]. The question calls it "the researcher's estimate". Say "opinion", or cite items 4 and 5 for the estimate.
+14. The question's recommendation confidence is "low-to-medium", while the PROJECT.md and earlier text said "medium". This is fine, as the question is the live record.
+
+Files read:
+- /home/user/wt/ml-cos/questions/P-001-after-the-count.md
+- /home/user/wt/ml-cos/docs/PROJECT.md (line 97)
+- /home/user/Model-Lab/decisions/questions/P-001-test-budget.md
