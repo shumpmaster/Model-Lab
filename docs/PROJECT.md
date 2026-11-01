@@ -10,8 +10,16 @@ stays living. The Critic checks Part 1 against the definition of ready.*
 ## 1. Scope
 *What is in, what is explicitly out, and where it must work (target devices or places).*
 
+**In.** How work passes between the operating model's agents, and why it comes back from its checks: the written instructions each agent runs on (its role file, the brief for each task, and what it is given to read), and, as candidate causes to measure beside them, the material handed over, how the work is split, the AI model that runs it, and the checks themselves. Every kind of agent work, taken on step by step rather than one kind first (decisions/questions/P-001-worst-work.md). The record of each agent's brief and AI model, for agents started by the automatic pipeline and from conversations alike (decisions/questions/P-001-session-records.md). Moving every result into the operating model under its own rules (decisions/questions/P-001-work-repo.md). Correcting every entry in this work's lessons log (decisions/questions/P-001-lessons-log.md).
+
+**Out.** The second idea in Model-Lab, the screening of cutting-edge AI and vibe-coding practice: its own project, started after this one is under way (portfolio ideas/IDEAS.md). Choosing or changing AI providers for their own sake. New desk features: the desk notice for moving to a new session is its own new work for the graduated desk (decisions/questions/P-001-session-move-notice.md), and this project only records the need.
+
+**Where it must work.** In the operating model repository's rules, template and agent files, so that every v3 project gets it, and in both ways agents are started: by the automatic pipeline (the Orchestrator script) and from a conversation with the Chief of Staff.
+
 ## 2. Strategy
 *In plain language: the chain from the deliverables to the value — how this work produces it.*
+
+**The chain from the work to the value.** (1) Count, from past records, how often each kind of work comes back from its check, and why, as far as the records show (M1). (2) From those causes, choose a small number of candidate changes, to instructions or to inputs, task split or checks, wherever the count points. (3) Test each against leaving things as they are, on the same past tasks, sized and written down before any run (M2). (4) Keep only what clears the owner's target (section 6, V1), and record the result of every change, kept, dropped or no difference (M4). (5) Put what was kept, and the brief-and-model record that makes later measurement possible (M3), into the operating model under its own rules (M5). (6) In real use, the first-time pass rate of each kind of work rises (V2): fewer review rounds and better research, the owner's two aims. A finding that no change helps is an accepted result; it still leaves the brief-and-model record in place, which is the instrument any later improvement needs.
 
 **The problem, stated without reference to any industry (Discovery-4, draft for the Critic).** Work passes from one worker to the next through a written hand-over: what to do, what to read, and what counts as done. An independent check then accepts the work or sends it back. Some returns are the check doing its job, catching a real fault; others are avoidable, and the record seldom shows why work went back: the written instructions, the material handed over, how the work was split, the worker's own capability, or the check itself. The problem is to make work pass its check first time more often where the return was avoidable, by finding which of those causes each return and changing only what helps (which may be nothing), without adding more written rules than a worker reliably follows, and without judging the change only by checks that can be fooled. The count of past work (the milestone "The causes of rework are known") separates returns that caught a real fault from avoidable ones as far as the records allow.
 
@@ -56,8 +64,26 @@ stays living. The Critic checks Part 1 against the definition of ready.*
 ## 4. Owners
 *An owner for every deliverable, including anything that needs the owner or an outside party.*
 
+| Deliverable | Owner | Notes |
+|---|---|---|
+| The brief, the questions to the owner, the intent, the gate cases | Chief of Staff | The owner rules every gate and every value target |
+| Research memos, and the checked facts in the portfolio library | Researcher; Source checker | The Source checker alone files library entries |
+| The count of past rework (M1) | Researcher, checked by the Source checker | Read from the Service Desk's and Model-Lab's records |
+| The fair-test design and its registration (M2) | Definer | Frozen before any run; the Critic's plan review passes it |
+| The locked checks for the test | Check author | Written before any change is built |
+| The candidate changes, and running the test exactly as registered (M4) | Builder | The Reviewer analyses the results against the thresholds |
+| The brief-and-model record across the model (M3), and the changes that were kept, in the operating model (M5) | The operating model repository's own roles: its orchestrator for the rules and template, its tools-builder for the tools and checks | Under that repository's process: a spec, a ledger entry, a separate review |
+| Adopting the new model version in the Service Desk | The Service Desk's own roles | Under its rules, after the model release |
+| Correcting the lessons log (M6) | Chief of Staff proposes; each correction lands with whichever deliverable it changes | Closing an entry without a change states the reason |
+| Archiving Model-Lab once both ideas are in | The owner, by their own GitHub action | The Chief of Staff tells the owner when both results are in the model repository |
+| Testing budget beyond Design, spend ceiling | The owner | Ruled at the Build gate and the Design gate |
+
 ## 5. Limits
 *The spend ceiling, the data boundaries (what data may go to which outside service), and the tier (T1, T2 or T3 by the tier triggers), which is the project's trust level.*
+
+- **Spend ceiling:** not yet ruled; proposed to the owner with the Design gate. The project's cost is AI usage within the owner's existing plan; the owner allowed up to about 100 test runs through Design, with token checkpoints (decisions/questions/P-001-test-budget.md), and the test's own budget is the owner's at the Build gate.
+- **Data boundaries:** the records studied are the operating model's own repositories (agent briefs, review records, research memos), which hold no personal or customer data; they go only to the AI service the sessions already run on. Outside web pages are untrusted data, read only as the model allows.
+- **Tier:** T1, as Model-Lab's charter sets (AGENTS.md); the project changes rules and agent instructions, not a product with users or data.
 
 ## 6. Value and stop rule
 *This project's own measure of value, the target and date, and what counts as a miss — including the cost to the owner's time. Write each value target on its own line starting with its ID, like `V1: <measure>, <target>, <date>`; spec criteria trace to these IDs.*
@@ -78,6 +104,17 @@ V2: first-time pass rate of each kind of work (plans, research, built work) over
 ## 7. Solid foundation
 *Every load-bearing unknown, each answered with evidence (library entry or research memo), including through research sub-projects if needed. Name the groundwork map this rests on (research/<Q-id>-memo.md) and the owner's answers to its shortlist, or say why no map was needed.*
 
+**Groundwork.** The groundwork map is research/Q-001-memo.md; the owner's answers to its shortlist are decisions/questions/P-001-no-change-result.md, P-001-session-records.md, P-001-test-budget.md, P-001-time-and-limit.md and P-001-worst-work.md. Research Q-002 to Q-007 is source-checked and corrected (research/Q-002-to-Q-007-corrections-confirmation.md; research/Q-006-source-check.md), and its cleared facts are filed in the portfolio library (portfolio library/README.md).
+
+**Load-bearing unknowns.** None can be answered by outside research; each is closed by this project's own count or test. Draft, for the owner to accept as open into Design where it says so (OPERATING_MODEL.md §4, definition of ready item 7):
+
+| # | Unknown | Closed by | If it fails |
+|---|---|---|---|
+| U1 | How much of the avoidable rework the instructions cause, by kind of work | The count of past work, before the Design gate (M1) | Stop rule: the owner rules whether to re-aim or close (section 6) |
+| U2 | Whether past tasks can be replayed faithfully, so a paired test can run | A replay check on a few tasks in Design, before the test is frozen (pre-mortem R9) | Compare new work with and without the change over the same period, with its larger sample stated |
+| U3 | Whether the checks used to judge the test are consistent and unbiased enough | Repeated judgements on a sample, and judges from a different model family or provider where available, in Design (R3) | A held-back set of checks and the owner's sample decide; the record states the limit |
+| U4 | Whether any change gives a gain the test can see | The test itself, in Build (M4) | "No change helps", the accepted result (section 6) |
+
 **Pre-mortem (Discovery-6, draft for the Critic).** Imagine it is the end and the project failed. The likeliest reasons, each with what would show it early and how the plan answers it. "First-time pass rate" is the share of work that passes its check at the first try; a "paired test" runs the same past tasks with and without a change and compares them task by task.
 
 | # | How it failed | Early sign | What the plan does about it | Source |
@@ -97,8 +134,19 @@ These risks shape any further research: R1 and R7 are answered by the count of p
 ## 8. Clear and consistent
 *Key terms defined; constraints checked against each other and found not to contradict.*
 
+**Terms.** *First-time pass rate:* the share of work that passes its independent check at the first try. *Return:* work sent back by its check; *avoidable* when the record shows it was not the check catching a real fault. *Brief:* what an agent is told for one task; *role file:* its standing instructions; together, with what it is given to read, its *instructions*. *Kind of work:* plans, research and built work. *Paired test:* the same past tasks run with and without a change, compared task by task. *Run:* one agent session on one task in a test; what counts as one run against the budget is fixed before testing. *The operating model:* the rules in the Personal-Org-Operating-Model repository, not an AI model; *AI model* means the model that runs an agent.
+
+**Constraints checked against each other.**
+- *No fixed timeline* (decisions/questions/P-001-time-and-limit.md) and *a value target needs a date*: resolved by the owner's ruling that the target is checked at events, with no calendar date (decisions/questions/P-001-value-target.md).
+- *About 100 test runs through Design* and *about 300 runs to test three kinds at full strength*: no conflict; the 100 cover Discovery and Design, and the test's budget is ruled at the Build gate (section 6).
+- *Every kind of work, step by step* and *a test sized per kind*: the kinds are tested one after another, within the budget the owner sets.
+- *Model-Lab is temporary* and *the result must be complete in the operating model*: M5 is reached only when nothing of the result is left only in Model-Lab.
+- *No cap on the owner's time* and *the model's priority order, which puts the owner's attention above speed and cost* (OPERATING_MODEL.md §1): questions still come at natural points (lessons log LL-17).
+
 ## 9. The target user
 *Either the one line `The owner is the user.`, or the two lines `Profile: docs/users/PROFILE.md` and `Approved: decisions/questions/<project item>-user-profile-<n>.md`. Build the profile from Discovery's research, in the form docs/users/_PROFILE.md, and have the owner approve it before the definition-of-ready check (S-025).*
+
+The owner is the user.
 
 # Part 2 — The intent
 
@@ -106,3 +154,18 @@ These risks shape any further research: R1 and R7 are answered by the count of p
 The owner's purpose, preferences and trade-offs for this project, and what they would hate. Drafted by
 the Chief of Staff from conversations, portfolio defaults and past rulings; confirmed on the
 move-to-Design card.
+
+*Draft, for the owner to confirm on the move-to-Design card. Each line cites the record of the owner's words.*
+
+- **Purpose.** "a refined prompt engine that isn’t redundant with the flow of the operating model"; the model has "many reviews, checks, tests etc", but the owner "never specifically addressed if the prompts being used to pass that information from agent to agent" were right; and the Chief of Staff's proposal of iterative refinement, recording each brief against how its work went and improving the weak ones, "should probably be in there too" (portfolio ideas/IDEAS.md, 2026-11-01).
+- **What success means.** "a combination of all but lower agent usage and less of my time": fewer review rounds and better research; the core goal "to minimize the gaps that might arise from traditional orchestrasted workflows for vibe coding, strategy, etc…" (portfolio ideas/IDEAS.md, 2026-11-01). Ruled as the value target V1 and V2 (decisions/questions/P-001-value-target.md).
+- **"No change" is acceptable.** Finding that changing the instructions doesn't help is an accepted result (decisions/questions/P-001-no-change-result.md).
+- **Done right, not fast.** "I want it to be done right. This is my current project and all of my effort will go into it"; no fixed timeline; several researchers at once is fine (decisions/questions/P-001-time-and-limit.md).
+- **Spending tokens is fine, with visibility.** Up to about 100 test runs through Design, with "natural checkpoints to understand how many tokens I’m burning through and how many tokens I have to burn" (decisions/questions/P-001-test-budget.md).
+- **Everything touched, step by step.** "let’s just work it incrementally because everything should be touched" (decisions/questions/P-001-worst-work.md).
+- **One place for the result.** The owner does not want "6 different repos all feeding information into the same workflow"; each result moves fully into the operating model repository, and Model-Lab is archived once both ideas are in (decisions/questions/P-001-work-repo.md).
+- **Integrated completely.** "I want them to go through the full operating model cycle, but then I want them integrated into the operating model completely" (portfolio ideas/IDEAS.md, 2026-11-01).
+- **Every agent's brief on record, across the model.** Conversation-started agents keep the brief and AI model of each helper, across the model, not only here (decisions/questions/P-001-session-records.md).
+- **Every slip tracked and corrected.** "We need to track all slip ups/errors/misses and record a lessons learned page that we correct within this workflow at the end" (decisions/questions/P-001-lessons-log.md).
+- **Told when work moves sessions.** The desk should notify the owner "when the conversation needs to move from one session to another", in the model and the desk (decisions/questions/P-001-session-move-notice.md).
+- **What the owner would hate** (from the same records): many repositories feeding one workflow; being told something is waiting on them when it is not (lessons log LL-11); results arriving faster than they can follow (LL-17); and, from 2026-11-01, separate status pages now that the project is on the desk (docs/handoff/2026-11-01-chief-of-staff.md, standing preferences).
