@@ -126,3 +126,10 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** every return was reported as it came, instead of at natural points.
 - **Correction proposed:** report at natural points, with one standing status page that is kept current.
 - **Status:** fixed here (status page); model change open.
+
+### LL-18 The lessons log's own first commit mixed two owners' files
+- **What happened:** the owner's instruction (the Chief of Staff's lane) and the log (the Orchestrator's lane) were committed together under one identity, and pushed, because an earlier `git add -A` had staged both. Split into two commits before any pull request; the branch was re-pushed.
+- **Caught by:** the Chief of Staff, from git's "nothing to commit" on the second commit.
+- **Cause:** staging everything before committing by lane.
+- **Correction proposed:** stage by lane only; run the surface guard's diff check before every push, not only before merging a builder's branch.
+- **Status:** fixed here; model change open.
