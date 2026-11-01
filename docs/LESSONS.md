@@ -200,3 +200,11 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** the body was written by hand and not run through the repository's own pr-body check before the pull request was opened.
 - **Correction proposed:** run `governance_checks.py pr-body` on the drafted body locally before opening any pull request (the Chief of Staff now does so with a saved event file).
 - **Status:** fixed here (practice changed); model change open (the check's message could name the trailing-character rule).
+
+### LL-28 A portfolio pull request waiting on the owner does not show on the desk
+- **What happened:** the library's pull request (portfolio #3) waits for the owner's merge, but the desk reads the portfolio repository only for its idea log, decision queue, rulings, intent and library fact names, not its pull requests, so nothing on the desk shows it waiting. The desk also counts library facts but not library patterns.
+- **The owner's words, verbatim (2026-11-01):** asked "Does the portfolio have desk access?", and on being told of the gap, "Yes." to logging it and adding it to the desk follow-ups.
+- **Caught by:** the owner's question; the Chief of Staff, reading the desk's configuration and portfolio reader (Service-Desk src/config/projects.json; src/public/lib/portfolio.js, RARE_DIRS).
+- **Cause:** the desk was built to read the portfolio's records, not to treat it as a project with work in flight (Service-Desk decisions/questions/P-001-portfolio-read.md); the model has the Source checker open pull requests in the portfolio, which the desk was not designed for.
+- **Correction proposed:** a desk follow-up, put to the owner with the Design gate: show the portfolio's open pull requests that wait on the owner, and count library patterns beside facts. Until then, the Chief of Staff gives the owner the link to every portfolio pull request that waits on them, in the same message (as for deploys, LL-23).
+- **Status:** open; to the owner with the Design gate (desk follow-ups).
