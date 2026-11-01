@@ -10,7 +10,7 @@ The six gaps:
   3. Portfolio pull requests waiting on you do not show on the desk, and library patterns are not counted, only facts. Workaround: the Chief of Staff sends the link with every request.
   4. When GitHub's notice of a waiting deploy does not reach you, the desk's operating notes do not say where to find it. Workaround: the Chief of Staff sends the waiting run's link with every merge that starts a deploy.
   5. A project the desk cannot read because its access token does not cover it is described as "the configured default branch was not found", which is misleading.
-  6. An open question for you inside this work: should "only the Service Desk needs your approval for deploys" be enforced, as its test's title and the spec read, or should any project be able to take up owner-approved deploys? Today the check allows either.
+  6. An open question for you inside this work: should "only the Service Desk needs your approval for deploys" be enforced, as its test's title and the spec read, or should any project be able to take up owner-approved deploys? The reviewer asked it, and none of the options below answers it: it is carried into the new desk work and put to you there.
 
 OPTIONS:
   A. **One piece of new work for the desk, started after this project's Design gate.** All six go into one new desk project item, with a short Discovery of its own sized to the work, then Design and Build under the desk's rules. *Gain:* one route and one set of reviews for all six; this project's Discovery is not slowed. *Cost:* the gaps and workarounds last until then. *Reversible:* yes.
