@@ -71,7 +71,7 @@ stays living. The Critic checks Part 1 against the definition of ready.*
 | The count of past rework (M1) | Researcher, as a research memo recorded by the Orchestrator; the Source checker re-derives the counts | The Researcher reads the records; where a count needs a script, the Source checker, which holds a shell, reproduces it |
 | The fair-test design and its registration (M2) | Definer | Frozen before any run; the Critic's plan review passes it |
 | The locked checks for the test | Check author | Written before any change is built |
-| The candidate changes, as text, written into the test's registration | Definer | In Model-Lab, changes are tested as copies of role files and briefs inside the test (experiments/**); no live role file changes until M5 |
+| The candidate changes, as text, written into the test's registration | Definer | In Model-Lab, changes are tested as copies of role files and briefs inside the test (experiments/**); no live role file changes for a candidate until M5 (the brief-and-model record, M3, is a separate rule change that lands in Build) |
 | Running the test exactly as registered, and its harness (M4) | Builder | Its scripts in src/** and tests/**; the Reviewer analyses the results against the thresholds, and the Orchestrator records its verdict verbatim |
 | The brief-and-model record across the model (M3), and the changes that were kept, in the operating model (M5) | The operating model repository's own roles: its orchestrator for the rules and template, its tools-builder for the tools and checks | Under that repository's process: a spec, a ledger entry, a separate review |
 | Adopting the new model version in the Service Desk | The Service Desk's own roles | Out of this project's scope (section 1); under its rules, after the model release |
@@ -100,7 +100,7 @@ V2: first-time pass rate of each kind of work (plans, research, built work) over
 - **Too few pieces:** if fewer than 30 pieces of a kind are checked within six months of the change entering the operating model, that kind is judged on what has been checked, with its uncertainty stated.
 - **Stop and go to the owner:** if the recount shows the instructions are not a meaningful cause of rework for any kind of work (the owner rules whether to re-aim or close); or if the 100 test runs allowed through Design are used before the fair test is ready (decisions/questions/P-001-test-budget.md).
 - **Cost to the owner's time:** no cap (decisions/questions/P-001-time-and-limit.md); each status update reports the tokens the helpers report using, and says the plan's remaining allowance cannot be read from a session.
-- **Testing budget:** testing all three kinds at this strength takes about 300 runs; the budget for the test itself is the owner's at the Build gate.
+- **Testing budget:** testing the three kinds counted today at this strength takes about 300 runs, more if the count of past work finds further kinds; the budget for the test itself is the owner's at the Build gate.
 
 ## 7. Solid foundation
 *Every load-bearing unknown, each answered with evidence (library entry or research memo), including through research sub-projects if needed. Name the groundwork map this rests on (research/<Q-id>-memo.md) and the owner's answers to its shortlist, or say why no map was needed.*
