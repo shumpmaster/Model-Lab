@@ -200,3 +200,17 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** the body was written by hand and not run through the repository's own pr-body check before the pull request was opened.
 - **Correction proposed:** run `governance_checks.py pr-body` on the drafted body locally before opening any pull request (the Chief of Staff now does so with a saved event file).
 - **Status:** fixed here (practice changed); model change open (the check's message could name the trailing-character rule).
+
+### LL-30 An answered question came back when the brief was merged
+- **What happened:** the value-target question was drafted on the brief's branch, then filed from a separate branch (PR #9) and closed by the answer record (PR #10). The brief's pull request (#12) still carried the question file, so merging it after #10 put the answered question back on the default branch, where the desk would read it as waiting. Tidied away in PR #14.
+- **Caught by:** the Chief of Staff, checking the default branch after the owner's merges.
+- **Cause:** a question file drafted on a long-running branch and copied to an asks branch, never removed from the first.
+- **Correction proposed:** draft a question only on its own asks branch, or remove it from the drafting branch once filed; and check the default branch's questions/ after every merge.
+- **Status:** fixed here (PR #14); model change open.
+
+### LL-31 The owner was given a wrong count of library facts and patterns
+- **What happened:** answering whether the portfolio has desk access, the Chief of Staff said the desk would count "the 72 facts" but not "the 16 patterns". The library holds 69 facts and 19 patterns (88 entries, as the Source checker returned and the library pull request said).
+- **Caught by:** the Chief of Staff, counting the merged library.
+- **Cause:** the figures were written from memory, not counted from the Source checker's table.
+- **Correction proposed:** count before stating any figure to the owner; corrected to the owner in the same session.
+- **Status:** fixed here (owner told); closed for the model unless it recurs.
