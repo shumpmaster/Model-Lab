@@ -66,3 +66,16 @@ licenses_next: nothing new.
 decided_by: chief-of-staff (a correction to its own record; no ruling)
 proposed_by: chief-of-staff
 reversibility: reversible
+
+## L-0005 — Incident: researchers were briefed to read the web directly, though the rulebook routes untrusted text through the Input reader
+date: 2026-11-01
+type: incident
+supersedes: []
+scope: P-001
+expires: never
+asked: The Q-007 memo (research/Q-007-memo.md, S-b2) notes that OPERATING_MODEL.md §5 says untrusted text "is read only by the Input reader", while the template's researcher.md grants WebSearch and WebFetch. The Chief of Staff's briefs for Q-001 to Q-007 (docs/briefs/) let each Researcher read the web directly, treating pages as untrusted claims.
+decision: Recorded as an inconsistency in the model (rule against tool grant) and in this session's briefs. The memos stand, with every web claim already marked as an untrusted claim and each source-checked on a different model. It becomes evidence for P-001 (how instructions and tool grants interact) and an item for the model's integration work; no further dispatch here reads the web directly until the owner or the model resolves which governs.
+licenses_next: An owner question or model change on the Researcher's web access, raised with the Design gate case.
+decided_by: chief-of-staff (an incident record; no ruling)
+proposed_by: chief-of-staff
+reversibility: reversible

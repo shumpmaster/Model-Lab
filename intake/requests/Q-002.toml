@@ -1,0 +1,5 @@
+kind = "research"
+# Full question: research/Q-002.md (P-001, Discovery). Checked by the Critic before dispatch.
+question = """
+See research/Q-002.md.
+"""
