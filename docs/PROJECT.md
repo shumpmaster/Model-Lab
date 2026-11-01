@@ -62,6 +62,19 @@ stays living. The Critic checks Part 1 against the definition of ready.*
 ## 6. Value and stop rule
 *This project's own measure of value, the target and date, and what counts as a miss — including the cost to the owner's time. Write each value target on its own line starting with its ID, like `V1: <measure>, <target>, <date>`; spec criteria trace to these IDs.*
 
+*Ruled by the owner, 2026-11-01 (decisions/questions/P-001-value-target.md, option A). "First-time pass rate" is the share of work that passes its independent check at the first try: a plan its review, a research memo its source check, built work its reviewer.*
+
+V1: first-time pass rate of the kind of work a change targets, raised by 20 percentage points over leaving things as they are in a paired test on the same past tasks (a change is kept when its gain is so large that chance alone would produce it at most 1 time in 40; the test is sized to see a 20-point gain), checked when testing ends, before anything enters the operating model
+V2: first-time pass rate of each kind of work (plans, research, built work) over the first 30 pieces checked under the changed operating model, in any project, above the recounted starting figure for that kind by so much that chance alone would produce it at most 1 time in 25, checked when 30 pieces of each kind are done; no calendar date (owner's ruling)
+
+- **Starting figures:** about 1 in 17 plans, 2 in 12 research memos and 15 in 50 pieces of built work passed first time, from the Service Desk's conversation-started records, which cannot show causes (research/Q-006-memo.md §0 items 1–2); the recount under "The causes of rework are known" (M1) replaces them, and the real-use odds are then restated.
+- **Miss on V1:** no change clears chance. The result is "no change helps", which the owner accepted in advance (decisions/questions/P-001-no-change-result.md); the record of each agent's brief and AI model (M3) still goes into the operating model, and the project closes.
+- **Miss on V2:** a kept change that falls short is removed at the operating model's next scheduled review of its rules, not adjusted to pass ("Killed, not tuned", OPERATING_MODEL.md §1).
+- **Too few pieces:** if fewer than 30 pieces of a kind are checked within six months of the change entering the operating model, that kind is judged on what has been checked, with its uncertainty stated.
+- **Stop and go to the owner:** if the recount shows the instructions are not a meaningful cause of rework for any kind of work (the owner rules whether to re-aim or close); or if the 100 test runs allowed through Design are used before the fair test is ready (decisions/questions/P-001-test-budget.md).
+- **Cost to the owner's time:** no cap (decisions/questions/P-001-time-and-limit.md); each status update reports the tokens the helpers report using, and says the plan's remaining allowance cannot be read from a session.
+- **Testing budget:** testing all three kinds at this strength takes about 300 runs; the budget for the test itself is the owner's at the Build gate.
+
 ## 7. Solid foundation
 *Every load-bearing unknown, each answered with evidence (library entry or research memo), including through research sub-projects if needed. Name the groundwork map this rests on (research/<Q-id>-memo.md) and the owner's answers to its shortlist, or say why no map was needed.*
 
