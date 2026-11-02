@@ -57,3 +57,13 @@ Those in the first handoff, plus: run `governance_checks.py pr-body` on a drafte
   5. Carry the two rule-change rulings and LL-01 to LL-37 into the operating model at the end of the cycle (M5, M6); before the second idea, LL-16.
 - **Token checkpoint:** helpers about 1.54 million tokens over the session; the session itself, by its own status, about 600,000 tokens of context in use and about $50 estimated cost at the last reading.
 - **Every pull request here needs the owner's merge** (no asks-merge grant, LL-33).
+
+## Update by the next session (session_01QBwHGN4kVVA3rfHx2b4FsF, 2 November)
+- **Done:** the third stopping point's records and session lines carried in (they were pushed with no pull request, LL-38); the owner's open-unknowns answer recorded (decisions/questions/P-001-open-unknowns.md) and section 7 cites it; the Critic's definition-of-ready check of the whole brief, FAIL at round 1 (outside judges against the spend ceiling; a portfolio-wide preference in Part 2), PASS at round 2 (reviews/P-001-ready/critic.md); the Design gate case (docs/gates/P-001/design-gate-1-case.md) with the gate Critic's view (reviews/P-001/_design-gate-1-critic.md); two questions filed: the Design gate (questions/P-001-design-gate.md) and accepting M1 (questions/P-001-accept-m1.md); lessons LL-38 to LL-40.
+- **Changed from the last list:** asking the owner to accept M1 moved to the Design gate, because a milestone's reached mark may be added only once the milestones are approved there (OPERATING_MODEL.md §3).
+- **Next, in order:**
+  1. Once the owner answers and the question files are on the default branch: record both answers in decisions/questions/ (deleting the question files). If the gate is `proceed`, add ` · reached: <date>` to M1 in a commit whose `Owner-Ruling:` trailer names decisions/questions/P-001-accept-m1.md (first line `Ruling: A` with a `Question: questions/P-001-accept-m1.md` line, or `Ruling: accept M1`), and confirm Part 2, the intent, as confirmed by the ruling.
+  2. Design starts: the replay check (U2) and the judge-consistency check (U3), within 40 of the 100 runs; then the Definer writes the fair test (M2) for the Critic's plan review. Check the environment can do what Design needs first (LL-22).
+  3. Renumber the briefing session's LL-36 when its branch lands (LL-39).
+  4. At the end of the cycle: the two rule-change rulings and LL-01 to LL-40 into the operating model (M5, M6); before the second idea, LL-16.
+- **Every pull request here needs the owner's merge** (no asks-merge grant, LL-33). This session pushes only its one branch, claude/chief-of-staff-discovery-064xiz, as the environment allows.
