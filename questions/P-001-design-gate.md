@@ -10,7 +10,7 @@ OPTIONS:
   D. kill — the project closes. *Gain:* no further time or runs go into it. *Cost:* nothing of it reaches the operating model, since its results move there only at the end of the cycle. *Reversible:* not as this project; starting again would be a new project.
 RECOMMENDATION: A, with medium-high confidence (the Chief of Staff's judgement): the brief meets every readiness item, and the three open unknowns each have a test and a fallback you accepted. What would change it: wanting the replay check answered first (then B).
 WHO HAS CHECKED IT: the Critic, on a different AI model from the writer: its readiness check of the brief, and its independent view of the case beside it.
-RISK CLASS: R0 (computed from the paths it touches; a phase gate is the owner's ruling whatever its class)   REVERSIBILITY: A, B and C reversible; D not   BLAST RADIUS: this project's next phase
+RISK CLASS: R0 (computed from the paths it touches; a phase gate is the owner's ruling whatever its class)   REVERSIBILITY: A, B and C reversible (except the runs used under A); D not   BLAST RADIUS: this project's next phase
 DEFAULT: none — a phase gate is never ruled by default or by proxy   TIMEOUT: none
 
 ## Context
