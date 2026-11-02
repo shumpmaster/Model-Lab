@@ -264,3 +264,10 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** the calculation reused the earlier script's cutoff without re-reading the ruled one.
 - **Correction proposed:** state the cutoff in the calculation itself and check it against the ruling before quoting a figure.
 - **Status:** fixed here (recomputed at 1 in 25); closed for the model unless it recurs.
+
+### LL-37 A session's own usage can be read after all
+- **What happened:** the Chief of Staff told the owner, and the test-budget ruling's note records, that a session cannot read its own tokens or cost, so every end line held `null`. On 2026-11-01 the session's own status (the session tool's `get_session`) showed its context use (about 594,000 of 1,000,000 tokens), its input, output and cache tokens, and an estimated cost (about $49.77).
+- **Caught by:** the Chief of Staff, checking context use before answering the owner's question about continuing.
+- **Cause:** the model's rule (OPERATING_MODEL.md §8 "Chief of Staff sessions") says the session "cannot read its own tokens or cost"; it was taken as fact without testing.
+- **Correction proposed:** end lines take the session's own figures where its status gives them; token checkpoints to the owner include the session's own use and estimated cost; the model's sentence is corrected. Remaining plan allowance is still not readable.
+- **Status:** open; to the model with this project's lessons. Practice changed here from now on.
