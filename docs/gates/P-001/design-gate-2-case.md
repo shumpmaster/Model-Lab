@@ -44,7 +44,7 @@ How the project's milestones depend on each other [docs/PROJECT.md]
 ## 5. The risks
 
 Unfaithful replay: the test compares new work, needing more pieces [docs/PROJECT.md].
-Judges may be inconsistent: held-back checks and your sample decide [docs/PROJECT.md].
+Inconsistent judges: held-back checks and your sample decide [docs/PROJECT.md].
 Only large gains show; moderate ones read "not shown" [docs/PROJECT.md].
 
 ## 6. Cost and limits
