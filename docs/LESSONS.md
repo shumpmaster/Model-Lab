@@ -271,3 +271,26 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** the model's rule (OPERATING_MODEL.md §8 "Chief of Staff sessions") says the session "cannot read its own tokens or cost"; it was taken as fact without testing.
 - **Correction proposed:** end lines take the session's own figures where its status gives them; token checkpoints to the owner include the session's own use and estimated cost; the model's sentence is corrected. Remaining plan allowance is still not readable.
 - **Status:** open; to the model with this project's lessons. Practice changed here from now on.
+
+## 2026-11-02 — Discovery of P-001, session_01QBwHGN4kVVA3rfHx2b4FsF
+
+### LL-38 A session's last records were pushed but never put in a pull request
+- **What happened:** at the third stopping point, the previous session pushed its records (brief 16, the Critic's rounds on M1 and the open-unknowns question, LL-37, the handoff update) and its session lines to two branches, but opened no pull request for either, so neither reached the default branch; the handoff on the default branch still showed the second stopping point. Found at the start of this session and carried into its pull request with merge commits.
+- **Caught by:** the Chief of Staff, comparing the remote branches with the default branch at session start.
+- **Cause:** the session ended right after pushing; nothing checks that every pushed branch has a pull request or a stated reason not to.
+- **Correction proposed:** before a session ends, list its pushed branches and open a pull request for each (or say in the handoff why not); a new session compares remote branches with the default branch before reading the handoff as current.
+- **Status:** fixed here; model change open.
+
+### LL-39 Two sessions gave the same lessons-log number to different entries
+- **What happened:** the pull-request briefing session added "LL-36" (a push after a red check, in Service-Desk) on its own branch, while this project's log already holds a different LL-36 (the real-use odds); LL-37 is used on a third branch. If the briefing branch merges as it stands, two entries share an id.
+- **Caught by:** the Chief of Staff, reading the unmerged branches at session start.
+- **Cause:** sessions number entries from the log as they last saw it, on separate branches, with no check for repeated ids.
+- **Correction proposed:** renumber the briefing session's entry when it lands (as the next free number); for the model, a check that lessons-log ids are unique, and sessions in parallel take numbers only when the entry lands.
+- **Status:** open (the briefing branch is not yet in a pull request).
+
+### LL-40 A conversation-run project's gate case cannot show its milestones from the timeline
+- **What happened:** the Design gate case must copy its milestone list exactly as the check prints it from the timeline; for this project the timeline prints nothing, because its Discovery ran from a conversation with no pipeline records (the cause LL-35 names). The case carries an empty block and a hand-written table of the standard milestones with their records.
+- **Caught by:** the Chief of Staff, running the gate check on the draft case.
+- **Cause:** as LL-35: the timeline reads standard milestones only from the pipeline's dispatch log and status files.
+- **Correction proposed:** with LL-35's model part: give conversation-run work a record the timeline reads.
+- **Status:** open; with LL-35.
