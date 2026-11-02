@@ -46,3 +46,14 @@ Those in the first handoff, plus: run `governance_checks.py pr-body` on a drafte
   5. Carry the two rule-change rulings (researchers and the web; library shelf lives and labels) and LL-01 to LL-36 into the operating model at the end of the cycle (M5, M6).
   6. Before the second idea starts: the tools assume one project per repository (LL-16).
 - **Every pull request here needs the owner's merge:** Model-Lab has no asks-merge grant (LL-33).
+
+## Update at the third stopping point (just after midnight, 2 November)
+- **Done since:** the owner's after-count ruling recorded (PR #24, A, go on now); M1 renamed and reworded to what the count delivered ("How often work is sent back, and what the records show of why, is known"), Critic-passed (reviews/P-001-open-unknowns/critic.md); the open-unknowns question filed (PR #25) and **answered by the owner in the session on 2026-11-02: "A: accept all three (Recommended)"**; lessons LL-37 (a session's own usage can be read from the session's status: context, tokens and estimated cost).
+- **Next, in order:**
+  1. Once PR #25 is merged, record the owner's answer in decisions/questions/P-001-open-unknowns.md (first line `Ruling: A — U2, U3 and U4 stay open into Design and Build, with the tests and fallbacks in docs/PROJECT.md section 7`; the owner's words: the owner chose "A: accept all three (Recommended)"), deleting the question file in the same pull request; then update section 7's "Draft." sentence to cite the ruling.
+  2. Ask the owner to accept M1 as reached (the count is done and source-checked), recorded with an `Owner-Ruling:` trailer.
+  3. The Critic's definition-of-ready check of the whole brief (Part 1 and Part 2), on a different model.
+  4. The Design gate case (docs/gates/, the gate form), with the Critic's view beside it.
+  5. Carry the two rule-change rulings and LL-01 to LL-37 into the operating model at the end of the cycle (M5, M6); before the second idea, LL-16.
+- **Token checkpoint:** helpers about 1.54 million tokens over the session; the session itself, by its own status, about 600,000 tokens of context in use and about $50 estimated cost at the last reading.
+- **Every pull request here needs the owner's merge** (no asks-merge grant, LL-33).
