@@ -14,7 +14,7 @@ RISK CLASS: R2 (a phase gate; reversible)   REVERSIBILITY: reversible   BLAST RA
 DEFAULT: none — a phase gate is never ruled by default or by proxy   TIMEOUT: none
 
 ## Context
-- The case for going on, with the Critic's independent view (source: docs/gates/P-001/design-gate-1-case.md)
+- The case for going on, with the Critic's independent view (source: docs/gates/P-001/design-gate-2-case.md)
 - The brief passed the Critic's definition-of-ready check (source: reviews/P-001-ready/critic.md)
 - The owner ruled to go on after the count, and accepted U2, U3 and U4 as open into Design and Build (source: decisions/questions/P-001-after-the-count.md; decisions/questions/P-001-open-unknowns.md)
 - The owner rules each phase gate, never by default or proxy (source: Personal-Org-Operating-Model OPERATING_MODEL.md §2 and §4 "Phase gates")
