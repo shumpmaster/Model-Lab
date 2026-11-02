@@ -4,7 +4,7 @@
 
 Move into Design, where a fair test of candidate changes is written down before anything runs [docs/PROJECT.md].
 
-**The proposer's recommendation:** proceed — the brief passed its readiness check, the starting figures are checked, and you already ruled to go on with three unknowns open [reviews/P-001-ready/critic.md] [decisions/questions/P-001-after-the-count.md] [decisions/questions/P-001-open-unknowns.md]
+**The proposer's recommendation:** proceed — the brief passed its readiness check and you already ruled to go on with three unknowns open [reviews/P-001-ready/critic.md] [decisions/questions/P-001-after-the-count.md] [decisions/questions/P-001-open-unknowns.md]
 
 ```mermaid
 flowchart LR
@@ -42,7 +42,7 @@ How the project's milestones depend on each other [docs/PROJECT.md]
 
 ## 5. The risks
 
-Changes aimed at the wrong cause: the count points away from instructions; candidates cover other causes [docs/PROJECT.md:126].
+Wrong cause: the count points away from instructions; candidates cover other causes [docs/PROJECT.md:126].
 Unfaithful replay: untested; a slower comparison on new work would replace it [docs/PROJECT.md].
 Inconsistent judges: untested; held-back checks and your sample would decide [docs/PROJECT.md].
 Only large gains show; moderate ones read "not shown" [docs/PROJECT.md].
