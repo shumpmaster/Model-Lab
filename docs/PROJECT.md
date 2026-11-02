@@ -107,7 +107,7 @@ V2: first-time pass rate of each kind of work (plans, research, built work) over
 
 **Groundwork.** The groundwork map is research/Q-001-memo.md; the owner's answers to its shortlist are decisions/questions/P-001-no-change-result.md, P-001-session-records.md, P-001-test-budget.md, P-001-time-and-limit.md and P-001-worst-work.md. Research Q-002 to Q-007 is source-checked and corrected (research/Q-002-to-Q-007-corrections-confirmation.md; research/Q-006-source-check.md), and its cleared facts are filed in the portfolio library (portfolio library/README.md).
 
-**Load-bearing unknowns.** None can be answered by outside research; each is closed by this project's own count or test. Draft. U1 and U5 close in Discovery; U2, U3 and U4 stay open into Design and Build only if the owner accepts them so, a ruling recorded in decisions/ with the Design gate (OPERATING_MODEL.md §4, definition of ready item 7):
+**Load-bearing unknowns.** None can be answered by outside research; each is closed by this project's own count or test. U1 and U5 are closed in Discovery by the count of past work; the owner accepted U2, U3 and U4 as open into Design and Build, with the tests and fallbacks below (decisions/questions/P-001-open-unknowns.md; OPERATING_MODEL.md §4, definition of ready item 7):
 
 | # | Unknown | Closed by | If it fails |
 |---|---|---|---|
