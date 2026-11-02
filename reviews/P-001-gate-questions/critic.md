@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-The Critic's cold read of the two owner questions, questions/P-001-design-gate.md and questions/P-001-accept-m1.md, on a different model from their writer (brief: docs/briefs/20-critic.md), verbatim. Recorded by the orchestrator. Session session_01QBwHGN4kVVA3rfHx2b4FsF, 2026-11-02.
+The Critic's cold read of the two owner questions, questions/P-001-design-gate.md and questions/P-001-accept-m1.md, on a different model from their writer (brief: docs/briefs/20-critic.md), verbatim: round 1 (FAIL), round 2 (PASS). Recorded by the orchestrator. Session session_01QBwHGN4kVVA3rfHx2b4FsF, 2026-11-02.
 
 ## Round 1
 Verdict: FAIL
@@ -64,3 +64,46 @@ ACCEPT M1 (questions/P-001-accept-m1.md)
 12. Non-blocking. Options A and B are even in form, but B states no cost and no timing. A clause such as "the project waits on the extended count" would balance them.
 
 13. Non-blocking. The Source checker's round-2 remaining slips (the memo's "unchanged" wording and the S-002 note) were handled in the memo. At line 27 the memo discloses that §1.3 and §1.4 were edited, so "all source-checked" stands.
+
+## Round 2
+Verdict: PASS
+Design gate: PASS
+Accept M1: PASS
+
+I re-read both question files cold, and the current case (docs/gates/P-001/design-gate-3-case.md) beside them. Every round-1 blocking finding is fixed. What remains is non-blocking.
+
+DESIGN GATE (questions/P-001-design-gate.md)
+
+1. Resolved (was blocking 1, the lessons-log claim). Option D now says nothing of the project reaches the operating model, "since its results move there only at the end of the cycle". That follows from M5's "done when" in docs/PROJECT.md section 3. No lessons-log promise remains. Non-blocking: PROJECT section 6 says a no-change miss still sends the brief-and-model record (M3) into the model. That is a different path from a kill at this gate, and the card's "nothing" is correct for a kill now.
+
+2. Resolved (was blocking 2, uneven options). A, B, C and D each state gain, cost and reversibility.
+   - A names its cost: up to 40 test runs and their tokens, which cannot be taken back. That matches decisions/questions/P-001-open-unknowns.md and PROJECT section 8.
+   - D is marked not reversible as this project.
+   - Non-blocking: A's gain, "the work goes on now", is thin beside the other options. The REVERSIBILITY header says "A, B and C reversible", while A's runs are not; the option line itself says so, so the header only needs "(except the runs used)".
+
+3. Resolved (was 3). WHY now names the M1 question beside it, and says that if you do not decide, nothing moves.
+
+4. Resolved (was 4 and 5). The terms are explained in line: the readiness check, "value targets (the gains it must show)", the fair test, and the replay and consistency checks. The standard Discovery and Design lines are now "the lines saying which of the model's standard Discovery and Design milestones it takes on".
+
+5. Resolved (was 6). RISK CLASS R0 matches governance/risk-paths.toml (docs, decisions and questions paths are R0). The note that a phase gate is the owner's ruling whatever its class is correct.
+
+6. Claims check against records.
+   - The case pointer, the ready Critic PASS, the owner rulings and the 40 of 100 runs all hold.
+   - The case's own cites resolve: PROJECT lines 48, 99, 103 and 105, and reviews/Q-008/critic.md exists.
+   - DEFAULT none and TIMEOUT none are right for a phase gate.
+   - The recommendation is labelled as the Chief of Staff's judgement.
+   - Nothing is presented as the owner's view without a record.
+
+ACCEPT M1 (questions/P-001-accept-m1.md)
+
+7. Option A still begins "A. accept M1 as reached", which satisfies reached_licence in governance/checks/v3_checks.py (the option begins "<letter>. accept" and names M1 whole). The question file name is unchanged, so the check's record-name match still holds.
+
+8. Resolved (was 11 and 12). The delivered text now gives both alternates and the 41 returns with no record of findings. Option B now states its cost: the milestone stays unreached and the project waits on the extended count.
+   - 2 of 19 matches PROJECT section 6.
+   - 27 of 75 without the five single-pass records matches the Q-008 memo's "12 of 24" built-work row and PROJECT section 6.
+   - 41 matches memo bottom line 3.
+   - The headline figures all match the memo.
+
+9. DEFAULT none and TIMEOUT none are right: §3 says only the owner's ruling adds a reached mark. R0 is computed. The reversibility line (a reopen ruling removes the mark) is supported by the check.
+
+10. Non-blocking: the question says the mark is added after the Design gate. That matches §3.
