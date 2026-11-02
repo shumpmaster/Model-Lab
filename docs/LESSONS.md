@@ -309,3 +309,10 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Correction proposed:** in this session, push only as a separate step after reading the checks. For the model: carry the push rule into the template's AGENTS.md working rules, and make the local check run the way CI does (LL-29), so a red local run means something.
 - **Status:** open (recurred).
 - **Number:** filed on its own branch as LL-36 while this log already held a different LL-36; renumbered on landing to the next number free on every branch (LL-38 to LL-41 are taken by the open Design-gate pull request), as LL-39 there proposes. The Service-Desk handoff of 2026-11-02 still calls it LL-36.
+
+### LL-43 The owner's Design-gate approval cannot be seen by the checks, so M1 cannot be marked reached
+- **What happened:** the owner ruled the Design gate "proceed" and accepted M1. Adding M1's reached mark failed the milestones check: it reads a project's approval only from the automatic pipeline's status record (status/P-001.toml), which the Orchestrator script writes and this conversation-run project does not have. The mark was taken out; the rulings are recorded.
+- **Caught by:** the milestones check, run before pushing.
+- **Cause:** as LL-35 and LL-40: the model's tools read phase and approval only from pipeline records.
+- **Correction proposed:** a way for a conversation-run project's gate ruling to reach the status record (the Orchestrator writes it from the ruling record, or the checks read the ruling record), put to the owner with LL-35's model part; until then, M1's mark waits.
+- **Status:** open; with LL-35 and LL-40.
