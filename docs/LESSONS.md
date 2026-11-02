@@ -294,3 +294,10 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** as LL-35: the timeline reads standard milestones only from the pipeline's dispatch log and status files.
 - **Correction proposed:** with LL-35's model part: give conversation-run work a record the timeline reads.
 - **Status:** open; with LL-35.
+
+### LL-41 Commits made under the default identity again (LL-13, LL-20 recurred)
+- **What happened:** three Chief of Staff commits on the Design gate case and its question were made with `git commit -a` and no identity flags, so they carried the environment's default author; one also swept the session lines into a gate-case commit. Found by the surface guard's diff check before the push and re-authored; nothing wrong was pushed.
+- **Caught by:** the surface guard's diff check, run before pushing (the practice from LL-18).
+- **Cause:** a quick follow-up commit typed without the identity flags; the repository has no identity set for the session, so git falls back to the default.
+- **Correction proposed:** set the session lane's identity once in the repository's config at session start, so a bare commit cannot fall back to the default; never use `commit -a` across lanes. For the model: the template's session start sets it.
+- **Status:** open (recurred); the pre-push guard check worked.
