@@ -15,22 +15,22 @@ Where the project stands in the six phases [docs/PROJECT.md]
 
 ## 2. The vision
 
-More agent work should pass its check first time, by changing only what a fair test shows helps, which may be nothing [docs/PROJECT.md].
+More agent work should pass its check first time, changing only what a fair test shows helps, perhaps nothing [docs/PROJECT.md].
 For you: fewer review rounds, better research, every agent's brief and AI model on record [docs/PROJECT.md].
 
 ## 3. What this phase taught us
 
 First-time pass rates are low: plans 2 of 44, research 5 of 19, built work 32 of 80 [docs/PROJECT.md:99] [research/Q-008-source-check.md].
 Records seldom say why: 61 of 84 classified returns name no cause beyond the fault; the instructions are the main cause of one [research/Q-008-memo.md].
-So candidates may also target the material handed over, the task split or the checks [docs/PROJECT.md].
+So candidates may target inputs, task split or checks too [docs/PROJECT.md].
 Wording matters, and AI judges favour their own output [docs/PROJECT.md].
 
 ## 4. The plan for the next phase
 
 Design writes down the fair test (M2): each candidate against no change, on the same past tasks [docs/PROJECT.md].
 First, replay and judge-consistency checks, within 40 of your 100 test runs [decisions/questions/P-001-open-unknowns.md].
-The Critic's plan review passes it; you then rule the Build gate and the test's budget [docs/PROJECT.md].
-M1, the count of past work, is done; only your ruling marks it reached, once milestones are approved [docs/PROJECT.md:35] [research/Q-008-source-check.md].
+After the Critic's plan review, you rule the Build gate and budget [docs/PROJECT.md].
+M1, the count, is done; your ruling marks it reached once milestones are approved [docs/PROJECT.md:35] [research/Q-008-source-check.md].
 
 ```mermaid
 flowchart LR
@@ -43,7 +43,7 @@ How the project's milestones depend on each other [docs/PROJECT.md]
 
 ## 5. The risks
 
-Replay may be unfaithful: the test then compares new work and needs more pieces [docs/PROJECT.md].
+Unfaithful replay: the test compares new work, needing more pieces [docs/PROJECT.md].
 Judges may be inconsistent: held-back checks and your sample decide [docs/PROJECT.md].
 Only large gains show; moderate ones read "not shown" [docs/PROJECT.md].
 
@@ -61,8 +61,8 @@ A kept change that misses in real use is removed at the model's next rule review
 
 ## 8. What the owner is agreeing to
 
-The value targets: a 20-point gain in the paired test, then a rise over 30 real pieces of each kind [decisions/questions/P-001-value-target.md].
-Milestones M1 to M6, the Discovery and Design standard lines, tier T1, the spend ceiling and the intent [docs/PROJECT.md].
+The value targets: a 20-point gain in the paired test, then a rise over 30 real pieces per kind [decisions/questions/P-001-value-target.md].
+Milestones M1 to M6, the standard lines, tier T1, the spend ceiling and the intent [docs/PROJECT.md].
 You are the user: no user representative step [docs/PROJECT.md].
 
 ## 9. Appendix: the phase record
