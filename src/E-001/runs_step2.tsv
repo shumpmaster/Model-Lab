@@ -11,4 +11,4 @@ run	kind	piece	model	agent_id	copy	tokens	tool_uses	duration_ms	outcome
 10	check	SD HD1 build	fable->claude-fable-5-1	ade76f14edd6cd6ec	sd-hd1-build-check	166148	33	251270	no verdict line; ended at transcript line 148 waiting on its own test runs
 11	replay	POOM PR5 build	opus->claude-opus-5-5	a38329abe6de7db22	poom-pr5-build	231380	67	839053	finished; 4 commits to c8d97f1 (14 files); check_all scope step fails
 12	replay	POOM S-014 build	opus->claude-opus-5-5	ad906ab597fdf5cd8	poom-s014-build				running
-13	check	POOM PR5 build	fable->claude-fable-5-1	a906f2abb95b010ac	poom-pr5-build-check				running
+13	check	POOM PR5 build	fable->claude-fable-5-1	a906f2abb95b010ac	poom-pr5-build-check	142936	26	394827	Verdict: PASS
