@@ -1,0 +1,31 @@
+You are the definer (your role file: .claude/agents/definer.md).
+
+Your task: 
+decisions/questions/P-001-glance2-anchor.md:1: Ruling: A, widened by the owner — a screen may anchor the set of its most important things in the briefing's soft box (--bg2, no outline, never vermilion), not only the single most important one; anchors stay occasional ("It definitely shouldn't be overdone"); the project page gets its boxed sentence and tally; the agents' why-not-written box becomes a plain line
+
+decisions/questions/P-001-glance2-arrow.md:1: Ruling: A — one small filled ink triangle points at the present on the Timeline's Now line, the project page's phase strip, each Home tile's drawing, Plan's next-to-reach row and an opened phase; the ▲ reading arrow is removed
+
+decisions/questions/P-001-glance2-counts.md:1: Ruling: A — each phase leads with all its milestones and sprints counted ("3 of 5 reached · 4 sprints"), the unused standard ones said in words; pieces of work counted done-of-total from a task list in each sprint's pull request, after the operating model adds it
+
+decisions/questions/P-001-glance2-palette.md:1: Ruling: A — a reached or passed mark (✓) is green (--ok) and a failed or not-reached mark (✕) red (--bad), on the 14–16 px mark only, never on words, rows or borders; vermilion stays what needs the owner, gold stays next to reach; no third colour; the red tile border on an unreadable project goes. With it as proposed: the stall line stays ink with a clock, a reached mark in a run later gone back over stays grey, and every absence stays grey
+
+decisions/questions/P-001-glance2-standard.md:1: Ruling: A — "Your milestones · n" and "Standard checklist · n · k tracked" as clear heads, a rule above the standard group, the untracked ones folded into one line worded "not tracked" (a tap lists them), the owner's rows in the row weight, and "· standard" in the Timeline's meta line
+docs/design/references/owner-request-2026-10-24-glance-emphasis.md:62-72:
+## The owner's round-2 answers and the operating-model go-ahead, word for word
+
+Said by the owner in the same session, after reviewing round 2's mockups (and the explanation of what counting a sprint's pieces of work would take):
+
+> Okay love it, all. Only changes I would propose is the outlined box isn't ONLY for the single most important thing on the page.
+>
+> It should be for the set of most important things on a page. It definitely shouldn't be overdone but only accepting one thing omits other elements that might be close to or as important.
+>
+> Then finally, you can proceed with the changes proposed for the operating model and the steps link back toward milestone. Honestly I had already assumed that existed and finding out it didn't represents that we caught a big gap. It makes no sense to consider the two things as unrelated, it's all a hierarchy of work. You can't progress phases without successfully delivering upon the milestones, the milestones are accomplished by delivering sprints and ultimately the agents should be either following clear tasks or should be recording them for us to see what it took to get there
+
+Read as: all five round-2 choices as recommended (decisions/questions/P-001-glance2-*.md), with the anchor rule widened to "the set of most important things on a page, never overdone"; item 4c (Done shaded) accepted with "all", for the Design reviewer to fit to the widened anchor rule; and a go-ahead for the operating-model change in Personal-Org-Operating-Model: each sprint carries its planned pieces of work (tasks), and every step (agent session) is recorded against its sprint, so the chain phase → milestone → sprint → task/step is whole and the desk can show it.
+
+Read first: docs/PROJECT.md; library/**; decisions/questions/P-001-glance2-anchor.md; decisions/questions/P-001-glance2-arrow.md; decisions/questions/P-001-glance2-counts.md; decisions/questions/P-001-glance2-palette.md; decisions/questions/P-001-glance2-standard.md; specs/S-001.md.
+
+Hand back: a spec draft, at specs/S-001.md, and whatever the role file says a hand-back must contain.
+
+Work only in /home/user/wt/e001/sd-afterglance-plan. Do not read, search or run commands on any path outside it, do not
+use the web, and do not run git commands that reach any other repository.
