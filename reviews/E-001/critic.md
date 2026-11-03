@@ -73,3 +73,44 @@ Points raised by the writer:
 Files reviewed (I wrote none):
 /home/user/wt/ml-definer/experiments/E-001.md
 /home/user/wt/ml-definer/experiments/E-002.md
+
+## Round 2
+Verdict: FAIL
+E-001: PASS
+E-002: FAIL
+
+Round 2. I read both revised files cold and checked each change you listed against its text, the records, and the environment where I could. E-001 clears. E-002 has one blocking defect, finding 1, which is a small fix.
+
+Verification of the nine items:
+- Start-commit rule (E-001 F1): fixed. It accepts a dispatch-log commit, the base of the branch or pull request, or the parent of the first commit. It says outright that a "Reviewed … at <commit>" names the finished work, and a piece with only that commit fails F1. E-002's use of the reviewed commit for Set C is flagged as correct there.
+- Templates: both are now in the files. The brief-rebuilding template and confinement paragraph are in E-001, and the judge-brief template is in E-002, with E-001's check run pointed at it. E-002 requires one filled text per piece, identical byte for byte across judges. Sound.
+- Faithful and template replay: reported separately in the hypothesis, measure and threshold. Template replay is limited to changes that touch neither the brief nor the template, and a brief change goes to the fallback. The result is never called faithful. Sound.
+- "Usable in part": stated. Pool arithmetic is correct (plans 42, research 14, built work 48). M2 states its own pairs per kind, and a smaller pool means the fallback, with no mixing of past and new tasks. The 50-pairs figure is labelled as an inference. Sound.
+- Reruns: a rerun costs 2 runs. The reserve of 4 gives at most 2 reruns, with at most 8 replay and 8 check runs, so the cap of 20 holds. E-002 is 8×2 + 2×2 = 20. Hard caps are counted as sessions started. Together that is exactly 40. A failed replay is not judged, so it saves a check run and gives slack. Sound.
+- Pass gate against an empty pass: present. "Not tested" applies if fewer than 3 consistency-set pieces have a test-judge PASS, or fewer than 2 Set B pieces have a PASS from either judge. Set C adds first-time passes so the set is not all failed work. "Not tested" triggers the fallback. The binomial figures check out (24 in 100 and 1 in 100 over 10 pieces). The self-preference limit (2 of 8, one way, still passes) is stated plainly.
+- F4 from the transcript file: usable. Subagent transcripts do exist at `<session folder>/subagents/agent-<id>.jsonl` in this environment, and F4 fails if the file is missing. Not verified for helpers started from inside a Builder subagent (finding 3).
+- History-limited copy: `git init`, then `fetch --no-tags` of the one start commit, then `checkout --detach`. Sound in construction. The claim "tested on Model-Lab on 2026-11-03" cites no record (finding 3).
+- Who runs each step: the Builder runs and starts every helper, and the Reviewer, who did not run it, analyses. This matches the playbook (§6: "run exactly as registered (Builder)"). The earlier bad citation to PROJECT §4 is gone from the text, though §4 stays in the sources line.
+- Research stratum and first-time-pass pieces: added as separate strata, outside the thresholds. Research is judged on web-free memos alone. The first-time-pass pieces match Q-008 (plans HD1 and S-027, research SD Q-008 and Q-013). The built-work first-pass pieces are defined by a rule over Q-006 §4 and Q-008 §2.3.
+
+Findings:
+
+1. (B, E-002) Set C is selected by two rules that conflict. "The first two of E-001's first-time-pass pieces, in its list order … one plan and one built work where possible." E-001 lists plans first (HD1's plan, S-027), then research, then built work, so the first two are both plans. The "where possible" lets the Builder choose after seeing the records, and Set C counts toward the deciding consistency set. Fix: name the two pieces, or state one rule only (for example, the first plan and the first built piece in E-001's list that can be recovered, skipped ones listed).
+
+2. (NB, E-001) F4 fails on any read of a path outside the copy. A Bash call touching /usr or a temp directory would fail the replay, and fail the whole kind, with no rerun, since that is not a set-up fault. List the system paths that are allowed (or say none and accept the strictness), and say who decides a borderline call.
+
+3. (NB, E-001) Two environment claims need a record. The tested copy-construction on Model-Lab needs a cited record. Transcript storage for helpers started by a Builder that is itself a subagent is unverified. If the transcript is missing, F4 fails by rule, so the cost of being wrong is a failed run, not a wrong answer.
+
+4. (NB, E-001 and E-002) The judge's copy "with the replay's output added" does not say who commits the output. It should be a commit on the start commit, because E-002 requires a copy holding only "the commit judged and its ancestors". The sources line of E-001 still lists PROJECT §4, which does not assign the Design checks. This is harmless now.
+
+5. (NB, E-001) Selection of the built-work first-pass piece depends on the Builder reading rounds in Q-008 §2.3's list. §2.3 does not itself say which passed in round 1. The Builder should cite the record lines, which F1–F3 already require.
+
+Views on the earlier four points, now closed:
+- (1) Fable 5.1 kept, with both caveats now written in.
+- (2) The rebuilt-brief grade is handled correctly.
+- (3) Research is predicted to fall to the fallback in advance. The web-free stratum is separate and counted directly.
+- (4) The returned-piece limit is stated per kind. First-time-pass pieces are audited.
+
+Files reviewed (I wrote none):
+/home/user/wt/ml-definer/experiments/E-001.md
+/home/user/wt/ml-definer/experiments/E-002.md
