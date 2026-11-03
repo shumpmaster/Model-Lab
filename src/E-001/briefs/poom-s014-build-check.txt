@@ -1,0 +1,12 @@
+You are the reviewer (your role file: .claude/agents/reviewer.md),
+doing the build review of POOM S-014 build.
+
+Read your role file and the files its context pack names, as they are in /home/user/wt/e001/poom-s014-build-check. The work
+to judge: the commit range 6c3c9a44b90cd6987eae69e1f2bcea7e483174b8..f77f7007670dedf8b44dfba57fd88a2d0a53542b in the copy. Judge it against: specs/S-014-session-runner.md.
+
+Work only in /home/user/wt/e001/poom-s014-build-check. Do not read, search or run commands on any path outside it, do not
+use the web, and do not run git commands that reach any other repository. You are one of
+several independent judgements and see no other verdict.
+
+Return, first line: `Verdict: PASS` or `Verdict: FAIL`. Then each blocking finding as one
+numbered line citing file:line.
