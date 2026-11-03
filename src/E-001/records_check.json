@@ -1,0 +1,1161 @@
+[
+ {
+  "piece": "SD M3B plan",
+  "repo": "SD",
+  "start": "3bfe663bca1b",
+  "ancestors": 1919,
+  "first_commits": [
+   [
+    "31ff26d",
+    "definer",
+    "2026-10-26T11:53:27+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    ".claude/agents/definer.md",
+    1
+   ],
+   [
+    "docs/PROJECT.md",
+    1
+   ],
+   [
+    "library/**",
+    92
+   ],
+   [
+    "specs/S-001.md",
+    1
+   ]
+  ],
+  "cites": [
+   [
+    "HEAD:reviews/M3B/_plan-critic-r1-verbatim.md:3",
+    "Dispatched by the orchestrator on 2026-10-26 against build/definer/m3b-plan at 31ff26d (the plan, draft 1)."
+   ],
+   [
+    "3bfe663:docs/PROJECT.md:113",
+    "- The desk's value targets shown (M3B) \u00b7 done when the desk shows each value target (V1 to V5) from the project document against its measure \u00b7 phase: Build"
+   ]
+  ]
+ },
+ {
+  "piece": "POOM S-007 plan",
+  "repo": "POOM",
+  "start": "03121f006fbf",
+  "ancestors": 168,
+  "first_commits": [
+   [
+    "fea44b3",
+    "orchestrator",
+    "2026-09-28T03:11:44+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    "governance/SURFACES.md",
+    1
+   ]
+  ],
+  "cites": [
+   [
+    "03121f0:governance/SURFACES.md:4",
+    "# id              class      status     authority"
+   ],
+   [
+    "03121f0:governance/SURFACES.md:5",
+    "tools-builder     builder    installed  proposes"
+   ]
+  ]
+ },
+ {
+  "piece": "SD M3C plan",
+  "repo": "SD",
+  "start": "d2a1d60338c0",
+  "ancestors": 2074,
+  "first_commits": [
+   [
+    "b26e876",
+    "definer",
+    "2026-10-30T10:37:58+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    ".claude/agents/definer.md",
+    1
+   ],
+   [
+    "docs/PROJECT.md",
+    1
+   ],
+   [
+    "library/**",
+    92
+   ],
+   [
+    "specs/S-001.md",
+    1
+   ]
+  ],
+  "cites": [
+   [
+    "HEAD:reviews/M3C/_plan-review-r1-verbatim.md:5",
+    "Checked on the branch at e477cc2 against d2a1d60, read-only. `governance/checks/check_all.sh . d2a1d60` passes every step, and the tree is still clean afterward"
+   ],
+   [
+    "d2a1d60:docs/PROJECT.md:117",
+    "- The desk live at the needs-you address (M3C) \u00b7 done when the owner's needs-you address opens the desk on production \u00b7 phase: Launch"
+   ]
+  ]
+ },
+ {
+  "piece": "POOM S-012r plan",
+  "repo": "POOM",
+  "start": "5ee6c05e3547",
+  "ancestors": 236,
+  "first_commits": [
+   [
+    "84caf74",
+    "orchestrator",
+    "2026-09-28T19:17:26+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    "governance/SURFACES.md",
+    1
+   ]
+  ],
+  "cites": [
+   [
+    "HEAD:reviews/7/_plan-review-s012r-round1-verbatim.md:2",
+    ""
+   ]
+  ]
+ },
+ {
+  "piece": "SD after-glance plan",
+  "repo": "SD",
+  "start": "2d0edb09f9ed",
+  "ancestors": 1445,
+  "first_commits": [
+   [
+    "671eada",
+    "definer",
+    "2026-10-24T16:33:07+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    ".claude/agents/definer.md",
+    1
+   ],
+   [
+    "docs/PROJECT.md",
+    1
+   ],
+   [
+    "library/**",
+    92
+   ],
+   [
+    "specs/S-001.md",
+    1
+   ],
+   [
+    "decisions/questions/P-001-glance2-anchor.md",
+    1
+   ],
+   [
+    "decisions/questions/P-001-glance2-arrow.md",
+    1
+   ],
+   [
+    "decisions/questions/P-001-glance2-counts.md",
+    1
+   ],
+   [
+    "decisions/questions/P-001-glance2-palette.md",
+    1
+   ],
+   [
+    "decisions/questions/P-001-glance2-standard.md",
+    1
+   ],
+   [
+    "docs/design/references/owner-request-2026-10-24-glance-emphasis.md",
+    1
+   ]
+  ],
+  "cites": [
+   [
+    "HEAD:reviews/S-001-after-glance/_plan-critic-r1-verbatim.md:3",
+    "Dispatched by the orchestrator on 2026-10-24 against build/definer/glance-plan at 671eada."
+   ],
+   [
+    "2d0edb0:docs/design/references/owner-request-2026-10-24-glance-emphasis.md:62",
+    "## The owner's round-2 answers and the operating-model go-ahead, word for word"
+   ]
+  ]
+ },
+ {
+  "piece": "POOM S-015 plan",
+  "repo": "POOM",
+  "start": "6c3c9a44b90c",
+  "ancestors": 271,
+  "first_commits": [
+   [
+    "20f25ca",
+    "orchestrator",
+    "2026-09-29T00:42:31+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    "governance/SURFACES.md",
+    1
+   ]
+  ],
+  "cites": []
+ },
+ {
+  "piece": "SD desk-v2 plan",
+  "repo": "SD",
+  "start": "87ce4f05c4c7",
+  "ancestors": 1133,
+  "first_commits": [
+   [
+    "a0b472a",
+    "definer",
+    "2026-10-20T14:45:13+00:00",
+    true
+   ],
+   [
+    "2ed4269",
+    "definer",
+    "2026-10-20T15:15:44+00:00",
+    false
+   ]
+  ],
+  "inputs": [
+   [
+    ".claude/agents/definer.md",
+    1
+   ],
+   [
+    "docs/PROJECT.md",
+    1
+   ],
+   [
+    "library/**",
+    92
+   ],
+   [
+    "specs/S-001.md",
+    1
+   ],
+   [
+    "decisions/questions/P-001-redesign-direction-v2.md",
+    1
+   ]
+  ],
+  "cites": [
+   [
+    "HEAD:reviews/S-001-desk-v2/_critic-round1-verbatim.md:3",
+    "Dispatched by the orchestrator on 2026-10-20 against build/definer/s001-desk-v2 at ceaf9a2."
+   ],
+   [
+    "87ce4f0:decisions/questions/P-001-redesign-direction-v2.md:1",
+    "Ruling: A \u2014 desk mockup v2, with Home, is the direction for the whole desk: planned this way, the board first, through the usual checks and build, in the trial "
+   ]
+  ]
+ },
+ {
+  "piece": "POOM S-022 plan",
+  "repo": "POOM",
+  "start": "30cfbaf1dbe0",
+  "ancestors": 520,
+  "first_commits": [
+   [
+    "0c0380a",
+    "orchestrator",
+    "2026-10-10T21:56:54+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    "governance/SURFACES.md",
+    1
+   ]
+  ],
+  "cites": [
+   [
+    "HEAD:reviews/S-022/_plan-review-s022-round1-verbatim.md:2",
+    ""
+   ]
+  ]
+ },
+ {
+  "piece": "SD HD1 stage",
+  "repo": "SD",
+  "start": "2c20c9aaeec7",
+  "ancestors": 2030,
+  "first_commits": [
+   [
+    "a1be3ee",
+    "builder",
+    "2026-10-29T22:27:03+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    ".claude/agents/builder.md",
+    1
+   ],
+   [
+    "specs/S-001.md",
+    1
+   ],
+   [
+    "docs/PROJECT.md",
+    1
+   ],
+   [
+    "tests/acceptance/**",
+    1
+   ],
+   [
+    "checks/**",
+    0
+   ]
+  ],
+  "cites": [
+   [
+    "HEAD:reviews/HD1/_stage-hd1-review-r1-verbatim.md:3",
+    "Dispatched by the orchestrator on 2026-10-30 against build/builder/hd1 at 374c7d9 (HD1's work over 2c20c9a)."
+   ],
+   [
+    "2c20c9a:specs/S-001.md:3727",
+    "  | HD1 | On every screen and sheet, the headers sized up as the approved picture draws them, with the bigger titles: screen titles 28 px and sheet titles 20 px"
+   ]
+  ]
+ },
+ {
+  "piece": "POOM S-017 build",
+  "repo": "POOM",
+  "start": "fb6d0c8dc067",
+  "ancestors": 470,
+  "first_commits": [
+   [
+    "cc7730b",
+    "tools-builder",
+    "2026-10-05T17:22:44+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    ".claude/agents/tools-builder.md",
+    1
+   ],
+   [
+    "specs/S-017-loop-and-alerts.md",
+    1
+   ],
+   [
+    "docs/LEDGER.md",
+    1
+   ]
+  ],
+  "cites": [
+   [
+    "HEAD:reviews/20/reviewer.md:4",
+    "- S-017 plan review: FAIL rounds 1 to 4, PASS round 5 (frozen fb6d0c8, L-0121). Build review: round 1 FAIL (two locked token pins outside the supersession table"
+   ],
+   [
+    "fb6d0c8:docs/LEDGER.md:1737",
+    "decision: Approved; S-017 is frozen at five rounds of plan review (round 5 PASS). It supersedes, as its table says, S-013 AC6's single read, S-015 AC10's self-d"
+   ],
+   [
+    "fb6d0c8:.claude/agents/tools-builder.md:23",
+    "Commits: only to `build/tools-builder/<task>`, as"
+   ]
+  ]
+ },
+ {
+  "piece": "SD M3B VT3 stage",
+  "repo": "SD",
+  "start": "55a24849c5e4",
+  "ancestors": 1999,
+  "first_commits": [
+   [
+    "5d9b0d2",
+    "builder",
+    "2026-10-29T11:35:43+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    ".claude/agents/builder.md",
+    1
+   ],
+   [
+    "specs/S-001.md",
+    1
+   ],
+   [
+    "docs/PROJECT.md",
+    1
+   ],
+   [
+    "tests/acceptance/**",
+    1
+   ],
+   [
+    "checks/**",
+    0
+   ]
+  ],
+  "cites": [
+   [
+    "HEAD:reviews/M3B/_stage-vt3-design-r1-verbatim.md:3",
+    "Dispatched by the orchestrator on 2026-10-29 against build/builder/vt3 at 99154a5 (VT3's work over 55a2484)."
+   ],
+   [
+    "55a2484:specs/S-001.md:3361",
+    "  | VT3 | From each Monday in Chicago after launch (before it, as a trial, since the file is private, question 3's answer C), while a week still noted on this d"
+   ]
+  ]
+ },
+ {
+  "piece": "POOM S-023/24 build",
+  "repo": "POOM",
+  "start": "6ba7f05f3e5d",
+  "ancestors": 602,
+  "first_commits": [
+   [
+    "6788f25",
+    "tools-builder",
+    "2026-10-13T01:39:44+00:00",
+    true
+   ],
+   [
+    "4f41556",
+    "orchestrator",
+    "2026-10-13T01:24:14+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    ".claude/agents/tools-builder.md",
+    1
+   ],
+   [
+    "specs/S-023-six-phases.md",
+    1
+   ],
+   [
+    "specs/S-024-phase-gates.md",
+    1
+   ],
+   [
+    "docs/LEDGER.md",
+    1
+   ]
+  ],
+  "cites": [
+   [
+    "HEAD:reviews/26/reviewer.md:5",
+    "Both round-1 blockers are fixed and pass my probes; the full suite and check_all pass on the combined tree. Four small non-blocking points remain (N9 to N12 bel"
+   ],
+   [
+    "6ba7f05:docs/LEDGER.md:1923",
+    "licenses_next: The joint S-023 and S-024 build (tests first from the frozen criteria, then tools, routing, model text, templates, VERSION 3.1.0 and CHANGELOG), "
+   ],
+   [
+    "6ba7f05:docs/LEDGER.md:1938",
+    "licenses_next: The joint S-023 and S-024 build, its independent review, and one pull request for the owner to merge; orch/join-up-review is not landed."
+   ]
+  ]
+ },
+ {
+  "piece": "SD M3E G5 stage",
+  "repo": "SD",
+  "start": "87bac4dd5be7",
+  "ancestors": 1508,
+  "first_commits": [
+   [
+    "45e09fa",
+    "builder",
+    "2026-10-25T04:21:56+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    ".claude/agents/builder.md",
+    1
+   ],
+   [
+    "specs/S-001.md",
+    1
+   ],
+   [
+    "docs/PROJECT.md",
+    1
+   ],
+   [
+    "tests/acceptance/**",
+    1
+   ],
+   [
+    "checks/**",
+    0
+   ]
+  ],
+  "cites": [
+   [
+    "HEAD:reviews/M3E/_stage-g5-review-r1-verbatim.md:3",
+    "Dispatched by the orchestrator on 2026-10-25 against build/builder/g5 at f5be3a8 (base 87bac4d)."
+   ],
+   [
+    "87bac4d:specs/S-001.md:2590",
+    "  | G5 | Every milestone and sprint counted on a project's page and its Timeline (\"3 of 5 reached \u00b7 4 sprints \u00b7 4 merged\"), the unused standard ones said in wor"
+   ]
+  ]
+ },
+ {
+  "piece": "POOM PR5 build",
+  "repo": "POOM",
+  "start": "450c4dd77c42",
+  "ancestors": 83,
+  "first_commits": [
+   [
+    "a1ac59d",
+    "tools-builder",
+    "2026-09-26T12:57:35+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    ".claude/agents/tools-builder.md",
+    1
+   ],
+   [
+    "docs/briefs/s-005.md",
+    1
+   ],
+   [
+    "specs/S-005-governance-follow-ups.md",
+    1
+   ],
+   [
+    "governance/enforcement.toml",
+    0
+   ],
+   [
+    "docs/research/003*",
+    2
+   ],
+   [
+    "docs/LEDGER.md",
+    1
+   ],
+   [
+    "tools/check_all.sh",
+    1
+   ],
+   [
+    "tools/surface_guard.py",
+    1
+   ]
+  ],
+  "cites": [
+   [
+    "HEAD:reviews/5/_reviewer-round1-verbatim.md:1",
+    "Verbatim return of the reviewer for PR 5 (S-005), round 1, content at bf078f7 (HEAD 48ead0d)."
+   ],
+   [
+    "HEAD:reviews/5/_reviewer-round1-verbatim.md:5",
+    ""
+   ]
+  ]
+ },
+ {
+  "piece": "SD M3G QW1 stage",
+  "repo": "SD",
+  "start": "c2f6f9482d8d",
+  "ancestors": 1759,
+  "first_commits": [
+   [
+    "5f62cd7",
+    "builder",
+    "2026-10-25T21:52:15+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    ".claude/agents/builder.md",
+    1
+   ],
+   [
+    "specs/S-001.md",
+    1
+   ],
+   [
+    "docs/PROJECT.md",
+    1
+   ],
+   [
+    "tests/acceptance/**",
+    1
+   ],
+   [
+    "checks/**",
+    0
+   ]
+  ],
+  "cites": [
+   [
+    "HEAD:reviews/M3G/_stage-qw1-review-r1-verbatim.md:3",
+    "Dispatched by the orchestrator on 2026-10-26 against build/builder/qw1 at a765ea5 (QW1's work over c2f6f94)."
+   ],
+   [
+    "c2f6f94:specs/S-001.md:2962",
+    "  | QW1 | Waiting opens with \"Questions for you\", grouped by project: each question at full width, its title up to three lines, its age, its lock or clock line,"
+   ]
+  ]
+ },
+ {
+  "piece": "POOM S-014 build",
+  "repo": "POOM",
+  "start": "6c3c9a44b90c",
+  "ancestors": 271,
+  "first_commits": [
+   [
+    "17d4a1e",
+    "tools-builder",
+    "2026-09-29T00:36:43+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    ".claude/agents/tools-builder.md",
+    1
+   ],
+   [
+    "docs/briefs/s-014.md",
+    1
+   ],
+   [
+    "specs/S-014-session-runner.md",
+    1
+   ],
+   [
+    "template-v3/governance/PACKS.toml",
+    1
+   ],
+   [
+    "template-v3/governance/RUNNER.toml",
+    1
+   ],
+   [
+    "template-v3/governance/BRIEFS.toml",
+    1
+   ],
+   [
+    "tools/govlib.py",
+    1
+   ],
+   [
+    "tools/review_check.py",
+    1
+   ]
+  ],
+  "cites": [
+   [
+    "HEAD:reviews/7/_build-review-s014-round1-verbatim.md:2",
+    ""
+   ]
+  ]
+ },
+ {
+  "piece": "ML Q-001",
+  "repo": "ML",
+  "start": "3d252f24034f",
+  "ancestors": 4,
+  "first_commits": [
+   [
+    "78bdbbc",
+    "orchestrator",
+    "2026-11-01T17:03:25+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    ".claude/agents/researcher.md",
+    1
+   ],
+   [
+    "research/Q-001.md",
+    1
+   ],
+   [
+    "research/_GROUNDWORK.md",
+    1
+   ],
+   [
+    "OPERATING_MODEL.md",
+    0
+   ],
+   [
+    "template-v3/.claude/agents/*",
+    0
+   ],
+   [
+    "template-v3/governance/BRIEFS.toml",
+    0
+   ],
+   [
+    "template-v3/governance/PACKS.toml",
+    0
+   ],
+   [
+    "dispatch-log/**",
+    0
+   ]
+  ],
+  "cites": [
+   [
+    "HEAD:docs/briefs/02-researcher.md:7",
+    "## Brief (2026-11-01T16:56:53.886Z)"
+   ],
+   [
+    "HEAD:docs/briefs/02-researcher.md:11",
+    "What you may read: the question; the form; the files the question names in /home/user/Personal-Org-Operating-Model (OPERATING_MODEL.md, template-v3/.claude/agen"
+   ]
+  ]
+ },
+ {
+  "piece": "ML Q-002",
+  "repo": "ML",
+  "start": "c42334bedf61",
+  "ancestors": 18,
+  "first_commits": [
+   [
+    "d879b98",
+    "orchestrator",
+    "2026-11-01T18:07:02+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    ".claude/agents/researcher.md",
+    1
+   ],
+   [
+    "research/Q-002.md",
+    1
+   ],
+   [
+    "research/_GROUNDWORK.md",
+    1
+   ],
+   [
+    "library/**",
+    0
+   ],
+   [
+    "OPERATING_MODEL.md",
+    0
+   ],
+   [
+    "template-v3/.claude/agents/*",
+    0
+   ],
+   [
+    "template-v3/governance/BRIEFS.toml",
+    0
+   ],
+   [
+    "template-v3/governance/PACKS.toml",
+    0
+   ]
+  ],
+  "cites": [
+   [
+    "671335c:research/Q-002.md:7",
+    "The pipeline under study is the operating model in shumpmaster/Personal-Org-Operating-Model (OPERATING_MODEL.md; role definitions in template-v3/.claude/agents/"
+   ]
+  ]
+ },
+ {
+  "piece": "ML Q-003",
+  "repo": "ML",
+  "start": "671335cbb70e",
+  "ancestors": 17,
+  "first_commits": [
+   [
+    "c42334b",
+    "orchestrator",
+    "2026-11-01T18:06:51+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    ".claude/agents/researcher.md",
+    1
+   ],
+   [
+    "research/Q-003.md",
+    1
+   ],
+   [
+    "research/_GROUNDWORK.md",
+    1
+   ],
+   [
+    "library/**",
+    0
+   ],
+   [
+    "OPERATING_MODEL.md",
+    0
+   ],
+   [
+    "template-v3/.claude/agents/*",
+    0
+   ],
+   [
+    "template-v3/governance/BRIEFS.toml",
+    0
+   ],
+   [
+    "template-v3/governance/PACKS.toml",
+    0
+   ]
+  ],
+  "cites": [
+   [
+    "671335c:research/Q-003.md:7",
+    "The pipeline under study is the operating model in shumpmaster/Personal-Org-Operating-Model (OPERATING_MODEL.md; role definitions in template-v3/.claude/agents/"
+   ]
+  ]
+ },
+ {
+  "piece": "ML Q-004",
+  "repo": "ML",
+  "start": "d879b98d2685",
+  "ancestors": 19,
+  "first_commits": [
+   [
+    "f54d6d7",
+    "orchestrator",
+    "2026-11-01T18:07:12+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    ".claude/agents/researcher.md",
+    1
+   ],
+   [
+    "research/Q-004.md",
+    1
+   ],
+   [
+    "research/_GROUNDWORK.md",
+    1
+   ],
+   [
+    "library/**",
+    0
+   ],
+   [
+    "OPERATING_MODEL.md",
+    0
+   ],
+   [
+    "template-v3/.claude/agents/*",
+    0
+   ],
+   [
+    "template-v3/governance/BRIEFS.toml",
+    0
+   ],
+   [
+    "template-v3/governance/PACKS.toml",
+    0
+   ]
+  ],
+  "cites": [
+   [
+    "671335c:research/Q-004.md:7",
+    "The pipeline under study is the operating model in shumpmaster/Personal-Org-Operating-Model (OPERATING_MODEL.md; role definitions in template-v3/.claude/agents/"
+   ]
+  ]
+ },
+ {
+  "piece": "SD HD1 plan (ftp)",
+  "repo": "SD",
+  "start": "548031e63040",
+  "ancestors": 2026,
+  "first_commits": [
+   [
+    "f6c194c",
+    "definer",
+    "2026-10-29T22:12:05+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    ".claude/agents/definer.md",
+    1
+   ],
+   [
+    "docs/PROJECT.md",
+    1
+   ],
+   [
+    "library/**",
+    92
+   ],
+   [
+    "specs/S-001.md",
+    1
+   ],
+   [
+    "decisions/questions/P-001-headers-approve.md",
+    1
+   ]
+  ],
+  "cites": [
+   [
+    "HEAD:reviews/HD1/_plan-review-r1-verbatim.md:3",
+    "Dispatched by the orchestrator on 2026-10-29 against build/definer/m3b-plan at f6c194c (AC98 and HD1, draft 1)."
+   ],
+   [
+    "HEAD:reviews/HD1/_plan-review-r1-verbatim.md:7",
+    "Verdict: PASS"
+   ],
+   [
+    "548031e:decisions/questions/P-001-headers-approve.md:1",
+    "Ruling: B"
+   ],
+   [
+    "548031e:decisions/questions/P-001-headers-approve.md:8",
+    "  A. Approve as drawn \u2014 the Definer writes it into the spec and it is built and reviewed as usual, replacing mockup v2's 11 px section heads for these roles."
+   ]
+  ]
+ },
+ {
+  "piece": "POOM S-027 plan (ftp)",
+  "repo": "POOM",
+  "start": "93ed08cd9fba",
+  "ancestors": 645,
+  "first_commits": [
+   [
+    "7c81268",
+    "orchestrator",
+    "2026-10-13T12:52:27+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    "governance/SURFACES.md",
+    1
+   ]
+  ],
+  "cites": [
+   [
+    "HEAD:reviews/S-027/_plan-review-s027-round1-verbatim.md:4",
+    ""
+   ]
+  ]
+ },
+ {
+  "piece": "SD followups build (ftp)",
+  "repo": "SD",
+  "start": "706eb4553386",
+  "ancestors": 722,
+  "first_commits": [
+   [
+    "2170e52",
+    "builder",
+    "2026-10-17T03:17:00+00:00",
+    true
+   ],
+   [
+    "2b81fa8",
+    "chief-of-staff",
+    "2026-10-17T03:10:21+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    ".claude/agents/builder.md",
+    1
+   ],
+   [
+    "specs/S-001.md",
+    1
+   ],
+   [
+    "docs/PROJECT.md",
+    1
+   ],
+   [
+    "tests/acceptance/**",
+    1
+   ],
+   [
+    "checks/**",
+    0
+   ]
+  ],
+  "cites": [
+   [
+    "HEAD:reviews/S-001-followups/_build-review-round1-verbatim.md:1",
+    "Verdict: PASS"
+   ],
+   [
+    "706eb45:specs/S-001.md:413",
+    "**Where the build stands (amendment of 2026-10-17, the desk follow-ups).**"
+   ],
+   [
+    "706eb45:specs/S-001.md:414",
+    "- **The owner's request of 2026-10-17:** \"go ahead with the desk follow-ups\". Ledger L-0015"
+   ]
+  ]
+ },
+ {
+  "piece": "POOM S-007 build (ftp)",
+  "repo": "POOM",
+  "start": "8c60a807b1a3",
+  "ancestors": 175,
+  "first_commits": [
+   [
+    "9aa70fb",
+    "tools-builder",
+    "2026-09-28T12:11:31+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    ".claude/agents/tools-builder.md",
+    1
+   ],
+   [
+    "specs/S-007-v3-layout-and-templates.md",
+    1
+   ],
+   [
+    "docs/LEDGER.md",
+    1
+   ]
+  ],
+  "cites": [
+   [
+    "HEAD:reviews/7/_build-review-s007-verbatim.md:4",
+    "range: 7eaad1a..7bf761c   date: 2026-09-28"
+   ],
+   [
+    "HEAD:reviews/7/_build-review-s007-verbatim.md:6",
+    "VERDICT: PASS"
+   ],
+   [
+    "HEAD:reviews/1/reviewer.md:7",
+    "Earlier rounds 1\u20133 were FAIL; see docs/LEDGER.md L-0012 and L-0013."
+   ],
+   [
+    "8c60a80:docs/LEDGER.md:1047",
+    "decision: Frozen by this commit, before any build. The orchestrator lands the surface map entries first (AC9), then the forms in template-v3/ and portfolio-temp"
+   ],
+   [
+    "b8d54f9:docs/briefs/s-007.md:5",
+    "*Recorded after the fact (the brief was given at dispatch and filed late; the text below is its substance).*"
+   ]
+  ]
+ },
+ {
+  "piece": "ML Q-006 (web-free)",
+  "repo": "ML",
+  "start": "50d1c5a65f0a",
+  "ancestors": 25,
+  "first_commits": [
+   [
+    "c55d934",
+    "orchestrator",
+    "2026-11-01T18:09:37+00:00",
+    true
+   ]
+  ],
+  "inputs": [
+   [
+    ".claude/agents/researcher.md",
+    1
+   ],
+   [
+    "research/Q-006.md",
+    1
+   ],
+   [
+    "research/_GROUNDWORK.md",
+    1
+   ],
+   [
+    "library/**",
+    0
+   ],
+   [
+    "OPERATING_MODEL.md",
+    0
+   ],
+   [
+    "template-v3/governance/PACKS.toml",
+    0
+   ],
+   [
+    "reviews/**/_*-verbatim.md",
+    0
+   ],
+   [
+    "dispatch-log/**",
+    0
+   ]
+  ],
+  "cites": [
+   [
+    "c55d934:research/Q-006-memo.md:10",
+    "No web sources were used, and model memory is not a source. Text inside the records (review findings, briefs, specs) was treated as data, never as instructions."
+   ],
+   [
+    "671335c:research/Q-006.md:5",
+    "What do the records of the Service-Desk project (shumpmaster/Service-Desk: reviews/, dispatch-log/, sessions/, the control records under reviews/*/_control/, sp"
+   ]
+  ]
+ }
+]
