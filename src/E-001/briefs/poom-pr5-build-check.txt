@@ -1,0 +1,12 @@
+You are the reviewer (your role file: .claude/agents/reviewer.md),
+doing the build review of POOM PR5 build.
+
+Read your role file and the files its context pack names, as they are in /home/user/wt/e001/poom-pr5-build-check. The work
+to judge: the commit range 450c4dd77c426978db0ad17e27e63ea6c2ef6f05..c8d97f1b0d0ff26f023758369e395df9c3852572 in the copy. Judge it against: specs/S-005-governance-follow-ups.md.
+
+Work only in /home/user/wt/e001/poom-pr5-build-check. Do not read, search or run commands on any path outside it, do not
+use the web, and do not run git commands that reach any other repository. You are one of
+several independent judgements and see no other verdict.
+
+Return, first line: `Verdict: PASS` or `Verdict: FAIL`. Then each blocking finding as one
+numbered line citing file:line.
