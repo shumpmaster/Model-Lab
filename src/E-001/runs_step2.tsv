@@ -9,3 +9,5 @@ run	kind	piece	model	agent_id	copy	tokens	tool_uses	duration_ms	outcome
 8	check	SD M3C plan	fable->claude-fable-5-1	aac871dc35a9c9e1e	sd-m3c-plan-check	194442	37	506527	Verdict: FAIL
 9	check	SD after-glance plan	fable->claude-fable-5-1	a764fd78aa3c29e53	sd-afterglance-plan-check	148837	32	344952	Verdict: PASS
 10	check	SD HD1 build	fable->claude-fable-5-1	ade76f14edd6cd6ec	sd-hd1-build-check	166148	33	251270	no verdict line; ended at transcript line 148 waiting on its own test runs
+11	replay	POOM PR5 build	opus->claude-opus-5-5	a38329abe6de7db22	poom-pr5-build				running
+12	replay	POOM S-014 build	opus->claude-opus-5-5	ad906ab597fdf5cd8	poom-s014-build				running
