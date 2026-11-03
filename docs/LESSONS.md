@@ -272,6 +272,36 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Correction proposed:** end lines take the session's own figures where its status gives them; token checkpoints to the owner include the session's own use and estimated cost; the model's sentence is corrected. Remaining plan allowance is still not readable.
 - **Status:** open; to the model with this project's lessons. Practice changed here from now on.
 
+## 2026-11-02 — Discovery of P-001, session_01QBwHGN4kVVA3rfHx2b4FsF
+
+### LL-38 A session's last records were pushed but never put in a pull request
+- **What happened:** at the third stopping point, the previous session pushed its records (brief 16, the Critic's rounds on M1 and the open-unknowns question, LL-37, the handoff update) and its session lines to two branches, but opened no pull request for either, so neither reached the default branch; the handoff on the default branch still showed the second stopping point. Found at the start of this session and carried into its pull request with merge commits.
+- **Caught by:** the Chief of Staff, comparing the remote branches with the default branch at session start.
+- **Cause:** the session ended right after pushing; nothing checks that every pushed branch has a pull request or a stated reason not to.
+- **Correction proposed:** before a session ends, list its pushed branches and open a pull request for each (or say in the handoff why not); a new session compares remote branches with the default branch before reading the handoff as current.
+- **Status:** fixed here; model change open.
+
+### LL-39 Two sessions gave the same lessons-log number to different entries
+- **What happened:** the pull-request briefing session added "LL-36" (a push after a red check, in Service-Desk) on its own branch, while this project's log already holds a different LL-36 (the real-use odds); LL-37 is used on a third branch. If the briefing branch merges as it stands, two entries share an id.
+- **Caught by:** the Chief of Staff, reading the unmerged branches at session start.
+- **Cause:** sessions number entries from the log as they last saw it, on separate branches, with no check for repeated ids.
+- **Correction proposed:** renumber the briefing session's entry when it lands (as the next free number); for the model, a check that lessons-log ids are unique, and sessions in parallel take numbers only when the entry lands.
+- **Status:** open (the briefing branch is not yet in a pull request).
+
+### LL-40 A conversation-run project's gate case cannot show its milestones from the timeline
+- **What happened:** the Design gate case must copy its milestone list exactly as the check prints it from the timeline; for this project the timeline prints nothing, because its Discovery ran from a conversation with no pipeline records (the cause LL-35 names). The case carries an empty block and a hand-written table of the standard milestones with their records.
+- **Caught by:** the Chief of Staff, running the gate check on the draft case.
+- **Cause:** as LL-35: the timeline reads standard milestones only from the pipeline's dispatch log and status files.
+- **Correction proposed:** with LL-35's model part: give conversation-run work a record the timeline reads.
+- **Status:** open; with LL-35.
+
+### LL-41 Commits made under the default identity again (LL-13, LL-20 recurred)
+- **What happened:** three Chief of Staff commits on the Design gate case and its question were made with `git commit -a` and no identity flags, so they carried the environment's default author; one also swept the session lines into a gate-case commit. Found by the surface guard's diff check before the push and re-authored; nothing wrong was pushed.
+- **Caught by:** the surface guard's diff check, run before pushing (the practice from LL-18).
+- **Cause:** a quick follow-up commit typed without the identity flags; the repository has no identity set for the session, so git falls back to the default.
+- **Correction proposed:** set the session lane's identity once in the repository's config at session start, so a bare commit cannot fall back to the default; never use `commit -a` across lanes. For the model: the template's session start sets it.
+- **Status:** open (recurred); the pre-push guard check worked.
+
 ### LL-42 A push went ahead after a red governance check again, this time in Service-Desk (LL-06, LL-29 recurred)
 - **What happened:** filing the two route questions for the pull-request briefing page (Service-Desk questions/P-002-route.md and P-002-follow-ups.md), the Chief of Staff ran the governance checks and the push in one command; the checks reported FAILED and the push went ahead. The two failures were `record_checks merges`, the local-only false failure on the orchestrator's review-record commit that LL-29 describes, and `v3_checks trace`, which fails on the unchanged branch too because the session's clone holds only recent history and cannot see the desk's older sprint merges. So nothing wrong was pushed, but the push did not wait for the check.
 - **Caught by:** the Chief of Staff, reading the command's output.
