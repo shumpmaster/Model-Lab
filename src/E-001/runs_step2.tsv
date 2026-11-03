@@ -1,0 +1,8 @@
+run	kind	piece	model	agent_id	copy	tokens	tool_uses	duration_ms	outcome
+1	replay	SD M3B plan	opus->claude-opus-5-5	a6cbb56bbe1225ac8	sd-m3b-plan	199653	52	613345	finished; committed 86fdcfa (specs/S-001.md)
+2	check	SD M3B plan	fable->claude-fable-5-1	ab62a6f88f1e8912b	sd-m3b-plan-check	152649	32	334293	Verdict: FAIL
+3	replay	SD HD1 build	opus->claude-opus-5-5	a70b45e766b529403	sd-hd1-build				running
+4	replay	SD Q-001 research	opus->claude-opus-5-5	ac84c57d54199393d	sd-q001-research	67141	5	32949	ended blocked; no memo
+5	replay	SD M3C plan	opus->claude-opus-5-5	a1529681c3c6999ea	sd-m3c-plan				running
+6	replay	SD Q-002 research	opus->claude-opus-5-5	ab887fdf99fa3f869	sd-q002-research	63806	4	30702	ended blocked; no memo
+7	replay	SD after-glance plan	opus->claude-opus-5-5	ae56bbe512ac13ad1	sd-afterglance-plan				running
