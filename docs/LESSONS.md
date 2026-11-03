@@ -316,3 +316,12 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** as LL-35 and LL-40: the model's tools read phase and approval only from pipeline records.
 - **Correction proposed:** a way for a conversation-run project's gate ruling to reach the status record (the Orchestrator writes it from the ruling record, or the checks read the ruling record), put to the owner with LL-35's model part; until then, M1's mark waits.
 - **Status:** open; with LL-35 and LL-40.
+
+## 2026-11-03 — Design of P-001, session_01QBwHGN4kVVA3rfHx2b4FsF
+
+### LL-44 The Definer was briefed to tag its commits with experiment ids, which the scope check rejects
+- **What happened:** the Chief of Staff's brief told the Definer to end its commits with `Spec: E-001` (or E-002). The repository's scope check fails every builder commit whose `Spec:` names no file in specs/, so all eight commits failed it. Found before anything was pushed; the Definer rebuilt its branch under a draft spec, S-001 (the fair test, M2), with the registrations' reviewed text unchanged apart from the frozen line's commit.
+- **Caught by:** the full governance check, run before merging the Definer's branch.
+- **Cause:** the brief was written without checking how the checks read the `Spec:` trailer; the model gives experiments no id of their own that the checks accept, so they sit under a spec.
+- **Correction proposed:** before briefing a builder, check what its commits' trailers must name (as LL-09 asks for the surface map); for the model, say in the experiment playbook that a registration sits under its spec and its commits name that spec.
+- **Status:** fixed here; model change open.
