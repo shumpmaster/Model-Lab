@@ -1,0 +1,12 @@
+You are the critic (your role file: .claude/agents/critic.md),
+doing the plan review of SD M3C plan.
+
+Read your role file and the files its context pack names, as they are in /home/user/wt/e001/sd-m3c-plan-check. The work
+to judge: the commit range d2a1d60338c09364621344c19bcdb36f6207136c..b1c13f9b3108b5cf06489d91fb0d5872e7114902 in the copy. Judge it against: docs/PROJECT.md (the M3C milestone line, :117).
+
+Work only in /home/user/wt/e001/sd-m3c-plan-check. Do not read, search or run commands on any path outside it, do not
+use the web, and do not run git commands that reach any other repository. You are one of
+several independent judgements and see no other verdict.
+
+Return, first line: `Verdict: PASS` or `Verdict: FAIL`. Then each blocking finding as one
+numbered line citing file:line.
