@@ -1,10 +1,11 @@
 run	kind	piece	model	agent_id	copy	tokens	tool_uses	duration_ms	outcome
 1	replay	SD M3B plan	opus->claude-opus-5-5	a6cbb56bbe1225ac8	sd-m3b-plan	199653	52	613345	finished; committed 86fdcfa (specs/S-001.md)
 2	check	SD M3B plan	fable->claude-fable-5-1	ab62a6f88f1e8912b	sd-m3b-plan-check	152649	32	334293	Verdict: FAIL
-3	replay	SD HD1 build	opus->claude-opus-5-5	a70b45e766b529403	sd-hd1-build				running
+3	replay	SD HD1 build	opus->claude-opus-5-5	a70b45e766b529403	sd-hd1-build	302073	80	1822719	finished; committed 8d6435f (15 files under src/ and tests/); reports one clause not met
 4	replay	SD Q-001 research	opus->claude-opus-5-5	ac84c57d54199393d	sd-q001-research	67141	5	32949	ended blocked; no memo
 5	replay	SD M3C plan	opus->claude-opus-5-5	a1529681c3c6999ea	sd-m3c-plan	194530	53	568649	finished; committed b1c13f9 (specs/S-001.md)
 6	replay	SD Q-002 research	opus->claude-opus-5-5	ab887fdf99fa3f869	sd-q002-research	63806	4	30702	ended blocked; no memo
 7	replay	SD after-glance plan	opus->claude-opus-5-5	ae56bbe512ac13ad1	sd-afterglance-plan	263131	51	641801	finished; committed 9bdc956 (specs/S-001.md)
 8	check	SD M3C plan	fable->claude-fable-5-1	aac871dc35a9c9e1e	sd-m3c-plan-check	194442	37	506527	Verdict: FAIL
 9	check	SD after-glance plan	fable->claude-fable-5-1	a764fd78aa3c29e53	sd-afterglance-plan-check	148837	32	344952	Verdict: PASS
+10	check	SD HD1 build	fable->claude-fable-5-1	ade76f14edd6cd6ec	sd-hd1-build-check				running
