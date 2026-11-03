@@ -301,3 +301,11 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** a quick follow-up commit typed without the identity flags; the repository has no identity set for the session, so git falls back to the default.
 - **Correction proposed:** set the session lane's identity once in the repository's config at session start, so a bare commit cannot fall back to the default; never use `commit -a` across lanes. For the model: the template's session start sets it.
 - **Status:** open (recurred); the pre-push guard check worked.
+
+### LL-42 A push went ahead after a red governance check again, this time in Service-Desk (LL-06, LL-29 recurred)
+- **What happened:** filing the two route questions for the pull-request briefing page (Service-Desk questions/P-002-route.md and P-002-follow-ups.md), the Chief of Staff ran the governance checks and the push in one command; the checks reported FAILED and the push went ahead. The two failures were `record_checks merges`, the local-only false failure on the orchestrator's review-record commit that LL-29 describes, and `v3_checks trace`, which fails on the unchanged branch too because the session's clone holds only recent history and cannot see the desk's older sprint merges. So nothing wrong was pushed, but the push did not wait for the check.
+- **Caught by:** the Chief of Staff, reading the command's output.
+- **Cause:** the working rule from LL-29 (push only in a separate step after reading a passing result) lives in Model-Lab's handoffs and lessons, which a Chief of Staff session working in Service-Desk does not read at start.
+- **Correction proposed:** in this session, push only as a separate step after reading the checks. For the model: carry the push rule into the template's AGENTS.md working rules, and make the local check run the way CI does (LL-29), so a red local run means something.
+- **Status:** open (recurred).
+- **Number:** filed on its own branch as LL-36 while this log already held a different LL-36; renumbered on landing to the next number free on every branch (LL-38 to LL-41 are taken by the open Design-gate pull request), as LL-39 there proposes. The Service-Desk handoff of 2026-11-02 still calls it LL-36.
