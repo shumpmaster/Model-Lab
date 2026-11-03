@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-The Critic's plan review of the two Design check registrations, E-001 (replay) and E-002 (judge consistency), reviewed together, on a different model from their writer (brief: docs/briefs/23-critic.md), verbatim. The same record is filed as reviews/E-001/critic.md. Recorded by the orchestrator. Session session_01QBwHGN4kVVA3rfHx2b4FsF, 2026-11-03.
+The Critic's plan review of the two Design check registrations, E-001 (replay) and E-002 (judge consistency), reviewed together, on a different model from their writer (brief: docs/briefs/23-critic.md), verbatim: round 1 (both FAIL), round 2 (E-001 PASS, E-002 FAIL), round 3 (both PASS). The same record is filed as reviews/E-001/critic.md. Recorded by the orchestrator. Session session_01QBwHGN4kVVA3rfHx2b4FsF, 2026-11-03.
 
 ## Round 1
 Verdict: FAIL
@@ -110,6 +110,43 @@ Views on the earlier four points, now closed:
 - (2) The rebuilt-brief grade is handled correctly.
 - (3) Research is predicted to fall to the fallback in advance. The web-free stratum is separate and counted directly.
 - (4) The returned-piece limit is stated per kind. First-time-pass pieces are audited.
+
+Files reviewed (I wrote none):
+/home/user/wt/ml-definer/experiments/E-001.md
+/home/user/wt/ml-definer/experiments/E-002.md
+
+## Round 3
+Verdict: PASS
+E-001: PASS
+E-002: PASS
+
+Round 3. I re-read both files in full. Finding 1 from round 2 is fixed, non-blocking points 2–5 are handled, and nothing the changes touched broke what already passed.
+
+Round-2 points:
+1. E-002 Set C (was blocking) is fixed.
+   - The rule is now single: the first plan and the first built-work piece in E-001's first-time-pass list whose round-1 submission and check pack can be recovered.
+   - The pieces are named: for plans, SD HD1's plan then POOM S-027; for built work, the SD unit then the POOM piece, as E-001 defines them.
+   - Skipped pieces are listed with the reason. If a kind has none recoverable, Set C shrinks and the result says so.
+   - The Builder has no choice left.
+   - The run count is unchanged: 8×2 + 2×2 = 20.
+2. F4 system paths (NB) are fixed.
+   - Allowed: read-only /usr, /bin, /lib and /etc, and files the run creates in /tmp. Everything else outside the copy fails, including the rest of /home/user and /root with its ~/.claude.
+   - Borderline calls go to the Reviewer, who must cite the transcript line.
+3. Environment claims (NB) are fixed.
+   - The "tested on Model-Lab" sentence is replaced by a check on every copy, recorded in the result: `rev-list --count` equal in the copy and the full clone, and a later commit's `cat-file -t` fails. A copy that fails is a set-up fault.
+   - A missing transcript fails F4 by rule, and the file says this includes helpers started by a Builder that is itself a helper.
+4. Committing the replay's output (NB) is fixed.
+   - The Builder commits it on top of the start commit, or uses the replay's own last commit, and makes a second copy from that commit.
+   - E-002 step 2.4 is referenced consistently.
+   - PROJECT §4 is dropped from E-001's sources.
+5. The built-work first-pass piece (NB) is fixed. The Builder must cite the review file and line showing the chosen piece's round-1 PASS, and that every earlier piece in the list did not pass in round 1.
+
+Findings (all non-blocking):
+1. (E-001) The copy check says `cat-file -t <the full clone's head>` must fail. If a piece's start commit is the full clone's head, or the head is its ancestor, the check fails for no fault. Say "a commit later than the start commit that exists in the full clone", and skip the check when none exists.
+2. (E-001 and E-002) E-002 says the replay output is a commit on top of the start commit. E-001 also allows the replay's own last commit. The copy rule, "the commit judged and its ancestors", covers both. Harmless, but the Reviewer should read them together.
+3. (E-001) An F4 failure caused by a helper wandering outside the copy is not a set-up fault, so it gets no rerun and fails the kind. This is strict, but it is stated and decided in advance, which is what the playbook asks.
+
+The checks that already passed in round 2 still hold: the start-commit rule, both templates in the files, faithful and template replay reported separately, and "usable in part". The rerun cost of 2 within the 4-run reserve and the hard caps of 20 each, 40 together, also hold. So do the pass gate, the F4 transcript source, the working-copy construction, who runs each step, and the separate research and first-time-pass strata. The binomial figures (24 and 1 in 100) are correct. Both files can be frozen once the `frozen:` line is set before any run.
 
 Files reviewed (I wrote none):
 /home/user/wt/ml-definer/experiments/E-001.md
