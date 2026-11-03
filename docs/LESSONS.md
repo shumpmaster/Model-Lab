@@ -117,8 +117,8 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **What happened:** Model-Lab holds both ideas, but the tools read a single project document per repository, so the second idea cannot start here as things stand.
 - **Caught by:** the Chief of Staff, at setup.
 - **Cause:** the model never needed two projects in one repository before.
-- **Correction proposed:** options to the owner before the second idea's Discovery starts.
-- **Status:** open.
+- **Correction proposed:** options to the owner before the second idea's Discovery starts. Options were brought in Service-Desk (questions/P-002-plan-place.md, PR #268), where the desk's new work hit the same limit; on 2026-11-03 the owner chose B, "B: own plan, tools first (Recommended)": the model's tools change so a repository holds one plan document per project item, under Personal-Org-Operating-Model's own rules (Service-Desk decisions/questions/P-002-plan-place.md). The same change serves the second idea here.
+- **Status:** open (the tools change is not yet specified or built).
 
 ### LL-17 The pace outran the owner
 - **What happened:** results and asks arrived faster than the owner could follow; the owner asked for a single status page.
