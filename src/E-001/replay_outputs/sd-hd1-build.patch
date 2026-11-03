@@ -1,0 +1,1170 @@
+From 8d6435f918d85aeb7081483bf4f81ecd874d96e6 Mon Sep 17 00:00:00 2001
+From: builder <builder@agents.invalid>
+Date: Tue, 3 Nov 2026 12:21:49 +0000
+Subject: [PATCH] HD1: headers sized as headers (AC98; AC80, AC81, AC85, AC91
+ (f), AC92 (d), AC94 noted)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Screen titles 600 28 px and sheet titles 600 20 px at the tokens' line heights; section and
+sheet-block heads 600 15 px --ink; lane heads, a group's name, run heads, the Timeline's goal
+labels, Plan's card label and "More detail"'s sub-heads 600 13 px, each keeping its colour; an
+opened phase's two group heads 600 12 px; the empty section's line 500 13 px (--t-row) --ink2.
+"Since you last looked · <time>" and "Milestones by phase · <count>" split at their first " · "
+in sandbox.js, the small part in --t-small --ink2 and a clock time in Plex Mono 400 12 px. Every
+token's value unchanged; every new rule in mockup v2's block.
+
+Tests: AC98's own (tests/desk/ac98-headers.test.mjs); the locked cases HD1 changes rewritten,
+each marked "Rewritten in HD1"; the stage-8 guard's pins whose after-value HD1 changes rewritten
+to HD1's look, and HD1_ONCE for the rest, met exactly.
+
+Agent-Session: session_01QBwHGMu36mvZdxN2ssBspJ
+Spec: S-001
+---
+ src/public/sandbox.css                   |  61 ++--
+ src/public/sandbox.js                    |  18 +-
+ tests/desk/ac80-board.test.mjs           |   7 +-
+ tests/desk/ac81-bar-type.test.mjs        |  13 +-
+ tests/desk/ac82-home.test.mjs            |   5 +-
+ tests/desk/ac83-page.test.mjs            |   4 +-
+ tests/desk/ac85-sheets.test.mjs          |   3 +-
+ tests/desk/ac88-dark.test.mjs            | 168 ++++++++--
+ tests/desk/ac91-g8d.test.mjs             |   4 +-
+ tests/desk/ac91-glance-gates.test.mjs    |   3 +-
+ tests/desk/ac91-glance-home.test.mjs     |   3 +-
+ tests/desk/ac91-glance-waiting.test.mjs  |   9 +-
+ tests/desk/ac92-glance-standard.test.mjs |  16 +-
+ tests/desk/ac94-qw1-questions.test.mjs   |   8 +-
+ tests/desk/ac98-headers.test.mjs         | 392 +++++++++++++++++++++++
+ 15 files changed, 647 insertions(+), 67 deletions(-)
+ create mode 100644 tests/desk/ac98-headers.test.mjs
+
+diff --git a/src/public/sandbox.css b/src/public/sandbox.css
+index 3f7e72a..89bf021 100644
+--- a/src/public/sandbox.css
++++ b/src/public/sandbox.css
+@@ -529,8 +529,17 @@ html.sb.v2-page {
+   --track: 0;
+ }
+ /* The sheets no frame redraws (AC88: the Team's "Working now" and "Summary"): a sheet's title takes --t-sheet, as
+-   mockup v2's sheets have theirs (AC81, "--t-sheet ... a sheet's title"), and the sheet mockup v2's shadow. */
+-html.sb.v2-page .sb-sheet-t { font: var(--t-sheet); }
++   mockup v2's sheets have theirs (AC81, "--t-sheet ... a sheet's title"), and the sheet mockup v2's shadow. From HD1
++   (AC98, "Bigger titles too", B), the title 600 20 px, as `.v2-stitle`. */
++html.sb.v2-page .sb-sheet-t { font: 600 20px/1.3 var(--font); }
++/* From HD1 (AC98; the owner's answers "Bigger titles too", B, and "All dark", A): the screens and sheets no frame redraws
++   take the bigger headers on mockup v2's ground: Team's, a member's and the Details views' title 600 28 px, their sheets'
++   title 600 20 px (above), and their section heads, "Who has the ball", "Running log", "Activity", … and a Team sheet's
++   "What happened", "Why" and "For you", 600 15 px --ink. The tokens keep their values (AC81), so `--t-screen` and
++   `--t-section` still name `--t-title` and `--t-label` for everything else that takes them; the eyebrow over Team's
++   title (`.sb-eyebrow`) stays small. */
++html.sb.v2-page .sb-hdr h1 { font: 600 28px/1.2 var(--font); }
++html.sb.v2-page .sb-h2, html.sb.v2-page .sb-sec h3 { font: 600 15px/1.3 var(--font); color: var(--ink); }
+ html.sb.v2-page .sb-sheet { box-shadow: var(--shadow); }
+ html.sb body { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); /* AC81: every screen keeps room for the bar at its foot, with the safe areas */ }
+ /* Stage 8 (the Design reviewer's round 1, part B item 26; frames H1, 1, 5 and 11): every screen starts 14 px down, as
+@@ -571,7 +580,7 @@ html.sb.v2-page main#view > .v2-timeline > .v2-tlhead { margin-top: -14px; }
+    three lanes at every width, 1.18 : 1 : 1, 6 px apart. */
+ .v2-board { display: grid; gap: 12px; padding-top: 4px; }
+ .v2-top { display: flex; align-items: center; min-height: 44px; }
+-.v2-title { font: var(--t-title); letter-spacing: -.01em; overflow-wrap: anywhere; }
++.v2-title { font: 600 28px/1.2 var(--font); letter-spacing: -.01em; overflow-wrap: anywhere; }
+ .v2-sub { font: var(--t-small); color: var(--ink2); margin-top: -6px; }
+ .v2-quiet { display: flex; flex-wrap: wrap; gap: 0 10px; align-items: center; }
+ .v2-quiet.under { display: grid; gap: 4px; }
+@@ -596,7 +605,7 @@ html.sb.v2-page main#view > .v2-timeline > .v2-tlhead { margin-top: -14px; }
+    side by side at every width, 1 : 1, 6 px apart; Kicked back is a strip above them (below), never a column. */
+ .v2-lanes { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6px; align-items: start; }
+ .v2-lane { min-width: 0; display: grid; gap: 6px; align-content: start; }
+-.v2-lh { font: 600 11px/1.3 var(--font); color: var(--ink); padding: 4px 0 6px; border-bottom: 1px solid var(--line); height: 44px; display: flex; flex-direction: column; justify-content: flex-end; overflow-wrap: anywhere; }
++.v2-lh { font: 600 13px/1.3 var(--font); color: var(--ink); padding: 4px 0 6px; border-bottom: 1px solid var(--line); height: 44px; display: flex; flex-direction: column; justify-content: flex-end; overflow-wrap: anywhere; }
+ .v2-lc { font: var(--t-mono); color: var(--ink2); }
+ /* AC91 (f), item 4c (mock pD): the Done lane's ground is --bg2, 12 px round, the full height of the lanes (as tall as
+    the taller), 8 px inside its sides and 10 px at its foot, its head 6 px from its top; its cards keep --card. A lane's
+@@ -607,10 +616,12 @@ html.sb.v2-page main#view > .v2-timeline > .v2-tlhead { margin-top: -14px; }
+    --t-mono, both --ink2, with no fold mark, no control and no drop target; words that are not a count ("not read yet",
+    "can't read", " when last read", `.v2-kw`) keep the line's --t-label --ink2, as "Kicked back" does. With any, its head, "Kicked back" in 600 12 px
+    ink with its count in --t-mono, over a hairline, then its cards in one row, each 200 px wide, the row scrolling
+-   sideways inside the strip, snapping to a card, so the page itself never scrolls sideways. */
+-.v2-kq { font: var(--t-label); color: var(--ink2); padding: 4px 0; overflow-wrap: anywhere; }
++   sideways inside the strip, snapping to a card, so the page itself never scrolls sideways. From HD1 (AC98): the line
++   ("Kicked back · none", "Questions for you · none") 500 13 px (--t-row), still --ink2, its words with it; the head with
++   cards 600 15 px --ink. */
++.v2-kq { font: var(--t-row); color: var(--ink2); padding: 4px 0; overflow-wrap: anywhere; }
+ .v2-kn { font: var(--t-mono); color: var(--ink2); }
+-.v2-kh { display: flex; align-items: center; gap: 6px; min-height: 28px; padding-bottom: 4px; border-bottom: 1px solid var(--line); font: 600 12px/1.3 var(--font); color: var(--ink); }
++.v2-kh { display: flex; align-items: center; gap: 6px; min-height: 28px; padding-bottom: 4px; border-bottom: 1px solid var(--line); font: 600 15px/1.3 var(--font); color: var(--ink); }
+ .v2-krow { display: flex; gap: 8px; max-width: 100%; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; padding: 2px 0 6px; }
+ .v2-kslot { flex: 0 0 200px; min-width: 0; display: grid; scroll-snap-align: start; }
+ /* While one of its cards is carried into Done, the row is clipped sideways only, so the card shows below it. */
+@@ -655,7 +666,7 @@ html.sb.v2-page main#view > .v2-timeline > .v2-tlhead { margin-top: -14px; }
+ .v2-new { font: var(--t-label); color: var(--ink); flex: none; }
+ .v2-new.none { display: none; }
+ .v2-grp { display: flex; align-items: center; gap: 4px; min-height: 26px; font: var(--t-label); color: var(--ink2); width: 100%; flex-wrap: wrap; padding-top: 2px; }
+-.v2-gn { color: var(--ink); overflow-wrap: anywhere; min-width: 0; }
++.v2-gn { font: 600 13px/1.3 var(--font); color: var(--ink); overflow-wrap: anywhere; min-width: 0; }
+ .v2-gc { font: var(--t-mono); }
+ .v2-list { display: grid; gap: 6px; }
+ .v2-card { position: relative; display: grid; gap: 3px; padding: 6px 7px 7px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); min-width: 0;
+@@ -703,9 +714,9 @@ html.sb.v2-page main#view > .v2-timeline > .v2-tlhead { margin-top: -14px; }
+ .v2-grab { justify-self: center; width: 36px; height: 5px; border-radius: 3px; background: var(--line2); }
+ .v2-shead { display: grid; grid-template-columns: minmax(0, 1fr) 44px; gap: 8px; align-items: start; margin-top: -4px; }
+ .v2-x44 { width: 44px; height: 44px; border-radius: 22px; display: grid; place-items: center; background: var(--chip); color: var(--ink); }
+-.v2-stitle { font: var(--t-sheet); overflow-wrap: anywhere; }
++.v2-stitle { font: 600 20px/1.3 var(--font); overflow-wrap: anywhere; }
+ .v2-blk { display: grid; gap: 4px; min-width: 0; }
+-.v2-bh { font: var(--t-label); color: var(--ink2); }
++.v2-bh { font: 600 15px/1.3 var(--font); color: var(--ink); }
+ .v2-quote { font: var(--t-body); color: var(--ink); border-left: 2px solid var(--line2); padding: 2px 0 2px 10px; overflow-wrap: anywhere; }
+ .v2-mark { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 8px; align-items: start; font: var(--t-small); color: var(--ink); }
+ .v2-tap { font: var(--t-small); color: var(--ink); background: var(--bg2); border-radius: 8px; padding: 6px 10px; }
+@@ -809,8 +820,12 @@ html.sb.v2-page main#view > .v2-timeline > .v2-tlhead { margin-top: -14px; }
+ .v2-bcant > .v2-k { margin-top: 1px; }
+ .v2-go { font: var(--t-label); color: var(--ink2); padding-top: 3px; }
+ .v2-brief:focus-visible { outline-offset: 2px; }
+-.v2-sh { display: flex; align-items: center; justify-content: space-between; gap: 8px; font: var(--t-label); color: var(--ink2); padding-top: 10px; min-height: 28px; }
+-.v2-shw { font: var(--t-label); color: var(--ink2); overflow-wrap: anywhere; }
++.v2-sh { display: flex; align-items: center; justify-content: space-between; gap: 8px; font: 600 15px/1.3 var(--font); color: var(--ink); padding-top: 10px; min-height: 28px; }
++.v2-shw { font: 600 15px/1.3 var(--font); color: var(--ink); overflow-wrap: anywhere; }
++/* HD1 (AC98, "Two headings on one line"): in "Since you last looked · <time>" and "Milestones by phase · <count>", " · " and
++   what follows in --t-small --ink2, the time in Plex Mono at 12 px (P-001-redesign-type.md, A), so each is one line at 360 px. */
++.v2-shs { font: var(--t-small); color: var(--ink2); }
++.v2-shm { font: 400 12px/1.4 var(--mono); }
+ .v2-seen { display: inline-flex; align-items: center; min-height: 28px; padding: 0 10px; border-radius: 14px; background: var(--chip); font: var(--t-label); color: var(--ink); flex: none; }
+ /* The lines share their columns (time, icon, words, chevron) where the browser has subgrid; else each keeps 38 px for its time. */
+ .v2-since { display: grid; grid-template-columns: minmax(38px, max-content) 14px minmax(0, 1fr) 10px; column-gap: 8px; }
+@@ -838,7 +853,7 @@ html.sb.v2-page main#view > .v2-timeline > .v2-tlhead { margin-top: -14px; }
+ .v2-hgroup { display: grid; gap: 8px; }
+ .v2-hgh { font: var(--t-label); }
+ .v2-hg { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; width: 100%; min-height: 28px; padding-top: 10px; font: var(--t-label); color: var(--ink2); }
+-.v2-hgt { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
++.v2-hgt { font: 600 15px/1.3 var(--font); color: var(--ink); flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+ .v2-hgy { display: inline-flex; align-items: center; gap: 4px; color: var(--ink); }
+ .v2-hgb { color: var(--bad); }
+ .v2-hgn { font: var(--t-mono); color: var(--ink2); }
+@@ -967,11 +982,12 @@ html.sb.v2-page main#view > .v2-timeline > .v2-tlhead { margin-top: -14px; }
+ .v2-pffrom .code { font: var(--t-mono); color: var(--ink2); }
+ /* "More detail", folded last at Home's foot (P-001-settings-place.md, A): the notifications switch and the usage bar. */
+ .v2-mdetail { border-top: 1px solid var(--line); padding-top: 4px; }
+-.v2-mds { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; font: var(--t-label); color: var(--ink2); cursor: pointer; list-style: none; }
++.v2-mds { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; font: 600 15px/1.3 var(--font); color: var(--ink); cursor: pointer; list-style: none; }
++.v2-mds > .v2-k { color: var(--ink2); }
+ .v2-mds::-webkit-details-marker { display: none; }
+ .v2-mdetail[open] > .v2-mds > .v2-k { rotate: 90deg; }
+ .v2-mdetail > section { display: grid; gap: 6px; padding: 8px 0; border-top: 1px solid var(--line); }
+-html.sb .v2-home .sb-h3 { font: var(--t-row); color: var(--ink); text-transform: none; letter-spacing: 0; margin: 0; }
++html.sb .v2-home .sb-h3 { font: 600 13px/1.3 var(--font); color: var(--ink); text-transform: none; letter-spacing: 0; margin: 0; }
+ .v2-home .sb-notify { display: grid; gap: 6px; }
+ .v2-home .sb-notify .small, .v2-home .sb-actions-usage .small, .v2-home .sb-v5 { font: var(--t-small); color: var(--ink2); }
+ .v2-home .sb-notify .sb-warn { color: var(--bad); }
+@@ -1087,17 +1103,17 @@ html.sb .v2-home .sb-h3 { font: var(--t-row); color: var(--ink); text-transform:
+ .v2-sdl { display: block; }
+ .v2-stdl { display: grid; padding: 0 0 10px 20px; position: relative; }
+ .v2-stdl::before { content: ""; position: absolute; left: 4px; top: 10px; bottom: 14px; width: 1px; background: var(--line2); }
+-.v2-runh { font: var(--t-label); font-weight: 600; color: var(--ink); padding: 8px 0 2px; }
++.v2-runh { font: 600 13px/1.3 var(--font); color: var(--ink); padding: 8px 0 2px; }
+ /* AC92 (d), from G9's round 2 (the Design reviewer's call, B1): a run's head outranks its two group heads, in --ink at 600,
+-   its size 11 px; each run's head after the first in an opened phase set apart by the standard group head's own rule and
++   its size 11 px (from HD1, AC98: 600 13 px, one step over its group heads' 600 12 px); each run's head after the first in an opened phase set apart by the standard group head's own rule and
+    gap, a 1 px --line rule with 8 px over it; the first, the latest run's, has none. */
+ .v2-runh ~ .v2-runh { margin-top: 8px; border-top: 1px solid var(--line); }
+ /* AC92 (d), from G6 (P-001-glance2-standard.md, A; round 2's mock, changes2.js q5): an opened phase's two heads on every
+-   run, "Your milestones · <n>" and "Standard checklist · <n> · <h> tracked", in --t-label --ink; the standard group set
++   run, "Your milestones · <n>" and "Standard checklist · <n> · <h> tracked", in --t-label --ink (from HD1, AC98: 600 12 px); the standard group set
+    apart by a 1 px --line rule above its head, 8 px over it; the owner's own rows' names in --t-row (500 13 px), a standard
+    row's in 400 13 px, an earlier run's rows smaller (note 2) with the same weights; the untracked ones folded into one row,
+    the dashed ring, its words in --t-small --ink2 and the chevron. */
+-.v2-subh { font: var(--t-label); color: var(--ink); padding: 10px 0 0; }
++.v2-subh { font: 600 12px/1.3 var(--font); color: var(--ink); padding: 10px 0 0; }
+ .v2-subh.std { margin-top: 8px; border-top: 1px solid var(--line); }
+ .v2-sml { display: grid; }
+ .v2-oldrun { display: grid; }
+@@ -1124,7 +1140,7 @@ html.sb .v2-home .sb-h3 { font: var(--t-row); color: var(--ink); text-transform:
+ .v2-pdbody { display: grid; gap: 6px; padding: 0 0 8px 26px; }
+ .v2-links { display: grid; gap: 0; }
+ .v2-pdetail > section.sb-notify-line, .v2-pdetail > .sb-actions-usage { display: grid; gap: 6px; padding: 8px 0 8px 26px; border-top: 1px solid var(--line); }
+-html.sb .v2-proj .sb-h3 { font: var(--t-row); color: var(--ink); text-transform: none; letter-spacing: 0; margin: 0; }
++html.sb .v2-proj .sb-h3 { font: 600 13px/1.3 var(--font); color: var(--ink); text-transform: none; letter-spacing: 0; margin: 0; }
+ .v2-proj .sb-notify { display: grid; gap: 6px; }
+ .v2-proj .sb-notify .small, .v2-proj .sb-actions-usage .small, .v2-proj .sb-actions-usage, .v2-proj .sb-notify p { font: var(--t-small); color: var(--ink2); }
+ .v2-proj .sb-notify .sb-warn { color: var(--bad); }
+@@ -1161,7 +1177,7 @@ html.sb .v2-proj .sb-h3 { font: var(--t-row); color: var(--ink); text-transform:
+ .v2-thead .v2-sega { min-width: 0; }
+ .v2-tlnone { padding: 8px 0; }
+ .v2-goal { display: grid; gap: 4px; padding: 10px 12px; border-radius: 10px; background: var(--bg2); }
+-.v2-goal .v2-label { font: var(--t-label); color: var(--ink2); }
++.v2-goal .v2-label { font: 600 13px/1.3 var(--font); color: var(--ink2); }
+ .v2-gq { font: var(--t-body); overflow-wrap: break-word; }
+ .v2-feed { position: relative; display: grid; }
+ .v2-tblk { position: relative; display: grid; padding-bottom: 6px; }
+@@ -1323,6 +1339,7 @@ html.sb .v2-proj .sb-h3 { font: var(--t-row); color: var(--ink); text-transform:
+    the place's words say ", moved" once. */
+ .v2-plmoved { font: var(--t-small); color: var(--ink2); }
+ .v2-plcard { display: grid; gap: 2px; padding: 12px; border-radius: 12px; background: var(--bg2); }
++.v2-plcard > .v2-label { font: 600 13px/1.3 var(--font); }
+ .v2-plbig { font: var(--t-sheet); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+ /* The bar (AC24): what changed and "Record plan", held above the tab bar while the list scrolls under it. */
+ .v2-plbar { position: sticky; z-index: 3; bottom: calc(82px + env(safe-area-inset-bottom, 0px)); display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; justify-content: space-between;
+@@ -1417,7 +1434,7 @@ html.sb .v2-proj .sb-h3 { font: var(--t-row); color: var(--ink); text-transform:
+ .v2-vmk > .v2-s { width: 14px; height: 14px; }
+ /* The sheet: a block per target, a hairline above it. */
+ .v2-tgt, .v2-vstop { display: grid; gap: 6px; min-width: 0; padding-top: 12px; border-top: 1px solid var(--line); }
+-.v2-vth { margin: 0; font: var(--t-row); color: var(--ink); overflow-wrap: anywhere; }
++.v2-vth { margin: 0; font: 600 15px/1.3 var(--font); color: var(--ink); overflow-wrap: anywhere; }
+ .v2-vfig { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; margin: 0; }
+ .v2-vbig { font: var(--t-title); color: var(--ink); overflow-wrap: anywhere; }
+ .v2-vfw { font: var(--t-small); color: var(--ink2); }
+diff --git a/src/public/sandbox.js b/src/public/sandbox.js
+index bb4c3e5..763e1ed 100644
+--- a/src/public/sandbox.js
++++ b/src/public/sandbox.js
+@@ -847,8 +847,22 @@ function ideaLines(seen, since) {
+   return ideaEvents(r.kept, since);
+ }
+ 
++/**
++ * HD1 (AC98, "Two headings on one line"; the owner's answer "Keep that part small", A, P-001-headers-wrap.md): a head's
++ * words before their first " · " at the head's own size, and " · " with what follows in its own span, small and grey
++ * (`.v2-shs`), a clock time with its day in Plex Mono (`.v2-shm`), so the heading keeps to one line on a phone. The words
++ * are unchanged and read whole: only the spans are new.
++ */
++function splitHead(words, mono) {
++  const i = words.indexOf(' · ');
++  if (i < 0) return words;
++  const rest = words.slice(i + 3);
++  return [words.slice(0, i), h('span', { class: 'v2-shs' }, ' · ', mono ? h('span', { class: 'v2-shm' }, rest) : rest)];
++}
++
+ function sinceNode(sv, seen, nowMs, unread = null, missing = []) {
+-  const head = h('div', { class: 'v2-sh', key: 'since-h' }, h('h2', { class: 'v2-shw' }, sv.heading),
++  // HD1: the time after " · " in Plex Mono ("yesterday, 04:00"); "in the last 7 days", words and not a time, in Plex Sans.
++  const head = h('div', { class: 'v2-sh', key: 'since-h' }, h('h2', { class: 'v2-shw' }, splitHead(sv.heading, Boolean(sv.time) && sv.time !== HOME_WORDS.lastWeek)),
+     sv.off ? null : h('button', { type: 'button', class: 'v2-seen', key: 'mark-seen', onclick: () => {
+       seen.markSeen();
+       homeState.accepted = null;
+@@ -1464,7 +1478,7 @@ function pageMilestones(p) {
+ function milestonesNode(p, mv) {
+   const name = p.project.name;
+   // AC92 (c), from G5: the head sums each phase's "<R> of <T> reached"; "↑ start at the foot" stays.
+-  const head = h('div', { class: 'v2-sh', key: 'ms-h' }, h('h2', { class: 'v2-shw' }, PAGE_WORDS.milestonesHead(mv.tracked ? mv.sum : null)), h('span', { class: 'v2-mono' }, PAGE_WORDS.startFoot));
++  const head = h('div', { class: 'v2-sh', key: 'ms-h' }, h('h2', { class: 'v2-shw' }, splitHead(PAGE_WORDS.milestonesHead(mv.tracked ? mv.sum : null), false)), h('span', { class: 'v2-mono' }, PAGE_WORDS.startFoot));
+   if (!mv.tracked) return [head, h('p', { class: 'v2-small', key: 'ms-none' }, mv.words)];
+   return [head, h('ol', { class: 'v2-std', key: 'ms-lines' }, mv.lines.map((l) => {
+     const fk = `phase:${l.phase}`;
+diff --git a/tests/desk/ac80-board.test.mjs b/tests/desk/ac80-board.test.mjs
+index 7b3a547..32395eb 100644
+--- a/tests/desk/ac80-board.test.mjs
++++ b/tests/desk/ac80-board.test.mjs
+@@ -805,12 +805,15 @@ test('AC80, rewritten in G2 (AC91 (f)): the CSS — two lanes side by side at ev
+   assert.match(rule('.v2-step'), /min-height: 28px;/);
+   assert.match(rule('.v2-gatebtns .v2-step'), /min-height: 26px;/);
+   assert.match(rule('.v2-undo'), /min-height: 28px;/);
+-  assert.match(rule('.v2-lh'), /font: 600 11px\/[\d.]+ var\(--font\);/, 'lane headings 600 11 px');
++  // Rewritten in HD1 (AC98, AC80 noted; forced): lane headings 600 11 → 600 13 px.
++  assert.match(rule('.v2-lh'), /font: 600 13px\/[\d.]+ var\(--font\);/, 'lane headings 600 13 px');
+   assert.match(rule('.v2-lc'), /font: var\(--t-mono\);/, 'their counts in Plex Mono 11 px');
+   assert.match(rule('.v2-t'), /font: 500 12px\/[\d.]+ var\(--font\);/, 'a card\'s title 500 12 px');
+   assert.match(rule('.v2-m'), /font: var\(--t-mono\);/, 'its meta in Plex Mono 11 px');
+   assert.match(rule('.v2-dt'), /font: 400 12px\/[\d.]+ var\(--font\);/, 'a Done row\'s title 400 12 px');
+-  assert.match(rule('.v2-grp'), /font: var\(--t-label\);/, 'a group\'s name 500 11 px');
++  // Rewritten in HD1 (AC98; the header plan's review, round 1, the Reviewer's N1; forced): a group's name is `.v2-gn`, 600 13 px;
++  // the group's button (`.v2-grp`) keeps --t-label for its count's line.
++  assert.match(rule('.v2-gn'), /font: 600 13px\/1\.3 var\(--font\);/, 'a group\'s name 600 13 px');
+   // Every control on the board: a tap target at least 24 px tall.
+   for (const sel of ['.v2-grp', '.v2-ql', '.v2-qs', '.v2-more', '.v2-x', '.v2-lnk', '.v2-ft', '.v2-undo', '.v2-fold']) {
+     const h = /min-height: (\d+)px/.exec(rule(sel)) || /(?:^|;)\s*height: (\d+)px/.exec(rule(sel)) || /(?:^|\s)height: (\d+)px/.exec(rule(sel));
+diff --git a/tests/desk/ac81-bar-type.test.mjs b/tests/desk/ac81-bar-type.test.mjs
+index c8f91e0..163c72a 100644
+--- a/tests/desk/ac81-bar-type.test.mjs
++++ b/tests/desk/ac81-bar-type.test.mjs
+@@ -130,10 +130,14 @@ test('AC81 (from stage 3): `p/<name>` opens the page\'s Overview, a tile\'s tap
+ // ---------------------------------------------------------------------------
+ // Type, colour and the fonts, from the stylesheet and the files
+ 
+-/** The pairs AC81 allows beside the tokens, where desk-v2.html's own CSS sets them (Plex Sans; then Plex Mono). */
+-const PAIRS = { font: ['600 11', '400 11', '500 12', '400 12', '600 12', '600 13', '500 15', '600 15'], mono: ['500 11'] };
++/**
++ * The pairs AC81 allows beside the tokens, where desk-v2.html's own CSS sets them (Plex Sans; then Plex Mono). Rewritten in HD1
++ * (AC98, AC81 as changed; forced): the owner's two title sizes, 600 28 and 600 20 ("Bigger titles too", B), and in Plex Mono
++ * 400 12, for the time in "Since you last looked · <time>" (draft 2); no other pair, size or weight.
++ */
++const PAIRS = { font: ['600 11', '400 11', '500 12', '400 12', '600 12', '600 13', '500 15', '600 15', '600 20', '600 28'], mono: ['500 11', '400 12'] };
+ 
+-test('AC81: every font on the new screens is a token or one of the pairs desk-v2.html sets (frame 1\'s 400 11 px among them); the only sizes 24, 18, 15, 13, 12 and 11 px with 16 px for text boxes, the only weights 400, 500 and 600', () => {
++test('AC81: every font on the new screens is a token or one of the pairs desk-v2.html sets (frame 1\'s 400 11 px among them); the only sizes 28, 24, 20, 18, 15, 13, 12 and 11 px with 16 px for text boxes (28 and 20 from HD1), the only weights 400, 500 and 600', () => {
+   const decls = [...V2.matchAll(/(?:^|[{;\s])(font|font-size|font-weight)\s*:\s*([^;{}]+?)\s*(?=;|})/g)].map((m) => [m[1], m[2].trim()]);
+   assert.ok(decls.length > 40, `${decls.length} declarations`);
+   for (const [prop, v] of decls) {
+@@ -333,7 +337,8 @@ test('AC81 (stage 1a\'s build review, round 1, F1): no rule that reaches mockup
+   assert.deepEqual(offenders, [], 'element rules that would out-rank a single v2 class');
+   // And the classes themselves set what the frames draw (AC80; AC81 as settled after round 1).
+   const rule = (sel) => (rules.find((r) => r.sel === sel) || { body: '' }).body;
+-  assert.match(rule('.v2-grp'), /font: var\(--t-label\)/, 'a group\'s name 500 11 px');
++  // Rewritten in HD1 (AC98; the header plan's review, round 1, the Reviewer's N1; forced): a group's name is `.v2-gn`, 600 13 px.
++  assert.match(rule('.v2-gn'), /font: 600 13px\/1\.3 var\(--font\)/, 'a group\'s name 600 13 px');
+   assert.match(rule('.v2-ql'), /font: var\(--t-small\)/, 'a quiet line 400 12 px');
+   assert.match(rule('.v2-undo'), /font: var\(--t-label\)/, '"Undo" 500 11 px');
+   assert.match(rule('.v2-more'), /font: var\(--t-label\)/, '"<n> more" 500 11 px');
+diff --git a/tests/desk/ac82-home.test.mjs b/tests/desk/ac82-home.test.mjs
+index c2fa634..fc81cfb 100644
+--- a/tests/desk/ac82-home.test.mjs
++++ b/tests/desk/ac82-home.test.mjs
+@@ -488,14 +488,15 @@ test('AC82: on Home the root is not laid out as a grid, so Home\'s column fills
+   assert.ok(!reachesRoot('.v2-home .sb-h3', ['v2-home']) && !reachesRoot('.v2-tiles', rootClasses));
+ });
+ 
+-test('AC82, the Design reviewer\'s N1 (stage 2, round 1): the fold\'s headings ("Notifications", "GitHub Actions this month") in the row role, 600 13 px, by a rule that out-ranks the base view\'s `html.sb .sb-h3`', () => {
++test('AC82, the Design reviewer\'s N1 (stage 2, round 1), rewritten in HD1 (AC98): the fold\'s headings ("Notifications", "GitHub Actions this month") 600 13 px, by a rule that out-ranks the base view\'s `html.sb .sb-h3`', () => {
+   const css = readFileSync(`${SRC}/public/sandbox.css`, 'utf8');
+   const rules = ruleList(css);
+   const base = rules.find((r) => r.sel === 'html.sb .sb-h3');
+   assert.match(base.body, /font: var\(--t-item\)/, 'the base view\'s rule, 0,2,1');
+   const home = rules.find((r) => r.sel === 'html.sb .v2-home .sb-h3');
+   assert.ok(home, 'Home\'s rule, 0,3,1: one class more than the base view\'s');
+-  assert.match(home.body, /font: var\(--t-row\)/);
++  // Rewritten in HD1 (AC98, "More detail"'s sub-heads 600 13 px; forced): --t-row (500 13 px) → 600 13 px.
++  assert.match(home.body, /font: 600 13px\/1\.3 var\(--font\)/);
+   assert.ok(css.indexOf('html.sb .v2-home .sb-h3') > css.indexOf('html.sb .sb-h3 {'), 'and after it');
+ });
+ 
+diff --git a/tests/desk/ac83-page.test.mjs b/tests/desk/ac83-page.test.mjs
+index 1a60157..7b5559e 100644
+--- a/tests/desk/ac83-page.test.mjs
++++ b/tests/desk/ac83-page.test.mjs
+@@ -556,7 +556,9 @@ test('AC83 + AC36: "Details" opens AC55\'s views as built, so every M1 and M2 vi
+ });
+ 
+ test('AC83 + AC81: the page\'s type is the tokens\' or desk-v2.html\'s pairs; the page renders from each fixture without error, and from a project that can\'t be read', async () => {
+-  for (const sel of ['.v2-sn', '.v2-sd', '.v2-sv', '.v2-smn', '.v2-sms', '.v2-runh', '.v2-prtt', '.v2-callout']) assert.match(rule(sel), /font: var\(--t-(row|small|body|label)\);/, sel);
++  for (const sel of ['.v2-sn', '.v2-sd', '.v2-sv', '.v2-smn', '.v2-sms', '.v2-prtt', '.v2-callout']) assert.match(rule(sel), /font: var\(--t-(row|small|body|label)\);/, sel);
++  // Rewritten in HD1 (AC98; forced): a run's head leaves the token list for its pair, 600 13 px (desk-v2.html's `.tl2 .nm`).
++  assert.match(rule('.v2-runh'), /font: 600 13px\/1\.3 var\(--font\);/, '.v2-runh');
+   assert.match(rule('.v2-ph.now .v2-pn'), /font: 600 12px\/1\.3 var\(--font\);/, 'the now phase\'s name, desk-v2.html:282');
+   const app = await openPage('#/p/Service-Desk');
+   try {
+diff --git a/tests/desk/ac85-sheets.test.mjs b/tests/desk/ac85-sheets.test.mjs
+index 5553a20..c3402bb 100644
+--- a/tests/desk/ac85-sheets.test.mjs
++++ b/tests/desk/ac85-sheets.test.mjs
+@@ -111,7 +111,8 @@ test('AC85 every sheet, rewritten in QW2 (AC95): the head in Plex Mono, "<projec
+       assert.equal(byClass(app.view, 'v2-scrim').length, 1, 'over a dimmed screen');
+     }
+     assert.match(rule('.v2-x44'), /width: 44px; height: 44px;/);
+-    assert.match(rule('.v2-stitle'), /font: var\(--t-sheet\)/);
++    // Rewritten in HD1 (AC98, AC85's note: "its title 600 20 px from HD1, no longer `--t-sheet`"; forced).
++    assert.match(rule('.v2-stitle'), /font: 600 20px\/1\.3 var\(--font\)/);
+     assert.match(CSS, /--t-sheet: 600 18px\/1\.3 var\(--font\);/);
+     assert.match(rule('.v2-mono'), /font: var\(--t-mono\)/);
+     assert.match(CSS, /--mono: "IBM Plex Mono"/);
+diff --git a/tests/desk/ac88-dark.test.mjs b/tests/desk/ac88-dark.test.mjs
+index d857d9e..c2d5aa8 100644
+--- a/tests/desk/ac88-dark.test.mjs
++++ b/tests/desk/ac88-dark.test.mjs
+@@ -94,8 +94,11 @@ const lum = (hex) => {
+   const c = [0, 2, 4].map((i) => parseInt(hex.slice(1 + i, 3 + i), 16) / 255).map((v) => (v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+   return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+ };
+-/** AC81's roles' sizes (--t-title 24, --t-sheet 18, --t-lead 15, --t-row and --t-body 13, --t-small 12, --t-label and --t-mono 11), and AC63's 16 px text box. */
+-const ROLE_PX = [24, 18, 15, 13, 12, 11, 16];
++/**
++ * AC81's roles' sizes (--t-title 24, --t-sheet 18, --t-lead 15, --t-row and --t-body 13, --t-small 12, --t-label and --t-mono 11), and AC63's 16 px text box.
++ * Rewritten in HD1 (AC98, AC81 as changed; forced): the owner's two title sizes, a screen's 28 px and a sheet's 20 px, join them.
++ */
++const ROLE_PX = [28, 24, 20, 18, 15, 13, 12, 11, 16];
+ const contrast = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
+ 
+ /** A node's own ground: its background's first colour when that is opaque (a token's six-digit value). */
+@@ -1088,11 +1091,11 @@ const G2_LOOK = (ink, ink2, bg2) => new Map([
+   ['div.v2-lanes', ['grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr) minmax(0, 1fr) → minmax(0, 1fr) minmax(0, 1fr)']],
+   ['section.v2-lane.lane-done', [`background: (none) → ${bg2}`, 'border-radius: (none) → 12px', 'padding: (none) → 0 8px 10px', 'align-self: (none) → stretch']],
+   ['h2.v2-lh (Done)', ['padding-top: (none) → 6px']],
+-  ['p.v2-kq', [`font: (none) → ${G2_FONT('500 11px/1.35')}`, `color: (none) → ${ink2}`, 'padding: (none) → 4px 0']],
+-  ['span.v2-kl', ['computed font-size: 13px → 11px', 'computed font-weight: 400 → 500', 'computed line-height: 18.849999999999998px → 14.850000000000001px',
+-    `computed color: ${ink} → ${ink2}`]],
+-  ['span.v2-kw', ['computed font-size: 13px → 11px', 'computed font-weight: 400 → 500', 'computed line-height: 18.849999999999998px → 14.850000000000001px',
+-    `computed color: ${ink} → ${ink2}`]],
++  // Rewritten in HD1 (AC98, AC91 (f) noted; forced): the empty section's line 500 11 → 500 13 px (--t-row), still --ink2, so
++  // "Kicked back" and the words that are not a count keep the line's 13 px and change only in weight, line height and colour.
++  ['p.v2-kq', [`font: (none) → ${G2_FONT('500 13px/1.35')}`, `color: (none) → ${ink2}`, 'padding: (none) → 4px 0']],
++  ['span.v2-kl', ['computed font-weight: 400 → 500', 'computed line-height: 18.849999999999998px → 17.55px', `computed color: ${ink} → ${ink2}`]],
++  ['span.v2-kw', ['computed font-weight: 400 → 500', 'computed line-height: 18.849999999999998px → 17.55px', `computed color: ${ink} → ${ink2}`]],
+   ['span.v2-kn', ['font: (none) → 400 11px/1.4 "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace', `color: (none) → ${ink2}`,
+     'computed font-size: 13px → 11px', 'computed line-height: 18.849999999999998px → 15.399999999999999px',
+     'computed font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif → "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace',
+@@ -1223,8 +1226,9 @@ const G5_EXCEPT = (n, d) => {
+  * - on the Timeline, a standard milestone's name (`p.v2-mstt` in a `div.v2-ms.std`) at 400.
+  * A standard row's name keeps its 400 13 px (`--t-body`), so it adds none.
+  */
+-const G6_HEAD = (ink, ink2) => [`font: ${G1_FONT('400 11px/1.35')} → ${G1_FONT('500 11px/1.35')}`, `color: ${ink2} → ${ink}`, 'padding: 6px 0 0 → 10px 0 0',
+-  'computed font-weight: 400 → 500', `computed color: ${ink2} → ${ink}`];
++// Rewritten in HD1 (AC98, AC92 (d) noted; forced): an opened phase's two group heads 500 11 → 600 12 px, --ink.
++const G6_HEAD = (ink, ink2) => [`font: ${G1_FONT('400 11px/1.35')} → ${G1_FONT('600 12px/1.3')}`, `color: ${ink2} → ${ink}`, 'padding: 6px 0 0 → 10px 0 0',
++  'computed font-size: 11px → 12px', 'computed font-weight: 400 → 600', 'computed line-height: 14.850000000000001px → 15.600000000000001px', `computed color: ${ink2} → ${ink}`];
+ const G6_LOOK = (ink, ink2, line) => new Map([
+   ['p.v2-subh', G6_HEAD(ink, ink2)],
+   ['p.v2-subh.std', [...G6_HEAD(ink, ink2), 'margin-top: (none) → 8px', `border-top: (none) → 1px solid ${line}`]],
+@@ -1486,7 +1490,9 @@ const G8C_EXCEPT = (n, d, theme) => {
+  * run heads, the first and those after it, on the `text` page with every phase opened, and G9's own screens
+  * (tests/desk/glance-fixtures.mjs's G9_OPENS, below).
+  */
+-const G9_RUNH = (ink, ink2) => [`color: ${ink2} → ${ink}`, 'font-weight: (none) → 600', 'computed font-weight: 500 → 600', `computed color: ${ink2} → ${ink}`];
++// Rewritten in HD1 (AC98, AC92 (d) noted; forced): a run's head 600 11 → 600 13 px, its pair in place of `--t-label` and a weight.
++const G9_RUNH = (ink, ink2) => [`color: ${ink2} → ${ink}`, `font: ${G1_FONT('500 11px/1.35')} → ${G1_FONT('600 13px/1.3')}`, 'computed font-size: 11px → 13px',
++  'computed font-weight: 500 → 600', 'computed line-height: 14.850000000000001px → 16.900000000000002px', `computed color: ${ink2} → ${ink}`];
+ const G9_LOOK = (ink, ink2, bg2, line) => new Map([
+   ['div.v2-anchor (a project page\'s soft box)', ['display: (none) → grid', 'gap: (none) → 4px 10px', 'padding: (none) → 12px', 'border-radius: (none) → 12px',
+     `background: (none) → ${bg2}`, `color: (none) → ${ink}`]],
+@@ -1536,13 +1542,15 @@ const QW1_FONT = (f) => `${f} "IBM Plex Sans", system-ui, -apple-system, "Segoe
+ const QW1_LOOK = (ink, ink2, line) => new Map([
+   ['section.v2-qsec', ['display: (none) → grid', 'gap: (none) → 6px']],
+   ['h2.v2-kh (the section\'s head)', ['display: (none) → flex', 'align-items: (none) → center', 'gap: (none) → 6px', 'min-height: (none) → 28px', 'padding-bottom: (none) → 4px',
+-    `border-bottom: (none) → 1px solid ${line}`, `font: (none) → ${QW1_FONT('600 12px/1.3')}`, `color: (none) → ${ink}`]],
+-  ['span (the section\'s title)', ['computed font-size: 13px → 12px', 'computed font-weight: 400 → 600', 'computed line-height: 18.849999999999998px → 15.600000000000001px']],
++    // Rewritten in HD1 (AC98, AC94 noted; forced): the section's head 600 12 → 600 15 px, and its title's text with it.
++    `border-bottom: (none) → 1px solid ${line}`, `font: (none) → ${QW1_FONT('600 15px/1.3')}`, `color: (none) → ${ink}`]],
++  ['span (the section\'s title)', ['computed font-size: 13px → 15px', 'computed font-weight: 400 → 600', 'computed line-height: 18.849999999999998px → 19.5px']],
+   ['span.v2-kn (the head\'s " · ")', ['font: (none) → 400 11px/1.4 "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace', `color: (none) → ${ink2}`,
+     'computed font-size: 13px → 11px', 'computed line-height: 18.849999999999998px → 15.399999999999999px',
+     'computed font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif → "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace',
+     `computed color: ${ink} → ${ink2}`]],
+-  ['p.v2-kq (the section\'s line)', [`font: (none) → ${QW1_FONT('500 11px/1.35')}`, `color: (none) → ${ink2}`, 'padding: (none) → 4px 0']],
++  // Rewritten in HD1 (AC98; forced): "Questions for you · none" 500 11 → 500 13 px (--t-row), still --ink2.
++  ['p.v2-kq (the section\'s line)', [`font: (none) → ${QW1_FONT('500 13px/1.35')}`, `color: (none) → ${ink2}`, 'padding: (none) → 4px 0']],
+   ['a.v2-t (a section question\'s title)', [`font: ${QW1_FONT('500 12px/1.33')} → ${QW1_FONT('500 13px/1.35')}`, 'max-height: calc(3 * 1.33em) → calc(3 * 1.35em)']],
+   // Its clip (`span.v2-tt`) is M3D5's, newer than bd4097d, so its display and overflow are M3D5_ONCE's; only its height is QW1's.
+   ['span.v2-tt (a section question\'s title)', ['max-height: (none) → calc(3 * 1.35em)', 'computed font-size: 12px → 13px', 'computed line-height: 15.96px → 17.55px']],
+@@ -1598,8 +1606,9 @@ const G9C_EXCEPT = (n, d, theme) => {
+ const STRIP_FONT = (f) => `${f} "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif`;
+ const STRIP_LOOK = (ink, line) => new Map([
+   ['h2.v2-kh (the strip\'s head)', ['display: (none) → flex', 'align-items: (none) → center', 'gap: (none) → 6px', 'min-height: (none) → 28px', 'padding-bottom: (none) → 4px',
+-    `border-bottom: (none) → 1px solid ${line}`, `font: (none) → ${STRIP_FONT('600 12px/1.3')}`, `color: (none) → ${ink}`]],
+-  ['span (the strip\'s title)', ['computed font-size: 13px → 12px', 'computed font-weight: 400 → 600', 'computed line-height: 18.849999999999998px → 15.600000000000001px']],
++    // Rewritten in HD1 (AC98, AC91 (f) noted; forced): the strip's head with cards 600 12 → 600 15 px, its title's text with it.
++    `border-bottom: (none) → 1px solid ${line}`, `font: (none) → ${STRIP_FONT('600 15px/1.3')}`, `color: (none) → ${ink}`]],
++  ['span (the strip\'s title)', ['computed font-size: 13px → 15px', 'computed font-weight: 400 → 600', 'computed line-height: 18.849999999999998px → 19.5px']],
+   ['ol.v2-krow', ['padding: 0 → 2px 0 6px', 'display: (none) → flex', 'gap: (none) → 8px', 'max-width: (none) → 100%', 'overflow-x: (none) → auto', 'overflow-y: (none) → hidden',
+     'overscroll-behavior-x: (none) → contain', 'scroll-snap-type: (none) → x mandatory']],
+   ['li.v2-kslot', ['flex: (none) → 0 0 200px', 'display: (none) → grid', 'scroll-snap-align: (none) → start']],
+@@ -1712,8 +1721,9 @@ const VT1_LOOK = (t) => new Map([
+   // The sheet's blocks.
+   ['section.v2-tgt (a target)', VT1_BLOCK(t)],
+   ['section.v2-vstop (the miss and stop rule)', VT1_BLOCK(t)],
+-  ['h3.v2-vth (a target\'s id and short name)', [`font: (none) → ${VT1_FONT('500 13px/1.35')}`, `color: (none) → ${t.ink}`]],
+-  ['span (a target\'s short name)', ['computed font-weight: 400 → 500', 'computed line-height: 18.849999999999998px → 17.55px']],
++  // Rewritten in HD1 (AC98; forced): each target's name, a sheet-block head, 500 13 → 600 15 px, --ink.
++  ['h3.v2-vth (a target\'s id and short name)', [`font: (none) → ${VT1_FONT('600 15px/1.3')}`, `color: (none) → ${t.ink}`]],
++  ['span (a target\'s short name)', ['computed font-size: 13px → 15px', 'computed font-weight: 400 → 600', 'computed line-height: 18.849999999999998px → 19.5px']],
+   ['p.v2-vfig (a figure and its words)', ['display: (none) → flex', 'flex-wrap: (none) → wrap', 'align-items: (none) → baseline', 'gap: (none) → 2px 8px']],
+   ['span.v2-vbig (a figure)', [`font: (none) → ${VT1_FONT('600 24px/1.2')}`, `color: (none) → ${t.ink}`, 'overflow-wrap: (none) → anywhere', 'computed font-size: 13px → 24px',
+     'computed font-weight: 400 → 600', 'computed line-height: 18.849999999999998px → 28.799999999999997px']],
+@@ -1873,6 +1883,116 @@ const VT3_EXCEPT = (n, d, theme) => {
+   return Boolean(k && (VT3_ONCE.get(theme).get(k) || []).includes(d)) ? `VT3 ${theme} ${k} ${d}` : null;
+ };
+ const VT3_FLAT = [...VT3_ONCE].flatMap(([theme, look]) => [...look].flatMap(([k, ds]) => ds.map((d) => `VT3 ${theme} ${k} ${d}`))).sort();
++/**
++ * HD1's changes to an element's look on purpose (AC98, with AC80, AC81, AC85, AC91 (f), AC92 (d) and AC94 noted; the stage's
++ * row: "`HD1_ONCE`"; the approved header picture, docs/design/builds/headers-picture/, with the owner's answers B, A and A),
++ * each declaration before and after, in each theme, on only its own element. The elements whose look an older exception
++ * pins (G2's `p.v2-kq` and its spans, G6's `p.v2-subh`, G9's `p.v2-runh`, QW1's and the strip's `h2.v2-kh` and their titles,
++ * QW1's `p.v2-kq`, VT1's `h3.v2-vth` and its name) are rewritten there to HD1's look; every other one is here:
++ * - a screen's title (`h1.v2-title`, and Team's, a member's and the Details views' `h1` in `div.sb-hdr-t`) 600 24 → 600 28 px;
++ * - a sheet's title (`h2.v2-stitle`, its clip `span.v2-clip.v2-stt` and a gate's item in it, `span.v2-gitem`; and Team's
++ *   sheets' `h2.sb-sheet-t`) 600 18 → 600 20 px, its line height still 1.3;
++ * - the section and sheet-block heads 500 11 px --ink2 → 600 15 px --ink: `.v2-sh` and `.v2-shw` (Home's "Since you last
++ *   looked", the page's "Milestones by phase", "Not used by this project" and "The rest", the portfolio's head and Plan's
++ *   groups, `.v2-plhw` and its words), Home's group titles (`span.v2-hgt`), "More detail" (`summary.v2-mds`, its words; its
++ *   chevron given --ink2, the colour it had), a sheet's block heads (`.v2-bh`), and Team's and the Details views' heads
++ *   (`h2.sb-h2`, a Team sheet's `h3` in `div.sb-sec`);
++ * - the sub-heads 600 13 px, each keeping its colour: a lane's head (`h2.v2-lh`, 600 11 px before, and its words), a
++ *   project's name heading its group (`span.v2-gn`, in a `.v2-grp`), the Timeline's goal labels (`h3.v2-label` in an
++ *   `article.v2-goal`), Plan's card label (`p.v2-label` in `section.v2-plcard`) and "More detail"'s sub-heads (`h3.sb-h3`,
++ *   500 13 px before);
++ * - the two headings' small part (AC98, "Two headings on one line"; new elements): " · " and what follows
++ *   (`span.v2-shs`) in --t-small --ink2, and the time in it (`span.v2-shm`) in Plex Mono 400 12 px.
++ * The walk reaches each on the fixtures' screens and sheets above; the last test in this file checks that the walks met
++ * HD1_ONCE exactly.
++ */
++const HD1_FONT = (f) => `${f} "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif`;
++const HD1_MONO = (f) => `${f} "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace`;
++const HD1_LH = { 11: '14.850000000000001px', 13: '17.55px', 15: '19.5px' };
++const HD1_TITLE = [`font: ${HD1_FONT('600 24px/1.2')} → ${HD1_FONT('600 28px/1.2')}`, 'computed font-size: 24px → 28px', 'computed line-height: 28.799999999999997px → 33.6px'];
++const HD1_SHEET_TEXT = ['computed font-size: 18px → 20px', 'computed line-height: 23.400000000000002px → 26px'];
++const HD1_SHEET = [`font: ${HD1_FONT('600 18px/1.3')} → ${HD1_FONT('600 20px/1.3')}`, ...HD1_SHEET_TEXT];
++/** A section head's own declarations (from --t-label --ink2), and what its words compute to. */
++const HD1_HEAD_DECL = (t) => [`font: ${HD1_FONT('500 11px/1.35')} → ${HD1_FONT('600 15px/1.3')}`, `color: ${t.ink2} → ${t.ink}`];
++const HD1_HEAD_TEXT = (t) => [`computed color: ${t.ink2} → ${t.ink}`, 'computed font-size: 11px → 15px', 'computed font-weight: 500 → 600', `computed line-height: ${HD1_LH[11]} → 19.5px`];
++const HD1_SUB_TEXT = ['computed font-size: 11px → 13px', 'computed font-weight: 500 → 600', `computed line-height: ${HD1_LH[11]} → 16.900000000000002px`];
++const HD1_LOOK = (t) => new Map([
++  ['h1.v2-title (a screen\'s title)', HD1_TITLE],
++  ['h1 (Team\'s, a member\'s or a Details view\'s title)', HD1_TITLE],
++  ['h2.v2-stitle (a sheet\'s title)', HD1_SHEET],
++  ['span.v2-clip.v2-stt (a sheet title\'s clip)', HD1_SHEET_TEXT],
++  ['span.v2-gitem (a gate\'s item in a sheet\'s title)', HD1_SHEET_TEXT],
++  ['h2.sb-sheet-t (a Team sheet\'s title)', HD1_SHEET],
++  ['h2.sb-h2 (a Team or Details head)', [...HD1_HEAD_DECL(t), ...HD1_HEAD_TEXT(t)]],
++  ['h3 (a Team sheet\'s head)', [...HD1_HEAD_DECL(t), ...HD1_HEAD_TEXT(t)]],
++  ['div.v2-sh (a head\'s row)', HD1_HEAD_DECL(t)],
++  ['h2.v2-shw (a head\'s words)', [...HD1_HEAD_DECL(t), ...HD1_HEAD_TEXT(t)]],
++  ['h2.v2-sh.v2-shw ("The rest")', [...HD1_HEAD_DECL(t), ...HD1_HEAD_TEXT(t)]],
++  ['h2.v2-sh (the portfolio\'s or a Plan group\'s head)', HD1_HEAD_DECL(t)],
++  ['span.v2-shw (the portfolio head\'s words)', [...HD1_HEAD_DECL(t), ...HD1_HEAD_TEXT(t)]],
++  ['span.v2-shw.v2-plhw (a Plan group\'s words)', HD1_HEAD_DECL(t)],
++  ['span (a Plan group head\'s words)', HD1_HEAD_TEXT(t)],
++  ['span.v2-hgt (a Home group\'s title)', [`font: (none) → ${HD1_FONT('600 15px/1.3')}`, `color: (none) → ${t.ink}`, ...HD1_HEAD_TEXT(t)]],
++  ['summary.v2-mds ("More detail")', HD1_HEAD_DECL(t)],
++  ['span ("More detail"\'s words)', HD1_HEAD_TEXT(t)],
++  ['svg ("More detail"\'s chevron)', [`color: (none) → ${t.ink2}`]],
++  ['.v2-bh (a sheet\'s block head)', [...HD1_HEAD_DECL(t), ...HD1_HEAD_TEXT(t)]],
++  ['h2.v2-lh (a lane\'s head)', [`font: ${HD1_FONT('600 11px/1.3')} → ${HD1_FONT('600 13px/1.3')}`]],
++  ['span (a lane head\'s words)', ['computed font-size: 11px → 13px', 'computed line-height: 14.3px → 16.900000000000002px']],
++  ['span.v2-gn (a group\'s name)', [`font: (none) → ${HD1_FONT('600 13px/1.3')}`, ...HD1_SUB_TEXT]],
++  ['h3.v2-label (a Timeline goal\'s label)', [`font: ${HD1_FONT('500 11px/1.35')} → ${HD1_FONT('600 13px/1.3')}`, ...HD1_SUB_TEXT]],
++  ['p.v2-label (Plan\'s card label)', [`font: ${HD1_FONT('500 11px/1.35')} → ${HD1_FONT('600 13px/1.3')}`, ...HD1_SUB_TEXT]],
++  ['h3.sb-h3 ("More detail"\'s sub-head)', [`font: ${HD1_FONT('500 13px/1.35')} → ${HD1_FONT('600 13px/1.3')}`, 'computed font-weight: 500 → 600',
++    `computed line-height: ${HD1_LH[13]} → 16.900000000000002px`]],
++  ['span.v2-shs (" · " and what follows)', [`font: (none) → ${HD1_FONT('400 12px/1.4')}`, `color: (none) → ${t.ink2}`, 'computed font-size: 11px → 12px',
++    'computed font-weight: 500 → 400', `computed line-height: ${HD1_LH[11]} → 16.799999999999997px`]],
++  ['span.v2-shm (the heading\'s time)', [`font: (none) → ${HD1_MONO('400 12px/1.4')}`,
++    `computed font-family: ${HD1_FONT('').trim()} → ${HD1_MONO('').trim()}`, 'computed font-size: 11px → 12px', 'computed font-weight: 500 → 400',
++    `computed line-height: ${HD1_LH[11]} → 16.799999999999997px`]],
++]);
++const HD1_ONCE = new Map([['light', HD1_LOOK({ ink: '#18191c', ink2: '#5c5f66' })], ['dark', HD1_LOOK({ ink: '#ecedef', ink2: '#a2a5ac' })]]);
++const HD1_KEY = (n) => {
++  const p = n.parent;
++  const is = (x, tag, cls) => Boolean(x && x.tag === tag && (!cls || x.cls.has(cls)));
++  const bare = (x) => x.cls.size === 0;
++  if (is(n, 'h1', 'v2-title')) return 'h1.v2-title (a screen\'s title)';
++  if (is(n, 'h1') && bare(n) && is(p, 'div', 'sb-hdr-t')) return 'h1 (Team\'s, a member\'s or a Details view\'s title)';
++  if (is(n, 'h2', 'v2-stitle')) return 'h2.v2-stitle (a sheet\'s title)';
++  if (is(n, 'span', 'v2-stt') && n.cls.has('v2-clip') && is(p, 'h2', 'v2-stitle')) return 'span.v2-clip.v2-stt (a sheet title\'s clip)';
++  if (is(n, 'span', 'v2-gitem') && is(p, 'span', 'v2-stt') && is(p.parent, 'h2', 'v2-stitle')) return 'span.v2-gitem (a gate\'s item in a sheet\'s title)';
++  if (is(n, 'h2', 'sb-sheet-t')) return 'h2.sb-sheet-t (a Team sheet\'s title)';
++  if (is(n, 'h2', 'sb-h2')) return 'h2.sb-h2 (a Team or Details head)';
++  if (is(n, 'h3') && bare(n) && is(p, 'div', 'sb-sec')) return 'h3 (a Team sheet\'s head)';
++  if (is(n, 'div', 'v2-sh')) return 'div.v2-sh (a head\'s row)';
++  if (is(n, 'h2', 'v2-shw') && is(p, 'div', 'v2-sh')) return 'h2.v2-shw (a head\'s words)';
++  if (is(n, 'h2', 'v2-sh') && n.cls.has('v2-shw')) return 'h2.v2-sh.v2-shw ("The rest")';
++  if (is(n, 'h2', 'v2-sh') && (n.cls.has('v2-pfh') || n.cls.has('v2-plh'))) return 'h2.v2-sh (the portfolio\'s or a Plan group\'s head)';
++  if (is(n, 'span', 'v2-shw') && n.cls.has('v2-plhw') && is(p, 'h2', 'v2-plh')) return 'span.v2-shw.v2-plhw (a Plan group\'s words)';
++  if (is(n, 'span', 'v2-shw') && is(p, 'h2', 'v2-pfh')) return 'span.v2-shw (the portfolio head\'s words)';
++  if (is(n, 'span') && bare(n) && is(p, 'span', 'v2-plhw')) return 'span (a Plan group head\'s words)';
++  if (is(n, 'span', 'v2-hgt') && is(p, 'button', 'v2-hg')) return 'span.v2-hgt (a Home group\'s title)';
++  if (is(n, 'summary', 'v2-mds')) return 'summary.v2-mds ("More detail")';
++  if (is(n, 'span') && bare(n) && is(p, 'summary', 'v2-mds')) return 'span ("More detail"\'s words)';
++  if (is(n, 'svg', 'v2-k') && is(p, 'summary', 'v2-mds')) return 'svg ("More detail"\'s chevron)';
++  if ((is(n, 'h3', 'v2-bh') || is(n, 'p', 'v2-bh'))) return '.v2-bh (a sheet\'s block head)';
++  if (is(n, 'h2', 'v2-lh')) return 'h2.v2-lh (a lane\'s head)';
++  if (is(n, 'span') && bare(n) && is(p, 'h2', 'v2-lh')) return 'span (a lane head\'s words)';
++  if (is(n, 'span', 'v2-gn') && p && p.cls.has('v2-grp')) return 'span.v2-gn (a group\'s name)';
++  if (is(n, 'h3', 'v2-label') && is(p, 'article', 'v2-goal')) return 'h3.v2-label (a Timeline goal\'s label)';
++  if (is(n, 'p', 'v2-label') && is(p, 'section', 'v2-plcard')) return 'p.v2-label (Plan\'s card label)';
++  if (is(n, 'h3', 'sb-h3')) {
++    for (let a = p; a; a = a.parent) if (a.cls.has('v2-home') || a.cls.has('v2-proj')) return 'h3.sb-h3 ("More detail"\'s sub-head)';
++    return null;
++  }
++  if (is(n, 'span', 'v2-shs') && is(p, 'h2', 'v2-shw')) return 'span.v2-shs (" · " and what follows)';
++  if (is(n, 'span', 'v2-shm') && is(p, 'span', 'v2-shs')) return 'span.v2-shm (the heading\'s time)';
++  return null;
++};
++const HD1_EXCEPT = (n, d, theme) => {
++  const k = HD1_KEY(n);
++  return Boolean(k && (HD1_ONCE.get(theme).get(k) || []).includes(d)) ? `HD1 ${theme} ${k} ${d}` : null;
++};
++const HD1_FLAT = [...HD1_ONCE].flatMap(([theme, look]) => [...look].flatMap(([k, ds]) => ds.map((d) => `HD1 ${theme} ${k} ${d}`))).sort();
+ const STRIP_FLAT = [...STRIP_ONCE].flatMap(([theme, look]) => [...look].flatMap(([k, ds]) => ds.map((d) => `G2-STRIP ${theme} ${k} ${d}`))).sort();
+ const G9C_FLAT = [...G9C_ONCE].flatMap(([theme, look]) => [...look].flatMap(([k, ds]) => ds.map((d) => `G9C ${theme} ${k} ${d}`))).sort();
+ const M3D1_EXCEPT = (n, d) => n.cls.has('v2-wn') && n.cls.has('v2-small') && n.parent && n.parent.cls.has('v2-prt')
+@@ -1950,6 +2070,8 @@ function sameLook(app, where, fails, seen) {
+         if (vt2) { excepted.add(vt2); continue; }
+         const vt3 = VT3_EXCEPT(b, d, way.theme);
+         if (vt3) { excepted.add(vt3); continue; }
++        const hd1 = HD1_EXCEPT(b, d, way.theme);
++        if (hd1) { excepted.add(hd1); continue; }
+         const k = `${way.theme} ${label(b)} ${d}`;
+         if (!seen.has(k)) { seen.add(k); fails.push(`${where} · ${way.name} · ${label(b)}${b.text.trim() ? ` "${b.text.trim().slice(0, 30)}"` : ''}: ${d}`); }
+       }
+@@ -2242,7 +2364,9 @@ test('AC44 step 4 (stage 8; the Reviewer\'s B1, round 1): the rules stage 8 remo
+   // AC25, whose new look VT2_ONCE pins): VT2's exception is pinned exactly by VT2's own walk, below; any the walks above meet is
+   // of it alone.
+   assert.ok([...excepted].filter((x) => /^VT2 /.test(x)).every((x) => VT2_FLAT.includes(x)), 'VT2: only its pinned declarations');
+-  assert.deepEqual([...excepted].filter((x) => !/^(section\.sb-screen|div\.v2-tlhead|M3D[45] |G[123456789] |G7B |G8B |G8C |G9C |PRE-G7 |QW1 |VT1 |VT2 )/.test(x)).sort(), [...[...M3D1_WAITS].map((d) => `span.v2-small.v2-wn ${d}`), ...m3d3].sort());
++  // HD1 (AC98): HD1's exception is met exactly by all the walks together (this file's last test); any met here is of it alone.
++  assert.ok([...excepted].filter((x) => /^HD1 /.test(x)).every((x) => HD1_FLAT.includes(x)), 'HD1: only its pinned declarations');
++  assert.deepEqual([...excepted].filter((x) => !/^(section\.sb-screen|div\.v2-tlhead|M3D[45] |G[123456789] |G7B |G8B |G8C |G9C |PRE-G7 |QW1 |VT1 |VT2 |HD1 )/.test(x)).sort(), [...[...M3D1_WAITS].map((d) => `span.v2-small.v2-wn ${d}`), ...m3d3].sort());
+ });
+ 
+ // The running log's lanes (AC49 with the owner's ruling, decisions/questions/P-001-desk-v2-lanes.md, A: "the work lanes
+@@ -2643,3 +2767,11 @@ test('AC88 + AC69 + AC92 (a) + AC44 step 4 (VT3 of M3B; AC25, AC82): on VT3\'s s
+   assert.deepEqual([...excepted].filter((x) => /^VT3 /.test(x)).sort(), VT3_FLAT, 'VT3_ONCE met exactly');
+   assert.deepEqual([...excepted].filter((x) => !before.has(x) && !/^VT3 /.test(x)), [], 'no other exception the walks above had not met');
+ });
++
++// HD1 (AC98; the stage's row: "the stage-8 guard meeting `HD1_ONCE` exactly and no other exception"): after every walk above,
++// the guard met each of HD1's pinned declarations, on its own element, in each theme, and none besides (the tests in this
++// file run in order, so `excepted` holds what every walk above met).
++test('AC44 step 4 + AC98 (HD1): the stage-8 guard meets HD1_ONCE exactly — each heading\'s new size, weight and colour, in light and dark, on only its own element — and no other exception', () => {
++  assert.deepEqual([...excepted].filter((x) => /^HD1 /.test(x)).sort(), HD1_FLAT, 'HD1_ONCE met exactly');
++  assert.ok(HD1_FLAT.length > 100, `${HD1_FLAT.length} pinned declarations`);
++});
+diff --git a/tests/desk/ac91-g8d.test.mjs b/tests/desk/ac91-g8d.test.mjs
+index b49b7ef..c506517 100644
+--- a/tests/desk/ac91-g8d.test.mjs
++++ b/tests/desk/ac91-g8d.test.mjs
+@@ -903,7 +903,9 @@ function assertUnknownLook(app, ref, where) {
+     assert.doesNotMatch(L.get(el).family, /Mono/, `${where}, ${theme}: the lane's words not in mono`);
+     assert.equal(L.get(el).colour, INK2[theme], `${where}, ${theme}: the lane's words in --ink2`);
+     if (ref) assert.deepEqual(look(L, kw), look(looks(ref, theme), refKw), `${where}, ${theme}: the strip's words in "can't read"'s look`);
+-    assert.deepEqual([L.get(kw).size, L.get(kw).weight, L.get(kw).colour], ['11px', '500', INK2[theme]], `${where}, ${theme}: --t-label --ink2`);
++    // Rewritten in HD1 (AC98, the empty section's line `.v2-kq` 500 11 → 500 13 px, --t-row, still --ink2; forced): the strip's
++    // words take the line's size.
++    assert.deepEqual([L.get(kw).size, L.get(kw).weight, L.get(kw).colour], ['13px', '500', INK2[theme]], `${where}, ${theme}: --t-row --ink2`);
+     assert.doesNotMatch(L.get(kw).family, /Mono/, `${where}, ${theme}: not in mono`);
+   }
+ }
+diff --git a/tests/desk/ac91-glance-gates.test.mjs b/tests/desk/ac91-glance-gates.test.mjs
+index 188e0e9..40cdf69 100644
+--- a/tests/desk/ac91-glance-gates.test.mjs
++++ b/tests/desk/ac91-glance-gates.test.mjs
+@@ -221,7 +221,8 @@ test('AC91 (h) with AC89 (j): the gate\'s short title is cut at two lines only w
+       for (const w of WIDTHS) {
+         const L = looks(app, theme, w);
+         const h2 = byClass(sheet(app), 'v2-stitle')[0];
+-        assert.deepEqual([L.get(h2).size, L.get(h2).weight], ['18px', '600'], `${theme}, ${w} px: the title in --t-sheet`);
++        // Rewritten in HD1 (AC98, a sheet's title 600 18 → 600 20 px, its line height still 1.3; forced).
++        assert.deepEqual([L.get(h2).size, L.get(h2).weight], ['20px', '600'], `${theme}, ${w} px: the title 600 20 px`);
+         assert.equal(L.get(keyed(app, `clip:stitle:${G4}`)).decl('max-height'), 'calc(2 * 1.3em)', `${theme}, ${w} px: the title held to two lines`);
+         const lead = L.get(keyed(app, `clip:gopen:${G4}`));
+         assert.deepEqual([lead.size, lead.weight], ['15px', '400'], `${theme}, ${w} px: the opening in --t-lead`);
+diff --git a/tests/desk/ac91-glance-home.test.mjs b/tests/desk/ac91-glance-home.test.mjs
+index 6afc141..2e86307 100644
+--- a/tests/desk/ac91-glance-home.test.mjs
++++ b/tests/desk/ac91-glance-home.test.mjs
+@@ -139,7 +139,8 @@ test('AC91 (a): on Home (`mix`), "<n> need you" takes --t-sheet (600 18 px) in i
+       }
+       // The largest text under the title: the title (--t-title) is larger, every other text on Home smaller.
+       const title = byClass(app.view, 'v2-title')[0];
+-      assert.equal(L.get(title).size, '24px');
++      // Rewritten in HD1 (AC98, a screen's title 600 24 → 600 28 px, "Bigger titles too", B; forced).
++      assert.equal(L.get(title).size, '28px');
+       const home = byClass(app.view, 'v2-home')[0];
+       const texts = findAll(home, (e) => e.tag && (e.children || []).some((x) => x.nodeType === 3 && String(x.text || x.textContent || '').trim()));
+       assert.ok(texts.length > 20, 'Home\'s texts');
+diff --git a/tests/desk/ac91-glance-waiting.test.mjs b/tests/desk/ac91-glance-waiting.test.mjs
+index d103b83..30b963e 100644
+--- a/tests/desk/ac91-glance-waiting.test.mjs
++++ b/tests/desk/ac91-glance-waiting.test.mjs
+@@ -142,7 +142,8 @@ test('AC91 (f): with no kicked-back card, one quiet line in the ruling\'s words,
+     for (const theme of THEMES) {
+       const L = looks(app, theme);
+       const c = INK[theme];
+-      assert.deepEqual([L.get(label).size, L.get(label).weight, L.get(label).colour], ['11px', '500', c.ink2], `${theme}: "Kicked back" in --t-label --ink2`);
++      // Rewritten in HD1 (AC98, the empty section's line 500 11 → 500 13 px, --t-row, --ink2 kept; forced).
++      assert.deepEqual([L.get(label).size, L.get(label).weight, L.get(label).colour], ['13px', '500', c.ink2], `${theme}: "Kicked back" in --t-row --ink2`);
+       assert.deepEqual([L.get(none).size, L.get(none).weight, L.get(none).colour], ['11px', '400', c.ink2], `${theme}: " · none" in --t-mono --ink2`);
+       assert.match(L.get(none).family, /Plex Mono/);
+       assert.match(L.get(none).raw('font'), /^400 11px\/1\.4 ⟦--mono\|/, `${theme}: the --t-mono role`);
+@@ -201,7 +202,8 @@ test('AC91 (f), amended: the empty strip\'s parts each in their role — " · "
+       assert.match(L.get(kn).raw('font'), /^400 11px\/1\.4 ⟦--mono\|/, `${what}, ${theme}: " · " and "none" in --t-mono`);
+       assert.equal(L.get(kn).colour, c.ink2);
+       for (const el of [byClass(s, 'v2-kl')[0], kw].filter(Boolean)) {
+-        assert.deepEqual([L.get(el).size, L.get(el).weight, L.get(el).colour], ['11px', '500', c.ink2], `${what}, ${theme}: "${el.textContent}" in --t-label --ink2`);
++        // Rewritten in HD1 (AC98: the line's 500 13 px, --t-row, still --ink2, and the words below that take its look with it; forced).
++        assert.deepEqual([L.get(el).size, L.get(el).weight, L.get(el).colour], ['13px', '500', c.ink2], `${what}, ${theme}: "${el.textContent}" in --t-row --ink2`);
+         assert.doesNotMatch(L.get(el).family, /Mono/, `${what}, ${theme}: "${el.textContent}" not in mono`);
+       }
+     }
+@@ -284,7 +286,8 @@ test('AC91 (f), rewritten in QW1 and in QW2 (AC95): with kicked-back cards, the
+     for (const theme of THEMES) {
+       const L = looks(app, theme);
+       const c = INK[theme];
+-      assert.deepEqual([L.get(head).size, L.get(head).weight, L.get(head).colour], ['12px', '600', c.ink], `${theme}: the head, 600 12 px ink`);
++      // Rewritten in HD1 (AC98, a section head 600 12 → 600 15 px, --ink; forced).
++      assert.deepEqual([L.get(head).size, L.get(head).weight, L.get(head).colour], ['15px', '600', c.ink], `${theme}: the head, 600 15 px ink`);
+       const n = head.children[1];
+       assert.deepEqual([L.get(n).size, L.get(n).weight, L.get(n).colour], ['11px', '400', c.ink2], `${theme}: its count in --t-mono`);
+       assert.match(L.get(n).raw('font'), /^400 11px\/1\.4 ⟦--mono\|/, 'the --t-mono role');
+diff --git a/tests/desk/ac92-glance-standard.test.mjs b/tests/desk/ac92-glance-standard.test.mjs
+index bddf417..2f87c3f 100644
+--- a/tests/desk/ac92-glance-standard.test.mjs
++++ b/tests/desk/ac92-glance-standard.test.mjs
+@@ -168,7 +168,7 @@ test('AC92 (d) (G6\'s fix round, the Definer\'s narrowing): in a phase with one
+ // ---------------------------------------------------------------------------
+ // The heads and the rule, on every run
+ 
+-test('AC92 (d), on Service-Desk\'s records at 77bfeae (real): every run, earlier ones included, under two heads, "Your milestones · <n>" and "Standard checklist · <n> · <h> tracked" (or "· none tracked this run"), in --t-label --ink, in light and dark; the standard group with a 1 px --line rule above its head and 8 px over it', async () => {
++test('AC92 (d), on Service-Desk\'s records at 77bfeae (real): every run, earlier ones included, under two heads, "Your milestones · <n>" and "Standard checklist · <n> · <h> tracked" (or "· none tracked this run"), in --t-label --ink (from HD1, AC98: 600 12 px --ink), in light and dark; the standard group with a 1 px --line rule above its head and 8 px over it', async () => {
+   const app = await openPage(textState());
+   try {
+     await openAll(app);
+@@ -192,7 +192,8 @@ test('AC92 (d), on Service-Desk\'s records at 77bfeae (real): every run, earlier
+     for (const [theme, ink] of THEMES) {
+       const L = looks(app, theme);
+       for (const hd of byClass(keyed(app, 'ms-lines'), 'v2-subh')) {
+-        assert.deepEqual([L.get(hd).size, L.get(hd).weight, L.get(hd).color], ['11px', '500', ink], `${theme}: "${hd.textContent}" in --t-label --ink`);
++        // Rewritten in HD1 (AC98, an opened phase's two group heads 500 11 → 600 12 px, --ink; forced).
++        assert.deepEqual([L.get(hd).size, L.get(hd).weight, L.get(hd).color], ['12px', '600', ink], `${theme}: "${hd.textContent}" 600 12 px --ink`);
+       }
+       const std = byClass(keyed(app, 'stdl:Design'), 'v2-subh').filter((x) => /\bstd\b/.test(x.className));
+       assert.equal(std.length, 2);
+@@ -213,7 +214,7 @@ const runHeads = (app, ph) => byClass(keyed(app, `stdl:${ph}`), 'v2-runh').map((
+ 
+ // G9's round 2 (AC92 (d), changed: the Design reviewer's call, G9's design review, round 1, B1): a run's head outranks its
+ // two group heads.
+-test('AC92 (d), from G9\'s round 2: an opened phase\'s run heads outrank its two group heads — each in --ink at weight 600, its size 11 px, in light and dark; each after the first set apart by a 1 px --line rule with 8 px over it, the standard group head\'s own rule and gap, and none above the first (the latest run\'s); on `mix`\'s made-up project, Build\'s runs with its two "Build-i1" runs (gone back over and still to come), and on `gates`\', Launch\'s three "Launch-i1" runs (NOT real records), each run found by itself', async () => {
++test('AC92 (d), from G9\'s round 2: an opened phase\'s run heads outrank its two group heads — each in --ink at weight 600, its size 11 px (from HD1, AC98: 13 px over their 600 12 px), in light and dark; each after the first set apart by a 1 px --line rule with 8 px over it, the standard group head\'s own rule and gap, and none above the first (the latest run\'s); on `mix`\'s made-up project, Build\'s runs with its two "Build-i1" runs (gone back over and still to come), and on `gates`\', Launch\'s three "Launch-i1" runs (NOT real records), each run found by itself', async () => {
+   const cases = [
+     [mixState(), 'Build', ['Build-i1 run 3', 'Build-i2 run 2', 'Build-i1 run 1'], { 'Build-i1 run 3': /^Run 3 · planned$/, 'Build-i1 run 1': /· gone back over$/ }],
+     [gatesState(), 'Launch', ['Launch-i1 run 4', 'Launch-i1 run 3', 'Launch-i1 run 2'], {}],
+@@ -236,11 +237,14 @@ test('AC92 (d), from G9\'s round 2: an opened phase\'s run heads outrank its two
+         const L = looks(app, theme);
+         rh.forEach((r, i) => {
+           const at = L.get(r.el);
+-          assert.deepEqual([at.size, at.weight, at.color], ['11px', '600', ink], `${theme}: ${ph}'s ${r.run} head in --ink at 600, 11 px`);
++          // Rewritten in HD1 (AC98, a run's head 600 11 → 600 13 px, one step over its group heads' 600 12 px; forced).
++          assert.deepEqual([at.size, at.weight, at.color], ['13px', '600', ink], `${theme}: ${ph}'s ${r.run} head in --ink at 600, 13 px`);
+           for (const g of groups) {
+             assert.equal(L.get(g).color, ink, `${theme}: the group head "${g.textContent}" stays --ink`);
+-            assert.ok(Number(at.weight) > Number(L.get(g).weight), `${theme}: ${r.run}'s head (${at.weight}) outranks "${g.textContent}" (${L.get(g).weight})`);
+-            assert.equal(L.get(g).size, at.size, `${theme}: the same size, 11 px, as the group heads`);
++            // Rewritten in HD1 (AC98; forced): the run's head still outranks them, now by its size at the same weight.
++            assert.ok(Number(at.weight) >= Number(L.get(g).weight), `${theme}: ${r.run}'s head (${at.weight}) no lighter than "${g.textContent}" (${L.get(g).weight})`);
++            assert.ok(parseFloat(at.size) > parseFloat(L.get(g).size), `${theme}: ${r.run}'s head (${at.size}) larger than "${g.textContent}" (${L.get(g).size})`);
++            assert.deepEqual([at.size, L.get(g).size], ['13px', '12px'], `${theme}: 13 px over the group heads' 12 px`);
+           }
+           if (i === 0) assert.deepEqual([at.borderTop, at.marginTop], ['', ''], `${theme}: no rule above the first run's head (${r.run})`);
+           else {
+diff --git a/tests/desk/ac94-qw1-questions.test.mjs b/tests/desk/ac94-qw1-questions.test.mjs
+index f75d133..a4e0d93 100644
+--- a/tests/desk/ac94-qw1-questions.test.mjs
++++ b/tests/desk/ac94-qw1-questions.test.mjs
+@@ -678,7 +678,7 @@ test('AC94 ("Before and around a link"): AC77\'s re-read before a section link,
+ // ---------------------------------------------------------------------------
+ // Its look, its targets, its region
+ 
+-test('AC94 ("Its look"; AC81; AC88): the head 600 12 px --ink, its count and each " · " --t-mono, " · " --ink2, a hairline under it; each question a board card, its title --t-row cut at three lines; the boxes in the sheet\'s form (10/12 px inside, a 12 px corner, 8 px apart, 36 px buttons); no soft box, no new colour, size or weight, every text at least 4.5:1 — in light and dark, at 360 and 414 px', async () => {
++test('AC94 ("Its look"; AC81; AC88): the head 600 12 px --ink (from HD1, AC98: 600 15 px), its count and each " · " --t-mono, " · " --ink2, a hairline under it; each question a board card, its title --t-row cut at three lines; the boxes in the sheet\'s form (10/12 px inside, a 12 px corner, 8 px apart, 36 px buttons); no soft box, no new colour, size or weight, every text at least 4.5:1 — in light and dark, at 360 and 414 px', async () => {
+   const b = busiestState();
+   const app = await open(b, { store: seen(NOW + H, b.seed) });
+   try {
+@@ -693,7 +693,8 @@ test('AC94 ("Its look"; AC81; AC88): the head 600 12 px --ink, its count and eac
+         const c = INK[theme];
+         const at = `${theme}, ${w} px`;
+         const h = L.get(head);
+-        assert.deepEqual([h.size, h.weight, h.colour, h.decl('border-bottom')], ['12px', '600', c.ink, `1px solid ${c.line}`], `${at}: the head`);
++        // Rewritten in HD1 (AC98, AC94 noted: a section head 600 12 → 600 15 px; forced).
++        assert.deepEqual([h.size, h.weight, h.colour, h.decl('border-bottom')], ['15px', '600', c.ink, `1px solid ${c.line}`], `${at}: the head`);
+         const [, dot, count] = head.children;
+         assert.match(L.get(dot).raw('font'), /^400 11px\/1\.4 ⟦--mono\|/, `${at}: " · " in --t-mono`);
+         assert.equal(L.get(dot).colour, c.ink2);
+@@ -713,7 +714,8 @@ test('AC94 ("Its look"; AC81; AC88): the head 600 12 px --ink, its count and eac
+         for (const el of findAll(sec, (e) => (e.children || []).some((x) => x.nodeType === 3 && String(x.text || '').trim()))) {
+           const l = L.get(el);
+           assert.ok([c.ink, c.ink2].includes(l.colour), `${at}: "${el.textContent.slice(0, 30)}" in ${l.colour}`);
+-          assert.ok(['11px', '12px', '13px'].includes(l.size), `${at}: "${el.textContent.slice(0, 30)}" at ${l.size}`);
++          // Rewritten in HD1 (AC98; forced): the section's sizes gain its head's 15 px.
++          assert.ok(['11px', '12px', '13px', '15px'].includes(l.size), `${at}: "${el.textContent.slice(0, 30)}" at ${l.size}`);
+           assert.ok(['400', '500', '600'].includes(l.weight));
+           let ground = null;
+           for (let n = el; n && !ground; n = n.parent) { const g = L.get(n); const bgv = g && (g.decl('background') || g.decl('background-color')); if (bgv && /^#/.test(bgv)) ground = bgv.toLowerCase(); }
+diff --git a/tests/desk/ac98-headers.test.mjs b/tests/desk/ac98-headers.test.mjs
+new file mode 100644
+index 0000000..db3ef53
+--- /dev/null
++++ b/tests/desk/ac98-headers.test.mjs
+@@ -0,0 +1,392 @@
++// ac-test: S-001/AC98 — the headers sized as headers (stage HD1; the approved header picture, docs/design/builds/headers-picture/,
++// images 1 to 8, with the owner's answers "Bigger titles too", B, "All dark", A, and "Keep that part small", A). The suite has no
++// browser (AC80's method), so the page is the sandbox's own code under the fake DOM, and the stylesheets the page loads
++// (style.css, then sandbox.css) are cascaded over what it drew (tests/desk/css-cascade.mjs): every screen and sheet from each
++// fixture — AC62's and AC81's (screen-text.mjs: Service-Desk at 3117150 from `service-desk/`, a made-up project with one item of
++// each kind, and a v2.5 project in `poom/`'s placeholder form), `md-extremes/` (sandbox-fixtures.mjs's five made-up projects),
++// Service-Desk with J12's built pull requests, and Plan's made-up estimates (wa-fixtures.mjs) — and the states the walk does not
++// reach on its own (glance-fixtures.mjs, qw1-fixtures.mjs and vt1-fixtures.mjs: Home with "Since you last looked", Waiting with
++// questions and with none, the Kicked back strip with cards, an opened phase with two runs, the value targets' sheet; all made
++// up, NOT real records), in dark (forced, and the phone's own) and light, at 360 and 414 px. Each role in AC98's table is
++// checked by selector: its computed size, weight and colour; the kept-small roles, each measured, unchanged; the tokens'
++// values unchanged; and the two headings' small part. The stage-8 guard's exception for HD1 is AC88's test's
++// (tests/desk/ac88-dark.test.mjs, `HD1_ONCE`); the Chromium captures at 360 × 740 and 414 × 896 are the pull request's.
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import { readFileSync } from 'node:fs';
++import { join } from 'node:path';
++import { SRC, CONFIG } from './helpers.mjs';
++import { loadSandbox, findAll, byClass, openIdle } from './sandbox-helpers.mjs';
++import { NOW, extremes } from './sandbox-fixtures.mjs';
++import { textSetup } from './screen-text.mjs';
++import { SD3, sdRepo } from './tv2-fixtures.mjs';
++import { waSetup, WORKED, memStore } from './wa-fixtures.mjs';
++import { parseCss, treeOf, cascade, nodes } from './css-cascade.mjs';
++import { PF_ROWS } from '../../src/public/lib/portfolio.js';
++import { HOME_WORDS } from '../../src/lib/home.js';
++import { PAGE_WORDS } from '../../src/lib/projectpage.js';
++import { quietState, twoMixState, textState, gatesState, deviceMarks, KICKED, GATE4, GATE_KEY, MIX_PROJECT, SD, G7_OPENS, G8B_OPENS, G9_OPENS, lookedAt } from './glance-fixtures.mjs';
++import { QW1_OPENS } from './qw1-fixtures.mjs';
++import { VT1_OPENS } from './vt1-fixtures.mjs';
++import { POLL_MS } from '../../src/lib/scheduler.js';
++
++const SANDBOX_CSS = readFileSync(join(SRC, 'public', 'sandbox.css'), 'utf8');
++const JS = readFileSync(join(SRC, 'public', 'sandbox.js'), 'utf8');
++const RULES = (() => {
++  const a = parseCss(readFileSync(join(SRC, 'public', 'style.css'), 'utf8'), 'style.css');
++  const b = parseCss(SANDBOX_CSS, 'sandbox.css').map((r) => ({ ...r, order: r.order + a.length }));
++  return [...a, ...b];
++})();
++const FLAT = SANDBOX_CSS.replace(/\/\*[\s\S]*?\*\//g, '');
++const V2 = FLAT.slice(FLAT.indexOf('@font-face')); // mockup v2's block (AC62's and AC81's tests)
++const OLDER = FLAT.slice(0, FLAT.indexOf('@font-face'));
++const rule = (sel) => {
++  const re = new RegExp(`(?:^|})\\s*${sel.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*\\{([^}]*)\\}`);
++  const m = re.exec(V2);
++  return m ? m[1] : '';
++};
++
++const INK = { light: { ink: '#18191c', ink2: '#5c5f66' }, dark: { ink: '#ecedef', ink2: '#a2a5ac' } };
++/** Dark forced on a light phone (the frames' way), the phone's own dark, and light; each at 360 and 414 px. */
++const WAYS = [
++  { name: 'dark (data-theme)', theme: 'dark', scheme: 'light', attr: 'dark' },
++  { name: 'dark (the phone)', theme: 'dark', scheme: 'dark', attr: null },
++  { name: 'light', theme: 'light', scheme: 'light', attr: null },
++].flatMap((w) => [360, 414].map((width) => ({ ...w, width, name: `${w.name}, ${width} px` })));
++
++const plain = (v) => String(v == null ? '' : v).replace(/⟦[^|⟧]*\|([^⟧]*)⟧/g, '$1').trim();
++const is = (n, tag, cls) => Boolean(n && n.tag === tag && (!cls || n.cls.has(cls)));
++const bare = (n) => n.cls.size === 0;
++const up = (n, pred) => { for (let a = n.parent; a; a = a.parent) if (pred(a)) return a; return null; };
++const SANS = /^"IBM Plex Sans"/;
++const MONO = /^"IBM Plex Mono"/;
++
++/**
++ * AC98's table, by selector, and its kept-small list: each role's match and its look ([size, weight, colour, family]), the
++ * colour a token's name. `null` leaves a part unchecked.
++ */
++const ROLES = [
++  // Screen and sheet titles (answer B).
++  ['a screen\'s title (.v2-title)', (n) => is(n, 'h1', 'v2-title'), ['28px', '600', 'ink', SANS], { lh: '33.6px' }],
++  ['Team\'s, a member\'s and a Details view\'s title (.sb-hdr h1)', (n) => is(n, 'h1') && Boolean(up(n, (a) => a.cls.has('sb-hdr'))), ['28px', '600', 'ink', SANS], { lh: '33.6px' }],
++  ['a sheet\'s title (.v2-stitle)', (n) => is(n, 'h2', 'v2-stitle'), ['20px', '600', 'ink', SANS], { lh: '26px' }],
++  ['a Team sheet\'s title (.sb-sheet-t)', (n) => n.cls.has('sb-sheet-t'), ['20px', '600', 'ink', SANS], { lh: '26px' }],
++  // Section and sheet-block heads, 600 15 px --ink (answer A).
++  ['a section head (.v2-shw)', (n) => n.cls.has('v2-shw'), ['15px', '600', 'ink', SANS]],
++  ['a section head\'s row (.v2-sh)', (n) => n.cls.has('v2-sh'), ['15px', '600', 'ink', SANS]],
++  ['a Plan group head (.v2-plhw)', (n) => n.cls.has('v2-plhw'), ['15px', '600', 'ink', SANS]],
++  ['a Home group\'s title (.v2-hgt)', (n) => n.cls.has('v2-hgt'), ['15px', '600', 'ink', SANS]],
++  ['"More detail" (.v2-mds)', (n) => n.cls.has('v2-mds'), ['15px', '600', 'ink', SANS]],
++  ['Waiting\'s section heads with cards (.v2-kh)', (n) => is(n, 'h2', 'v2-kh'), ['15px', '600', 'ink', SANS]],
++  ['a sheet\'s block head (.v2-bh)', (n) => n.cls.has('v2-bh'), ['15px', '600', 'ink', SANS]],
++  ['each target\'s name (.v2-vth)', (n) => is(n, 'h3', 'v2-vth'), ['15px', '600', 'ink', SANS]],
++  ['a Team or Details head (.sb-h2)', (n) => is(n, 'h2', 'sb-h2'), ['15px', '600', 'ink', SANS]],
++  ['a Team sheet\'s head (.sb-sec h3)', (n) => is(n, 'h3') && bare(n) && is(n.parent, 'div', 'sb-sec'), ['15px', '600', 'ink', SANS]],
++  // Sub-heads, 600 13 px, each keeping its colour.
++  ['a lane\'s head (.v2-lh)', (n) => is(n, 'h2', 'v2-lh'), ['13px', '600', 'ink', SANS]],
++  ['a project\'s name heading its group (.v2-gn)', (n) => n.cls.has('v2-gn'), ['13px', '600', 'ink', SANS]],
++  ['an opened phase\'s run head (.v2-runh)', (n) => n.cls.has('v2-runh'), ['13px', '600', 'ink', SANS]],
++  ['the Timeline\'s goal labels (.v2-goal .v2-label)', (n) => n.cls.has('v2-label') && Boolean(up(n, (a) => a.cls.has('v2-goal'))), ['13px', '600', 'ink2', SANS]],
++  ['Plan\'s card label (.v2-plcard > .v2-label)', (n) => n.cls.has('v2-label') && is(n.parent, 'section', 'v2-plcard'), ['13px', '600', 'ink2', SANS]],
++  ['"More detail"\'s sub-heads (.sb-h3)', (n) => n.cls.has('sb-h3') && Boolean(up(n, (a) => a.cls.has('v2-home') || a.cls.has('v2-proj'))), ['13px', '600', 'ink', SANS]],
++  // An opened phase's two group heads, one step under its run's head.
++  ['an opened phase\'s group head (.v2-subh)', (n) => n.cls.has('v2-subh'), ['12px', '600', 'ink', SANS]],
++  // An empty section's line, quieter than a full head; " · " and "none" in their mono.
++  ['an empty section\'s line (.v2-kq)', (n) => is(n, 'p', 'v2-kq'), ['13px', '500', 'ink2', SANS]],
++  ['its words (.v2-kl, .v2-kw)', (n) => (n.cls.has('v2-kl') || n.cls.has('v2-kw')) && is(n.parent, 'p', 'v2-kq'), ['13px', '500', 'ink2', SANS]],
++  ['its " · " and "none" (.v2-kn)', (n) => n.cls.has('v2-kn') && is(n.parent, 'p', 'v2-kq'), ['11px', '400', 'ink2', MONO]],
++  // The two headings' small part.
++  ['" · " and what follows (.v2-shs)', (n) => n.cls.has('v2-shs'), ['12px', '400', 'ink2', SANS]],
++  ['the heading\'s time (.v2-shm)', (n) => n.cls.has('v2-shm'), ['12px', '400', 'ink2', MONO]],
++  // Beside the heads, each keeping its own look.
++  ['a head\'s mono note (.v2-sh .v2-mono)', (n) => n.cls.has('v2-mono') && n.parent && n.parent.cls.has('v2-sh'), ['11px', '400', 'ink2', MONO]],
++  ['"Mark as seen" (.v2-seen)', (n) => n.cls.has('v2-seen'), ['11px', '500', 'ink', SANS]],
++  ['a lane\'s or section\'s count (.v2-lc)', (n) => n.cls.has('v2-lc'), ['11px', '400', 'ink2', MONO]],
++  ['a Home group\'s count (.v2-hgn)', (n) => n.cls.has('v2-hgn'), ['11px', '400', 'ink2', MONO]],
++  ['a Home group\'s waiting part (.v2-hgy)', (n) => n.cls.has('v2-hgy'), ['11px', '500', 'ink', SANS]],
++  ['"More detail"\'s chevron', (n) => is(n, 'svg') && is(n.parent, 'summary', 'v2-mds'), [null, null, 'ink2', null]],
++  // Kept small, on purpose (as drawn, the picture approved, B).
++  ['the Timeline\'s pinned band (.v2-tpn)', (n) => n.cls.has('v2-tpn'), ['12px', '600', 'ink', SANS]],
++  ['the Timeline\'s compact title (.v2-tn)', (n) => n.cls.has('v2-tn'), ['15px', '600', 'ink', SANS]],
++  ['Technical, Context and Why (.v2-bn)', (n) => n.cls.has('v2-bn'), ['11px', '500', 'ink2', SANS]],
++  ['a card\'s kind label (.v2-kd)', (n) => n.cls.has('v2-kd'), ['11px', '500', 'ink2', SANS]],
++  ['the board\'s buttons (.v2-step)', (n) => n.cls.has('v2-step'), ['11px', '500', null, SANS]],
++  ['the folds (.v2-fold)', (n) => n.cls.has('v2-fold') && !n.cls.has('v2-untrb'), ['11px', '500', null, SANS]],
++  ['a field label (.v2-label)', (n) => n.cls.has('v2-label') && !up(n, (a) => a.cls.has('v2-goal')) && !is(n.parent, 'section', 'v2-plcard'), ['11px', '500', 'ink2', SANS]],
++  ['a tab (.v2-tab)', (n) => n.cls.has('v2-tab'), ['11px', '500', null, SANS]],
++  ['the Now line (.v2-nowl)', (n) => n.cls.has('v2-nowl'), ['11px', '500', 'ink', MONO]],
++  ['the small word over Team\'s title (.sb-eyebrow)', (n) => n.cls.has('sb-eyebrow') && Boolean(up(n, (a) => a.cls.has('sb-hdr'))), ['11px', '500', 'ink2', SANS]],
++  ['a tile\'s name (.v2-tnm)', (n) => n.cls.has('v2-tnm'), ['13px', '600', null, SANS]],
++  ['a phase row\'s name (.v2-sn)', (n) => n.cls.has('v2-sn'), ['13px', '500', null, SANS]],
++  ['AC97\'s figure (.v2-vbig)', (n) => n.cls.has('v2-vbig'), ['24px', '600', 'ink', SANS]],
++  ['the briefing\'s count (.v2-bt1)', (n) => n.cls.has('v2-bt1') && Boolean(up(n, (a) => a.cls.has('k-you'))), ['18px', '600', null, SANS]],
++];
++/** The heads that must turn dark: their words in --ink by the token, not a value of their own. */
++const DARK_HEADS = ['.v2-shw', '.v2-sh', '.v2-hgt', '.v2-mds', '.v2-kh', '.v2-bh', '.v2-vth'];
++
++/** Each role's look on a screen, in every way; a failure once per role, way and look. */
++function check(app, where, fails, met) {
++  for (const way of WAYS) {
++    const root = document.documentElement;
++    const attrs = { ...(root.attrs || {}) };
++    if (way.attr) attrs['data-theme'] = way.attr; else delete attrs['data-theme'];
++    const tree = cascade(treeOf(app.view, { className: root.className, attrs }), RULES, { scheme: way.scheme, width: way.width, reducedMotion: false });
++    const c = INK[way.theme];
++    for (const n of nodes(tree)) {
++      for (const [name, match, [size, weight, colour, family], extra] of ROLES) {
++        if (!match(n)) continue;
++        met.add(`${name} · ${way.name}`);
++        const got = [plain(n.style.get('font-size')), plain(n.style.get('font-weight')), plain(n.style.get('color')).toLowerCase(), plain(n.style.get('font-family'))];
++        const bad = [];
++        if (size && got[0] !== size) bad.push(`size ${got[0]}, not ${size}`);
++        if (weight && got[1] !== weight) bad.push(`weight ${got[1]}, not ${weight}`);
++        if (colour && got[2] !== c[colour]) bad.push(`colour ${got[2]}, not --${colour} ${c[colour]}`);
++        if (family && !family.test(got[3])) bad.push(`family ${got[3]}`);
++        if (extra && extra.lh && plain(n.style.get('line-height')) !== extra.lh) bad.push(`line height ${plain(n.style.get('line-height'))}, not ${extra.lh}`);
++        if (bad.length) {
++          const k = `${name} · ${way.name} · ${bad.join(', ')}`;
++          if (!fails.some((f) => f.endsWith(k))) fails.push(`${where} · "${String(n.text || '').trim().slice(0, 30)}" · ${k}`);
++        }
++      }
++    }
++  }
++}
++
++async function opened(setup, hash = '#/', { now = NOW, store = null } = {}) {
++  const app = await loadSandbox({ ...setup, hash, now, store });
++  await app.advance(1000);
++  await app.advance(61_000);
++  return app;
++}
++const hrefsIn = (app, re) => {
++  const out = [];
++  const walk = (n) => { for (const c of n.children || []) { if (c.tag === 'a' && re.test(c.attrs.href || '') && !out.includes(c.attrs.href)) out.push(c.attrs.href); walk(c); } };
++  walk(app.view);
++  return out;
++};
++const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
++
++/** Every screen and sheet the fixture reaches, as AC88's walk opens them. */
++async function everyScreen(app, projects, where, fails, met, counts) {
++  const visit = async (hash) => {
++    await app.go('#/');
++    await app.go(hash);
++    check(app, `${where} ${hash}`, fails, met);
++    counts.screens++;
++  };
++  await visit('#/');
++  await visit('#/since');
++  for (const r of PF_ROWS) await visit(`#/pf/${r}`);
++  await visit('#/waiting');
++  for (const h of hrefsIn(app, /^#\/waiting\/card\//)) await visit(h);
++  await visit('#/work');
++  for (const h of hrefsIn(app, /^#\/work\/ms\//).slice(0, 3)) await visit(h);
++  for (const p of projects) {
++    const base = `#/p/${encodeURIComponent(p.name)}`;
++    await visit(base);
++    await visit(`#/waiting/${encodeURIComponent(p.name)}`);
++    if (p.model === 'v3') for (const s of ['info', 'values', 'experiments', 'timeline', 'notes']) await visit(`${base}/${s}`);
++    else await visit(`${base}/pipeline`);
++    for (const s of ['asked', 'agents', 'team']) await visit(`${base}/${s}`);
++    await app.go(`${base}/team`);
++    if (findAll(app.view, (e) => e.dataset && e.dataset.k === 'team-idle').length) await openIdle(app);
++    for (const m of hrefsIn(app, new RegExp(`^${esc(base)}/team/[^/]+$`))) {
++      await visit(m);
++      for (const s of hrefsIn(app, new RegExp(`^${esc(m)}/(now(/[^/]+)?|e/\\d+)$`)).slice(0, 2)) await visit(s);
++    }
++  }
++}
++
++test('AC98 (the stylesheet): each role\'s rule by selector, in mockup v2\'s block — the titles 600 28 and 600 20 px at the tokens\' line heights, the section heads 600 15 px --ink, the sub-heads 600 13 px, an opened phase\'s group heads 600 12 px, the empty line --t-row --ink2, the small part --t-small --ink2 with its time in Plex Mono 400 12 px; the kept-small rules and every token\'s value unchanged; the older block holds none of them', () => {
++  const want = [
++    ['.v2-title', /font: 600 28px\/1\.2 var\(--font\)/],
++    ['html.sb.v2-page .sb-hdr h1', /font: 600 28px\/1\.2 var\(--font\)/],
++    ['.v2-stitle', /font: 600 20px\/1\.3 var\(--font\)/],
++    ['html.sb.v2-page .sb-sheet-t', /font: 600 20px\/1\.3 var\(--font\)/],
++    ['html.sb.v2-page .sb-h2, html.sb.v2-page .sb-sec h3', /font: 600 15px\/1\.3 var\(--font\); color: var\(--ink\)/],
++    ['.v2-lh', /font: 600 13px\/1\.3 var\(--font\); color: var\(--ink\)/],
++    ['.v2-kq', /font: var\(--t-row\); color: var\(--ink2\)/],
++    ['.v2-gn', /font: 600 13px\/1\.3 var\(--font\); color: var\(--ink\)/],
++    ['.v2-bh', /font: 600 15px\/1\.3 var\(--font\); color: var\(--ink\)/],
++    ['.v2-shw', /font: 600 15px\/1\.3 var\(--font\); color: var\(--ink\)/],
++    ['.v2-shs', /font: var\(--t-small\); color: var\(--ink2\)/],
++    ['.v2-shm', /font: 400 12px\/1\.4 var\(--mono\)/],
++    ['.v2-mds > .v2-k', /color: var\(--ink2\)/],
++    ['html.sb .v2-home .sb-h3', /font: 600 13px\/1\.3 var\(--font\)/],
++    ['html.sb .v2-proj .sb-h3', /font: 600 13px\/1\.3 var\(--font\)/],
++    ['.v2-runh', /font: 600 13px\/1\.3 var\(--font\); color: var\(--ink\)/],
++    ['.v2-subh', /font: 600 12px\/1\.3 var\(--font\); color: var\(--ink\)/],
++    ['.v2-goal .v2-label', /font: 600 13px\/1\.3 var\(--font\); color: var\(--ink2\)/],
++    ['.v2-plcard > .v2-label', /font: 600 13px\/1\.3 var\(--font\)/],
++    ['.v2-vth', /font: 600 15px\/1\.3 var\(--font\); color: var\(--ink\)/],
++    // Kept small.
++    ['.v2-tpn', /font: 600 12px\/1\.3 var\(--font\)/],
++    ['.v2-tn', /font: 600 15px\/1\.3 var\(--font\)/],
++    ['.v2-bn', /font: var\(--t-label\); color: var\(--ink2\)/],
++    ['.v2-kd', /font: var\(--t-label\); color: var\(--ink2\)/],
++    ['.v2-label', /font: var\(--t-label\); color: var\(--ink2\)/],
++    ['.v2-tab', /font: var\(--t-label\); color: var\(--ink2\)/],
++    ['.v2-nowl', /font: 500 11px\/1\.4 var\(--mono\)/],
++    ['.v2-tnm', /font: 600 13px\/1\.3 var\(--font\)/],
++    ['.v2-sn', /font: var\(--t-row\)/],
++    ['.v2-step.off', /color: var\(--ink2\)/],
++    ['.v2-brief.k-you .v2-bt1', /font: var\(--t-sheet\)/],
++  ];
++  for (const [sel, re] of want) assert.match(rule(sel), re, sel);
++  for (const sel of ['.v2-sh', '.v2-kh', '.v2-mds', '.v2-hgt']) assert.match(rule(sel), /font: 600 15px\/1\.3 var\(--font\);[^}]*color: var\(--ink\)|color: var\(--ink\);[^}]*font: 600 15px/, sel);
++  assert.ok(/font: 600 15px\/1\.3 var\(--font\); color: var\(--ink\)/.test(rule('.v2-hgt')), '.v2-hgt');
++  // Every head turned dark by the token, never a colour of its own.
++  for (const sel of DARK_HEADS) assert.match(rule(sel), /color: var\(--ink\)/, `${sel} in --ink by the token`);
++  // The folds and the board's buttons unchanged (--t-label).
++  assert.equal((V2.match(/\.v2-fold \{[^}]*font: var\(--t-label\)/g) || []).length, 2, 'the folds\' two rules in --t-label');
++  assert.match(V2, /\.v2-gatebtns \.v2-step \{[^}]*font: var\(--t-label\)/);
++  // The tokens' values unchanged (AC81): AC97's figure 24 px by --t-title and the briefing's count 18 px by --t-sheet.
++  const tok = Object.fromEntries([...FLAT.slice(FLAT.indexOf('html.sb .v2, html.sb.v2-page {')).matchAll(/(--t-[a-z]+): ([^;]+);/g)].slice(0, 9).map((m) => [m[1], m[2]]));
++  assert.deepEqual(tok, {
++    '--t-title': '600 24px/1.2 var(--font)', '--t-sheet': '600 18px/1.3 var(--font)', '--t-lead': '400 15px/1.45 var(--font)',
++    '--t-row': '500 13px/1.35 var(--font)', '--t-body': '400 13px/1.45 var(--font)', '--t-small': '400 12px/1.4 var(--font)',
++    '--t-label': '500 11px/1.35 var(--font)', '--t-mono': '400 11px/1.4 var(--mono)', '--t-input': '400 16px/1.4 var(--font)',
++  });
++  assert.match(FLAT, /--t-screen: var\(--t-title\); --t-section: var\(--t-label\);/, 'the older look\'s roles still name the same tokens');
++  // Every new rule in mockup v2's block; the older block (AC62's) holds none of the new sizes or classes.
++  assert.doesNotMatch(OLDER, /600 28px|600 20px|600 15px\/1\.3|600 13px\/1\.3|v2-shs|v2-shm/, 'the older block unchanged by HD1');
++  // AC81's pairs: exactly 600 28 and 600 20 new, and in Plex Mono 400 12; no font-size of its own, no other weight.
++  const fonts = [...V2.matchAll(/(?:^|[{;\s])font\s*:\s*(\d{3}) (\d+)px\/[\d.]+(?:px)? var\(--(font|mono)\)/g)].map((m) => `${m[3]} ${m[1]} ${m[2]}`);
++  for (const f of ['font 600 28', 'font 600 20', 'mono 400 12']) assert.ok(fonts.includes(f), f);
++  assert.doesNotMatch(V2, /font-size\s*:/);
++  for (const m of V2.matchAll(/font-weight\s*:\s*([^;}]+)/g)) assert.match(m[1].trim(), /^(400|500|600)$/);
++  // The gate sheet's title still held to two lines at its line height.
++  assert.match(V2, /\.v2-stitle > \.v2-stt[^{]*\{[^}]*max-height: calc\(2 \* 1\.3em\)|max-height: calc\(2 \* 1\.3em\)/);
++});
++
++test('AC98 ("Two headings on one line"): "Since you last looked · <time>" and "Milestones by phase · <count>" split at their first " · " in sandbox.js — the words before it the head\'s, " · " and what follows in `.v2-shs`, a clock time in `.v2-shm` (Plex Mono) and "in the last 7 days" and the count in Plex Sans; the words unchanged and read whole', async () => {
++  assert.match(JS, /function splitHead\(words, mono\)/);
++  assert.match(JS, /splitHead\(sv\.heading, Boolean\(sv\.time\) && sv\.time !== HOME_WORDS\.lastWeek\)/);
++  assert.match(JS, /splitHead\(PAGE_WORDS\.milestonesHead\(mv\.tracked \? mv\.sum : null\), false\)/);
++  // Home, "last looked" yesterday, earlier in the week and before that (made up); and markers off (no " · ").
++  const DAY = 24 * 3600e3;
++  for (const [looked, re, mono] of [[NOW - 20 * 3600e3, /^yesterday, \d\d:\d\d$/, true], [NOW - 3600e3, /^\d\d:\d\d$/, true], [NOW - 4 * DAY, /^\d{1,2} [A-Z][a-z]{2}, \d\d:\d\d$/, true],
++    [NOW - 9 * DAY, new RegExp(`^${HOME_WORDS.lastWeek}$`), false]]) {
++    const app = await loadSandbox({ ...textSetup(), hash: '#/', now: NOW, store: lookedAt(looked) });
++    try {
++      await app.advance(1000);
++      await app.advance(POLL_MS);
++      const h2 = byClass(findAll(app.view, (e) => e.dataset && e.dataset.k === 'since-h')[0], 'v2-shw')[0];
++      const [words, small] = h2.children;
++      assert.equal(words.textContent, HOME_WORDS.since, 'the head\'s words');
++      assert.match(small.className, /\bv2-shs\b/);
++      assert.equal(small.children[0].textContent, ' · ');
++      const after = small.textContent.slice(3);
++      assert.match(after, re);
++      assert.equal(byClass(small, 'v2-shm').length, mono ? 1 : 0, `${after}: ${mono ? 'a time, in Plex Mono' : 'words, in Plex Sans'}`);
++      assert.equal(h2.textContent, `${HOME_WORDS.since} · ${after}`, 'read whole, unchanged');
++      assert.ok(byClass(h2.parentNode, 'v2-seen').length === 1, 'beside "Mark as seen"');
++    } finally {
++      app.restore();
++    }
++  }
++  // With it off (no "last looked" kept on the device): the head alone, no small part.
++  {
++    const app = await opened(textSetup());
++    try {
++      const h2 = byClass(findAll(app.view, (e) => e.dataset && e.dataset.k === 'since-h')[0], 'v2-shw')[0];
++      assert.equal(h2.textContent, HOME_WORDS.since);
++      assert.equal(byClass(h2, 'v2-shs').length, 0);
++    } finally {
++      app.restore();
++    }
++  }
++  // A project's page: "· <R> of <T> reached" and "· none tracked yet", in Plex Sans, beside "↑ start at the foot".
++  const seenForms = new Set();
++  for (const setup of [textSetup(), extremes()]) {
++    const app = await opened(setup);
++    try {
++      for (const p of setup.config.projects) {
++        await app.go(`#/p/${encodeURIComponent(p.name)}`);
++        const head = findAll(app.view, (e) => e.dataset && e.dataset.k === 'ms-h')[0];
++        if (!head) continue;
++        const h2 = byClass(head, 'v2-shw')[0];
++        const small = byClass(h2, 'v2-shs')[0];
++        if (!small) { assert.equal(h2.textContent, PAGE_WORDS.milestonesHead(null)); continue; }
++        assert.equal(h2.children[0].textContent, 'Milestones by phase');
++        assert.match(small.textContent, /^ · (\d+ of \d+ reached|none tracked yet)$/);
++        seenForms.add(/none/.test(small.textContent) ? 'none' : 'count');
++        assert.equal(byClass(small, 'v2-shm').length, 0, 'the count in Plex Sans');
++        assert.equal(byClass(head, 'v2-mono')[0].textContent, PAGE_WORDS.startFoot, 'beside "↑ start at the foot"');
++      }
++    } finally {
++      app.restore();
++    }
++  }
++  assert.ok(seenForms.has('count'), 'a count drawn');
++});
++
++test('AC98: every role in AC98\'s table by selector — its computed size, weight and colour — on every screen and sheet from each fixture, in dark (forced, and the phone\'s own) and light, at 360 and 414 px; the counts, the mono notes and "Mark as seen" beside the heads in their own look; the kept-small roles unchanged, each measured', async () => {
++  const fails = [];
++  const met = new Set();
++  const counts = { screens: 0 };
++  const walk = async (setup, projects, where, hash = '#/', opts = {}) => {
++    const app = await opened(setup, hash, opts);
++    try {
++      await everyScreen(app, projects, where, fails, met, counts);
++    } finally {
++      app.restore();
++    }
++  };
++  const t = textSetup();
++  await walk(t, t.config.projects, 'text');
++  const x = extremes();
++  await walk(x, x.config.projects, 'md-extremes');
++  await walk({ config: { ...CONFIG, projects: [SD3] }, repos: { 'Service-Desk': sdRepo() } }, [SD3], 'service-desk + J12');
++  await walk(waSetup({ extra: { 'intake/estimates.jsonl': WORKED() } }), [], 'plan', '#/work', { now: Date.parse('2026-10-18T18:00:00Z'), store: memStore() });
++  // The states the walk does not reach: Home with "Since you last looked"; Waiting with no question and nothing kicked back,
++  // and the strip with cards, every project shown and one; a gate's sheet; a project's page with every phase opened.
++  const one = async (where, setup, hash, store, then) => {
++    const app = await loadSandbox({ ...setup, hash, now: NOW, store });
++    try {
++      await app.advance(1000);
++      await app.advance(POLL_MS);
++      if (then) await then(app);
++      check(app, where, fails, met);
++      counts.screens++;
++    } finally {
++      app.restore();
++    }
++  };
++  await one('Home, "Since you last looked" yesterday', textSetup(), '#/', lookedAt(NOW - 20 * 3600e3));
++  await one('Waiting, quiet', quietState(), '#/waiting', memStore());
++  await one('Waiting, kicked back, every project', twoMixState(), '#/waiting', memStore(deviceMarks(KICKED)));
++  await one('Waiting, kicked back, one project', twoMixState(), `#/waiting/${MIX_PROJECT}`, memStore(deviceMarks(KICKED)));
++  await one('a gate\'s sheet', gatesState(), `#/waiting/card/${encodeURIComponent(GATE_KEY(MIX_PROJECT, GATE4))}`, memStore());
++  await one('a page, every phase opened', textState(), `#/p/${SD.name}`, memStore(), async (app) => {
++    for (const ph of ['Launch', 'Build', 'Design', 'Discovery']) await app.tap(findAll(app.view, (e) => e.tag === 'button' && e.attrs && e.attrs['aria-label'] === ph)[0]);
++  });
++  for (const [where, open] of [...G7_OPENS, ...G8B_OPENS, ...G9_OPENS, ...QW1_OPENS]) {
++    const app = await open();
++    try {
++      check(app, where, fails, met);
++      counts.screens++;
++    } finally {
++      app.restore();
++    }
++  }
++  // The value targets' row and sheet (AC97): each target's name a sheet-block head, its figure 24 px as before.
++  for (const [where, open, screens] of VT1_OPENS) {
++    const app = await open();
++    try {
++      for (const [hash, prepare] of screens) {
++        await app.go(hash);
++        if (prepare) await prepare(app);
++        check(app, `VT1 ${where} ${hash}`, fails, met);
++        counts.screens++;
++      }
++    } finally {
++      app.restore();
++    }
++  }
++  assert.ok(counts.screens > 250, `${counts.screens} screens and sheets`);
++  assert.deepEqual(fails, []);
++  // Each role was measured, in every way.
++  const missing = ROLES.flatMap(([name]) => WAYS.map((w) => `${name} · ${w.name}`)).filter((k) => !met.has(k));
++  assert.deepEqual(missing, [], 'every role drawn and measured in every way');
++});
+-- 
+2.43.0
+

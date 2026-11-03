@@ -1,0 +1,824 @@
+From 9bdc95678cdee6b6206f558226bade60bd82eb06 Mon Sep 17 00:00:00 2001
+From: definer <definer@agents.invalid>
+Date: Tue, 3 Nov 2026 12:07:19 +0000
+Subject: [PATCH] S-001 after the glance audit's round 2, draft 1: the owner's
+ five answers and the hierarchy of work
+
+AC91 to AC96 and J25: anchors in the briefing's soft box (widened by the
+owner to the set of a page's most important things), the ink arrow at the
+present, green and red on the marks only, all milestones and sprints
+counted, the standard checklist set apart, and a sprint's pieces of work
+and steps (the pieces after the operating-model change). Noted in place:
+AC48, AC59, AC60, AC81 to AC84, AC86, AC88, AC90 and J12. Six stages; the
+milestone and the anchor bound go to the owner.
+
+Agent-Session: session_01QBwHGMu36mvZdxN2ssBspJ
+Spec: S-001
+---
+ specs/S-001.md | 650 ++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 649 insertions(+), 1 deletion(-)
+
+diff --git a/specs/S-001.md b/specs/S-001.md
+index 31818b8..076817d 100644
+--- a/specs/S-001.md
++++ b/specs/S-001.md
+@@ -1,7 +1,7 @@
+ # Spec S-001 — Service Desk, first version, in nine milestones
+ 
+ status: draft   frozen_at: —   workstream: service-desk-v1
+-work-type: feature   design_id: P-001   lineage: [P-001 brief (docs/PROJECT.md Part 1), S-001 drafts of 2026-10-06 (item/P-001, plan rounds 1 to 3), S-001 amendment of 2026-10-08 (M1 accepted; M2 additions; design milestone MD), S-001 J10 revision of 2026-10-08 (J10 and AC23 adopt model S-020's frozen usage form, L-0005; J1, J6 and A3 match the M2 code, PR #44 review N-C), S-001 J10 ranges note (a wrong-kind usage value marks only its key; negatives and non-finite costs are wrong kinds; a zero divisor gives "not available"; run time rounded to the second; PR #49 review R2-N1 and R2-N2, PR #52 review), S-001 milestones header of 2026-10-13 (model v3.3.0, S-023: the project milestones this spec delivers, docs/PROJECT.md section 3), S-001 design-lab revision of 2026-10-14 (MD carries rulings 1, 2 and 6 of decisions/questions/P-001-design-lab-1.md, the phases and milestones of model v3.3.0 (L-0008), and the owner's design comments of 10 to 13 Oct (docs/design/references/comments-2026-10.md): AC48–AC53 and J11; draft 2 after plan review round 1), S-001 trial-view notes 1 of 2026-10-14 (the owner's notes on the sandbox's Home screen, decisions/questions/P-001-trial-view-notes-1.md: AC54, with AC8, AC35, AC37, AC48, J11 and A3 noted in place), S-001 trial-view notes 1, notes 5 to 15, of 2026-10-15 (the same record, the batch closed: AC55 and AC56, with AC36, AC49, AC51, AC52, AC53 and J3 changed in place; draft 2 after plan review round 1 of the trial-view amendment; draft 3 after plan review round 2, AC51's milestone styling resting on the owner's answer "Bold headings, no colour (Recommended)", decisions/questions/P-001-trial-view-notes-1.md, last paragraph), S-001 tile-summary amendment of 2026-10-15 (the owner's ruling decisions/questions/P-001-tile-summary-clip.md: AC54's summary shows its first three lines, faded at the cut, with the whole summary one tap away; AC56's list of pop-ups names its bubble; draft 2 after plan review round 1 of the tile-summary amendment), S-001 design-lab answers of 2026-10-16 (the owner's ruling decisions/questions/P-001-design-lab-open.md on the eleven design-lab questions: all as recommended except question 1, so Home's "Tell your Chief of Staff…" bar and its bottom band are not built; AC48 changed in place, with AC50, AC54, the saved-screens notes, the open questions and the brief noted; draft 2 after plan review round 1 of the design-lab answers amendment, with the owner's follow-up ruling decisions/questions/P-001-design-lab-answers-followup.md: answer 6 waits on the model change "deploy approvals tied to the owner", AC52's Deploys line marked; a ruling's line 1 longer than three lines clipped to three, faded, with the whole line one tap away, in AC55's "Your last action" and AC52's "Done today", AC56's list of pop-ups extended; draft 3 after plan review round 2: a bubble taller than the viewport held to it less a margin and scrolling up and down inside itself (C), tested at 360×740 and 414×896, for AC55's, AC52's and AC54's bubbles; the clip for rulings only; AC56's checks cover the "Done today" bubble; draft 4 after build review 1: an open whole-line bubble stays unchanged through a refresh that changes AC55's line, saying a newer action is arriving, with AC56's step 2b case; a short ruling keeps the one-line form; the bubble holds line 1 only, "(proxy)" outside it; draft 5 after build review round 2: the hold spelled out for a "Done today" row, the day turning at midnight named, with AC56's midnight case; focus after a held bubble closes with its control gone goes to "Your last action" or "Done today"'s header; draft 6: one notice for both holds, "This has changed since you opened it. Close this to see the latest."), S-001 trial-view notes 2, notes 1 to 27, of 2026-10-16 (the owner's notes on the sandbox's Status and Timeline screens and the mockup they approved, decisions/questions/P-001-trial-view-notes-2.md, read as its "How it is read" lines read them; mockup version 6, docs/design/mockups/status-and-timeline.html, and docs/design/mockups/phase-branches.html: AC57 to AC64 and J12, with AC48, AC50, AC51, AC56 and J11 changed in place; draft 2 after plan review round 1 of the trial-view notes 2 amendment, reviews/S-001-trial-view-2/_plan-review-round1-verbatim.md, with the owner's answers of 2026-10-16 to its seven readings: the pull request's own title, re-picked colours, the gold ring for next to reach, AC61 in S-032's draft forms, J12's fixture built from REST answers and Setup CS13; draft 3 after plan review round 2, reviews/S-001-trial-view-2/_plan-review-round2-verbatim.md: a pull request's own `Milestone:` line changes no milestone's state, the gold ring named "next to reach" in words on Status, a colour-distance rule with Context's and Why's colours to be re-picked, 14 untied pull requests on the default branch since 680797b, and notes 28 to 31, approved by the owner, as AC65 to AC68 with AC36, AC49, AC52, AC55, AC58 and AC62 changed in place; draft 4: notes 32 to 35 from the audit for missing elements, approved by the owner, as AC69 to AC72, the confirmed Context and Why colours and dark-mode gold with the colour-distance rule set at 10 for all pairs, AC45 carrying the owner's notifications ruling of 2026-10-08 for M3, and the owner's later-work picks pointed to; draft 5 after plan review round 3, reviews/S-001-trial-view-2/_plan-review-round3-verbatim.md, the owner's ruling "Fix, recheck the fixes": AC72 reads a hand-started deploy's commit from its run title, AC58's and AC50's tests point to AC65, "Record notes" under "More detail", the notification lines marked ruled, AC72's trace reason, AC70's fallback in plain words, the dashed circle's second meaning named, and slate in the colour rule; draft 6 after build review round 1, reviews/S-001-trial-view-2/_build-review-round1-verbatim.md: J12's rate limit judged by the page with a plain 60-minute wait, other J12 failures retried, only merged pull requests placed by their Milestone line, AC72's "Can't check" while J12's kept list is not current, and neutral shades for a third or later run), S-001 desk follow-ups of 2026-10-17 (the owner's request "go ahead with the desk follow-ups", the revision L-0015 names: AC61 in the frozen S-032's forms, adopted here with model v3.4.0, its list of differences made true and the S-032 build review's N1 and N2 named as known limits; the merge-commit message corrected for the "Pull request title and description" setting, and a push deploy's run title cut to `deploy <sha>`, Setup CS14, the Chief of Staff's; J12's failed reads retried with a backoff, with AC14's case for J12 failing all day, build review round 2 of trial-view notes 2, N1), S-001 model 3.5.0 records of 2026-10-17 (the owner's pick "File every ask (Recommended)", decisions/questions/P-001-trial-view-notes-2.md:165-166, and the revision L-0016 licenses: the desk reads the records model S-033 added, adopted here with model v3.5.0: a question's and an answer's `Milestone:` line and a question's `## Context` in AC66 and J2, the decision card's `Milestone:` line and `## Context` in J2, the Chief of Staff's session lines in AC49, AC67 and the new J13, and a milestone's ` · reached:` part in J11, AC50, AC57, AC59, AC65 and AC68, built before any plan line carries one; the asks-merge workflow's merges shown as any pull request until the owner rules; draft 2 after the Critic's check and plan review round 1 (reviews/S-001-model-3.5.0-records/_critic-round1-verbatim.md and _plan-review-round1-verbatim.md): the amendment led by one plain paragraph; the answer's `Milestone:` line in the sandbox's answer box only (AC53), the accepted views' answer link unchanged (AC19, J3), its gap a known limit (J2); the owner's words of 2026-10-17 quoted from the session, with L-0016's licenses_next as the record; the first asks-merge merge (#84, 21bc250) in place of #82; open question 1 restated with each option's effect on what needs the owner, who has the ball, "Quiet" and the Timeline, a desk-only route, and its recommendation changed to it; open question 2 quoting ruling 5 whole; both ready to file; the parsed cache's key moved on (J6); J13's mirror of the model's session checks listed, one `usage` rule, an end line with no open piece and the Chief of Staff's Cost; J11's reached part after ` · why:`; MD2 reached on 16 Oct pinned in AC50, AC57, AC59 and J11, and a reached milestone in a run still to come (AC57's rule 3); the fixtures' provenance and a question file changed after filing; AC66's frozen copy; and the ruling behind each (C) choice named; draft 3 after the Critic's check and plan review round 2 (reviews/S-001-model-3.5.0-records/_critic-round2-verbatim.md and _plan-review-round2-verbatim.md): open question 1 in three plain options with its mechanism in the Context, C's full cost and risk stated, B recommended and the default, the branch-name idea a later model idea, one letter case, and AC57's run-still-to-come case naming M3A; draft 4 after the owner's answers of 2026-10-17 to both open questions (decisions/questions/P-001-asks-merge-on-desk.md, "B. Off the Timeline (Recommended)", and decisions/questions/P-001-cos-sessions-on-desk.md, "A. Team screen only (Recommended)"): J12 reads each merge commit's message and author, the asks-merge job's merges are left out of the Timeline's sprints and run times (AC59, AC60) and out of "Done today"'s Timeline link (AC66), while open they show as today, and the Agents list stays as it is; draft 5 after plan review round 4 (reviews/S-001-model-3.5.0-records/_plan-review-round4-verbatim.md), the owner's ruling "Fix, recheck the fixes (Recommended)" (decisions/questions/P-001-s001-round4.md): AC66's test covers a job's merge leaving the queue, J12's trailer rule called a partial summary of `parse_trailers` with two more made-up cases, the kept list's key moved to `desk-pulls-v2`, CS13 step 1 naming the author check, the plan winning for a plan-listed job merge (AC59, AC60), and J12 and AC60 in Areas touched's test list; draft 6 after plan review round 5 (reviews/S-001-model-3.5.0-records/_plan-review-round5-verbatim.md, PASS with notes): the plan-listed exception carried into AC66, the amendment, J12, the Answered entry and the brief, with a case in AC60's test; J12's "lacks the field" reading named; CS13's corrected author name bounded; J12's two new cases listed in its test; and the round-4 ruling's record cited; draft 7 after plan review round 6 (reviews/S-001-model-3.5.0-records/_plan-review-round6-verbatim.md, PASS with notes): an unread plan-listed merge shown as J12's awkward cases show a listed pull request it lacks (AC60, AC66), AC66's test with a plan-listed job's merge linked from "Done today", and the lead's "unless the plan lists one"; draft 8 after build review round 1 (reviews/S-001-model-3.5.0-records/_build-review-round1-verbatim.md): J11's reached fixture named as its two files (j11-reached/docs/PROJECT.md and j11-reached/both/, MX5 and MX6), AC62's "every word kept" exceptions adding the Chief of Staff's page (AC49, J13), and Areas touched pointing J13's read to src/lib/model.js `neededReads`), S-001 notifications of 2026-10-18 (the owner's request of 2026-10-18, "add as an immediate priority, to enable a notification system for whenever anything at all is waiting on me", recorded in decisions/questions/P-001-notify-job-merges.md, with its ruling A, "a pull request the automatic job will merge sends no notification", and the ruling of 2026-10-08, decisions/questions/P-001-notifications.md, widened to anything that waits on the owner and brought forward: AC45 changed in place; AC73 to AC77 new, AC77 carrying the owner's report of a stale answer link on a question being asked in a session; J16 to J19 new; Workflow 3, EXP-006, Setup N1 to N9 and CS15 to CS17, J2, J7, A3, Risks, Facts relied on, Areas touched and the brief noted; two open questions; no model change; draft 2 after the Critic's check and plan review round 1, both FAIL (reviews/S-001-notifications/_critic-round1-verbatim.md and _plan-review-round1-verbatim.md on the branch orch/s001-notifications), with the owner's answers of 2026-10-18 on deploys (A, notify and count now, Service-Desk only), the fast path (decisions/questions/P-001-notify-poom-fast-path.md, B) and filing (decisions/questions/P-001-file-only-required.md, B): Terms and AC52 count a waiting deploy in a project marked deploysNeedOwner; the operating-model project sends its own notifications (Workflow 4), with no token across projects; AC77 closes the reported window with "Your answer is being recorded" (J20, new); keyed hashes and signed state taken only from the sender's own main runs; no pull_request_target; test: fail by a throwaway VAPID key; the JWT refreshed at most hourly; J1, J6, J7, CS9, the owner's time, rollback and EXP-006 updated; draft 3 after round 2 of both, both FAIL (reviews/S-001-notifications/_critic-round2-verbatim.md and _plan-review-round2-verbatim.md): the session hold lasts until the session ends or the answer's pull request opens, 8 hours a fallback, in both models; the fast path's account-wide Pro minutes cited from GitHub's billing documentation, its runs bounded and a no-secret ready workflow; research Q-014's origin gate and J18's lookup by the workflow's own runs; a new JWT only for BadJwtToken and at most hourly, test: fail one request; the workflow check in CS15's pull request; EXP-006's order and case 10; the open question to be filed after this spec merges; draft 4 after round 3 (reviews/S-001-notifications/_critic-round3-verbatim.md, FAIL on B1, and _plan-review-round3-verbatim.md, PASS with notes N1 to N10), the owner's ruling "Fix, recheck the fixes (Recommended)" (decisions/questions/P-001-notify-round3.md) and the owner's cost instruction of 2026-10-18 (docs/design/references/owner-github-plan-2026-10-18.md, 762e93f): the session hold ends only at an end line written after the question was raised, with the real session file as a fixture and CS17's order; AC78 and J21 new (the account's Actions use as a percent bar, the estimated cost past the included minutes, a notification each $50, no approval step; research Q-015), with Setup N12 and CS19; Workflow 4's minutes cut and its cost stated; asks-merge's runs admitted, job-level concurrency, J18's success-only lookup, the job log's timestamps, lasting refusals, the check's own test, v3's "being recorded" needing the answer, the R3 order and scope, Q-014's source check and case 10's second signal, and EXP-006 cases 9 to 11; draft 5 after round 4 (reviews/S-001-notifications/_critic-round4-verbatim.md, PASS with notes 1 to 9, and _plan-review-round4-verbatim.md, FAIL on B1 with notes N1 to N10), the owner's ruling "Fix, then build (Recommended)" (decisions/questions/P-001-notify-round4.md), and the source checks research/Q-014-source-check.md (PASS) and research/Q-015-source-check.md (FAIL on F1.5): AC77's real-record test with a copy of the real question carrying the one added line, the unmodified question a second case; AC78's "Not reported" fallback for an account GitHub reports no Actions use for (U-11), with Setup N11 then recommended; N12 after step 3b's deploy, with a preview deploy for the Pages secret, a 404 trying the classic token, and renewal; Workflow 4's ready workflow keeping closed and draft events, its skipped job valid; the refusal clock on run_started_at; the page's reads per opening; the 100% rule, the over-count and the $50 start-up stated and tested; the cost notification out of public logs; spend scope and the value case; F6.2's citation; CS19 done; draft 6 (the sender's open questions, 2026-10-18), after the Builder's report on brief step 2, questions 1 to 15 (the sender at 7ffa285 on orch/s001-notifications), under the owner's ruling "Fix, then build (Recommended)" (decisions/questions/P-001-notify-round4.md): J18's lookup passing over another workflow's, a branch's or another repository's artifact, never reading it as unreadable, as its test now says; J18 holding the questions seen being recorded; the state-read clock's start; the 6-hour give-up for try-later and unnamed answers only; the start-up, back-on, merge-card and missing-card words and the key's kind names; one tag for every test push; J20 reading only the pull requests that can count; a candidate's check-page cap and rule (b)'s read bounds; a new JWT for a new push service; the cost push's one try; and the origin's REST read on every `workflow_run` run; then the Orchestrator's settling of the two points the Definer left open, both keeping the spec's promise to the owner: a state read that cannot be dated dated by the newest `desk-notify-state` artifact, or the issue at once, with AC76's case; and the page reading the pull requests closed since a held question was raised, so an answer's pull request closed unmerged ends the hold on the desk as on the phone, in A3's count and AC77's case; and, on the Orchestrator's ruling that the owner asked to know exactly when something shifts to them, the sender making the same closed read on each run, a failed read counted under AC76, in J16's count and AC77's case, so the known limit of a pull request opened and closed between two runs is gone; and the undatable read's clock at 30 minutes or more; draft 7 after round 5 (reviews/S-001-notifications/_critic-round5-verbatim.md on the branch orch/s001-notifications, FAIL on findings 1 and 2 with notes 3 to 12), the owner's ruling "Fix, recheck the fixes (Recommended)" (decisions/questions/P-001-notify-round5.md, pull request #110), and the Builder's step-3 report, questions 1 and 5: AC76's second read applying J18's checks the artifact list carries, with the failed-read issues' words and close; the closed read pinned for both readers (when the page makes it, up to 3 pages, drafts excluded, a found end kept, a single pull request read when a recorded answer's pull request leaves the open list, a failed read keeping the hold, "read successfully" untouched); what the page keeps on the device; the lead restated; the request counts redone; the page's open-window gap stated; the cost push's late 410 a known limit; the brief revised; J18's `recorded` cases; and the candidate cap at the job's own 10 pages; draft 8 after round 6 (reviews/S-001-notifications/_critic-round6-verbatim.md on the branch orch/s001-notifications, FAIL on finding A with notes B and C, and round 5's note 10 partly fixed), the owner's ruling "A. Fix, then build (Recommended)" (decisions/questions/P-001-notify-round6.md, pull request #114: no further recheck; the Reviewer's build review checks this fix), the Orchestrator's settling of finding A, and the owner's ruling "A. Keep the fold (Recommended)", decisions/questions/P-001-notify-more-detail.md, pull request #112, with the screenshots docs/design/mockups/notify-more-detail/ on the branch orch/s001-notifications: "an opening" defined in Terms; a `?open=` arrival and a return to the foreground each running the closed read again before the tapped item shows, with AC77's cases; a failed closed read retried at the next poll; the history-read gap listed; the close rule for a state that verifies; the late 410 in AC76's promise and the lead; the brief's step 5 completed; and the accepted Home's "More detail" fold pinned in AC75 and AC78; draft 9 after build review round 1 (reviews/S-001-notifications/_build-review-round1-security-verbatim.md and _build-review-round1-desk-verbatim.md on the branch orch/s001-notifications, both FAIL), under the Orchestrator's rulings, so the spec says what is built: J18's `recorded` keeping the answer's pull request's number, sealed, and the sender reading that pull request when it has left the open list (merged, answered; closed unmerged, open again; failed, "not read"), counted in J16; the 6-hour give-up clock started at the first try-later or unnamed failure; no 413 re-send for the cost push; usage read only for the project whose J7 entry holds `actionsUsage`, which moves into Service-Desk's entry; a waiting deploy's title only for a run from this repository; the unreadable-state run's issue and J18's lookup cost and key rotation stated as known limits; a found closed pull request's failed file read retried at the next poll; a return to the foreground kept to A2's 60 seconds, a tap's closed read at once and counted in A3; the device-memory gap stated and AC77's claim corrected; and an arrival during a closed read in flight waiting for a fresh one; the desk review's findings 1 and 2 code defects against the spec as written), S-001 notification view of 2026-10-19 (the owner's ruling "A. Go live now, switch later (Recommended)", decisions/questions/P-001-notify-which-view.md, pull request #119: the Home Screen icon and every notification tap open the sandbox view, the owner's page, until MD3 makes it the desk; the manifest's `start_url` `/?sandbox` with `id` `/`; taps at `/?sandbox&open=<key>`, AC74 and AC77's tap rules holding there; an older `/?open=` address forwarded to the sandbox; plain `/` still the accepted view; an icon added before the change, Setup N13 and EXP-006 case 12; the return to `/` at MD3 or M3; AC74's and AC75's tests), S-001 work ahead by milestones of 2026-10-18 (the owner's audit pick "Planning at milestone level", decisions/questions/P-001-trial-view-notes-2.md:167, and the rulings of 2026-10-18, decisions/questions/P-001-next-work.md, P-001-m3a-order.md, P-001-m3a-date.md, P-001-m3a-picks.md, P-001-m3a-estimator.md and P-001-m3a-finish.md, on the Work ahead mockup, version 2 (docs/design/mockups/work-ahead.html at 781e828 on orch/m3a-mockup): AC24 rewritten for milestones in the owner's order, with the Chief of Staff's estimates and a rough finish; J4's plan holding milestones only, with no dates; J14, the estimate record, and J15, the later-work list and its asks, new; J7, A3, Setup CS20 to CS22, Facts relied on, Areas touched and the brief noted; two open questions; brought up to date on 2026-10-19 with notifications (drafts 1 to 9 and the view amendment of 2026-10-19, merged from main at ab46b4a): its Setup steps renumbered CS20 to CS22, since notifications hold CS15 to CS19; "Ruled, to be built in M3: phone notifications" corrected to built and live; J7, A3, Areas touched, Facts relied on and the brief merged with notifications' own; and its two open questions filed unchanged as questions/P-001-m3a-estimate-merges.md and questions/P-001-m3a-when.md (pull request #122, bdb924a); draft 2 after the owner's answers of 2026-10-19 to both (decisions/questions/P-001-m3a-estimate-merges.md, "B. The automatic job merges them too (Recommended)", and decisions/questions/P-001-m3a-when.md, "A. Now, in the trial view (Recommended)", on the branch cos/m3a-answers-3, pull request #123): the operating-model change that lets the asks-merge job merge an estimate named as a dependency, with the add-only check it must hold and the interim in which the owner merges each one (J14, CS21, J16 at the sync); Work ahead built now in the sandbox view, accepted as its own milestone and carried into the desk at MD3 (AC24, M3's header, the brief); the open questions marked answered; the lead restated; draft 3 after the Critic's check and plan review round 1, both FAIL (reviews/S-001-m3a/_critic-round1-verbatim.md, blocking 1 and 2 with notes 3 to 11, and _plan-review-round1-verbatim.md, blocking 1 to 4 with notes 5 to 12, on the branch orch/m3a-work-ahead), under the Orchestrator's rulings: an estimate is the milestone's own days of work, counted from its date only while it is under way; a 0-to-0 estimate holds until the milestone is reached and alone reads "once you accept it"; an estimate dated after today counts 0 days, with 10 minutes' clock skew allowed; the worked example and its tests redone, the 1 Nov daylight-saving change named; the word ban on the desk's own fixed words only, as whole words; the private project's files never copied (poom/'s placeholder form) and J11's record set named; estimate pull requests carrying `Milestone: none (a rough estimate)`, each notifying in the meantime, said in the lead; the sender's J16 change a separate R3 Builder pull request landing before or with the job's fifth kind, and rule 2's base the merge base; M3A's mark as AC57 gives it; J7's `planning` rules widened; AC44's last line, the brief's order and the MD3 hand-off of AC24's test; the tap's delay told; the records added to Facts relied on; the "W3" label dropped; every difference from the mockup listed; and the brief's orders for the Chief of Staff's rewording of M3A's "done when" and the Home control shown to the owner; draft 4 after round 2 of both checks, both FAIL (reviews/S-001-m3a/_critic-round2-verbatim.md, blocking A with notes B and C, and _plan-review-round2-verbatim.md, blocking A and B with notes C to E, on the branch orch/m3a-work-ahead), under the Orchestrator's rulings: the brief's fixtures in poom/'s placeholder form, matching AC24; a named exception in AC60 leaving an estimate-only pull request off the Timeline, J12 reading the changed paths it needs (its kept list's key moving to `desk-pulls-v3`), with AC60's and J12's cases, and CS20 split so the estimate pull request is estimate-only; only `planning: true` on a v2.5 entry failing the build; Status's own words, "Work filed: <its sprints>", with the empty ring; the day count's wording; the fixture's estimates kept under 7 days; J7's whole rule in the brief; the add-only check's 10 minutes of clock skew; and no deadline words in estimate notes; draft 5 after round 3 of both checks, both PASS with notes (reviews/S-001-m3a/_critic-round3-verbatim.md and _plan-review-round3-verbatim.md, on the branch orch/m3a-work-ahead): changed paths not read, from a missing, null or field-error `changedFiles` or `files`, read as not estimate-only, so placed as any pull request, the field error judged beside the check rollup's; the real J12 fixture rebuilt with `changed_files` and the file paths from REST through tests/desk/tools/j12-fixture.mjs; J12's cost restated at about 2 points a page; AC66's "Done today" row for an estimate reading "not on the Timeline: a rough estimate", with its test; the `Milestone:` match exact after trimming; and the exception limited to the planning project's `intake/estimates.jsonl`; draft 6 after build review round 1, FAIL on the Builder's AC60 match with notes (reviews/S-001-m3a/_build-review-round1-verbatim.md, on the branch orch/m3a-work-ahead), recording the Orchestrator's rulings: a newer plan whose order equals the draft's clears the draft silently, the set-aside notice only when the orders differ (C); "No changes yet" with no move made, including when the plan can't be read or has not been read yet, and "Draft not recorded · your changes are on this phone only" only once a move has been made (D); "Record plan" offered only once the reads are in, nothing is unread and at least one milestone row shows, otherwise inactive with "Record plan is off until your milestones are read" and no link built (B); the screen's words the mockup does not draw named in AC24 (I); Home's "Work ahead ›" control in AC62's "every word kept" exceptions (J); and an impossible calendar date, such as 30 Feb, malformed in J14 (G); and, for build review A's fix, J12's kept entry naming `estimateLine`, whether the whole trimmed `Milestone:` value is exactly `none (a rough estimate)`, worked out when the pull request is kept, with AC60's exception needing both `estimate` and `estimateLine`, and AC24's words adding the plan's too-long and no-prefill fallbacks and J15's "Copy the ask" button), S-001 the job's pull requests being recorded of 2026-10-19 (the owner's answer to notifications' open question, decisions/questions/P-001-answer-pr-on-desk.md, "B. Show as 'being recorded' (Recommended)", pull request #125: AC79 new, a pull request the asks-merge job may merge itself showing as "Being recorded by the automatic job", not counted, until the job leaves it, judged by J16's rule shared with the sender in src/lib/; Terms, AC2, AC52, AC77, J6, J16, A3 and AC14 noted; the open question answered; draft 2 after the Critic's check and plan review round 1, both FAIL (the Critic's and the plan review's round-1 verdicts on 49daf31, recorded verbatim by the Orchestrator): the grant on the page taken from the ledger's pure form check and the job's own grant line in its latest judging log, never from history the page lacks; the reads staged, the trigger reads riding the poll call as conditional requests, the job's log through one fixed function form, a pending or failed read counting; the page's `judgeCandidate` inputs pinned (the pull request's creation as the sender's first sight, no kept retry time, a retried reason counting at once); the worst case summed on AC14's five-project convention; the desk counting within about a minute of the phone, sometimes before it; AC77's test and AC73 made to agree; the R3 paths (CS23), the log's redirect, size and subrequests, the private-repository limit, the test matrix, the row's behaviour, Areas touched and the brief; and the real cost stated; draft 3 after round 2 (the Critic's PASS with notes N to S, and the plan review's FAIL on A with notes B to I, recorded verbatim by the Orchestrator), under the Orchestrator's calls: one cap of 3 AC79 blob calls per candidate head per opening, failures and retries included, a failed or too-large log answer kept for its run, in AC79, A3 and AC14 alike; the desk holding a left pull request as counted until its head changes, stated as the second-direction difference; the rule (c) words only 30 minutes after the page first saw the head; judging runs limited to the default branch in the page and the sender; the grant line re-read on a ledger change; the poll call's request count, first pages only and J6's budget and response field; the module's reads worked out in a dry pass; AC52's test, J1's counts, J6's cases, the skipped-run assumption and a 65,536-character log scan; and the cost given as about 5 to 20 counted reads per pull request per open device, a little more than the question said; draft 4 after round 3, both PASS with notes (the Critic's T to W and the plan review's notes 1 to 6, recorded verbatim by the Orchestrator), under the Orchestrator's calls: a failed grant read not retried until the next opening or ledger change, the project counting meanwhile, in AC14's failing case; the poll call's `jobs` part read last and answered `null` past J1's 30 requests, enforced in code, J1 stating its own limit; the fresh cap at each opening counted in A3 and AC14 (7,577); the default-branch and skipped-run facts named with their evidence; the owner paragraph's cost "up to about two and a half times" the question's, and its two unclear sentences mended; J16's sender test for a branch's dispatch, and the brief naming `judgeCandidate`'s new default-branch input; draft 5 after build review round 1, the desk's and the security reviews' both FAIL (reviews/S-001-job-prs-recorded/_build-review-round1-desk-verbatim.md and _build-review-round1-security-verbatim.md), recording the Orchestrator's rulings: on the page, the grant's form check, the `decided_by` record in the tree, run again against the current tree on every cycle, not only when the ledger's sha changes (desk A, security E); a head that reaches the cap of 3 counted until its head changes, even if later reads would allow judging (desk B); the grant line from the next run whose merge job ran when the newest judging run's did not, not marked failed for the opening (desk C); in the shared judgment, a run's log the job's words only when its `PR #n:` lines name each number at most once, in strictly ascending number order, a log that breaks this judged as if that run printed nothing and every candidate it names counted until a later well-formed run judges it, with asks_merge.py's escaped or refused paths named as a model change this rests beside, not this spec's work (security A); the sender's judging run's `head_sha` an ancestor of, or equal to, the checkout's default-branch HEAD, and the page counting every candidate a `workflow_dispatch` newest judging run or grant line's run names, taking its grant line from the next `workflow_run` or `schedule` run (security C); a head commit time more than 10 minutes after the reader's clock ignored on both sides (security D); `u.commit` and `u.runJobs` following no redirect, a redirect a failed read (security F); the blob call's `commitTime` and `jobLog` entries answering `null`, never refused, a v2.5 project's `jobLog` included (security G); and AC74's tap on a pull request shown as being recorded opening its row, the `recording` kind (desk G6); draft 6 after build review round 2, the desk's and the security reviews' both PASS with notes (reviews/S-001-job-prs-recorded/_build-review-round2-desk-verbatim.md and _build-review-round2-security-verbatim.md), recording the Orchestrator's rulings on four: the sender's ancestry check applying only to `workflow_dispatch` runs, `workflow_run` and `schedule` runs taken as before, which also settles security R3 (desk R1); verdicts taken only from a judging run whose `merge` job concluded `success`, any other completed conclusion but skipped or cancelled the forged case, every candidate its log names counting on both sides until a later successful well-formed run judges it (security R1); a candidate whose checks have all completed and that no judging run has judged within 45 minutes after that counting on both sides, J16's rule (e), the 45 minutes a setting to tune (security R2); and the asks_merge.py model change fully closing security A, the success-only rule the reader-side guard until it lands; and CS23 recorded as landed in pull request #130; draft 7 after build review round 3, the desk's and the security reviews' both PASS with notes (reviews/S-001-job-prs-recorded/_build-review-round3-desk-verbatim.md and _build-review-round3-security-verbatim.md), text only, no new rule to build: a known limit in AC79 and J16 (e), a sender's failed log download with a candidate unjudged for over 45 minutes telling the phone before the desk stops showing "Being recorded", until the sender's next successful read, never from a page-side failure (desk R2, the Orchestrator's option 2); and a follow-up hardening, not built, named in AC79's grant paragraph and in "What this spec does not cover": the page taking a grant line only when it is the first kept line, before any `PR #` line, and the only grant or "no grant" line in the log, today's safety resting on asks_merge.py `run` printing its grant line first, with the reviewer's finding that no current path forges a grant (security H1)), S-001 the waiting-on-you screen as a board of 2026-10-19 (the owner's request and follow-ups of 2026-10-19, docs/design/references/owner-request-2026-10-19-board.md on orch/board-mockup at b3e2a6b, and the rulings decisions/questions/P-001-board-direction.md, P-001-board-bounce.md, P-001-board-layout.md, P-001-board-answer.md and P-001-board-done-keep.md, pull requests #134, #137 and #138; mockup version 5, docs/design/mockups/board.html at b3e2a6b, its approval put in the session without being filed, a known slip: AC80 new, the sandbox's Queue as a board of three lanes left to right, "Waiting on you", "Kicked back" and "Done", at version 5's sizes with 36 px tap boxes, one card per thing that needs the owner with one step each, the verdict only where J22 says the pull request's risk class or GitHub's owner check needs it, one button per option, marks by drag or "Done ✓" kept on the device, confirmed from reads the page already makes, kicked back after `KICK_BACK_MINUTES` (5), Done keeping 24 hours; J22 new, a pull request's risk class from its changed files and governance/risk-paths.toml, and the `owner-verdict` status read in the poll call for at most 3 heads; J1, J6, J20, A3, AC14's test, AC24's count, AC52, AC53, AC56, AC62, AC66, Terms, Setup G4 (optional, dropped in draft 2), Facts relied on, Areas touched and the brief changed in place; draft 2 after round 1 of the Critic and the plan review, both FAIL (reviews of the board amendment at 0670766), and the owner's request of 2026-10-19 for a design audit (docs/design/references/owner-request-2026-10-19-design-steward.md on orch/board-mockup), under the Orchestrator's rulings: J22 reading the verdict file on the branch, PASS giving the merge and FAIL or "Owner requested changes" "Open ↗" with "You asked for changes", never the merge (Critic A, plan review H); (a) mirroring the two path-only flags, a changed manifest by `is_manifest` and a deleted or renamed `[tests]` path, and an `error` tripwire or "Owner: after agents" shown as "Open ↗" with its description, never "no verdict" (plan review A, Critic E); the owner check read only in a public v3 project (plan review I), and Setup G4 dropped; the item winning over a Done row (plan review C); a mark judged against its own step, the last head's judgement kept until J20 reads a new one, reads current by head, confirming before judging, a waiting J20 read asked each poll and first in the budget, and the expected kick-backs told to the owner (plan review D to G); the sheet keeping AC52's contents for gate, hold and merge cards and every item's wait (Critic B, F); every criterion AC80 changes named, with a note in each, and every changed test named in the brief (plan review B); the TOML subset, the model registration and J1's arithmetic corrected (plan review K); J22's and AC80's tests widened (plan review J); the two open questions, one board or one per project and the Done card's button, left with the owner; and the sizes and layout marked pending the design audit; draft 3 after round 2, the Critic PASS with notes L to O and the plan review FAIL on F, under the Orchestrator's rulings: a mark's waited J20 read asked until it answers or `KICK_BACK_MINUTES` after the mark, whichever comes first, riding alone in a blob call of its own, then only at the existing cadence, with A3 recomputed for those retries and the verdict blobs (7,577 + 1,440 + 288 + 50 = 9,355) and AC14's test asserting the bound (plan review F, H); a new head on an "Open ↗" pull request card counting as needing the owner again (plan review C); the tripwire's card in plain words, told to the owner as the usual card for Service-Desk code changes, rules 4 and 6 explained, and a note that narrowing `signal_code` later needs no spec change (Critic L, plan review K); the interim text following the two open questions' defaults, one board and the button kept (Critic N); the manifest flag's wording (plan review A), the function answering `ownerChecks` `null` for a non-v3 project (plan review I), the indentation and the Areas touched wording (Critic M, plan review K); draft 4 after round 3, both PASS with notes, under the Orchestrator's rulings: the waited reads bounded per pull request head, at most 5 polls whoever waits, re-marks sharing them, A3's 1,440 restated as the per-head worst case and 9,355 kept (plan review note 3, Critic T); the verdict blob an optional read riding alone, retried only at J20's 5-minute wait inside that bound, the card meanwhile "Open ↗" with "Your verdict is on GitHub; reading it…" (plan review note 4); the solo calls counted outside `MAX_BLOB_CALLS_PER_CYCLE`, A3 footnoted with the per-cycle maximum (plan review note 1); the tripwire words "this project's code or checks" and AC53's verdict link in that card's sheet (Critic P); the conditional note in Terms "Queue" and AC52 (Critic R); tests for rule 4's words and the default Done row (Critic S); the indent glitches (Critic M, plan review note 2); and the private v3 project's known limit (plan review I)), S-001 desk mockup v2 of 2026-10-20 (the owner's ruling decisions/questions/P-001-redesign-direction-v2.md, "A. Yes, this direction (Recommended)": desk mockup v2, with Home, the direction for the whole desk, as answered at d2afcfc on orch/desk-mockup-v2 and now on main as docs/design/mockups/desk-v2.html with docs/design/mockups/desk-v2/README.md; the rulings made after the board's draft 4, P-001-board-scope.md (C), P-001-board-done-button.md, P-001-board-after-agents.md, P-001-domain-review-count.md, P-001-gate-card.md and P-001-gate-buttons.md (A), and the rulings on the whole desk, P-001-home-tab.md, P-001-home-tiles.md, P-001-portfolio-tab.md, P-001-portfolio-read.md, P-001-portfolio-plan.md, P-001-standard-milestones.md, P-001-why-line.md, P-001-timeline-labels.md, P-001-text-box-size.md, P-001-redesign-nav.md and P-001-redesign-type.md (A) and P-001-redesign-conflicts.md; the design reviewer's rulebook, governance/domains/design/README.md, its spec points brought in; the board's draft 4 (ac4f882 on build/definer/s001-board, never merged, PASS with notes from the Critic and the plan review in round 3, reviews/S-001-board/ on orch/board-mockup) carried in with its logic kept and its "pending the design audit" sizes, places and layout replaced by mockup v2's: AC81 to AC88 and J23 and J24 new; AC80, J16, J20 and J22 changed for the later board rulings, with "With the agents" (J22's rule 0) in the desk and the sender; AC12, AC24, AC40, AC42, AC44, AC48, AC54, AC55, AC57, AC59, AC60, AC62, AC65, AC68, AC69 and AC73 noted in place; Terms, A3, AC14's test, Facts relied on, Risks, Areas touched, Setup CS24 to CS26 and P1, nine open questions and the brief's eight stages; draft 1; draft 2 after round 1 of the Critic and the plan review, both FAIL (reviews/S-001-desk-v2/ on orch/desk-v2): the owner's eleven answers of 2026-10-20 built in (P-001-tile-summary, -since-count, -tile-direction, -milestones-together, -plan-order, -team-screen, -sheet-boxes, -settings-place, -portfolio-notify, -latest-bubble and -timeline-marker, all A), every stage serving MD3 after MD2's acceptance (P-001-md2-accept.md), rule 0 never kept across heads and its verdict calls one per head, the sender's rule 0 reads kept in J18 with their failures stated, A3 recounted (9,817), stage 3 carrying J23's version reads, stages 1a and 1b in one preview deploy, Setup CS27 for the operating-model project's pin, and the marks no served Plex file holds drawn as icons; draft 3 after round 2, both FAIL: AC81's "Until stage 3" for the project screens in stages 1a to 2, the Chief of Staff's sessions left off Home (P-001-cos-sessions-on-desk.md), every verdict file read by `verdictOf`, a verdict file on the default branch counted, `ownerCheckHeads` shared by the page and the sender, and every owner-check read in the sender counted as a 200; draft 4 after round 3, both FAIL, on the owner's ruling "A. Fix and confirm" (decisions/questions/P-001-desk-v2-plan-stop.md): `ownerCheckHeads` taking in the pull requests that need the owner by their files, the tripwire's limit stated, the sender's owner-check reads made last in a run and skipped near its budget guard's floor, the pause a busy hour can still bring stated plainly, and the round's non-blocking notes; then, after stage 1a's build review, round 1 (reviews/S-001-desk-v2/_build-1a-review-round1-verbatim.md and _build-1a-design-round1-verbatim.md): a pull request card's check line not built until a read gives it, the waited read's 5 a head kept on the device across openings with AC14's test on one combined day, stage 1a's Critic line accepted until stage 4, a failed owner-check read asked again after 5 minutes keeping its place, the board's buttons 500 11 px in AC81's list, and text no frame draws taking its nearest role), S-001 after MD3 of 2026-10-23 (the owner's rulings made while the new desk was built and at MD3's acceptance: P-001-desk-v2-lanes.md (A), P-001-desk-v2-pick.md (A), P-001-desk-v2-frozen-record.md, P-001-md-glance-test.md, P-001-audit-repeat.md (A), P-001-audit-copy.md (A), P-001-audit-team.md (B), P-001-audit-reload.md (A) and P-001-md3-accept.md (A), with P-001-audit-marks.md noted open; the MD3 design audit's fixes (docs/design/audit-2026-10-22.md, section 4); AC89 and AC90 new; AC17, AC44, AC49, AC56, AC67 and AC69 changed in place; AC24, AC80 and AC82 to AC87 noted as built; J6, J16, J23 and A3 (9,952); Setup CS12 withdrawn and CS27 moot; EXP-005 withdrawn, never run; seven known limits; three questions for the owner listed; the reviewers' follow-ups of stages 1a to 8 sorted; and eight stages after MD3, with their milestone lines; draft 1); draft 2 after round 1 of the Critic and the plan review, both FAIL: AC49's looks taken by lanes open at once, the fourth look marked C, and the limit that remains put to the owner as question 4; AC89 (a)'s five read states; AC90 noted in AC24, AC59, AC82 and AC86, AC89 (e) in AC41, and AC90's Team part in stage 4; AC89 (l)'s cap defined, C; AC89 (m) for loading and taps, and stage 6 split into 6a and 6b; AC69 corrected to what main draws; Risks, A3's note and J23's cost at 9,952 with 48 to spare; AC44's step 4 records; every follow-up cited to its committed review record, CS27 to the operating-model project's workflows; the owner questions matched to their filed records, with places for their answers; and the counts and words corrected); the owner's four answers of 2026-10-23, each the recommended option, written in: P-001-agent-status-hide.md (known limit 8 stands), P-001-sender-lib-approval.md (the 13 files stay outside the owner-approval paths), P-001-after-md3-milestone.md with P-001-m3d-line.md (the new milestone M3D, in the `milestones:` header, carried by every stage after MD3) and P-001-lanes-alike.md (known limit 6 stands)); draft 3 after round 2 of the Critic and the plan review, each FAIL on one point: AC49's rows each naming their lane, the Chief of Staff's helper and end rows by their piece's `doing`; AC89 (a)'s states from main's readState, with HH:MM for the 3-minute cause; AC89 (l)'s cap without device storage and per device; the owner's paragraph on the 11th portfolio mark and five lanes open at once; the answered questions quoted from their records; and the checks' small notes)]
++work-type: feature   design_id: P-001   lineage: [P-001 brief (docs/PROJECT.md Part 1), S-001 drafts of 2026-10-06 (item/P-001, plan rounds 1 to 3), S-001 amendment of 2026-10-08 (M1 accepted; M2 additions; design milestone MD), S-001 J10 revision of 2026-10-08 (J10 and AC23 adopt model S-020's frozen usage form, L-0005; J1, J6 and A3 match the M2 code, PR #44 review N-C), S-001 J10 ranges note (a wrong-kind usage value marks only its key; negatives and non-finite costs are wrong kinds; a zero divisor gives "not available"; run time rounded to the second; PR #49 review R2-N1 and R2-N2, PR #52 review), S-001 milestones header of 2026-10-13 (model v3.3.0, S-023: the project milestones this spec delivers, docs/PROJECT.md section 3), S-001 design-lab revision of 2026-10-14 (MD carries rulings 1, 2 and 6 of decisions/questions/P-001-design-lab-1.md, the phases and milestones of model v3.3.0 (L-0008), and the owner's design comments of 10 to 13 Oct (docs/design/references/comments-2026-10.md): AC48–AC53 and J11; draft 2 after plan review round 1), S-001 trial-view notes 1 of 2026-10-14 (the owner's notes on the sandbox's Home screen, decisions/questions/P-001-trial-view-notes-1.md: AC54, with AC8, AC35, AC37, AC48, J11 and A3 noted in place), S-001 trial-view notes 1, notes 5 to 15, of 2026-10-15 (the same record, the batch closed: AC55 and AC56, with AC36, AC49, AC51, AC52, AC53 and J3 changed in place; draft 2 after plan review round 1 of the trial-view amendment; draft 3 after plan review round 2, AC51's milestone styling resting on the owner's answer "Bold headings, no colour (Recommended)", decisions/questions/P-001-trial-view-notes-1.md, last paragraph), S-001 tile-summary amendment of 2026-10-15 (the owner's ruling decisions/questions/P-001-tile-summary-clip.md: AC54's summary shows its first three lines, faded at the cut, with the whole summary one tap away; AC56's list of pop-ups names its bubble; draft 2 after plan review round 1 of the tile-summary amendment), S-001 design-lab answers of 2026-10-16 (the owner's ruling decisions/questions/P-001-design-lab-open.md on the eleven design-lab questions: all as recommended except question 1, so Home's "Tell your Chief of Staff…" bar and its bottom band are not built; AC48 changed in place, with AC50, AC54, the saved-screens notes, the open questions and the brief noted; draft 2 after plan review round 1 of the design-lab answers amendment, with the owner's follow-up ruling decisions/questions/P-001-design-lab-answers-followup.md: answer 6 waits on the model change "deploy approvals tied to the owner", AC52's Deploys line marked; a ruling's line 1 longer than three lines clipped to three, faded, with the whole line one tap away, in AC55's "Your last action" and AC52's "Done today", AC56's list of pop-ups extended; draft 3 after plan review round 2: a bubble taller than the viewport held to it less a margin and scrolling up and down inside itself (C), tested at 360×740 and 414×896, for AC55's, AC52's and AC54's bubbles; the clip for rulings only; AC56's checks cover the "Done today" bubble; draft 4 after build review 1: an open whole-line bubble stays unchanged through a refresh that changes AC55's line, saying a newer action is arriving, with AC56's step 2b case; a short ruling keeps the one-line form; the bubble holds line 1 only, "(proxy)" outside it; draft 5 after build review round 2: the hold spelled out for a "Done today" row, the day turning at midnight named, with AC56's midnight case; focus after a held bubble closes with its control gone goes to "Your last action" or "Done today"'s header; draft 6: one notice for both holds, "This has changed since you opened it. Close this to see the latest."), S-001 trial-view notes 2, notes 1 to 27, of 2026-10-16 (the owner's notes on the sandbox's Status and Timeline screens and the mockup they approved, decisions/questions/P-001-trial-view-notes-2.md, read as its "How it is read" lines read them; mockup version 6, docs/design/mockups/status-and-timeline.html, and docs/design/mockups/phase-branches.html: AC57 to AC64 and J12, with AC48, AC50, AC51, AC56 and J11 changed in place; draft 2 after plan review round 1 of the trial-view notes 2 amendment, reviews/S-001-trial-view-2/_plan-review-round1-verbatim.md, with the owner's answers of 2026-10-16 to its seven readings: the pull request's own title, re-picked colours, the gold ring for next to reach, AC61 in S-032's draft forms, J12's fixture built from REST answers and Setup CS13; draft 3 after plan review round 2, reviews/S-001-trial-view-2/_plan-review-round2-verbatim.md: a pull request's own `Milestone:` line changes no milestone's state, the gold ring named "next to reach" in words on Status, a colour-distance rule with Context's and Why's colours to be re-picked, 14 untied pull requests on the default branch since 680797b, and notes 28 to 31, approved by the owner, as AC65 to AC68 with AC36, AC49, AC52, AC55, AC58 and AC62 changed in place; draft 4: notes 32 to 35 from the audit for missing elements, approved by the owner, as AC69 to AC72, the confirmed Context and Why colours and dark-mode gold with the colour-distance rule set at 10 for all pairs, AC45 carrying the owner's notifications ruling of 2026-10-08 for M3, and the owner's later-work picks pointed to; draft 5 after plan review round 3, reviews/S-001-trial-view-2/_plan-review-round3-verbatim.md, the owner's ruling "Fix, recheck the fixes": AC72 reads a hand-started deploy's commit from its run title, AC58's and AC50's tests point to AC65, "Record notes" under "More detail", the notification lines marked ruled, AC72's trace reason, AC70's fallback in plain words, the dashed circle's second meaning named, and slate in the colour rule; draft 6 after build review round 1, reviews/S-001-trial-view-2/_build-review-round1-verbatim.md: J12's rate limit judged by the page with a plain 60-minute wait, other J12 failures retried, only merged pull requests placed by their Milestone line, AC72's "Can't check" while J12's kept list is not current, and neutral shades for a third or later run), S-001 desk follow-ups of 2026-10-17 (the owner's request "go ahead with the desk follow-ups", the revision L-0015 names: AC61 in the frozen S-032's forms, adopted here with model v3.4.0, its list of differences made true and the S-032 build review's N1 and N2 named as known limits; the merge-commit message corrected for the "Pull request title and description" setting, and a push deploy's run title cut to `deploy <sha>`, Setup CS14, the Chief of Staff's; J12's failed reads retried with a backoff, with AC14's case for J12 failing all day, build review round 2 of trial-view notes 2, N1), S-001 model 3.5.0 records of 2026-10-17 (the owner's pick "File every ask (Recommended)", decisions/questions/P-001-trial-view-notes-2.md:165-166, and the revision L-0016 licenses: the desk reads the records model S-033 added, adopted here with model v3.5.0: a question's and an answer's `Milestone:` line and a question's `## Context` in AC66 and J2, the decision card's `Milestone:` line and `## Context` in J2, the Chief of Staff's session lines in AC49, AC67 and the new J13, and a milestone's ` · reached:` part in J11, AC50, AC57, AC59, AC65 and AC68, built before any plan line carries one; the asks-merge workflow's merges shown as any pull request until the owner rules; draft 2 after the Critic's check and plan review round 1 (reviews/S-001-model-3.5.0-records/_critic-round1-verbatim.md and _plan-review-round1-verbatim.md): the amendment led by one plain paragraph; the answer's `Milestone:` line in the sandbox's answer box only (AC53), the accepted views' answer link unchanged (AC19, J3), its gap a known limit (J2); the owner's words of 2026-10-17 quoted from the session, with L-0016's licenses_next as the record; the first asks-merge merge (#84, 21bc250) in place of #82; open question 1 restated with each option's effect on what needs the owner, who has the ball, "Quiet" and the Timeline, a desk-only route, and its recommendation changed to it; open question 2 quoting ruling 5 whole; both ready to file; the parsed cache's key moved on (J6); J13's mirror of the model's session checks listed, one `usage` rule, an end line with no open piece and the Chief of Staff's Cost; J11's reached part after ` · why:`; MD2 reached on 16 Oct pinned in AC50, AC57, AC59 and J11, and a reached milestone in a run still to come (AC57's rule 3); the fixtures' provenance and a question file changed after filing; AC66's frozen copy; and the ruling behind each (C) choice named; draft 3 after the Critic's check and plan review round 2 (reviews/S-001-model-3.5.0-records/_critic-round2-verbatim.md and _plan-review-round2-verbatim.md): open question 1 in three plain options with its mechanism in the Context, C's full cost and risk stated, B recommended and the default, the branch-name idea a later model idea, one letter case, and AC57's run-still-to-come case naming M3A; draft 4 after the owner's answers of 2026-10-17 to both open questions (decisions/questions/P-001-asks-merge-on-desk.md, "B. Off the Timeline (Recommended)", and decisions/questions/P-001-cos-sessions-on-desk.md, "A. Team screen only (Recommended)"): J12 reads each merge commit's message and author, the asks-merge job's merges are left out of the Timeline's sprints and run times (AC59, AC60) and out of "Done today"'s Timeline link (AC66), while open they show as today, and the Agents list stays as it is; draft 5 after plan review round 4 (reviews/S-001-model-3.5.0-records/_plan-review-round4-verbatim.md), the owner's ruling "Fix, recheck the fixes (Recommended)" (decisions/questions/P-001-s001-round4.md): AC66's test covers a job's merge leaving the queue, J12's trailer rule called a partial summary of `parse_trailers` with two more made-up cases, the kept list's key moved to `desk-pulls-v2`, CS13 step 1 naming the author check, the plan winning for a plan-listed job merge (AC59, AC60), and J12 and AC60 in Areas touched's test list; draft 6 after plan review round 5 (reviews/S-001-model-3.5.0-records/_plan-review-round5-verbatim.md, PASS with notes): the plan-listed exception carried into AC66, the amendment, J12, the Answered entry and the brief, with a case in AC60's test; J12's "lacks the field" reading named; CS13's corrected author name bounded; J12's two new cases listed in its test; and the round-4 ruling's record cited; draft 7 after plan review round 6 (reviews/S-001-model-3.5.0-records/_plan-review-round6-verbatim.md, PASS with notes): an unread plan-listed merge shown as J12's awkward cases show a listed pull request it lacks (AC60, AC66), AC66's test with a plan-listed job's merge linked from "Done today", and the lead's "unless the plan lists one"; draft 8 after build review round 1 (reviews/S-001-model-3.5.0-records/_build-review-round1-verbatim.md): J11's reached fixture named as its two files (j11-reached/docs/PROJECT.md and j11-reached/both/, MX5 and MX6), AC62's "every word kept" exceptions adding the Chief of Staff's page (AC49, J13), and Areas touched pointing J13's read to src/lib/model.js `neededReads`), S-001 notifications of 2026-10-18 (the owner's request of 2026-10-18, "add as an immediate priority, to enable a notification system for whenever anything at all is waiting on me", recorded in decisions/questions/P-001-notify-job-merges.md, with its ruling A, "a pull request the automatic job will merge sends no notification", and the ruling of 2026-10-08, decisions/questions/P-001-notifications.md, widened to anything that waits on the owner and brought forward: AC45 changed in place; AC73 to AC77 new, AC77 carrying the owner's report of a stale answer link on a question being asked in a session; J16 to J19 new; Workflow 3, EXP-006, Setup N1 to N9 and CS15 to CS17, J2, J7, A3, Risks, Facts relied on, Areas touched and the brief noted; two open questions; no model change; draft 2 after the Critic's check and plan review round 1, both FAIL (reviews/S-001-notifications/_critic-round1-verbatim.md and _plan-review-round1-verbatim.md on the branch orch/s001-notifications), with the owner's answers of 2026-10-18 on deploys (A, notify and count now, Service-Desk only), the fast path (decisions/questions/P-001-notify-poom-fast-path.md, B) and filing (decisions/questions/P-001-file-only-required.md, B): Terms and AC52 count a waiting deploy in a project marked deploysNeedOwner; the operating-model project sends its own notifications (Workflow 4), with no token across projects; AC77 closes the reported window with "Your answer is being recorded" (J20, new); keyed hashes and signed state taken only from the sender's own main runs; no pull_request_target; test: fail by a throwaway VAPID key; the JWT refreshed at most hourly; J1, J6, J7, CS9, the owner's time, rollback and EXP-006 updated; draft 3 after round 2 of both, both FAIL (reviews/S-001-notifications/_critic-round2-verbatim.md and _plan-review-round2-verbatim.md): the session hold lasts until the session ends or the answer's pull request opens, 8 hours a fallback, in both models; the fast path's account-wide Pro minutes cited from GitHub's billing documentation, its runs bounded and a no-secret ready workflow; research Q-014's origin gate and J18's lookup by the workflow's own runs; a new JWT only for BadJwtToken and at most hourly, test: fail one request; the workflow check in CS15's pull request; EXP-006's order and case 10; the open question to be filed after this spec merges; draft 4 after round 3 (reviews/S-001-notifications/_critic-round3-verbatim.md, FAIL on B1, and _plan-review-round3-verbatim.md, PASS with notes N1 to N10), the owner's ruling "Fix, recheck the fixes (Recommended)" (decisions/questions/P-001-notify-round3.md) and the owner's cost instruction of 2026-10-18 (docs/design/references/owner-github-plan-2026-10-18.md, 762e93f): the session hold ends only at an end line written after the question was raised, with the real session file as a fixture and CS17's order; AC78 and J21 new (the account's Actions use as a percent bar, the estimated cost past the included minutes, a notification each $50, no approval step; research Q-015), with Setup N12 and CS19; Workflow 4's minutes cut and its cost stated; asks-merge's runs admitted, job-level concurrency, J18's success-only lookup, the job log's timestamps, lasting refusals, the check's own test, v3's "being recorded" needing the answer, the R3 order and scope, Q-014's source check and case 10's second signal, and EXP-006 cases 9 to 11; draft 5 after round 4 (reviews/S-001-notifications/_critic-round4-verbatim.md, PASS with notes 1 to 9, and _plan-review-round4-verbatim.md, FAIL on B1 with notes N1 to N10), the owner's ruling "Fix, then build (Recommended)" (decisions/questions/P-001-notify-round4.md), and the source checks research/Q-014-source-check.md (PASS) and research/Q-015-source-check.md (FAIL on F1.5): AC77's real-record test with a copy of the real question carrying the one added line, the unmodified question a second case; AC78's "Not reported" fallback for an account GitHub reports no Actions use for (U-11), with Setup N11 then recommended; N12 after step 3b's deploy, with a preview deploy for the Pages secret, a 404 trying the classic token, and renewal; Workflow 4's ready workflow keeping closed and draft events, its skipped job valid; the refusal clock on run_started_at; the page's reads per opening; the 100% rule, the over-count and the $50 start-up stated and tested; the cost notification out of public logs; spend scope and the value case; F6.2's citation; CS19 done; draft 6 (the sender's open questions, 2026-10-18), after the Builder's report on brief step 2, questions 1 to 15 (the sender at 7ffa285 on orch/s001-notifications), under the owner's ruling "Fix, then build (Recommended)" (decisions/questions/P-001-notify-round4.md): J18's lookup passing over another workflow's, a branch's or another repository's artifact, never reading it as unreadable, as its test now says; J18 holding the questions seen being recorded; the state-read clock's start; the 6-hour give-up for try-later and unnamed answers only; the start-up, back-on, merge-card and missing-card words and the key's kind names; one tag for every test push; J20 reading only the pull requests that can count; a candidate's check-page cap and rule (b)'s read bounds; a new JWT for a new push service; the cost push's one try; and the origin's REST read on every `workflow_run` run; then the Orchestrator's settling of the two points the Definer left open, both keeping the spec's promise to the owner: a state read that cannot be dated dated by the newest `desk-notify-state` artifact, or the issue at once, with AC76's case; and the page reading the pull requests closed since a held question was raised, so an answer's pull request closed unmerged ends the hold on the desk as on the phone, in A3's count and AC77's case; and, on the Orchestrator's ruling that the owner asked to know exactly when something shifts to them, the sender making the same closed read on each run, a failed read counted under AC76, in J16's count and AC77's case, so the known limit of a pull request opened and closed between two runs is gone; and the undatable read's clock at 30 minutes or more; draft 7 after round 5 (reviews/S-001-notifications/_critic-round5-verbatim.md on the branch orch/s001-notifications, FAIL on findings 1 and 2 with notes 3 to 12), the owner's ruling "Fix, recheck the fixes (Recommended)" (decisions/questions/P-001-notify-round5.md, pull request #110), and the Builder's step-3 report, questions 1 and 5: AC76's second read applying J18's checks the artifact list carries, with the failed-read issues' words and close; the closed read pinned for both readers (when the page makes it, up to 3 pages, drafts excluded, a found end kept, a single pull request read when a recorded answer's pull request leaves the open list, a failed read keeping the hold, "read successfully" untouched); what the page keeps on the device; the lead restated; the request counts redone; the page's open-window gap stated; the cost push's late 410 a known limit; the brief revised; J18's `recorded` cases; and the candidate cap at the job's own 10 pages; draft 8 after round 6 (reviews/S-001-notifications/_critic-round6-verbatim.md on the branch orch/s001-notifications, FAIL on finding A with notes B and C, and round 5's note 10 partly fixed), the owner's ruling "A. Fix, then build (Recommended)" (decisions/questions/P-001-notify-round6.md, pull request #114: no further recheck; the Reviewer's build review checks this fix), the Orchestrator's settling of finding A, and the owner's ruling "A. Keep the fold (Recommended)", decisions/questions/P-001-notify-more-detail.md, pull request #112, with the screenshots docs/design/mockups/notify-more-detail/ on the branch orch/s001-notifications: "an opening" defined in Terms; a `?open=` arrival and a return to the foreground each running the closed read again before the tapped item shows, with AC77's cases; a failed closed read retried at the next poll; the history-read gap listed; the close rule for a state that verifies; the late 410 in AC76's promise and the lead; the brief's step 5 completed; and the accepted Home's "More detail" fold pinned in AC75 and AC78; draft 9 after build review round 1 (reviews/S-001-notifications/_build-review-round1-security-verbatim.md and _build-review-round1-desk-verbatim.md on the branch orch/s001-notifications, both FAIL), under the Orchestrator's rulings, so the spec says what is built: J18's `recorded` keeping the answer's pull request's number, sealed, and the sender reading that pull request when it has left the open list (merged, answered; closed unmerged, open again; failed, "not read"), counted in J16; the 6-hour give-up clock started at the first try-later or unnamed failure; no 413 re-send for the cost push; usage read only for the project whose J7 entry holds `actionsUsage`, which moves into Service-Desk's entry; a waiting deploy's title only for a run from this repository; the unreadable-state run's issue and J18's lookup cost and key rotation stated as known limits; a found closed pull request's failed file read retried at the next poll; a return to the foreground kept to A2's 60 seconds, a tap's closed read at once and counted in A3; the device-memory gap stated and AC77's claim corrected; and an arrival during a closed read in flight waiting for a fresh one; the desk review's findings 1 and 2 code defects against the spec as written), S-001 notification view of 2026-10-19 (the owner's ruling "A. Go live now, switch later (Recommended)", decisions/questions/P-001-notify-which-view.md, pull request #119: the Home Screen icon and every notification tap open the sandbox view, the owner's page, until MD3 makes it the desk; the manifest's `start_url` `/?sandbox` with `id` `/`; taps at `/?sandbox&open=<key>`, AC74 and AC77's tap rules holding there; an older `/?open=` address forwarded to the sandbox; plain `/` still the accepted view; an icon added before the change, Setup N13 and EXP-006 case 12; the return to `/` at MD3 or M3; AC74's and AC75's tests), S-001 work ahead by milestones of 2026-10-18 (the owner's audit pick "Planning at milestone level", decisions/questions/P-001-trial-view-notes-2.md:167, and the rulings of 2026-10-18, decisions/questions/P-001-next-work.md, P-001-m3a-order.md, P-001-m3a-date.md, P-001-m3a-picks.md, P-001-m3a-estimator.md and P-001-m3a-finish.md, on the Work ahead mockup, version 2 (docs/design/mockups/work-ahead.html at 781e828 on orch/m3a-mockup): AC24 rewritten for milestones in the owner's order, with the Chief of Staff's estimates and a rough finish; J4's plan holding milestones only, with no dates; J14, the estimate record, and J15, the later-work list and its asks, new; J7, A3, Setup CS20 to CS22, Facts relied on, Areas touched and the brief noted; two open questions; brought up to date on 2026-10-19 with notifications (drafts 1 to 9 and the view amendment of 2026-10-19, merged from main at ab46b4a): its Setup steps renumbered CS20 to CS22, since notifications hold CS15 to CS19; "Ruled, to be built in M3: phone notifications" corrected to built and live; J7, A3, Areas touched, Facts relied on and the brief merged with notifications' own; and its two open questions filed unchanged as questions/P-001-m3a-estimate-merges.md and questions/P-001-m3a-when.md (pull request #122, bdb924a); draft 2 after the owner's answers of 2026-10-19 to both (decisions/questions/P-001-m3a-estimate-merges.md, "B. The automatic job merges them too (Recommended)", and decisions/questions/P-001-m3a-when.md, "A. Now, in the trial view (Recommended)", on the branch cos/m3a-answers-3, pull request #123): the operating-model change that lets the asks-merge job merge an estimate named as a dependency, with the add-only check it must hold and the interim in which the owner merges each one (J14, CS21, J16 at the sync); Work ahead built now in the sandbox view, accepted as its own milestone and carried into the desk at MD3 (AC24, M3's header, the brief); the open questions marked answered; the lead restated; draft 3 after the Critic's check and plan review round 1, both FAIL (reviews/S-001-m3a/_critic-round1-verbatim.md, blocking 1 and 2 with notes 3 to 11, and _plan-review-round1-verbatim.md, blocking 1 to 4 with notes 5 to 12, on the branch orch/m3a-work-ahead), under the Orchestrator's rulings: an estimate is the milestone's own days of work, counted from its date only while it is under way; a 0-to-0 estimate holds until the milestone is reached and alone reads "once you accept it"; an estimate dated after today counts 0 days, with 10 minutes' clock skew allowed; the worked example and its tests redone, the 1 Nov daylight-saving change named; the word ban on the desk's own fixed words only, as whole words; the private project's files never copied (poom/'s placeholder form) and J11's record set named; estimate pull requests carrying `Milestone: none (a rough estimate)`, each notifying in the meantime, said in the lead; the sender's J16 change a separate R3 Builder pull request landing before or with the job's fifth kind, and rule 2's base the merge base; M3A's mark as AC57 gives it; J7's `planning` rules widened; AC44's last line, the brief's order and the MD3 hand-off of AC24's test; the tap's delay told; the records added to Facts relied on; the "W3" label dropped; every difference from the mockup listed; and the brief's orders for the Chief of Staff's rewording of M3A's "done when" and the Home control shown to the owner; draft 4 after round 2 of both checks, both FAIL (reviews/S-001-m3a/_critic-round2-verbatim.md, blocking A with notes B and C, and _plan-review-round2-verbatim.md, blocking A and B with notes C to E, on the branch orch/m3a-work-ahead), under the Orchestrator's rulings: the brief's fixtures in poom/'s placeholder form, matching AC24; a named exception in AC60 leaving an estimate-only pull request off the Timeline, J12 reading the changed paths it needs (its kept list's key moving to `desk-pulls-v3`), with AC60's and J12's cases, and CS20 split so the estimate pull request is estimate-only; only `planning: true` on a v2.5 entry failing the build; Status's own words, "Work filed: <its sprints>", with the empty ring; the day count's wording; the fixture's estimates kept under 7 days; J7's whole rule in the brief; the add-only check's 10 minutes of clock skew; and no deadline words in estimate notes; draft 5 after round 3 of both checks, both PASS with notes (reviews/S-001-m3a/_critic-round3-verbatim.md and _plan-review-round3-verbatim.md, on the branch orch/m3a-work-ahead): changed paths not read, from a missing, null or field-error `changedFiles` or `files`, read as not estimate-only, so placed as any pull request, the field error judged beside the check rollup's; the real J12 fixture rebuilt with `changed_files` and the file paths from REST through tests/desk/tools/j12-fixture.mjs; J12's cost restated at about 2 points a page; AC66's "Done today" row for an estimate reading "not on the Timeline: a rough estimate", with its test; the `Milestone:` match exact after trimming; and the exception limited to the planning project's `intake/estimates.jsonl`; draft 6 after build review round 1, FAIL on the Builder's AC60 match with notes (reviews/S-001-m3a/_build-review-round1-verbatim.md, on the branch orch/m3a-work-ahead), recording the Orchestrator's rulings: a newer plan whose order equals the draft's clears the draft silently, the set-aside notice only when the orders differ (C); "No changes yet" with no move made, including when the plan can't be read or has not been read yet, and "Draft not recorded · your changes are on this phone only" only once a move has been made (D); "Record plan" offered only once the reads are in, nothing is unread and at least one milestone row shows, otherwise inactive with "Record plan is off until your milestones are read" and no link built (B); the screen's words the mockup does not draw named in AC24 (I); Home's "Work ahead ›" control in AC62's "every word kept" exceptions (J); and an impossible calendar date, such as 30 Feb, malformed in J14 (G); and, for build review A's fix, J12's kept entry naming `estimateLine`, whether the whole trimmed `Milestone:` value is exactly `none (a rough estimate)`, worked out when the pull request is kept, with AC60's exception needing both `estimate` and `estimateLine`, and AC24's words adding the plan's too-long and no-prefill fallbacks and J15's "Copy the ask" button), S-001 the job's pull requests being recorded of 2026-10-19 (the owner's answer to notifications' open question, decisions/questions/P-001-answer-pr-on-desk.md, "B. Show as 'being recorded' (Recommended)", pull request #125: AC79 new, a pull request the asks-merge job may merge itself showing as "Being recorded by the automatic job", not counted, until the job leaves it, judged by J16's rule shared with the sender in src/lib/; Terms, AC2, AC52, AC77, J6, J16, A3 and AC14 noted; the open question answered; draft 2 after the Critic's check and plan review round 1, both FAIL (the Critic's and the plan review's round-1 verdicts on 49daf31, recorded verbatim by the Orchestrator): the grant on the page taken from the ledger's pure form check and the job's own grant line in its latest judging log, never from history the page lacks; the reads staged, the trigger reads riding the poll call as conditional requests, the job's log through one fixed function form, a pending or failed read counting; the page's `judgeCandidate` inputs pinned (the pull request's creation as the sender's first sight, no kept retry time, a retried reason counting at once); the worst case summed on AC14's five-project convention; the desk counting within about a minute of the phone, sometimes before it; AC77's test and AC73 made to agree; the R3 paths (CS23), the log's redirect, size and subrequests, the private-repository limit, the test matrix, the row's behaviour, Areas touched and the brief; and the real cost stated; draft 3 after round 2 (the Critic's PASS with notes N to S, and the plan review's FAIL on A with notes B to I, recorded verbatim by the Orchestrator), under the Orchestrator's calls: one cap of 3 AC79 blob calls per candidate head per opening, failures and retries included, a failed or too-large log answer kept for its run, in AC79, A3 and AC14 alike; the desk holding a left pull request as counted until its head changes, stated as the second-direction difference; the rule (c) words only 30 minutes after the page first saw the head; judging runs limited to the default branch in the page and the sender; the grant line re-read on a ledger change; the poll call's request count, first pages only and J6's budget and response field; the module's reads worked out in a dry pass; AC52's test, J1's counts, J6's cases, the skipped-run assumption and a 65,536-character log scan; and the cost given as about 5 to 20 counted reads per pull request per open device, a little more than the question said; draft 4 after round 3, both PASS with notes (the Critic's T to W and the plan review's notes 1 to 6, recorded verbatim by the Orchestrator), under the Orchestrator's calls: a failed grant read not retried until the next opening or ledger change, the project counting meanwhile, in AC14's failing case; the poll call's `jobs` part read last and answered `null` past J1's 30 requests, enforced in code, J1 stating its own limit; the fresh cap at each opening counted in A3 and AC14 (7,577); the default-branch and skipped-run facts named with their evidence; the owner paragraph's cost "up to about two and a half times" the question's, and its two unclear sentences mended; J16's sender test for a branch's dispatch, and the brief naming `judgeCandidate`'s new default-branch input; draft 5 after build review round 1, the desk's and the security reviews' both FAIL (reviews/S-001-job-prs-recorded/_build-review-round1-desk-verbatim.md and _build-review-round1-security-verbatim.md), recording the Orchestrator's rulings: on the page, the grant's form check, the `decided_by` record in the tree, run again against the current tree on every cycle, not only when the ledger's sha changes (desk A, security E); a head that reaches the cap of 3 counted until its head changes, even if later reads would allow judging (desk B); the grant line from the next run whose merge job ran when the newest judging run's did not, not marked failed for the opening (desk C); in the shared judgment, a run's log the job's words only when its `PR #n:` lines name each number at most once, in strictly ascending number order, a log that breaks this judged as if that run printed nothing and every candidate it names counted until a later well-formed run judges it, with asks_merge.py's escaped or refused paths named as a model change this rests beside, not this spec's work (security A); the sender's judging run's `head_sha` an ancestor of, or equal to, the checkout's default-branch HEAD, and the page counting every candidate a `workflow_dispatch` newest judging run or grant line's run names, taking its grant line from the next `workflow_run` or `schedule` run (security C); a head commit time more than 10 minutes after the reader's clock ignored on both sides (security D); `u.commit` and `u.runJobs` following no redirect, a redirect a failed read (security F); the blob call's `commitTime` and `jobLog` entries answering `null`, never refused, a v2.5 project's `jobLog` included (security G); and AC74's tap on a pull request shown as being recorded opening its row, the `recording` kind (desk G6); draft 6 after build review round 2, the desk's and the security reviews' both PASS with notes (reviews/S-001-job-prs-recorded/_build-review-round2-desk-verbatim.md and _build-review-round2-security-verbatim.md), recording the Orchestrator's rulings on four: the sender's ancestry check applying only to `workflow_dispatch` runs, `workflow_run` and `schedule` runs taken as before, which also settles security R3 (desk R1); verdicts taken only from a judging run whose `merge` job concluded `success`, any other completed conclusion but skipped or cancelled the forged case, every candidate its log names counting on both sides until a later successful well-formed run judges it (security R1); a candidate whose checks have all completed and that no judging run has judged within 45 minutes after that counting on both sides, J16's rule (e), the 45 minutes a setting to tune (security R2); and the asks_merge.py model change fully closing security A, the success-only rule the reader-side guard until it lands; and CS23 recorded as landed in pull request #130; draft 7 after build review round 3, the desk's and the security reviews' both PASS with notes (reviews/S-001-job-prs-recorded/_build-review-round3-desk-verbatim.md and _build-review-round3-security-verbatim.md), text only, no new rule to build: a known limit in AC79 and J16 (e), a sender's failed log download with a candidate unjudged for over 45 minutes telling the phone before the desk stops showing "Being recorded", until the sender's next successful read, never from a page-side failure (desk R2, the Orchestrator's option 2); and a follow-up hardening, not built, named in AC79's grant paragraph and in "What this spec does not cover": the page taking a grant line only when it is the first kept line, before any `PR #` line, and the only grant or "no grant" line in the log, today's safety resting on asks_merge.py `run` printing its grant line first, with the reviewer's finding that no current path forges a grant (security H1)), S-001 the waiting-on-you screen as a board of 2026-10-19 (the owner's request and follow-ups of 2026-10-19, docs/design/references/owner-request-2026-10-19-board.md on orch/board-mockup at b3e2a6b, and the rulings decisions/questions/P-001-board-direction.md, P-001-board-bounce.md, P-001-board-layout.md, P-001-board-answer.md and P-001-board-done-keep.md, pull requests #134, #137 and #138; mockup version 5, docs/design/mockups/board.html at b3e2a6b, its approval put in the session without being filed, a known slip: AC80 new, the sandbox's Queue as a board of three lanes left to right, "Waiting on you", "Kicked back" and "Done", at version 5's sizes with 36 px tap boxes, one card per thing that needs the owner with one step each, the verdict only where J22 says the pull request's risk class or GitHub's owner check needs it, one button per option, marks by drag or "Done ✓" kept on the device, confirmed from reads the page already makes, kicked back after `KICK_BACK_MINUTES` (5), Done keeping 24 hours; J22 new, a pull request's risk class from its changed files and governance/risk-paths.toml, and the `owner-verdict` status read in the poll call for at most 3 heads; J1, J6, J20, A3, AC14's test, AC24's count, AC52, AC53, AC56, AC62, AC66, Terms, Setup G4 (optional, dropped in draft 2), Facts relied on, Areas touched and the brief changed in place; draft 2 after round 1 of the Critic and the plan review, both FAIL (reviews of the board amendment at 0670766), and the owner's request of 2026-10-19 for a design audit (docs/design/references/owner-request-2026-10-19-design-steward.md on orch/board-mockup), under the Orchestrator's rulings: J22 reading the verdict file on the branch, PASS giving the merge and FAIL or "Owner requested changes" "Open ↗" with "You asked for changes", never the merge (Critic A, plan review H); (a) mirroring the two path-only flags, a changed manifest by `is_manifest` and a deleted or renamed `[tests]` path, and an `error` tripwire or "Owner: after agents" shown as "Open ↗" with its description, never "no verdict" (plan review A, Critic E); the owner check read only in a public v3 project (plan review I), and Setup G4 dropped; the item winning over a Done row (plan review C); a mark judged against its own step, the last head's judgement kept until J20 reads a new one, reads current by head, confirming before judging, a waiting J20 read asked each poll and first in the budget, and the expected kick-backs told to the owner (plan review D to G); the sheet keeping AC52's contents for gate, hold and merge cards and every item's wait (Critic B, F); every criterion AC80 changes named, with a note in each, and every changed test named in the brief (plan review B); the TOML subset, the model registration and J1's arithmetic corrected (plan review K); J22's and AC80's tests widened (plan review J); the two open questions, one board or one per project and the Done card's button, left with the owner; and the sizes and layout marked pending the design audit; draft 3 after round 2, the Critic PASS with notes L to O and the plan review FAIL on F, under the Orchestrator's rulings: a mark's waited J20 read asked until it answers or `KICK_BACK_MINUTES` after the mark, whichever comes first, riding alone in a blob call of its own, then only at the existing cadence, with A3 recomputed for those retries and the verdict blobs (7,577 + 1,440 + 288 + 50 = 9,355) and AC14's test asserting the bound (plan review F, H); a new head on an "Open ↗" pull request card counting as needing the owner again (plan review C); the tripwire's card in plain words, told to the owner as the usual card for Service-Desk code changes, rules 4 and 6 explained, and a note that narrowing `signal_code` later needs no spec change (Critic L, plan review K); the interim text following the two open questions' defaults, one board and the button kept (Critic N); the manifest flag's wording (plan review A), the function answering `ownerChecks` `null` for a non-v3 project (plan review I), the indentation and the Areas touched wording (Critic M, plan review K); draft 4 after round 3, both PASS with notes, under the Orchestrator's rulings: the waited reads bounded per pull request head, at most 5 polls whoever waits, re-marks sharing them, A3's 1,440 restated as the per-head worst case and 9,355 kept (plan review note 3, Critic T); the verdict blob an optional read riding alone, retried only at J20's 5-minute wait inside that bound, the card meanwhile "Open ↗" with "Your verdict is on GitHub; reading it…" (plan review note 4); the solo calls counted outside `MAX_BLOB_CALLS_PER_CYCLE`, A3 footnoted with the per-cycle maximum (plan review note 1); the tripwire words "this project's code or checks" and AC53's verdict link in that card's sheet (Critic P); the conditional note in Terms "Queue" and AC52 (Critic R); tests for rule 4's words and the default Done row (Critic S); the indent glitches (Critic M, plan review note 2); and the private v3 project's known limit (plan review I)), S-001 desk mockup v2 of 2026-10-20 (the owner's ruling decisions/questions/P-001-redesign-direction-v2.md, "A. Yes, this direction (Recommended)": desk mockup v2, with Home, the direction for the whole desk, as answered at d2afcfc on orch/desk-mockup-v2 and now on main as docs/design/mockups/desk-v2.html with docs/design/mockups/desk-v2/README.md; the rulings made after the board's draft 4, P-001-board-scope.md (C), P-001-board-done-button.md, P-001-board-after-agents.md, P-001-domain-review-count.md, P-001-gate-card.md and P-001-gate-buttons.md (A), and the rulings on the whole desk, P-001-home-tab.md, P-001-home-tiles.md, P-001-portfolio-tab.md, P-001-portfolio-read.md, P-001-portfolio-plan.md, P-001-standard-milestones.md, P-001-why-line.md, P-001-timeline-labels.md, P-001-text-box-size.md, P-001-redesign-nav.md and P-001-redesign-type.md (A) and P-001-redesign-conflicts.md; the design reviewer's rulebook, governance/domains/design/README.md, its spec points brought in; the board's draft 4 (ac4f882 on build/definer/s001-board, never merged, PASS with notes from the Critic and the plan review in round 3, reviews/S-001-board/ on orch/board-mockup) carried in with its logic kept and its "pending the design audit" sizes, places and layout replaced by mockup v2's: AC81 to AC88 and J23 and J24 new; AC80, J16, J20 and J22 changed for the later board rulings, with "With the agents" (J22's rule 0) in the desk and the sender; AC12, AC24, AC40, AC42, AC44, AC48, AC54, AC55, AC57, AC59, AC60, AC62, AC65, AC68, AC69 and AC73 noted in place; Terms, A3, AC14's test, Facts relied on, Risks, Areas touched, Setup CS24 to CS26 and P1, nine open questions and the brief's eight stages; draft 1; draft 2 after round 1 of the Critic and the plan review, both FAIL (reviews/S-001-desk-v2/ on orch/desk-v2): the owner's eleven answers of 2026-10-20 built in (P-001-tile-summary, -since-count, -tile-direction, -milestones-together, -plan-order, -team-screen, -sheet-boxes, -settings-place, -portfolio-notify, -latest-bubble and -timeline-marker, all A), every stage serving MD3 after MD2's acceptance (P-001-md2-accept.md), rule 0 never kept across heads and its verdict calls one per head, the sender's rule 0 reads kept in J18 with their failures stated, A3 recounted (9,817), stage 3 carrying J23's version reads, stages 1a and 1b in one preview deploy, Setup CS27 for the operating-model project's pin, and the marks no served Plex file holds drawn as icons; draft 3 after round 2, both FAIL: AC81's "Until stage 3" for the project screens in stages 1a to 2, the Chief of Staff's sessions left off Home (P-001-cos-sessions-on-desk.md), every verdict file read by `verdictOf`, a verdict file on the default branch counted, `ownerCheckHeads` shared by the page and the sender, and every owner-check read in the sender counted as a 200; draft 4 after round 3, both FAIL, on the owner's ruling "A. Fix and confirm" (decisions/questions/P-001-desk-v2-plan-stop.md): `ownerCheckHeads` taking in the pull requests that need the owner by their files, the tripwire's limit stated, the sender's owner-check reads made last in a run and skipped near its budget guard's floor, the pause a busy hour can still bring stated plainly, and the round's non-blocking notes; then, after stage 1a's build review, round 1 (reviews/S-001-desk-v2/_build-1a-review-round1-verbatim.md and _build-1a-design-round1-verbatim.md): a pull request card's check line not built until a read gives it, the waited read's 5 a head kept on the device across openings with AC14's test on one combined day, stage 1a's Critic line accepted until stage 4, a failed owner-check read asked again after 5 minutes keeping its place, the board's buttons 500 11 px in AC81's list, and text no frame draws taking its nearest role), S-001 after MD3 of 2026-10-23 (the owner's rulings made while the new desk was built and at MD3's acceptance: P-001-desk-v2-lanes.md (A), P-001-desk-v2-pick.md (A), P-001-desk-v2-frozen-record.md, P-001-md-glance-test.md, P-001-audit-repeat.md (A), P-001-audit-copy.md (A), P-001-audit-team.md (B), P-001-audit-reload.md (A) and P-001-md3-accept.md (A), with P-001-audit-marks.md noted open; the MD3 design audit's fixes (docs/design/audit-2026-10-22.md, section 4); AC89 and AC90 new; AC17, AC44, AC49, AC56, AC67 and AC69 changed in place; AC24, AC80 and AC82 to AC87 noted as built; J6, J16, J23 and A3 (9,952); Setup CS12 withdrawn and CS27 moot; EXP-005 withdrawn, never run; seven known limits; three questions for the owner listed; the reviewers' follow-ups of stages 1a to 8 sorted; and eight stages after MD3, with their milestone lines; draft 1); draft 2 after round 1 of the Critic and the plan review, both FAIL: AC49's looks taken by lanes open at once, the fourth look marked C, and the limit that remains put to the owner as question 4; AC89 (a)'s five read states; AC90 noted in AC24, AC59, AC82 and AC86, AC89 (e) in AC41, and AC90's Team part in stage 4; AC89 (l)'s cap defined, C; AC89 (m) for loading and taps, and stage 6 split into 6a and 6b; AC69 corrected to what main draws; Risks, A3's note and J23's cost at 9,952 with 48 to spare; AC44's step 4 records; every follow-up cited to its committed review record, CS27 to the operating-model project's workflows; the owner questions matched to their filed records, with places for their answers; and the counts and words corrected); the owner's four answers of 2026-10-23, each the recommended option, written in: P-001-agent-status-hide.md (known limit 8 stands), P-001-sender-lib-approval.md (the 13 files stay outside the owner-approval paths), P-001-after-md3-milestone.md with P-001-m3d-line.md (the new milestone M3D, in the `milestones:` header, carried by every stage after MD3) and P-001-lanes-alike.md (known limit 6 stands)); draft 3 after round 2 of the Critic and the plan review, each FAIL on one point: AC49's rows each naming their lane, the Chief of Staff's helper and end rows by their piece's `doing`; AC89 (a)'s states from main's readState, with HH:MM for the 3-minute cause; AC89 (l)'s cap without device storage and per device; the owner's paragraph on the 11th portfolio mark and five lanes open at once; the answered questions quoted from their records; and the checks' small notes), S-001 after the glance audit's round 2 of 2026-11-03 (the owner's five rulings decisions/questions/P-001-glance2-anchor.md, -arrow.md, -counts.md, -palette.md and -standard.md, the anchor rule widened by the owner, and the owner's go-ahead for the hierarchy of work, docs/design/references/owner-request-2026-10-24-glance-emphasis.md: AC91 to AC96 and J25, with AC48, AC59, AC60, AC81 to AC84, AC86, AC88, AC90 and J12 noted in place; draft 1)]
+ mechanism: A Cloudflare Pages project with Pages Functions, behind Access for the owner's email
+ only. While the page is open it calls the function every 60 seconds per connected project; the
+ function holds a read-only fine-grained GitHub token, makes conditional GitHub REST reads and hands
+@@ -2379,6 +2379,157 @@ portfolio's marks sit stays open. Until you answer it, they stay as built.
+   at once; AC49's "first look no open lane is using" and the fifth lane's look; the four answered
+   questions quoted from their records; and the small notes of both checks.
+ 
++**After the glance audit's round 2: your five answers and the hierarchy of work (amendment of 2026-11-03; draft 1).**
++
++You answered all five round-2 choices as recommended, and widened one: a soft box may hold the set
++of a page's most important things, not only the single most important one, and boxes stay
++occasional. So this revision writes down what the desk will do:
++- each phase leads with all its milestones counted, yours and the standard ones it tracks
++  ("3 of 5 reached"), with its sprints counted beside them; the standard ones not used are said in
++  words, never as "0 of 5";
++- your milestones and the standard checklist sit under their own clear heads, the checklist below a
++  rule, its untracked ones folded into one "not tracked" line a tap opens;
++- a finished mark (✓) is green and a failed one (✕) red, on the small mark only, never on words,
++  rows or borders; the red edge on a tile the desk can't read goes;
++- one small dark arrow points at where things are now, on the Timeline, the page's phase strip,
++  each Home tile, Plan and an opened phase; the upward reading arrow goes;
++- the project page's sentence and a one-line tally sit in the briefing's soft box, and the agents'
++  "why not written" box becomes a plain line;
++- each sprint will count its pieces of work done of total, from a task list in its pull request,
++  and the steps that served it. That needs the operating-model change you gave the go-ahead for, so
++  it is the last step and waits on it. Research sprints show their steps from the first step on,
++  since the desk already reads them.
++
++The work comes in six steps, each one pull request you can try on the preview. None of it is
++irreversible, and none adds a call to GitHub: the desk's daily margin stays at 48. It builds on
++your eleven round-1 choices, which this revision does not write in (see "Builds on round 1"). Two
++points are for you: the milestone this work belongs to, and how many boxes one screen may hold.
++
++- **Why: the owner's rulings, word for word** (each in decisions/questions/, line 1; five in all,
++  each answered in session_017seyaGqUxAff6E8dKWHDCR on 2026-10-24 with the words "Okay love it, all.
++  Only changes I would propose is the outlined box isn't ONLY for the single most important thing on
++  the page. It should be for the set of most important things on a page. It definitely shouldn't be
++  overdone but only accepting one thing omits other elements that might be close to or as
++  important."):
++  - "Ruling: A, widened by the owner — a screen may anchor the set of its most important things in
++    the briefing's soft box (--bg2, no outline, never vermilion), not only the single most important
++    one; anchors stay occasional ("It definitely shouldn't be overdone"); the project page gets its
++    boxed sentence and tally; the agents' why-not-written box becomes a plain line"
++    (P-001-glance2-anchor.md). AC91, new.
++  - "Ruling: A — one small filled ink triangle points at the present on the Timeline's Now line, the
++    project page's phase strip, each Home tile's drawing, Plan's next-to-reach row and an opened
++    phase; the ▲ reading arrow is removed" (P-001-glance2-arrow.md). AC92, new.
++  - "Ruling: A — a reached or passed mark (✓) is green (--ok) and a failed or not-reached mark (✕)
++    red (--bad), on the 14–16 px mark only, never on words, rows or borders; vermilion stays what
++    needs the owner, gold stays next to reach; no third colour; the red tile border on an unreadable
++    project goes. With it as proposed: the stall line stays ink with a clock, a reached mark in a run
++    later gone back over stays grey, and every absence stays grey" (P-001-glance2-palette.md), read
++    there as "--bad keeps its current values". AC93, new.
++  - "Ruling: A — each phase leads with all its milestones and sprints counted ("3 of 5 reached · 4
++    sprints"), the unused standard ones said in words; pieces of work counted done-of-total from a
++    task list in each sprint's pull request, after the operating model adds it"
++    (P-001-glance2-counts.md). AC94 and AC96, new; J25, new.
++  - "Ruling: A — "Your milestones · n" and "Standard checklist · n · k tracked" as clear heads, a
++    rule above the standard group, the untracked ones folded into one line worded "not tracked" (a
++    tap lists them), the owner's rows in the row weight, and "· standard" in the Timeline's meta
++    line" (P-001-glance2-standard.md). AC95, new.
++  - **The go-ahead for the operating-model change**, word for word
++    (docs/design/references/owner-request-2026-10-24-glance-emphasis.md, "The owner's round-2
++    answers and the operating-model go-ahead"): "Then finally, you can proceed with the changes
++    proposed for the operating model and the steps link back toward milestone. Honestly I had
++    already assumed that existed and finding out it didn't represents that we caught a big gap. It
++    makes no sense to consider the two things as unrelated, it's all a hierarchy of work. You can't
++    progress phases without successfully delivering upon the milestones, the milestones are
++    accomplished by delivering sprints and ultimately the agents should be either following clear
++    tasks or should be recording them for us to see what it took to get there". Read there as: each
++    sprint carries its planned pieces of work (tasks), and every step (agent session) is recorded
++    against its sprint, so the chain phase → milestone → sprint → task/step is whole and the desk can
++    show it. The model change is Personal-Org-Operating-Model's ("What this spec does not cover",
++    below); the desk's side is AC96 and J25.
++- **What each ruling's "as proposed" means here.** Every ruling's option, as put, points at the
++  Design reviewer's proposal in docs/design/audit-2026-10-24-round-2.md (items 1 to 5; "the audit"
++  below), mocked in docs/design/mockups/glance-emphasis/. The criteria take the audit's measured
++  sizes, places and words where a ruling says "as proposed", each cited to its item; where the
++  owner's widening changes the audit (item 2's "at most one anchor per screen"), the ruling governs.
++- **Builds on round 1** (C). The audit judged round 2 "with your round-1 choices taken as the
++  baseline: all 11 accepted" (the six rulings decisions/questions/P-001-glance-at-work.md, -count.md,
++  -lanes.md, -new.md, -ran-again.md and -since.md, and the round's other items). Those choices are
++  not in this revision's brief and are not written in here. Where a round-2 criterion leans on one,
++  it names it: the stall line's ink and clock (round 1, item 1), the can't-read line (item 2), the
++  Timeline's resting point (item 7) and the Kicked back strip with its two equal lanes
++  (P-001-glance-lanes.md, C). Item 4c, the Done lane shaded on the briefing's ground (accepted with
++  "all", for the Design reviewer to fit to the widened anchor rule), is placed by AC91 but built
++  with the lanes ruling, not in this revision's stages. Writing round 1 in, and its order against
++  the stages below, is the Orchestrator's to place.
++- **What changes:**
++  - **New:** AC91 (anchors), AC92 (the arrow), AC93 (green and red on the marks), AC94 (counts of
++    milestones and sprints), AC95 (the standard checklist set apart) and AC96 (pieces of work and
++    steps); J25 (a sprint's task list and its steps).
++  - **Changed in place, each with a note naming the new criterion:** AC48 (milestones neutral: the
++    headings stay so, the marks take colour), AC59 and AC84 (the icons, the Now line, the meta line
++    and the sprint fold), AC60 (the sprint's line counts its pieces and steps), AC81 (where `--ok`
++    and `--bad` are drawn), AC82 (the tile's arrow and marks; no red edge), AC83 (the anchor, the
++    strip's arrow, the counts, the two groups, the ▲ gone, the why line plain), AC86 (Plan's arrow
++    and its Reached marks), AC88 (the anchor and the marks in dark), AC90 (the why-once line's form,
++    not its words) and J12 (its kept entry gains the task counts).
++  - **Not changed:** what counts as waiting on the owner, Quiet, the notifications (AC73 to AC78),
++    AC69's vermilion list, and every word AC59 to AC61 show (AC84's "every word stays"), except the
++    words these criteria replace, each named. M3's criteria AC25 to AC28 are unchanged.
++  - **No new reads:** the task list rides the pull-request bodies J12 already fetches, and the steps
++    the dispatch log J9 already reads. J12's query text is unchanged; A3's sum stays 9,952 and the
++    margin 48 a day.
++- **Readings marked (C) for the Critic,** each in its criterion: the anchor bound "at most two on a
++  screen, six lines in all" (AC91; also put to the owner, below); the can't-read line keeping its red
++  words (AC93); the arrow where a project has no present, or is Done (AC92); a sprint counted once
++  per phase however many milestones it feeds, and "Not tied to a milestone" sprints counted in their
++  phase (AC94); the task list's provisional form until the model's spec freezes (J25); and a sprint
++  with no task list worded "lists no pieces" (AC96).
++- **The audit's own findings, sorted:** F1 (a recorded "not reached" ignored by the Launch line) and
++  F2 (an own milestone dropped from its phase's line) are fixed by AC94's definitions of tracked and
++  of "your milestones", and AC94's test covers both; F4 (the tile's red edge) is AC93's; F3 (gold
++  with two meanings: "next to reach" and Plan's "moved last" edge, which AC24 specifies) is not
++  ruled, and stays as built; filing it as a question is the Chief of Staff's.
++- **Not taken up:** counts of GitHub Actions runs. The owner said "I wouldn't be against the last two
++  being visible somewhere as well if it's a simple ask"; the audit found a per-sprint count needs one
++  more call per sprint, so not simple, and no ruling asks for it. Steps are taken up (AC96), since
++  the go-ahead asks for them.
++- **The stages,** in order of value to the owner. Each is one pull request with the Reviewer's
++  verdict and the Design reviewer's (the rulebook's parts A and B); tried on the preview, its preview
++  deploy approved before the next opens; with Chromium captures at 360 × 740 and 414 × 896, light and
++  dark, of each screen it changes. Each keeps every test it does not replace and rewrites each case
++  it changes, never dropping one (the brief). The stage-8 guard's exception (tests/desk/ac88-dark.test.mjs)
++  is rewritten in each stage for exactly what it changes:
++
++  | Stage | What the owner sees | Criteria | Tests (`ac-test:` and `join-test:` marks) |
++  |---|---|---|---|
++  | 1 | Each phase counts all its milestones and sprints; each milestone its sprints and merges; a research sprint its steps | AC94, AC96 (a) | AC94; AC96 (a); AC83's and AC84's changed cases rewritten and named |
++  | 2 | Your milestones and the standard checklist under their own heads, the untracked folded into "not tracked"; "· standard" on the Timeline | AC95 | AC95; AC83's and AC84's changed cases |
++  | 3 | Green ✓ and red ✕ on the marks only; no red edge on an unreadable tile | AC93 | AC93; AC81's and AC88's colour cases; AC59's, AC60's and AC84's icon cases |
++  | 4 | One small dark arrow at the present on five drawings; the ▲ gone | AC92 | AC92; AC82's, AC83's, AC84's and AC86's drawing cases |
++  | 5 | The project page's sentence and tally in a soft box; the why line plain | AC91 | AC91; AC83's and AC90's changed cases |
++  | 6 | Each sprint's pieces done of total and its steps, summed on its milestone and phase | AC96 (b), J25, J12 (changed) | AC96 (b); J25; J12's kept-entry cases |
++
++  Stage 5 needs stage 1's tally. Stage 6 waits on the model change and on Service-Desk adopting it
++  (the Orchestrator's lane, approved by the owner, as L-0016 was); before it opens, a revision of
++  this spec replaces J25's provisional form with the model's frozen one and names the version that
++  carries it. Stages 1 to 5 wait on nothing.
++- **The milestone** (for the owner, below). No line in docs/PROJECT.md section 3 covers this work;
++  M3D is reached (2026-10-24). Each ruling's record says "Milestone: none (a design follow-up after
++  M3D; the planner gives it a milestone when it is built)". So this plan proposes one, as M3D's was
++  made: a Build-phase line the Chief of Staff drafts, the Critic checks and the owner approves,
++  placed before M3C. A draft for the Chief of Staff to start from (C): "What matters seen at a glance
++  (M3E) · done when each phase on a project's page counts all its milestones and sprints, the
++  standard checklist sits in its own group, finished and failed marks are green and red, a small
++  arrow marks where each project is now, and a page's most important things sit in a soft box, each
++  on the desk's preview with its tests · phase: Build". Stage 6 is left out of that line, since it
++  waits on the model; it joins a milestone once the model change is adopted. If round 1's choices are
++  built under the same milestone, the line names them too. Until the line is approved, each stage's
++  pull request carries the rulings' own `Milestone: none (…)` reason, and this spec's `milestones:`
++  header is unchanged.
++- **Open for the owner** (under "Open questions for the owner", "Open: after the glance audit's
++  round 2"): the milestone, and the anchor bound. No stage waits on either; stage 5 builds the
++  recommended bound unless the owner answers otherwise first.
++
+ **What this spec does not cover, and where it goes instead:**
+ - D7.1, recording each session's usage and context figures: a model change, specified and built
+   in Personal-Org-Operating-Model under its own process. Done as model S-020, which froze the
+@@ -2510,6 +2661,18 @@ portfolio's marks sit stays open. Until you answer it, they stay as built.
+   no change on screen); an answer link for a portfolio card; and, on a project's page, the parts
+   no connected project records yet: experiments' results, value targets against their measures
+   (M3B), spend alerts, research sub-projects and the T2 parts (AC83).
++- **The hierarchy of work in the operating model** (added 2026-11-03, after the glance audit's round
++  2; the owner's go-ahead, quoted in that amendment): each sprint's pull request carries its planned
++  pieces of work as a task list, and every step (an agent session, the Chief of Staff's included) is
++  recorded against the sprint it serves, so phase → milestone → sprint → piece and step is one chain.
++  A model change for Personal-Org-Operating-Model under its own spec process (its sprint form,
++  OPERATING_MODEL §3 and S-032's pull-request body), not desk work; then Service-Desk adopts that
++  model version, the Orchestrator's lane, approved by the owner. Until then the desk counts no pieces
++  and no steps for a pull-request sprint, and says so once (AC96, J25). J25's form is provisional
++  and yields to the model's frozen one.
++- **Counts of GitHub Actions runs per sprint** (the owner's "if it's a simple ask", 2026-10-24): not
++  ruled, and not simple (one more call per sprint, the audit's item 4). A later piece of work if the
++  owner asks for it.
+ 
+ ## Value targets this spec traces to
+ V1 to V5 are the brief's (docs/PROJECT.md §6, lines 177–181 at 3117150). V5 was added by the owner and is
+@@ -3518,6 +3681,9 @@ The rules for all six:
+     Milestones are neutral. Colour is never the only carrier of meaning (AC42): a word, an icon or
+     a shape goes with it. Codes such as `Q-012` and `PR #61` come after the plain words, in small
+     monospace.
++    - *Changed after the glance audit's round 2 (2026-11-03; AC93):* on the trial view's screens,
++      green and red are drawn only on a status mark, a ✓ for a recorded finished fact and a ✕ for a
++      recorded failure; milestones' headings and words stay neutral.
+     - **Extended by trial-view notes 2, notes 13 and 14 (2026-10-16):** two families join the
+       palette, each used only where these criteria name it, and always with its words:
+       - **one colour per phase** (Discovery, Design, Build, Launch; Done takes the neutral idle
+@@ -5247,6 +5413,10 @@ built without `?sandbox`: the accepted M1 and M2 views stay exactly as they are
+     or more milestones in one phase run is said once under its band, "Why not recorded yet for <k>
+     of <n> milestones · for the agents to add", and those milestones show no why line until each
+     has one (AC90; AC84's "every word stays" is met by the band's line).
++  - *Changed after the glance audit's round 2 (2026-11-03):* a reached ✓ is green and a not-reached
++    ✕ red, on the mark only (AC93); the Now line carries the ink triangle in place of its bar
++    (AC92); a milestone's sprint fold counts its merges (AC94); and a standard milestone is named
++    "standard" on its meta line, its name lighter than the project's own (AC95).
+   - **Changed by AC84 (desk mockup v2, 2026-10-20):** in the trial view the Timeline's content and
+     order stand and its look is frame 7b's: a compact pinned header, lighter pinned bands, a thin
+     rail in the phase's colour, the Now line the only heavy rule, and the boxed, upper-case labels
+@@ -5434,6 +5604,10 @@ built without `?sandbox`: the accepted M1 and M2 views stay exactly as they are
+   colour-coded bullets, Technical, Context and Why, each from its record or "not recorded", and
+   ends with a link to its tasks; and sprints that name no milestone are gathered in each run under
+   a flagged "Not tied to a milestone" line.
++  - *Changed after the glance audit's round 2 (2026-11-03):* a sprint's ✓ marks are green and its ✕
++    marks red, each word staying grey (AC93); a research sprint's first line counts its steps, and
++    from stage 6 of that amendment the "Tasks in this sprint ↗" line counts its pieces done of total
++    (AC96, J25).
+   - **Changed by AC84 (desk mockup v2, 2026-10-20):** Technical, Context and Why are small grey
+     words with grey left edges, never colour-coded (P-001-timeline-labels.md, A, which replaces
+     notes-2 note 14 for them); their text and sources are unchanged, and "Not tied to a milestone"
+@@ -7089,6 +7263,9 @@ only real records (P-001-design-lab-1.md: "Absolutely no fake numbers"; AC41).*
+       `--ink2` as the agents' grey, are at least 10 apart by CIEDE2000 in each theme. Measured
+       on 2026-10-20 with the formula AC48's test uses (36 pairs a theme): lowest 13.3 in light
+       (`--you` and `--bad`) and 12.2 in dark (`--gold` and the Build olive) (Facts relied on).
++    - *Changed after the glance audit's round 2 (2026-11-03; AC93):* `--ok` and `--bad` are drawn on
++      the status marks AC93 lists, and on nothing else (the can't-read line's words excepted, as
++      built); their values are unchanged, so the distance rule's figures stand.
+   - **Text that crowds can be cut** (P-001-redesign-conflicts.md, item 1, which replaces notes-2
+     note 5's "Every word of text stays"): a screen built to mockup v2 shows what its frame shows,
+     and AC62's "every word kept" no longer binds it (AC62, changed). What no frame shows, and the
+@@ -7283,6 +7460,10 @@ only real records (P-001-design-lab-1.md: "Absolutely no fake numbers"; AC41).*
+     went back: not recorded" shared by two or more tiles is said once at the group's head, "<k>
+     projects · why their run went back: not recorded", and those tiles' Now lines keep only their
+     own "went back on <date>" where a record gives it. The tile's Next line: AC89 (k).
++  - *Changed after the glance audit's round 2 (2026-11-03):* a tile's drawing carries the ink
++    triangle at the now run's now cell (AC92); its finished ✓ is green and its ✕ red, on the mark only
++    (AC93); and a tile whose project can't be read has no red border, its corner's words carrying it
++    (AC93). The briefing is Home's anchor, unchanged (AC91).
+   - A test marked `ac-test: S-001/AC82` renders Home from the fixtures and made-up cases (labelled
+     NOT real in tests/desk/fixtures/README.md) and checks: every briefing form, its parts' order
+     and omissions, "oldest" ignoring a card with no raised time, the settle time (AC12's sum, in
+@@ -7428,6 +7609,13 @@ only real records (P-001-design-lab-1.md: "Absolutely no fake numbers"; AC41).*
+     (AC36, AC55); its "Your merges?" goes (AC89 (d)). Its top line is "v2.5 pipeline · model not
+     recorded", not frame 8's "v2.5.1 pipeline": no record the desk reads gives the patch number.
+     The waits row's short names: AC89 (c).
++  - *Changed after the glance audit's round 2 (2026-11-03):* the one sentence and AC94's tally sit in
++    the page's anchor (AC91); the strip carries the ink triangle above the now cell (AC92); the
++    marks take green and red (AC93); the section head and each phase's folded line count all its
++    milestones and sprints, and the old "Yours: … · Standard: …" line goes (AC94); an opened phase
++    has the heads "Your milestones" and "Standard checklist", the rule, and the "not tracked" fold
++    (AC95), its next-to-reach row the triangle and no ▲ (AC92), and its why-once line plain (AC91).
++    This test's changed cases are rewritten in those stages and named.
+   - A test marked `ac-test: S-001/AC83` renders the page from `service-desk/` (Service-Desk's
+     records at the fixture's commit, real), `poom/` (placeholder form) and made-up records
+     (labelled NOT real) for: a project with all 24 standard lines written, some skipped; one
+@@ -7517,6 +7705,11 @@ only real records (P-001-design-lab-1.md: "Absolutely no fake numbers"; AC41).*
+     (P-001-audit-team.md, AC67). The phase line can wrap to two lines on a phone (Known limits,
+     after MD3, 3). AC90 says a missing why once per band; AC89 (g) and (k) level the sprint marks
+     and date "Run <k> began".
++  - *Changed after the glance audit's round 2 (2026-11-03):* the Now line's bar becomes the ink
++    triangle, still the only heavy rule (AC92); the marks take green and red (AC93); "<n> sprints ▸"
++    becomes "<n> sprints · <m> merged ▸" (AC94); a standard milestone's meta line says "standard"
++    and the gathered line reads "Standard checklist · <n> not recorded for this run ›" (AC95). These
++    replace the words they name; every other word AC59 to AC61 show stays.
+   - A test marked `ac-test: S-001/AC84` renders the Timeline from the fixtures AC59's and AC60's
+     tests use and checks: every word AC59 to AC61 show is still in the page, inside its folds;
+     the header's parts; the band's words and its pinned style; the rail's solid and dashed parts;
+@@ -7679,6 +7872,10 @@ only real records (P-001-design-lab-1.md: "Absolutely no fake numbers"; AC41).*
+     finish's reason shared by two or more rows of a group is said once at the group's head, as
+     AC24's note says, and the rows it covers drop it; each row shows its rough finish once there is
+     one. The milestone's sheet keeps its full state.
++  - *Changed after the glance audit's round 2 (2026-11-03):* the row whose icon is the gold ring
++    carries the ink triangle in the page's margin, one per project group, none on a gate row (AC92);
++    the Reached list's ✓ is green (AC93). Gold's second use, the "moved last" edge (the audit's F3),
++    stays as AC24 specifies.
+   - A test marked `ac-test: S-001/AC86` runs AC24's test cases on the Plan tab (each kept, none
+     dropped), and checks the tab's title line, the order control opening AC24's ordering, the
+     groups, each row's icon, words and right-hand value, "Not milestones yet", the ideas section's
+@@ -7794,6 +7991,9 @@ only real records (P-001-design-lab-1.md: "Absolutely no fake numbers"; AC41).*
+     colour, and the nine colours at least 10 apart (AC81). The fade at a clipped text's cut uses the
+     dark card's colour; the vermilion is `#ff6a3d`, with `--on-you` `#0f1012` on it (6.69:1,
+     measured, Facts relied on); shadows are mockup v2's dark ones.
++  - *Changed after the glance audit's round 2 (2026-11-03):* the anchor's `--bg2`, the triangle's ink
++    and the green and red marks are checked in dark as in light (AC91 to AC93), with the audit's
++    measured contrasts (Facts relied on).
+   - A test marked `ac-test: S-001/AC88` renders every trial-view screen from each fixture with the
+     dark theme forced (`data-theme="dark"`, as the mockup's frames force it) and checks that every
+     `color`, `background` and `border-color` on it resolves to one of AC81's tokens, and, from
+@@ -8030,6 +8230,9 @@ theme.*
+       "not recorded in what the desk reads" is said once at the list's head, "<k> members · last
+       work not recorded in what the desk reads"; each card shows "last:" only when a record names
+       it.
++  - *Changed after the glance audit's round 2 (2026-11-03; AC91):* the why-once line on an opened
++    phase is a plain line, no longer a filled callout; its words and its once-per-phase rule are
++    unchanged.
+   - A test marked `ac-test: S-001/AC90` renders Plan, the Timeline, Home and the Team screen from
+     the fixtures the audit used (`service-desk/`, `poom/`, `md-extremes/`) and made-up cases
+     (labelled NOT real), and checks: each shared reason said once per group with its count and its
+@@ -8041,6 +8244,334 @@ theme.*
+     (draft 2, the Critic's finding 4). Stage 4's pull request adds the Team case, with AC67's and
+     AC49's changed cases named.
+ 
++**After the glance audit, round 2** (added 2026-11-03, "After the glance audit's round 2: your five
++answers and the hierarchy of work"; draft 1)
++*From the owner's five rulings (decisions/questions/P-001-glance2-anchor.md, -arrow.md, -counts.md,
++-palette.md and -standard.md), the owner's go-ahead for the hierarchy of work
++(docs/design/references/owner-request-2026-10-24-glance-emphasis.md), and the Design reviewer's
++proposals they accept (docs/design/audit-2026-10-24-round-2.md, items 1 to 5, "the audit"). The desk
++is mockup v2 as built (AC44), with the round-1 choices as their baseline (the amendment, "Builds on
++round 1"). Each criterion names the criteria it changes; where they differ, it governs. Every
++screen keeps AC81's tokens and AC88's dark theme, and every mark keeps its shape and its word, so
++colour is never the only carrier of meaning (AC42; WCAG 1.4.1, library/facts/F-wcag22-01.md).*
++
++- AC91 [trace: V1 → AC91] [trace: V4 → AC91] — When the owner opens a screen, then the few things
++  that matter most on it, and only those, sit in a soft box in the look of Home's briefing, so the
++  eye lands there first; such boxes stay occasional, and on the desk's screens a filled box means
++  nothing else.
++  - The ruling: P-001-glance2-anchor.md, line 1 (quoted in the amendment). The owner's words: "the
++    outlined box isn't ONLY for the single most important thing on the page. It should be for the
++    set of most important things on a page. It definitely shouldn't be overdone but only accepting
++    one thing omits other elements that might be close to or as important." The option as put: "The
++    project page gets the boxed sentence and tally; the rule holds desk-wide; the why-not-written box
++    becomes a plain line." The owner's round-2 ask: "the occasional usage of outlined boxes or subtle
++    callouts that an assist as visual anchors on pages for the most important information on it".
++  - **The form** (the audit, item 2, "one form"): Home's briefing's own look: the `--bg2` ground,
++    radius 12 px, padding 12 px, a 6 px gap between its lines, text in `--ink` in the roles the
++    lines already have. No edge of any kind: no border, no outline, no edge in `--line`, `--line2`
++    or vermilion (an edged thing on the desk is one to tap or type into, and `--bg2` with a
++    `--line2` edge is the text box's look). Its ground is never vermilion. A mark inside it keeps
++    its own colour (the briefing's ◆ stays vermilion).
++  - **What may sit in one** (the widened rule): the set of a screen's most important things, such as
++    where a project stands, what needs the owner and how far the work has come. One box may hold
++    several of them. Never a gap the agents fill (AC69), never inside a card, tile, sheet or bubble,
++    and never used for decoration.
++  - **Never overdone** (C, the reading of "It definitely shouldn't be overdone"; put to the owner,
++    "Open: after the glance audit's round 2"): at most two anchors on any screen, holding at most six
++    lines between them at 360 px wide; a screen may have none.
++  - **Where, as ruled:**
++    - **Home:** the briefing (AC82), unchanged; it is the anchor that sets the look;
++    - **a v3 project's page:** AC83's one sentence and, under it, one tally line, in one box at the
++      top of the Overview, where the sentence sits today: the tally is AC94's head, "<R> of <T>
++      milestones reached · <the sprints part>" (as drawn by the audit, "8 of 16 milestones reached ·
++      17 sprints: 9 merged, 8 not read"); from stage 6 it adds " · <d> of <t> pieces done" where AC96
++      gives it. The strip and the ◆ row stay outside it (the audit's reasons: the box's padding broke
++      "Discovery" mid-word at 360 px, and the ◆ row is anchored by vermilion and is absent when
++      nothing waits);
++    - **a v2.5 project's page:** its sentence alone (AC83, frame 8), with no tally, since it has no
++      milestones (C);
++    - **every other screen** (the Timeline, Plan, Waiting, the sheets, Team and its member pages,
++      Details, the portfolio's block and the failed-load page): none, as the audit's table has them,
++      until the Design reviewer's per-screen table names one;
++    - **a further anchor** (the widened rule) only where the Design reviewer's per-screen table in a
++      stage's build brief names it, with what it holds and why it is among the screen's most
++      important things, within the bound above; the Reviewer checks it against this criterion. Item
++      4c, Waiting's Done lane shaded on `--bg2` (the owner's comment, the owner-request record's
++      "Comment on item 4b"), is settled in that table with the lanes ruling (P-001-glance-lanes.md,
++      C), and built with it.
++  - **What stops being a box:** the why-once line on an opened phase ("Why each is taken on or
++    skipped: not written yet. <project>'s Chief of Staff writes its lines.", AC83 and AC90) becomes
++    a plain line in `--t-small`, in the agents' grey with its eye icon, on the list's own ground; its
++    words are unchanged (AC83, AC90; P-001-why-line.md's words stand).
++  - **Kept as built** (C): the Timeline's two end cards ("What we're delivering" and "Where we
++    started", AC59) and Plan's card. They are not at the top of their screens, and the audit's
++    table keeps them; the Design reviewer's table may list them as that screen's anchors or as cards.
++  - A test marked `ac-test: S-001/AC91` renders every trial-view screen from each fixture
++    (`service-desk/`, `poom/`, `md-extremes/`) and made-up cases (labelled NOT real) in light and dark,
++    and checks, reading the CSS as AC88's cascade does: the anchor rule's ground, radius, padding and
++    gap, and that it has no `border`, `outline` or `box-shadow` and no `--you` ground; at most two
++    anchors on each screen, holding at most six lines at 360 px, each in a place this criterion or
++    the stage's table names, and none inside a card, tile, sheet or bubble; the project page's box
++    holding its sentence and tally (a v2.5 page its sentence only); the why-once line with no ground
++    of its own, its words unchanged; and Home's briefing unchanged. The stage's pull request carries
++    Chromium captures of the project page at 360 × 740 and 414 × 896, light and dark, with nothing
++    scrolling sideways and "Discovery" whole on the strip.
++
++- AC92 [trace: V4 → AC92] — When the owner looks at a drawing of where a project is, on the
++  Timeline, a project page's phase strip, a Home tile, Plan or an opened phase, then one small
++  filled triangle in ink points at the present, and nothing else on the desk uses that shape.
++  - The ruling: P-001-glance2-arrow.md, line 1. The option as put: "The triangle on all five
++    drawings; the ▲ reading arrow removed." The owner's ask: "On any timeline element or plan
++    element, can we are add a subtle but noticeable visual arrow indicator for where we are?"
++  - **The shape** (the audit, item 3): a filled triangle in `--ink`, pointing at the present: right
++    on a drawing read down the screen, down on one read across it, never up. It is drawn as a shape
++    (a CSS `clip-path` polygon or an inline SVG in `currentColor`), never a text character, so it
++    looks the same on every phone (AC81's rule for marks). It is hidden from assistive technology
++    (`aria-hidden`): the words beside it already say now, Now or next to reach. It never animates,
++    and moves only when its drawing does. Ink stands at 17.58:1 (light) and 16.25:1 (dark) on `--bg`
++    and 16.99:1 and 15.15:1 on `--card` (the audit, measured), above WCAG 1.4.11's 3:1.
++  - **Where, one per drawing, in the audit's sizes:**
++    - **the Timeline** (AC84): at the Now line, an 8 × 10 px triangle pointing right, centred on the
++      rail, in place of the line's 16 × 2 px bar; one per Timeline;
++    - **a project page's strip** (AC83): a 10 × 6 px triangle pointing down, centred above the now
++      cell's bar, in the gap between the anchor (AC91) and the strip;
++    - **a Home tile** (AC82): a 6 × 8 px triangle pointing right, 3 px left of the now run's now
++      cell;
++    - **Plan** (AC86): a 6 × 8 px triangle pointing right, in the page's 16 px margin beside the row
++      whose icon is the gold ring (next to reach, AC57's state), one per project group. A gate card's
++      row at the group's top takes none (it is not a milestone, AC86's note);
++    - **an opened phase** (AC83): a 6 × 8 px triangle on the phase's thin line, beside its
++      next-to-reach row, in the now phase only.
++  - **Where there is no present** (C): no triangle where AC50 gives no now (its "not recorded", and
++    a tile or page that says "not available", "Checking…" or "Can't read"), nor on Plan in a group
++    with no next-to-reach row. A Done project: on its tile the triangle points at the Done cell; its
++    page's strip, which ends at Launch (AC83), has none, since the sentence says "Done". A v2.5
++    project: the tile's and the page's sprint drawings point at the open sprint, and have none with
++    no sprint open.
++  - **Removed:** the ▲ on an opened phase that meant "read from the bottom up" (frame 6, AC83's "a
++    thin line with an arrow pointing up", notes 12 and 19). The thin line stays, and the section
++    head's "↑ start at the foot" says the reading order once, so no triangle means two things.
++  - A test marked `ac-test: S-001/AC92` renders the five drawings from the fixtures and made-up
++    cases (labelled NOT real): a first run, a second run, a gate waiting, a Done project, a v2.5
++    project with and without an open sprint, a project not yet read and one that can't be read; and
++    checks: exactly one triangle on each drawing that has a present, beside the element its words
++    name (the now cell, the Now line, the next-to-reach row), pointing the way given above, at its
++    size, in `--ink` in both themes, `aria-hidden`, with no animation or transition; none where there
++    is no present; none on a gate row; and no ▲ or other up-pointing triangle on any screen. The
++    stage's pull request carries Chromium captures of each drawing at 360 × 740 and 414 × 896, light
++    and dark.
++
++- AC93 [trace: V4 → AC93] — When a status mark says that something finished and was confirmed, or
++  that something failed, then that mark, and only the mark, is green (`--ok`) or red (`--bad`); words,
++  rows, fills and borders take neither; vermilion still means only what needs the owner, gold only
++  next to reach, and no third colour joins them.
++  - The ruling: P-001-glance2-palette.md, line 1 (quoted in the amendment), with "--bad keeps its
++    current values" (its "Read as"). The owner's ask: "I'm not against slight color … I am willing
++    to adjust that, for a limited palette that enforces consistent indication of things that are
++    going well, and things that aren't."
++  - **The tokens, unchanged** (AC81): `--ok` #12733a light, #4cc06a dark; `--bad` #b3162a light,
++    #ff6b78 dark. The nine meaningful colours keep their distances (lowest 13.3 light, `--you` and
++    `--bad`; 12.2 dark, `--gold` and Build), since no value changes.
++  - **Green, on the ✓ only** (the audit, item 1): the ✓ of a reached milestone and of a finished
++    phase, on the Timeline, a project page's strip, an opened phase's rows, a Home tile's drawing and
++    Plan's Reached list; the ✓ of a sprint's marks merged, review, checks and source-checked (AC60),
++    each ✓ in its own span in `--ok`, its word staying `--ink2`; the Done lane's ✓, as built; and a
++    "CI … passing" line, which gains a ✓ before its words where it has none.
++  - **Red, on the ✕ only:** the ✕ of a milestone not reached ("Design-6 · not reached"); the ✕ of a
++    sprint's mark for a review failed, checks failed or a source check failed (AC60), its word staying
++    `--ink2`; the ✕ of a project the desk can't read, as built; the ✕ of the failed-load page (AC89
++    (h)); a "CI … failing" line, which gains a ✕ before its words, such as a sheet's "What was
++    checked: CI on main's head: failing"; and the mismatch mark of a waiting deploy that matches no
++    passed pull request (AC72).
++  - **Stays ink or grey:** planned, in progress (the half circle), not recorded, no record in the
++    model, skipped and not needed; a reached mark in a run later gone back over (the lighter check,
++    notes-2 note 2); every absence ("Nothing waiting", "Nothing needs you" and its tick, "checked …
++    ago"); the agents' gaps and their grey diamond (AC69); "new"; the stall line, in ink with its
++    clock (round 1, item 1); the settle and undo lines, a clock or lock in ink; the Technical, Context
++    and Why labels; and every milestone heading ("Bold headings, no colour", P-001-trial-view-notes-1.md,
++    stands: only the icon changes).
++  - **The rules that keep it limited** (the audit's seven): colour only on a status mark, a ✓ or ✕
++    or a status icon at 14 to 16 px, never on a fill, border, row ground or heading; every coloured
++    mark keeps its shape and word; green only for a recorded, finished fact (reached, merged, passed,
++    confirmed), never for an absence or for quiet; red only for a recorded failure or a failed read,
++    never for an agents' gap or for something waiting; where a mark is the owner's and failing (a
++    kicked-back card) vermilion wins; gold stays next to reach; no third colour.
++  - **The can't-read line's words stay red, as built** (C): round 1's item 2 drew them in `--bad`,
++    and the audit's rule 1 keeps them ("Words stay ink or grey, except the can't-read line"). The
++    ruling's "never on words" is read as ruling out new red words, not that line.
++  - **Gone:** the red border on a Home tile whose project can't be read (`.v2-tile.bad`; the audit's
++    F4). The tile's corner, "✕ Can't read since HH:MM", carries it.
++  - **Contrast** (the audit, measured): `--ok` 5.26:1 at its lowest (light, on `--chip`), `--bad`
++    5.77:1 at its lowest (dark, on `--chip`), so each mark passes WCAG 1.4.11's 3:1 and 1.4.3's 4.5:1
++    on every ground it sits on, in both themes.
++  - **What this changes** (each by the owner's ruling, as the audit listed them): notes-2 note 23's
++    "not by colour" for these marks (the icon in a plain circle stays, and the colour goes with its
++    shape); note 28's pick for the tile's checks; AC48's "Milestones are neutral" for the marks only;
++    P-001-timeline-labels.md's "colour is left for what needs the owner", which now also allows pass
++    and fail on the marks; AC59's, AC60's and AC84's icons; and frames 5, 6, 7b and H5 as drawn.
++    P-001-redesign-type.md's one vermilion accent and AC69 are unchanged.
++  - A test marked `ac-test: S-001/AC93` renders every trial-view screen from each fixture and
++    made-up cases (labelled NOT real: a failed review, failed checks, a failed source check, a CI
++    failing line, a deploy mismatch, a milestone not reached, a reached mark in a run gone back over,
++    a kicked-back card) in light and dark, and checks, through AC88's cascade: every element whose
++    `color` resolves to `--ok` is a ✓ mark in the list above, and every one resolving to `--bad` a ✕
++    mark in the list or the can't-read line; no `background`, `border-color` or `outline-color`
++    resolves to either; the words beside each mark stay `--ink2` or `--ink`; each case listed under
++    "Stays ink or grey" resolves to neither; a kicked-back card's mark stays vermilion; no tile has a
++    `--bad` border; and the nine colours' distances and each mark's contrast on its ground as above.
++
++- AC94 [trace: V4 → AC94] — When the owner opens a project's page or its Timeline, then each phase
++  leads with all its milestones counted, the project's own and the standard ones it tracks, reached
++  of total, with its sprints counted beside them; the standard ones it doesn't use are said in
++  words, never as "0 of 5"; and each milestone counts its sprints and how many have merged.
++  - The ruling: P-001-glance2-counts.md, line 1. The option as put: "Milestone and sprint counts as
++    proposed; pieces counted done-of-total from a task list in each sprint's pull request (an
++    operating-model change, then the desk reads it)." The owner's words: "when I look at the
++    milestones page I am consistently met with a 0 out of X milestones. Even on phases we've fully
++    completed. My understanding is that is referring to the standard milestones. I want to expand
++    that to all milestones, in some way that highlights the fact we didn't use the x standard ones
++    but we still have y number of milestones and this is what we've completed so far. I want that
++    same logic applied to sprints and actions. So I can see the volume progress for each." The
++    pieces of work are AC96's.
++  - **What is counted, for each phase** (C where marked):
++    - **your milestones:** each of the project's own milestones that docs/PROJECT.md section 3 puts in
++      the phase, across all its runs, counted once however many runs it appears in, a dropped one
++      (AC24's "Dropped") left out;
++    - **the standard ones tracked:** each of the phase's standard milestones that has a recorded
++      state in the model's trace (reached, not reached or any other recorded state, J11) or that a
++      plan line marks "taken on" (AC61), counted once;
++    - **the standard ones not tracked:** the phase's others, "not recorded yet" or "no record in the
++      model" (AC83's three states), and, apart from them, those a plan line marks "skipped";
++    - **T** is your milestones plus the standard ones tracked; **R** those of them reached (an own
++      milestone whose plan line carries ` · reached: <date>`, J11; a standard one recorded reached);
++    - **the phase's sprints:** every sprint AC60 places in the phase's runs, under a milestone or
++      under "Not tied to a milestone", counted once even when it feeds two milestones (PR #44 under
++      M2 and M2B) (C); never one AC60 keeps off the Timeline (the asks-merge job's merges, the
++      estimate pull requests). Each is merged, not merged or not read, by AC60's merged mark: "✓
++      merged" is merged; a sprint J12 does not hold, or whose read failed ("not available", "not
++      recorded in what the desk reads"), is not read.
++  - **The section head** (AC83): "Milestones by phase · <R> of <T> reached", R and T summed over the
++    phases, in place of "yours and the model's <n>"; "↑ start at the foot" stays at its right.
++  - **Each phase's folded line** (AC83's one line per phase, still read from the bottom up, its state
++    word at the right and its fold mark as built), its detail now two lines:
++    - **line 1:** "<R> of <T> reached · <the sprints part>", the sprints part one of "<m> of <s>
++      sprints merged" (every sprint's merge known), "<s> sprints: <m> merged, <k> not read" (some not
++      read), "<s> sprints, merges not read" (none read), or "no sprints filed yet"; "1 sprint" in the
++      singular. With T of 0: "No milestones tracked yet · <the sprints part>" (C). For example (the
++      audit's `mix` fixture): "3 of 5 reached · 4 sprints, merges not read";
++    - **line 2:** "Standard checklist: <k> tracked · <u> not tracked", or "Standard checklist: none
++      tracked (<n>)" when k is 0, adding " · <j> skipped" where plan lines say skipped; n is the
++      phase's standard count (24 in all today: Discovery 8, Design 6, Build 5, Launch 5), and k + u +
++      j = n. These are words: no "<x> of <n>" is ever given for the checklist alone;
++    - AC83's old detail line ("Yours: <ids> · Standard: <k> of <n> <reached | recorded>", with its
++      "run <k>: … reached") goes: each id is one tap away in the opened phase (AC95).
++  - **Each milestone:**
++    - **on the Timeline** (AC84): its fold reads "<n> sprints · <m> merged ▸", or "· <m> merged, <k>
++      not read" when some are not read, "· merges not read" when none is, in place of "<n> sprints
++      ▸"; a milestone with none keeps its words as built;
++    - **in an opened phase** (AC83): an own milestone with work filed reads "work filed · <m> of <n>
++      sprints merged" ("work filed · 1 of 1 sprint merged"), the merge part as on the Timeline where
++      some are not read; its other state words are unchanged.
++  - **The audit's F1 and F2 are fixed by these definitions:** a standard milestone with a recorded
++    state in a later run ("Launch-3 · not reached" in run 3) is tracked, so its phase never reads
++    "not recorded yet" for it; and an own milestone planned in an earlier run (M3C in run 2) is among
++    the phase's milestones.
++  - **A v2.5 project:** no phases or milestones; its page and Timeline are unchanged.
++  - **Unread records:** a project the desk can't read keeps AC89 (h)'s "Phases: not available", with
++    no counts; a count is never given from a partial read.
++  - AC90 still applies: a reason shared by two or more rows of a phase is said once at its head.
++  - A test marked `ac-test: S-001/AC94` renders the page and the Timeline from `service-desk/`, the
++    audit's `text` and `mix` cases (made up, labelled NOT real) and made-up cases: a phase with all
++    its sprints merged, some not read, none read and none filed; a sprint feeding two milestones; an
++    untied sprint; an asks-merge job's merge; a dropped own milestone; a standard milestone taken on,
++    one skipped and one with a recorded state in a later run (F1); an own milestone planned in an
++    earlier run (F2); T of 0; and a project that can't be read. It checks the head's sum, each line 1
++    and line 2 form and its singular, k + u + j = n, no "<x> of <n>" for the checklist, the Timeline
++    fold's and the opened row's sprint words, and that AC83's old detail line is gone.
++
++- AC95 [trace: V4 → AC95] — When the owner opens a phase on a project's page, or reads its Timeline,
++  then the project's own milestones and the model's standard checklist sit under their own clear
++  heads, the checklist below a rule, its untracked milestones folded into one "not tracked" line a
++  tap opens, and the owner's rows weightier than the checklist's.
++  - The ruling: P-001-glance2-standard.md, line 1. The option as put: "As proposed; the folded line
++    says "6 not tracked this run"." The owner's words: "please visual segregate the standard
++    milestones a little bit more than they currently are. The lighter color just kind of gets
++    skipped by me and I get confused on what's in or out". P-001-standard-milestones.md (every
++    standard milestone shown, skipped ones named) and P-001-redesign-conflicts.md item 2 stand.
++  - **In an opened phase** (AC83; the audit, item 5), for each run, the latest first and each earlier
++    run alike (earlier runs gain the heads they lack today):
++    - **the heads:** "Your milestones · <n>", n the own milestones in that run's list, then
++      "Standard checklist · <n> · <k> tracked", or "Standard checklist · <n> · none tracked this
++      run", each in `--t-label` (500 11 px) in `--ink`, in place of today's "Yours" and "The model's
++      standard <n>" in 400 11 px `--ink2`;
++    - **the rule:** a 1 px line in `--line` above the standard head, with an 8 px gap above it;
++    - **the rows:** an own milestone's name in the row role, `--t-row` (500 13 px); a standard one's in
++      400 13 px, its colour as built; each keeps AC83's icon and state words, the first at the foot;
++    - **the standard rows tracked** (AC94's sense) and those a plan line marks skipped are listed,
++      each named, a skipped one with its why (P-001-standard-milestones.md);
++    - **the untracked folded into one row:** a dashed ring and "<u> not tracked this run: <a> not
++      recorded yet, <b> no record in the model ›" (a part left out when it is 0), in `--t-small`,
++      `--ink2`. A tap, Enter or Space opens the list in place, each milestone with its own icon and
++      words (AC83's three states told apart, the rulebook's part B item 30), and folds it again; the
++      row's accessible name says how many and that it opens, its state open or folded; a refresh
++      keeps it as the owner left it (AC56). A run whose standard milestones are all tracked has no
++      such row;
++    - AC83's why-once line stays at the foot of the run's list, in AC91's plain form.
++  - **On the Timeline** (AC84): a standard milestone's meta line reads "<id> · standard · <its state
++    words>" ("Design-6 · standard · not reached"); a standard milestone's name is 400 13 px and an own
++    milestone's stays 500 13 px; the gathered line reads "Standard checklist · <n> not recorded for
++    this run ›" in place of "<n> standard <Phase> milestones · not recorded for this run", opening as
++    it does today.
++  - **Not on Plan or Home:** neither shows standard milestones (the audit, item 5).
++  - A test marked `ac-test: S-001/AC95` renders an opened phase and the Timeline from the fixtures and
++    made-up cases (labelled NOT real): a run with every standard milestone tracked, one with none, a
++    mix of not recorded, no record in the model and skipped, and an earlier run. It checks: both
++    heads' words, role and colour on every run; the rule above the standard head; the two name
++    weights; the folded row's words, its parts left out at 0, its tap, keys, accessible name and
++    state, and its list's icons and words; a skipped milestone listed with its why; no folded row
++    where all are tracked; the state kept on refresh; and the Timeline's meta line, name weights and
++    gathered line.
++
++- AC96 [trace: V4 → AC96] — When a sprint's records say what work it held, then the desk counts it:
++  the steps that served the sprint, on the sprint; and, once the operating model records them, the
++  pieces of work its pull request planned, done of total, on the sprint, its milestone and its phase;
++  so the chain phase → milestone → sprint → piece and step reads whole, and where the model does not
++  record it yet the desk says so once and never makes a figure up.
++  - The rulings and words: P-001-glance2-counts.md, line 1 ("pieces of work counted done-of-total
++    from a task list in each sprint's pull request, after the operating model adds it"); the owner's
++    go-ahead (quoted in the amendment): "the agents should be either following clear tasks or should
++    be recording them for us to see what it took to get there"; and the owner's meaning of actions:
++    "I meant the pieces of work within a sprint in a milestone, but I wouldn't be against the last two
++    being visible somewhere as well if it's a simple ask". The rulebook's part A item 5 (no made-up
++    figures) and AC41.
++  - **(a) Steps of a research or pipeline-item sprint, from stage 1** (already read, J25): on the
++    sprint's first line, after its code, "<n> steps" in Plex Mono ("19 Oct · Q-012 · 9 steps"; "1
++    step"). A pull-request sprint shows no steps part until (b).
++  - **(b) Pieces of work, and a pull-request sprint's steps, from stage 6** (after the model change and
++    its adoption here; "What this spec does not cover"):
++    - **on the sprint:** "<d> of <t> pieces done" on the line of "Tasks in this sprint ↗" (AC60),
++      before the link, with "<n> steps" on its first line as in (a); a sprint whose pull request lists
++      no pieces reads "lists no pieces" there, in the agents' grey, "for the agents to list" (AC69)
++      (C); one whose body J12 does not hold, "pieces not read";
++    - **on its milestone:** the Timeline's fold and the opened phase's row add " · <d> of <t> pieces
++      done", summed over its sprints whose pieces are read; when only some list pieces, "<d> of <t>
++      pieces done in <j> of <n> sprints" (C);
++    - **on its phase:** AC94's line 1 adds " · <d> of <t> pieces done", summed the same way, and the
++      project page's tally (AC91) the same;
++    - a pipeline-item sprint has no pull request, so it has no pieces part; its steps stand for it (C).
++  - **Before (b)** (the project's model version lacks the forms, J25): an opened milestone's sprint
++    list says once at its head, in the slashed circle's state and words, "Pieces of work and a pull
++    request's steps: no record for this in the model yet" (AC83's "no record in the model"; AC90's
++    once-per-group rule); no sprint, milestone or phase shows a pieces part; nothing counts commits
++    in their place (the option B the owner did not pick).
++  - A test marked `ac-test: S-001/AC96` renders the Timeline, an opened phase and the page from the
++    fixtures and made-up cases (labelled NOT real) and checks: (a) a research sprint's step count
++    against its dispatch-log entries, its singular, and no steps part on a pull-request sprint before
++    (b); before (b), the once line and no pieces part anywhere; and, with (b), each sprint's "<d> of
++    <t> pieces done", "lists no pieces" and "pieces not read", the milestone's and the phase's sums
++    with and without the "in <j> of <n> sprints" part, the tally's pieces part, and a pull-request
++    sprint's steps.
++
+ ### N — Notifications the moment anything waits on you (first, from 2026-10-18)
+ *Covers AC45 as ruled on 2026-10-08 and widened by the owner's request of 2026-10-18 ("Notifications
+ the moment anything waits on you", draft 6), and the owner's cost instruction of 2026-10-18 (AC78).
+@@ -10996,6 +11527,9 @@ MD3 is accepted (AC24). AC25 to AC28 are unchanged.*
+       comment line, and a final paragraph holding `Signed-off-by: A <a@x>`, `Merged-By:
+       orchestrator` and two lines that are not trailers (`[('Signed-off-by', 'A <a@x>'),
+       ('Merged-By', 'orchestrator')]`), each with the author `github-actions[bot]`.
++  - *Changed after the glance audit's round 2 (2026-11-03; J25, from that amendment's stage 6):* the
++    kept entry gains `tasks`, the two counts of the body's task list and never its text, and the key
++    moves to `desk-pulls-v4`. The query text and the request count are unchanged.
+   - A test marked `join-test: S-001/J12` covers it, with that fixture: the refused cursor, the
+     budget, `null` on a failed read, the three-page limit and its note, a head change reading the
+     first page only, each of the answer's own errors above, the kept fields only (no body text
+@@ -12470,6 +13004,58 @@ MD3 is accepted (AC24). AC25 to AC28 are unchanged.*
+     session's start or end (P-001-cos-sessions-on-desk.md, A) while the Chief of Staff's commit is
+     listed, and "Mark as seen" emptying the list.
+ 
++- **J25 — A sprint's task list and its steps → the counts (page side; added 2026-11-03, AC94, AC96,
++  after the glance audit's round 2).** v3 projects only. No new request: both sources are answers
++  the page already holds, so A3's sum (9,952) and J12's query text are unchanged.
++  - **Steps of a pipeline-item sprint** (AC96 (a), from stage 1): from the v3 dispatch log J9 reads
++    (`dispatch-log/<YYYY-MM>.jsonl`, every month file the page holds), each entry with `"action":
++    "dispatch"` (a session starts, J9's shape) whose `item` equals the sprint's id (`Q-013`, a `P-`
++    or `E-` item) is one step. An entry that doesn't have J9's shape is skipped, as J9 skips it
++    (AC31). The count is of steps the page holds: a month file it can't read makes the count "steps
++    not read" (C).
++  - **Pieces of work of a pull-request sprint** (AC96 (b), from stage 6): from the pull request's
++    `body`, which J12 already fetches. **The form is provisional** (C) until the model change freezes
++    its own; before stage 6 opens, a revision of this join replaces this paragraph with the model's
++    frozen form and its version, as J10 adopted model S-020's:
++    - the section headed by a line exactly `## Tasks`, up to the next line starting `## ` or the
++      body's end; a body with none has no task list;
++    - in it, each line whose text after any spaces starts `- [ ] `, `- [x] ` or `- [X] ` (or the same
++      with `*` in place of `-`) is one piece, at any depth of indent; `[x]` or `[X]` is done. Lines
++      inside a fenced code block (between two lines starting with three backticks) are not counted;
++    - so each pull request gives `tasks`: `{ "done": <d>, "total": <t> }`, or `null` for no `## Tasks`
++      section. A section with no task lines gives `{ "done": 0, "total": 0 }`, which AC96 says as
++      "lists no pieces".
++  - **Steps of a pull-request sprint** (AC96 (b)): from the field the model change adds to each step's
++    record to name its sprint (a dispatch-log entry's, and a Chief of Staff session line's, J13). Its
++    name and form are the model's; the revision above names them. Until then none is read.
++  - **Which model applies** (C): the forms apply to a project from the model version that adopts
++    them, read from its `governance/OPERATING_MODEL_VERSION` (J23's version reads). A project at a
++    lower version shows AC96's "no record for this in the model yet"; at that version or later, a pull
++    request with no `## Tasks` section reads "lists no pieces", one merged before the project adopted
++    the form included (a known gap, C: the desk reads no adoption date, and the words state a fact,
++    not a fault).
++  - **What the page keeps** (J12, changed): each kept pull request gains `tasks` as above, the two
++    counts only, never a task's text. The key moves from `desk-pulls-v3` to `desk-pulls-v4`;
++    `desk-pulls-v3` is removed on load and every entry read again from J12, as each earlier move did;
++    an entry lacking `tasks` reads "pieces not read" until J12 reads it again.
++  - **Awkward cases:**
++    - **a box ticked after the merge:** shown from the next head change only if the pull request is
++      among the newest 100, J12's known gap for a body edited after its merge;
++    - **more than 300 pull requests:** a sprint among the older ones reads "pieces not read" (J12's
++      awkward case);
++    - **J12's read fails or is rate-limited:** every pull-request sprint reads "pieces not read", its
++      reason one tap away (AC41); the project is never "Can't read" for it;
++    - **a task line quoted inside a `>` block:** counted, since it sits in the section (C);
++    - **two `## Tasks` sections:** the first only (C);
++    - **a sprint listed under two milestones:** its pieces count once in its phase (AC94's rule for
++      sprints) and once under each milestone.
++  - A test marked `join-test: S-001/J25` covers it with made-up dispatch logs and pull-request bodies
++    (labelled NOT real in tests/desk/fixtures/README.md): steps by `item`, a malformed entry skipped,
++    an unread month; each task-line form, upper and lower `x`, `*` bullets, an indented one, one in a
++    code fence, a quoted one, no section, an empty section and two sections; the kept entry holding
++    the two counts and no text; `desk-pulls-v3` removed and re-read; a version below and at the
++    adopting one; and the request count per J12 read unchanged.
++
+ ## Toolchain and deploy route
+ - **Layout.** Everything the Builder writes for the desk lives under `src/`, and deploys run from
+   `src/`.
+@@ -12999,6 +13585,16 @@ src/functions/, src/notify/ or src/config/ is planned; a stage that finds it nee
+ a change to an owner-approval path (governance/risk-paths.toml) carries the owner's verdict. Nothing
+ under governance/, .github/, docs/ or intake/ changes in the Builder's pull requests.*
+ 
++*From 2026-11-03 (after the glance audit's round 2: AC91 to AC96 and J25) the same areas and no
++others, in that amendment's stages: the desk's page code (src/public/sandbox.js and
++src/public/sandbox.css, and the modules under src/lib/ with their src/public/lib copies, among them
++the project page's and the Timeline's derivations and J12's kept entry in src/lib/pulls.js); and the
++tests and fixtures under tests/desk (AC59, AC60, AC81 to AC84, AC86, AC88, AC90 to AC96, J12, J25),
++with tests/desk/fixtures/README.md labelling each made-up case. No change to src/functions/,
++src/notify/ or src/config/ is planned: J12's query text is unchanged. Nothing under governance/,
++.github/, docs/ or intake/ changes in the Builder's pull requests; the model change is
++Personal-Org-Operating-Model's, and its adoption here the Orchestrator's.*
++
+ ## Setup outside the Builder's surface
+ *None of this is in `src/**`, `tests/**` or `docs/handover/**`, and the Builder does none of it.
+ The owner does everything touching Access, tokens and Cloudflare or GitHub settings by hand,
+@@ -14317,6 +14913,15 @@ this order; no agent holds any of these values):
+     "repos/shumpmaster/Service-Desk/actions/workflows/desk-notify.yml/runs?created=2026-10-19T21:00:00Z..2026-10-19T21:59:59Z&status=success&per_page=1"
+     --jq .total_count` (58), and the same for 17:00 to 17:59 (41), with `&status=failure` 0 in
+     each, run on 2026-10-20: an hour near J16's worst case of about 60 runs.
++- **After the glance audit's round 2** (2026-11-03; AC91 to AC93): the status colours' contrast on
++  each ground and their distances, measured by the Design reviewer with tests/desk/ciede2000.mjs —
++  evidence: docs/design/audit-2026-10-24-round-2.md, item 1's table ("--ok light #12733a | 5.93 |
++  5.73 | 5.54 | 5.26"; "--bad dark #ff6b78 | 6.91 | 6.45 | 6.64 | 5.77"; vs `--you` 13.3 light and
++  15.6 dark), and ink's 17.58:1 and 16.25:1 on `--bg` and 16.99:1 and 15.15:1 on `--card` (item 3).
++  WCAG 1.4.11's 3:1 for status icons and 1.4.1's colour-not-alone — evidence:
++  library/facts/F-wcag22-01.md. The tokens' values are AC81's, unchanged. Known limits: none that
++  rest on unverified platform behaviour; J25's task-list form is the model's to fix, and the desk
++  relies on no GitHub rendering of it.
+ 
+ ## Experiments in Build (EXP-001, EXP-002 and EXP-004 on the preview after M1's merge; EXP-003 at M2's start; EXP-005 withdrawn, never run)
+ - **Outcomes at M1's acceptance** (2026-10-07, decisions/questions/P-001-m1-accept.md):
+@@ -14752,6 +15357,15 @@ this order; no agent holds any of these values):
+   - **The font files.** A changed or subset Plex file may not carry the Plex name (OFL 1.1's
+     Reserved Font Name). Mitigation: IBM's own split files, unchanged, their checksums tested
+     (AC81).
++- **Colour and boxes creeping back** (after the glance audit's round 2). Green, red and soft boxes
++  are now allowed in small places; each later screen could add one more until the desk is loud again,
++  the audit's own warning ("Linear-style anchors work because they are rare"). Mitigation: AC93's
++  cascade check allows `--ok` and `--bad` only on the listed marks; AC91's check counts anchors per
++  screen against its bound and the Design reviewer's table; a new use needs a revision naming it.
++- **The pieces of work wait on another project's change.** Stage 6 needs the model change and its
++  adoption, which this spec doesn't control, and its form may differ from J25's provisional one.
++  Mitigation: stages 1 to 5 wait on nothing; until stage 6 the desk says "no record for this in the
++  model yet" once per list, never a figure; J25 is revised to the frozen form before stage 6 opens.
+ 
+ ## Stop rule, rollback, cost
+ stop rule: three Reviewer FAILs on one milestone's pull request stop that milestone, and the owner
+@@ -15030,6 +15644,21 @@ and the owner's answer, then says what it settles here:
+    limit 6 stands; AC49's rule, and its rows naming their lane, are built in stage 4 (draft 3, the
+    Critic's finding A, makes "Each row names its lane in words" true on the Chief of Staff's log).
+ 
++**Open: after the glance audit's round 2** (2026-11-03). Two points, for the Chief of Staff to file
++as questions in the usual form; no stage waits on either:
++1. **The milestone for this work.** No line in docs/PROJECT.md section 3 covers it (M3D is reached),
++   and each ruling says "the planner gives it a milestone when it is built". Recommended: a new
++   Build-phase line for stages 1 to 5, drafted by the Chief of Staff from the draft in the amendment,
++   checked by the Critic and approved by the owner, as M3D's was; stage 6 joins a milestone once the
++   model change is adopted. The other option: none, each pull request carrying the rulings' own
++   `Milestone: none (…)` reason. If round 1's choices are built in the same milestone, the line names
++   them too.
++2. **How many soft boxes a screen may hold** (AC91's bound, a reading of "It definitely shouldn't be
++   overdone"). Recommended: at most two on any screen, six lines between them at phone width, and
++   none on most screens. Other options: one box per screen, which may hold several things; or no
++   fixed number, the Design reviewer judging each screen. Stage 5 builds the recommendation unless
++   the owner answers first.
++
+ ---
+ 
+ ## Brief for the surface owner
+@@ -15556,6 +16185,25 @@ budget: three Reviewer rounds per milestone; $0 hosting, $0 API
+     P-001-audit-marks.md, if ruled B, is a stage of its own (AC87's block only), placed by the Chief
+     of Staff.
+ 
++  - **After the glance audit's round 2 (2026-11-03; draft 1), in the desk at `/`, one stage at a
++    time,** in the order of that amendment's stage table, each tried on the preview and its preview
++    deploy approved before the next opens; each with the Reviewer's verdict and the Design reviewer's,
++    Chromium captures at 360 × 740 and 414 × 896, light and dark, of each screen it changes, and its
++    `Milestone:` line as the amendment's milestone note says:
++    - **1, counts** (AC94, AC96 (a)): AC83's and AC84's changed cases named and rewritten;
++    - **2, the standard checklist set apart** (AC95);
++    - **3, green and red on the marks** (AC93): AC81's and AC88's colour cases, and AC59's, AC60's
++      and AC84's icon cases, rewritten;
++    - **4, the arrow** (AC92): the drawing cases of AC82, AC83, AC84 and AC86;
++    - **5, anchors** (AC91), after stage 1, within the Design reviewer's per-screen table in the
++      stage's build brief;
++    - **6, pieces of work and steps** (AC96 (b), J25, J12 changed), only after the model change is
++      adopted here and J25 is revised to its frozen form.
++
++    Each stage rewrites the stage-8 guard's exception for exactly what it changes, keeps every test
++    it does not replace, and never drops a case without its counterpart. Nothing under governance/,
++    .github/, docs/ or intake/ is the Builder's.
++
+   - **M3 (AC24–AC28):**
+     - **First, M3A: Work ahead by milestones (AC24, J4, J7, J14, J15; 2026-10-18; draft 2), now, in
+       the sandbox view** (the owner's ruling "A. Now, in the trial view (Recommended)",
+-- 
+2.43.0
+
