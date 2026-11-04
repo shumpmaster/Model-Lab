@@ -5,3 +5,4 @@
 {"event": "helper", "session": "session_01QBwHGJ9ZMyT9fK17HjfmCc", "role": "critic", "started": "2026-11-04T22:37:00Z", "ended": "2026-11-04T22:39:40Z", "reported": {"tokens": 154762, "tool_uses": 34, "duration_ms": 157060}}
 {"event": "helper", "session": "session_01QBwHGJ9ZMyT9fK17HjfmCc", "role": "definer", "started": "2026-11-04T22:40:00Z", "ended": "2026-11-04T22:41:20Z", "reported": {"tokens": 13472, "tool_uses": 6, "duration_ms": 78521}}
 {"event": "helper", "session": "session_01QBwHGJ9ZMyT9fK17HjfmCc", "role": "critic", "started": "2026-11-04T22:42:00Z", "ended": "2026-11-04T22:43:00Z", "reported": {"tokens": 133127, "tool_uses": 21, "duration_ms": 58616}}
+{"event": "helper", "session": "session_01QBwHGJ9ZMyT9fK17HjfmCc", "role": "check-author", "started": "2026-11-04T22:46:00Z", "ended": "2026-11-04T23:05:40Z", "reported": {"tokens": 282603, "tool_uses": 65, "duration_ms": 1180155}}
