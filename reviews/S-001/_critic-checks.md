@@ -1,6 +1,6 @@
 Verdict: FAIL
 
-*The Critic on S-001's locked checks (Build-1), against the frozen spec. Brief 73 (docs/briefs/73-critic.md); a fresh session on a different model from the checks' writer. Recorded verbatim by the Orchestrator, 2026-11-04. The first line is the latest round's verdict.*
+*The Critic on S-001's locked checks (Build-1), against the frozen spec. Brief 73 (docs/briefs/73-critic.md) for round 1 and brief 75 for round 2; each a fresh session on a different model from the checks' writer. Recorded verbatim by the Orchestrator, 2026-11-04. The first line is the latest round's verdict; round 1's was FAIL. The Orchestrator's byte diff of the two copies (`git diff --stat e0d8104 742ef89`) shows the files round 2 did not re-read unchanged.*
 
 ## Round 1 (commit e0d8104)
 
@@ -75,3 +75,83 @@ Overall: coverage is wide. Each AC1–AC11 and each J1–J8 has a test file, and
 - **Open questions:**
   - (a) Should AC1's freeze cover all role files for the whole test, or only the absence of the change texts (finding 7)?
   - (b) Is a dispatch (b) helper's Agent-Session id its own or the Orchestrator's (finding 6)?
+
+## Round 2 (commit 742ef89)
+
+Critic's round 2 on S-001's locked checks (tests/acceptance/**). I read the new copy at commit 742ef89 (scratchpad/fix-checks2) against round 1's copy at e0d8104 (scratchpad/fix-checks), against specs/S-001.md, experiments/E-003.md, C2, and E-001.md:76 (F4). I ran nothing.
+
+Round 1's findings 1, 3 and 4 are resolved, and finding 2 is only half resolved. The fix for finding 2 adds a new blocking contradiction. Findings 5 to 9, 11 and 12 are resolved, and finding 10 is partly resolved.
+
+## Findings
+
+1. **Blocking (new, from the fix for round-1 finding 2): the transcript-check tests now contradict each other on /tmp, so no correct implementation can pass them all.**
+   - F4 (E-001.md:76) allows only "files the run itself creates in the system temporary directory (/tmp)".
+   - test_ac05_judging.py:181 requires `clean` for `Read /tmp/s001-file-the-run-made.txt`. No earlier line in that transcript creates the file.
+   - test_ac05_judging.py:207 requires `leak@1` for a Read of `<self.tmp>/saved-output.txt.other`. `self.tmp` comes from `tempfile.mkdtemp`, which is under /tmp, and nothing in that transcript creates that file either.
+   - :171 (`Glob path=/tmp/other`) and :173 (`cd /tmp && ls`) also require a leak.
+   - So the outcome depends on which reading the implementation takes:
+     - Read F4 strictly (only files the run created): it fails :181.
+     - Allow all of /tmp, as the interface docstring now says (e003_support.py:49-50: "/usr, /bin, /lib, /etc (read only) and /tmp"): it fails :171, :173 and :207.
+   - Fix: in :181, put a line before the Read that creates the file (a Write, or a Bash `echo > /tmp/…`). Keep a Read of a /tmp file the run did not create as a leak. Change e003_support.py:50 to "files the run itself created in /tmp". The /usr, /bin, /lib and /etc clean cases are right as they are.
+
+2. **Resolved (round-1 finding 1): J7 and J8 now pick recorded manifests by their parsed file lines** (e003_support.py:481-491 `manifest_kind`; test_j7:131-148; test_j8:159-166). A blind manifest that lists reviewer.md is no longer taken for an analysis manifest.
+   - Non-blocking weakness that this change brings in: the filter also applies when S001_MANIFEST names the record. A record whose `## Pack manifest` is badly formed (wrong info string, two blocks, one-space lines) gives no file lines. Its kind is then None, and J8/J7 skip with the message "no blind dispatch has recorded a manifest yet" instead of failing. The spec says the test "parses the dispatch's recorded manifest in the named form and fails unless …".
+   - Fix: when S001_MANIFEST is set, check that record whatever its kind.
+
+3. **Resolved (round-1 finding 3).** The Stage 2 lines now name decisions/questions/P-009-ruling.md (test_j1:102). The check file is checks/S-009-check.py, so the spec id is in its path (:110), and test_s009.py carries a `join-test: S-009/` marker. Line numbers check out: Stage 2 at line 7, Stage 3 at line 12. Each expected item now follows from C2 items 1 to 4.
+
+4. **Resolved (round-1 finding 4).** test_j2:116 sets the record's date to the dispatch date (2026-11-01) before the seven-day check.
+
+5. **Resolved (round-1 finding 5).** The interface list (e003_support.py:23-73) now matches the calls the tests make. That covers `--label`/`--copy-path` with no `--template`, and the calls round 1 found missing: entry options, locked-checks, parse-return/followup-text, verify-removal, v2, the make options, cards draw/file, and the `--history` events.
+
+6. **Resolved (round-1 finding 6).** AC4 drops the locked-checks session test and says the K2 record and the dispatch records show it (test_ac04:15-17).
+
+7. **Resolved (round-1 finding 7).** The role-file freeze is gone. AC1 now checks that:
+   - brief records that existed at the freeze are not modified or deleted;
+   - no brief record holds a change text.
+
+   It says that other repositories are beyond a file test (test_ac01:86-106). I accept this reading, since AC1 is stated "at the Build gate".
+   - Non-blocking: the needle at :99 ("A source you cannot open is not by itself a fault in the memo") would also fail a future Builder or Reviewer brief that quotes C3 for reference. No current record matches it.
+
+8. **Resolved (round-1 finding 8).** test_ac04:82 now checks only `S-001-` lines.
+
+9. **Resolved (round-1 finding 9).** "completed" is defined as "judged", with "arms-finished" kept apart (e003_support.py:43-46). test_ac03:134-141 matches Reruns (b).
+
+10. **Partly resolved (round-1 finding 10), non-blocking.**
+    - Added:
+      - J3, no deliverable: the arm fails and no export is made (test_j3:154-166; this matches E-003 Exclusions 4);
+      - J8, the extract changed since the freeze (test_j8:107-115; the spec at :270 says the extract is "as frozen").
+    - Still untested, and none contradicts the spec:
+      - AC2 "records the pair";
+      - "is listed", where only `reason` is checked;
+      - J2's two-lane piece, which the tests name as a gap;
+      - J3, a deliverable that names the change;
+      - J7, the power for a kind stopped at a review point;
+      - that a write under /etc is refused.
+
+11. **Resolved (round-1 finding 11).** analyse.py is now declared as an added Builder deliverable in src/E-003/** (e003_support.py:69-71).
+
+12. **Resolved (round-1 finding 12).** The memo commit is now `base`, which comes before the source check's start `parent` (test_ac02:24-34).
+
+**Round 1's four checks:**
+- (a) **Coverage of AC1 to AC11 and J1 to J8: holds.** Every criterion and join still has a test file, and each J file keeps its `join-test: S-001/Jn` marker.
+- (b) **Nothing beyond the spec: holds**, apart from the declared analyse.py.
+- (c) **Each check able to fail: holds**, apart from the skip in finding 2.
+- (d) **No held-back check, sheet text or src/** read: holds.** Only the stand-in sheet is used, and no test reads src/**, docs/handover/** or docs/reports/**.
+
+**Not checked by reading:** I found which files changed by comparing line counts. The files I did not re-read in the new copy (AC6 to AC11, J4 to J6) have the same line counts as in round 1, but same-length edits there were not checked.
+
+## Six-part contract
+- **Changed (by file):** none. I am read-only.
+- **Why:** this is the Critic's round 2 on S-001's locked checks, needed before the checks are locked into use (the standard milestone "Tests written before the work").
+- **Verified:** by reading only. In the new copy I read in full:
+  - e003_support.py;
+  - test_ac01, ac02, ac03, ac04, ac05;
+  - test_j1, j2, j3, j7, j8;
+  - tests/acceptance/README.md;
+  - docs/briefs/README.md.
+
+  In round 1's copy I read test_ac05:100-201, test_ac01:70-105, and the round-1 findings. I also read C2 in full, grepped E-001.md:76 for F4, grepped S-001.md (lines 214, 216, 250 and 270) and E-003.md (Exclusions), and compared line counts across both copies.
+- **Undone:** I ran no tests, because I hold no shell. I did not re-read AC6 to AC11 or J4 to J6 (their line counts match round 1).
+- **Needed outside its surface:** the Check author must fix finding 1. It should also fix finding 2's S001_MANIFEST skip, and should either fix or answer the remaining gaps in finding 10.
+- **Open questions:** (a) Should F4's "files the run itself creates in /tmp" be read strictly, that is, shown by the transcript? The tests need one reading, and the spec's words support the strict one.
