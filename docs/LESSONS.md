@@ -380,3 +380,10 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** as LL-19: one working copy shared between the Chief of Staff's own changes and a helper's reads; the clean copy for the checks was made only after the slip.
 - **Correction proposed:** run pre-push checks in a separate worktree at the commit being pushed (done from then on), and never change a checkout a running helper was pointed at; for the model, with LL-19, helpers read from a fixed worktree for their brief.
 - **Status:** fixed here (practice changed); model change open with LL-19.
+
+### LL-52 An owner question left out what the pipeline's loop does on a red check (LL-46, LL-50 recurred)
+- **What happened:** the first draft of the gate-citation question (questions/P-001-gate-citation.md) traced option A's red check through the gate check and CI, but not through the pipeline's loop, which holds all dispatches and merges while the default branch's latest check is red and files a CI-hold card after an hour; it also left out that quoting the criteria in the case breaks its 350-word limit. The Critic failed it at round 1 (reviews/P-001-gate-citation/critic.md, findings 1 and 2). Traced afterwards: the loop does not run in Model-Lab today, since it stops at its first step for want of its token setting.
+- **Caught by:** the Critic, before the card reached the owner.
+- **Cause:** the trace followed the check that refuses the citation, not every system that reads that check's result; the workflow header that names the loop's reaction was read for its trigger only.
+- **Correction proposed:** as LL-46: when an option makes a check fail, list every reader of that check's result (CI, the loop, the asks-merge workflow, the desk) and trace each; for the model, the question template asks for it.
+- **Status:** fixed here (redrafted for round 2); model change open with LL-46.
