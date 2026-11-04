@@ -79,3 +79,17 @@ licenses_next: An owner question or model change on the Researcher's web access,
 decided_by: chief-of-staff (an incident record; no ruling)
 proposed_by: chief-of-staff
 reversibility: reversible
+
+## L-0006 — Build gate passed for P-001: proceed at size A, with the terms as recommended
+date: 2026-11-04
+type: ruling
+supersedes: []
+scope: P-001
+expires: never
+asked: The Build gate for the prompt engine (questions/P-001-build-gate.md, case docs/gates/P-001/build-gate-4-case.md), with the fair test's terms (questions/P-001-build-gate-terms.md).
+decision: Proceed at size A: the plan's criteria are approved, and the fair test (specs/S-001.md, experiments/E-003.md) runs at 60 pieces of each kind, built work first, then plans, then research, about 732 runs and 132 million tokens. The terms are ruled as recommended (A for terms 1 to 7, the plan's answer for 8 to 11). The owner's words are recorded verbatim in decisions/questions/P-001-build-gate.md and decisions/questions/P-001-build-gate-terms.md. No status record is written by hand (decisions/questions/P-001-gate-record.md, ruling A).
+licenses_next: Carrying out the terms; the Definer's freeze of S-001 through the freeze gate's check; then the Check author's locked checks, once the owner's private sheets repository is set up.
+options_considered: proceed at sizes A to D; hold; recycle into Design; kill.
+decided_by: owner
+proposed_by: chief-of-staff
+reversibility: irreversible
