@@ -1,1 +1,2 @@
 {"event": "start", "session": "session_01QBwHGKs5xh6cq2DgNNozv7", "time": "2026-11-04T20:22:18Z", "doing": "Design of P-001: the LL-49 choice (how the Build gate case cites the plan) to the owner as a filed question, then the case rework, the standard lines, the Critic re-checks and the Build gate"}
+{"event": "helper", "session": "session_01QBwHGKs5xh6cq2DgNNozv7", "role": "critic", "started": "2026-11-04T20:23:50Z", "ended": "2026-11-04T20:25:00Z", "reported": {"tokens": 47485, "tool_uses": 16, "duration_ms": 52272}}
