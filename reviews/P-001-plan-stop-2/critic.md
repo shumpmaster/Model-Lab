@@ -1,6 +1,6 @@
 Verdict: FAIL
 
-The Critic's check of questions/P-001-plan-stop-2.md and the last change to questions/P-001-heldback-store.md (brief: docs/briefs/40-critic.md), on claude-sonnet-5-5, a different model from the questions' writer, verbatim. Recorded by the orchestrator. Session session_01QBwHGMBo8kZsMCS2EvKNwd, 2026-11-04.
+The Critic's check of questions/P-001-plan-stop-2.md and the last change to questions/P-001-heldback-store.md (brief: docs/briefs/40-critic.md), on claude-sonnet-5-5, a different model from the questions' writer, verbatim. Recorded by the orchestrator. Session session_01QBwHGMBo8kZsMCS2EvKNwd, 2026-11-04. FAIL at round 1, on both questions. Round 2 judged the store question alone, now asked first: PASS. The plan-stop card is rewritten after the store answer and checked afresh.
 
 ## Round 1
 Checks were by reading only. I could not run `git show HEAD~1` (no shell), so I judged the store question's last change from its current text and the Triage record. I did not read the store question's earlier critic record.
@@ -31,3 +31,37 @@ Six-part contract:
 6. Open questions: should the owner answer the store question first, with the plan-stop card then putting only the options that fit? Does "the same way" allow a second confirmation review? The card rightly puts this to the owner.
 
 Files: /home/user/Model-Lab/questions/P-001-plan-stop-2.md, /home/user/Model-Lab/questions/P-001-heldback-store.md, /home/user/Model-Lab/triage/P-001-S-001-round-5.md, /home/user/Model-Lab/reviews/S-001/plan.md, /home/user/Model-Lab/intake/P-001-environment-2026-11-04.md, /home/user/Model-Lab/decisions/questions/P-001-plan-stop.md, /home/user/Personal-Org-Operating-Model/AGENTS.md
+
+## Round 2 — the store question alone
+Verdict: PASS
+
+The store question can be put alone. I read it by file only. I did not re-read the sources behind the unchanged lines, which passed at round 2.
+
+Findings:
+1. [non-blocking] Finding 9 is fixed. The opening now says "An earlier check ... failed it ... and the latest check left that open". That matches Round 4 finding 2 and Round 5, which left the store's location open. The opening is plain, with no ids or paths.
+2. [non-blocking] Finding 10 is fixed by the new ORDER line. It is true to the records and agrees with the options.
+   - A or C "fits rewriting how the test is run". This is what Triage said, and what the options themselves say.
+   - B "fits only a plan that says its secrecy is checked after the fact, not enforced". This agrees with B's own text, "the most it can claim is that a helper reading the sheets would be caught afterwards".
+   - "If the test is dropped, this question falls away" is correct.
+   - Every pair of answers is therefore either workable or stated as moot or unfitting. The plan-stop card is not being put now, so no cross-question pair can clash. When it is rewritten, it must use only the routes this ORDER line names for the owner's answer.
+3. [non-blocking] The claims are true of their cited records.
+   - The WHY line is supported by Round 4 finding 2.
+   - The Context bullets match the intake, the rule, the spec and Triage.
+   - Option A states only what it conditions on. It says "no test has yet shown" and "would make A no safer than B", so it states no system behaviour without a record (LL-46, LL-50).
+   - The options carry gain, cost and what each rules out.
+4. [non-blocking] The recommendation is hedged ("provided the sessions are set up as described, which the first judging would confirm") and does not lean beyond the records.
+5. [non-blocking] The footer fields are right.
+   - Risk class R0 for questions/**.
+   - Reversibility reversible. A seen sheet must be rewritten, and the blast-radius line says so.
+   - Default none and timeout none, since each option needs the owner's own action or acceptance.
+   - The Context line "The last check before Design closes ..." for Round 4 is slightly dated but accurate as a source line.
+
+Six-part contract:
+1. What I changed: nothing. I am read-only and wrote no file.
+2. Why: to judge whether the store question can now be put alone, after applying findings 9 and 10.
+3. What I verified: I re-read the question as it stands, and checked the opening change and the ORDER line against the options' text and against Triage and the Plan stop rule, which I read in this session.
+4. What is undone: I did not re-read specs/S-001.md or the intake. I did not re-run the round 2 checks on unchanged text. I could not view the diff, because I have no shell.
+5. Needed outside my lane: the Chief of Staff rewrites the plan-stop card after the owner's answer, with only the routes that fit. That card must come back for a fresh Critic check, including findings 1 to 4 of my round 1.
+6. Open questions: none new. The rule's reading of a second focused review stays for the plan-stop card.
+
+Files: /home/user/Model-Lab/questions/P-001-heldback-store.md
