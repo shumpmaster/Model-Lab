@@ -2,9 +2,9 @@
 
 ## 1. The ask
 
-Approve the fair test's criteria as scenarios, set its budget, size and order, and rule its seven open questions; the plan then freezes and Build starts [specs/S-001.md].
+Approve the fair test's criteria, set its budget, and rule its seven open questions; the plan then freezes [specs/S-001.md].
 
-**The proposer's recommendation:** proceed with option A, 60 pieces a kind, built work first — the plan passed its review, and 60 is the smallest size that sees a real 20-point gain about 4 times in 5 under the library's assumption [reviews/S-001/plan.md] [specs/S-001.md:64] [specs/S-001.md:99].
+**The proposer's recommendation:** proceed with option A, 60 pieces a kind — the plan passed review, and 60 is the smallest size seeing a 20-point gain about 4 times in 5 [reviews/S-001/plan.md] [specs/S-001.md:64] [specs/S-001.md:99].
 
 ```mermaid
 flowchart LR
@@ -21,26 +21,26 @@ For you: fewer review rounds, better research, every agent's brief and AI model 
 ## 3. What this phase taught us
 
 Past tasks cannot be re-run faithfully, so the test uses new work as it arrives, done both ways [specs/S-001.md:10].
-You ruled to skip the judge-consistency check; a held-back check on a different AI model judges both versions blind, and your sample of about eight cards a kind confirms the judge [specs/S-001.md:10] [specs/S-001.md:116].
+A held-back check on a different AI model judges both versions blind; about eight cards a kind, seen by you, confirm the judge [specs/S-001.md:10] [specs/S-001.md:116].
 JOIN-UP: to be filled from the join-up review.
 
 ## 4. The plan for the next phase
 
-A Check author who never learns the changes writes one held-back check per kind; then each kind collects pairs, is judged, and the Reviewer analyses it [specs/S-001.md:103].
+A Check author blind to the changes writes each kind's held-back check; then pairs are collected, judged and analysed [specs/S-001.md:103].
 Built work first, then plans, then research [specs/S-001.md:99].
 The brief-and-model record (M3) is built beside the test [docs/PROJECT.md].
 
 ## 5. The risks
 
-Slow: at the Service Desk's pace option A takes 60 to 121 weeks one kind after another, or 32 to 64 collected together [specs/S-001.md:94].
+Slow: option A takes 60 to 121 weeks one kind after another, or 32 to 64 collected together [specs/S-001.md:94].
 Plans and built work cannot enter until each piece's brief, start commit and model are recorded at dispatch [specs/S-001.md:15].
-Two changes aim at causes worth at most about 11 to 19 points, so "not shown" is the likely result for them [specs/S-001.md:40].
+Two changes target causes worth at most about 11 to 19 points, so "not shown" is likely for them [specs/S-001.md:40].
 Every judge is from the same provider as the work [specs/S-001.md:116].
 
 ## 6. Cost and limits
 
 Option A: 732 runs, about 132 million tokens, within your existing AI plan unless you override it [specs/S-001.md:94] [decisions/questions/P-001-spend-ceiling.md].
-Options B to D: 490, 266 or 1,040 runs [specs/S-001.md:95-97].
+Options B to D: 490, 266 or 1,040 runs [specs/S-001.md:95].
 Through Design: 14 of your 100 test runs used [specs/S-001.md:66].
 No cap on your time [docs/PROJECT.md].
 
@@ -53,7 +53,7 @@ A kept change that misses in real use is removed at the next rule review [docs/P
 ## 8. What the owner is agreeing to
 
 Criteria AC1 to AC11 as scenarios, frozen after this ruling [specs/S-001.md].
-The budget, size and order you choose, and your answers to the seven open questions [specs/S-001.md:194].
+Your budget and your answers to the seven open questions [specs/S-001.md:194].
 Build's and Launch's standard lines, all taken on [docs/PROJECT.md].
 You are the user: no user representative step [docs/PROJECT.md].
 
