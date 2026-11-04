@@ -82,3 +82,55 @@ Records checked:
 - `/home/user/Personal-Org-Operating-Model/OPERATING_MODEL.md` §2 (lines 69-73)
 
 I did not find the "Plain English first" heading in `OPERATING_MODEL.md` by that name. My Plain English judgement is made against the seven-part card text at lines 69-73.
+
+## Round 2
+Verdict: FAIL
+
+Round 2 improves the question, but B is still not described truthfully. That is one blocking finding. Items 4 and 5 are also blocking: they correct the "safe" and "reversible" claims that B's description and the recommendation rest on.
+
+1. **BLOCKING: a "waiting-owner" record with no gate or card is not valid, and the question says it is inert.**
+   - `governance/checks/orchestrator.py` `check_status` lines 770-771 give the error "state waiting-owner without gate and card".
+   - `load_statuses` (lines 1176-1179) logs an anomaly and skips any record with errors. So the script would not do nothing: it would write an anomaly into the dispatch log and ignore the record.
+   - `governance/ROUTING.toml` lines 360-367 ("waiting-owner" means no action) only applies to a record that loads.
+   - For a valid waiting-owner record, `gate` and `card` are required. `gate` must be one of `GATES` (line 101). `check_status` line 772 also errors if `gate` is set in any other state.
+   - The ten REQUIRED fields (line 153: kind, stage, state, role, last_verdict, plan_round, build_round, confirm_used, attempts, sessions) are also needed. The question names none of this.
+   - B's description ("in the 'waiting-owner' state, for which the script's routing table says 'do nothing'") and Context line 21 are therefore misleading.
+
+2. **BLOCKING: the desk would flag the record to you, and the question says the desk is unchecked.**
+   - `/home/user/Service-Desk/src/public/lib/model.js` lines 685-695 cover a waiting-owner status with `gate` or `card` missing. With no open card for the item, the desk adds a `status-card` flag titled "P-001: waiting on you: card ... (card file not found)".
+   - Lines 696-704 give the same flag when `gate` and `card` are present but `queue/P-001-<gate>-<card>.md` does not exist.
+   - Lines 247-252 also look for `decisions/P-001/<gate>-<card>.md`.
+   - Either way, B as written puts a false "waiting on you" item in the owner's desk. This was checkable. The question says "how it would show this one has not been checked", and the recommendation line 11 says "B is safe enough as far as the script goes". Both are wrong on what the files show.
+
+3. **BLOCKING: B's reversibility claim ("reversible, by deleting the record") is incomplete.**
+   - Anomalies are appended to the hash-chained dispatch log (`orchestrator.py` `anomaly()` lines 1089-1094, and `log()`), and `status/processed.json` keeps their keys.
+   - Deleting the record would not remove them. The log is described as verified by `verify-log` (line 47).
+   - The question's header says REVERSIBILITY: reversible without qualification, for B included.
+
+4. **BLOCKING: the "inert" alternatives are not examined.**
+   - A status with `state = "done"` or `"closed"` loads and gets no action (`ROUTING.toml` lines 369-376). It needs no gate or card.
+   - The desk would show it as "done" or "closed: <outcome>" (`model.js` lines 716-717), which misstates a project that is in Design.
+   - It still meets `approved_in` (`v3_checks.py` line 615) only if `spec` is a string that matches `SPEC_ID_RE` (`check_status` line 757). The question does not say what spec a project with no spec would use, or whether the spec must exist (`note_spec`).
+   - A fair B has to say which state would be used, and what each does to the script and the desk.
+
+5. **BLOCKING in effect: the recommendation rests on the wrong B.**
+   - Its "what would change it" line says B is "safe enough as far as the script goes". Under findings 1 to 4 that is not shown. After correction, the recommendation's lean toward A (which I think is still plausible) needs re-stating on the true costs of B.
+
+6. **Non-blocking: the claim that nothing else waits.**
+   - WHY says "Nothing else in the project waits on it: the fair test goes on either way." No record is cited, and this is a factual claim about the project.
+   - The question does cite `decisions/questions/P-001-design-gate.md` line 11 (the Definer writes the fair test next). That supports it in part, but the claim should carry a citation.
+
+7. **Non-blocking: A's and C's costs.**
+   - C: verified against `v3_checks.py` lines 123-133 and 146-148. Reached marks are findings while not approved, and the standard-line and drop protections apply only when approved or waiting on the Design gate. The cost line is true.
+   - A: "how long it takes is not known" and "does not by itself fix the related gap" for LL-35 and LL-40 are honest. That is what `docs/LESSONS.md` LL-43 (line 317) proposes, and the two routes in A's last sentence match LL-43. Fair.
+   - "made ... then copied into this project" is stated as the route. It is consistent with the instruction given to me but I did not re-verify a copy mechanism.
+
+8. **Non-blocking: the form and plain English.**
+   - Context is now 5 lines, which is within the limit. WHO HAS CHECKED IT cites the round-1 record and states FAIL at round 1, which is honest. Update it after this round.
+   - "status record", "the script" and "routing table" are glossed better. "The pipeline's script, not a conversation, runs the work" is understandable. "Routing table" is still insider language in B and Context line 21.
+   - The Milestone line (M1 to M6) is fine. RISK CLASS R3 is cited to OPERATING_MODEL §2. I did not re-check that citation's text in round 2.
+
+9. **Non-blocking: the question says only this project gains from B, and that A, B and C differ in blast radius.**
+   - This is correct and consistent with finding 2: B's blast radius also includes the owner's desk.
+
+Records checked: `/home/user/wt/ml-ask-gate/questions/P-001-gate-record.md`, `/home/user/wt/ml-ask-gate/governance/checks/orchestrator.py` (lines 97-101, 153, 702-772, 1154-1181), `/home/user/wt/ml-ask-gate/governance/ROUTING.toml` (360-376), `/home/user/wt/ml-ask-gate/governance/checks/v3_checks.py` (117-148, 613-622), `/home/user/Service-Desk/src/public/lib/model.js` (230-252, 685-717).
