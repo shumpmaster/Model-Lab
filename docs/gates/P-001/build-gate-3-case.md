@@ -62,7 +62,7 @@ Wake-ups are outside the budget; no cap on your time [reviews/S-001/plan.md:899]
 flowchart LR
   P["A, all checks pass: 9 sessions, 24 to 27 records"] --> W["A, sessions cannot be resumed: 183 to 366 session starts, up to 243 to 487"]
 ```
-*Text alternative: your part under option A. If every first check passes, 9 sessions to start and 24 to 27 records to pass; if sessions cannot be resumed after their machines are reclaimed, 183 to 366 session starts, or 243 to 487 if the Orchestrator's own session cannot either, and the test stops for your ruling first.*
+*Text alternative: your part under option A. If every first check passes, 9 sessions to start and 24 to 27 records to pass; if sessions cannot be resumed after their machines are reclaimed, 183 to 366 session starts, or 243 to 487 if the Orchestrator's own session cannot either; a question comes to you before that kind opens.*
 Your time under A [reviews/P-001-build-gate/critic.md]
 
 ## 7. Kill criteria
