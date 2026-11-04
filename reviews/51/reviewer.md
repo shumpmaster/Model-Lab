@@ -1,6 +1,6 @@
-Verdict: PASS
+Verdict: FAIL
 
-*The Reviewer on pull request #51 (R3), brief 78 (docs/briefs/78-reviewer.md) for round 1 and brief 81 for round 2; each a fresh session on a different model from the locked checks' writer. Recorded verbatim by the Orchestrator, 2026-11-04. The first line is the latest round's verdict; round 1's was FAIL.*
+*The Reviewer on pull request #51 (R3), brief 78 (docs/briefs/78-reviewer.md) for round 1, brief 81 for round 2 and brief 84 for round 3; each a fresh session on a different model from the locked checks' writer. Recorded verbatim by the Orchestrator, 2026-11-04. The first line is the latest round's verdict; round 1's was FAIL and round 2's PASS.*
 
 ## Round 1 (commit b991248)
 
@@ -112,3 +112,78 @@ The Check author's corrections fix both blocking findings from round 1. Findings
   - The owner gives a verdict on PR #51, including the skip flag in finding 5.
   - The Orchestrator records this return as round 2 in reviews/51/reviewer.md.
 - **Open questions:** none new. Round 1's question (a), whether these tests can still be corrected inside PR #51, was answered by brief 79: they lock when #51 merges.
+
+## Round 3 (commit 2555c21)
+
+**Findings**
+
+1. **Blocking: the new selection lets a named blind manifest that lacks the extract skip both J7 and J8.** Round 2 and f74fc54 failed this manifest. bef590a now skips it.
+   - **Where:** test_j7_analysis_pack.py:147-151 and test_j8_holdout_pack.py:165-169. Each now checks a named record only if it has its own kind's marker or has no file lines at all (`analysis or not has_files`, `blind or not has_files`). Before, `manifest_kind(t) is None` covered every record with no marker, including one that has file lines.
+   - **Reproducing case:** /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/rev51r3/noextract-brief.md is the blind fixture without the extract and without .claude/agents/check-author.md. It still lists critic.md, reviewer.md, source-checker.md and docs/playbooks/software.md.
+     - At HEAD: J7Recorded gives "OK (skipped=1)" and J8Recorded gives "OK (skipped=1)". The skip messages wrongly say the record is "of the other kind".
+     - At f74fc54 (exported to /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/rev51r3/old): both fail, and J8 reports `['the extract is not in the manifest']`.
+   - **Why it fails the spec:**
+     - S-001:270 (J8) names "the recorded manifest … lacks the extract (no dispatch; the manifest is made again)" as an awkward case. The test "fails unless … the extract is present".
+     - E-003:33 lets the blind dispatch go ahead once "J8's test passes on it". A skip exits 0, so this manifest would let the dispatch go ahead.
+   - **Possible fix:** have J8 check `blind or not analysis` and J7 check `analysis or not blind`. That keeps round 2's behaviour and also covers a record with both kinds' markers.
+
+2. **Not blocking: the Critic's round-4 case is fixed when the manifest is named.** Each test was run alone with S001_MANIFEST set (fixtures in /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/rev51r3/):
+
+   | Manifest | J7 | J8 |
+   |---|---|---|
+   | blind | skip | OK |
+   | analysis | OK | skip |
+   | malformed (bad-brief.md) | FAIL | FAIL |
+   | blind plus experiments/E-003.md, byte-sorted (mixed-brief.md) | FAIL | FAIL |
+
+   - J8's failure on the mixed fixture is `experiments/E-003.md: not allowed by must_read` and `…: matched by must_not_see`. That matches S-001 J8 ("never … experiments/E-003.md") and E-003:33.
+   - Apart from finding 1, every result matches S-001's J7 and J8.
+
+3. **Not blocking: the same hole remains when no manifest is named.** When S001_MANIFEST is unset, both tests still use `manifest_kind`, which returns "analysis" first (e003_support.py:489). So a mixed record in docs/briefs is checked by J7 only, and J8 run alone skips it with "no blind dispatch has recorded a manifest yet". This is from reading the code; I did not add a record to the copy. The full suite still fails such a record through J7. It matters only if someone runs J8 alone without naming the manifest, and the skip message tells them to set S001_MANIFEST.
+
+4. **Not blocking: the interface note's new wording is narrower than E-001's F4.**
+   - The note (e003_support.py:51-52) now lists what "counts as created": a `>`/`>>` target, a `touch`/`mkdir` argument, or a Write/Edit file_path.
+   - F4 (E-001:76) allows any "files the run itself creates in … /tmp". Under the note, a file made in /tmp by `cp`, `tee` or `mktemp` and then read would be a leak. F4 would call that clean, or a borderline call for the Reviewer to decide (E-001:77).
+   - No test asserts that such a case leaks. AC5's /tmp cases (test_ac05_judging.py:182-194) use only Write and `echo >`. So a correct build fails no test here. The note should still say "for example" or match F4's wording.
+   - The AC5 docstring change (:177-178) now matches the test and the note.
+
+5. **Not blocking: no change adds a test that a correct build would fail.**
+   - The changes are confined to:
+     - the recorded-manifest selection in J7 and J8;
+     - the pure helper `manifest_markers`;
+     - one docstring;
+     - one interface comment.
+   - None of them touches a built script's behaviour.
+
+6. **Not blocking: the skip flags and `record_checks merges` still fail check_all, for the same reasons as in round 2.**
+   - review_check still flags the skipTest lines in J7 and J8 as test weakening; the owner's verdict is required.
+   - `record_checks merges` now reports 38 violations (33 in round 2). All are orchestrator commits without an `Item:` trailer, the same local-only cause as before.
+
+**Six-part contract**
+- **Changed:** nothing in the repository. My new files are in the scratchpad only:
+  - /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/rev51r3/mixed-brief.md
+  - /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/rev51r3/noextract-brief.md
+  - copies of round 2's blind, analysis and bad fixtures in the same folder
+  - /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/rev51r3/old/ (an export of f74fc54)
+  - /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/rev51r3/suite.txt
+  - /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/rev51r3/checkall.txt
+- **Why:** this is round 3 of the R3 review of PR #51, after the Check author's bef590a (merged as 2555c21). It answers the Critic's round-4 finding 3.
+- **Verified:**
+  - **Diff:** read `git diff f74fc54 HEAD -- tests/` in full.
+  - **Manifests:** ran J7Recorded and J8Recorded alone on five fixtures at HEAD (finding 2). Ran the mixed and no-extract fixtures again at f74fc54 for comparison (finding 1).
+  - **Suite:** `python3 -m unittest discover -s tests/acceptance` with bytecode writing off ran 228 tests: 43 pass, 2 skip (J7 and J8, nothing recorded), 183 fail, 0 errors. Every failure is "interface missing", and the set of failing tests is the same as in round 2.
+  - **`bash governance/checks/check_all.sh . 2350130 51`:** 23 pass, 2 fail, ending "Governance checks FAILED". The two failures:
+    - `review_check pr 51`: 1 violation, reviews/51/owner.md missing (test-weakening flag).
+    - `record_checks merges`: 38 violations (finding 6).
+    - Surface guard, ledger, digest and spec checks all pass.
+  - **Read-only:** git status was clean after the runs. I did not read docs/reports/**.
+- **Undone:**
+  - The PR's Tasks section is not in the copy, so I could not check its ticks.
+  - No join-up section: this is the checks review, and the project has no screens or views.
+- **Needed outside my lane:**
+  - The Check author fixes finding 1, and optionally findings 3 and 4.
+  - The owner gives a verdict on the skip flags.
+  - The Orchestrator records this return as round 3 in reviews/51/reviewer.md.
+- **Open questions:**
+  - (a) Should J8, when no manifest is named, also check a record that carries both kinds' markers (finding 3)?
+  - (b) Should the interface note's list of creating calls be exhaustive or only examples (finding 4)?

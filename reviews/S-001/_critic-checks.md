@@ -1,6 +1,6 @@
 Verdict: FAIL
 
-*The Critic on S-001's locked checks (Build-1), against the frozen spec. Brief 73 (docs/briefs/73-critic.md) for round 1, brief 75 for round 2, brief 77 for round 3 and brief 80 for round 4; each a fresh session on a different model from the checks' writer. Recorded verbatim by the Orchestrator, 2026-11-04. The first line is the latest round's verdict; rounds 1 and 2 were FAIL and round 3 PASS. The Orchestrator's byte diff of the two copies (`git diff --stat e0d8104 742ef89`) shows the files round 2 did not re-read unchanged.*
+*The Critic on S-001's locked checks (Build-1), against the frozen spec. Brief 73 (docs/briefs/73-critic.md) for round 1, brief 75 for round 2, brief 77 for round 3, brief 80 for round 4 and brief 83 for round 5; each a fresh session on a different model from the checks' writer. Recorded verbatim by the Orchestrator, 2026-11-04. The first line is the latest round's verdict; rounds 1 and 2 were FAIL, round 3 PASS and round 4 FAIL. The Orchestrator's byte diff of the two copies (`git diff --stat e0d8104 742ef89`) shows the files round 2 did not re-read unchanged.*
 
 ## Round 1 (commit e0d8104)
 
@@ -299,3 +299,90 @@ Files:
 - /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks4/tests/acceptance/test_ac06_owner_cards.py
 - /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks4/tests/acceptance/test_j4_sheet_route.py
 - /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks4/tests/acceptance/test_ac09_model_change.py
+
+## Round 5 (commit bef590a)
+
+The Critic's round 5 on S-001's locked checks. I compared the four changed files in fix-checks5 (bef590a) with fix-checks4 (0030fcb) by reading both copies in full. I worked out by hand what J7 and J8 do when run alone with S001_MANIFEST set, against S-001:202, :269 and :270 and E-001 F4 (E-001.md:76).
+
+What changed, by file:
+- **e003_support.py:** the interface note at :51-52 gained a list of what counts as creating a file, and a new `manifest_markers` was added at :496-503.
+- **test_j7_analysis_pack.py:** the import, and the record selection at :145-151.
+- **test_j8_holdout_pack.py:** the import, and the record selection at :162-169.
+- **test_ac05_judging.py:** only the docstring at :178.
+
+## Findings
+
+1. **Resolved (round 4 finding 3, blocking before): a blind manifest that also lists experiments/E-003.md is now checked and failed by both tests.** Worked by hand:
+   - `manifest_markers` returns (True, True, True) for this record.
+   - J8 checks it, since `mine` is true when blind is true (:165-167). `holdout_problems` fails it because E-003.md is in WITHHELD and outside must_read.
+   - J7 checks it, since analysis is true (:147-149). It fails it because the extract and check-author.md are outside the analysis must_read.
+   - The unnamed full-suite path is unchanged (`manifest_kind`), so a mixed record in docs/briefs still fails J7.
+
+2. **Blocking, new: a regression from round 4 finding 4.** With S001_MANIFEST set, a record that has file lines but neither kind's marker is now skipped by both J7 and J8. Round 4 checked and failed it in both. (test_j8_holdout_pack.py:165-169; test_j7_analysis_pack.py:147-151)
+   - Round 4 checked a named record when its kind was None. Round 5 checks it only when it has no file lines (`not has_files`). My round 4 suggestion said "or its kind is None", so the fix narrowed it.
+   - Example by hand: a blind pack whose manifest lists specs/S-001.md in place of the extract and leaves out check-author.md.
+     - Its files are critic.md, reviewer.md, source-checker.md, docs/playbooks/software.md and specs/S-001.md.
+     - The markers are (True, False, False), so `mine` is false in both tests.
+     - J8 skips it, wrongly saying the record is "of the other kind (J7's)". J7 skips it too.
+   - The same happens to any blind manifest that lacks both the extract and the agent file. It also happens when the only lines that fail to parse (e.g. an uppercase SHA) are the marker lines.
+   - Why this blocks:
+     - S-001:270 names "lacks the extract (no dispatch; the manifest is made again)" as an awkward case J8 must fail, and S-001:202 dispatches only "after J8's test passes on the recorded manifest".
+     - A skip is not a fail. The skip message is false, and the example also leaks specs/S-001.md.
+     - This is the same kind of hole as round 4 finding 3, which was blocking.
+   - Fix (one line in each test):
+     - J8: `return blind or not analysis`
+     - J7: `return analysis or not blind`
+     - Worked by hand, this gives: blind-only goes to J8 only, analysis-only to J7 only, both markers to both, and neither marker (including no file lines) to both. That keeps findings 1 and 3 here as they are.
+
+3. **Resolved (round 4 finding 6, leftovers 1 and 2).**
+   - AC5's docstring at :178 now reads "clean on the line that creates it and on any later line, and only then". That matches e003_support.py:51 and the cases at ac05:182-194.
+   - The interface note at :51-52 now says a Bash `>` or `>>` redirect target counts as a file the run created. That covers the echo case at ac05:184.
+
+4. **Not blocking: the note's new "Write/Edit file_path counts as created" is wider than E-001 F4 for Edit.**
+   - E-001:76 allows only "files the run itself creates" in /tmp.
+   - An Edit cannot create a file. It acts on an existing one and returns part of its text. So a transcript whose first contact with a /tmp file it did not create is an Edit would be marked clean by a Builder following the note.
+   - The same is true, more weakly, of `>>` and `touch` on a file that already exists. Those are defensible, because a transcript check cannot see the file system.
+   - No test asserts the Edit case, so a correct implementation is not failed. Suggest dropping "/Edit" from the note.
+
+5. **Not blocking: wording.**
+   - J8's docstring at :14-17 and J7's at :15-18 still say the record named by S001_MANIFEST is checked, but each can skip it.
+   - No synthetic test exercises `manifest_markers` or the named-record selection. TestJ7Classify tests only `manifest_kind`. A case for a mixed record and one for a record with no marker would make findings 1 and 2 testable without the variable.
+
+6. **The four asked cases, J7 and J8 each run alone with S001_MANIFEST set:**
+   - **Well-formed blind manifest** (markers T,T,F): J8 checks it and it passes, given a correct PACKS entry. J7 skips it, giving "J8's" as the reason, which is correct.
+   - **Well-formed analysis manifest** (markers T,F,T): J7 checks it and it passes. J8 skips it, giving "J7's", which is correct.
+   - **Malformed record:**
+     - With no section, no block, or no parsable file line, both tests check it and fail it.
+     - With a marker line parsed, the marker's own test checks it and fails it.
+     - With file lines but no marker parsed, both skip it. That is finding 2.
+   - **Blind manifest that also lists E-003.md:** both tests check it and fail it (finding 1).
+
+7. **Round 1's four checks, for the changed files:**
+   - (a) **Coverage holds.** The join-test markers stay, and no case was dropped.
+   - (b) **Nothing beyond the spec holds.** `manifest_markers` is a helper on the test side.
+   - (c) **Each check able to fail: fails for J8**, run alone with the variable set, on a named blind record with no marker (finding 2). It holds elsewhere.
+   - (d) **No held-back check, sheet text or src/** read: holds.**
+   - Nothing contradicts experiments/E-003.md. S-001:270 is contradicted as in finding 2, and E-001 F4 only as in finding 4, which is not blocking. No change fails a correct implementation.
+
+## Six-part contract
+- **Changed (by file):** none. I am read-only.
+- **Why:** this is the Critic's round 5 on S-001's locked checks, needed before they are locked for "Tests written before the work".
+- **Verified:** by reading only.
+  - I read all four changed files in full in both copies.
+  - I read S-001:269-270 and checked :202 and :214 by search.
+  - I read E-001 F4 (:70-79) by search.
+  - I read round 4's return (crit-checks-r4.md).
+- **Undone:**
+  - I ran no tests (I hold no shell).
+  - For the claim that only these four files changed, I relied on the Orchestrator's diff.
+  - I did not re-read E-003.md in this round. The changes touch only the selection logic and the /tmp wording, and I checked the E-003 points behind them in round 4.
+- **Needed outside its surface:**
+  - The Check author (dispatch (b)) should fix finding 2, which blocks, and preferably findings 4 and 5.
+  - A Critic round should then check the change.
+- **Open questions:** whether "Edit" should stay in the note's list of what counts as creating a file (finding 4). E-001 F4 suggests not.
+
+Files:
+- /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks5/tests/acceptance/test_j8_holdout_pack.py
+- /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks5/tests/acceptance/test_j7_analysis_pack.py
+- /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks5/tests/acceptance/e003_support.py
+- /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks5/tests/acceptance/test_ac05_judging.py

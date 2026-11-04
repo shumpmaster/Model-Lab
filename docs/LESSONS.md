@@ -447,3 +447,10 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** the Critic holds no shell, so it judged each test's expectation by reading; round 2 re-read only the changed files, and no round ran an expectation against the frozen text.
 - **Correction proposed:** a check of locked tests runs each expectation against a small reference built from the frozen text before it passes (the Reviewer's method here); for the model, Build-1's record is the Critic's pass, so either the Critic's check of tests gets a shell or the Reviewer's run is part of Build-1.
 - **Status:** open; the checks are being corrected before they lock.
+
+### LL-61 Each fix to one test's record selection opened a new hole beside it
+- **What happened:** J7's and J8's choice of which recorded manifest to check was changed four times (rounds 2 to 5 of the locked checks). Each change closed the case its finding named and opened a neighbouring one: a malformed record skipped, then a blind manifest listing the registration skipped, then a blind manifest lacking the extract skipped (reviews/S-001/_critic-checks.md, rounds 2 to 5; reviews/51/reviewer.md, round 3). Round 5 of the Critic and round 3 of the Reviewer failed the same hole independently. The Chief of Staff stopped there and put the stop to the owner, rather than run a sixth round under no rule (LL-55).
+- **Caught by:** the Critic and the Reviewer.
+- **Cause:** as LL-53: each fix was made and checked against the finding it answered, not against the whole set of records the test must classify; the selection logic has four inputs and was never written as a table of every case.
+- **Correction proposed:** a fix to classification logic lists every input combination and its required result before it is written, and the check reruns all of them; for the model, LL-55's rule on how check rounds are counted covers locked checks too.
+- **Status:** open; at the stop, for the owner.
