@@ -1,6 +1,6 @@
 Verdict: FAIL
 
-The Critic's plan review of specs/S-001.md and experiments/E-003.md, on a different model from the writer (brief: docs/briefs/28-critic.md), verbatim (FAIL at rounds 1 and 2; PASS at round 3). Round 4 is the join-up review closing Design (brief: docs/briefs/33-critic.md, session session_01QBwHGMBo8kZsMCS2EvKNwd, 2026-11-04, on claude-sonnet-5-5): FAIL, four blocking findings; under the plan stop rule this went to the owner, who chose one focused confirmation review (decisions/questions/P-001-plan-stop.md). Round 5 is that review (brief: docs/briefs/38-critic.md, on claude-sonnet-5-5): FAIL, two new blocking findings; it went back to the owner, who chose to re-specify how the test is run as a new draft reviewed from round one (decisions/questions/P-001-plan-stop-2.md). The new draft's rounds are recorded below as "New draft, round <n>" (brief for round 1: docs/briefs/42-critic.md): round 1 FAIL, four blocking findings. Recorded by the orchestrator. Session session_01QBwHGLd77YbwCSMSPU26vW, 2026-11-04.
+The Critic's plan review of specs/S-001.md and experiments/E-003.md, on a different model from the writer (brief: docs/briefs/28-critic.md), verbatim (FAIL at rounds 1 and 2; PASS at round 3). Round 4 is the join-up review closing Design (brief: docs/briefs/33-critic.md, session session_01QBwHGMBo8kZsMCS2EvKNwd, 2026-11-04, on claude-sonnet-5-5): FAIL, four blocking findings; under the plan stop rule this went to the owner, who chose one focused confirmation review (decisions/questions/P-001-plan-stop.md). Round 5 is that review (brief: docs/briefs/38-critic.md, on claude-sonnet-5-5): FAIL, two new blocking findings; it went back to the owner, who chose to re-specify how the test is run as a new draft reviewed from round one (decisions/questions/P-001-plan-stop-2.md). The new draft's rounds are recorded below as "New draft, round <n>" (brief for round 1: docs/briefs/42-critic.md): round 1 FAIL, four blocking findings; round 2 FAIL, one blocking finding. Recorded by the orchestrator. Session session_01QBwHGLd77YbwCSMSPU26vW, 2026-11-04.
 
 ## Round 1
 Verdict: FAIL
@@ -763,3 +763,115 @@ The owner's ruling at the gate: decisions/P-001/criteria-<n>.md. Not yet recorde
    - May exports of private-repository work be placed in public Model-Lab?
 
 Files: /home/user/Model-Lab/specs/S-001.md, /home/user/Model-Lab/experiments/E-003.md, /home/user/Model-Lab/experiments/E-003/check-author-extract.md, /home/user/Model-Lab/docs/design/JOIN_UP_REVIEW.md, /home/user/Model-Lab/governance/PACKS.toml, /home/user/Model-Lab/governance/HOLDOUTS.md, /home/user/Model-Lab/governance/SURFACES.md, /home/user/Model-Lab/governance/checks/session_runner.py, /home/user/Model-Lab/governance/checks/govlib.py, /home/user/Model-Lab/intake/P-001-environment-2026-11-04.md, /home/user/Model-Lab/src/E-001/RESULT.md, /home/user/Model-Lab/decisions/questions/P-001-plan-stop-2.md, /home/user/Model-Lab/decisions/questions/P-001-heldback-store.md, /home/user/Model-Lab/decisions/questions/P-001-model-lab-public.md, /home/user/Model-Lab/docs/PROJECT.md, /home/user/Model-Lab/reviews/S-001/plan.md, /home/user/Model-Lab/triage/P-001-S-001-round-5.md
+
+## New draft, round 2
+Verdict: FAIL
+
+# Plan review, round 2 of S-001 / E-003 (branch head after the merge of 0d79ea9)
+
+I am the Critic, on claude-sonnet-5-5. I wrote nothing and ran no command, because I have no shell.
+
+I re-read S-001 (K1 to K7, the session table, J3 to J5, the owner-action tables, open questions 8 and 9, Needed outside), E-003 (lines 14-17, 34, 41, 55, 70, 94, 109), the extract, and the new intake section (lines 35-42).
+
+I re-did the arithmetic for the owner-action tables:
+- Blocks: A 24-27, B 17-19, C 8, D 32-37, with review points counted from each kind's weeks.
+- Wake messages: 60-121 and 180-363.
+- K5-fails sessions: 183-366.
+- The per-judging counts: 132 / 132 / 66 = 330, and 9 - 3 + 330 = 336.
+
+All of it holds.
+
+## Round 1 findings, one by one
+
+1. **K1 reach. Partly resolved; see new finding A.** The probe, the before-the-first-sheet timing and the stop rules are added (S-001:166-171).
+2. **Wake route and owner's actions. Resolved.**
+   - What starts a pair is stated (:156). The cadence is stated (:157-163). K5 now treats reclaim as expected (:175-179).
+   - K7 is added (:181). The owner-action ranges are given, with the K7-fails and K5-fails cases (:122-131).
+   - The ranges are consistent with the wake counts.
+3. **Results with no route. Resolved.** The J4 block carries k2 to k5 (:258), in full, stopped and void forms. The J5 counts block carries k2 to k5 and k7 plus judging-side runs, tokens and left-out labels (:259). The parser and test are specified.
+4. **Milestones header. Resolved.** S-001:7 now reads `milestones: M2, M4`, and both are in docs/PROJECT.md (:57, :66).
+5. **"Judges in their own sessions". Handled as an owner question.** Open question 8 now quotes both rulings, says the plainer reading may be one session per judging, gives the costs (about 330 sessions for option A) and is ruled before the freeze (:332-336). That is the right route.
+6. **Shared machine. Resolved.** The pack folder is in a new empty folder outside every clone and any instructions file (:206). The sheet session holds nothing of earlier kinds (:213). The E-003 mirror is at :34.
+7. **K3 fallback. Resolved.** Scripts are now covered, and no second repository is given. The spec stops the test or orders a revision (:173).
+8. **J5 overclaim. Resolved.** The path is limited by form (1 to 200 characters), must name a file in the export tree as the export reader lists it, and the test checks that, the test number and the label against the INDEX (:259).
+9. **PACKS starting state. Resolved.** The default branch at eb8fe9d is named (:346).
+10. **Whole-tree exports. Put to the owner as open question 9.** Both outcomes are stated (:337-339). Acceptable.
+11. **Sheet lost before the push. Resolved.** n = 2, 1 run, counted (:178; E-003:41).
+12. **Extract and judge inputs. Resolved.** The extract now has the plans row "with the task statement it was written to" (line 12) and the "judge is given beside it" wording (lines 35-42).
+
+## New findings
+
+**A. BLOCKING. K1's probe cannot detect the reach it tests (S-001:168, :344).**
+- Each part passes if it is "refused or returns nothing". The probe runs before the first sheet is written, so the sheets repository then holds nothing.
+- A readable empty repository also "returns nothing" to a root read through the session's GitHub tools. It also returns nothing to `git ls-remote` and to a `git fetch`.
+- So the probe passes whether or not the reach exists. That is the very thing the guarantee at :142 rests on.
+- Fix:
+  - Have the owner put one harmless canary file in the sheets repository, such as a README with a fixed word, before the probe.
+  - Require parts (i) and (ii) to be refused and not to show the canary.
+  - Change :344 ("holding `holdouts/` and `verdicts/` only") to allow that file.
+  - Have the J4/J5 `k1`/sessions record say which word was or was not seen.
+- Part (iii) is fine, since an open sheet session has events.
+
+**B. Not blocking. Probe parts after a sheet exists can expose it (:169, :171).**
+- Every later work session runs the probe at its start. A `git fetch` (part ii) or a root read that succeeds after a sheet exists would bring the sheet to that machine.
+- After the first sheet, use `git ls-remote` and a directory-name read of the canary only. Do not fetch.
+
+**C. Not blocking. Part (iii) is likely to fail, and the plain words do not say what that means.**
+- The Chief of Staff's session holds `list_events`, which reads another session's events (intake:41). The probe is likely to show the reach.
+- The recorded fallback is to go on with the sheet kept from the Orchestrator's side by instruction alone (:170, :229). That side includes the Chief of Staff, who writes the cards and the gate case.
+- "In plain words" (:9-18) says nothing of open questions 8 and 9 or of this. Add one sentence to the plain words.
+
+**D. Not blocking. The wakes' tokens are not estimated (:115).**
+- About 7 work-session turns a week, over 60 to 121 weeks for option A, is about 420 to 850 turns. Each begins with a listing, plus 60 to 121 judging turns and the weekly Orchestrator turn.
+- The owner sets the token budget on 132 million (:95). State at least a bound, or say plainly that the budget excludes wakes.
+
+**E. Not blocking. The weekly landing needs an authority statement (:159, :355).**
+- The Orchestrator lands the Builder's records and exports by merge commit weekly, from its own scheduled task. CLAUDE.md requires the full suite and the required reviewers before a merge.
+- Say that landing the work session's records and exports is exempt, or what review it gets.
+
+**F. Not blocking. Small form gaps.**
+- J5's verdict-line `served model` has no character form, while J4 gives one (1 to 64 characters from letters, digits, `.`, `_` and `-`). Give J5 the same.
+- J4's awkward cases still describe a void block as "no block but `set`, `scan: void`, and the hit's line" (:258). The void form now has more lines (runs, tokens, the four k lines). Align the two.
+- K5 does not cover a reclaim of the Orchestrator's own session, though its weekly wake is a long-lived turn. K7 covers only its wake.
+
+## Join-up review — Design, 2026-11-04 (round 2, in the form of docs/design/JOIN_UP_REVIEW.md)
+
+**Screens checked:** none. P-001 has no screens or views. I checked the same parts side by side as in round 1: S-001, E-003, the extract, PACKS.toml `[roles.S-001-holdout]`, HOLDOUTS.md, SURFACES.md, the runner, and the intake, including the new tools section.
+
+| Check | Result | Fix |
+|---|---|---|
+| One meaning per term, threshold and id | Pass. Milestones now M2 and M4 in both S-001 and E-003. Sessions per kind (K1 to K7), the 20-run checkpoints and the J4/J5 forms agree. The k lines use the same three words in J4, J5, E-003:94 and :182. Remaining: J4's void awkward-case text against the void form, and the J5 model field (F). | F |
+| One route | Pass for pack, sheet, judging, card and Reviewer routes, and now for the K results and the counts: the J4 and J5 blocks carry k2 to k5, k7 and judging-side counts, and the Orchestrator maps labels from the work side's records. The wake route (daily, weekly, weekly) is stated end to end. One route cannot yet be shown to work: the K1 probe (A). | A |
+| Consistent names, paths and ids | Pass. The intake lines cited (:37-42) exist and say what is claimed; the cited runner lines still hold; PACKS.toml's starting state is stated consistently (:346); `C?-*.md` still does not match the extract. The set-id form `S-001-<kind>-<n>` agrees with E-003's naming. | none |
+| No two parts doing the same job, no job without a part | Pass. Waking (work, Orchestrator, judging), counts card, landing, K lines and the canary-holder (the owner) each have a part, except the canary file (A) and the landing's authority (E). | A, E |
+| Every datum available from the records, or listed as a needed change | Pass except: the canary file in the sheets repository (A), and the whole-tree exports (open question 9, with the owner). The start-commit field in Model-Lab's briefs is still listed under open question 5. | A |
+
+**Needed changes to the records:** the canary file in the sheets repository and its use in K1 (A); the start-commit field in Model-Lab's briefs; the PACKS.toml entries as listed at S-001:346-348.
+
+**Blocking differences:** A only. B to F are carried as risks. Open questions 5, 8 and 9 go to the owner before the freeze.
+
+## Sign-off
+The owner's ruling at the gate: decisions/P-001/criteria-<n>.md. Not yet recorded.
+
+## The six-part contract
+
+1. **What I changed:** Nothing. I am read-only and wrote no file.
+2. **Why:** To judge each round 1 finding against the Definer's answer, review the new K7, the owner-action ranges and the J4/J5 fixed forms, and update the join-up section.
+3. **What I verified:**
+   - I read S-001's changed sections, E-003, the extract, the intake and the J3 to J5 text.
+   - I re-did the arithmetic for the blocks, wake and session counts.
+   - I checked the cited intake lines against the text.
+4. **What is undone:**
+   - I could not run any command, so I did not run sizing.py, arrivals.py or any test.
+   - I did not diff the unchanged parts against round 1 line by line.
+   - I did not re-read the C-files or the role files.
+   - The tools' behaviour (create_trigger, list_events, GitHub tools) is described but untested; K1, K5 and K7 are the first-use checks.
+5. **Needed outside my lane:**
+   - The Definer: finding A, and B to F.
+   - The owner: open questions 5, 8 and 9 before the freeze, and the canary file.
+   - The Chief of Staff: the plain-words sentence (C) and the PACKS.toml entries.
+6. **Open questions:**
+   - Will `list_events` show the reach (K1 iii)? If so, does the owner go on with instruction alone?
+   - Is a weekly landing of work-session records exempt from the stage-5 review?
+
+Files: /home/user/Model-Lab/specs/S-001.md, /home/user/Model-Lab/experiments/E-003.md, /home/user/Model-Lab/experiments/E-003/check-author-extract.md, /home/user/Model-Lab/intake/P-001-environment-2026-11-04.md, /home/user/Model-Lab/governance/PACKS.toml, /home/user/Model-Lab/docs/design/JOIN_UP_REVIEW.md
