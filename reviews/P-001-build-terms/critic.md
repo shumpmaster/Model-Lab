@@ -1,6 +1,6 @@
 # The Critic on M2's reworded "done when" and the project document's lines restated to the Build-gate terms, verbatim
 
-*Brief 66 (docs/briefs/66-critic.md); a fresh session on a different model from the lines' writer. Recorded verbatim by the Orchestrator, 2026-11-04.*
+*Brief 66 (docs/briefs/66-critic.md) for round 1 and brief 68 (docs/briefs/68-critic.md) for round 2; each a fresh session on a different model from the lines' writer. Recorded verbatim by the Orchestrator, 2026-11-04.*
 
 ## Round 1
 
@@ -41,3 +41,40 @@ All file paths below are in the fixed copy, /tmp/claude-0/-home-user/a9cd8a0a-14
 4. Not checked: the old-versus-new diff (no shell). The 1-in-40 threshold against decisions/questions/P-001-value-target.md. The other S-001 sections beyond the cited table and open questions.
 5. Risks: none beyond finding 4a. Left alone, it leaves the project document saying the test uses past tasks.
 6. Next: the Chief of Staff fixes line 158 and, if it chooses, 4b and 4c. Those edits touch no milestone line, so M2 does not need a further Critic check for them.
+
+## Round 2
+
+Verdict: PASS
+
+All three findings are resolved and no blocking finding remains. I read docs/PROJECT.md and reviews/E-001/reviewer.md in the fixed copy, and ran a search for "past tasks", "300 runs" and "about 300".
+
+**Findings**
+
+1. 4a, line 158: resolved, not blocking. The line now reads "a kind with too few new pieces to test is reported as such, not dropped". That is consistent with V1, M2 and the line 153 definition.
+
+2. 4b, line 134: resolved, not blocking. The pre-mortem's "paired test" definition now carries "(the pre-mortem's definition as it stood at Discovery; the test now pairs new work, section 8, "Paired test")". This marks the old wording as Discovery-time and points to line 153. That is true of the document and accurate.
+
+3. 4c, line 31: resolved, not blocking. The line keeps "not yet known (Q-003 §7)" as the research's wording at the time. It adds "the replay check since found they cannot (reviews/E-001/reviewer.md)".
+   - The reviewer record supports this. Plans, built work and research all go to the fallback.
+   - Plans fail the faithful grade and the template grade.
+   - Built work fails both grades, and HD1 fails F4 and F7.
+   - Research has a web-free stratum of 0 passing.
+   - "Cannot" compresses "the thresholds were not met, so the fallback applies". A purist might want "could not, at the registered thresholds". I consider this acceptable and it needs no change.
+
+4. Line 153 ("Paired test"): true of its record. It says new work is done or checked with and without the change, and that past tasks could not be replayed faithfully (reviews/E-001/reviewer.md). The reviewer's record gives that outcome for each kind. "About 300 runs" appears nowhere in the document.
+
+5. The lines that still say "past tasks" are all at-the-time statements:
+   - Line 129 (U2 row): it states the unknown and the fallback of comparing new work with and without the change.
+   - Line 146 (R9): it names that same fallback.
+   - Line 141 (R4): it describes the fitting risk and says nothing of the plan's design.
+   - No line states the plan as using past tasks. Not blocking.
+
+6. M2 and V1: unchanged and not re-checked, as instructed. Line 108 (V1) still says "paired test on new work".
+
+**Six-part contract**
+- Verdict: PASS.
+- Findings: the six above, none blocking.
+- Evidence: the PROJECT.md lines 31, 108, 129, 134, 141, 146, 153 and 158, and the reviewer.md outcome sections for plans, built work and research.
+- Scope: the three changed lines and the whole-document search for plan statements built on past tasks or about 300 runs.
+- Not checked: M2 and V1 (unchanged, passed at round 1), and anything outside docs/PROJECT.md and reviews/E-001/reviewer.md.
+- Self-implication: none. This round checks only changes made after my round 1, and no finding implicates my earlier check beyond the 4a miss that I already recorded.
