@@ -2,9 +2,9 @@
 
 ## 1. The ask
 
-Approve the eleven criteria, in full in the proposal, choose a size on the gate card and answer the terms card; both cards passed their check after you ruled them cut down, and the plan then freezes [docs/gates/P-001/build-gate-4-proposal.md] [reviews/P-001-build-gate/critic.md:360] [reviews/P-001-build-gate/critic.md:362] [reviews/S-001/plan.md:939].
+Approve the eleven criteria in the proposal, choose a size and answer the terms, on two cards that passed their check once cut down; the plan then freezes [docs/gates/P-001/build-gate-4-proposal.md] [reviews/P-001-build-gate/critic.md:360] [reviews/P-001-build-gate/critic.md:362] [reviews/S-001/plan.md:939].
 
-**The proposer's recommendation:** proceed at size A, 732 runs — the plan passed review, and size A tests every kind in turn [reviews/S-001/plan.md:1] [reviews/S-001/plan.md:535] [decisions/questions/P-001-worst-work.md].
+**The proposer's recommendation:** proceed at size A, 732 runs — it tests every kind in turn [reviews/S-001/plan.md:1] [reviews/S-001/plan.md:535] [decisions/questions/P-001-worst-work.md].
 
 ```mermaid
 flowchart LR
@@ -27,14 +27,14 @@ Starting figures and the target [docs/PROJECT.md:111] [docs/PROJECT.md:108]
 ## 3. What this phase taught us
 
 Past work cannot be re-run faithfully, so new work is done both ways [decisions/questions/P-001-e002-not-tested.md:12].
-By your rulings, the judges' consistency check was not run, and the secret marking sheets get their own private repository and sessions [decisions/questions/P-001-e002-not-tested.md:1] [decisions/questions/P-001-heldback-store.md:1].
+By your rulings, the judges' consistency was not checked, and the secret sheets get their own repository and sessions [decisions/questions/P-001-e002-not-tested.md:1] [decisions/questions/P-001-heldback-store.md:1].
 The join-up review closing Design found no blocking difference [reviews/S-001/plan.md:939].
 No screens: the test has none [reviews/S-001/plan.md:927].
 
 ## 4. The plan for the next phase
 
-Build's milestones: every agent's brief and model on record, each tested change with a result, what worked in the operating model, every slip corrected [docs/PROJECT.md:65] [docs/PROJECT.md:66] [docs/PROJECT.md:68] [docs/PROJECT.md:69].
-The Builder runs the test; the Reviewer analyses it; the operating model's own roles take in what worked [docs/PROJECT.md:89] [docs/PROJECT.md:90].
+Build's milestones: briefs and models on record, each change's result, what worked adopted, every slip corrected [docs/PROJECT.md:65] [docs/PROJECT.md:66] [docs/PROJECT.md:68] [docs/PROJECT.md:69].
+The Builder runs the test, the Reviewer analyses it, the operating model's roles adopt what worked [docs/PROJECT.md:89] [docs/PROJECT.md:90].
 
 ```mermaid
 flowchart TB
@@ -44,19 +44,19 @@ flowchart TB
   D["Size D: 100 research and built work, 60 plans, 1,040 runs, 87 to 173 weeks"]
 ```
 *Text alternative: the plan's four sizes, weeks one kind after another. Size A, 60 pieces of each kind, 732 runs over 60 to 121 weeks; size B, 40 of each, 490 runs over 40 to 81 weeks; size C, built work only, 266 runs over 7 to 15 weeks; size D, 100 pieces of research and of built work and 60 of plans, 1,040 runs over 87 to 173 weeks. Tokens and chances for sizes other than A are on the gate card.*
-The plan's sizes [reviews/S-001/plan.md:535] [reviews/S-001/plan.md:253] [reviews/S-001/plan.md:254] [reviews/S-001/plan.md:255] [reviews/S-001/plan.md:256]
+The plan's sizes [reviews/S-001/plan.md:583] [reviews/S-001/plan.md:535] [reviews/S-001/plan.md:253] [reviews/S-001/plan.md:254] [reviews/S-001/plan.md:255] [reviews/S-001/plan.md:256]
 
 ## 5. The risks
 
-A real gain may be missed: about 4 in 5 at 60 pieces under the library's middle assumption, about 1 in 2 for built work and research otherwise, less if a judge errs; you may stop a kind at its review points [reviews/P-001-build-gate/critic.md:17] [reviews/P-001-build-gate/critic.md:386].
+A real gain may be missed: about 4 in 5 at 60 pieces under the library's assumption, about 1 in 2 for built work and research otherwise, less if a judge errs [reviews/P-001-build-gate/critic.md:17] [reviews/P-001-build-gate/critic.md:386].
 For built work and research, smaller gains usually read "not shown" [reviews/P-001-build-gate/critic.md:272].
-Secrecy from the sessions writing your cards likely rests on instruction; the first check shows it, and you decide [reviews/S-001/plan.md:897] [reviews/S-001/plan.md:963].
-For you to accept: about four relays a kind, judging up to a week behind, and the secret word kept to one line, never reused [reviews/S-001/plan.md:913] [reviews/S-001/plan.md:916] [reviews/S-001/plan.md:921].
+Secrecy from the sessions writing your cards likely rests on instruction; you decide after the first check [reviews/S-001/plan.md:897] [reviews/S-001/plan.md:963].
+To accept: four relays a kind, judging a week behind, the secret word never reused [reviews/S-001/plan.md:913] [reviews/S-001/plan.md:916] [reviews/S-001/plan.md:921].
 One reading list's comment is thin, a Reviewer's minor note [reviews/44/reviewer.md:17].
 
 ## 6. Cost and limits
 
-The ceiling is your AI plan; whether the runs fit is not known; work waits for the reset if not [decisions/questions/P-001-spend-ceiling.md:10] [docs/PROJECT.md:116].
+The ceiling is your AI plan; if the runs do not fit, work waits for the reset [decisions/questions/P-001-spend-ceiling.md:10] [docs/PROJECT.md:116].
 Wake-ups are outside the budget; no cap on your time; usage so far: not recorded [reviews/S-001/plan.md:899] [docs/PROJECT.md:116].
 
 ```mermaid
@@ -76,7 +76,7 @@ At every token checkpoint and 16-week review point of each kind, you get the cou
 
 The criteria, frozen, and your size [docs/gates/P-001/build-gate-4-proposal.md].
 The terms card's answers, and pull request #44's reading lists [reviews/P-001-build-gate/critic.md:373] [reviews/44/reviewer.md:28].
-Set-up: a private repository for the sheets, kept out of every other session, which you check in the settings [decisions/questions/P-001-heldback-store.md:12].
+Set-up: a private repository for the sheets, which you check is kept out of other sessions [decisions/questions/P-001-heldback-store.md:12].
 Build's and Launch's standard lines, all taken on [docs/PROJECT.md:60] [docs/PROJECT.md:72].
 You are the user: no representative reads the proposal, despite its label [docs/PROJECT.md:166] [docs/gates/P-001/build-gate-4-proposal.md:3].
 
@@ -87,7 +87,7 @@ You are the user: no representative reads the proposal, despite its label [docs/
 ```milestones
 ```
 
-The gate check prints no milestone lines for a project run from a conversation; the table gives each milestone with its record [docs/LESSONS.md:291].
+The gate check prints no milestone lines for this project, run from a conversation, as at the Design gate; the table gives each milestone with its record [docs/gates/P-001/design-gate-3-case.md:75].
 
 | Milestone | Record |
 |---|---|
