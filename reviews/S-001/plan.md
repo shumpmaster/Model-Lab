@@ -1,6 +1,6 @@
 Verdict: FAIL
 
-The Critic's plan review of specs/S-001.md and experiments/E-003.md, on a different model from the writer (brief: docs/briefs/28-critic.md), verbatim (FAIL at rounds 1 and 2; PASS at round 3). Round 4 is the join-up review closing Design (brief: docs/briefs/33-critic.md, session session_01QBwHGMBo8kZsMCS2EvKNwd, 2026-11-04, on claude-sonnet-5-5): FAIL, four blocking findings; under the plan stop rule this goes to the owner before any further round. Recorded by the orchestrator. Session session_01QBwHGLd77YbwCSMSPU26vW, 2026-11-04.
+The Critic's plan review of specs/S-001.md and experiments/E-003.md, on a different model from the writer (brief: docs/briefs/28-critic.md), verbatim (FAIL at rounds 1 and 2; PASS at round 3). Round 4 is the join-up review closing Design (brief: docs/briefs/33-critic.md, session session_01QBwHGMBo8kZsMCS2EvKNwd, 2026-11-04, on claude-sonnet-5-5): FAIL, four blocking findings; under the plan stop rule this went to the owner, who chose one focused confirmation review (decisions/questions/P-001-plan-stop.md). Round 5 is that review (brief: docs/briefs/38-critic.md, on claude-sonnet-5-5): FAIL, two new blocking findings; it goes back to the owner the same way. Recorded by the orchestrator. Session session_01QBwHGLd77YbwCSMSPU26vW, 2026-11-04.
 
 ## Round 1
 Verdict: FAIL
@@ -411,3 +411,155 @@ The owner's ruling at the gate: <the gate's decision record: decisions/<item>/cr
    - Does the owner want findings 5 to 11 fixed before the Build gate, or carried as risks?
 
 Files: /home/user/Model-Lab/specs/S-001.md, /home/user/Model-Lab/experiments/E-003.md, /home/user/Model-Lab/experiments/E-003/check-author-extract.md, /home/user/Model-Lab/governance/PACKS.toml, /home/user/Model-Lab/governance/HOLDOUTS.md, /home/user/Model-Lab/governance/checks/session_runner.py, /home/user/Model-Lab/governance/RUNNER.toml, /home/user/Model-Lab/governance/BRIEFS.toml, /home/user/Model-Lab/governance/SURFACES.md, /home/user/Model-Lab/docs/design/JOIN_UP_REVIEW.md.
+
+## Round 5 — the focused confirmation review
+Verdict: FAIL
+
+Confirmation review of S-001 (plan round 5), on claude-sonnet-5-5, a different model from the Definer. Two blocking findings are new. Both sit in the join between the held-back store and the judges, the part the fixes touched but did not finish. Of the seven earlier findings, five are resolved, one is resolved only on paper, and one is only partly resolved.
+
+**How I worked.** I have no shell, so I could not run `git diff`. I read the files as they stand now (ec29f46) and compared them with the figures recorded in reviews/S-001/plan.md rounds 3 and 4. I read these:
+- specs/S-001.md
+- experiments/E-003.md
+- the extract (experiments/E-003/check-author-extract.md)
+- governance/PACKS.toml
+- governance/HOLDOUTS.md
+- governance/SURFACES.md
+- the runner functions in session_runner.py (norm, always_out, _fill, _any, manifest_problems, and the SESSION_ROLES, AGENT_OF and PACK_OF lines)
+- glob_to_regex and glob_match in govlib.py
+- intake/P-001-environment-2026-11-04.md
+- E-002's judge-brief template
+- the check-author agent file
+
+I read the docstring of `glob_to_regex` but not `_segment_regex`. I did not read `pack_entry` or the Service Desk's whole files. From the Service Desk I only grepped critic.md line 31, which matches the spec's claim of a one-word difference.
+
+## The seven earlier findings
+
+1. **Pack `S-001-holdout` cannot be selected. Resolved on paper; the proof is partly open (see B1).**
+   - The route is now a hand-assembled pack, with no runner change (S-001:114-119, :227-230; E-003:11; PACKS.toml:103-121).
+   - SESSION_ROLES, AGENT_OF and PACK_OF are left alone, so the original defect is gone. The spec says openly that `S-001-holdout` is "no role it knows".
+   - J8 (S-001:163) now checks a recorded manifest against the pack entry. That shows what was put in a folder, not what the session could read (B1).
+
+2. **No place for the held-back text, no fingerprint rule. Partly resolved.**
+   - The author-to-store leg is now consistent in four places:
+     - The Check author returns the text to the Orchestrator only (extract :48-52; S-001:122).
+     - The Orchestrator places it in one file in the store.
+     - The fingerprint is the SHA-256 of that file's bytes, computed by the Orchestrator.
+     - The Orchestrator records the set id and fingerprint in HOLDOUTS.md with a ledger entry `holdouts: changed` (S-001:121-125, :159, :231). v3_checks.py:1635-1646 exists as cited.
+   - The store-to-judge-brief leg is open (B2).
+   - The store's location is the owner's open question 8, which you told me to leave aside.
+
+3. **J7 hands the Reviewer records its pack does not hold. Resolved, with residue (N2, N4, N5).**
+   - `[roles.S-001-analysis]` (PACKS.toml:123-130) holds the spec, E-003, reviews/E-003/** and decisions/questions/E-003-*-cards.md. These match S-001:126-129 and :162, and E-003:15.
+   - The card path pattern matches the J6 file name. The `*` stays inside one path segment, per the govlib.py docstring (:297-303).
+
+4. **J8's withheld-path list contradicts the pack. Resolved.**
+   - `experiments/E-003/C?-*.md` now appears in all of these places: S-001:108, :120, :146, :163; E-003:11; PACKS.toml:119.
+   - Case-folded, `c?-*.md` matches `c1-plans-read-the-check.md`. It fails on `check-author-extract.md` at the third character, because "e" is not "-".
+   - The extract contains no "arm", no C1 to C3, and no `specs/` or `E-003.md`. I grepped it.
+
+5. **The extract promises sources the pack cannot give. Resolved.**
+   - The extract (:12-19) names only Model-Lab's three role files and software.md, and says there is no research playbook.
+   - S-001:102 and :132 state the consequence: the Service Desk's pieces are judged by Model-Lab's standard.
+
+6. **Spec and pack disagree; the agent file and brief point at the spec. Resolved.**
+   - S-001:108 and J8 now say HOLDOUTS.md is in no pack, which agrees with `always_out`.
+   - The extract (:22-29) says the agent file's lines about reading a spec, committing and handing off do not apply, and that a brief's spec line does not apply either.
+   - No BRIEFS route is needed, since the pack is hand-assembled.
+
+9. **Judge brief differs from E-002's template without saying so. Resolved.**
+   - E-003:53-60 lists seven changes: role and file, piece label, "Judge it against" (per kind, including plans), the added check, the web line for research, the return line, and foreground only.
+   - I compared them against E-002:22-36. Nothing else differs, apart from the trivial label in the template's line 24.
+
+## Findings
+
+1. **BLOCKING (B1). The blind dispatch's guarantee is certified by a folder manifest, not by what the session could read.**
+   - AC4 (S-001:146) and J8 (:163) rest on a hand-assembled "pack folder" and a recorded manifest of its paths and SHA-256s.
+   - The only record of how sessions get repositories (intake/P-001-environment-2026-11-04.md:20-27) says the opposite of confinement: "Subagents you start share this container", and "Helpers … can read every repository that session holds".
+   - So /home/user/Model-Lab/specs/S-001.md, experiments/E-003.md and the C-files are readable by the blind Check author whatever its folder holds.
+   - The scripted runner would have enforced the pack; this route does not, and no record shows another mechanism.
+   - J8 would pass with a manifest that is correct and a session that read the spec. That is the same defect I flagged in round 4 finding 1 ("J8 would pass while the route is broken").
+   - The arms get a read-outside-the-copy leak test (E-003 Exclusions 2). The blind Check author gets none.
+   - S-001:132 does not list this among the limits.
+   - Fix, in the Definer's lane:
+     - State that the pack is a convention in a shared container.
+     - Add to AC4 and J8 a transcript check that the blind session made no read, search or command on any path outside its pack. A hit voids the held-back check for that kind.
+     - Add the limit to S-001:132.
+
+2. **BLOCKING (B2). No named role places the held-back text into each judge's brief and checks its fingerprint, and the only candidate cannot hold the record.**
+   - The text:
+     - J4 (S-001:159) says "read by the harness from the held-back store, whose SHA-256 … must equal the recorded fingerprint".
+     - E-003 Step 4 (:51) puts the full text into every judge's brief.
+     - E-003:13 has the Builder build the harness, and it "starts every helper session".
+   - The Builder's pack hides both governance/HOLDOUTS.md and holdouts/** (PACKS.toml:70-71, "the hidden holdout checks"). The runner keeps the record out of every pack (session_runner.py:356-358).
+   - The recorded fingerprint lives only in HOLDOUTS.md. No record says who hands it, or the store path, to the harness, or who fills the brief.
+   - Either the Builder's session gets the text and the record, against its own pack, or the Orchestrator does it, which no line says.
+   - A second leak follows. E-003 Exclusions 3 has the harness record each run's full starting context. For judges that context holds the held-back text. If it is saved under reviews/E-003/**, it is written into a repository, against S-001:122 ("never … into any repository"). The new Reviewer pack would then hold it (PACKS.toml:128).
+   - Fix, in the Definer's lane, with the Chief of Staff and Orchestrator:
+     - Name the role that reads the store, checks the fingerprint, fills the judge brief and starts the judge. The Orchestrator is the only role whose lane (SURFACES.md:52) holds HOLDOUTS.md, so it is the likely candidate.
+     - Say how the Builder's harness is tested without the real text, using a stand-in file in J4.
+     - Say where the filled judge briefs and transcripts go, and that the held-back text is excised from anything the Reviewer or a repository holds.
+
+3. **Not blocking. Stale "Needed outside" items.**
+   - S-001:227-229 still ask for corrections that PACKS.toml:103-130 already makes. The pack uses `C?-*.md`, and its comment already says the Orchestrator adds the agent file and brief.
+   - They also say "the Chief of Staff adds" the analysis pack, which is already added.
+   - Update them to "done at ec29f46, owner's approval pending (open question 5)".
+
+4. **Not blocking. The manifest has no defined form.**
+   - S-001:116, :128, :163 and :231 say "recorded in the dispatch's brief record (docs/briefs/)". The existing records have no manifest field; the grep hits for "manifest" in docs/briefs are only briefs 32, 36 and 38.
+   - The check author (b) cannot write a parseable J7 or J8 test without a named heading and line format. Name it.
+
+5. **Not blocking. The Reviewer's pack lacks what J7 asks for.**
+   - J7 and E-003 want "power at that size stated" for a kind stopped early. Only sizes 15, 22, 30 and 45 appear in the spec, and the generator experiments/E-003/sizing.py is not in `S-001-analysis`.
+   - Add sizing.py, or have the spec state the Reviewer computes it.
+   - Also unchanged since round 4 finding 10: reviews/E-003/** is the Orchestrator's lane (SURFACES.md:46), but the Builder's harness produces the results and cannot write there (:65-70). Name the route.
+
+6. **Not blocking. HOLDOUTS.md does not state the fingerprint algorithm.** HOLDOUTS.md:1-10 says only "fingerprints". The algorithm lives in the spec, E-003 and the extract. Add one line there when the Orchestrator makes its first entry.
+
+7. **Not blocking. A return-recording hazard.**
+   - The extract (:57-60) has the author return each check's full text.
+   - The Orchestrator's habit is to record returns verbatim (CLAUDE.md, this repository's reviews/ practice).
+   - Say in S-001:231 that this return is not recorded in any repository.
+
+8. **Not blocking, unchanged. C2 file :15 says "at most 3 of the 16"; S-001:30 says "3 to 5 of 16 … 11 to 19 points".** This was round 4's join-up table, row 1 (e). It is not among the seven findings.
+
+## Did any change alter a threshold, size, option or criterion's meaning?
+
+No change I can see alters one.
+- Unchanged against the figures I recorded in rounds 3 and 4 (the repository carries no earlier copy I could diff):
+  - 1 in 40
+  - 8 cards, split 4/2/2
+  - at least 6 answered, at most 2 disagreements, up to 12 cards
+  - 16-week review points
+  - 10% reserve
+  - the tables of weeks, power, runs and tokens
+  - options A to D (732, 490, 266 and 1,040 runs)
+  - the false-pass guard
+- AC4's wording now names the per-task pack and the separate sessions. That ties the criterion to the mechanism in B1 and B2 but does not change what it requires.
+
+## The six-part contract
+
+1. **What I changed:** Nothing. I am read-only and wrote no file.
+2. **Why:** To check the Definer's fixes (8df159b) and the Chief of Staff's PACKS.toml change (ec29f46) against the join-up review's findings 1 to 4, 5, 6 and 9, and to read the tools the plan connects to.
+3. **What I verified:**
+   - The route, store and Reviewer-pack text in the spec, E-003, the extract and PACKS.toml, read side by side.
+   - That `C?-*.md` matches the change files and not the extract, by reading the glob rules (`?` and `*` stay within a segment).
+   - That the extract holds none of "arm", C1 to C3, `specs/` or `E-003.md`.
+   - E-003's list of template changes against E-002:22-36.
+   - The runner's role lines, `norm`, `always_out` and `manifest_problems`.
+   - SURFACES.md lane lines.
+   - The intake's statements on shared repositories.
+   - v3_checks.py's `check_holdouts` exists as cited.
+4. **What is undone:**
+   - I ran no command, so no `git diff` and no test run.
+   - I did not read `_segment_regex`, `pack_entry` or RUNNER.toml.
+   - I did not read the whole of the Service Desk's files, and checked only critic.md line 31 there.
+   - I did not re-check findings 7, 8, 10 and 11 of round 4, which this review did not cover.
+5. **Needed outside my lane:**
+   - The Definer: B1 and B2, and findings 3 to 8.
+   - The Orchestrator: say whether it is the role that fills the judge briefs and checks the fingerprint, and the manifest format.
+   - The Chief of Staff: a HOLDOUTS.md line on the algorithm, and a route for results into reviews/E-003/**.
+6. **Open questions:**
+   - Which role fills the judge brief from the held-back store and checks the fingerprint: the Orchestrator, or a Builder harness run with a text it was not meant to hold?
+   - Does the owner accept a convention-only blind pack plus a transcript check, or want the blind author started in a session that holds no Model-Lab repository (the intake says repositories are fixed when a session starts)?
+
+Files: /home/user/Model-Lab/specs/S-001.md, /home/user/Model-Lab/experiments/E-003.md, /home/user/Model-Lab/experiments/E-003/check-author-extract.md, /home/user/Model-Lab/governance/PACKS.toml, /home/user/Model-Lab/governance/HOLDOUTS.md, /home/user/Model-Lab/governance/SURFACES.md, /home/user/Model-Lab/governance/checks/session_runner.py, /home/user/Model-Lab/governance/checks/govlib.py, /home/user/Model-Lab/intake/P-001-environment-2026-11-04.md.
