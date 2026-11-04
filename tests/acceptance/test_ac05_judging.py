@@ -174,11 +174,24 @@ class TestTranscriptCheck(Base):
 
     def test_system_paths_e001_f4_allows_are_clean(self):
         """E-001 F4: reading or running tools under /usr, /bin, /lib and /etc (read only), and files the run
-        itself creates in the system temporary directory (/tmp).  Any other outside path fails."""
+        itself creates in the system temporary directory (/tmp).  Any other outside path fails.  A /tmp
+        path is clean only when an earlier line of the same transcript creates it."""
         self.clean([tool_line("Read", file_path="/etc/hostname"), tool_line("Read", file_path="/etc/hosts"),
                     tool_line("Bash", command="/usr/bin/git status"), tool_line("Bash", command="/bin/ls /usr/lib"),
                     tool_line("Read", file_path="/lib/os-release"),
-                    tool_line("Read", file_path="/tmp/s001-file-the-run-made.txt")])
+                    tool_line("Write", file_path="/tmp/s001-made-by-write.txt", content="x"),
+                    tool_line("Read", file_path="/tmp/s001-made-by-write.txt"),
+                    tool_line("Bash", command="echo hi > /tmp/s001-made-by-echo.txt"),
+                    tool_line("Read", file_path="/tmp/s001-made-by-echo.txt")])
+
+    def test_a_tmp_file_the_run_did_not_create_is_a_leak(self):
+        self.leak([tool_line("Read", file_path="/tmp/s001-not-made-by-this-run.txt")], 1)
+        # created only AFTER the read: the earlier read is the leak
+        self.leak([tool_line("Read", file_path="/tmp/s001-late.txt"),
+                   tool_line("Write", file_path="/tmp/s001-late.txt", content="x")], 1)
+        # a different /tmp path than the one created
+        self.leak([tool_line("Write", file_path="/tmp/s001-a.txt", content="x"),
+                   tool_line("Read", file_path="/tmp/s001-b.txt")], 2)
 
     def test_parent_directory_escape_and_sibling_prefix_are_leaks(self):
         self.leak([tool_line("Read", file_path="../secret.txt")], 1)

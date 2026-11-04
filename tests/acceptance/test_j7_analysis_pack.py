@@ -19,6 +19,7 @@ is skipped, saying so, while no analysis dispatch has recorded one -- the spec s
 "meaningful only once ... the manifest is recorded", and the analysis is dispatched last.  The same
 checks run on synthetic manifests, good and deliberately broken, so the test is not vacuous.
 """
+import os
 import re
 import unittest
 
@@ -140,7 +141,7 @@ class TestJ7Classify(Base):
 
 class TestJ7Recorded(Base):
     def test_every_recorded_analysis_manifest_conforms(self):
-        found = [(rel, t) for rel, t in recorded_manifests() if manifest_kind(t) == "analysis"]
+        found = [(rel, t) for rel, t in recorded_manifests() if manifest_kind(t) == "analysis" or os.environ.get("S001_MANIFEST")]
         if not found:
             self.skipTest("no analysis dispatch has recorded a manifest yet (J7 runs before each analysis dispatch)")
         for rel, text in found:

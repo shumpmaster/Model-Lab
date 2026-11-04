@@ -47,7 +47,8 @@ usage error exits 2.  A missing script fails its test with "interface missing".
               locked-checks --copy DIR --command "<shell command>"   -> {"exit": N}
   transcript_check.py check --cwd DIR [--web-sources FILE] [--allow-path P] [--sheets-repo NAME] TRANSCRIPT.jsonl
                           -> stdout `clean` exit 0, or `leak@<line>` exit 1.  Allowed outside the copy (E-001 F4):
-                          /usr, /bin, /lib, /etc (read only) and /tmp; web only for URLs listed in --web-sources
+                          /usr, /bin, /lib, /etc (read only) and files the run itself created in /tmp
+                          (a /tmp path is clean only if an earlier line of the transcript creates it); web only for URLs listed in --web-sources
   fill_judge_brief.py --sheet FILE --fingerprint HEX --fill FILE.json --label L --copy-path DIR --out FILE
                           -> on a match writes the filled judge brief (E-002's template with E-003 Step 4's
                              changes) to --out; on a mismatch exit 1 and writes nothing
@@ -473,8 +474,8 @@ def recorded_manifests():
     for rel in paths:
         with open(os.path.join(ROOT, rel), encoding="utf-8") as fh:
             text = fh.read()
-        if re.search(r"^## Pack manifest[ \t]*$", text, re.M):
-            out.append((rel, text))
+        if env or re.search(r"^## Pack manifest[ \t]*$", text, re.M):
+            out.append((rel, text))   # a record named by S001_MANIFEST is checked whatever it holds
     return out
 
 

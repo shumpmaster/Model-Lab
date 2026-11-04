@@ -158,7 +158,7 @@ class TestJ8Validation(Base):
 
 class TestJ8Recorded(Base):
     def test_every_recorded_blind_dispatch_manifest_conforms(self):
-        found = [(rel, t) for rel, t in recorded_manifests() if manifest_kind(t) == "blind"]
+        found = [(rel, t) for rel, t in recorded_manifests() if manifest_kind(t) == "blind" or os.environ.get("S001_MANIFEST")]
         if not found:
             self.skipTest("no blind dispatch has recorded a manifest yet (J8 runs before each blind dispatch; "
                           "set S001_MANIFEST=<brief record> to check one)")
