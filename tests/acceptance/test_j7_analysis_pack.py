@@ -141,9 +141,15 @@ class TestJ7Classify(Base):
 
 class TestJ7Recorded(Base):
     def test_every_recorded_analysis_manifest_conforms(self):
-        found = [(rel, t) for rel, t in recorded_manifests() if manifest_kind(t) == "analysis" or os.environ.get("S001_MANIFEST")]
+        named = bool(os.environ.get("S001_MANIFEST"))
+        # A record named by S001_MANIFEST is checked here only if it is an analysis manifest or is
+        # malformed (no file lines, kind None); a well-formed manifest of the other kind is J8's.
+        found = [(rel, t) for rel, t in recorded_manifests()
+                 if manifest_kind(t) == "analysis" or (named and manifest_kind(t) is None)]
         if not found:
-            self.skipTest("no analysis dispatch has recorded a manifest yet (J7 runs before each analysis dispatch)")
+            self.skipTest("S001_MANIFEST names a manifest of the other kind (J8's); this test checks analysis "
+                          "manifests" if named else
+                          "no analysis dispatch has recorded a manifest yet (J7 runs before each analysis dispatch)")
         for rel, text in found:
             kind = (re.search(r"reviews/E-003/(built|plans|research)/", text) or [None, "built"])[1]
             self.assertEqual(analysis_problems(text, kind), [], rel)

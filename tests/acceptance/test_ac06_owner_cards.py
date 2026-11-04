@@ -133,9 +133,10 @@ class TestAC6Rescore(Base):
         base = self.rescore(pairs, {})
         self.assertEqual((base["n10"], base["n01"]), (1, 1))
         self.assertEqual(base["classes"], {"p00": "n10", "p01": "n01", "p02": "concordant", "p03": "concordant"})
-        # yes = FAIL, no = PASS: the owner fails the change arm of p00 (so p00 becomes concordant) and
-        # passes the control arm of p01 (so p01 becomes concordant)
-        out = self.rescore(pairs, {"c00": "yes", "k01": "no"})
+        # E-003 Step 5: yes = FAIL, no = PASS.  p00 is (change PASS, control FAIL): the owner fails the
+        # change arm, so both fail.  p01 is (change FAIL, control PASS): the owner fails the control arm
+        # (a "no" there would change nothing: it is already PASS), so both fail.  Both become concordant.
+        out = self.rescore(pairs, {"c00": "yes", "k01": "yes"})
         self.assertEqual(out["classes"]["p00"], "concordant")
         self.assertEqual(out["classes"]["p01"], "concordant")
         self.assertEqual((out["n10"], out["n01"]), (0, 0))

@@ -171,8 +171,10 @@ class TestJ4Fill(Base):
     def test_a_matching_fingerprint_puts_the_sheet_in_the_brief(self):
         p, outp = self.fillrun()
         self.assertEqual(p.returncode, 0, p.stderr[-400:])
-        text = open(outp, encoding="utf-8").read()
-        self.assertIn(STAND_IN_SHEET.rstrip("\n"), text, "the check in full")
+        # E-002's template breaks lines inside phrases ("Judge it\nagainst:") and E-003 changes nothing else
+        # in it, so every phrase is matched with whitespace collapsed.
+        text = " ".join(open(outp, encoding="utf-8").read().split())
+        self.assertIn(" ".join(STAND_IN_SHEET.split()), text, "the check in full")
         a, b, c = text.find("Judge it against"), text.find("Apply this check:"), text.find("The work fails if any test of this check fails.")
         self.assertTrue(0 <= a < b < c, "E-003 Step 4 change 4: after 'Judge it against', then the check, then the failing rule")
         self.assertLess(b, text.find("STANDIN-T1"))

@@ -158,9 +158,15 @@ class TestJ8Validation(Base):
 
 class TestJ8Recorded(Base):
     def test_every_recorded_blind_dispatch_manifest_conforms(self):
-        found = [(rel, t) for rel, t in recorded_manifests() if manifest_kind(t) == "blind" or os.environ.get("S001_MANIFEST")]
+        named = bool(os.environ.get("S001_MANIFEST"))
+        # A record named by S001_MANIFEST is checked here only if it is a blind-dispatch manifest or is
+        # malformed (no file lines, kind None); a well-formed manifest of the other kind is J7's.
+        found = [(rel, t) for rel, t in recorded_manifests()
+                 if manifest_kind(t) == "blind" or (named and manifest_kind(t) is None)]
         if not found:
-            self.skipTest("no blind dispatch has recorded a manifest yet (J8 runs before each blind dispatch; "
+            self.skipTest("S001_MANIFEST names a manifest of the other kind (J7's); this test checks blind-dispatch "
+                          "manifests" if named else
+                          "no blind dispatch has recorded a manifest yet (J8 runs before each blind dispatch; "
                           "set S001_MANIFEST=<brief record> to check one)")
         for rel, text in found:
             self.assertEqual(holdout_problems(text), [], rel)
