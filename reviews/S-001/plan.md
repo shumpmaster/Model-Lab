@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-The Critic's plan review of specs/S-001.md and experiments/E-003.md, on a different model from the writer (brief: docs/briefs/28-critic.md), verbatim (FAIL at rounds 1 and 2; PASS at round 3). Round 4 is the join-up review closing Design (brief: docs/briefs/33-critic.md, session session_01QBwHGMBo8kZsMCS2EvKNwd, 2026-11-04, on claude-sonnet-5-5): FAIL, four blocking findings; under the plan stop rule this went to the owner, who chose one focused confirmation review (decisions/questions/P-001-plan-stop.md). Round 5 is that review (brief: docs/briefs/38-critic.md, on claude-sonnet-5-5): FAIL, two new blocking findings; it went back to the owner, who chose to re-specify how the test is run as a new draft reviewed from round one (decisions/questions/P-001-plan-stop-2.md). The new draft's rounds are recorded below as "New draft, round <n>" (brief for round 1: docs/briefs/42-critic.md): round 1 FAIL, four blocking findings; round 2 FAIL, one blocking finding. Recorded by the orchestrator. Session session_01QBwHGLd77YbwCSMSPU26vW, 2026-11-04.
+The Critic's plan review of specs/S-001.md and experiments/E-003.md, on a different model from the writer (brief: docs/briefs/28-critic.md), verbatim (FAIL at rounds 1 and 2; PASS at round 3). Round 4 is the join-up review closing Design (brief: docs/briefs/33-critic.md, session session_01QBwHGMBo8kZsMCS2EvKNwd, 2026-11-04, on claude-sonnet-5-5): FAIL, four blocking findings; under the plan stop rule this went to the owner, who chose one focused confirmation review (decisions/questions/P-001-plan-stop.md). Round 5 is that review (brief: docs/briefs/38-critic.md, on claude-sonnet-5-5): FAIL, two new blocking findings; it went back to the owner, who chose to re-specify how the test is run as a new draft reviewed from round one (decisions/questions/P-001-plan-stop-2.md). The new draft's rounds are recorded below as "New draft, round <n>" (brief for round 1: docs/briefs/42-critic.md): round 1 FAIL, four blocking findings; round 2 FAIL, one blocking finding; round 3 PASS, with the join-up review passing. Recorded by the orchestrator. Session session_01QBwHGLd77YbwCSMSPU26vW, 2026-11-04.
 
 ## Round 1
 Verdict: FAIL
@@ -875,3 +875,91 @@ The owner's ruling at the gate: decisions/P-001/criteria-<n>.md. Not yet recorde
    - Is a weekly landing of work-session records exempt from the stage-5 review?
 
 Files: /home/user/Model-Lab/specs/S-001.md, /home/user/Model-Lab/experiments/E-003.md, /home/user/Model-Lab/experiments/E-003/check-author-extract.md, /home/user/Model-Lab/intake/P-001-environment-2026-11-04.md, /home/user/Model-Lab/governance/PACKS.toml, /home/user/Model-Lab/docs/design/JOIN_UP_REVIEW.md
+
+## New draft, round 3
+Verdict: PASS
+
+# Plan review, round 3 of S-001 / E-003 (branch head after commit 3077c89)
+
+I am the Critic, on claude-sonnet-5-5. I wrote nothing and ran no command, because I have no shell. I re-read the changed parts of S-001 and the lines they touch. These are the plain words (:16-18), the tables (:111-135), the landing's authority (:165), K1 to K7 (:170-189) and J4/J5 (:266-267). I also checked the new citations against governance/risk-paths.toml and re-did the arithmetic for the new owner-action columns.
+
+## Round 2 findings
+
+**A (blocking). Resolved.**
+- The probe now has a canary: a `README.md` that the owner places before any probe. It holds one word, which the owner gives only to each sheet session's lead (S-001:172).
+- Before the first sheet, parts (i) and (ii) pass only if each is refused and the canary is not shown. Part (iii) passes only if refused. An empty repository can no longer pass (:174).
+- The probing session records one line per part. The sheet lead reads those records and says in `k1-canary:` whether it saw the word (:175-176). The probing session does not know the word, so it cannot judge its own return. That is a sound split.
+- The sheet lead starts the Check author only if every part reads `refused` and the canary is shown in neither record. Otherwise it stops with `stopped: k1` (:176; J4 stopped form).
+- Needed outside now lists `README.md` in the repository (:353).
+
+**B (not blocking). Resolved.** After the first sheet exists, nothing is fetched or opened. Part (i) lists root names only, part (ii) is `git ls-remote` only, and part (iii) is not run again (:174).
+
+**C (not blocking). Resolved.** The plain words now carry open questions 8 and 9. They also say that part (iii) will likely show the reach because the Chief of Staff's session holds a tool that reads other sessions' transcripts. The consequence is stated: the sheet is then kept from the side that writes the cards and the gate case by instruction alone, unless the owner changes the access or stops the test (:18).
+
+**D (not blocking). Resolved.** The budget is stated to exclude the wakes. The wake counts are given (about 420 to 847 work-session turns, 60 to 121 each for the Orchestrator and judging sessions, 540 to 1,089 in all). No cost per turn is claimed. This is honest (:16, :124).
+
+**E (not blocking). Resolved.** The weekly landing is not exempt from review. Its paths are class R1 (governance/risk-paths.toml:22) and need a Reviewer's verdict (:29). The landing takes the surface guard, the full suite, a Reviewer helper and a merge commit on PASS. A FAIL means nothing lands that week, and AC2's 7 days run to the start of a pair, not to the landing (S-001:165). The risk-paths citations check out. I did not open AGENTS.md §1 and §4.
+
+**F (not blocking). Resolved.**
+- J5's served model now has J4's form (1 to 64 characters from letters, digits, `.`, `_` and `-`).
+- J4's void awkward case now says "the void form above and no other".
+- K5 covers the Orchestrator's own session, and its failure adds a column to the owner-action ranges. I re-did the arithmetic: A 243-487, B 163-327, C 29-61, D 351-695. All correct.
+- J4 and J5 gain the `k1-canary` line, with its three words in the parser's form.
+
+## New findings (all non-blocking)
+
+1. **The owner's per-kind relays are not in the owner-action tables (S-001:112-114, :126-135).**
+   - K1 asks the owner, per kind, to give the sheet lead the canary word. It also asks for the sheet session's id for part (iii) and the Model-Lab commit of each K1 record (:172, :176). These are about three to four messages a kind.
+   - They are small and fixed, but the tables count only starts, blocks and wake messages. Add one line, or say "plus about four short relays a kind".
+
+2. **Detection lag on the judging side (:176).**
+   - The judging lead reads the K1 records added since its last block, at the tip of the landing branch. Landing is weekly and reviewed. A `seen` in a work session's record can therefore reach the judging lead a week or more later, during which judging goes on.
+   - The sheet is already treated as seen from the moment of the reach, and the kind stops when the lead finds it. The lag is acceptable, but say so in the kind's record limits (:229-237).
+
+3. **The canary word could enter a public record if a probe succeeds (:175).**
+   - A `returned <first line>` record carries README's first line into Model-Lab. This happens only on a failed K1, where the kind stops anyway.
+   - Keep the word on README's first line only, and tell the owner not to reuse it.
+
+4. **Small: :122 ("Once for the whole test") does not mention the canary.** It does elsewhere (:17, :353). One phrase will fix it.
+
+## Join-up review — Design, 2026-11-04 (round 3, in the form of docs/design/JOIN_UP_REVIEW.md)
+
+**Screens checked:** none. P-001 has no screens or views. I checked the same parts side by side as before: S-001, E-003, the extract, PACKS.toml `[roles.S-001-holdout]`, HOLDOUTS.md, SURFACES.md, risk-paths.toml, the runner and the intake.
+
+| Check | Result | Fix |
+|---|---|---|
+| One meaning per term, threshold and id | Pass. M2 and M4 agree; K1 to K7, `k<n>` and `k1-canary` words agree across J4, J5 and E-003; the model form is now the same in J4 and J5; the void form agrees with its awkward case. | none |
+| One route | Pass. Pack, sheet, judging, card, Reviewer and landing routes match end to end. The wake route (daily, weekly, weekly) is stated. K1 is now able to detect a reach, through the canary read by the sheet lead. The landing route is reviewed under R1. | none |
+| Consistent names, paths and ids | Pass. The cited intake lines (:37-42), runner lines and risk-paths lines (:22, :29) exist and say what is claimed. The PACKS.toml starting state is consistent (:346). `C?-*.md` does not match the extract. | none |
+| No two parts doing the same job, no job without a part | Pass. The canary has an owner and a reader; the landing has a Reviewer. Small gap: the owner's per-kind relays are uncounted (new finding 1). | 1 |
+| Every datum available from the records, or listed as a needed change | Pass. The canary file is now listed (:353). The start-commit field in Model-Lab's briefs is under open question 5. Whole-tree exports of private repositories are with the owner as open question 9. | none |
+
+**Needed changes to the records:** the canary file in the sheets repository; the start-commit field in Model-Lab's briefs; the PACKS.toml entries as listed at S-001:346-348.
+
+**Blocking differences:** none. The non-blocking items above are carried into the gate's case as risks. Open questions 5, 8 and 9 stay with the owner before the freeze.
+
+## Sign-off
+The owner's ruling at the gate: decisions/P-001/criteria-<n>.md. Not yet recorded.
+
+## The six-part contract
+
+1. **What I changed:** Nothing. I am read-only and wrote no file.
+2. **Why:** To judge whether round 2's findings A to F are resolved and whether the changes introduce anything new, and to update the join-up section.
+3. **What I verified:**
+   - I read the changed text of S-001 at the lines cited above.
+   - I re-did the arithmetic for the new K5-in-the-Orchestrator column.
+   - I checked the risk-paths citations against the file.
+   - I confirmed that J4 and J5 give the `k1-canary` line in the parser's form.
+4. **What is undone:**
+   - I ran no command, so I did not run sizing.py, arrivals.py or any test.
+   - I did not read AGENTS.md §1 and §4.
+   - I did not diff the sections that rounds 1 and 2 passed.
+   - The tools' behaviour (create_trigger, list_events, GitHub tools) is still untested; K1, K5 and K7 are the first-use checks.
+5. **Needed outside my lane:**
+   - The Definer: new findings 1 to 4, optional before the freeze.
+   - The owner: open questions 5, 8 and 9 before the freeze, and the canary file.
+   - The Chief of Staff: the PACKS.toml entries.
+6. **Open questions:**
+   - Will the first K1 probe show the `list_events` reach? If so, does the owner go on with instruction alone?
+
+Files: /home/user/Model-Lab/specs/S-001.md, /home/user/Model-Lab/experiments/E-003.md, /home/user/Model-Lab/experiments/E-003/check-author-extract.md, /home/user/Model-Lab/governance/risk-paths.toml, /home/user/Model-Lab/intake/P-001-environment-2026-11-04.md, /home/user/Model-Lab/docs/design/JOIN_UP_REVIEW.md
