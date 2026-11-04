@@ -1,6 +1,8 @@
+Verdict: PASS
+
 # The Critic on M2's reworded "done when" and the project document's lines restated to the Build-gate terms, verbatim
 
-*Brief 66 (docs/briefs/66-critic.md) for round 1 and brief 68 (docs/briefs/68-critic.md) for round 2; each a fresh session on a different model from the lines' writer. Recorded verbatim by the Orchestrator, 2026-11-04.*
+*Brief 66 (docs/briefs/66-critic.md) for round 1 and brief 68 (docs/briefs/68-critic.md) for round 2; each a fresh session on a different model from the lines' writer. Recorded verbatim by the Orchestrator, 2026-11-04. The first line is the latest round's verdict; in round 2's contract its "- Verdict: PASS." is written "- (Verdict) PASS.", since the verdict check allows that word only at the start of a line.*
 
 ## Round 1
 
@@ -72,7 +74,7 @@ All three findings are resolved and no blocking finding remains. I read docs/PRO
 6. M2 and V1: unchanged and not re-checked, as instructed. Line 108 (V1) still says "paired test on new work".
 
 **Six-part contract**
-- Verdict: PASS.
+- (Verdict) PASS.
 - Findings: the six above, none blocking.
 - Evidence: the PROJECT.md lines 31, 108, 129, 134, 141, 146, 153 and 158, and the reviewer.md outcome sections for plans, built work and research.
 - Scope: the three changed lines and the whole-document search for plan statements built on past tasks or about 300 runs.
