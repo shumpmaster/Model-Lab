@@ -1,6 +1,6 @@
-Verdict: PASS
+Verdict: FAIL
 
-*The Critic on S-001's locked checks (Build-1), against the frozen spec. Brief 73 (docs/briefs/73-critic.md) for round 1, brief 75 for round 2 and brief 77 for round 3; each a fresh session on a different model from the checks' writer. Recorded verbatim by the Orchestrator, 2026-11-04. The first line is the latest round's verdict; rounds 1 and 2 were FAIL. The Orchestrator's byte diff of the two copies (`git diff --stat e0d8104 742ef89`) shows the files round 2 did not re-read unchanged.*
+*The Critic on S-001's locked checks (Build-1), against the frozen spec. Brief 73 (docs/briefs/73-critic.md) for round 1, brief 75 for round 2, brief 77 for round 3 and brief 80 for round 4; each a fresh session on a different model from the checks' writer. Recorded verbatim by the Orchestrator, 2026-11-04. The first line is the latest round's verdict; rounds 1 and 2 were FAIL and round 3 PASS. The Orchestrator's byte diff of the two copies (`git diff --stat e0d8104 742ef89`) shows the files round 2 did not re-read unchanged.*
 
 ## Round 1 (commit e0d8104)
 
@@ -209,3 +209,93 @@ Critic's round 3 on S-001's locked checks. I compared the new copy (d372707, fix
 - **Open questions:** (a) Should J7 and J8 each get their own manifest variable, or should one variable be filtered by kind as in finding 2's fix? Either works. The spec names neither.
 
 Files: /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks3/tests/acceptance/e003_support.py, /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks3/tests/acceptance/test_ac05_judging.py, /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks3/tests/acceptance/test_j7_analysis_pack.py, /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks3/tests/acceptance/test_j8_holdout_pack.py
+
+## Round 4 (commit 0030fcb)
+
+The Critic's round 4 on S-001's locked checks. I compared the seven changed files in fix-checks4 (0030fcb) with fix-checks3 (d372707) by reading both copies in full. I worked each changed expectation out by hand from E-003 Step 4 and Step 5, E-002's template (experiments/E-002.md:22-36) and S-001 J4, J7 and J8 (:266, :269, :270).
+
+The Reviewer's findings 1, 2 and 6 are resolved. Finding 3, which is also my round 3 note 2, is resolved for the case it named. But the fix opens a new hole in J8, and that hole blocks.
+
+**Self-implication flag (D-050):** the J7/J8 fix is the one my round 3 note 2 proposed ("each test checks the named record only if `manifest_kind` is its own kind or None"). Finding 3 below is a fault in my own earlier proposal.
+
+## Findings
+
+1. **Resolved (Reviewer finding 1, blocking before): AC6's re-scoring now expects the right answer.** test_ac06_owner_cards.py:136-142.
+   - The answers are now `{c00: yes, k01: yes}`. By hand, using E-003:78 ("Yes is FAIL"):
+     - p00 (change PASS, control FAIL) becomes (FAIL, FAIL), so concordant.
+     - p01 (change FAIL, control PASS) becomes (FAIL, FAIL), so concordant.
+     - n10 and n01 are both 0, as asserted.
+   - The new comment states the rule correctly. That fits E-003:86: each pair's class is worked out again from its two outputs.
+   - Nothing else in the file changed.
+
+2. **Resolved (Reviewer finding 2, blocking before): J4's fill test no longer depends on line breaks.** test_j4_sheet_route.py:174-183.
+   - The text is now matched with whitespace collapsed. By hand against E-002:27-28 and :34-35, with only E-003 Step 4's seven changes applied:
+     - "Judge it\nagainst:" collapses to "Judge it against:", so a ≥ 0.
+     - Change 4 puts "Apply this check:", the sheet, then the failing rule after it, so a < b < c. STANDIN-T1 comes after b and STANDIN-T3 before c.
+     - Change 6 turns "Then each blocking finding as one\nnumbered line citing file:line." into "Then the numbers of the tests of the check that failed, each citing file:line." The asserted substring is present.
+     - Change 7's "Do not start background tasks" is present.
+     - "L7" is present, and the template holds no word "arm".
+   - A byte-faithful fill now passes, and so does a fill that wraps the added text.
+   - Not blocking: "the check in full" (:177) is now also matched collapsed. A fill that re-wraps the sheet would pass, though E-003:65 says "given in full". The byte-for-byte test at :187-190 and the fingerprint gate limit the risk. This weakens the check slightly; it is not a defect.
+
+3. **Blocking: new. J8, run on its own with S001_MANIFEST set, skips a blind manifest that wrongly lists experiments/E-003.md.** It should fail it. (test_j8_holdout_pack.py:160-172; e003_support.py:482-492)
+   - `manifest_kind` checks for "analysis" first, so any manifest whose files include experiments/E-003.md is classed "analysis", even when it also holds the extract and check-author.md.
+   - J8 now checks a named record only if it is "blind" or None. So for a blind-dispatch manifest that wrongly lists E-003.md, J8 prints "skipped: S001_MANIFEST names a manifest of the other kind (J7's)" and does not fail.
+   - J8 is to be run exactly this way: its docstring (:17) and skip text tell you to run it with S001_MANIFEST=<brief record> before each dispatch, and e003_support.py:8-9 gives the one-file command.
+   - S-001:270 says the blind pack holds "never … experiments/E-003.md", and that J8 "fails unless … no path matches a withheld path". E-003:33 says the blind dispatch goes ahead once "J8's test passes on it". A skip is not a fail, and the skip message wrongly points at J7.
+   - This is the leak the blind pack exists to stop: the registration names the changes. In round 3 the named record was checked whatever it held, so this is a regression.
+   - The full suite still goes red, because J7 checks the record as an analysis manifest and fails it on check-author.md and the extract. So the hole is open only for a one-file run. Even so, a locked check cannot be fixed once locked, and a J8 run alone must not skip a leaking blind manifest.
+   - Fix (one line in each test): when the variable is set, J8 checks the named record if its files include the extract or check-author.md, or its kind is None. J7 checks it if its files include experiments/E-003.md, or its kind is None. A record carrying both kinds' markers is then checked, and failed, by both. Alternatively, give each test its own variable.
+   - The unnamed full-suite path is unaffected: a mixed manifest found by scanning docs/briefs still fails J7.
+
+4. **Resolved (Reviewer finding 3 and my round 3 note 2) for the case they named.**
+   - With the variable naming a well-formed blind manifest, J7 now skips it, saying why (test_j7_analysis_pack.py:144-152), and J8 checks it.
+   - With it naming a well-formed analysis manifest, J8 skips and J7 checks.
+   - A malformed record (kind None) is checked, and failed, by both.
+   - Finding 3 is the remaining gap.
+
+5. **Resolved (Reviewer finding 6): AC9's docstring now gives the reading.** test_ac09_model_change.py:3-5 says the analysis leaves out only a pair still mixed after its Reruns (b) rerun, and that the `arm_models` fixture stands for that pair. This fits E-003 Exclusions 7 (:119) and Reruns (b) (:107). The test body is unchanged.
+
+6. **Partly resolved, not blocking: my round 3 note 3.**
+   - e003_support.py:51 now reads "clean on the line that creates it and on any later line, and only then", which is right. By hand:
+     - the Write at ac05:182 and the echo at :184 are clean;
+     - the read before the write at :190-191 is leak@1;
+     - the other path at :193-194 is leak@2.
+   - The stale comment at ac05:138-139 is replaced with an accurate one.
+   - Left over:
+     - test_ac05_judging.py:178's docstring still says "clean only when an earlier line of the same transcript creates it", which read literally makes the creating line a leak;
+     - the interface note still does not tell the Builder that a Bash `>` redirect target counts as a file the run created.
+
+7. **Round 1's four checks, for the changed files:**
+   - (a) **Coverage: holds.** The J4, J7 and J8 `join-test` markers stay, and no case was dropped.
+   - (b) **Nothing beyond the spec: holds.**
+   - (c) **Each check able to fail: fails for J8**, run alone with the variable set, on a blind manifest that holds experiments/E-003.md (finding 3). It holds elsewhere; J4's collapsed matching still fails a fill that is missing or out of order.
+   - (d) **No held-back check, sheet text or src/** read: holds.** Only the stand-in sheet is used, and nothing under src/**, docs/handover/** or docs/reports/** is read.
+   - Nothing in the seven files contradicts E-003 or its change files. S-001 is contradicted only as in finding 3. No change fails a correct implementation.
+
+## Six-part contract
+- **Changed (by file):** none. I am read-only.
+- **Why:** this is the Critic's round 4 on S-001's locked checks. It follows the Reviewer's findings on PR #51 and is needed before the checks are locked for "Tests written before the work".
+- **Verified:** by reading only.
+  - I read all seven changed files in full in both copies. For round 3's J8 I read lines 1-139 and 140 to the end; only TestJ8Recorded and nothing else changed. In e003_support.py only :51 changed. In AC5 only :138-139 changed.
+  - I read E-003.md in full and E-002.md:15-44 (the template).
+  - I read S-001:266-270.
+  - I read the Reviewer's return (rev51-r1.md) and my rounds 1 and 3 (crit-checks-r1.md, crit-checks-r3.md).
+- **Undone:**
+  - I ran no tests (I hold no shell).
+  - For the claim that only these seven files changed, I relied on the Orchestrator's diff.
+  - Round 3's checks record, reviews/S-001/_critic-checks.md, is in neither copy, so I read my earlier rounds from the scratchpad tmp files instead.
+- **Needed outside its surface:**
+  - The Check author (dispatch (b)) should fix finding 3 (it blocks), and should fix finding 6's two leftovers.
+  - A Critic round should then check the change.
+- **Open questions:**
+  - (a) For finding 3: should each test match on its own markers (my suggestion), or should J7 and J8 get separate variables? Both close the hole; the spec names neither.
+
+Files:
+- /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks4/tests/acceptance/test_j8_holdout_pack.py
+- /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks4/tests/acceptance/test_j7_analysis_pack.py
+- /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks4/tests/acceptance/e003_support.py
+- /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks4/tests/acceptance/test_ac05_judging.py
+- /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks4/tests/acceptance/test_ac06_owner_cards.py
+- /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks4/tests/acceptance/test_j4_sheet_route.py
+- /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks4/tests/acceptance/test_ac09_model_change.py
