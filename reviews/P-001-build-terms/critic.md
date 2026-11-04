@@ -2,7 +2,7 @@ Verdict: PASS
 
 # The Critic on M2's reworded "done when" and the project document's lines restated to the Build-gate terms, verbatim
 
-*Brief 66 (docs/briefs/66-critic.md) for round 1 and brief 68 (docs/briefs/68-critic.md) for round 2; each a fresh session on a different model from the lines' writer. Recorded verbatim by the Orchestrator, 2026-11-04. The first line is the latest round's verdict; in round 2's contract its "- Verdict: PASS." is written "- (Verdict) PASS.", since the verdict check allows that word only at the start of a line.*
+*Brief 66 (docs/briefs/66-critic.md) for round 1 and brief 68 (docs/briefs/68-critic.md) for round 2; each a fresh session on a different model from the lines' writer. Recorded verbatim by the Orchestrator, 2026-11-04. The first line is the latest round's verdict; in round 2's contract the line giving the verdict, which the return wrote with a colon after the word, is written "- (Verdict) PASS.", since the verdict check allows that word only at the start of a line.*
 
 ## Round 1
 
