@@ -1,0 +1,93 @@
+# Output of the two scripts, as run for S-001's round-3 draft on 2026-11-04 from /home/user/wt/ml-definer-s001
+# (repositories: /home/user/Service-Desk, /home/user/Personal-Org-Operating-Model, /home/user/Model-Lab, as they stood then)
+
+$ python3 experiments/E-003/arrivals.py
+1. Q-008's window
+   first piece's check record: POOM reviews/1/reviewer.md, added 2026-09-24
+   last piece's check record:  ML research/Q-002-to-Q-007-corrections-confirmation.md, added 2026-11-01
+   Q-008's memo first committed 2026-11-01T21:45:49+00:00
+   cross-check SD: check records added 2026-09-30 to 2026-11-01 (601 files)
+   cross-check POOM: check records added 2026-09-24 to 2026-10-24 (204 files)
+   cross-check ML: check records added 2026-11-01 to 2026-11-01 (27 files)
+   window: 2026-09-24 to 2026-11-01, 5.57 weeks (both days counted)
+
+2. Rates over the window, pieces a week
+   plans all projects 44 / 5.57 = 7.9
+   built work all projects 80 / 5.57 = 14.4
+   research all projects 19 / 5.57 = 3.4
+   plans Service Desk 18 / 4.71 = 3.8   (SD from 2026-09-30)
+   built work Service Desk 51 / 4.71 = 10.8   (SD from 2026-09-30)
+   research Service Desk 12 / 4.71 = 2.5   (SD from 2026-09-30)
+
+3. Recent pace, 2026-10-21 to 2026-11-03 (2 weeks)
+   SD plans 6: S-001-after-md3 2026-10-23, S-001-after-glance 2026-10-24, M3G 2026-10-25, M3B 2026-10-26, HD1 2026-10-30, M3C 2026-10-31
+   SD built 40: S-001-desk-v2/1b 2026-10-21, S-001-desk-v2/2 2026-10-21, S-001-desk-v2/3 2026-10-22, S-001-desk-v2/4 2026-10-22, S-001-desk-v2/5 2026-10-22, S-001-desk-v2/6a 2026-10-22, S-001-desk-v2/6b 2026-10-22, S-001-desk-v2/7 2026-10-22, S-001-desk-v2/8 2026-10-22, M3D/1 2026-10-23, M3D/2 2026-10-23, M3D/3 2026-10-23, M3D/4 2026-10-24, M3D/6a 2026-10-24, M3D/7 2026-10-24, M3D/8 2026-10-24, M3E/g1 2026-10-24, M3E/g2 2026-10-24, M3E/g3 2026-10-25, M3E/g4 2026-10-25, M3E/g5 2026-10-25, M3E/g6 2026-10-25, M3E/g7 2026-10-25, M3E/g7b 2026-10-25, M3E/g8 2026-10-25, M3E/g8b 2026-10-25, M3E/g8c 2026-10-25, M3E/g8d 2026-10-25, M3E/g9 2026-10-25, M3E/g9b 2026-10-25, M3E/g9c 2026-10-25, M3G/qw1 2026-10-26, M3G/qw2 2026-10-26, M3G/qw3 2026-10-26, M3B/vt1 2026-10-27, M3B/vt2 2026-10-28, M3B/vt3 2026-10-29, HD1/hd1 2026-10-30, LA1 2026-10-31, LA2 2026-10-31
+   SD research (first source check) 6: Q-016 2026-11-02, Q-018 2026-11-03, Q-019 2026-11-03, Q-020 2026-11-03, Q-021 2026-11-03, Q-017 2026-11-03
+   ML research memos 8 (this project's own Discovery, ending; not counted forward): Q-001-memo, Q-002-memo, Q-003-memo, Q-004-memo, Q-005-memo, Q-006-memo, Q-007-memo, Q-008-memo
+   POOM commits 24; last commit 2026-10-24
+   plans SD recent 6 / 2 = 3.0 a week
+   built work SD recent 40 / 2 = 20.0 a week
+   research SD recent 6 / 2 = 3.0 a week
+
+4. On record at dispatch (brief, model and start commit in a control file)
+   SD research: 4 of 6 recent items record the source check's (Q-016, Q-018, Q-020, Q-021); 3 also the researcher's
+   SD plans: 0 of 6 folders have any control file; SD built: 0 of 8 folders
+   ML docs/briefs: 29 briefs; 29 have a 'model:' line; 0 a 'start commit:' line
+
+$ python3 experiments/E-003/sizing.py
+critical n10 for 10, 15, 20 discordant pairs: 9 12 15
+eligible pieces a week = pace x share; share 0.375 (half on record) to 0.750 (all)
+
+plans (starting figure 5%); eligible a week at the Service Desk's pace 1.42 to 2.85; 5.93 only if the other projects resume
+  40 pairs: 178 runs with reserve, about 32 million tokens; 14 to 28 weeks at the Service Desk's pace (7 only if the other projects resume)
+    power, 20-point gain, one-way / middle / independent: 0.84 / 0.57 / 0.62
+    same, judge wrong 1 verdict in 10: 0.35 / 0.30 / 0.31
+    power, 10-point gain, one-way / middle / independent: 0.21 / 0.17 / 0.18
+  60 pairs: 266 runs with reserve, about 48 million tokens; 21 to 42 weeks at the Service Desk's pace (10 only if the other projects resume)
+    power, 20-point gain, one-way / middle / independent: 0.99 / 0.80 / 0.84
+    same, judge wrong 1 verdict in 10: 0.55 / 0.45 / 0.47
+    power, 10-point gain, one-way / middle / independent: 0.56 / 0.31 / 0.33
+  100 pairs: 442 runs with reserve, about 80 million tokens; 35 to 70 weeks at the Service Desk's pace (17 only if the other projects resume)
+    power, 20-point gain, one-way / middle / independent: 1.00 / 0.96 / 0.98
+    same, judge wrong 1 verdict in 10: 0.80 / 0.71 / 0.73
+    power, 10-point gain, one-way / middle / independent: 0.94 / 0.54 / 0.58
+  at the 16-week review point, Service Desk's pace, half on record: about 22 pairs; power at 22, one-way / middle / independent: 0.27 / 0.24 / 0.25
+  at the 16-week review point, Service Desk's pace, all on record: about 45 pairs; power at 45, one-way / middle / independent: 0.91 / 0.64 / 0.69
+
+research (starting figure 26%); eligible a week at the Service Desk's pace 0.94 to 1.88; 2.55 only if the other projects resume
+  40 pairs: 134 runs with reserve, about 24 million tokens; 21 to 43 weeks at the Service Desk's pace (16 only if the other projects resume)
+    power, 20-point gain, one-way / middle / independent: 0.84 / 0.57 / 0.37
+    same, judge wrong 1 verdict in 10: 0.35 / 0.30 / 0.23
+    power, 10-point gain, one-way / middle / independent: 0.21 / 0.17 / 0.11
+  60 pairs: 200 runs with reserve, about 36 million tokens; 32 to 64 weeks at the Service Desk's pace (24 only if the other projects resume)
+    power, 20-point gain, one-way / middle / independent: 0.99 / 0.80 / 0.54
+    same, judge wrong 1 verdict in 10: 0.55 / 0.45 / 0.35
+    power, 10-point gain, one-way / middle / independent: 0.56 / 0.31 / 0.16
+  100 pairs: 332 runs with reserve, about 60 million tokens; 53 to 107 weeks at the Service Desk's pace (39 only if the other projects resume)
+    power, 20-point gain, one-way / middle / independent: 1.00 / 0.96 / 0.81
+    same, judge wrong 1 verdict in 10: 0.80 / 0.71 / 0.59
+    power, 10-point gain, one-way / middle / independent: 0.94 / 0.54 / 0.28
+  at the 16-week review point, Service Desk's pace, half on record: about 15 pairs; power at 15, one-way / middle / independent: 0.06 / 0.09 / 0.10
+  at the 16-week review point, Service Desk's pace, all on record: about 30 pairs; power at 30, one-way / middle / independent: 0.57 / 0.40 / 0.26
+
+built work (starting figure 40%); eligible a week at the Service Desk's pace 4.05 to 8.10; 10.80 only if the other projects resume
+  40 pairs: 178 runs with reserve, about 32 million tokens; 5 to 10 weeks at the Service Desk's pace (4 only if the other projects resume)
+    power, 20-point gain, one-way / middle / independent: 0.84 / 0.57 / 0.34
+    same, judge wrong 1 verdict in 10: 0.35 / 0.30 / 0.22
+    power, 10-point gain, one-way / middle / independent: 0.21 / 0.17 / 0.10
+  60 pairs: 266 runs with reserve, about 48 million tokens; 7 to 15 weeks at the Service Desk's pace (6 only if the other projects resume)
+    power, 20-point gain, one-way / middle / independent: 0.99 / 0.80 / 0.51
+    same, judge wrong 1 verdict in 10: 0.55 / 0.45 / 0.34
+    power, 10-point gain, one-way / middle / independent: 0.56 / 0.31 / 0.14
+  100 pairs: 442 runs with reserve, about 80 million tokens; 12 to 25 weeks at the Service Desk's pace (9 only if the other projects resume)
+    power, 20-point gain, one-way / middle / independent: 1.00 / 0.96 / 0.77
+    same, judge wrong 1 verdict in 10: 0.80 / 0.71 / 0.57
+    power, 10-point gain, one-way / middle / independent: 0.94 / 0.54 / 0.25
+  at the 16-week review point, Service Desk's pace, half on record: about 64 pairs; power at 64, one-way / middle / independent: 0.99 / 0.83 / 0.54
+  at the 16-week review point, Service Desk's pace, all on record: about 129 pairs; power at 129, one-way / middle / independent: 1.00 / 0.99 / 0.87
+
+Options (runs with reserve; weeks at the Service Desk's pace, all to half on record, one kind after another / collected together; in brackets, only if the other projects resume)
+  A: 60 each: 732 runs, about 132 million tokens; 60 to 121 weeks one after another (39), 32 to 64 together (24)
+  B: 40 each: 490 runs, about 88 million tokens; 40 to 81 weeks one after another (26), 21 to 43 together (16)
+  C: built work 60 only: 266 runs, about 48 million tokens; 7 to 15 weeks one after another (6), 7 to 15 together (6)
+  D: 100 research and built, 60 plans: 1040 runs, about 188 million tokens; 87 to 173 weeks one after another (59), 53 to 107 together (39)

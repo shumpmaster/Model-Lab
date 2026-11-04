@@ -4,7 +4,8 @@
 the arm's working copy by the harness, never to a live role file (docs/PROJECT.md section 4).*
 
 kind of work: built work (to its build review)   cause aimed at: material handed over   length:
-two sentences of fixed text (10 words) plus the list the harness fills
+two sentences: 10 fixed words in all, plus the list the harness fills (11 counting `<list>` as one
+word)
 
 ## Why this change
 - Material handed over is the largest cause the records name for built work: 5 of the 16 built-work returns with findings, beside 11 with no cause named beyond the fault or the worker's own slip (research/Q-008-memo.md §4, tallies). Across all kinds it is the second-largest named cause, 8 of 21 (bottom line 4).
