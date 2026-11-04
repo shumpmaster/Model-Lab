@@ -364,3 +364,10 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** as LL-35, LL-40 and LL-43: the tools read a project's state only from pipeline records; the gate-record ruling forbids writing a status record by hand until the model changes.
 - **Correction proposed:** with the gate-record change in the operating model (decisions/questions/P-001-gate-record.md): the record that carries the owner's ruling also carries the item's spec, so a conversation-run case can cite it; until then the Build gate case's citations of its spec are reported as this known gap.
 - **Status:** open; with LL-43.
+
+### LL-50 An owner question stated what a system would do without a record that shows it (LL-46 recurred)
+- **What happened:** the first draft of the held-back store question said the sessions doing the tested work "never hold" the new private repository, and gave that option no costs; no record showed how the environment gives a session its repositories. The Critic failed it (reviews/P-001-heldback-store/critic.md, round 1, findings 1 and 2). The environment's own documentation, read afterwards, shows the protection holds only if judging sessions are started separately with that repository and the work's sessions never are.
+- **Caught by:** the Critic.
+- **Cause:** the option's gain was written from an expectation of how sessions work, not from a record; the environment's documentation was read only after the check, though it was available before.
+- **Correction proposed:** as LL-46: before an option states what a system will do, read the record or documentation that decides it and cite it; record environment facts that an ask rests on in the project (as intake/P-001-environment-2026-11-04.md now does); for the model, the environment check of LL-22 records them at the start.
+- **Status:** open (recurred); the question was redrafted.
