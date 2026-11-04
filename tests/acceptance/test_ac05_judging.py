@@ -135,8 +135,8 @@ class TestTranscriptCheck(Base):
 
     def setUp(self):
         super().setUp()
-        # The copy lives outside /tmp: E-001's F4 allows the system temporary directory (files the run
-        # itself creates there), so a copy under /tmp could not show the leak cases below.
+        # The copy lives outside /tmp so that its parent-escape and sibling-prefix cases land outside the
+        # copy and not in /tmp, where only a file the run itself created is allowed (E-001 F4).
         import tempfile
         base = None
         for cand in ("/var/tmp", os.path.expanduser("~")):

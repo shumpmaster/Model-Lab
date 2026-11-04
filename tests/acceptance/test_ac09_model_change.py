@@ -1,6 +1,8 @@
 """AC9 [trace: V1 -> AC9] -- when the served model of the doers or the judge changes during a kind's
 comparison, pairs are grouped by model, the deciding test is run on the larger group only, and the result
-says so.  (E-003 Exclusions 7: a pair whose two arms report different served models is a set-up fault.)
+says so.  (E-003 Exclusions 7: a pair whose two arms report different served models is a set-up fault,
+which Sample's Reruns (b) reruns once before judging; the analysis leaves out only a pair that is still
+mixed after its rerun, which is what the last test's "arm_models" fixture stands for.)
 
 Interface named (e003_support.py): analyse.py run (see test_ac07_decision.py); pairs carry "doer_model"
 and "judge_model" (and optionally "arm_models": [change arm's, control arm's]).  Output adds "groups"
