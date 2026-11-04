@@ -1,6 +1,6 @@
 Verdict: PASS
 
-The Critic's plan review of specs/S-001.md and experiments/E-003.md, on a different model from the writer (brief: docs/briefs/28-critic.md), verbatim (FAIL at rounds 1 and 2; PASS at round 3). Round 4 is the join-up review closing Design (brief: docs/briefs/33-critic.md, session session_01QBwHGMBo8kZsMCS2EvKNwd, 2026-11-04, on claude-sonnet-5-5): FAIL, four blocking findings; under the plan stop rule this went to the owner, who chose one focused confirmation review (decisions/questions/P-001-plan-stop.md). Round 5 is that review (brief: docs/briefs/38-critic.md, on claude-sonnet-5-5): FAIL, two new blocking findings; it went back to the owner, who chose to re-specify how the test is run as a new draft reviewed from round one (decisions/questions/P-001-plan-stop-2.md). The new draft's rounds are recorded below as "New draft, round <n>" (brief for round 1: docs/briefs/42-critic.md): round 1 FAIL, four blocking findings; round 2 FAIL, one blocking finding; round 3 PASS, with the join-up review passing. Recorded by the orchestrator. Session session_01QBwHGLd77YbwCSMSPU26vW, 2026-11-04.
+The Critic's plan review of specs/S-001.md and experiments/E-003.md, on a different model from the writer (brief: docs/briefs/28-critic.md), verbatim (FAIL at rounds 1 and 2; PASS at round 3). Round 4 is the join-up review closing Design (brief: docs/briefs/33-critic.md, session session_01QBwHGMBo8kZsMCS2EvKNwd, 2026-11-04, on claude-sonnet-5-5): FAIL, four blocking findings; under the plan stop rule this went to the owner, who chose one focused confirmation review (decisions/questions/P-001-plan-stop.md). Round 5 is that review (brief: docs/briefs/38-critic.md, on claude-sonnet-5-5): FAIL, two new blocking findings; it went back to the owner, who chose to re-specify how the test is run as a new draft reviewed from round one (decisions/questions/P-001-plan-stop-2.md). The new draft's rounds are recorded below as "New draft, round <n>" (brief for round 1: docs/briefs/42-critic.md): round 1 FAIL, four blocking findings; round 2 FAIL, one blocking finding; round 3 PASS, with the join-up review passing. Round 4 (brief: docs/briefs/57-critic.md, session session_01QBwHGKFFgmANWaCNGxCLZd, on claude-sonnet-5-5) is a focused check of the Definer's fix to the order of the kinds and its weeks (commit e504ea0): PASS. Recorded by the orchestrator. Session session_01QBwHGLd77YbwCSMSPU26vW, 2026-11-04.
 
 ## Round 1
 Verdict: FAIL
@@ -963,3 +963,36 @@ The owner's ruling at the gate: decisions/P-001/criteria-<n>.md. Not yet recorde
    - Will the first K1 probe show the `list_events` reach? If so, does the owner go on with instruction alone?
 
 Files: /home/user/Model-Lab/specs/S-001.md, /home/user/Model-Lab/experiments/E-003.md, /home/user/Model-Lab/experiments/E-003/check-author-extract.md, /home/user/Model-Lab/governance/risk-paths.toml, /home/user/Model-Lab/intake/P-001-environment-2026-11-04.md, /home/user/Model-Lab/docs/design/JOIN_UP_REVIEW.md
+
+## New draft, round 4 (commit 9b805dd; brief 57, a fresh session; a focused check of the Definer's fix e504ea0)
+Verdict: PASS
+
+Findings:
+1. (Not blocking) Every changed sentence is true of experiments/E-003/sizing.py lines 135-149 and experiments/E-003/output.txt lines 89-93.
+   - `seq` is the sum of the kinds' weeks, and `par` is the maximum of them.
+   - Option A comes out at 60 to 121 weeks one after another (39) and 32 to 64 together (24). Research alone at 60 pairs is 32 to 64 (output.txt line 62), and it is the slowest kind: plans are 21 to 42 and built work is 7 to 15.
+   - The option table (S-001 lines 96-99) matches all four options: A 60–121 (39) and 32–64 (24); B 40–81 (26) and 21–43 (16); C 7–15 (6) twice; D 87–173 (59) and 53–107 (39).
+   - Line 15 gives 60 to 121 one after another and 32 to 64 if all three collect from the start. Line 317 gives plans 21 to 42 and research 32 to 64. Both are true.
+   - Line 308 quotes output.txt's own "together" wording, which is the script's label and is correct there.
+2. (Not blocking) Each order in open question 4 (lines 337-341) carries the weeks true of it.
+   - Order 1, one kind after another: 60 to 121 weeks of collection, plus waits between kinds that no record measures. Line 338 says this, and it matches the bound at line 120.
+   - Order 2, the next kind collecting while the previous is judged: the same 60 to 121 weeks of collection, with only the waits saved. This is the correction the fix was meant to make. Nothing in sizing.py supports a shorter figure for it, and none is claimed.
+   - Orders 3 and 4: 32 to 64 weeks, as the slowest kind. Line 341 also says E-003 registers analysis one after another, so order 4 needs that registration revised before any run. That is right, because E-003 line 101 says "kinds are still analysed one after another".
+   - The ruling quote in line 337 matches line 1 of decisions/questions/P-001-worst-work.md. The owner's verbatim words there are "I don't care to start, let's just work it incrementally because everything should be touched". The spec states "Follows 'incrementally' literally" as its own reading and puts the question to the owner. That is an honest framing, not a claim about the ruling.
+3. (Not blocking) The plan is consistent with itself and with E-003.
+   - Line 90's header and line 94's column heading agree with each other and with line 15.
+   - Line 126's claim that an overlapping order "does not change these counts, which are per kind-week" holds for order 2 as well. The counts are 7, 1 and 1 a week while a kind runs, and 1 landing review a week, so the totals follow from the kind-weeks (line 16: 540 to 1,090 wakes).
+   - Line 221's "if the owner lets kinds overlap" now covers orders 2 to 4 and is still true.
+   - The Weeks row at line 120 ("the tables' figures, plus up to 2 weeks before a kind closes") is unchanged and does not contradict anything.
+   - E-003.md line 101 matches the spec. "Only the second shortens collection" refers to all three collecting from the start. Under the first, collection takes the one-after-another weeks. "Kinds are still analysed one after another" is consistent with order 4 being excluded from E-003 as registered.
+   - The K checks, the AC and J lines and the Risks do not mention the "together" weeks, so nothing else is made false.
+4. (Not blocking, out of scope) E-003 line 101 does not name order 4 (everything at once). The spec says order 4 needs a revised registration, so no new falsehood arises.
+5. The fix touched only the lines named. I found no change beyond its scope and no figure changed.
+
+Contract:
+- changed: nothing. I hold no write tool.
+- why: this is the round-4 focused check of the fix in e504ea0, landed by merge b527ed9, with the "together" weeks (32 to 64) no longer tied to the next kind collecting while the previous is judged.
+- verified: sizing.py lines 100-149; all of output.txt lines 89-93 and lines 62 and 78; S-001 lines 13-16, 88-126, 219-222, 305-346 and every other line the greps matched; E-003.md lines 94-107; the P-001-worst-work.md ruling.
+- undone: I did not read the rest of the spec or re-run earlier rounds' checks. I did not run sizing.py (no shell), so I rely on output.txt matching it. I read the code, which computes the sums and maxima those figures need.
+- needed outside your lane: the Orchestrator records this verbatim in reviews/S-001/plan.md as round 4, and notes that a round is counted.
+- open questions: none for the Definer. The owner's choice among the four orders stays with open question 4.
