@@ -175,7 +175,7 @@ class TestTranscriptCheck(Base):
     def test_system_paths_e001_f4_allows_are_clean(self):
         """E-001 F4: reading or running tools under /usr, /bin, /lib and /etc (read only), and files the run
         itself creates in the system temporary directory (/tmp).  Any other outside path fails.  A /tmp
-        path is clean only when an earlier line of the same transcript creates it."""
+        path is clean on the line that creates it and on any later line, and only then."""
         self.clean([tool_line("Read", file_path="/etc/hostname"), tool_line("Read", file_path="/etc/hosts"),
                     tool_line("Bash", command="/usr/bin/git status"), tool_line("Bash", command="/bin/ls /usr/lib"),
                     tool_line("Read", file_path="/lib/os-release"),

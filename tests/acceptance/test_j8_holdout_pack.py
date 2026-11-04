@@ -22,7 +22,7 @@ import re
 import unittest
 
 from e003_support import (Base, CHANGE_FILE, CHANGE_TEXT, ROOT, good_manifest, manifest_violations, norm,
-                          manifest_kind, parse_manifest, pack_entry, pattern_matches, recorded_manifests)
+                          manifest_kind, manifest_markers, parse_manifest, pack_entry, pattern_matches, recorded_manifests)
 
 AGENT = ".claude/agents/check-author.md"
 EXTRACT = "experiments/E-003/check-author-extract.md"
@@ -159,10 +159,14 @@ class TestJ8Validation(Base):
 class TestJ8Recorded(Base):
     def test_every_recorded_blind_dispatch_manifest_conforms(self):
         named = bool(os.environ.get("S001_MANIFEST"))
-        # A record named by S001_MANIFEST is checked here only if it is a blind-dispatch manifest or is
-        # malformed (no file lines, kind None); a well-formed manifest of the other kind is J7's.
+        # A record named by S001_MANIFEST is checked here if its files include the extract or
+        # .claude/agents/check-author.md, or it has no file lines; so a blind manifest that wrongly lists
+        # experiments/E-003.md is checked, and failed, here too (S-001 J8: "never ... experiments/E-003.md").
+        def mine(t):
+            has_files, blind, analysis = manifest_markers(t)
+            return blind or not has_files
         found = [(rel, t) for rel, t in recorded_manifests()
-                 if manifest_kind(t) == "blind" or (named and manifest_kind(t) is None)]
+                 if (mine(t) if named else manifest_kind(t) == "blind")]
         if not found:
             self.skipTest("S001_MANIFEST names a manifest of the other kind (J7's); this test checks blind-dispatch "
                           "manifests" if named else
