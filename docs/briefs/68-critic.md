@@ -14,3 +14,7 @@ Read only from the fixed copy /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-7
 Check: is each finding resolved; is each changed sentence true of the record it cites (reviews/E-001/reviewer.md; section 8's "Paired test"); and is docs/PROJECT.md now free of any line that states the plan as using past tasks or about 300 runs. M2 and V1 passed at round 1 and have not changed.
 
 Return first a column-0 line `Verdict: PASS` or `Verdict: FAIL`, then numbered findings marked blocking or not, then the six-part contract.
+
+## The round-1 text as given with the brief
+
+Round 1's verdict line and opening paragraph and its findings 4a, 4b and 4c were given word for word; its findings 1 to 3 were given in summary (M2 and V1 pass; the other changed lines true of their records; "about 300 runs" gone), and 4d as "fine as at-the-time statements; named without a finding". Its six-part contract was not given; the brief pointed to reviews/P-001-build-terms/critic.md for the full text.
