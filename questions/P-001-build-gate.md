@@ -23,7 +23,7 @@ RISK CLASS: R0 (questions/**; a phase gate, which only you rule)   REVERSIBILITY
 DEFAULT: none (irreversible; a phase gate is never ruled by default or by proxy)   TIMEOUT: none
 
 ## Context
-- The case for going on, with the Critic's independent view, and the fair test's eleven criteria in full in the proposal beside it, as the owner ruled (source: docs/gates/P-001/build-gate-3-case.md; docs/gates/P-001/build-gate-3-proposal.md; questions/P-001-gate-citation.md)
+- The case for going on, with the Critic's independent view, and the fair test's eleven criteria in full in the proposal beside it, as the owner ruled (source: docs/gates/P-001/build-gate-3-case.md; docs/gates/P-001/build-gate-3-proposal.md; decisions/questions/P-001-gate-citation.md)
 - Past tasks could not be replayed, and the judge-consistency check was not run, by the owner's ruling (source: decisions/questions/P-001-e002-not-tested.md; specs/S-001.md, "In plain words")
 - The plan passed its review at round 3 with the join-up review, and its run, token and week sums were re-checked (source: reviews/S-001/plan.md, "New draft, round 1" and "round 3")
 - The plan's budget options, power figures and smaller-gains warning, with the plan recommending A (source: specs/S-001.md, "In plain words" and "Budget options by kind and order")
