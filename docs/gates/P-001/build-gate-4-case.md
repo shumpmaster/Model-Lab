@@ -2,7 +2,7 @@
 
 ## 1. The ask
 
-Approve the eleven criteria in the proposal, choose a size and answer the terms, on two cards that passed their check once cut down; the plan then freezes [docs/gates/P-001/build-gate-4-proposal.md] [reviews/P-001-build-gate/critic.md:360] [reviews/P-001-build-gate/critic.md:362] [reviews/S-001/plan.md:939].
+Approve the eleven criteria, choose a size and answer the terms, on two cards that passed their check once cut down; the plan then freezes [docs/gates/P-001/build-gate-4-proposal.md] [reviews/P-001-build-gate/critic.md:360] [reviews/P-001-build-gate/critic.md:362] [reviews/S-001/plan.md:939].
 
 **The proposer's recommendation:** proceed at size A, 732 runs — it tests every kind in turn [reviews/S-001/plan.md:1] [reviews/S-001/plan.md:535] [decisions/questions/P-001-worst-work.md].
 
