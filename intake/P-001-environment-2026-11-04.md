@@ -26,3 +26,8 @@ The session was started with four sources: Personal-Org-Operating-Model, Service
 - Helpers started from a session share its machine, so they can read every repository that session holds.
 - A repository chosen for one session is not thereby in another; nothing read here shows whether the environment's settings add a repository to every new session.
 - A session's machine is reclaimed after a period of inactivity, so anything kept only in its own storage is lost (this session's operating instructions, 2026-11-04; not a file record).
+
+## The held-back store (added 2026-11-04, after the owner's ruling, decisions/questions/P-001-heldback-store.md)
+- The owner created the repository shumpmaster/secret-marking; the session's repository listing shows it private.
+- It is not among this session's sources and has not been attached to it, so no helper this session starts can read it.
+- Not yet shown: whether the environment's settings add it to new sessions (the owner's check, as the ruling says).
