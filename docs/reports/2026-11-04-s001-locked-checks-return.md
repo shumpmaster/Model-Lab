@@ -187,3 +187,42 @@ Branch `build/check-author/s001-locked`, same worktree (`/tmp/claude-0/-home-use
 **Left as the brief said**
 - The rest of round-1 finding 10 stays untested: AC2's "records the pair", "is listed", the two-lane piece, a deliverable that names the change, and the power for a kind stopped early. The spec gives no location or format for these.
 - The Critic's note on finding 7 stays: AC1's needle on C3's sentence would also fail a future brief that quotes it for reference.
+
+## Round 4 (brief 79), commit 0030fcb
+
+## Brief 79: Reviewer findings 1, 2, 3 and 6, plus the Critic's round-3 note 3, fixed in commit 0030fcb on top of d372707
+
+New commit: `0030fcb`, same worktree and branch (`build/check-author/s001-locked`). Not pushed, same trailers.
+
+**What changed, and how I checked each expectation by hand**
+1. **Finding 1, AC6 re-scoring** (`test_ac06_owner_cards.py`, `test_the_owners_answer_replaces_the_judges_verdict_and_the_pair_class_is_worked_out_again`).
+   - The answers are now `{"c00": "yes", "k01": "yes"}` and the comment is rewritten.
+   - Check against E-003 Step 5 ("yes is FAIL, no is PASS"; the class is worked out again from the two outputs). I re-derived it with a reference script outside the repository.
+     - p00 is (change PASS, control FAIL), so it starts as n10. Yes on c00 makes both arms FAIL, so it is concordant.
+     - p01 is (change FAIL, control PASS), so it starts as n01. Yes on k01 makes both arms FAIL, so it is concordant. A "no" on k01 would change nothing, because k01 is already PASS.
+     - So n10 = n01 = 0, as the test asserts.
+   - I also re-checked the neighbouring rescore tests against Step 5, and they hold.
+     - "Can't tell" keeps the judge's verdict.
+     - A "no" on a both-pass pair stays concordant.
+     - The answered and disagreements case gives 3 answered and 1 disagreement.
+2. **Finding 2, J4 string matches** (`test_j4_sheet_route.py`, `test_a_matching_fingerprint_puts_the_sheet_in_the_brief`).
+   - The brief text is now read with whitespace collapsed, and the stand-in sheet is collapsed the same way before the `assertIn`.
+   - This covers every phrase match in the test: "Judge it against", "Apply this check:", the failing-rule sentence, the STANDIN markers, "Do not start background tasks", the "numbers of the tests ... file:line" phrase and "L7".
+   - Check against E-002's frozen template, which wraps "Judge it / against:". I wrapped the template the same way, applied E-003 Step 4 changes 4, 6 and 7, and ran the test's own expectations on the collapsed result with a reference script. All hold, and no `arm` word appears.
+   - No other test file matches template phrases. I grepped for them.
+3. **Finding 3, the shared manifest variable** (`test_j7_analysis_pack.py` and `test_j8_holdout_pack.py`). With `S001_MANIFEST` set, each test now checks the named record only if it is its own kind or is malformed (no file lines). A well-formed manifest of the other kind makes it skip with the plain message "S001_MANIFEST names a manifest of the other kind ...". I ran these cases:
+   - a well-formed blind manifest: J8 passes and J7 skips;
+   - a malformed record: both J7 and J8 fail, one failure each.
+4. **Finding 6, AC9** (`test_ac09_model_change.py` docstring). It now says Exclusions 7's set-up fault is rerun once (Sample, Reruns (b)). The analysis leaves out only a pair still mixed after its rerun, which is what the `arm_models` fixture stands for.
+5. **Critic's round-3 note 3.** In `e003_support.py`, the transcript-check wording is now "clean on the line that creates it and on any later line, and only then". The stale comment in `test_ac05_judging.py` `setUp` now says the copy is outside /tmp so that the parent-escape and sibling cases land outside the copy and not in /tmp.
+
+**Results**
+- Suite: 228 tests, 43 pass, 2 skip, 183 fail. All 183 failures are "interface missing", because the Builder's `src/E-003/` scripts do not exist yet. The counts are the same as before this commit.
+- `bash governance/checks/check_all.sh . 7d6c999` prints "OK: all governance checks passed".
+- `surface_guard.py diff --range 7d6c999..build/check-author/s001-locked --branch build/check-author/s001-locked` prints "OK: 4 commit(s) ... checked (0 merge(s) skipped, 0 exempt, 0 human)".
+- `git log --format='%an %ae' -3` gives:
+  - check-author check-author@agents.invalid
+  - check-author check-author@agents.invalid
+  - check-author check-author@agents.invalid
+
+**Not touched.** Finding 4 (the skip flag) and finding 5 (`record_checks merges`) are the owner's and the known LL-29 false failure. Open question (a) is the coordinator's: the checks are corrected here, before the lock.
