@@ -13,7 +13,8 @@ patterns compared case-folded, as session_runner.py's `norm` does."
 
 No Builder code is needed.  The pack-entry tests run against governance/PACKS.toml now.  The
 recorded-manifest test checks every `## Pack manifest` section found in docs/briefs/*.md whose files
-include experiments/E-003.md or whose agent file is reviewer.md (or the one named by S001_MANIFEST); it
+include experiments/E-003.md (classified by the parsed file lines, not by the record's text, so the blind
+dispatch's manifest, which also lists reviewer.md, is not taken for one; or the one named by S001_MANIFEST); it
 is skipped, saying so, while no analysis dispatch has recorded one -- the spec says the test is
 "meaningful only once ... the manifest is recorded", and the analysis is dispatched last.  The same
 checks run on synthetic manifests, good and deliberately broken, so the test is not vacuous.
@@ -22,7 +23,7 @@ import re
 import unittest
 
 from e003_support import (Base, good_manifest, manifest_violations, norm, parse_manifest, pack_entry,
-                          recorded_manifests, session_runner)
+                          manifest_kind, recorded_manifests, session_runner)
 
 AGENT = ".claude/agents/reviewer.md"
 KIND_FILES = ["experiments/E-003.md", "experiments/E-003/sizing.py", "specs/S-001.md",
@@ -127,10 +128,19 @@ class TestJ7Validation(Base):
             self.assertTrue(analysis_problems(text), "form defect not found: " + name)
 
 
+class TestJ7Classify(Base):
+    def test_the_blind_dispatchs_manifest_is_not_taken_for_an_analysis_manifest(self):
+        blind = good_manifest(["experiments/E-003/check-author-extract.md", ".claude/agents/critic.md",
+                               ".claude/agents/reviewer.md", ".claude/agents/source-checker.md",
+                               "docs/playbooks/software.md", ".claude/agents/check-author.md"])
+        self.assertEqual(manifest_kind(blind), "blind")
+        self.assertEqual(manifest_kind(good_manifest(KIND_FILES + [AGENT])), "analysis")
+        self.assertIsNone(manifest_kind("no manifest here"))
+
+
 class TestJ7Recorded(Base):
     def test_every_recorded_analysis_manifest_conforms(self):
-        found = [(rel, t) for rel, t in recorded_manifests()
-                 if AGENT in t or "experiments/E-003.md" in t]
+        found = [(rel, t) for rel, t in recorded_manifests() if manifest_kind(t) == "analysis"]
         if not found:
             self.skipTest("no analysis dispatch has recorded a manifest yet (J7 runs before each analysis dispatch)")
         for rel, text in found:

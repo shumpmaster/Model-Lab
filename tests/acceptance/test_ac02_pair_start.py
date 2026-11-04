@@ -31,7 +31,7 @@ class TestAC2(Base):
         entry = {"brief": brief, "start": parent, "repo": "Service-Desk", "kind": kind, "model": model,
                  "dispatched_at": dispatched, "real_path": real}
         if kind == "research":
-            entry["memo_commit"] = later
+            entry["memo_commit"] = base   # the memo is submitted before the source check starts
         self.entry_file = self.write("entry.json", json.dumps(entry))
         self.real = real
         self.brief = brief

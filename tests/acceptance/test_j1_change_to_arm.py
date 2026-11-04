@@ -99,14 +99,16 @@ class TestJ1Fills(Base):
 
     def c2_repo(self):
         r = self.new_repo()
-        spec = "# Spec S-009\n\n### Stage 1\nalpha\nbeta\n\n### Stage 2\ngamma\ndelta\nepsilon\n\n### Stage 3\nzeta\n"
+        spec = ("# Spec S-009\n\n### Stage 1\nalpha\nbeta\n\n### Stage 2\ngamma\ndelta, as ruled in decisions/questions/P-009-ruling.md\n"
+                "epsilon\n\n### Stage 3\nzeta, see decisions/questions/P-010-other.md\n")
         commit_files(r, {
             "specs/S-009.md": spec,
             "decisions/questions/P-009-ruling.md": "Stage 2 is ruled in decisions/questions/P-009-ruling.md\n",
             "decisions/questions/P-010-other.md": "unrelated\n",
             "tests/acceptance/test_s009.py": "# join-test: S-009/J1\n",
             "tests/acceptance/test_other.py": "# nothing\n",
-            "checks/s009_check.py": "# the S-009 check\n",
+            "checks/S-009-check.py": "# a check whose path holds the spec id\n",
+            "checks/unrelated_check.py": "# names no spec\n",
             "src/lib/a.py": "a\n", "src/lib/b.py": "b\n", "src/app.py": "app\n",
         }, "start")
         start = git(r, "rev-parse", "HEAD")
@@ -137,7 +139,8 @@ class TestJ1Fills(Base):
         self.assertIn("decisions/questions/P-009-ruling.md", rest)
         self.assertNotIn("decisions/questions/P-010-other.md", rest)
         self.assertIn("tests/acceptance/test_s009.py", rest)
-        self.assertIn("checks/s009_check.py", rest)
+        self.assertIn("checks/S-009-check.py", rest)
+        self.assertNotIn("checks/unrelated_check.py", rest)
         self.assertNotIn("tests/acceptance/test_other.py", rest)
         self.assertEqual(len(items), len(set(items)), "each once")
         order = [rest.index(x) for x in ("src/lib/a.py", "decisions/questions/P-009-ruling.md",

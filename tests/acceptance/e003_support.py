@@ -24,34 +24,52 @@ usage error exits 2.  A missing script fails its test with "interface missing".
                           -> {"brief": <change-arm brief>, "placement": "after-task-statement"
                               | "after-first-paragraph", "recorded": bool}
               remove  --change Cn --brief FILE --fill TEXT   -> {"brief": <text without the paragraph>}
+              verify-removal --change Cn --control FILE --changed FILE --fill TEXT -> {"clean": bool}
               fill-c1 --repo DIR --commit SHA                -> {"eligible": bool, "fill": <path>, "reason": str}
               fill-c2 --repo DIR --commit SHA --task-file F  -> {"eligible": bool, "fill": <list>, "reason": str}
-  pair.py     entry   --source FILE [--role ROLE] [--kind K] --now ISO  -> {"eligible": bool, "reason": str,
-                          "entry": {"brief","start","repo","kind","model","dispatched_at"[,"memo_commit"]}}
+  pair.py     entry   --source FILE --now ISO [--role ROLE] [--kind K] [--repo NAME] [--memo-commit SHA]
+                          [--dispatched-at ISO] [--round-1-verdict-at ISO]
+                          -> {"eligible": bool, "reason": str, "entry": {"brief","start","repo","kind","model",
+                              "dispatched_at"[,"memo_commit"]}}   (the source: a docs/briefs record, or a
+                              Service Desk control file as JSON, one object or a list of them)
               plan    --entry FILE --repos-root DIR --change Cn --now ISO --no-run
-                          -> {"arms": [{"arm","copy","commit","brief","model","start_at"}, ...]}  (copies made,
-                             no session started)
+                          -> {"arms": [{"arm": "control"|"change","copy","commit","brief","model","start_at"}]}
+                             (copies made, no session started; entry FILE is JSON with the entry keys above
+                              plus "real_path", the absolute path the brief uses)
               audit   --repo DIR --start SHA --submission SHA --named-input PATH ... [--default-branch B]
                           -> {"include": bool, "reason": str}
               context-compare --a FILE --b FILE --change-text FILE --path-a P --path-b P
                           -> {"same": bool, "reason": str}
               rerun-decision --history FILE  -> {"action": "rerun"|"leave-out", "reason": str}
-  transcript_check.py check --cwd DIR [--web-ok] [--sheets-repo NAME] TRANSCRIPT.jsonl
-                          -> stdout `clean` exit 0, or `leak@<line>` exit 1
-  fill_judge_brief.py --sheet FILE --fingerprint HEX --template FILE --fill FILE.json --out FILE
-                          -> on a match writes the brief to --out; on a mismatch exit 1 and writes nothing
-  export.py   make    --kind plans|built|research --repo DIR --start SHA --final SHA --label L --out DIR
-              (research: --memo-commit SHA in place of --start/--final)
+                          FILE is a JSON list of {"event": W}, W one of: "set-up-fault", "context-differs",
+                          "in-flight-inputs", "leak", "arms-finished" (both arms ended, not yet judged),
+                          "completed" (judged: nothing is rerun for a better answer)
+              locked-checks --copy DIR --command "<shell command>"   -> {"exit": N}
+  transcript_check.py check --cwd DIR [--web-sources FILE] [--allow-path P] [--sheets-repo NAME] TRANSCRIPT.jsonl
+                          -> stdout `clean` exit 0, or `leak@<line>` exit 1.  Allowed outside the copy (E-001 F4):
+                          /usr, /bin, /lib, /etc (read only) and /tmp; web only for URLs listed in --web-sources
+  fill_judge_brief.py --sheet FILE --fingerprint HEX --fill FILE.json --label L --copy-path DIR --out FILE
+                          -> on a match writes the filled judge brief (E-002's template with E-003 Step 4's
+                             changes) to --out; on a mismatch exit 1 and writes nothing
+  export.py   make    --kind plans|built|research --repo DIR --label L --out DIR --checker-role ID
+                      --role-file PATH [--task-statement-path P] [--task-statement-text T] [--memo-path P]
+                      (--start SHA --final SHA | --memo-commit SHA) [--no-deliverable]
               finish  --out DIR --kind K        (appends the final line `last`)
               verify  --out DIR --kind K        (exit 1 on a bundle whose SHA-256 differs from its index line)
               list    BUNDLE                    (the export reader: one path per line)
+              With --no-deliverable make exports nothing and prints {"exported": false, "arm_result": "FAIL"}.
   block.py    parse   < BLOCK                    -> {"form": "full"|"stopped"|"void", ...}; exit 1 on refusal
   verdicts.py check   --index FILE --filelists DIR --tests N --set SETID
-                      [--verdicts FILE] [--counts FILE] [--closing FILE]     exit 1, first line names the line
-  judge.py    next-step --state JSON | arm-outcome --verdict V --locked-exit N | check-model --doer M --judge M
-  cards.py    draw --pairs FILE --seed S [--kind K] | extend --state FILE --answers FILE | rescore ... | file ...
-  analyse.py  run --pairs FILE --cards FILE --kind K        (the Reviewer's reference numbers)
-  counts.py   card | due | cap | may-start | record-ruling
+                      (--verdicts FILE | --counts FILE | --closing FILE)    exit 1, first line names the line
+  judge.py    next-step --state JSON ({"verdict","follow_up_sent","sessions"}) -> {"action"}
+              parse-return --text-file F [--background-running] -> {"verdict","failed","multiple"}
+              followup-text | arm-outcome --verdict V [--locked-exit N] | check-model --doer M --judge M
+  cards.py    draw --pairs FILE --seed N --set SETID [--answers FILE] | rescore --pairs FILE --answers FILE
+              | file --kind K --set SETID --cards FILE --answers FILE --out ROOT [--sheet FILE]
+  analyse.py  run --pairs FILE --cards FILE --kind K | v2 --kind K --passes N
+              (a mechanical reference for the Reviewer's analysis: the spec has the Reviewer analyse, and names
+               no script; this is an added Builder deliverable that the tests need, in src/E-003/**)
+  counts.py   card | due | cap | may-start | record-ruling   (arguments in test_ac08_counts_card.py)
   kind.py     can-open --kind K --holdouts FILE --sheet-record FILE
 """
 import hashlib
@@ -458,6 +476,19 @@ def recorded_manifests():
         if re.search(r"^## Pack manifest[ \t]*$", text, re.M):
             out.append((rel, text))
     return out
+
+
+def manifest_kind(text):
+    """Classify a recorded manifest by its parsed file lines (never by the record's other text):
+    "analysis" if the files include experiments/E-003.md; "blind" if they include the extract or
+    .claude/agents/check-author.md; else None."""
+    files, _, _, _ = parse_manifest(text)
+    paths = {norm(p) for _, p in files}
+    if "experiments/e-003.md" in paths:
+        return "analysis"
+    if "experiments/e-003/check-author-extract.md" in paths or ".claude/agents/check-author.md" in paths:
+        return "blind"
+    return None
 
 
 def good_manifest(paths, commit="0123456789abcdef0123456789abcdef01234567", brief="ab" * 32):

@@ -151,6 +151,20 @@ class TestJ3(ExportBase):
         self.assertEqual(git(c, "rev-parse", revs[0] + "^{tree}"), git(r, "rev-parse", self.final + "^{tree}"))
         self.assertEqual(git(c, "log", "-1", "--format=%B", revs[0]).strip(), "R1")
 
+    def test_no_deliverable_means_that_arm_fails_and_no_export_is_made(self):
+        r = self.source()
+        out = os.path.join(self.tmp, "exports", "none")
+        os.makedirs(out)
+        before = set(os.listdir(out))
+        p = self.run_script("export.py", "make", "--kind", "built", "--repo", r, "--label", "L8", "--out", out,
+                            "--checker-role", "reviewer", "--role-file", ".claude/agents/reviewer.md",
+                            "--start", self.start, "--final", self.final, "--no-deliverable")
+        self.assertEqual(p.returncode, 0, p.stderr[-300:])
+        res = json.loads(p.stdout)
+        self.assertFalse(res["exported"])
+        self.assertEqual(res["arm_result"], "FAIL")
+        self.assertEqual(set(os.listdir(out)), before, "no bundle, fill file or INDEX line for it")
+
     def test_final_line_last_when_every_pair_has_its_exports(self):
         r, out, f = self.one("built", "L1")
         self.assertNotIn("last", self.index_lines(out))

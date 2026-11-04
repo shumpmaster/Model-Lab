@@ -112,7 +112,8 @@ class TestJ2(Base):
         self.assertFalse(out["eligible"])
 
     def test_more_than_seven_days_after_dispatch_is_not_eligible_and_exactly_seven_is(self):
-        rec = RECORD % SHA
+        # "recorded: at hand-out" on the dispatch date itself, so the record is not late (J2, first case)
+        rec = (RECORD % SHA).replace("2026-11-05", "2026-11-01")
         self.assertTrue(self.entry(rec, kind="built", repo="Model-Lab", dispatched_at="2026-11-01T00:00:00Z",
                                    now="2026-11-08T00:00:00Z")["eligible"])
         late = self.entry(rec, kind="built", repo="Model-Lab", dispatched_at="2026-11-01T00:00:00Z",

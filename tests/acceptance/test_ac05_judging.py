@@ -135,7 +135,17 @@ class TestTranscriptCheck(Base):
 
     def setUp(self):
         super().setUp()
-        self.cwd = os.path.join(self.tmp, "copy")
+        # The copy lives outside /tmp: E-001's F4 allows the system temporary directory (files the run
+        # itself creates there), so a copy under /tmp could not show the leak cases below.
+        import tempfile
+        base = None
+        for cand in ("/var/tmp", os.path.expanduser("~")):
+            if os.path.isdir(cand) and os.access(cand, os.W_OK):
+                base = tempfile.mkdtemp(prefix="s001-copy-", dir=cand)
+                break
+        self.assertIsNotNone(base, "no writable directory outside /tmp for the copy")
+        self.addCleanup(__import__("shutil").rmtree, base, True)
+        self.cwd = os.path.join(base, "copy")
         os.makedirs(self.cwd)
 
     def check(self, lines, *extra):
@@ -156,11 +166,19 @@ class TestTranscriptCheck(Base):
                     tool_line("Glob", pattern="**/*.py"), tool_line("Bash", command="ls -la && git log --oneline")])
 
     def test_a_read_search_or_command_outside_the_copy_is_a_leak_at_its_line(self):
-        self.leak([text_line("a"), tool_line("Read", file_path="/etc/hostname")], 2)
+        self.leak([text_line("a"), tool_line("Read", file_path="/home/user/Service-Desk/README.md")], 2)
         self.leak([tool_line("Grep", pattern="x", path="/home/user")], 1)
         self.leak([text_line("a"), text_line("b"), tool_line("Glob", pattern="*.md", path="/tmp/other")], 3)
         self.leak([tool_line("Bash", command="cat /root/.bashrc")], 1)
         self.leak([tool_line("Bash", command="cd /tmp && ls")], 1)
+
+    def test_system_paths_e001_f4_allows_are_clean(self):
+        """E-001 F4: reading or running tools under /usr, /bin, /lib and /etc (read only), and files the run
+        itself creates in the system temporary directory (/tmp).  Any other outside path fails."""
+        self.clean([tool_line("Read", file_path="/etc/hostname"), tool_line("Read", file_path="/etc/hosts"),
+                    tool_line("Bash", command="/usr/bin/git status"), tool_line("Bash", command="/bin/ls /usr/lib"),
+                    tool_line("Read", file_path="/lib/os-release"),
+                    tool_line("Read", file_path="/tmp/s001-file-the-run-made.txt")])
 
     def test_parent_directory_escape_and_sibling_prefix_are_leaks(self):
         self.leak([tool_line("Read", file_path="../secret.txt")], 1)
@@ -168,7 +186,7 @@ class TestTranscriptCheck(Base):
         self.leak([tool_line("Read", file_path=self.cwd + "-evil/x")], 1)
 
     def test_the_first_of_two_leaks_is_reported(self):
-        self.leak([tool_line("Read", file_path="/etc/a"), tool_line("Read", file_path="/etc/b")], 1)
+        self.leak([tool_line("Read", file_path="/root/.claude/a"), tool_line("Read", file_path="/home/user/b")], 1)
 
     def test_web_use_is_a_leak_unless_allowed(self):
         self.leak([tool_line("WebFetch", url="https://example.com/x", prompt="p")], 1)
@@ -181,7 +199,7 @@ class TestTranscriptCheck(Base):
         self.clean([tool_line("WebFetch", url="https://example.org/paper", prompt="p")], "--web-sources", src)
         self.leak([tool_line("WebFetch", url="https://elsewhere.example/page", prompt="p")], 1, "--web-sources", src)
         self.leak([tool_line("WebSearch", query="more")], 1, "--web-sources", src)
-        self.leak([tool_line("Read", file_path="/etc/hosts")], 1, "--web-sources", src)
+        self.leak([tool_line("Read", file_path="/root/.claude/settings.json")], 1, "--web-sources", src)
 
     def test_a_file_the_harness_saved_of_the_runs_own_output_may_be_read_at_its_named_path(self):
         saved = os.path.join(self.tmp, "saved-output.txt")

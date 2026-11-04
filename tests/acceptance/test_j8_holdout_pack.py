@@ -12,7 +12,7 @@ C2, C3) or "arm", or holds a sentence of a change text.  It is meaningful only o
 and the manifest is recorded, so it runs before each blind dispatch."
 
 No Builder code is needed.  The entry and extract tests run now.  The recorded-manifest test checks every
-`## Pack manifest` section in docs/briefs/*.md whose agent file is .claude/agents/check-author.md (or
+`## Pack manifest` section in docs/briefs/*.md whose parsed file lines include the extract or .claude/agents/check-author.md (or
 the one named by S001_MANIFEST); it is skipped, saying so, while no blind dispatch has recorded one --
 run it with S001_MANIFEST=<brief record> before each dispatch.  The same checks run on synthetic
 manifests, good and deliberately broken.
@@ -22,7 +22,7 @@ import re
 import unittest
 
 from e003_support import (Base, CHANGE_FILE, CHANGE_TEXT, ROOT, good_manifest, manifest_violations, norm,
-                          parse_manifest, pack_entry, pattern_matches, recorded_manifests)
+                          manifest_kind, parse_manifest, pack_entry, pattern_matches, recorded_manifests)
 
 AGENT = ".claude/agents/check-author.md"
 EXTRACT = "experiments/E-003/check-author-extract.md"
@@ -104,6 +104,16 @@ class TestJ8Extract(Base):
                 if len(s.split()) >= 4:
                     self.assertNotIn(s, flat, "the extract holds a sentence of %s: %r" % (cid, s))
 
+    def test_the_extract_is_as_frozen(self):
+        """J8 awkward case: the extract edited after the freeze is a revision, and the Check author is not
+        dispatched on it."""
+        import subprocess
+        from e003_support import FROZEN
+        p = subprocess.run(["git", "-C", ROOT, "diff", "--name-status", FROZEN, "HEAD", "--", EXTRACT],
+                           capture_output=True, text=True)
+        self.assertEqual(p.returncode, 0, p.stderr)
+        self.assertEqual(p.stdout.strip(), "", "the extract changed since the freeze:\n" + p.stdout)
+
     def test_the_extract_says_the_check_goes_to_the_lead_only(self):
         self.assertRegex(self.text, r"(?i)agent that started you")
         self.assertRegex(self.text, r"(?i)nowhere else")
@@ -148,7 +158,7 @@ class TestJ8Validation(Base):
 
 class TestJ8Recorded(Base):
     def test_every_recorded_blind_dispatch_manifest_conforms(self):
-        found = [(rel, t) for rel, t in recorded_manifests() if AGENT in t]
+        found = [(rel, t) for rel, t in recorded_manifests() if manifest_kind(t) == "blind"]
         if not found:
             self.skipTest("no blind dispatch has recorded a manifest yet (J8 runs before each blind dispatch; "
                           "set S001_MANIFEST=<brief record> to check one)")

@@ -131,7 +131,12 @@ class TestAC3Reruns(Base):
             self.assertEqual(out["action"], "leave-out", ev)
             self.assertTrue(out["reason"], ev)
 
-    def test_a_completed_pair_is_never_rerun_for_a_better_answer(self):
+    def test_arms_that_finished_but_are_not_yet_judged_still_get_the_one_rerun(self):
+        """E-003 Sample, Reruns (b): a set-up fault found before judging is rerun once."""
+        self.assertEqual(self.decision("arms-finished", "set-up-fault")["action"], "rerun")
+
+    def test_a_judged_pair_is_never_rerun_for_a_better_answer(self):
+        """"completed" means judged: after judging nothing is rerun to get a better answer."""
         self.assertNotEqual(self.decision("completed")["action"], "rerun")
         self.assertNotEqual(self.decision("completed", "set-up-fault")["action"], "rerun")
 
