@@ -17,4 +17,4 @@
 4. **Then put the gate:** the owner's verdict on PR #44's reading lists, the gate card and the terms card together.
 
 ## Token checkpoint
-This session, by its own status: about 300,000 tokens of context at the last reading and about $10 estimated cost then; the end line holds the final figures. Helpers this session: the Critic 47,485 (standard lines); 87,548 and 77,566 (gate-citation card, rounds 1 and 2); 101,675 and 100,126 (gate cards, rounds 2 and 3); the gate Critic 100,166 (case 2) and 89,088 (case 3).
+This session, by its own status: about 381,000 tokens of context in use and about $14.80 estimated cost. Helpers this session: the Critic 47,485 (standard lines); 87,548 and 77,566 (gate-citation card, rounds 1 and 2); 101,675 and 100,126 (gate cards, rounds 2 and 3); the gate Critic 100,166 (case 2) and 89,088 (case 3).
