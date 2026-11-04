@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-The Critic's cold read of questions/P-001-gate-record.md, on a different model from its writer, verbatim. Recorded by the orchestrator. Session session_01QBwHGLd77YbwCSMSPU26vW, 2026-11-04.
+The Critic's cold read of questions/P-001-gate-record.md, on a different model from its writer, verbatim (PASS at round 3; its non-blocking findings 6 and 8 were applied after it). Recorded by the orchestrator. Session session_01QBwHGLd77YbwCSMSPU26vW, 2026-11-04.
 
 ## Round 1
 Verdict: FAIL
@@ -134,3 +134,49 @@ Round 2 improves the question, but B is still not described truthfully. That is 
    - This is correct and consistent with finding 2: B's blast radius also includes the owner's desk.
 
 Records checked: `/home/user/wt/ml-ask-gate/questions/P-001-gate-record.md`, `/home/user/wt/ml-ask-gate/governance/checks/orchestrator.py` (lines 97-101, 153, 702-772, 1154-1181), `/home/user/wt/ml-ask-gate/governance/ROUTING.toml` (360-376), `/home/user/wt/ml-ask-gate/governance/checks/v3_checks.py` (117-148, 613-622), `/home/user/Service-Desk/src/public/lib/model.js` (230-252, 685-717).
+
+## Round 3
+Verdict: PASS
+
+Round 3 corrects what blocked rounds 1 and 2. I checked each claim about B against the code, and they hold. I found no blocking issue. The findings below are non-blocking.
+
+1. **Non-blocking, checked: a "done" record with `spec = "S-001"` makes the script log nothing.**
+   - `governance/ROUTING.toml` lines 369-376 (route "finished", states done/closed) give `action = "none"`.
+   - `route_item` (`orchestrator.py` lines 476-479) returns no action for "none". The route loop only calls `act`, which writes log lines, when there is an action (lines 1525-1532).
+   - `check_status` (lines 702-772) accepts a done record that has the ten REQUIRED fields (line 153) and a spec that matches `SPEC_ID_RE` (line 757). The error at line 770 applies only to waiting-owner, and the one at line 772 only to a record that sets `gate` in another state.
+   - `specs/S-001.md` exists in the worktree, so the spec is real. `note_spec` (lines 1142-1145) only raises the spec counter.
+   - So the question's "'done' loads quietly" is true for logs.
+   - One caveat the question does not raise: `write()` (lines 1626-1630) compares the file's text with `dump_status` and rewrites it if it differs. A hand-written record not in the canonical form (header comment line, the `FIELD_ORDER` order) would be rewritten by the script on its next run. That is not a log entry and it is harmless, but "quietly" is not strictly "untouched".
+
+2. **Non-blocking, checked: the "waiting-owner" claim is true.**
+   - `check_status` lines 770-771 give an error, and `load_statuses` (lines 1176-1179) logs an anomaly and skips the record. The question says the script "rejects the record and logs an error".
+   - The desk behaviour is also as stated. `model.js` lines 685-695 (gate or card missing, no open card: a `status-card` flag) and lines 696-704 (card file not found: a flag) both give a false "waiting on you" item.
+
+3. **Non-blocking, checked: the "ready and the working states start work" claim is true.**
+   - The routing table has dispatch routes for them. `route_item` / `_dispatch` (lines 449-468) log and plan a dispatch.
+   - A stage 4 or later record with an unfrozen spec raises a card instead (line 455). That is also a side effect, so "start work" is a fair summary.
+
+4. **Non-blocking, checked: the "done" effect on the desk is true.** `model.js` line 716 sets `item.finished = 'done'`. The question says the desk "shows the project as finished while it is in Design".
+
+5. **Non-blocking, checked: reversibility and blast radius.**
+   - "Reversible, but anything the script logged or did meanwhile stays in its log" is correct and honest. Anomalies go to the hash-chained log and to `processed.json` (`anomaly()` lines 1089-1094, `write()` lines 1637-1651).
+   - A "done" record logs nothing (finding 1), so the cost applies to the other states, as the question says.
+   - The blast radius (A all conversation-run projects; B this project and the desk's view; C this project's milestones) is fair.
+
+6. **Non-blocking: other checks switch on at the same time.**
+   - Once any `status/P-*.toml` holds a spec, other checks activate, not only the milestone ones (`v3_checks.py` line 73: section 3 must list a live milestone; lines 2009-2018: a research request filed after approval needs a milestone tag).
+   - Every option that makes the checks see approval does this, A included. The question calls it "protections", which is true but incomplete. Consider one clause saying the project becomes subject to the checks that apply to approved projects.
+
+7. **Non-blocking: A's second route.** A says the spec may have the script write the status record from the ruling. That is LL-43's own proposal (`docs/LESSONS.md` line 317), so it is not new. It is a fair statement of the choice.
+
+8. **Non-blocking: plain English.**
+   - "Working states", "card" and "status record" are glossed in the WHY and options, but "working states" is not defined. Context line 21 is dense. A cold reader can follow it.
+   - The Context cites "Service-Desk src/public/lib/model.js", which is in another repository. Name the repository (it is "Service-Desk") and the lines (685-704, 716).
+
+9. **Non-blocking: form.** The Milestone line (M1 to M6), the seven card parts and 5 Context lines are in order. WHO HAS CHECKED IT cites the Critic's record at round 3. `reviews/P-001-gate-record/critic.md` should hold this PASS once recorded, before the question is filed.
+
+10. **Non-blocking: the recommendation.**
+    - It now leans on stated things: A's unknown time (the stated reason for medium confidence), and the "done" side effect on the desk as the thing that would change it.
+    - The risk class (R3, cited to OPERATING_MODEL.md §2) is unchanged, and the owner has everything needed to decide. I did not re-check the R3 citation text.
+
+Records checked: `/home/user/wt/ml-ask-gate/questions/P-001-gate-record.md`, `/home/user/wt/ml-ask-gate/governance/checks/orchestrator.py` (153, 449-468, 476-479, 702-792, 1089-1094, 1142-1181, 1525-1663), `/home/user/wt/ml-ask-gate/governance/ROUTING.toml` (360-376), `/home/user/wt/ml-ask-gate/governance/checks/v3_checks.py` (73, 613-622, 2009-2018, 2362), `/home/user/Service-Desk/src/public/lib/model.js` (247-252, 685-717), `/home/user/wt/ml-ask-gate/specs/S-001.md` (existence only).
