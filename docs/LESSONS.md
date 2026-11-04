@@ -371,3 +371,26 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** the option's gain was written from an expectation of how sessions work, not from a record; the environment's documentation was read only after the check, though it was available before.
 - **Correction proposed:** as LL-46: before an option states what a system will do, read the record or documentation that decides it and cite it; record environment facts that an ask rests on in the project (as intake/P-001-environment-2026-11-04.md now does); for the model, the environment check of LL-22 records them at the start.
 - **Status:** open (recurred); the question was redrafted. It recurred once more the same day: the second plan-stop card called its first option's secrecy "real" against the store question's own recorded caveat (reviews/P-001-plan-stop-2/critic.md, finding 1); the card is being rewritten after the store answer.
+
+## 2026-11-04 — Design of P-001, session_01QBwHGKs5xh6cq2DgNNozv7
+
+### LL-51 Uncommitted lines set aside in the checkout a Critic was reading (LL-19 recurred)
+- **What happened:** three reworded standard-milestone lines in docs/PROJECT.md were left uncommitted on purpose, since a Critic must check a reworded line before it stands, and a Critic was dispatched to read them in the shared Model-Lab checkout. When a stop hook asked for uncommitted work to be committed and pushed, the Chief of Staff stashed the file there to run the checks on a clean tree, then saw that this hid the lines from the Critic and restored them within seconds. The Critic's return quotes the new lines, so its reading was not affected (reviews/P-001-standard-lines/critic.md).
+- **Caught by:** the Chief of Staff, at once.
+- **Cause:** as LL-19: one working copy shared between the Chief of Staff's own changes and a helper's reads; the clean copy for the checks was made only after the slip.
+- **Correction proposed:** run pre-push checks in a separate worktree at the commit being pushed (done from then on), and never change a checkout a running helper was pointed at; for the model, with LL-19, helpers read from a fixed worktree for their brief.
+- **Status:** fixed here (practice changed); model change open with LL-19.
+
+### LL-52 An owner question left out what the pipeline's loop does on a red check (LL-46, LL-50 recurred)
+- **What happened:** the first draft of the gate-citation question (questions/P-001-gate-citation.md) traced option A's red check through the gate check and CI, but not through the pipeline's loop, which holds all dispatches and merges while the default branch's latest check is red and files a CI-hold card after an hour; it also left out that quoting the criteria in the case breaks its 350-word limit. The Critic failed it at round 1 (reviews/P-001-gate-citation/critic.md, findings 1 and 2). Traced afterwards: the loop does not run in Model-Lab today, since it stops at its first step for want of its token setting.
+- **Caught by:** the Critic, before the card reached the owner.
+- **Cause:** the trace followed the check that refuses the citation, not every system that reads that check's result; the workflow header that names the loop's reaction was read for its trigger only.
+- **Correction proposed:** as LL-46: when an option makes a check fail, list every reader of that check's result (CI, the loop, the asks-merge workflow, the desk) and trace each; for the model, the question template asks for it.
+- **Status:** fixed here (redrafted for round 2); model change open with LL-46.
+
+### LL-53 The two Build-gate cards used all three Critic rounds and still failed
+- **What happened:** the gate card and the terms card failed the Critic at rounds 1, 2 and 3 (reviews/P-001-build-gate/critic.md). Each round fixed the findings before it and added new claims that were not traced: at round 3, option C2's chance stated the 100-piece figure for plans that stay at 60, and both cards said every failure "comes to you first" where the plan puts only some first checks to the owner as a question (LL-46, LL-50 again). The Build gate case went through three versions in the same session, each held by the gate Critic; case 3's main remaining finding is that it cannot show the terms card, which sits under questions/, outside the gate Critic's pack.
+- **Caught by:** the Critic and the gate Critic.
+- **Cause:** two at once. The cards carry most of a 370-line plan's figures and options, redrafted quickly between rounds, with each new sentence checked against the finding it answered but not against every record it touches. And, as LL-49, the gate tools assume the pipeline's records: a conversation-run case can cite neither the plan nor the cards the owner rules with it.
+- **Correction proposed:** at the stop rule, Triage traces the cause and the owner rules how the cards go on (OPERATING_MODEL §4 "Stop rule"); before any redraft, every changed sentence is checked against the record it states, not only the finding it answers; for the model, with LL-49 and the gate-record change, a gate case can cite its item's cards and spec.
+- **Status:** open; the stop-rule step is the next session's first.
