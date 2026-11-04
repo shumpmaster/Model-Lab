@@ -51,7 +51,7 @@ The plan's sizes [reviews/S-001/plan.md:583] [reviews/S-001/plan.md:535] [review
 A real gain may be missed: about 4 in 5 at 60 pieces under the library's assumption, about 1 in 2 for built work and research otherwise, less if a judge errs [reviews/P-001-build-gate/critic.md:17] [reviews/P-001-build-gate/critic.md:386].
 For built work and research, smaller gains usually read "not shown" [reviews/P-001-build-gate/critic.md:272].
 Secrecy from the sessions writing your cards likely rests on instruction; you decide after the first check [reviews/S-001/plan.md:897] [reviews/S-001/plan.md:963].
-To accept: four relays a kind, judging a week behind, the secret word never reused [reviews/S-001/plan.md:913] [reviews/S-001/plan.md:916] [reviews/S-001/plan.md:921].
+To accept: four relays a kind, judging a week or more behind, the secret word never reused [reviews/S-001/plan.md:913] [reviews/S-001/plan.md:916] [reviews/S-001/plan.md:921].
 One reading list's comment is thin, a Reviewer's minor note [reviews/44/reviewer.md:17].
 
 ## 6. Cost and limits
