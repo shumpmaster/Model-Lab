@@ -42,3 +42,25 @@ Asked again, the owner chose: "A: new private repo (Recommended)".
 - The plan is rewritten so that the sheet writer and the judges run in their own sessions, started with that repository and never with the work's; the first judging confirms the set-up.
 - How the plan goes on is the next question (questions/P-001-plan-stop-2.md, rewritten with only the routes that fit this answer).
 ```
+
+## Update: the owner answered the second plan-stop question (file once PR #41 merges)
+Answer record for decisions/questions/P-001-plan-stop-2.md, in the same pull request as the store answer, which also deletes questions/P-001-plan-stop-2.md:
+```
+Ruling: A — re-specify how the fair test is run: the sheet writer and the judges in their own sessions, the measures, size and options kept, and the plan reviewed again from round one
+Question: questions/P-001-plan-stop-2.md
+
+Asked: 2026-11-04, in the Chief of Staff's session session_01QBwHGMBo8kZsMCS2EvKNwd, by the session's question tool, from questions/P-001-plan-stop-2.md (filed in PR #41; Critic: reviews/P-001-plan-stop-2/critic.md, PASS at round 4). A choice under the plan stop rule after the focused confirmation review failed: the owner's own choice, never a default.
+
+## The owner's words, verbatim
+The owner chose: "A: rewrite, full review (Recommended)".
+
+## How it is carried out
+- The Definer writes a new draft of S-001 and E-003 that runs the sheet writer and each judging in their own sessions, started with the sheets' private repository and never with the work's, keeping the measures, size and options; it settles how each sheet reaches the repository and who hands each judge its sheet.
+- The new draft goes to the Critic's plan review from round one, with the tools' files and the environment record in its brief.
+```
+
+## Next, in order (replaces the list above)
+1. Once PR #41 merges: one pull request filing both answer records (store, plan-stop-2) and deleting both question files.
+2. The owner creates the private repository for the sheets and checks it is not added to every new session.
+3. The Definer's new draft (brief: the answer records, round 5's findings, triage/P-001-S-001-round-5.md, the intake record, the tools' files); then the plan review from round one, with the tools' files in the Critic's brief.
+4. Then the join-up review again, the Design standard milestones' records, and the Build gate case from the draft at f2f5a45.
