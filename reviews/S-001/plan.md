@@ -1,6 +1,6 @@
-Verdict: PASS
+Verdict: FAIL
 
-The Critic's plan review of specs/S-001.md and experiments/E-003.md, on a different model from the writer (brief: docs/briefs/28-critic.md), verbatim (FAIL at rounds 1 and 2; PASS at round 3). Recorded by the orchestrator. Session session_01QBwHGLd77YbwCSMSPU26vW, 2026-11-04.
+The Critic's plan review of specs/S-001.md and experiments/E-003.md, on a different model from the writer (brief: docs/briefs/28-critic.md), verbatim (FAIL at rounds 1 and 2; PASS at round 3). Round 4 is the join-up review closing Design (brief: docs/briefs/33-critic.md, session session_01QBwHGMBo8kZsMCS2EvKNwd, 2026-11-04, on claude-sonnet-5-5): FAIL, four blocking findings; under the plan stop rule this goes to the owner before any further round. Recorded by the orchestrator. Session session_01QBwHGLd77YbwCSMSPU26vW, 2026-11-04.
 
 ## Round 1
 Verdict: FAIL
@@ -287,3 +287,127 @@ New material, all non-blocking
 4. **The Orchestrator confirms the pack in the gate case.** That is a good control. Make sure the Chief of Staff's gate document includes it, and that the Critic's gate check can verify it. This is a note for the gate stage, not for the spec.
 
 Everything else that I checked in rounds 1 and 2 stands as resolved. The plan can be frozen once these non-blocking points are handled or accepted. None of them changes a threshold, a size or an option.
+
+## Round 4 — the join-up review closing Design
+Verdict: FAIL
+
+## Join-up review — Design, 2026-11-04
+
+*Required before Design can be marked done, and again before Launch (OPERATING_MODEL §4 "Phase gates", S-024). A step inside the phase, not a phase of its own. Reviewed: P-001 at commit 5bb3727. The plan review of specs/S-001.md passed at round 3 and is not re-run here.*
+
+**Screens checked:** none. P-001 has no screens or views. Its design is a set of parts, checked side by side in place of screens:
+- specs/S-001.md (criteria, J1 to J8, Needed outside, Areas touched)
+- experiments/E-003.md
+- experiments/E-003/check-author-extract.md
+- C1, C2 and C3
+- `[roles.S-001-holdout]` and `[roles.check-author]` in governance/PACKS.toml
+- governance/HOLDOUTS.md
+- .claude/agents/critic.md, reviewer.md and source-checker.md
+- docs/playbooks/
+- docs/PROJECT.md, M2 to M4 and section 6
+- governance/checks/session_runner.py and governance/RUNNER.toml
+
+| Check | Result (pass, or what differs and where) | Fix |
+|---|---|---|
+| One meaning per term, threshold and id | **Mostly pass.** These agree across the parts: pair, run, kind, the 1-in-40 and 6-card/2-disagreement thresholds, 8 to 12 cards, 7 days, 16 weeks, 10% reserve, and every run, token and option total I recomputed. The C1 to C3 word counts (35, 11, 64) also hold. These differ: (a) the deciding pass is not defined the same way for built work and research. (b) The model "the same model" refers to differs between plans/built work and research (finding 8). (c) "Held-back" (spec, E-003, PROJECT) and "holdout" (pack name, HOLDOUTS.md) are used for one thing. HOLDOUTS.md calls its sets "readable only by CI", but J4 puts the text in every judge's brief. (d) E-003 "Holdout use" says "used once means once per kind", against _REGISTRATION.md:12 "At most once". (e) C2 says its reachable share is "at most 3 of the 16" (C2 line 15). The spec says "3 to 5 of 16 … 11 to 19 points" (S-001:30). (f) The extract judges built work against "the spec the stage builds" (extract line 28). E-003:51 says the task statement. (g) The held-back check is a PACKS "holdout" in name only. | Findings 6, 7, 8, 9 |
+| One route (work and records pass by one path; both ends of each join say the same) | **Fails at four places.** (1) The blind dispatch cannot be routed to the new pack (finding 1). (2) The held-back text has no route from its author to the harness (finding 2). (3) J7's reader, the Reviewer, cannot open the records J7 hands it (finding 3). (4) J8's withheld-path list and the pack's list differ (finding 4). J1, J2, J3, J5 and J6 have matching ends, apart from findings 7, 10 and 11. | Findings 1 to 4 |
+| Consistent names, paths and ids (every path or id named exists in the part it points to) | **Mostly pass.** Every cited record exists: the C1 to C3 files, E-001/E-002 records, Q-008, the decisions and the environment report. The pack paths exist. These do not: (a) the extract names "the research playbook" and "the playbook for the spec's work type", and docs/playbooks/ holds only software.md. (b) The extract names the Service Desk's role files, which no Model-Lab pack can hold. (c) S-001:108 and J8 say the pack holds governance/HOLDOUTS.md, and the pack and runner leave it out. (d) E-003 Step 4 says "E-002's judge-brief template" with a "Judge it against" slot, and the template is in E-002 line 21 onward. | Findings 5, 9 |
+| No two parts doing the same job, and no job without a part | **Pass on duplicates.** The two Check author dispatches are deliberately separate, and the judge and the locked-check script are deliberately both decisive for built work. **Unowned jobs:** the card draw by seed, re-scoring after the owner's answers, and the Newcombe range. E-003 names no part for them (the Builder runs the harness, the Chief of Staff prepares cards, the Reviewer analyses). Which part writes the result record is also unnamed. Neither is blocking: all can be assigned at Build, but they are carried as a risk. | Finding 10 |
+| Every datum the design needs is available from the records, or listed as a needed change | **Fails at two places.** (a) The store location and fingerprint method for the held-back checks are in no record. (b) The runner change and the Reviewer-pack change (findings 1 and 3) are not in "Needed outside this spec's lane" (S-001:205-208). The start-commit field for Model-Lab's briefs is named in open question 5 but not listed there. | Findings 1, 2, 3, 11 |
+
+**Needed changes to the records:**
+- A runner and role change so a dispatch can select `S-001-holdout` (finding 1).
+- A named store and a fingerprint rule for the held-back checks (finding 2).
+- Reviewer pack entries for experiments/E-003.md, reviews/E-003/** and the owner's card answers (finding 3).
+- A start-commit field in Model-Lab's docs/briefs/ (S-001:15, :47; open question 5).
+
+## Sign-off
+The owner's ruling at the gate: <the gate's decision record: decisions/<item>/criteria-<n>.md at the Build gate, for Design's review; decisions/<item>/launch-<n>.md at the Launch gate, for Build's>
+
+## Findings
+
+1. **BLOCKING. The per-task pack `[roles.S-001-holdout]` cannot be selected by any dispatch.**
+   - governance/PACKS.toml:103-120 adds a role table named for a task. session_runner.py:464-472 builds a pack from `PACK_OF.get(role, role)`, where `role` is the plan entry's `role`.
+   - SESSION_ROLES (session_runner.py:135) has no such role, so a dispatch naming it is refused as "unknown role" (:782-783).
+   - `AGENT_OF` and `PACK_OF` (:137-138) map only `definer-freeze` and `critic-gate`/`critic-triage`. RUNNER.toml:36 has no `[tools]` row for it. The SURFACES.md roster (:19-30) has no row for it.
+   - ENTRY_KEYS (:132) has no task field, so "task `S-001-holdout`" (S-001:108) cannot be written. A dispatch as `check-author` gets the standing `[roles.check-author]`, whose `must_read` is `specs/{spec}.md` (PACKS.toml:45). The blind author would then read S-001.
+   - J8's test (S-001:147) reads only the TOML text, so it would pass while the route is broken. "Needed outside" (S-001:206) allows "a separate role table" but lists no runner, RUNNER.toml or roster change. The pack comment (PACKS.toml:105-106) says as much.
+   - Fix: list the runner change as a needed change (an `AGENT_OF` and `PACK_OF` mapping and the `[tools]` row), or key the pack to an entry field. Make J8 also prove that a dispatch resolves to this pack.
+
+2. **BLOCKING. No route or place for the held-back text, and no fingerprint rule.**
+   - The extract (lines 36-38) tells the author to "store it outside every repository, as governance/HOLDOUTS.md says".
+   - HOLDOUTS.md (lines 1-10) names no location and no fingerprint method. The runner keeps that file out of every pack (session_runner.py:357-358), so the author cannot read it. The pack comment (PACKS.toml:110) says "the extract carries its storage rule", but the extract gives only the sentence above.
+   - The author's session is confined to its pack folder (BRIEFS.toml:9). Its write lane is tests/acceptance/** and checks/** (SURFACES.md:60-63). Its agent file says commit to build/check-author/<task> (check-author.md:20).
+   - J4 (S-001:143) has the harness read the text "from outside the repositories" and check it against HOLDOUTS.md. The author side and the harness side agree on no path and no algorithm. S-001:207 has the Orchestrator record the fingerprint "from the Check author's return", so the author computes it.
+   - Fix: name the store, who moves the text there, and the fingerprint (for example SHA-256 of the file's bytes, computed by the Orchestrator). Add it to the extract and to J4. Also note that a HOLDOUTS.md change needs a ledger entry with `holdouts: changed` (v3_checks.py:1635-1647).
+
+3. **BLOCKING. J7 hands the Reviewer records its pack does not hold.**
+   - E-003:15 and J7 (S-001:146) have the Reviewer analyse each kind against the thresholds in E-003. The result records go to reviews/E-003/** (Areas touched, S-001:150), and the owner's card answers go to decisions/questions/ (J6).
+   - The Reviewer's pack (PACKS.toml:53-58) holds specs, tests/acceptance, checks, src, tests, docs/handover and `reviews/{spec}/checks.txt` only. It has no experiments/E-003.md, no reviews/E-003/** and no decisions/questions/**.
+   - The thresholds are only partly in the spec (AC7). The Exclusions, Newcombe, false-pass guard and card rules live in E-003.
+   - Fix: add to "Needed outside" a Reviewer pack entry for those three, or name where the harness puts the results (docs/handover or tests) and copy the thresholds into the spec.
+
+4. **BLOCKING. J8's withheld-path list contradicts the pack, and as written would fail the extract.**
+   - S-001:108, AC4 (:130) and J8 (:147) withhold `experiments/E-003/C*.md`. The pack withholds `C1-*.md`, `C2-*.md` and `C3-*.md` (PACKS.toml:118) because paths are casefolded (session_runner.py:225-227, :681), so `c*.md` also matches `check-author-extract.md`. The pack comment (PACKS.toml:108-109) says so.
+   - J8's test "resolves its patterns and fails if any withheld path matches". Written from the spec's list, it fails on the extract, which is in the pack's `must_read`. It can never pass, and the blind dispatch is gated on it.
+   - Fix: rewrite the spec, AC4, E-003 line 11 and J8 with `C1-*.md`, `C2-*.md`, `C3-*.md`, or have J8 read the pack's own `must_not_see`.
+
+5. **Not blocking. The extract promises sources the pack cannot give.**
+   - Lines 12-14 and 16-17 name "the research playbook", "the playbook for the spec's work type", and the Service Desk's role files "where two projects' standards differ". docs/playbooks/ has only software.md.
+   - The pack is a Model-Lab source tree, so the Service Desk's files cannot be in it.
+   - Today every eligible piece comes from the Service Desk (S-001:47), so Model-Lab's standard would judge the Service Desk's work.
+   - Carry as a risk for the Build gate. Fix: say the check is written from Model-Lab's files only, or add the Service Desk's files to the pack as a needed change.
+
+6. **Not blocking. Spec and pack disagree on what the pack holds, and the blind author's own role file and brief point at the spec.**
+   - S-001:108 lists governance/HOLDOUTS.md in the pack. The runner removes it from all packs (session_runner.py:357-358), and the pack leaves it out.
+   - The check-author agent file (check-author.md:11, :23-24) and the brief (BRIEFS.toml:9, :17) tell the author to read the frozen spec ("spec S-001"). Both come with every pack (session_runner.py:822-823).
+   - Fix: add a BRIEFS route and a note in the extract that these lines do not apply.
+
+7. **Not blocking. J3 says the judge never sees commit messages, yet a "fresh copy of its final commit" holds them.**
+   - J3 (S-001:142) says "never the hand-back or commit messages". E-002:37 and E-001 step 2.1 copies hold the commit and its ancestors, so the arm's commit messages are in the history.
+   - The judge template (E-002:30-32) bars other repositories but not `git log`.
+   - Fix: squash the deliverable into one neutral commit, or add the bar to the judge brief.
+
+8. **Not blocking. Plans and built work use a different model than the recorded one.**
+   - E-003:44 runs both arms on "the model the operating model uses for that role when the kind's comparison opens". AC2 and S-001:59 say "the same served model", and J2 (:141) records the dispatch model. For research, E-003:45 uses the check's recorded model.
+   - The recorded model is a required field for eligibility but is not used for plans or built work.
+   - Fix: say which one governs.
+   - A related gap: AC5 requires a judge on a model other than the doers'. If a recorded source-check model were Fable 5.1, no awkward case covers it.
+
+9. **Not blocking. Judge brief text differs from E-002's template without saying so.**
+   - E-003:52 and Exclusions 2 let the research judge use the web. The template (E-002:30-32) says "do not use the web".
+   - E-003:53 adds the foreground-only lines only. The template's "Judge it against" slot (E-002:28) is a spec or request, but plans have nothing in J3 for it.
+   - Fix: list every change to the template.
+
+10. **Not blocking. Jobs with no named part, and the milestone header.**
+    - No part is named for the card draw, the re-scoring, the Newcombe range, or writing the result record (E-003 steps 3 to 5; J5 to J7; Areas touched has reviews/E-003/** in the Orchestrator's lane). The Builder cannot write there (SURFACES.md:65-70).
+    - Fix: name the Builder's harness for the first three and the Orchestrator's recording route for the record.
+    - E-003:5 names milestones M2 and M4. S-001:7 names M2 only, yet AC4 to AC9 deliver M4's test. PROJECT.md:66 gives M4 to the Builder.
+    - PROJECT.md:57 and :108 still read "on the same past tasks" and "about 300 runs" (:117), against the spec's 732. Open questions 1 and 2 cover these for the owner, so they stand as carried risks.
+    - M3 "lands with M5" (PROJECT.md:37), after M4, yet the test needs recording from the start. S-001:48 and open question 5 give the fallback (the Chief of Staff records).
+
+11. **Not blocking. Result and sample data have a small mismatch.**
+    - Model-Lab's briefs hold no start commit (S-001:15, :47), and "Needed outside" (S-001:208) lists recording only "if the owner orders it".
+    - The "Holdout use" line of E-003 (:107) names no held-back set, but _REGISTRATION.md:12 asks for one. The ids will exist only after dispatch.
+    - Fix: list the field and set ids as needed changes at the Build gate.
+
+## The six-part contract
+
+1. **What I changed:** Nothing. I am read-only and wrote no file.
+2. **Why:** To check the Design parts side by side, as the brief asked, and give the Design part of docs/design/JOIN_UP_REVIEW.md.
+3. **What I verified:**
+   - I read all the files the brief lists, plus the cited records by existence.
+   - I recomputed the run and token totals for options A to D.
+   - I counted the words in C1, C2 and C3.
+   - I traced the runner's role-to-pack lookup (session_runner.py:135-142, :464-472, :807-812), the pack contents and the tool rows in RUNNER.toml.
+   - I did not run any command.
+4. **What is undone:** I did not read the Service Desk's files, the operating model repository, or the full list of records the spec cites. I did not run the J8 test or the harness, since neither exists yet.
+5. **Needed outside my lane:**
+   - The Chief of Staff and Orchestrator: the runner and roster change for `S-001-holdout` (finding 1), the store and fingerprint rule (finding 2), and the Reviewer pack (finding 3).
+   - The Definer: findings 4 to 11.
+6. **Open questions:**
+   - Should dispatch (a) get its own role name in the runner, or a task field in the entry?
+   - Where is the held-back store, and who moves the text there?
+   - Does the owner want findings 5 to 11 fixed before the Build gate, or carried as risks?
+
+Files: /home/user/Model-Lab/specs/S-001.md, /home/user/Model-Lab/experiments/E-003.md, /home/user/Model-Lab/experiments/E-003/check-author-extract.md, /home/user/Model-Lab/governance/PACKS.toml, /home/user/Model-Lab/governance/HOLDOUTS.md, /home/user/Model-Lab/governance/checks/session_runner.py, /home/user/Model-Lab/governance/RUNNER.toml, /home/user/Model-Lab/governance/BRIEFS.toml, /home/user/Model-Lab/governance/SURFACES.md, /home/user/Model-Lab/docs/design/JOIN_UP_REVIEW.md.
