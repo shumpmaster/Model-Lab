@@ -82,3 +82,85 @@ I read the question cold, then checked it against the cited records. The facts a
 - Undone: I did not re-derive the sizing or read sizing.py or output.txt; I relied on the plan reviews' recomputation. I did not read the case, the proposal, or the Chief of Staff's notes. I did not read the full LL-50 context line, which was elided in the grep output. I did not check whether brief 54 or any ruling shows you telling an earlier session to apply the limit to cards.
 - Needed outside my lane: the Chief of Staff must fix findings 1 to 3, and should fix 4 to 8. A fresh Critic session on a different model then re-checks. I flag no self-implication for this session (D-050); it is a first check of this card.
 - Open questions: Did you ever ask a session to apply the three-round limit to cards? If so, where is it recorded? Does the owner want a plain fourth round offered as option D? Does the gate card's "32 to 64 side by side" line stay under A once term 2's recommendation is looked at again?
+
+## Round 2 (commit 1d8ddc4; brief 61, a fresh session)
+
+Verdict: FAIL
+
+Round 2 check of questions/P-001-build-gate-stop.md at 1d8ddc4. I read it cold, then against the records in /home/user/ml-q44 and the operating model. Round 1's three blocking findings are resolved, and so are findings 4, 5 and 8. Findings 6 and 7 are only partly resolved (see "Round 1, checked"). One new blocking fault remains, in the recommendation. It is a short fix.
+
+**Findings**
+
+1. BLOCKING. RECOMMENDATION credits A to "the trace's reading of the evidence", and that is not what the trace says (LL-05, LL-08).
+   - The trace's section "Which option the evidence supports" (triage/P-001-build-gate-round-3.md, lines 156-167) reads: "A focused confirmation review, after the minimal re-scope above, preceded by the plan erratum". The re-scope it points to is "cut the cards to the decision" (lines 130-136).
+   - The same section warns "this is not 'just fix two lines'", and says re-scope is the better call if the confirmation adds new errors.
+   - The card never says the trace paired A with cutting the cards down. An owner reading "the trace's reading" would take it that the trace backed A as the card describes it. A does not cut the cards. It states "the cards stay as long as they are, so the root cause stays".
+   - Whether "after the minimal re-scope" means B plus A or only a tight list of fixes is itself unclear in the trace. The card should say that the trace named a confirmation review after a re-scope, and say which reading it took. Otherwise drop the attribution and make the reasoning the Chief of Staff's own.
+   - Fix: restate the source of the recommendation, and keep the existing "what would change it".
+
+2. Not blocking. The opening says flatly "No rule limits how many times a card may be checked".
+   - The trace says only that it found none "in the files I was assigned", and lists "Is a card-round count anywhere in the rules?" as open.
+   - My search of the operating model found none either, and §4 and AGENTS.md "Plan stop rule" name plan and build rounds only. So the claim is probably true, but it is not a record the card cites.
+   - Prefer "we found no rule…", citing §4 and AGENTS.md.
+
+3. Not blocking. The card has four options against the form's 2-3 (OPERATING_MODEL §2).
+   - Three of the four are the stop rule's fixed options, so this is explicable. The fourth is the one the owner is entitled to.
+   - One clause saying why would stop a cold reader seeing a form breach.
+
+4. Not blocking. B's rule for which terms get argued does not match the trace's.
+   - The card says B argues terms that touch "earlier rulings, the value target or anything that cannot be undone".
+   - The trace's list is Q1, Q2, Q4, Q5, Q8 and Q9. Q5 includes a rule-change approval (term 6), which the card's criterion would put in the "listed" group.
+   - The fix for round 1 finding 6 is in: "you still answer every term, none is decided for you". But the card cites the trace's Re-scope as the source of its own different rule.
+   - Say B's criterion is the Chief of Staff's.
+
+5. Not blocking. The opening is still one dense paragraph (round 1 finding 7).
+   - It leads with the failure and has no ids or paths, which passes the test.
+   - "The 100-piece size", "pieces" and "your part" in option A are not explained to a cold reader.
+   - A says plans stay "about 4 in 5" without the judge-error figure (9 in 20), which the trace gave for the same line.
+
+6. Not blocking. Small points.
+   - Option A says "any claim outside them fails it". The trace says "any added claim". As written, existing untouched claims could be read as failing the check.
+   - "An order that goes further beyond your ruling" is two orders in the plan (orders 3 and 4, S-001:340-341). Say "orders".
+   - The card does not say that the owner's choice is recorded as a ledger ruling before the next round (AGENTS.md:38). That is a procedure point, not an effect on the options.
+
+**Round 1, checked**
+
+- Finding 1 (rule binding, no plain fourth round) is resolved.
+  - The opening now says no rule limits card checks and that three rounds were treated as the limit.
+  - "As you asked" is now supported. The intake records the owner's words: "round 3, the last allowed, so apply the stop rule".
+  - D is the plain fourth round, with all four parts.
+- Finding 2 (A's reason did not match A) is resolved. A's cost now says the rewritten order term is new text, is the part most likely to fail, and may change that term's recommendation.
+- Finding 3 (B and C rule effects) is resolved. Both say the round count is an assumption, not a rule.
+- Finding 4 (A's gain overstated) is resolved. A says the other non-blocking points stay open.
+- Finding 5 (the gate card's headline weeks) is resolved. A labels the 32-to-64 figure.
+- Finding 6 is only partly resolved (see finding 4 above).
+- Finding 7 (the dense opening, the unexplained terms) is only partly resolved (see finding 5 above).
+- Finding 8 is resolved. Context is 5 bullets, and the default's consequence is stated ("the Build gate does not reach you and nothing else moves").
+- Finding 8 point: WHO HAS CHECKED IT cites round 1's failure.
+
+**Every changed sentence, checked against its record**
+
+- Two of the opening's claims are true of their records:
+  - One of the last check's two faults was a misreading and the other is a fix inside the cards (triage lines 43-57 and 110-113).
+  - The plan fault, and the two slips (line 17's worst case, the Orchestrator's weekly-landing ask), are corrected and passed rounds 4 and 5 (reviews/S-001/plan.md, lines 967-1034).
+- Option A's "four checks that put a question to you" are K1, K3, K4 and K5 at its first check (S-001:177, :180, :181, :187). "Wake messages simply fall to you" matches K7 (S-001:189).
+- The "32 to 64" figure belongs to orders 3 and 4, and orders 1 and 2 are 60 to 121 (S-001:338-341; plan.md lines 977-980). That is why the card is right to say the recommended order term must be looked at again.
+- The ledger holds only L-0001 to L-0005, and none is a delegation. OPERATING_MODEL §2 lets a grant cover choosing a confirmation review. §4 forbids accepting a failed check. The same-way failure route matches AGENTS.md:38 and decisions/questions/P-001-plan-stop.md.
+- Leaving out "drop" is justified by triage lines 138-142, and the kill stays on the gate card.
+- Context bullets 1 to 5 are true of their sources.
+- Risk class R0 and reversible are consistent. DEFAULT and TIMEOUT "none", with the reason, match the earlier plan-stop ruling. They depart from the default in Model-Lab §5 for reversible questions, but the reason is given.
+- The options are put fairly apart from finding 1: A, B, C and D each have what happens, gain, cost and rules out. Their effects trace to the triage and the rule, and the assumed round counts are flagged as assumptions.
+
+**Six-part contract**
+- Changed: nothing. I hold no write tool.
+- Why: round 2 cold check of the Build-gate stop-rule question, against round 1's findings and the cited records.
+- Verified: I read the question, the intake and round 1. I also read the triage in full, Critic round 3, the gate card and terms card, S-001 lines 170-191 and 333-373, and reviews/S-001/plan.md lines 967-1034. I read the ledger, OPERATING_MODEL §2 and §4, AGENTS.md "Plan stop rule", the plan-stop ruling, the question template, Model-Lab §5 and "Plain English first", and LL-05. I also searched the operating model for any card-round limit and found none. I read only the fixed copies.
+- Undone: I did not re-derive the sizing or open sizing.py or output.txt, and I relied on the plan reviews' recomputation. I did not read LL-08, LL-46, LL-50 or LL-52 in full, only their headers and corrections. I did not read the case, the proposal or any -notes.md. I did not read the earlier plan-stop question's own text, only its ruling record.
+- Needed outside my lane:
+  - The Chief of Staff fixes finding 1 and should fix findings 2 to 6.
+  - A fresh Critic session on a different model then re-checks, with no self-implication flag from this session (D-050).
+- Open questions:
+  - Did the trace mean its "after the minimal re-scope above" as a re-scope plus a confirmation review, or only as a tight list of fixes?
+  - Should the card say that the recommended order term (2A) loses its stated gain, since orders 1 and 2 are both 60 to 121 weeks?
+
+Files: /home/user/ml-qstop2/questions/P-001-build-gate-stop.md, /home/user/ml-q44/triage/P-001-build-gate-round-3.md, /home/user/ml-q44/reviews/S-001/plan.md, /home/user/ml-q44/specs/S-001.md
