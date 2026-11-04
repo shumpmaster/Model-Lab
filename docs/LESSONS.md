@@ -440,3 +440,10 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** the Critic's usual model was carried over from briefs where the writer was the Chief of Staff (claude-opus-5-5); the model-diversity pair is the checker and the work's own writer, which changes with the work.
 - **Correction proposed:** every checker brief names the checked work's writer and model, and the pair is compared before dispatch (as LL-03 asks); for the model, the runner's diversity check covers conversation-started helpers.
 - **Status:** fixed here (corrected before dispatch); model change open with LL-03.
+
+### LL-60 Three reading-only Critic rounds passed locked tests that would fail a correct build
+- **What happened:** the Critic passed S-001's locked checks at round 3. The required Reviewer on pull request #51, which can run code, then found two tests that a correct build would fail: an AC6 fixture whose expected class contradicts E-003 Step 5, and J4 string matches that a byte-faithful fill of E-002's template cannot meet, since the template wraps the phrase across a line (reviews/51/reviewer.md, findings 1 and 2). It reproduced both with reference scripts. The checks were not yet locked, so they went back to the Check author.
+- **Caught by:** the Reviewer.
+- **Cause:** the Critic holds no shell, so it judged each test's expectation by reading; round 2 re-read only the changed files, and no round ran an expectation against the frozen text.
+- **Correction proposed:** a check of locked tests runs each expectation against a small reference built from the frozen text before it passes (the Reviewer's method here); for the model, Build-1's record is the Critic's pass, so either the Critic's check of tests gets a shell or the Reviewer's run is part of Build-1.
+- **Status:** open; the checks are being corrected before they lock.
