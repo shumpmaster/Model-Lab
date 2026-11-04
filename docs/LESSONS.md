@@ -417,3 +417,26 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** the check was run on the working tree before the edit was committed, and not again on the commit given to the Critic.
 - **Correction proposed:** run the form check on the exact commit a helper's fixed copy is made from, as for a push.
 - **Status:** fixed here (practice changed); closed for the model unless it recurs.
+
+## 2026-11-04 — Build gate of P-001, session_01QBwHGJ9ZMyT9fK17HjfmCc
+
+### LL-57 Read-only Critics were briefed to run git commands they cannot run
+- **What happened:** brief 66 told the Critic to read the reworded lines with `git show`; the Critic has no shell, so it judged the lines from the current text only and said so in its return. The first draft of brief 69 again pointed it at `git diff` and `git show`; the Chief of Staff caught that before dispatch and gave it fixed copies at each commit to compare instead (docs/briefs/69-critic.md).
+- **Caught by:** the Critic (reviews/P-001-build-terms/critic.md, round 1, opening paragraph), then the Chief of Staff.
+- **Cause:** the brief was written from the Chief of Staff's own tools, not the helper's; the Critic's agent file grants Read, Grep and Glob only.
+- **Correction proposed:** before a brief names a command, check the helper's tool grant; for a read-only checker, give a fixed copy for each version it must compare. For the model: the brief template names the helper's tools.
+- **Status:** fixed here (practice changed); model change open.
+
+### LL-58 Four line pointers in the fair test's plan pointed at the wrong lines through five plan rounds
+- **What happened:** S-001's "Facts relied on" and one other line cited docs/PROJECT.md:96, :99 (twice) and :147 for V1, the starting figures and the outside-provider rule; those lines held other text. The plan passed five review rounds with them. The Critic's check of the settled text, run before the freeze landed, found them; the Definer corrected them and froze again (reviews/S-001/_critic-settled.md, round 1, finding 1).
+- **Caught by:** the Critic.
+- **Cause:** line-number citations drift as the cited file changes, and no check reads them; the plan reviews checked what the facts say, not where the pointers land.
+- **Correction proposed:** a check that each `file:line` citation in a spec exists and holds the cited words, or citations by section heading; for the model, with LL-54, the plan-review brief asks for every pointer behind a decision figure to be opened.
+- **Status:** fixed here (corrected before the freeze); model change open.
+
+### LL-59 A checker's brief first named the same model as the work it checks
+- **What happened:** brief 73 first set the Critic on claude-sonnet-5-5 to check the Check author's locked checks, which were written on claude-sonnet-5-5. Found and corrected to claude-opus-5-5 before dispatch.
+- **Caught by:** the Chief of Staff, rereading the brief before dispatch.
+- **Cause:** the Critic's usual model was carried over from briefs where the writer was the Chief of Staff (claude-opus-5-5); the model-diversity pair is the checker and the work's own writer, which changes with the work.
+- **Correction proposed:** every checker brief names the checked work's writer and model, and the pair is compared before dispatch (as LL-03 asks); for the model, the runner's diversity check covers conversation-started helpers.
+- **Status:** fixed here (corrected before dispatch); model change open with LL-03.
