@@ -256,3 +256,103 @@ Case and cards agree on letters, sizes, the 24 to 27 records, 183 to 366 and 243
   - I did not read the Chief of Staff's notes or the full proposal text.
 - Needed outside my lane: the Chief of Staff must fix findings 1 and 2, which are blocking. It should fix 3 to 9 in the same pass. The Orchestrator should treat the rounds as exhausted (round 3 was the last allowed), so the cards go to the owner only after the fix, or the owner is told they failed their last check (D-044).
 - Open questions: should finding 4's figure go back to the plan, since the plan itself ties 32 to 64 weeks to 2A? Who owns the Orchestrator-session K7 ask in finding 7?
+
+## The cut-down cards, round 1 (commit ddc3429; brief 63, a fresh session; new cards under the owner's ruling, decisions/questions/P-001-build-gate-stop.md)
+
+Verdict: FAIL
+
+Both cards follow the ruling's shape: they are short, they point to the plan's tables, and the terms card argues seven terms and lists four. Each card has one blocking problem. These are new cards, round 1. Neither card is yet fit for the owner, because the gate card hides the cost of the recommended spend and the terms card leaves out parts of the plan's open questions.
+
+Findings
+
+1. Gate card, BLOCKING. Option A states no cost. It says "Cost: the runs you set", and the card gives no run, token or week figure for the size it recommends.
+   - The ruling allows pointing to the plan's tables instead of copying them. It does not allow leaving the owner with no headline number.
+   - OPERATING_MODEL §2 requires gain and cost per option.
+   - The card says "In plain words" holds "the chance, the weeks, the runs, what you would do". It omits two things that section holds and that earlier rounds found decisive: "Smaller gains" and "The budget excludes the wakes".
+   - "Smaller gains": two of the three changes can reach at most about 11 to 19 points, so "not shown" is the usual result even if they help (spec "What the test can and cannot show").
+   - "The budget excludes the wakes": the budget the owner sets counts runs only. The plan puts about 540 to 1,089 wakes and 60 to 121 landing reviews outside it, not estimated (spec "The budget excludes the wakes").
+   - The recommendation rests on "about 4 in 5 for every kind under the library's assumption". It is qualified, so it is not false. But built work, the first kind, is also the one whose change is expected to read "not shown", and that is not said anywhere. This is LL-05 leaning, which round 1 of the old cards already found.
+   - Fix: add one line for A giving 732 runs, about 132 million tokens, and 60 to 121 weeks one after another (32 to 64 if the kinds collect together). Say the wakes are outside it, and that "not shown" is likely for built work and research.
+
+2. Terms card, BLOCKING. The ruling's test is that nothing is left out, and some parts of the plan's open questions are missing.
+   - Question 5 (recording at dispatch) has two gaps.
+     - It asks which projects take part. Term 9 does not carry this; term 7 only covers the public/private cut.
+     - It says Model-Lab's brief records lack the start-commit field, so the field must be added (spec open question 5; "Needed outside", last bullet). Term 9 omits this.
+   - Question 3 asks about research "given what the test can show for C3 (and C2)". The plan says the owner "may prefer to test C1 and C2 only". Term 3 carries only research and C3, and drops C2 and that alternative.
+   - Fix: add these to terms 3, 7 and 9.
+
+3. Terms card, term 4, non-blocking but must be corrected. The rules of the operating model say a rule change is approved by the owner's own GitHub action, or a recorded proxy action (OPERATING_MODEL §2 "Approvals").
+   - "Approve them by your verdict and merge on the pull request" blurs this. Say plainly that the approval is the owner's own action on that pull request.
+   - The plan says the entries are "merged before the Build gate". The card does not say whether that has happened.
+   - Neither card names the pull request (#44). That branch is the one the cards sit on, so a reader cannot tell whether merging it also lands the gate documents. I could not check this, so I raise it as an open question.
+   - "Passed with one minor note" is true of reviews/44/reviewer.md finding 5. That review was of commit 09dfa20, and the reviewer did not re-run the suite on the later head. It also recorded one red check in the local suite, the expected LL-29 case. Say this.
+
+4. Gate card, non-blocking. Option A's gain, "the test starts", overstates.
+   - Plans and built work cannot enter until recording at dispatch exists (spec "Recording is a precondition"). That is term 9.
+   - The recommendation reason "built work, which comes first … the fastest kind" holds only once term 9 is ordered. Say so (LL-46, LL-50).
+   - Also point to the plan's first-use checks, such as K1, as the condition on the secret check.
+
+5. Gate card, non-blocking. Its letters clash with the plan's.
+   - The card's options A to D include the plan's sizes A to D.
+   - "C" could mean Recycle or size C, and an answer to a gate must be unambiguous. Name the sizes "size A", "size B" and so on everywhere, including the answer line.
+   - The opening is also well over the "≤ 5 lines" background of §2.
+   - The card does not link the case or the Critic's view, which §2 requires at a phase gate.
+
+6. Gate card, non-blocking.
+   - Option D (kill) says "the lessons log still goes to the operating model". PROJECT.md records that the brief-and-model record goes in on a V1 miss (line 112), and M6 corrects the lessons log at the end of a cycle. No record says what happens on a kill at this gate. Cite one or drop the clause.
+   - Context bullet 2 says "by the owner's ruling" for both facts. Only the judge-consistency skip is the owner's (P-001-e002-not-tested). The failed replay is E-001's result (reviews/E-001/reviewer.md). Split them (LL-05).
+   - Option C (size C) is said to go against the ruling "no single kind first". The plan does not say this of its own option C; it is the Chief of Staff's reading. The owner's words were "I don't care to start… work it incrementally because everything should be touched". Say "reads as going against".
+   - The same applies to term 2B and 2C "goes beyond your ruling", where the plan does say it, so attribute it to the plan.
+   - The "likely limit" (K1) is worded "may be" on the card. The plan says "likely", with its reason: the Chief of Staff's session holds a tool that reads other sessions' transcripts.
+
+7. Terms card, non-blocking.
+   - Context bullet 2 says the owner "ruled the value target with the words 'the same past tasks'". The ruling is the owner's choice of option A, "+20 pts". The words are in the question as put and in PROJECT.md V1, not in the owner's own words (LL-05).
+   - Term 1 should say plainly that A rewrites text the owner approved.
+   - Term 7A's cost, "the operating model's own work is not tested", omits that the repository has had no commit since 24 October (spec); the loss today is small.
+   - Term 5B says "override your ceiling", but the ruling asks for an override "at the time" of spending. Say that the answer must be given at the time.
+   - Term 11 gives no figure for the owner's part, though the plan's ranges are large: for size A, up to 240 to 484 wake messages, or 243 to 487 new sessions. It also omits the 8 to 12 cards per kind that the owner answers. State the worst case in one line.
+   - Term 2A gives "60 to 121 weeks" without the pace it assumes, the Service Desk's pace, or the recording precondition.
+   - Term 2B's "up to three times as large" is a derivation, not in the record. Mark it as the writer's arithmetic.
+   - Terms 9 (a new standing duty for the Chief of Staff) and 8 arguably touch the rules and the earlier no-fixed-length ruling (P-001-time-and-limit). They are only listed. Confirm that is acceptable under the ruling.
+   - Terms 8 to 11 use K3, K5 and K7 in the options, which a non-expert cannot read.
+
+8. Both cards, non-blocking. "WHO HAS CHECKED IT" lists "its check of this card" before this check has a result. After a PASS, cite the round and the record, as P-001-gate-citation does.
+
+9. Both cards, non-blocking. The risk class R0 (questions/** is R0 in risk-paths.toml), reversibility "irreversible" with its reason given, default none and timeout none are right. AGENTS.md §5 says irreversible questions never default, and the template's computed reversibility is overridden with the reason stated. The milestone line Design-6 is accepted as before.
+
+Checked and true
+- Gate card, opening: it leads with the skipped checks. The claim "wrong 1 in 10 lowers it to about 1 in 2 or less" matches the plan.
+- Gate card, Context: the plan passed at round 3, with the join-up review having no blocking difference, and rounds 4 and 5 passed.
+- Gate card, recommendation: 60 pairs is the smallest size giving 0.80 under the middle assumption for every kind; 40 pairs gives 0.57.
+- Gate card, Context: the 100-run allowance covered only Discovery and Design, and the ruling "no single kind first; every kind, incrementally" is cited correctly.
+- Terms card, term 1: it is true that the plan gives the two texts word for word.
+- Terms card, term 2: 60 to 121 versus 32 to 64 weeks match.
+- Terms card, term 3: the 11 to 16 points, 200 runs and "not shown is likely" match.
+- Terms card, term 5: the judges are Fable 5.1 and share the work's provider (spec "What this cannot rule out"). Option B's cost is "not estimated" in the plan.
+- Terms card, term 6: both quotes match lines 1 and 10 of the plan-stop-2 record. Line 10 is the Chief of Staff's carry-out text. The counts of 9 and about 336 match. The card says the A reading "may not be what you meant". The two changes (one criterion and one join line) are AC5 and J5.
+- Terms card, term 7: the "beyond a record" reading matches P-001-model-lab-public.
+- Terms card, term 10: the plus-one false-pass rule matches E-003 "Kept".
+- Terms card, term 11: the K3 fallback (stop, or order a revision) is accurate.
+- Terms card, opening: seven terms plus four makes eleven, which maps onto the nine questions apart from the gaps in finding 2.
+- Neither opening has ids or paths. No option states what a system will do without a record, apart from findings 4 and 6.
+
+Six-part contract
+- Changed: nothing. I hold no write tool.
+- Why: to check the two redrafted Build-gate cards cold against the owner's ruling (B) and the records they cite.
+- Verified:
+  - I read both cards, the ruling, and S-001 (lines 1 to 237 and 330 to 377, plus a grep of the headings).
+  - I read the question template, the lessons LL-05, 08, 46, 50, 52 and 53, and the earlier three rounds in reviews/P-001-build-gate/critic.md.
+  - I read the rulings plan-stop-2, worst-work, model-lab-public, spend-ceiling, test-budget, e002-not-tested and value-target, reviews/44/reviewer.md, the join-up review and the round 4 and 5 headings in reviews/S-001/plan.md.
+  - I checked E-003 "Kept", PROJECT.md for the kill and miss lines, risk-paths.toml and AGENTS.md §5.
+  - I confirmed that docs/gates/P-001 holds the earlier cases.
+- Undone:
+  - I did not re-derive the sizing figures.
+  - I did not read S-001 lines 238 to 329 in full (the acceptance criteria and join sheets, facts relied on, and risks). I did read the risks and stop rule.
+  - I did not open the build-gate cases or the proposals.
+  - I did not check whether PR #44 is merged or what else it carries, and I did not check that PACKS.toml still equals what the Reviewer read.
+  - I did not open E-003 beyond "Kept", or read the time-and-limit ruling.
+- Needed outside my lane: the Chief of Staff fixes findings 1 and 2, and should fix 3 to 8 in the same pass. The redraft goes to a round 2 check. The Orchestrator records this verbatim in reviews/P-001-build-gate/critic.md as round 1 of the new cards.
+- Open questions:
+  - (1) Does merging the pull request that adds the reading lists also land the cards and the gate case?
+  - (2) Should the headline cost of the recommended size be allowed to stay as a pointer? I judge not.
+  - (3) The plan frames 2B and 2C as going beyond the ruling. Is that the owner's reading, or only the plan's?
