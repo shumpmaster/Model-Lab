@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Critic on S-001's locked checks (Build-1), against the frozen spec. Brief 73 (docs/briefs/73-critic.md) for round 1 and brief 75 for round 2; each a fresh session on a different model from the checks' writer. Recorded verbatim by the Orchestrator, 2026-11-04. The first line is the latest round's verdict; round 1's was FAIL. The Orchestrator's byte diff of the two copies (`git diff --stat e0d8104 742ef89`) shows the files round 2 did not re-read unchanged.*
+*The Critic on S-001's locked checks (Build-1), against the frozen spec. Brief 73 (docs/briefs/73-critic.md) for round 1, brief 75 for round 2 and brief 77 for round 3; each a fresh session on a different model from the checks' writer. Recorded verbatim by the Orchestrator, 2026-11-04. The first line is the latest round's verdict; rounds 1 and 2 were FAIL. The Orchestrator's byte diff of the two copies (`git diff --stat e0d8104 742ef89`) shows the files round 2 did not re-read unchanged.*
 
 ## Round 1 (commit e0d8104)
 
@@ -155,3 +155,57 @@ Round 1's findings 1, 3 and 4 are resolved, and finding 2 is only half resolved.
 - **Undone:** I ran no tests, because I hold no shell. I did not re-read AC6 to AC11 or J4 to J6 (their line counts match round 1).
 - **Needed outside its surface:** the Check author must fix finding 1. It should also fix finding 2's S001_MANIFEST skip, and should either fix or answer the remaining gaps in finding 10.
 - **Open questions:** (a) Should F4's "files the run itself creates in /tmp" be read strictly, that is, shown by the transcript? The tests need one reading, and the spec's words support the strict one.
+
+## Round 3 (commit d372707)
+
+Critic's round 3 on S-001's locked checks. I compared the new copy (d372707, fix-checks3) with round 2's copy (742ef89, fix-checks2) by reading the four changed files side by side. I also checked them against specs/S-001.md (:214, :216, :269, :270), experiments/E-003.md (:36, Exclusions 2 at :114) and E-001.md:76 (F4). Both of round 2's findings are resolved and nothing blocking is left. F4 now has one reading. Findings 2 and 3 below are new and not blocking.
+
+## Findings
+
+1. **Resolved (round 2 finding 1, blocking): /tmp now has one reading, the strict one, and every transcript-check case applies it.**
+   - The old :181 case (a Read of a /tmp file nothing had created) is gone. test_ac05_judging.py:182-185 now creates each /tmp file first, once with a Write and once with a Bash `echo hi > …`, and then reads it. Both are required clean.
+   - The new test at :187-194 requires a leak in three cases:
+     - a /tmp file the run never created;
+     - a Read that comes before the Write that creates the file (leak@1);
+     - a different /tmp path from the one created (leak@2).
+   - The cases that were already there still fit this reading:
+     - :171 (`Glob path=/tmp/other`) and :173 (`cd /tmp && ls`) are leaks;
+     - :220 (`<self.tmp>/saved-output.txt.other`, under /tmp and not created) is a leak;
+     - :219 is clean only through `--allow-path`, which matches E-003 Exclusions 2.
+   - test_ac03_pair_audit.py:146-167 has its copy under /tmp and requires reads inside the copy to be clean. That fits: the copy check comes first, and S-001:214 puts the blind Check author's pack folder under /tmp.
+   - The interface note (e003_support.py:50-51) now says "files the run itself created in /tmp (a /tmp path is clean only if an earlier line of the transcript creates it)". That is the same reading as the ac05 docstring (:176-178) and E-001.md:76.
+   - Nothing contradicts S-001, E-003 or the change files. A correct implementation can pass every case.
+
+2. **Resolved (round 2 finding 2), with a new non-blocking flaw. Self-implication flag (D-050): the fix is the one my round 2 text proposed, so this finding is about my own earlier check.**
+   - What is resolved: when S001_MANIFEST is set, recorded_manifests (e003_support.py:477-478) returns the named record whatever it holds. J7 (:144) and J8 (:161) then check it whatever its kind, so a badly formed record now fails instead of skipping.
+   - The new flaw: both tests read the same variable, and each checks the named record against its own entry.
+     - With S001_MANIFEST naming a correct blind record (as J8's docstring :17 and its skip text tell you to set it), J7 fails it. critic.md is not in the analysis must_read, and E-003.md, sizing.py, verdicts.tsv and the card file are missing.
+     - With it naming a correct analysis record, J8 fails it, because E-003.md and reviews/E-003/** are withheld.
+     - So running the whole suite (the first command in e003_support.py:6-7) with the variable set fails a correct manifest. Running one file at a time works.
+     - S-001:269 says J7 parses "the recorded manifest", meaning the analysis dispatch's own, not any record that is named.
+   - Fix: when the variable is set, each test checks the named record only if `manifest_kind` is its own kind or None (None catches a badly formed record). Otherwise it skips, saying the record is the other kind. Or give each test its own variable.
+
+3. **Non-blocking: the wording and one comment do not quite match what the tests require.**
+   - "Clean only if an earlier line … creates it" (e003_support.py:51; ac05:178), read literally, makes the creating line itself a leak. That would cover the Write at :182 and the Bash at :184, which the tests require to be clean.
+     - Fix: "clean on the line that creates it and on any later line".
+   - The tests also mean the Builder must treat a Bash redirect target as a file the run creates. Only `>` is tested. This sits inside F4 and is not beyond the spec, but the Builder should be told.
+   - The comment at ac05:138-139 ("a copy under /tmp could not show the leak cases below") is now stale. Under the strict reading, a copy under /tmp could show them. It is harmless.
+
+4. **Round 1's four checks, for the changed files:**
+   - (a) **Coverage: holds.** J7 and J8 keep their `join-test` markers, and every case in ac05 is still there.
+   - (b) **Nothing beyond the spec: holds.** The strict /tmp reading is F4's own wording.
+   - (c) **Each check able to fail: holds.** The skip in finding 2 is gone. J7 and J8 now skip only when no record of their kind exists and the variable is unset, which matches the spec's "meaningful only once … recorded".
+   - (d) **No held-back check, sheet text or src/** read: holds.** The changed files use only the stand-in sheet and read nothing under src/**, docs/handover/** or docs/reports/**.
+
+## Six-part contract
+- **Changed (by file):** none. I am read-only.
+- **Why:** this is the Critic's round 3 on S-001's locked checks, needed before they are locked for the standard milestone "Tests written before the work".
+- **Verified:** by reading only.
+  - I read the four changed files in full in both copies: e003_support.py, test_ac05_judging.py, test_j7_analysis_pack.py and test_j8_holdout_pack.py. For J8 I read the round 2 copy's lines 1-40 and 140 to the end; the rest matched.
+  - I read test_ac03_pair_audit.py:110-168 in the new copy, because it also calls the transcript check.
+  - I read S-001:269 in full, and grepped S-001 (:214, :216, :270), E-003 (:36, :114), E-001:76 and tests/acceptance/README.md (no S001_MANIFEST guidance there).
+- **Undone:** I ran no tests (I hold no shell). For the claim that only these four files changed, I relied on the Orchestrator's diff.
+- **Needed outside its surface:** the Check author should fix finding 2 (the shared S001_MANIFEST variable) and finding 3 (the wording and the stale comment). Neither blocks locking.
+- **Open questions:** (a) Should J7 and J8 each get their own manifest variable, or should one variable be filtered by kind as in finding 2's fix? Either works. The spec names neither.
+
+Files: /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks3/tests/acceptance/e003_support.py, /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks3/tests/acceptance/test_ac05_judging.py, /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks3/tests/acceptance/test_j7_analysis_pack.py, /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-checks3/tests/acceptance/test_j8_holdout_pack.py
