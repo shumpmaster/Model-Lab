@@ -393,7 +393,7 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Caught by:** the Critic and the gate Critic.
 - **Cause:** two at once. The cards carry most of a 370-line plan's figures and options, redrafted quickly between rounds, with each new sentence checked against the finding it answered but not against every record it touches. And, as LL-49, the gate tools assume the pipeline's records: a conversation-run case can cite neither the plan nor the cards the owner rules with it.
 - **Correction proposed:** at the stop rule, Triage traces the cause and the owner rules how the cards go on (OPERATING_MODEL §4 "Stop rule"); before any redraft, every changed sentence is checked against the record it states, not only the finding it answers; for the model, with LL-49 and the gate-record change, a gate case can cite its item's cards and spec.
-- **Status:** open. The stop rule was applied in session_01QBwHGKFFgmANWaCNGxCLZd: Triage traced the root cause to the cards' length (triage/P-001-build-gate-round-3.md); the owner ruled them cut down (decisions/questions/P-001-build-gate-stop.md, in PR #47's answer), and the cut-down cards passed at their round 2 (reviews/P-001-build-gate/critic.md). The model part stays open.
+- **Status:** open. The stop rule was applied in session_01QBwHGKFFgmANWaCNGxCLZd: Triage traced the root cause to the cards' length (triage/P-001-build-gate-round-3.md); the owner ruled them cut down (decisions/questions/P-001-build-gate-stop.md, its record waiting on PR #47's merge), and the cut-down cards passed at their round 2 (reviews/P-001-build-gate/critic.md). The model part stays open.
 
 ## 2026-11-04 — Design of P-001, session_01QBwHGKFFgmANWaCNGxCLZd
 
