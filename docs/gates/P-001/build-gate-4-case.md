@@ -4,7 +4,7 @@
 
 Approve the eleven criteria, choose a size and answer the terms, on two cards that passed their check once cut down; the plan then freezes [docs/gates/P-001/build-gate-4-proposal.md] [reviews/P-001-build-gate/critic.md:360] [reviews/P-001-build-gate/critic.md:362] [reviews/S-001/plan.md:939].
 
-**The proposer's recommendation:** proceed at size A, 732 runs, about 132 million tokens — it tests every kind, in the order the plan reads your ruling [reviews/S-001/plan.md:535] [reviews/P-001-build-gate/critic.md:368] [reviews/S-001/plan.md:981] [decisions/questions/P-001-worst-work.md].
+**The proposer's recommendation:** proceed at size A, 732 runs, about 132 million tokens — every kind, in the plan's reading of your ruling [reviews/S-001/plan.md:535] [reviews/P-001-build-gate/critic.md:368] [reviews/S-001/plan.md:981] [decisions/questions/P-001-worst-work.md].
 
 ```mermaid
 flowchart LR
@@ -29,12 +29,12 @@ Starting figures and the target [docs/PROJECT.md:111] [docs/PROJECT.md:108]
 Past work cannot be re-run faithfully, so new work is done both ways [decisions/questions/P-001-e002-not-tested.md:12].
 By your rulings, the judges' consistency was not checked, and the secret sheets get their own repository and sessions [decisions/questions/P-001-e002-not-tested.md:1] [decisions/questions/P-001-heldback-store.md:1].
 The join-up review closing Design found no blocking difference [reviews/S-001/plan.md:939].
-No screens: the test has none [reviews/S-001/plan.md:927].
+No screens [reviews/S-001/plan.md:927].
 
 ## 4. The plan for the next phase
 
 Build's milestones: briefs and models on record, each change's result, what worked adopted, every slip corrected [docs/PROJECT.md:65] [docs/PROJECT.md:66] [docs/PROJECT.md:68] [docs/PROJECT.md:69].
-The Builder runs the test, the Reviewer analyses it, the operating model's roles adopt what worked [docs/PROJECT.md:89] [docs/PROJECT.md:90].
+The Builder runs the test and the Reviewer analyses it [docs/PROJECT.md:89].
 
 ```mermaid
 flowchart TB
