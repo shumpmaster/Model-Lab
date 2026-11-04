@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-The Critic's check of questions/P-001-plan-stop-2.md and the last change to questions/P-001-heldback-store.md (brief: docs/briefs/40-critic.md), on claude-sonnet-5-5, a different model from the questions' writer, verbatim. Recorded by the orchestrator. Session session_01QBwHGMBo8kZsMCS2EvKNwd, 2026-11-04. FAIL at round 1, on both questions. Round 2 judged the store question alone, now asked first: PASS. The plan-stop card is rewritten after the store answer and checked afresh.
+The Critic's check of questions/P-001-plan-stop-2.md and the last change to questions/P-001-heldback-store.md (brief: docs/briefs/40-critic.md), on claude-sonnet-5-5, a different model from the questions' writer, verbatim. Recorded by the orchestrator. Session session_01QBwHGMBo8kZsMCS2EvKNwd, 2026-11-04. FAIL at round 1, on both questions. Round 2 judged the store question alone, now asked first: PASS. The plan-stop card was rewritten after the store answer: FAIL at round 3 on one word, PASS at round 4.
 
 ## Round 1
 Checks were by reading only. I could not run `git show HEAD~1` (no shell), so I judged the store question's last change from its current text and the Triage record. I did not read the store question's earlier critic record.
@@ -94,3 +94,14 @@ Six-part contract:
 6. Open questions: how does the sheet reach the new private repository, if only judging sessions hold it? Does the rule allow a second focused review? The card puts the second question to the owner.
 
 Files: /home/user/Model-Lab/questions/P-001-plan-stop-2.md, /home/user/Model-Lab/docs/handoff/2026-11-04-chief-of-staff-4.md, /home/user/Model-Lab/triage/P-001-S-001-round-5.md, /home/user/Model-Lab/reviews/S-001/plan.md
+
+## Round 4 — confirmation of the round-3 fix
+Verdict: PASS
+
+I read option A at line 9 of /home/user/Model-Lab/questions/P-001-plan-stop-2.md. Both fixes are in, and I did not re-check the rest of the card, which you say is unchanged.
+
+1. Finding 1 is fixed: the Cost line now says "more review rounds than B", and "than D" is gone.
+2. Finding 6 is fixed: A now includes "settling how each sheet reaches the repository (for example, you place it)".
+3. Non-blocking: if the owner places each sheet, that is a cost to the owner, and A's Cost line does not list it. The "for example" wording keeps it open for the plan's rewrite to settle. You could add "possibly your hands per sheet" to the Cost line, but I do not require it.
+
+Files: /home/user/Model-Lab/questions/P-001-plan-stop-2.md
