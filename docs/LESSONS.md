@@ -332,3 +332,19 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** the brief was written without checking where the records would be published; the project's data boundary names which AI service data may go to, but not which repositories are public.
 - **Correction proposed:** before a brief moves records between repositories, check each one's visibility and say in the brief what may be copied; for the model, the data classes name repository visibility, and the environment check (LL-22) lists it.
 - **Status:** fixed here (the owner ruled); model change open.
+
+## 2026-11-04 — Design of P-001, session_01QBwHGLd77YbwCSMSPU26vW
+
+### LL-46 An owner question described an option's effects without checking the code that decides them
+- **What happened:** the gate-record question (questions/P-001-gate-record.md) first said a hand-written status record "could make [the script] start helper sessions or raise cards"; the Critic showed that an inert state exists. The redraft then called a "waiting-owner" record inert and the desk's response "not checked"; the Critic showed the script rejects such a record and the desk flags it as waiting on the owner. It passed at round 3, the last allowed.
+- **Caught by:** the Critic, twice (reviews/P-001-gate-record/critic.md, rounds 1 and 2).
+- **Cause:** the options' costs were written from a reading of one function, not from the code paths that decide them (the routing table, `check_status`, the desk's reader); "not checked" was written where checking was possible.
+- **Correction proposed:** before an option states what a system will do, trace it through the code that decides it, and write "not checked" only for what cannot be checked; for the model, the question template asks for each option's effects to cite the record or code that shows them (as LL-09 asks for the surface map).
+- **Status:** fixed here (practice changed); model change open.
+
+### LL-47 A helper's reported figures were lost when the container restarted
+- **What happened:** the Definer (brief 27) finished just before the session's worker restarted; its hand-back text survived in its transcript, but the token figure the harness reports at return was never delivered, so its session line records `tokens: null`.
+- **Caught by:** the Chief of Staff, logging the Definer's return after the restart.
+- **Cause:** the reported figure lives only in the return notice; the session line is written after the notice arrives, so a restart in between loses it.
+- **Correction proposed:** for the model, the session line takes the figures from the helper's own transcript where the notice is lost, or the runner records them as the helper ends; the token checkpoint to the owner states which helpers' figures are missing.
+- **Status:** open.
