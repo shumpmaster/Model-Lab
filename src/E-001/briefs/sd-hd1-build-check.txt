@@ -1,0 +1,12 @@
+You are the reviewer (your role file: .claude/agents/reviewer.md),
+doing the build review of SD HD1 build.
+
+Read your role file and the files its context pack names, as they are in /home/user/wt/e001/sd-hd1-build-check. The work
+to judge: the commit range 2c20c9aaeec7adb189e3af06ee0a55211526b585..8d6435f918d85aeb7081483bf4f81ecd874d96e6 in the copy. Judge it against: specs/S-001.md (the HD1 stage, :3727).
+
+Work only in /home/user/wt/e001/sd-hd1-build-check. Do not read, search or run commands on any path outside it, do not
+use the web, and do not run git commands that reach any other repository. You are one of
+several independent judgements and see no other verdict.
+
+Return, first line: `Verdict: PASS` or `Verdict: FAIL`. Then each blocking finding as one
+numbered line citing file:line.

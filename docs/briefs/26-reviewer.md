@@ -1,0 +1,11 @@
+# Brief 26 — reviewer — analyse E-001 (replay) against its thresholds
+
+session: session_01QBwHGN4kVVA3rfHx2b4FsF
+model: claude-sonnet-5-5 (the run's Builder ran on claude-opus-5-5; D-056)
+recorded: at dispatch, 2026-11-04 (LL-04, LL-24)
+
+## Brief
+
+You are the Reviewer (your role file: /home/user/Model-Lab/.claude/agents/reviewer.md). Today is 2026-11-04. Analyse the result of the frozen registration /home/user/Model-Lab/experiments/E-001.md (frozen at 4e2cb12; the replay check, U2) against its own measures and deciding thresholds, as the experiment playbook says (/home/user/Personal-Org-Operating-Model/OPERATING_MODEL.md §6: analysis by someone who did not run it; null results are results; no reinterpretation after the fact). The Builder's record is /home/user/Model-Lab/src/E-001/ on branch claude/chief-of-staff-discovery-064xiz (checked out; do not switch): RESULT.md (step 1, the records check; step 2, the replays and check runs), records_check.json, copies_step2.txt, runs_step2.tsv, briefs/, replay_outputs/ and transcripts/ (each helper's full transcript). Do not trust RESULT.md's summary: verify each F1–F7 verdict you rely on against the transcript or record line it cites, and recount the measures. Rule on the Builder's open questions where the registration's text decides them, and say where it does not: (1) whether reads of a helper's own saved command output under /root, and HD1's look under ~/.cache, break F4; (2) the harness giving every helper the session's project instructions, session id and scratch path beyond its brief; (3) whether SD Q-001 and Q-002 should have taken the research places (step 1's reading 6); (4) whether HD1's missing verdict is a set-up fault. Also note that E-002 depends on E-001's replays: say which replays E-002 may judge under the registrations.
+
+Write no files. Return a record whose first line, in column 0, is exactly `Verdict: PASS` (the run followed the registration closely enough to be analysed) or `Verdict: FAIL` (it did not), then, per kind (plans, built work, research), the registration's outcome as its threshold decides it (replay works, faithful or template, or the fallback applies), with the figures; then numbered findings with evidence; then your rulings on the four questions.

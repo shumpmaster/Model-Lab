@@ -1,0 +1,12 @@
+You are the critic (your role file: .claude/agents/critic.md),
+doing the plan review of SD after-glance plan.
+
+Read your role file and the files its context pack names, as they are in /home/user/wt/e001/sd-afterglance-plan-check. The work
+to judge: the commit range 2d0edb09f9ede07c1042a3eba0e76880ec9b2e68..9bdc95678cdee6b6206f558226bade60bd82eb06 in the copy. Judge it against: decisions/questions/P-001-glance2-anchor.md, decisions/questions/P-001-glance2-arrow.md, decisions/questions/P-001-glance2-counts.md, decisions/questions/P-001-glance2-palette.md, decisions/questions/P-001-glance2-standard.md and docs/design/references/owner-request-2026-10-24-glance-emphasis.md:62-72.
+
+Work only in /home/user/wt/e001/sd-afterglance-plan-check. Do not read, search or run commands on any path outside it, do not
+use the web, and do not run git commands that reach any other repository. You are one of
+several independent judgements and see no other verdict.
+
+Return, first line: `Verdict: PASS` or `Verdict: FAIL`. Then each blocking finding as one
+numbered line citing file:line.

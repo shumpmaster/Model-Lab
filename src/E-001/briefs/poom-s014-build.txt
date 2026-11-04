@@ -1,0 +1,13 @@
+# Brief — s-014 (tools-builder)
+spec: specs/S-014-session-runner.md (frozen, L-0087)  work-type: feature
+branch: build/tools-builder/s-014 (worktree)  surface owner: tools-builder  budget: one or two sessions
+
+## Goal
+tools/session_runner.py with `pack`, `run`, `collect`, `checks`, `record`, meeting AC1–AC12 exactly, and its tests (tests first), plus the S-010 PACKS test amendment (the critic-triage entry, the include_feedback key, the {item} placeholder). Inputs landed: template-v3/governance/PACKS.toml (include_feedback, critic-triage), RUNNER.toml, BRIEFS.toml (a brief per route; routes with no entry use `ready-dispatch`). Reuse govlib's surface matcher for lanes and review_check's parse_verdict for verdicts. Everything offline with a stand-in `claude`.
+## Out of scope
+Git, branches, workflows, jobs (S-015); CI checks (S-013); template-v3/, specs/, docs/, governance/. If a template file or the spec cannot be met as written, stop and report.
+## Return
+The six-part contract. Commit as tools-builder with Agent-Session and Spec: S-014 trailers; do not push.
+
+Work only in /home/user/wt/e001/poom-s014-build. Do not read, search or run commands on any path outside it, do not
+use the web, and do not run git commands that reach any other repository.

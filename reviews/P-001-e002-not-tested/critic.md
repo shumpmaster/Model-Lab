@@ -1,0 +1,28 @@
+Verdict: PASS
+
+The Critic's cold read of questions/P-001-e002-not-tested.md, on a different model from its writer, verbatim (round 1). Its non-blocking findings 1 to 3, and 4 and 6 in part, were applied after it. Recorded by the orchestrator. Session session_01QBwHGN4kVVA3rfHx2b4FsF, 2026-11-04.
+
+## Round 1
+Verdict: PASS
+
+I read questions/P-001-e002-not-tested.md cold against the question form, the decision-card parts (OPERATING_MODEL.md §2), and the five cited records. I found no blocking defects. The claims that carry the decision check out. There are six non-blocking findings, and I would fix findings 1 to 3 before the question goes to the owner.
+
+Verified claims:
+- **Three eligible replays.** The claim holds. reviews/E-001/reviewer.md, "Which replays E-002 may judge", lists three: M3C (run 5), PR5 (run 11) and S-014 (run 12). M3B and after-glance fail F4. HD1 fails F4 and F7. Q-001 and Q-002 have no memo.
+- **"Not tested" with three replays.** E-002 "Deciding threshold" says "Not tested if … fewer than 4 Set B pieces get both judges' verdicts". The rule is an OR, so one trigger makes the whole result "not tested", and that triggers the fallback.
+- **Substitutes cannot reach four.** E-002 runs substitutes with the test judge twice only ("adds to consistency only"). A substitute never gets the same-model verdict, so it can never be a Set B piece with both judges' verdicts. The card's "fixed in advance" holds.
+- **Option C's description of the F4 failures.** It is accurate. The Reviewer's finding 1 and ruling 1 say runs 1 (M3B) and 7 (after-glance) failed F4 only on reading their own saved tool output under /root/.claude/…/tool-results/. Both passed F5, F6 and F7. The Reviewer also says the lenient reading adds those two, making five. HD1 also failed F4, on `ls ~/.cache`, but it fails F7 regardless, so "two" and "five" are right.
+- **Run counts.** "Up to 20" matches E-002's hard cap. E-001's 14 runs at about 2.5 million tokens match RESULT.md (2,526,069).
+- **Fallback wording.** It matches E-002 and decisions/questions/P-001-open-unknowns.md (the held-back set and the owner's sample decide, and the record states the limit). The ruling record does show U3 accepted as open with its fallback.
+- **Card parts.** "Nothing runs" if undecided is consistent with DEFAULT: none. REVERSIBILITY "costly" is a valid word. Milestone "M2, Design-3" matches the E-002 header. The recommendation states confidence and what would change it.
+
+Findings, all non-blocking:
+
+1. **Token estimate is unsupported.** WHY says "up to 20 test runs, several million tokens on the replay check's evidence". No record gives E-002's token cost, and the phrase "on the replay check's evidence" is hard to parse. The Context cites only E-001's 14 runs (2.5 million). The estimate is plausible: E-001's six judge runs cost 143k to 194k each, so 20 would be roughly 3 to 3.8 million. Say that it is an estimate and give the basis, and drop or reword "on the replay check's evidence". Option B's cost line says only "their tokens" and could carry the same figure.
+2. **Option C overstates its gain.** "The consistency question gets tested" is not guaranteed. A re-registered E-002 with five Set B pieces can still be "not tested", for example if fewer than 3 consistency-set pieces get a test-judge PASS or fewer than 2 Set B pieces get a PASS from either judge. Use "gets a chance to be tested". Also say what C amends. The rule lives in E-001's frozen F4, so C reopens a result already seen, not just E-002. The Reviewer said it "needs an amended registration".
+3. **Option B's gain is unclear and dismissive.** "Self-preference and first-time-pass readings … for what they are worth" is loose. E-002's self-preference measure is itself "not tested" with three pieces, and no measure is called "first-time-pass". The nearest are Set C and the "pieces with a pass" measure. State what B would actually report: the judges' differences on three pieces, and consistency on whatever pieces get both test-judge verdicts, as readings only. Say plainly that they change nothing M2 does. That keeps the options even without the "worth" hint. Also, "its consistency result is 'not tested'" should read "the whole check's outcome is 'not tested'".
+4. **Costs omit a practical hurdle for B and C.** The Reviewer notes the check copies are gone and must be rebuilt from replay_outputs/*.patch. Rebuilt commit hashes would differ, so E-002's "byte for byte" judge-brief rule "needs care". The Reviewer also notes S-014's replay verdict is not comparable (RUNNER.toml defect). Both bear on how much B's readings are worth.
+5. **Jargon for a non-expert owner.** WHY runs about six lines and uses "self-preference", "held-back checks", "registered", "replay check" and "judging-consistency check" without a gloss. §2 asks for background of 5 lines or fewer with no jargon. One plain sentence each on what E-002 and E-001 check, and why the F4 ruling matters, would do.
+6. **Budget effect not stated.** B's and C's costs do not say the runs count toward the 40-run Design cap. 14 are used by E-001, and E-002's cap is 20. A short note would show that the cap is not the constraint.
+
+Files read, all under /home/user/Model-Lab: questions/P-001-e002-not-tested.md, questions/_TEMPLATE.md, experiments/E-002.md, experiments/E-001.md, reviews/E-001/reviewer.md, decisions/questions/P-001-open-unknowns.md, src/E-001/RESULT.md. I also read /home/user/Personal-Org-Operating-Model/OPERATING_MODEL.md §2 (lines 69 to 71). I could not verify "R0 (computed from the paths it touches)" because no mapping from paths to class is in the records I read.

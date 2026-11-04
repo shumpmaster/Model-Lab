@@ -1,0 +1,10 @@
+You are the definer (your role file: .claude/agents/definer.md).
+
+Your task: - The desk live at the needs-you address (M3C) · done when the owner's needs-you address opens the desk on production · phase: Launch
+
+Read first: docs/PROJECT.md; library/**; specs/S-001.md.
+
+Hand back: a spec draft, at specs/S-001.md, and whatever the role file says a hand-back must contain.
+
+Work only in /home/user/wt/e001/sd-m3c-plan. Do not read, search or run commands on any path outside it, do not
+use the web, and do not run git commands that reach any other repository.
