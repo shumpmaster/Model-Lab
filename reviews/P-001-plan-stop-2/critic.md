@@ -65,3 +65,32 @@ Six-part contract:
 6. Open questions: none new. The rule's reading of a second focused review stays for the plan-stop card.
 
 Files: /home/user/Model-Lab/questions/P-001-heldback-store.md
+
+## Round 3 — the plan-stop card, rewritten after the store answer
+Verdict: FAIL
+
+One small blocking slip stands between this card and PASS. Everything else in my round 1 findings 1 to 6 is resolved. I read the card by file only, with the Update section of the handoff for the owner's answer. I did not re-read the intake or the Plan stop rule beyond what I read earlier in this session.
+
+Findings:
+1. [BLOCKING] Option A's cost says "more review rounds than D". There is no option D any more; the options are A, B and C. Say "than B". As written, a reader cannot tell what A is being compared with.
+2. [non-blocking] Round 1 finding 1 is resolved. A no longer says the secrecy is real. It says "Whether separate sessions keep the sheets out of reach is not yet tested; the first judging would confirm it". The recommendation no longer calls A the only route that enforces the secrets.
+3. [non-blocking] Round 1 findings 2 and 3 are resolved.
+   - The card says why re-scope is not offered: it fits only the portfolio folder, which the owner did not choose. That matches the store question's own ORDER line.
+   - Triage's reading is now carried: with the sheets kept apart the fix is "a redesign of the running steps to be treated as a re-specify". B's cost says "a change the trace calls a redesign of those steps, not a patch".
+   - The pairs problem is gone because the store answer is fixed as A. The card offers only the fixed options that fit (re-specify, another focused review, drop).
+   - The rule's reading is put plainly to the owner in B, as Triage advised.
+4. [non-blocking] Round 1 finding 4 is resolved. A now says the judges run "in sessions that never share a machine with the helpers doing the work", instead of "never hold the work".
+5. [non-blocking] Round 1 findings 5 and 6 are resolved. The opening carries no ids or paths, and "five ... one more only on paper and one only in part" matches Round 5 ("five resolved, one resolved only on paper, one only partly resolved").
+6. [non-blocking] A gap for the plan's rewrite, not for this card. The owner's answer gives the new repository "only" to judging sessions, yet someone must put the sheets into it. A says the sheet writer runs in a session that never holds the plan, but not how its sheet reaches the repository. The re-specify should settle this, for example by having the owner place each sheet. The card could add one clause.
+7. [non-blocking] The Context bullet on the owner's choice cites an answer record not yet filed (it "waits on the question's pull request"). That is honest and fine until PR #41 merges. After it merges, cite the filed record.
+8. [non-blocking] The risk class R0, reversibility irreversible (set by C), default none and timeout none are right. The WHY line is supported by the rule and by Round 5. The recommendation's citation of Triage's "Which the evidence supports" is supported.
+
+Six-part contract:
+1. What I changed: nothing. I am read-only and wrote no file.
+2. Why: to judge the rewritten plan-stop card against my round 1 findings 1 to 6 and the same records.
+3. What I verified: I read the card cold. I checked its claims against Round 5, Triage, the intake and the Plan stop rule read earlier in this session, the store question's ORDER line, and the owner's answer text in the Update section of the handoff.
+4. What is undone: I did not re-read specs/S-001.md or experiments/E-003.md. I did not verify the WHY line's "Build gate" claim. I ran no command.
+5. Needed outside my lane: the Chief of Staff fixes finding 1 and optionally 6 and 7. A fresh Critic or the same check can then pass it. Finding 1 is a one-word change.
+6. Open questions: how does the sheet reach the new private repository, if only judging sessions hold it? Does the rule allow a second focused review? The card puts the second question to the owner.
+
+Files: /home/user/Model-Lab/questions/P-001-plan-stop-2.md, /home/user/Model-Lab/docs/handoff/2026-11-04-chief-of-staff-4.md, /home/user/Model-Lab/triage/P-001-S-001-round-5.md, /home/user/Model-Lab/reviews/S-001/plan.md
