@@ -226,3 +226,41 @@ New commit: `0030fcb`, same worktree and branch (`build/check-author/s001-locked
   - check-author check-author@agents.invalid
 
 **Not touched.** Finding 4 (the skip flag) and finding 5 (`record_checks merges`) are the owner's and the known LL-29 false failure. Open question (a) is the coordinator's: the checks are corrected here, before the lock.
+
+## Round 5 (brief 82), commit bef590a
+
+## Brief 82: J7/J8 manifest selection and the two docstring leftovers fixed in commit bef590a on top of 0030fcb
+
+New commit: `bef590a`, same worktree and branch (`build/check-author/s001-locked`). Not pushed, same trailers.
+
+**What changed**
+1. **Finding 3, the J8 skip.**
+   - `tests/acceptance/e003_support.py`: new `manifest_markers(text)`, just above `good_manifest`. It returns whether the record has file lines, whether they include a blind marker (the extract or `.claude/agents/check-author.md`), and whether they include `experiments/E-003.md`. It works from the parsed file lines.
+   - `test_j8_holdout_pack.py`, `TestJ8Recorded`: with `S001_MANIFEST` set, the test now checks the named record if it has a blind marker or no file lines. Otherwise it skips, naming J7. The unnamed scan is unchanged: it checks records classified "blind".
+   - `test_j7_analysis_pack.py`, `TestJ7Recorded`: the same on the other side. With the variable set, it checks the named record if its files include `experiments/E-003.md` or it has no file lines. Otherwise it skips, naming J8.
+   - A record carrying both kinds' files is therefore checked, and failed, by both.
+   - Check against S-001 J8 ("never ... experiments/E-003.md"; fails unless no path matches a withheld path) and E-003:33 (the blind dispatch goes ahead once J8 passes on the manifest). A blind manifest that wrongly lists `experiments/E-003.md` now fails J8 whether it is run alone or in the suite.
+2. **Finding 6's leftovers.**
+   - `test_ac05_judging.py`, the docstring of `test_system_paths_e001_f4_allows_are_clean`: now "clean on the line that creates it and on any later line, and only then", the same wording as the interface note.
+   - `e003_support.py`, the interface note: it now says a Bash `>` or `>>` redirect target, a `touch` or `mkdir` argument, or a Write/Edit `file_path` counts as created.
+   - I added `touch`, `mkdir` and `>>` beyond what the brief named, to keep the note accurate. The existing test only exercises the `>` redirect and the Write.
+
+**The four runs.** I ran each file alone with `S001_MANIFEST=<record>` and `-k Recorded`.
+
+| Record | J7 | J8 |
+|---|---|---|
+| Well-formed blind manifest | skip | pass |
+| Well-formed analysis manifest | pass | skip |
+| Malformed record (wrong info string) | fail | fail |
+| Blind manifest that also lists `experiments/E-003.md` | fail | fail |
+
+The trial records were removed afterwards.
+
+**Results**
+- Suite: 228 tests, 43 pass, 2 skip, 183 fail. All 183 failures are "interface missing", because the Builder's `src/E-003/` scripts do not exist yet. The counts are unchanged.
+- `bash governance/checks/check_all.sh . 7d6c999` prints "OK: all governance checks passed".
+- `surface_guard.py diff --range 7d6c999..build/check-author/s001-locked --branch build/check-author/s001-locked` prints "OK: 5 commit(s) ... checked (0 merge(s) skipped, 0 exempt, 0 human)".
+- `git log --format='%an %ae' -3` gives:
+  - check-author check-author@agents.invalid
+  - check-author check-author@agents.invalid
+  - check-author check-author@agents.invalid
