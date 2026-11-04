@@ -348,3 +348,19 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** the reported figure lives only in the return notice; the session line is written after the notice arrives, so a restart in between loses it.
 - **Correction proposed:** for the model, the session line takes the figures from the helper's own transcript where the notice is lost, or the runner records them as the helper ends; the token checkpoint to the owner states which helpers' figures are missing.
 - **Status:** open.
+
+## 2026-11-04 — Design of P-001, session_01QBwHGMBo8kZsMCS2EvKNwd
+
+### LL-48 A push went ahead beside a red governance check (LL-06, LL-29, LL-42 recurred)
+- **What happened:** after a stop hook asked for untracked work to be committed and pushed, the Chief of Staff ran the full governance checks and the push as two calls sent at the same time, so the push did not wait for the result. The checks were red: `record_checks merges`, the known local false failure on the orchestrator's brief commits (LL-29), and `v3_checks gates`, a real failure in the first draft of the Build gate case (over 350 words, and placeholder lines without citations). The draft case reached the branch of draft pull request #39 with its gate check failing.
+- **Caught by:** the Chief of Staff, reading the checks' output after the push.
+- **Cause:** two calls that depend on each other were sent together; the rule "push only in a separate step after reading a passing result" was known and still not followed under a prompt to push.
+- **Correction proposed:** as LL-29 and LL-42: a push is never sent in the same step as the checks it depends on; for the model, a pre-push hook that runs the checks the way CI does, so the rule does not rest on memory.
+- **Status:** open (recurred); the case was fixed in the next commit.
+
+### LL-49 A conversation-run project's Build gate case cannot cite its own spec
+- **What happened:** the first draft of the Build gate case cited specs/S-001.md for the test's figures and options; `v3_checks gates` refused every such citation, because it builds the gate Critic's pack from the item's status record, `status/P-001.toml`, whose `spec` fills `{spec}`, and this project has no status record. The Design gate case met no such limit only because it cited no spec.
+- **Caught by:** `v3_checks gates`, run on the draft.
+- **Cause:** as LL-35, LL-40 and LL-43: the tools read a project's state only from pipeline records; the gate-record ruling forbids writing a status record by hand until the model changes.
+- **Correction proposed:** with the gate-record change in the operating model (decisions/questions/P-001-gate-record.md): the record that carries the owner's ruling also carries the item's spec, so a conversation-run case can cite it; until then the Build gate case's citations of its spec are reported as this known gap.
+- **Status:** open; with LL-43.

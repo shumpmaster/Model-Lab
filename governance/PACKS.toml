@@ -99,3 +99,22 @@ may_read = ["docs/design/screens/**"]
 must_not_see = ["docs/PROJECT.md", "docs/gates/**/*-case.md", "docs/gates/**/*-case-*.svg", "decisions/**", "specs/**",
                 "reviews/**", "research/**", "status/**", "dispatch-log/**", "queue/**", "intake/**", "docs/reports/**",
                 "docs/briefs/**", "docs/design/references/**", "docs/handover/**"]
+
+[roles.S-001-holdout]
+# The blind Check author's per-task pack (spec S-001, "Two Check author jobs", dispatch (a); J8).
+# Role: check-author; task: S-001-holdout. The format keys a pack to a role, not a task, so this is a
+# separate table beside [roles.check-author], which it does not replace and which S-001's own locked
+# checks still use. It holds the extract and the role files and playbooks the extract names, and no
+# {spec}, {ruling}, may_read or include_feedback. Paths are compared case-folded, so the change texts
+# are withheld by name: a pattern "C*.md" in experiments/E-003/ would also hide the extract.
+# governance/HOLDOUTS.md is left out: the runner keeps it out of every pack (D-054), and the extract
+# carries its storage rule. The role's own agent file and BRIEF.md come with every pack.
+must_read = ["experiments/E-003/check-author-extract.md",
+             ".claude/agents/critic.md", ".claude/agents/reviewer.md", ".claude/agents/source-checker.md",
+             "docs/playbooks/**"]
+# "Sees this spec, E-003, the change texts, the locked checks of (b), or any record of the plan
+# review or the gate" — never (S-001).
+must_not_see = ["specs/S-001.md", "experiments/E-003.md",
+                "experiments/E-003/C1-*.md", "experiments/E-003/C2-*.md", "experiments/E-003/C3-*.md",
+                "tests/acceptance/**", "checks/**", "reviews/S-001/**", "docs/briefs/**", "docs/gates/**",
+                "decisions/**", "src/**"]
