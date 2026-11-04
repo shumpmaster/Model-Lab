@@ -98,3 +98,119 @@ Two checks came out clean and need no change.
 - Consistency with the rulings: the fallbacks for U2 and U3 are applied as P-001-open-unknowns.md:11-12 and P-001-e002-not-tested.md:10-12 say. The spend ceiling is respected, and S-001.md:84 is honest that Fable 5.1 may not be a different family (docs/reports/2026-11-03-design-environment-check.md:16).
 
 Please resubmit with findings 1 to 5 addressed.
+
+## Round 2
+Verdict: FAIL
+
+Plan review, round 2 of 3, of S-001 / E-003 at commit e0c9717.
+
+I have no shell, so I did not run sizing.py or arrivals.py. I read both, read the records they read, and re-did the arithmetic by hand. I could not check git add dates (24 Sept, 30 Sept, 1 Nov).
+
+Round-1 findings
+
+1. **Resolved in substance, with one gap (see new finding 1).**
+   - The Check author is now given only experiments/E-003/check-author-extract.md (S-001.md:99, AC4 at :116, J8 at :133, E-003.md:11, :27).
+   - I read the extract (check-author-extract.md:1-44). It names the kinds, the existing check files to write from, the held-back check form, the J5 answer form and the rules. It says nothing of the changes' content.
+   - J8's test checks that the pack lists no withheld file and that no change-text sentence appears in the extract.
+   - The held-back checks stay correlated with C1 and C3, because they are written from the same role files the changes touch. S-001.md:102 and :41 now state this.
+
+2. **Mostly resolved, with conditions (see new findings 3 and 4).**
+   - arrivals.py gives the window, the rates and the recording share.
+   - My re-derivation matches S-001.md:69.
+     - 24 Sept to 1 Nov, both days counted, is 39 days = 5.57 weeks.
+     - 44, 80 and 19 over 5.57 weeks give 7.9, 14.4 and 3.4 a week.
+     - The Service Desk (SD) alone is 33 days = 4.71 weeks, giving 18/4.71 = 3.8, 51/4.71 = 10.8 and 12/4.71 = 2.5.
+   - The hard-coded SD denominators (arrivals.py:33) match Q-008: 1+17 plans, 51 built, 12 research (research/Q-008-memo.md:73-79).
+   - The recording claims check out against the records.
+     - SD has `_control` folders only for Q-items.
+     - My glob found no control files under any other reviews folder, so "no plan or built piece has a record" holds.
+     - SD's recent research dispatches (dispatch-log/2026-11.jsonl) cover Q-016 to Q-021 (6 items).
+     - Source-checker control files with `brief`, `model` and `source_tip` exist for Q-016, Q-018, Q-020 and Q-021. That is 4 of 6, as S-001.md:71 says.
+
+3. **Resolved.**
+   - Review points replace the calendar limit (S-001.md:85, E-003.md:76).
+   - I re-derived every "Weeks" figure from the pace and share used in sizing.py.
+     - Built 60 is 5.6 to 14.8 weeks.
+     - Plans 60 is 10.1 to 42.1.
+     - Research 60 is 23.5 to 64.
+     - Option A one after another is 39 to 121.
+     - Option A together is 24 to 64.
+     - B, C and D match.
+   - Pairs at the 16-week slow-pace review point: plans 22, research 15 (built exceeds 60).
+   - The power quoted at those sizes is plausible. One-way research at 15 pairs is 0.06; one-way plans at 22 is about 0.27.
+   - Runs, tokens and the power table are unchanged and correct.
+
+4. **Resolved.**
+   - A card is one output (E-003.md:55).
+   - Yes is FAIL, and "can't tell" has a defined treatment (E-003.md:62).
+   - Groups G1/G2/G3 are 4/2/2, so wrongly-failing judges are now sampled.
+   - The seeded draw is specified (E-003.md:61).
+   - Confirmation needs at least 6 answered and at most 2 disagreements. S-001.md:101, AC6, AC7 and J6 agree with E-003.
+
+5. **Resolved on paper.**
+   - The research check's brief, start commit and model are required at entry (E-003.md:35, Exclusions 6, S-001.md:46, J2, open question 5).
+   - See new finding 5: Model-Lab's briefs do not record the model.
+
+6. **Resolved.**
+   - The disagreement rule is dropped from C2.
+   - C2 now has the no-spec and empty-list cases (C2 file, lines 30-33).
+   - The bogus line range is gone.
+   - See finding 8 for a word-count nit.
+
+7. **Resolved.** The "Most it could reach" column (S-001.md:27-31) and "What the test can and cannot show" (S-001.md:39-43) state the point plainly, and R2 repeats it.
+
+8. **Resolved.**
+   - Judge noise is added to the sizing: the `noisy()` formula is right, and the table column agrees with S-001.md:42.
+   - The stand-in measure is stated (E-003.md:70).
+   - "Used once" now means once per kind (E-003.md:106).
+
+9. **Partly resolved (see new finding 3).**
+
+10. **Resolved.** AC5, J3 and E-003.md:50-51 now agree for research.
+
+11. **Resolved.** E-003.md:101 gives the reason and open question 7 hands it to the owner. The argument is thin but honestly labelled as a judgment.
+
+12. **Resolved.** Open questions 3, 4, 5 and 7 now carry the rulings and the research question.
+
+13. **Resolved.** J1, J2 and J6 carry the added awkward cases.
+
+New findings
+
+1. **BLOCKING: the blind Check author cannot also write S-001's locked checks.**
+   - S-001.md:187 says the Check author's pack must hold the extract "in place of `specs/{spec}.md`".
+   - S-001.md:191 names the Check author only for held-back checks.
+   - But S-001's own acceptance tests and join-tests (J1 to J8, `tests/acceptance/**`, `checks/**`) are normally written by the Check author from the spec, at stage 4 (OPERATING_MODEL.md "Tests written before the work", line 165; PACKS.toml:44-45 gives that role the spec).
+   - As written, either the locked checks have no author, or the same role both reads the spec and is the blind author. The second breaks AC4.
+   - Fix: state two separate Check author dispatches. (a) A blind one, whose per-task pack holds the extract, not the spec. (b) A normal one for the locked checks, with the spec. Say who dispatches each and that (b) never writes or sees the held-back checks. Say that the PACKS change is a per-task pack, not a replacement of the role's standing pack.
+   - Also name who makes the PACKS change and when (it is outside the spec's areas, and the Orchestrator must confirm it before the Build gate). J8's test is only meaningful once it is in place.
+
+2. **Non-blocking: the extract's header tells the Check author that the test varies something.** The extract says what "the test changes" and that files `C*.md` are withheld (check-author-extract.md:3-7, :40). That is a hint, though a mild one. Reword it to "files not listed in your pack are not yours to read". Also J8's check that no change-text sentence appears in the extract does not catch this.
+
+3. **Non-blocking: the "fast pace" is not reachable as described.**
+   - Fast is "all three projects" (S-001.md:69). But the same paragraph says the operating model repository has stopped and Model-Lab's research was this project's own Discovery.
+   - POOM supplied 26 of the 44 plans and 29 of the 80 built pieces (Q-008.md:73-78). So the fast pace for plans (7.9 a week) and built work (14.4) cannot come back unless POOM resumes.
+   - Label the fast end "only if the other projects resume", or drop it from the headline ranges (nine months in the "Time" bullet, S-001.md:15).
+   - The slow pace of the SD alone (3.8 and 10.8) is the honest central case.
+
+4. **Non-blocking: the evidence is a command, not command plus output.**
+   - S-001.md:151-152 cites `python3 …` without the printed output (template form: "command + output").
+   - I could not run either script.
+   - Before the freeze, the Orchestrator should run sizing.py and arrivals.py, attach the output (for example experiments/E-003/output.txt), and confirm it matches the figures in the spec.
+   - Confirm especially the three dates, the cross-check lines (arrivals.py:129-131, which the spec does not quote) and "6 recent research items".
+
+5. **Non-blocking: Model-Lab's briefs do not record model or start commit.**
+   - S-001.md:15 and E-003.md:36 say Model-Lab's docs/briefs/ holds the record today.
+   - docs/briefs/README.md:1-4 says only that it records "what the agent was told", the brief text. No model, no start commit.
+   - So Model-Lab's plans and built work are no more eligible today than the SD's. Correct the claim, or add Model-Lab to open question 5.
+
+6. **Non-blocking: sizing.py's comment contradicts the spec.** sizing.py:36 says "3 of 6 recent research items on record". S-001.md:71 says 4 of 6, and the control files confirm 4 of 6. Fix the comment. The share is not computed from it (SHARE is hard-coded at sizing.py:39), but the evidence should agree.
+
+7. **Non-blocking: arrivals.py's window start is an inference.** The first and last records (POOM reviews/1/reviewer.md; ML Q-002-to-Q-007-corrections-confirmation.md) are the Definer's choice. Q-008 mentions both (Q-008.md:213, :447) but does not say they are the earliest and latest. The cross-check lines are the safeguard (finding 4).
+
+8. **Non-blocking nits.**
+   - C2's fixed text is 11 words, not 10 (S-001.md:30, C2 file line 7).
+   - S-001.md:161 says "plans and research could take most of a year each", while research at 60 pairs is up to 64 weeks.
+
+9. **Non-blocking: the judging limits are honestly stated.** The same-provider, unmeasured-consistency, C1-teaching-to-the-check and 8-cards limits are all present (S-001.md:102). Owner cards from G2 and G3 now address a judge that wrongly passes or fails. Plans may have few G2 outputs at a 5% start. E-003.md:60 handles this by moving the cards to other groups.
+
+Please resubmit with finding 1 fixed. Findings 2 to 8 can be fixed in the same pass.
