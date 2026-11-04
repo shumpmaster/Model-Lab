@@ -99,3 +99,57 @@ Run in the worktree after committing, as `bash governance/checks/check_all.sh . 
 `python3 governance/checks/surface_guard.py diff --range 7d6c999..build/check-author/s001-locked --branch build/check-author/s001-locked` printed `OK: 1 commit(s) in 7d6c999..build/check-author/s001-locked checked (0 merge(s) skipped, 0 exempt, 0 human)` and exited 0.
 
 Not pushed.
+
+## Round 2 (brief 74), commit 742ef89
+
+## Brief 74: round-1 findings on S-001's locked checks fixed in commit 742ef89, on top of e0d8104
+
+Findings 1 to 5, 7 to 9 and 12 are fixed, plus the cheap cases of 10. Findings 6 and 11 are answered below, and the rest of 10 is not done.
+
+New commit: `742ef89`, same worktree and branch (`build/check-author/s001-locked`). e0d8104 is not rewritten, nothing is pushed, and the trailers are as before. The commit message has no model names or attribution lines, per the project rule.
+
+`git log --format='%an %ae' -3`:
+- check-author check-author@agents.invalid
+- check-author check-author@agents.invalid
+- orchestrator orchestrator@agents.invalid
+
+**Results**
+- The suite runs 227 tests: 43 pass, 2 skip and 182 fail.
+- All 182 failures are "interface missing", meaning the Builder's `src/E-003/` scripts do not exist yet. I checked this by reading every failure.
+- The 2 skips are the recorded-manifest checks, which wait for a dispatch to record a manifest.
+- `bash governance/checks/check_all.sh . 7d6c999` prints "OK: all governance checks passed". Every line passes, including `v3_checks joins`, and the `record_checks merges` false failure does not appear against this base.
+- `surface_guard.py diff --range 7d6c999..build/check-author/s001-locked --branch build/check-author/s001-locked` prints "OK: 2 commit(s) ... checked (0 merge(s) skipped, 0 exempt, 0 human)".
+
+**Findings**
+1. **J7 manifest picked by record text (blocking), fixed.** `e003_support.manifest_kind` now classifies a recorded manifest from its parsed file lines. "Analysis" means `experiments/E-003.md` is among them. "Blind" means the extract or `check-author.md` is. J7 and J8 both use it. I added `TestJ7Classify`, which shows the blind pack's manifest (it lists reviewer.md) is not taken for an analysis manifest.
+2. **Transcript check counted F4 reads as leaks (blocking), fixed.**
+   - I read F4 in `experiments/E-001.md:76`. It allows /usr, /bin, /lib and /etc (read only) and files the run creates in /tmp.
+   - The leak cases in `test_ac05_judging.py` now use `/home/user/...` and `/root/...`.
+   - I added `test_system_paths_e001_f4_allows_are_clean`, covering /etc, /usr/bin, /bin, /lib and /tmp.
+   - The copy under test now lives under /var/tmp, falling back to the home directory. Under /tmp, the `../secret.txt` and `-evil` leak cases would themselves be allowed.
+3. **J1 fill-c2 fixture vs C2's list rules (blocking), fixed in `test_j1_change_to_arm.py`.**
+   - Stage 2 of the fixture spec now names `decisions/questions/P-009-ruling.md`, and Stage 3 names the unrelated P-010. C2 item 3 requires the stage to name the ruling.
+   - The check file is now `checks/S-009-check.py`, with the spec id in its path. I added `checks/unrelated_check.py` as a negative case. Item 4 needs a `join-test: S-009/` marker or the spec id in the path.
+4. **J2 seven-day test with a late record (blocking), fixed.** In `test_j2_dispatch_record.py` the record's `recorded:` date now equals the dispatch date (2026-11-01). The exactly-7-days and 7-days-plus-1-second cases are unchanged.
+5. **Interface list out of date, fixed.** I rewrote the docstring in `e003_support.py` to match every call the tests make. It now includes `fill_judge_brief.py` without `--template`, the `rerun-decision` history file with its event words, and the `analyse.py` note from finding 11.
+6. **AC4 locked-checks-session test, dropped.**
+   - No held-back-side record names a session id, so a file test cannot catch the fault it aimed at.
+   - Your answer to open question (b) means a test would compare the Orchestrator's own session id against `reviews/E-003/**`, and could fail a correct run.
+   - The AC4 docstring now says this part is shown by K2's record and the dispatch records.
+7. **AC1 role-file check, narrowed.**
+   - Answer to open question (a): I read "every brief and role file ... is as it was, since the changes exist only as these texts" as "no change text is in any of them". That check stays.
+   - The test that failed on any change to a role file or playbook since the freeze is removed, because a later unrelated role-file update is legitimate.
+   - I added a check that no brief record that existed at the freeze has been modified or deleted. `docs/briefs/README.md` is excluded, and new records may be added.
+   - I added a check that no brief record holds a change text.
+   - Role files and briefs in other repositories are out of reach of a Model-Lab file test.
+8. **AC4 HOLDOUTS.md check, fixed.** It now checks only lines starting `S-001-`.
+9. **AC3 "completed", fixed.**
+   - The docstring now says "completed" means judged.
+   - I added the "arms-finished" event, which still gets the one rerun after a set-up fault (Reruns (b)).
+10. **Cheap cases added, the rest not.**
+    - Added: the J8 extract-as-frozen diff against f4298cd (`test_j8_holdout_pack.py`).
+    - Added: J3 `export.py make --no-deliverable`, which exports nothing and returns `{"exported": false, "arm_result": "FAIL"}` (`test_j3_neutral_export.py`).
+    - Not added: AC2's "records the pair", the two-lane J2 case, a deliverable that names the change, and J7's power for a kind stopped early. The spec fixes no record location or format for these.
+    - "Is listed" stays checked as a non-empty `reason`, since the spec gives no listing form.
+11. **`analyse.py` is a Builder deliverable the spec does not name.** I kept it as the smallest mechanical reference the tests need. It is in the interface list, flagged as an added deliverable in `src/E-003/**`, and the Builder's brief should say so. It is not the Reviewer's actual result record.
+12. **AC2 research fixture, fixed.** The memo commit is now earlier than the source check's start commit (`test_ac02_pair_start.py`).
