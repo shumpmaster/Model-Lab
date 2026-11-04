@@ -57,11 +57,23 @@ stays living. The Critic checks Part 1 against the definition of ready.*
 - A fair test of the changes is ready (M2) · done when a test comparing each candidate change with leaving things as they are, on the same past tasks, is written down before any run, with its measure, its size and the number of runs it needs, for the owner to set its budget at the Build gate, and a group where nothing changes · phase: Design · why: the owner accepted that no change may be the result, and the research found that about 100 paired runs can only show large gains, so the test must be set up before it is run
 
 **Build**
+- Build-1 (standard) · taken on · why: the held-back checks and the plan's own locked checks must exist before any run, written by a Check author who never sees the work
+- Build-2 (standard) · taken on · why: the test's harness and the brief-and-model record must be built to the frozen plan before anything is measured
+- Build-3 (standard) · taken on · why: the harness and the record touch how every project's agents are started and judged, so a reviewer must try to break them
+- Build-4 (standard) · taken on · why: each candidate change must end with a recorded result, kept, dropped or no difference, before anything enters the operating model
+- Build-5 (standard) · taken on · why: the harness, the held-back checks, the judges and the records must work together on real pieces of work, not one at a time
 - Every agent's brief and model on record (M3) · done when every agent session, whether started by the automatic pipeline or from a conversation, records the brief it was given and the model that ran it, and each brief can be read against how its work went (review rounds, fails, rework) · phase: Build · why: the owner ruled that conversation-started agents keep this record across the model and approved recording each brief against how its work went, and the automatic pipeline already records it, so the record covers every session
 - Each tested change has a result (M4) · done when every tested change has a recorded result, kept, dropped or no difference found, from runs within the testing budget the owner sets at the Build gate · phase: Build · why: the owner wants a refined prompt engine that is not redundant with the model's existing checks, so each change must earn its place
 
 - The operating model runs on what worked (M5) · done when the changes that proved themselves and the rule for recording each brief are part of the operating model under its own rules, and nothing of the result is left only in the work repository · phase: Build · why: the owner wants the result integrated into the operating model completely and ruled that each result moves fully into the model repository
 - Every slip in this work corrected (M6) · done when each entry in the lessons log is corrected in the operating model or closed with its reason · phase: Build · why: the owner asked that every slip, error and miss be tracked and corrected within this workflow at the end
+
+**Launch**
+- Launch-1 (standard) · taken on · why: what worked, and the brief-and-model record, must run in the operating model itself, not only in this repository
+- Launch-2 (standard) · taken on · why: the operating model repository's own roles keep the changes running after this project ends, and must be named as their keepers
+- Launch-3 (standard) · taken on · why: the owner ruled that each result moves fully into the operating model repository, after which this repository is archived
+- Launch-4 (standard) · taken on · why: the second value target is checked over the first 30 pieces of each kind under the changed model, so that count must be running before the project leaves the desk
+- Launch-5 (standard) · taken on · why: the owner passes the Launch gate, and the lessons for the operating model are recorded at handover
 
 ## 4. Owners
 *An owner for every deliverable, including anything that needs the owner or an outside party.*
