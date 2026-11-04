@@ -4,7 +4,7 @@
 
 Approve the eleven criteria, choose a size and answer the terms, on two cards that passed their check once cut down; the plan then freezes [docs/gates/P-001/build-gate-4-proposal.md] [reviews/P-001-build-gate/critic.md:360] [reviews/P-001-build-gate/critic.md:362] [reviews/S-001/plan.md:939].
 
-**The proposer's recommendation:** proceed at size A, 732 runs — it tests every kind in turn [reviews/S-001/plan.md:1] [reviews/S-001/plan.md:535] [decisions/questions/P-001-worst-work.md].
+**The proposer's recommendation:** proceed at size A, 732 runs, about 132 million tokens — it tests every kind, in the order the plan reads your ruling [reviews/S-001/plan.md:535] [reviews/P-001-build-gate/critic.md:368] [reviews/S-001/plan.md:981] [decisions/questions/P-001-worst-work.md].
 
 ```mermaid
 flowchart LR
@@ -70,15 +70,15 @@ Your time under size A [reviews/P-001-build-gate/critic.md:164] [reviews/S-001/p
 
 No change clears chance: "no change helps", and the project closes [docs/PROJECT.md:112].
 A kept change missing in real use is removed [docs/PROJECT.md:113].
-At every token checkpoint and 16-week review point of each kind, you get the counts and say go on or stop [docs/gates/P-001/build-gate-4-proposal.md:24].
+At every 20 runs of each side and 16 weeks of each kind, you get the counts and say go on or stop [docs/gates/P-001/build-gate-4-proposal.md:24].
 
 ## 8. What the owner is agreeing to
 
 The criteria, frozen, and your size [docs/gates/P-001/build-gate-4-proposal.md].
-The terms card's answers, and pull request #44's reading lists [reviews/P-001-build-gate/critic.md:373] [reviews/44/reviewer.md:28].
+The terms card's answers, and pull request #44's reading lists [reviews/P-001-build-gate/critic.md:364] [reviews/P-001-build-gate/critic.md:373] [reviews/44/reviewer.md:28].
 Set-up: a private repository for the sheets, which you check is kept out of other sessions [decisions/questions/P-001-heldback-store.md:12].
 Build's and Launch's standard lines, all taken on [docs/PROJECT.md:60] [docs/PROJECT.md:72].
-You are the user: no representative reads the proposal, despite its label [docs/PROJECT.md:166] [docs/gates/P-001/build-gate-4-proposal.md:3].
+You are the user: no representative reads the proposal, despite its label [docs/PROJECT.md:166] [decisions/questions/P-001-gate-citation.md] [docs/gates/P-001/build-gate-4-proposal.md:3].
 
 ## 9. Appendix: the phase record
 <details>
@@ -91,7 +91,7 @@ The gate check prints no milestone lines for this project, run from a conversati
 
 | Milestone | Record |
 |---|---|
-| M2 A fair test of the changes is ready | Its plan passed review; its pull request is open, so no sprint has merged; yours to accept at this gate [docs/PROJECT.md:57] [reviews/S-001/plan.md:1] |
+| M2 A fair test of the changes is ready | Its plan passed review; yours to accept at this gate [docs/PROJECT.md:57] [reviews/S-001/plan.md:1] |
 | Design-1 Done defined in real scenarios | The eleven criteria, checked side by side with the rest [reviews/S-001/plan.md:711] [docs/gates/P-001/build-gate-4-proposal.md] |
 | Design-2 How the pieces connect is mapped | The join sheets, checked side by side [reviews/S-001/plan.md:711] |
 | Design-3 Every unknown has a test | Not recorded by the model; seven first-use checks, untested until first use [reviews/S-001/plan.md:957] |
@@ -110,7 +110,7 @@ Rulings in Design: one focused review, then a rewrite with its own review; the s
 Fixed after checks: cases 1 to 3, held by the gate Critic; the cards, after three failed rounds and a cut-down redraft; the standard lines reworded [reviews/P-001/_build-gate-3-critic.md] [reviews/P-001-build-gate/critic.md:178] [reviews/P-001-standard-lines/critic.md].
 
 Words used. Kind: plans, research or built work [docs/PROJECT.md:109].
-Terms card: the plan's open questions, seven argued and four listed with the plan's answer [reviews/P-001-build-gate/critic.md:373].
+Terms card: the plan's open questions, seven argued and four listed with the plan's answer [reviews/P-001-build-gate/critic.md:364].
 Relay: a short message you pass from the secret side [reviews/S-001/plan.md:912].
 First-use check: a check of the running, the first time it is used [reviews/S-001/plan.md:957].
 Reading lists: the files each secret-side helper may read [reviews/44/reviewer.md:13].
