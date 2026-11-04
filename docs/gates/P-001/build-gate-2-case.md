@@ -34,7 +34,7 @@ Secrecy from the side writing your cards may rest on instruction; a first check 
 If sessions cannot wake themselves, your actions rise to 243 to 487; first-use checks show it early [reviews/S-001/plan.md:906] [reviews/S-001/plan.md:957].
 Plans and built work enter only once briefs record their start (terms card) [reviews/S-001/plan.md:935].
 Accepted: four relays a kind, a week's judging lag, and the word public only on a failed check [reviews/S-001/plan.md:913] [reviews/S-001/plan.md:916] [reviews/S-001/plan.md:920].
-One reading list's comment is thin; filled before the freeze [reviews/44/reviewer.md:17].
+One reading list's comment is thin, a Reviewer's non-blocking note [reviews/44/reviewer.md:17].
 
 ## 6. Cost and limits
 
