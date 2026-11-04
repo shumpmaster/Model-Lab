@@ -9,7 +9,7 @@ Write one **held-back check** for the one kind of work your brief names:
 
 | Kind | The piece that is judged | Its existing check, to write from |
 |---|---|---|
-| Plans | a spec draft at round 1, as submitted to its plan review | the plan-review role file, `.claude/agents/critic.md`, and the playbook `docs/playbooks/software.md` |
+| Plans | a spec draft at round 1, as submitted to its plan review, with the task statement it was written to | the plan-review role file, `.claude/agents/critic.md`, and the playbook `docs/playbooks/software.md` |
 | Built work | a built stage's round-1 submission: the commit range it adds, in a copy of the repository | the build-review role file, `.claude/agents/reviewer.md`, as a general standard that holds for any stage; no particular spec is given to you, since the judge receives the stage's spec at judging time, as the task it was set |
 | Research | a research memo's round-1 submission, with the sources it cites | the source-check role file, `.claude/agents/source-checker.md`; there is no research playbook |
 
@@ -32,8 +32,10 @@ If your brief names a spec, or tells you to read one, that line does not apply t
 - A short list of pass/fail tests, numbered from 1. Each names one fault that, if present, sends
   the piece back, and says how a judge decides whether the piece has it, from the piece and the
   files it cites.
-- It judges the piece alone. The judge sees only the piece and the files it cites, never how or by
-  whom it was made.
+- It judges the piece and what the judge is given beside it, and nothing else. The judge sees the
+  piece, the files it cites, and the task the piece was set: for plans, the task statement of the
+  writer's brief, as text; for built work, the spec the stage builds; for research, the question
+  file the memo answers. It never sees how or by whom the piece was made.
 - It is written for a judge on a different AI model from the workers, who has not seen the project
   before. Each test must be decidable from the piece and what it cites, with no other context.
 - For research: the judge opens the memo's sources itself.
