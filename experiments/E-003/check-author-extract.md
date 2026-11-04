@@ -1,13 +1,11 @@
-# What the Check author is given for the fair test (S-001, E-003)
+# Held-back checks for S-001: what the Check author is given
 
-*An extract of spec S-001 and registration E-003, written for the Check author and frozen with them.
-It is all the Check author is given of either. It leaves out, on purpose, everything about what the
-test changes: S-001's design and criteria, E-003's hypothesis and method, and the files
-experiments/E-003/C*.md are withheld from the Check author (S-001, AC4; join sheet J8). Nothing below
-says what the test varies.*
+*Frozen with spec S-001. This file, and the role files and playbooks it names, are your task.
+Files not listed in your pack are not yours to read.*
 
 ## Your task
-Write one **held-back check** for each of three kinds of work, before that kind's comparison opens:
+Write one **held-back check** for each of three kinds of work, each by the date the Orchestrator
+gives you for that kind:
 
 | Kind | The piece that is judged | Its existing check, to write from |
 |---|---|---|
@@ -26,18 +24,18 @@ project; where two projects' standards differ, write the check so it holds for b
 - It is written for a judge on a different AI model from the workers, who has not seen the project
   before. Each test must be decidable from the piece and what it cites, with no other context.
 - For research: the judge opens the memo's sources itself.
-- The judge answers in this form (S-001, join sheet J5): first line `Verdict: PASS` or
+- The judge answers in this form: first line `Verdict: PASS` or
   `Verdict: FAIL`; then the numbered tests that failed, each with the file and line it rests on.
   A piece passes when no test fails.
 
 ## Rules
-- Write each check before its kind opens. Once its fingerprint is recorded, it is never edited while
-  its kind's comparison runs; it is used for that kind only (E-003, Holdout use).
-- Store it outside every repository, as governance/HOLDOUTS.md says; record only its set id and
-  fingerprint there. No copy of it may be committed anywhere.
-- Writing each check is one run of the test's budget.
-- If you need anything not listed here to write a check, ask through the channel; do not read
-  specs/S-001.md, experiments/E-003.md or experiments/E-003/C*.md.
+- Once its fingerprint is recorded, a check is never edited while it is in use; it is used for its
+  own kind only.
+- Store it outside every repository, as governance/HOLDOUTS.md says. Return its set id and
+  fingerprint; the Orchestrator records them there. No copy of it may be committed anywhere.
+- Writing each check is one run of the budget.
+- If you need anything not listed here to write a check, ask through the channel; read nothing
+  outside your pack.
 
 ## Return
 The six-part contract, with, per kind: the set id, its fingerprint, the role files and playbooks

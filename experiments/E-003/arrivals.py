@@ -15,7 +15,8 @@ It prints four things, each with the files or log lines it rests on:
    alone (the one project still producing plans and built work: the operating model repository
    has had no commit since 24 October, and Model-Lab's research is this project's own Discovery).
 3. The recent pace: the 14 days ending --to, counted mechanically (rules below).
-4. Which recent pieces had brief, start commit and model on record at dispatch.
+4. Which recent pieces had brief, start commit and model on record at dispatch, and which of these
+   fields Model-Lab's brief records (docs/briefs/*.md) carry.
 
 Dates are the dates files were added to git. Some records were filed in batches after the work
 (for example SD reviews/S-001-notifications, six rounds filed on 18 October), so a date can be
@@ -134,11 +135,11 @@ def main():
 
     print("\n2. Rates over the window, pieces a week")
     for kind, n in Q008.items():
-        print(f"   {kind:10s} all projects {n:3d} / {w:.2f} = {n / w:4.1f}")
+        print(f"   {kind} all projects {n} / {w:.2f} = {n / w:.1f}")
     sd_rows = added(sd, "reviews", "research/*source-check*", "dispatch-log", until=memo)
     wsd = weeks(sd_rows[0][0], last)
     for kind, n in Q008_SD.items():
-        print(f"   {kind:10s} Service Desk {n:3d} / {wsd:.2f} = {n / wsd:4.1f}   (SD from {sd_rows[0][0]})")
+        print(f"   {kind} Service Desk {n} / {wsd:.2f} = {n / wsd:.1f}   (SD from {sd_rows[0][0]})")
 
     since = (dt.date.fromisoformat(a.to) - dt.timedelta(days=13)).isoformat()
     print(f"\n3. Recent pace, {since} to {a.to} (2 weeks)")
@@ -152,7 +153,7 @@ def main():
     poomc = git(poom, "log", f"--since={since}", f"--until={a.to}T23:59:59", "--format=%h").split()
     print(f"   POOM commits {len(poomc)}; last commit {git(poom, 'log', '-1', '--format=%as').strip()}")
     for kind, n in (("plans", len(plans)), ("built work", len(built)), ("research", len(research))):
-        print(f"   {kind:10s} SD recent {n} / 2 = {n / 2:4.1f} a week")
+        print(f"   {kind} SD recent {n} / 2 = {n / 2:.1f} a week")
 
     print("\n4. On record at dispatch (brief, model and start commit in a control file)")
     rc = sorted(k for k in research if recorded(sd, k, "source-checker"))
@@ -163,6 +164,11 @@ def main():
     bc = {f for (f, _) in built if (sd / "reviews" / f / "_control").is_dir()}
     print(f"   SD plans: {len(pc)} of {len(plans)} folders have any control file; SD built: {len(bc)} of "
           f"{len({f for f, _ in built})} folders")
+    briefs = sorted(p for p in (ml / "docs" / "briefs").glob("*.md") if p.name != "README.md")
+    has = lambda p, field: any(l.lower().startswith(field) for l in p.read_text().splitlines())
+    nm = sum(has(p, "model:") for p in briefs)
+    nc = sum(has(p, "start commit:") or has(p, "start:") for p in briefs)
+    print(f"   ML docs/briefs: {len(briefs)} briefs; {nm} have a 'model:' line; {nc} a 'start commit:' line")
 
 
 if __name__ == "__main__":
