@@ -393,4 +393,27 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Caught by:** the Critic and the gate Critic.
 - **Cause:** two at once. The cards carry most of a 370-line plan's figures and options, redrafted quickly between rounds, with each new sentence checked against the finding it answered but not against every record it touches. And, as LL-49, the gate tools assume the pipeline's records: a conversation-run case can cite neither the plan nor the cards the owner rules with it.
 - **Correction proposed:** at the stop rule, Triage traces the cause and the owner rules how the cards go on (OPERATING_MODEL §4 "Stop rule"); before any redraft, every changed sentence is checked against the record it states, not only the finding it answers; for the model, with LL-49 and the gate-record change, a gate case can cite its item's cards and spec.
-- **Status:** open; the stop-rule step is the next session's first.
+- **Status:** open. The stop rule was applied in session_01QBwHGKFFgmANWaCNGxCLZd: Triage traced the root cause to the cards' length (triage/P-001-build-gate-round-3.md); the owner ruled them cut down (decisions/questions/P-001-build-gate-stop.md, its record waiting on PR #47's merge), and the cut-down cards passed at their round 2 (reviews/P-001-build-gate/critic.md). The model part stays open.
+
+## 2026-11-04 — Design of P-001, session_01QBwHGKFFgmANWaCNGxCLZd
+
+### LL-54 A figure in the plan passed eight checks without anyone opening the script that makes it
+- **What happened:** the plan tied its "32 to 64 weeks" to the order "the next kind collects while the previous is judged"; the script computes that figure as the slowest single kind, true only if all three kinds collect from the start. Three plan-review rounds and two card rounds passed it, and the recommended term on the terms card rested on it, until the cards' third round flagged it as minor and Triage rated it a plan fault (triage/P-001-build-gate-round-3.md, finding 4). Triage also found two more slips in the plan's statement of the owner's part. The Definer corrected all three; plan rounds 4 and 5 passed them (reviews/S-001/plan.md).
+- **Caught by:** the Critic (cards' round 3, finding 4) and Triage.
+- **Cause:** the checks compared the plan's figures with its own tables and output file, never with what the script's code computes; the meaning of a column ("together") was taken from its label.
+- **Correction proposed:** a check of a figure that drives a decision reads the code that produces it, not only its output; for the model, the plan-review brief names the scripts behind the decision figures as must-read.
+- **Status:** fixed here (the plan corrected); model change open.
+
+### LL-55 The stop rule was applied to card checks, which no rule covers
+- **What happened:** the cards' third failed Critic round was treated as "the last allowed", and the stop rule applied, at the owner's instruction; Triage and the Critic found that the model's three-round limit is written for plan and build rounds only, and no rule counts card checks or restarts their count (triage/P-001-build-gate-round-3.md; reviews/P-001-build-gate-stop/critic.md, round 1). The stop-rule question had to offer "the limit does not apply to cards" as an option and mark the redrafted cards' round count as an assumption.
+- **Caught by:** Triage and the Critic.
+- **Cause:** the model's stop rule names plans and built work; decision cards have their own repeated checks but no limit, and an earlier session applied the limit by analogy.
+- **Correction proposed:** the model says whether, and how, the stop rule counts checks of decision cards, and whether a cut-down or redrafted card starts its count again.
+- **Status:** open; to the model with this project's lessons.
+
+### LL-56 A gate case was sent to its Critic two words over its limit, after an edit not re-checked
+- **What happened:** the gate check passed on case 4; a one-line edit afterwards ("a week or more") was committed without re-running it, and the gate Critic's fixed copy was taken at that commit, 352 words against 350. The pre-push run caught it; the case was trimmed before the push, and the Critic, reading the fixed copy, counted about 349 by its own method (reviews/P-001/_build-gate-4-critic.md).
+- **Caught by:** the full governance check, run in the separate check worktree before the push (the practice from LL-48 and LL-51).
+- **Cause:** the check was run on the working tree before the edit was committed, and not again on the commit given to the Critic.
+- **Correction proposed:** run the form check on the exact commit a helper's fixed copy is made from, as for a push.
+- **Status:** fixed here (practice changed); closed for the model unless it recurs.
