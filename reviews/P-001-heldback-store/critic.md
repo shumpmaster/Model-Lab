@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-The Critic's check of questions/P-001-heldback-store.md (brief: docs/briefs/37-critic.md), on claude-sonnet-5-5, a different model from the question's writer, verbatim. Recorded by the orchestrator. Session session_01QBwHGMBo8kZsMCS2EvKNwd, 2026-11-04.
+The Critic's check of questions/P-001-heldback-store.md (brief: docs/briefs/37-critic.md), on claude-sonnet-5-5, a different model from the question's writer, verbatim. Recorded by the orchestrator. Session session_01QBwHGMBo8kZsMCS2EvKNwd, 2026-11-04. FAIL at round 1; PASS at round 2 (commit 6dce93a), whose two non-blocking notes were then applied in the wording it suggested.
 
 ## Round 1
 Findings. Blocking ones come first.
@@ -80,3 +80,59 @@ Six-part contract:
 6. Open questions: does the environment let a repository be attached to one session only, with no standing access for the others? The answer decides whether A's gain is true.
 
 Files: /home/user/Model-Lab/questions/P-001-heldback-store.md (under review).
+
+## Round 2
+Round 2 findings. None are blocking.
+
+1. Round-1 finding 1 (A's protection stated as fact): resolved.
+   - A now says its protection holds only if judging sessions alone are started with the new repository. It says outright that this "rests on how sessions are set up, which no test has yet shown".
+   - The cost now names the approval wherever a session asks to attach a private repository.
+   - Context bullet 3 and intake/P-001-environment-2026-11-04.md lines 21-23 and 26 back the mechanism. Repositories are chosen at session start, and subagents share the container.
+   - The recommendation carries the same condition.
+
+2. Round-1 finding 2 (A's costs and "Rules out: nothing", and the claim that either can be changed later): resolved.
+   - A now has costs and rules out judging from the work's session.
+   - The opening and the blast radius both say a sheet the work may have seen must be rewritten and re-fingerprinted.
+
+3. Round-1 finding 3 (the machine-reclaim claim miscited): resolved, with a small weakness.
+   - Context bullet 5 now cites the intake file, and so does the 60-to-121-weeks bullet 6 (to S-001).
+   - Intake line 28 admits the reclaim fact comes from "this session's operating instructions ... not a file record". It is disclosed honestly. I accept it as a dated session observation.
+
+4. Round-1 finding 4 (the two non-file sources): resolved.
+   - The repository listing is now recorded in intake lines 5-15. It gives portfolio and the operating model as private, and Model-Lab and Service Desk as public. That matches Context bullet 4.
+   - The listing is copied by the Chief of Staff and is not independently checkable. That is acceptable for a dated tool observation.
+
+5. Round-1 findings 5 and 6 (fairness, and a missing option): resolved.
+   - B now has fair gains.
+   - Option C (the owner keeps the sheets) is added. The encrypted-sheets idea is dismissed with a sound reason: the key would need the same hidden place.
+   - C's arithmetic checks out against AC5 (specs/S-001.md:131): 60 × (2 + 2 + 1) = 300 judging sessions.
+
+6. Round-1 findings 7 and 8 (the opening, and default/timeout): resolved.
+   - The opening has no ids or paths, and "fit-together check" is gone.
+   - DEFAULT none and TIMEOUT none are now explained by the choice-question precedent and the point that each option needs the owner's action. Risk class R0 stays correct, since questions/** is R0 in governance/risk-paths.toml.
+   - Minor and non-blocking: the opening's "partly" and "may run for over a year" are fair to the records (60 to 121 weeks).
+
+7. Non-blocking, new. The card omits a caveat that its own intake records.
+   - Intake line 27 says nothing read shows whether the environment's settings add a repository to every new session.
+   - If they do, A's condition cannot be met and A collapses to B. The card's "which the first judging would confirm" only partly covers this. It would be fairer to name this unknown in A's gain, or to say the owner should check the environment's repository settings when creating the repository.
+
+8. Non-blocking, new. C's gain wording is slightly too strong.
+   - "No repository or session ever holds them except the one judging" ignores the writing helper's session and the Chief of Staff's session, through which the owner receives each sheet. The text of each sheet passes through them once.
+   - Say "no repository holds them, and only the writing session and the judging one see each".
+
+Six-part contract:
+1. Changed: nothing. I hold no write tool.
+2. Why: to check the redrafted P-001 question and the new intake record against my round-1 findings, per brief 37.
+3. Verified:
+   - I read questions/P-001-heldback-store.md and intake/P-001-environment-2026-11-04.md.
+   - I re-read specs/S-001.md AC5 at line 131 and checked the 300-session sum by hand.
+   - I relied on my round-1 reads for the rest, including the plan Round 4 finding 2, AC8, risk-paths.toml and AGENTS.md §5.
+   - I ran no command.
+4. Undone:
+   - I did not re-read reviews/P-001-heldback-store/critic.md.
+   - I did not check the "github.access" documentation page itself, only the extracts.
+   - I did not confirm the repository visibility myself.
+5. Needed outside my lane: the Chief of Staff may fix findings 7 and 8 (the writer fixes; I do not). Neither stops the card going to the owner.
+6. Open questions: do the environment's settings add a repository to every new session? (Finding 7.)
+
+File: /home/user/Model-Lab/questions/P-001-heldback-store.md
