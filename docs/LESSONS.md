@@ -370,4 +370,4 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Caught by:** the Critic.
 - **Cause:** the option's gain was written from an expectation of how sessions work, not from a record; the environment's documentation was read only after the check, though it was available before.
 - **Correction proposed:** as LL-46: before an option states what a system will do, read the record or documentation that decides it and cite it; record environment facts that an ask rests on in the project (as intake/P-001-environment-2026-11-04.md now does); for the model, the environment check of LL-22 records them at the start.
-- **Status:** open (recurred); the question was redrafted.
+- **Status:** open (recurred); the question was redrafted. It recurred once more the same day: the second plan-stop card called its first option's secrecy "real" against the store question's own recorded caveat (reviews/P-001-plan-stop-2/critic.md, finding 1); the card is being rewritten after the store answer.
