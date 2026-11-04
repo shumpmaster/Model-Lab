@@ -371,3 +371,12 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** the option's gain was written from an expectation of how sessions work, not from a record; the environment's documentation was read only after the check, though it was available before.
 - **Correction proposed:** as LL-46: before an option states what a system will do, read the record or documentation that decides it and cite it; record environment facts that an ask rests on in the project (as intake/P-001-environment-2026-11-04.md now does); for the model, the environment check of LL-22 records them at the start.
 - **Status:** open (recurred); the question was redrafted. It recurred once more the same day: the second plan-stop card called its first option's secrecy "real" against the store question's own recorded caveat (reviews/P-001-plan-stop-2/critic.md, finding 1); the card is being rewritten after the store answer.
+
+## 2026-11-04 — Design of P-001, session_01QBwHGKs5xh6cq2DgNNozv7
+
+### LL-51 Uncommitted lines set aside in the checkout a Critic was reading (LL-19 recurred)
+- **What happened:** three reworded standard-milestone lines in docs/PROJECT.md were left uncommitted on purpose, since a Critic must check a reworded line before it stands, and a Critic was dispatched to read them in the shared Model-Lab checkout. When a stop hook asked for uncommitted work to be committed and pushed, the Chief of Staff stashed the file there to run the checks on a clean tree, then saw that this hid the lines from the Critic and restored them within seconds. The Critic's return quotes the new lines, so its reading was not affected (reviews/P-001-standard-lines/critic.md).
+- **Caught by:** the Chief of Staff, at once.
+- **Cause:** as LL-19: one working copy shared between the Chief of Staff's own changes and a helper's reads; the clean copy for the checks was made only after the slip.
+- **Correction proposed:** run pre-push checks in a separate worktree at the commit being pushed (done from then on), and never change a checkout a running helper was pointed at; for the model, with LL-19, helpers read from a fixed worktree for their brief.
+- **Status:** fixed here (practice changed); model change open with LL-19.
