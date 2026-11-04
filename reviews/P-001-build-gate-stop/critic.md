@@ -164,3 +164,91 @@ Round 2 check of questions/P-001-build-gate-stop.md at 1d8ddc4. I read it cold, 
   - Should the card say that the recommended order term (2A) loses its stated gain, since orders 1 and 2 are both 60 to 121 weeks?
 
 Files: /home/user/ml-qstop2/questions/P-001-build-gate-stop.md, /home/user/ml-q44/triage/P-001-build-gate-round-3.md, /home/user/ml-q44/reviews/S-001/plan.md, /home/user/ml-q44/specs/S-001.md
+
+## Round 3 (commit 1fdbf47; brief 62, a fresh session)
+
+Verdict: PASS
+
+Round 3 check of questions/P-001-build-gate-stop.md at commit 1fdbf47. The card is fit to go to the owner. It has no blocking fault. Finding 1 below should be fixed, but it does not stop it.
+
+**Findings**
+
+1. Not blocking. The recommendation's second reason, that B "asks less of your attention", is not traced. (LL-05)
+   - B's own cost line says you read the figures in the plan instead of on the cards. It also says you still answer every term.
+   - The §1 priority order is true: outcome, quality, the owner's attention, speed, cost (OPERATING_MODEL line 35). But it has not been shown that B takes less of your attention overall.
+   - The first reason (B alone shortens the cards) does hold. The trace's root cause is the cards' scope. A, C and D keep the length.
+   - Suggested fix: say "less to read on each card" and note the plan reading, or drop the claim.
+
+2. Not blocking. Round 2 finding 5 is only partly resolved. The opening is still one dense paragraph.
+   - It leads with the failure and holds no ids or paths, so it passes that test.
+   - "The size that takes 100 pieces of work of each kind except plans" in option A is hard for a cold reader. The gate card names it C2.
+   - "Pieces", "your part" and "side by side" are not explained.
+   - The 9-in-20 figure now has its judge-error clause. That part is fixed.
+
+3. Not blocking. "Nothing here cannot be undone" is a clumsy double negative. "Everything here can be undone" is plainer.
+
+4. Not blocking. The trace's phrase "after the minimal re-scope above, preceded by the plan erratum" is quoted without "preceded by the plan erratum". The omission does not mislead. The erratum is already done and passed rounds 4 and 5.
+
+**Round 2 and round 1 findings, checked**
+
+- **Round 2 finding 1 (source of the recommendation) is resolved.**
+  - The card now calls B the Chief of Staff's judgement, with medium confidence.
+  - It quotes what the trace said: "a focused confirmation review, after the minimal re-scope above".
+  - It carries the trace's warning that this is not "just fix two lines". The trace's cut-if-new-faults point is also there.
+  - It says the trace does not make clear whether it meant a cut followed by a focused check, or only a tight list of fixes.
+  - All of this matches triage lines 156-167. Lines 130-136 and 163-167 support it.
+  - "What would change it" is kept and fair.
+- **Round 2 finding 2:** now "we found no rule", which matches the trace's "in the files I was assigned". My search of the operating model also found none.
+- **Round 2 finding 3:** the clause explaining four options against the form's two or three is in. Three are the stop rule's own options. The fourth is the owner's.
+- **Round 2 finding 4:** B's criterion is now marked as the Chief of Staff's choice, and the card says the trace's list differs.
+- **Round 2 finding 6:**
+  - "Orders" is now plural.
+  - The ledger-ruling-before-next-check point is in the options header. That matches AGENTS.md line 38.
+  - "Any claim added outside them fails it" matches the trace.
+- **Round 1 findings** stay resolved. Option D is present with all four parts. A's cost line is honest. The round-count assumptions are flagged. The context has 5 bullets. The default's effect is stated.
+
+**Every changed sentence against its record**
+
+- **Opening**
+  - The three-round limit is written for plans and built work: OPERATING_MODEL §4 and AGENTS.md.
+  - The owner's "round 3, the last allowed, so apply the stop rule" is in the intake.
+  - One fault a misreading and the other an in-card fix: triage lines 43-57 and 110-113.
+  - The plan fault, and the two slips (line 17's worst case, the weekly-landing ask): corrected, with plan rounds 4 and 5 both PASS (plan.md lines 967-1034).
+  - Order 2 takes 60 to 121 weeks; orders 3 and 4 take 32 to 64: S-001:338-341 and plan.md lines 977-980.
+- **Option A**
+  - The four checks that put a question to you are K1 before the first sheet, K3, K4, and K5 at its first check (S-001:177, :180, :181, :187). The wake messages falling to you matches K7 (:189).
+  - Term 2A's recommendation and its "32 to 64 instead of 60 to 121" gain are in the terms card line 10. That is why the card says to look at it again.
+  - "Plans stay at about 4 in 5, or about 9 in 20" is 0.80 and 0.45, from triage lines 46 and 112.
+  - C2 on the gate card is 100 pieces for research and built work and 60 for plans. The built-work chance is 24 in 25, or 7 in 10 with judge error.
+  - "One time in ten" for judge error is supported by S-001:44 and :76.
+  - The 32-to-64 label on the gate card matches that card's "side by side" wording.
+- **B and C**
+  - B and C match the trace's Re-scope and Re-specify.
+  - The count from a first round is flagged as an assumption. AGENTS.md line 38 says that for plans only.
+  - The wording "no rule says" is fair.
+- **D:** consistent with the trace's open question and its "what would change it".
+- **Exclusion of "drop":** matches triage lines 138-142. The kill stays on the gate card.
+- **Ledger:** L-0001 to L-0005 only, no delegation. OPERATING_MODEL §2 lets a grant cover choosing a focused review, and nothing else does. §4 forbids accepting work despite a failed check.
+- **Context bullets 1 to 5** are true of their sources. "Found no rule" in bullet 2 is slightly firmer than the trace but matches the card's own "we found".
+- **Options:** each has what happens, gain, cost and what it rules out. The effects follow from the trace and the rule, and nothing about a person's or system's future behaviour is left untraced.
+- **Risk class and timing:** R0 for questions/**, reversible, and a blast radius limited to the two cards and when the gate arrives are all right. DEFAULT and TIMEOUT "none", with the reason, match decisions/questions/P-001-plan-stop.md. They depart from the Model-Lab §5 default, but the reason is given.
+
+**Six-part contract**
+- **Changed:** nothing. I hold no write tool.
+- **Why:** round 3 cold check of the Build-gate stop-rule question. It covers round 1 and 2 findings and every changed sentence, against the cited records.
+- **Verified:**
+  - I read the question, the intake, and rounds 1 and 2.
+  - I read the whole triage record, plan.md lines 967-1034, S-001 lines 170-191 and 330-374, and the terms card's lines 10 and 12. I also read the gate card's option lines C1 and C2 and its D.
+  - I read AGENTS.md line 38, OPERATING_MODEL §4 and the §1 priority line, and the S-001 judge-error lines.
+  - I read only the fixed copies.
+- **Undone:**
+  - I did not re-run or open sizing.py or output.txt. I relied on plan rounds 4 and 5.
+  - I did not read the gate card's long omitted lines in full, only the grepped option lines. So I did not recheck the rest of that card.
+  - I did not re-read OPERATING_MODEL §2 "Decision cards", the question template, Model-Lab §5 and "Plain English first", or LL-05/08/46/50/52 afresh. I relied on round 2's reading of them, which I spot-checked only through the points above.
+  - I did not read the case, the proposal or any -notes.md.
+- **Needed outside my lane:** the Chief of Staff may fix findings 1 to 3. None blocks the card going to the owner. No self-implication flag (D-050) for this session.
+- **Open questions:**
+  - Does B in fact take less of the owner's attention, given the plan reading it asks for?
+  - Should "pieces" and "your part" be explained once in the opening?
+
+Files: /home/user/ml-qstop3/questions/P-001-build-gate-stop.md, /home/user/ml-q44/triage/P-001-build-gate-round-3.md, /home/user/ml-q44/reviews/S-001/plan.md, /home/user/ml-q44/specs/S-001.md, /home/user/ml-q44/questions/P-001-build-gate-terms.md, /home/user/ml-q44/questions/P-001-build-gate.md, /home/user/Personal-Org-Operating-Model/AGENTS.md, /home/user/Personal-Org-Operating-Model/OPERATING_MODEL.md
