@@ -325,3 +325,10 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** the brief was written without checking how the checks read the `Spec:` trailer; the model gives experiments no id of their own that the checks accept, so they sit under a spec.
 - **Correction proposed:** before briefing a builder, check what its commits' trailers must name (as LL-09 asks for the surface map); for the model, say in the experiment playbook that a registration sits under its spec and its commits name that spec.
 - **Status:** fixed here; model change open.
+
+### LL-45 A private repository's work was copied into a public one without checking first, and the ask was put without a question file
+- **What happened:** the Chief of Staff started the Builder's replay session with access to the private operating-model repository, and told it to copy every helper transcript into Model-Lab, without checking that Model-Lab is public. Two replays' transcripts and patches from the private repository were pushed to a public branch before anyone noticed. The Chief of Staff then put the choice (make it private, remove it, or leave it) to the owner in the session without filing a question first. The owner ruled to leave it public (decisions/questions/P-001-model-lab-public.md).
+- **Caught by:** the Chief of Staff, checking the repositories' visibility before landing the branch, after the Builder flagged the owner's email in three transcripts.
+- **Cause:** the brief was written without checking where the records would be published; the project's data boundary names which AI service data may go to, but not which repositories are public.
+- **Correction proposed:** before a brief moves records between repositories, check each one's visibility and say in the brief what may be copied; for the model, the data classes name repository visibility, and the environment check (LL-22) lists it.
+- **Status:** fixed here (the owner ruled); model change open.
