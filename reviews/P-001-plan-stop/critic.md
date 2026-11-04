@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-The Critic's check of questions/P-001-plan-stop.md (brief: docs/briefs/35-critic.md), on claude-sonnet-5-5, a different model from the question's writer, verbatim. Recorded by the orchestrator. Session session_01QBwHGMBo8kZsMCS2EvKNwd, 2026-11-04.
+The Critic's check of questions/P-001-plan-stop.md (brief: docs/briefs/35-critic.md), on claude-sonnet-5-5, a different model from the question's writer, verbatim. Recorded by the orchestrator. Session session_01QBwHGMBo8kZsMCS2EvKNwd, 2026-11-04. FAIL at round 1; PASS at round 2 (on commit f0f5f28) on the later form fix to the reversibility field, and on its notes applied.
 
 ## Round 1
 Critic check of questions/P-001-plan-stop.md. Brief: /home/user/Model-Lab/docs/briefs/35-critic.md. Read-only. I ran nothing.
@@ -70,3 +70,76 @@ Fixes the Chief of Staff must make before this can pass:
 6. Open questions: (a) Should the card name the 3 smaller findings (5, 6, 9)? (b) Should the Service Desk's PACKS.toml also be in the rule change, per reviews/39 finding 5? (c) Does the owner want DEFAULT and TIMEOUT written "none" or in some other form the template allows?
 
 Files: /home/user/Model-Lab/questions/P-001-plan-stop.md, /home/user/Model-Lab/triage/P-001-S-001-round-4.md, /home/user/Model-Lab/reviews/S-001/plan.md, /home/user/Model-Lab/reviews/39/reviewer.md, /home/user/Model-Lab/governance/risk-paths.toml.
+
+## Round 2
+Verdict: PASS
+
+Round 2 check of /home/user/Model-Lab/questions/P-001-plan-stop.md (commit f0f5f28) under brief 35. Read-only, nothing run. Every blocking finding from round 1 is resolved, and I found nothing new that blocks.
+
+Round-1 findings:
+1. Opening, path and jargon: resolved, not blocking. The opening now has no path. Its only cross-reference is "(Triage, round 4)". It explains the blind helper and the marking sheets in plain words. It says that dropping the test cannot be undone, and it lands on the choice the owner must make. The roles "Triage" and "the helper that analyses the results" are still named, which is acceptable.
+2. "Triage found the measures, size and options sound": resolved, not blocking. Line 5, Context bullet 19 and the recommendation now say Triage found the four touch no threshold, size or option, and that it did not re-check the seven smaller points. This matches the triage record.
+3. Options unfair and uncited: resolved, not blocking.
+   - Each option now gives a gain, what happens, a cost and what it rules out.
+   - The unsupported cost figures are now "not estimated".
+   - A states its dependency on the rule change and that A cannot succeed if the owner declines it.
+   - B states that it still needs the same rule change.
+   - C states that a narrowed plan restarts at round one and what it rules out (the secret marking sheets).
+   - D states what it rules out.
+4. Claims checked against records: still true, with one small inconsistency, not blocking.
+   - Line 13 says the four failures "touch none" of the thresholds, sizes or options, while Context bullet 19 adds "beyond the fourth's file pattern". Align them.
+   - The "what would change it" line follows the triage record.
+5. Risk class, reversibility, default, timeout: resolved, not blocking.
+   - R0 for the ruling and R3 for A's rule change under governance/** (confirmed in governance/risk-paths.toml) is now stated, with the owner's approval.
+   - Reversibility is A, B and C reversible and D not.
+   - Default "none" now gives its reason from the stop rule's text: the owner's own choice, and a later approval does not count.
+6. LL-46, what systems will do: resolved, not blocking. Option A now says what the rule change would need to do, rather than asserting what the tools will do.
+7. Milestones: confirmed. docs/PROJECT.md lines 55 and 56 hold Design-5 and Design-6, both taken on with a why.
+
+New, not blocking:
+- C's gain "no rule change to the tools" is slightly strong. Triage ties the Reviewer-pack change (finding 3) to a different problem, and C may still need it. Say "no rule change for the secret marking sheets". The text does already say "for the secret marking sheets", so this is only a nudge.
+- D's "unless a new plan is made later" has no cited record. It is harmless.
+- Triage's third "what would change the choice" (the Service Desk's standards cannot reach the blind helper, so re-scope) is not in the card. It is a minor omission.
+
+## Six-part contract
+1. Changed: nothing.
+2. Why: the round-2 check of the redrafted card (brief 35).
+3. Verified: I read the redraft in full and grepped docs/PROJECT.md for Design-5 and Design-6. My round-1 reading of the cited records stands; I did not reread them.
+4. Undone: I did not re-open the cited records, the spec or the runner. I did not run CI form checks.
+5. Needed outside my lane: the Chief of Staff may make the optional small fixes above. Nothing blocks filing the card.
+6. Open questions: none new.
+
+File: /home/user/Model-Lab/questions/P-001-plan-stop.md.
+
+## Round 2, the reversibility field's form fix
+I judged /home/user/Model-Lab/questions/P-001-plan-stop.md as it now stands, with the later commit that changed REVERSIBILITY. Read-only, nothing run. My round-2 findings are unchanged, and the new wording adds no blocking finding.
+
+1. Not blocking. REVERSIBILITY now reads "irreversible", and BLAST RADIUS says option D ends the test and is the reason, and that A, B and C can be revisited.
+   - This is the conservative reading. It fits the rule in AGENTS.md §5 that irreversible questions never default, and it matches DEFAULT "none" and TIMEOUT "none".
+   - It is true of D, and the card says plainly why the whole question carries the label.
+2. Not blocking. The label now covers all four options, but the blast-radius sentence puts "A, B and C can be revisited" before the list of what is affected, which reads slightly awkwardly. Moving that clause to the end would help.
+3. The round-2 non-blocking nits stand. They are C's "no rule change to the tools" gain, which may be slightly strong; "touch none" in the recommendation against "beyond the fourth's file pattern" in Context; and the uncited "unless a new plan is made later" for D.
+4. All other round-2 results stand: the opening is plain, the options are fair, the claims match the triage record, and Design-5 and Design-6 exist in docs/PROJECT.md.
+
+## Six-part contract
+1. Changed: nothing.
+2. Why: to judge the final state of the card after the form-check edit (round 2, brief 35).
+3. Verified: I re-read lines 14 and 15 of the file by grep. The rest of the file I had read in full a moment earlier.
+4. Undone: I did not reread the other lines, since you described only this edit. I did not run CI form checks.
+5. Needed outside my lane: nothing blocks filing.
+6. Open questions: none.
+
+File: /home/user/Model-Lab/questions/P-001-plan-stop.md.
+
+## Round 2, confirmation of the notes applied
+I read /home/user/Model-Lab/questions/P-001-plan-stop.md as it now stands. Read-only, nothing run. The changes you listed are in place and none of them breaks the card.
+
+1. Reversibility and blast radius are fine, not blocking. REVERSIBILITY is the one word "irreversible". BLAST RADIUS says option D is the reason and that A, B and C can be revisited. This fits DEFAULT "none" and TIMEOUT "none", and AGENTS.md §5, where irreversible questions are never defaulted.
+2. The "beyond one file pattern" wording is fine, not blocking. It appears in the opening (line 5) and the recommendation (line 13), and it now matches Context line 19 and the triage record.
+3. Option C is fine, not blocking. Its gain now reads "no rule change for the secret marking sheets (the analyst's reading may still need one)". This is accurate against the triage record.
+4. The third "what would change it" is fine, not blocking. It is the Service Desk's standards being out of the secret-sheet writer's reach, which leads to C limited to this project's standards. It matches Triage's third item and finding 5.
+5. One small point, not blocking: BLAST RADIUS puts "A, B and C can be revisited" in the middle of its list. Moving it to the end would read better. It does not affect the verdict.
+
+I did not recheck the rest of the card. It is unchanged from my round-2 pass.
+
+File: /home/user/Model-Lab/questions/P-001-plan-stop.md.
