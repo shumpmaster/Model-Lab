@@ -174,3 +174,85 @@ N9. Plain English. Both openings are plain. "Plan's option C", "the plan's optio
 - Undone: the sizing figures were not re-derived. I did not open the proposal file, the full text of E-003, the PROJECT.md sections on V1 and M2 (so I could not compare the "same past tasks" wording), plan.md beyond the lines cited, or the question files' original wording for the plan-stop-2 option text.
 - Needed outside my lane: the Chief of Staff must fix G1 to G3 and T1 to T4, and should fix N1 to N9. It must then re-submit for round 3, the last round allowed.
 - Open questions: should the case's lettering follow the card, or the card's the plan's? That is the Chief of Staff's call, but they must match. Does the owner intend "up to" on the owner's part to cover the 243 to 487 worst case, or only the K5-alone range?
+
+## Round 3 (commit ea0aaac; brief 54, a fresh session; the last round allowed)
+
+Verdict: FAIL
+
+Round 3 check of questions/P-001-build-gate.md (the gate card) and questions/P-001-build-gate-terms.md (the terms card). I read both from /home/user/ml-gate at ea0aaac, and I am on claude-sonnet-5-5, a different model from the cards' writer. Round 2's findings G1 to G3, T1 to T4 and most of N1 to N9 are resolved. Two new errors keep the verdict at FAIL: finding 1 on the gate card and finding 2 on both cards. Each is a one-line fix.
+
+**Round 2 findings, resolved**
+- G1: option C now has gain, cost, chance and the owner's part for both sizes. The figures are right for C1 (0.57 / 0.30, 17 to 19 records, 40 to 81 wake messages, 123 to 246 session starts). C2 has an error (finding 1).
+- G2: the 243 to 487 worst case, the K7 ranges (60 to 121, 180 to 363) and the ranges for B and C all match "The owner's actions per option".
+- G3: the case now uses the card's letters (A, B, C1, C2) and its figures.
+- T1: the quoted V1 and M2 texts are word for word the plan's open questions 1 and 2.
+- T2: 9B no longer overstates the gain; it says little isolation is gained and that AC5 and J5 change.
+- T3: term 10 now lists the K7, K5 and K3 fallbacks, including the K3 choice of stopping the test or ordering a new plan through review.
+- T4: the conversation-started research source-check record is in term 5.
+- N1, N2, N3, N5, N7 and N8 are fixed. N6 is fixed apart from one open item (see the note after finding 4).
+- All nine of the plan's questions map to terms 1 to 11, and nothing is left out.
+- The opening of each card is plain, with no ids or paths.
+- Checked true:
+  - The gate card's figures match the plan for A, B, C1 and C2: runs, tokens, weeks, sessions, records, wake messages and session starts.
+  - 9B's 336 sessions, 7B's cost, the 16-week review points, and the quoted lines 1 and 10 of the plan-stop-2 ruling all match.
+  - The Reviewer's note on the thin analysis comment (reviews/44/reviewer.md, finding 5) is carried correctly.
+  - The model-lab-public and spend-ceiling rulings are used correctly in 11 and 7.
+  - Options that go against a ruling are flagged: gate B; terms 2A, 2C and 9A, and 11B as going beyond the ruling.
+
+**Findings**
+
+1. Gate card, option C2 (BLOCKING). "Chance: about 24 in 25, or about 7 in 10 with judge error" is stated for the whole option. The option is 100 pieces for research and built work and 60 for plans.
+   - Those figures are the plan's for 100 pieces (0.96 / 0.71).
+   - Plans stay at 60 pieces, which is 0.80 / 0.45 (the plan's 60-piece rows).
+   - So the figure is false for plans.
+   - Fix: say "for research and built work; plans stay at about 4 in 5, or 9 in 20 with judge error".
+
+2. Both cards, "comes to you first" (BLOCKING, LL-46 and LL-50: a claim about what a system will do that no record holds).
+   - Terms 10A's gain says "every failure that would change your part comes to you first". The gate card's recommendation says "a failed first check there comes to you before more is spent".
+   - Only K1, K3, K4 and K5 at its first check are put to the owner as a question.
+   - K7 has no question. The Orchestrator tries first, then the owner just sends wake messages. The owner is not offered a go-on-or-stop choice, and the card says so itself in term 10.
+   - K5 in the Orchestrator's own session after the first check is also no question; it is just one more session a week.
+   - Fix: name the checks that do come as a question (K1, K3, K4, K5 at its first check), and say the wake-message duty simply falls to the owner.
+
+3. Gate card, options B, C1 and C2 (not blocking). A says built work and research fall to about 1 in 2 if the two versions disagree as often as chance allows. B, C1 and C2 omit this, although B is built work only. Under that assumption B is 0.51 and C1 is 0.34 for built work, 0.37 for research and 0.62 for plans. The line defining "Chance" implies the middle assumption only, so the figures are true. But B's "about 4 in 5" reads better than the record supports. Add the caveat to B at least.
+
+4. Terms card, term 2 and the gate card's "side by side" (not blocking).
+   - 32 to 64 weeks is the longest single kind (research), so it holds only if all three kinds collect from the start. That is 2C, "all at once".
+   - The plan (line 90, and open question 4) ties it to 2A, the next kind starting while the previous is judged, and the card repeats the plan.
+   - Collecting one kind after another gives about the sum, 60 to 121. The card is true of its cited record, but a smart owner could pick 2A expecting 32 to 64.
+   - Say "up to 32 to 64, only if the kinds overlap fully", or flag it back to the plan.
+
+Note on N6 (the one open item): 4B ("leave research until the built-work and plan results are in; research may never be tested") is not marked as going against "every kind" or "everything should be touched". It also does not say how it fits with gate options A and C, which include research.
+
+5. Gate card (not blocking). The plan's "one likely limit" (K1: the secret check kept from the cards' writer by instruction alone, because the Chief of Staff's session holds a tool that reads other sessions' transcripts) is in the case (section 5) and the plan's "In plain words", but in neither card. The gate card says "Your part assumes every first check passes". Add a line pointing to case section 5.
+
+6. Gate card, opening (not blocking). It says the check of "how accurate the judges are" was skipped. The ruling and the plan call it the judging-consistency check, and the sizing's "wrong one time in ten" is a noise model. Use "how consistent and reliable".
+   - Also, "a little over half of what it would be otherwise" is right for the middle assumption (0.80 to 0.45). It is about two-thirds under independent arms (0.51 to 0.34).
+
+7. Terms card, term 10 (not blocking). It lists the K7 fallbacks for the work and judging sessions but not the one for the Orchestrator's session: the owner asks for the weekly landing. The plan's ranges do not count it either. Say so, or carry it back to the plan.
+
+8. Both cards (not blocking). N4 and N9 are only partly fixed.
+   - "WHO HAS CHECKED IT" on both cards names the Critic's check of the card but not the round or result. Cite "round 3, PASS" once the Orchestrator records that.
+   - "Plan question n" in terms 1, 2, 3, 5 to 11 still uses the plan's lettering; give the question's name instead.
+
+9. Both cards (not blocking). R0 is now given with its basis. The cards state "irreversible" and give the reason (option F, term 11B), though the template says reversibility is computed from the class. DEFAULT and TIMEOUT "none" are right for irreversible questions.
+
+Case and cards agree on letters, sizes, the 24 to 27 records, 183 to 366 and 243 to 487 session starts, and the 4 in 5 and 1 in 2 chances.
+
+**Six-part contract**
+- Changed: nothing; I hold no write tool.
+- Why: round 3 cold read of the two Build-gate cards as a non-expert owner, against round 2's findings and the cited records.
+- Verified, by reading in /home/user/ml-gate:
+  - Both cards, and reviews/P-001-build-gate/critic.md (rounds 1 and 2).
+  - specs/S-001.md in full (lines 1 to 373).
+  - docs/gates/P-001/build-gate-3-case.md, and the proposal for V1.
+  - reviews/44/reviewer.md, questions/_TEMPLATE.md, AGENTS.md §5, and the rulings on e002-not-tested, plan-stop-2, worst-work, model-lab-public and spend-ceiling.
+  - The risk-paths class lines.
+  - The gate-citation ruling exists at /home/user/ml-ask/decisions/questions/P-001-gate-citation.md; I did not open it.
+- Undone:
+  - I did not re-derive the sizing.
+  - I did not open E-003's false-pass text this round (round 2 did).
+  - I did not open reviews/S-001/plan.md, so I did not re-check the cards' cited lines in it.
+  - I did not read the Chief of Staff's notes or the full proposal text.
+- Needed outside my lane: the Chief of Staff must fix findings 1 and 2, which are blocking. It should fix 3 to 9 in the same pass. The Orchestrator should treat the rounds as exhausted (round 3 was the last allowed), so the cards go to the owner only after the fix, or the owner is told they failed their last check (D-044).
+- Open questions: should finding 4's figure go back to the plan, since the plan itself ties 32 to 64 weeks to 2A? Who owns the Orchestrator-session K7 ask in finding 7?
