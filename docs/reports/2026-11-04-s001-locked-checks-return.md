@@ -153,3 +153,37 @@ New commit: `742ef89`, same worktree and branch (`build/check-author/s001-locked
     - "Is listed" stays checked as a non-empty `reason`, since the spec gives no listing form.
 11. **`analyse.py` is a Builder deliverable the spec does not name.** I kept it as the smallest mechanical reference the tests need. It is in the interface list, flagged as an added deliverable in `src/E-003/**`, and the Builder's brief should say so. It is not the Reviewer's actual result record.
 12. **AC2 research fixture, fixed.** The memo commit is now earlier than the source check's start commit (`test_ac02_pair_start.py`).
+
+## Round 3 (brief 76), commit d372707
+
+## Brief 76: both Critic round-2 fixes are in commit d372707, on top of 742ef89, with no push
+
+Branch `build/check-author/s001-locked`, same worktree (`/tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/wt-check`). Same trailers as before.
+
+**What changed**
+1. **The /tmp reading (blocking finding 1).** I took F4's words strictly: a /tmp path is clean only when an earlier line of the same transcript creates it.
+   - `tests/acceptance/test_ac05_judging.py`:
+     - `test_system_paths_e001_f4_allows_are_clean` now creates each /tmp file first, one by a Write and one by `echo > file`, and then reads it.
+     - I added one test, `test_a_tmp_file_the_run_did_not_create_is_a_leak`. It covers an uncreated /tmp read, a read before the creating write, and a read of a different /tmp path than the one created. The brief said to add no new test; this is the only addition, and it pins the strict reading. Say if you want it removed.
+   - `tests/acceptance/e003_support.py`: the transcript-check interface note now reads "files the run itself created in /tmp (a /tmp path is clean only if an earlier line of the transcript creates it)".
+   - I checked the other transcript cases and the docstring against F4's words and against each other.
+     - `Glob path=/tmp/other` and `cd /tmp && ls` stay leaks, because nothing creates those paths.
+     - The `saved-output.txt.other` read stays a leak, because only `--allow-path` clears the saved-output file, not its `.other` sibling.
+     - The /usr, /bin, /lib and /etc cases are unchanged.
+2. **The manifest skip (finding 2).** When `S001_MANIFEST` names a record, J7 and J8 now check it whatever its kind, and a badly formed one fails instead of skipping.
+   - `e003_support.py`, `recorded_manifests`: a record named by the variable is returned even if it has no `## Pack manifest` heading.
+   - `test_j7_analysis_pack.py` and `test_j8_holdout_pack.py`: the recorded-manifest tests take any record when the variable is set. I added `import os` to the J7 file.
+   - I tried a malformed record (wrong info string) through the variable for J7 and J8. Each failed with one failure instead of skipping. I removed the trial record.
+
+**Results**
+- Suite: 228 tests, 43 pass, 2 skip, 183 fail. All 183 failures are "interface missing", meaning the Builder's `src/E-003/` scripts do not exist yet. The 2 skips are J7 and J8's recorded-manifest checks, which wait for a dispatch to record a manifest.
+- `bash governance/checks/check_all.sh . 7d6c999` printed "OK: all governance checks passed".
+- `surface_guard.py diff --range 7d6c999..build/check-author/s001-locked --branch build/check-author/s001-locked` printed "OK: 3 commit(s) ... checked (0 merge(s) skipped, 0 exempt, 0 human)".
+- `git log --format='%an %ae' -3`:
+  - check-author check-author@agents.invalid
+  - check-author check-author@agents.invalid
+  - check-author check-author@agents.invalid
+
+**Left as the brief said**
+- The rest of round-1 finding 10 stays untested: AC2's "records the pair", "is listed", the two-lane piece, a deliverable that names the change, and the power for a kind stopped early. The spec gives no location or format for these.
+- The Critic's note on finding 7 stays: AC1's needle on C3's sentence would also fail a future brief that quotes it for reference.
