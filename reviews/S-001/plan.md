@@ -1,6 +1,6 @@
 Verdict: FAIL
 
-The Critic's plan review of specs/S-001.md and experiments/E-003.md, on a different model from the writer (brief: docs/briefs/28-critic.md), verbatim (FAIL at rounds 1 and 2; PASS at round 3). Round 4 is the join-up review closing Design (brief: docs/briefs/33-critic.md, session session_01QBwHGMBo8kZsMCS2EvKNwd, 2026-11-04, on claude-sonnet-5-5): FAIL, four blocking findings; under the plan stop rule this went to the owner, who chose one focused confirmation review (decisions/questions/P-001-plan-stop.md). Round 5 is that review (brief: docs/briefs/38-critic.md, on claude-sonnet-5-5): FAIL, two new blocking findings; it goes back to the owner the same way. Recorded by the orchestrator. Session session_01QBwHGLd77YbwCSMSPU26vW, 2026-11-04.
+The Critic's plan review of specs/S-001.md and experiments/E-003.md, on a different model from the writer (brief: docs/briefs/28-critic.md), verbatim (FAIL at rounds 1 and 2; PASS at round 3). Round 4 is the join-up review closing Design (brief: docs/briefs/33-critic.md, session session_01QBwHGMBo8kZsMCS2EvKNwd, 2026-11-04, on claude-sonnet-5-5): FAIL, four blocking findings; under the plan stop rule this went to the owner, who chose one focused confirmation review (decisions/questions/P-001-plan-stop.md). Round 5 is that review (brief: docs/briefs/38-critic.md, on claude-sonnet-5-5): FAIL, two new blocking findings; it went back to the owner, who chose to re-specify how the test is run as a new draft reviewed from round one (decisions/questions/P-001-plan-stop-2.md). The new draft's rounds are recorded below as "New draft, round <n>" (brief for round 1: docs/briefs/42-critic.md): round 1 FAIL, four blocking findings. Recorded by the orchestrator. Session session_01QBwHGLd77YbwCSMSPU26vW, 2026-11-04.
 
 ## Round 1
 Verdict: FAIL
@@ -563,3 +563,203 @@ No change I can see alters one.
    - Does the owner accept a convention-only blind pack plus a transcript check, or want the blind author started in a session that holds no Model-Lab repository (the intake says repositories are fixed when a session starts)?
 
 Files: /home/user/Model-Lab/specs/S-001.md, /home/user/Model-Lab/experiments/E-003.md, /home/user/Model-Lab/experiments/E-003/check-author-extract.md, /home/user/Model-Lab/governance/PACKS.toml, /home/user/Model-Lab/governance/HOLDOUTS.md, /home/user/Model-Lab/governance/SURFACES.md, /home/user/Model-Lab/governance/checks/session_runner.py, /home/user/Model-Lab/governance/checks/govlib.py, /home/user/Model-Lab/intake/P-001-environment-2026-11-04.md.
+
+## New draft, round 1 (with the join-up review closing Design)
+Verdict: FAIL
+
+# Plan review, round 1 of the new draft of S-001 / E-003 (commit ce860ed)
+
+I am the Critic, on claude-sonnet-5-5. I wrote nothing and ran no command, because I have no shell.
+
+I read:
+- specs/S-001.md, experiments/E-003.md, experiments/E-003/check-author-extract.md, docs/design/JOIN_UP_REVIEW.md
+- governance/PACKS.toml, HOLDOUTS.md, SURFACES.md
+- session_runner.py (`norm` :225, `always_out` :356, `manifest_problems` :708, `PACK_OF` and `SESSION_ROLES` :135-138)
+- govlib.py (`glob_to_regex` :297, `glob_match` :331)
+- the intake record, src/E-001/RESULT.md (:1-40, :150-180, :286-305)
+- the rulings P-001-heldback-store, P-001-plan-stop-2 and P-001-model-lab-public, and P-001-work-repo
+- triage round 5, reviews/S-001/plan.md round 4, and PROJECT.md :40-66
+
+I re-did the run, reserve-split, checkpoint and week arithmetic for options A to D and for 40, 60 and 100 pairs. All of it holds: 266 / 266 / 200 runs, 732 in total, 36 checkpoints pooled against 33 split, and the weeks sums of 60 to 121 and 32 to 64.
+
+Not verified:
+- The 50,540-byte pack size, since I have no shell.
+- Whether the sheets repository really is absent from other sessions. No record shows it.
+
+## Findings
+
+**Blocking**
+
+1. **The central guarantee rests on an unrecorded fact, and K1 does not test it.**
+   - specs/S-001.md:130 says a session that never holds the sheets repository "cannot fetch one" because the repository is private.
+   - No record shows that. The intake's own listing from the Chief of Staff and Orchestrator session shows the private repository (intake:5-16, :31). That session also has GitHub tools.
+   - The only support is that the permission check refused the operating-model repository until the owner allowed it (src/E-001/RESULT.md:161).
+   - K1 (S-001:146) lists only the session's own status and its checkouts under /home/user. It never probes what the session's tools or git can reach.
+   - K1 also runs at each work session's start, after a sheet may already exist. A leak is then found after exposure.
+   - Fix:
+     - Add a K1 probe: a read of the sheets repository through the session's GitHub tools, and a `git fetch` of it, must both be refused.
+     - Run it before the first sheet is written.
+     - Run it in the Orchestrator's session and in every work session.
+     - Say what happens if either succeeds.
+
+2. **The work and judging sessions must live for weeks, and nothing says how they are woken. The owner's actions omit it.**
+   - Pieces arrive over 7 to 64 weeks per kind (S-001:75-87). A machine is reclaimed after inactivity (intake:28).
+   - Nothing says what starts the arms when a piece is dispatched. They must start within the same hour and within 7 days of the real dispatch (S-001:60, E-003:54).
+   - Nothing says who wakes the work session, or how often.
+   - K5 (S-001:150) and the "not estimated" for lost sessions (:111) treat reclaim as a rare event. With batches spread over weeks it is the normal case. Every batch could need a new judging session, and the owner starts those.
+   - So the owner's burden is understated. The "3 sessions, 2 records, at least 1 batch" (:111-113, :119) leaves out a wake-up per piece or batch and a new session per reclaim.
+   - Fix:
+     - Say what triggers a pair.
+     - Give the owner's actions per kind as a range, with reclaim expected.
+     - Or name a cadence and put its cost in options A to D.
+
+3. **Required results have no route out of the sheets-side sessions.**
+   - The J4 block is exactly ten lines (S-001:224). The J5 closing block is the verdict file plus `sha256` (:225). Any other line is refused.
+   - Yet E-003:92 reports the results of K1 to K6, J7 (:227) hands them to the Reviewer, and :310 has them recorded in sessions.md.
+   - K2's repository list, K3, K4 and K5 are produced only inside the sheets-side sessions. K2 and K4 are the second line for AC4 and AC5. No fixed-form line carries them.
+   - AC8 and E-003:97 need the judging side's runs, tokens and pairs left out on the combined counts card. Only "as its lead last reported them" is said; no form or route.
+   - Fix:
+     - Add fixed-form lines for the K results (for example `k2: ok`, `k4: ok`) and for the counts, to J4 and J5.
+     - Extend J5's test to match.
+
+4. **The milestones header repeats round 4 finding 10.**
+   - S-001:7 reads `milestones: M2`. E-003:5 names M2 and M4.
+   - AC4 to AC10 deliver the runs and results of M4 ("Each tested change has a result", docs/PROJECT.md:66).
+   - Name both milestones in S-001, or say which acceptance criteria belong to which.
+
+**Not blocking**
+
+5. **The "judges in their own sessions" reading is not clearly supported by the ruling's words. It must go to the owner before the freeze.**
+   - The words are "the sheet writer and each judging in their own sessions" (P-001-plan-stop-2.md:10) and "the sessions that judge" (P-001-heldback-store.md:1).
+   - The plainer reading is each judging in its own session, about 120 sessions a kind (S-001:296).
+   - The draft reads it as one judging session per kind, with each judge a helper (:122). That is a departure, and AC5, the session table and the owner's costs all rest on it.
+   - The draft does ask the owner (open question 8), and it states the cost. That is the right route.
+   - The answer is due "at the Build gate" (:302). Move it before the freeze, because a per-judge answer changes AC5, J5 and the owner's burden.
+   - Per-judge sessions would add little isolation, since every session can read public Model-Lab (:197).
+
+6. **A sheets-side session's helpers share its machine, and what that machine holds is not confined.**
+   - The sheet session's clone of the sheets repository holds earlier kinds' sheets and verdict files. The blind Check author for a later kind shares that machine (intake:22, :26).
+   - Under option "together" it could also see a running kind's partial verdicts. The only guard is the transcript check.
+   - The pack folder's location is not stated. A folder under a checkout, or in a directory with an instructions file, brings extra context (src/E-001/RESULT.md:292).
+   - State that the pack folder sits outside every clone and outside any directory with an instructions file.
+   - Say what the sheet session may hold of earlier kinds.
+
+7. **The K3 fallback is incomplete and contradicts K2 (S-001:148).**
+   - It covers briefs, pack files and exports.
+   - The Builder's three scripts (the fill script, the transcript check and the export reader) also come from Model-Lab (:185, E-003:14). The fallback does not mention them.
+   - The fallback's "second private repository started with the judging session" breaks K2's "sheets repository only" and AC5's "no work repository".
+
+8. **J5's test overclaims (S-001:225).**
+   - It says "no other text, a sheet's above all, can be carried".
+   - `<path>` in `<n>@<path>:<line>` is free text a judge writes, so a sheet quotation could pass as a path.
+   - Require the lead to check that the path names a file in the judged export. Add a length and character limit.
+
+9. **Two lines about governance/PACKS.toml disagree.**
+   - S-001:303 says the earlier change was reverted on the default branch.
+   - S-001:304 says `[roles.S-001-holdout]` is "today in the file with the earlier text".
+   - The file at ce860ed holds it (PACKS.toml:103-120): `C1-*.md`, `C2-*.md` and `C3-*.md` patterns, and no `reviews/E-003/**`.
+   - Say which tip is the starting state, so the Chief of Staff's edit starts from the right text.
+   - I checked the planned `C?-*.md`:
+     - `?` is one non-slash character (govlib.py:290).
+     - Matching is case-folded (session_runner.py:225).
+     - It does not match check-author-extract.md, and it does match the C-files.
+     - Confirmed.
+
+10. **Exports carry whole start trees into public Model-Lab.**
+    - J3 (S-001:223) and E-003:57 put the start commit's full tree in every export.
+    - For the private operating-model and portfolio repositories that is more than "records" (P-001-model-lab-public.md:10).
+    - The spec is silent. Either restrict entry to public repositories, or add this to open question 8 or 5.
+
+11. **K5's fallback misses a lost sheet session (S-001:150).**
+    - A sheet session lost before step 4's push loses the Check author's return. It is held nowhere else (:176, :191).
+    - Say that a new sheet is written (set id n = 2, 1 run, counted).
+
+12. **The extract and E-003 differ on what a judge is given.**
+    - Extract lines 35-36 say the check judges "the piece alone". E-003:68 gives plans the task statement text and research the question file. The plans row (extract:12) does not mention it.
+    - Add one sentence to the extract. This is a frozen file, so do it before the freeze.
+
+## Items you asked me to judge
+
+- **Session kinds against the recorded facts.** The start, repositories and helpers are consistent with the intake (:21, :22, :26) and with RESULT.md (:9, :11, :158, :166-175, :299). Gaps are in findings 1, 2, 6 and 7.
+- **K1 to K6 and their fallbacks.**
+  - K1 is unsound as written (finding 1).
+  - K2 is fine.
+  - K3's fallback is incomplete (7).
+  - K4's fallback is honest: it asks the owner.
+  - K5 misses the sheet session and is mis-framed as rare (2, 11).
+  - K6 relies on instructions plus a count of calls naming the repository. Arm transcripts are covered; the work session's own transcript is not, as the spec admits (:197).
+- **Sheet text in any record.**
+  - I found no record that carries a sheet's text.
+  - The routes are the fixed blocks, the unrecorded Check author return, the filled briefs that are not stored, and the Reviewer's pack (which holds only the verdict record and numbers).
+  - Finding 8 is the weakest point. The rest relies on the transcript checks.
+  - HOLDOUTS.md stays out of every pack (`always_out`, session_runner.py:356-358).
+  - I found no `arm`, no C1 to C3 and no change-text phrase in the extract.
+- **Roles under lane and pack.**
+  - PACKS.toml is the Chief of Staff's, who proposes (SURFACES:83).
+  - HOLDOUTS.md and reviews/** are the Orchestrator's (:46, :52).
+  - Cards go in decisions/**, the Chief of Staff's.
+  - Exports and records go in src/**, the Builder's (:65-70).
+  - The locked checks go in tests/acceptance/** and checks/**, the Check author's.
+  - The leads write to a repository with no surface map; the spec says so and it is acceptable.
+  - Every role can do its part, except for the triggers and routes in findings 2 and 3.
+- **The owner's actions.** They are stated (:111-119, :302), but not fair or complete until finding 2 is fixed. The sums are right: 9 session starts, 6 records passed and at least 3 batch messages for option A.
+- **Repeats from earlier rounds.** The milestones header repeats round 4 f10 (finding 4). The hand-built pack route (round 4 f1 and round 5 B1) is now handled by sessions plus a transcript check. Round 4 f4 (`C*.md` matching the extract) is fixed by `C?-*.md`.
+
+## Join-up review — Design, 2026-11-04 (in the form of docs/design/JOIN_UP_REVIEW.md)
+
+**Screens checked:** none. P-001 has no screens or views. As in round 4, I checked the parts side by side:
+- specs/S-001.md (AC1 to AC11, J1 to J8, Needed outside)
+- experiments/E-003.md
+- experiments/E-003/check-author-extract.md
+- governance/PACKS.toml `[roles.S-001-holdout]`
+- governance/HOLDOUTS.md
+- governance/SURFACES.md
+- session_runner.py
+- the intake record
+- src/E-001/RESULT.md
+- the rulings
+
+| Check | Result | Fix |
+|---|---|---|
+| One meaning per term, threshold and id | Mostly pass. Pairs, runs, reserve (⌈10%⌉, judging side rounded down), 1 in 40, 6 cards and 2 disagreements, 8 to 12 cards, 16 weeks and 7 days agree across the spec and E-003. Differences: milestones M2 against M2 and M4 (blocking, finding 4); "judges in their own sessions" is read two ways (5); "readable only by CI" in HOLDOUTS.md:3 is queued for correction (S-001:307). | 4, 5 |
+| One route | Fails at three places. (1) The K2 to K5 results and the counts card have no carrying block (3). (2) The work and judging sessions' wake-up route is missing (2). (3) K1 does not test the fetch route that the guarantee rests on (1). The pack route, the sheet route (J4), the judging route (J5), the card route (J6) and the Reviewer route (J7) match end to end. | 1, 2, 3 |
+| Consistent names, paths and ids | Mostly pass. The cited pack lines, runner lines (:135-138, :225-227, :356-358, :464-472), SURFACES lines and intake lines exist and say what is claimed. The state of PACKS.toml is contradicted at S-001:303 and :304 (9). The K3 fallback's second repository contradicts K2 and AC5 (7). | 7, 9 |
+| No two parts doing the same job, no job without a part | Pass on duplicates: the two Check author dispatches are separate and kept so. Unowned jobs: waking the work session (2), the counts card's judging side (3), and the K1 probe of tool reach (1). | 1, 2, 3 |
+| Every datum available from the records, or listed as a needed change | Fails at three places: the K results and the judging-side counts (3); the start commit in Model-Lab's briefs (listed, owner's order, open question 5); and the privacy of whole-tree exports (10). | 3, 10 |
+
+**Needed changes to the records:**
+- Fixed-form lines for the K results and the counts in J4 and J5.
+- The K1 probe.
+- The starting state of PACKS.toml.
+- The start-commit field in Model-Lab's briefs (already listed).
+
+**Blocking differences:** findings 1 to 4. The others are non-blocking and carry to the gate's case as risks.
+
+## Sign-off
+The owner's ruling at the gate: decisions/P-001/criteria-<n>.md. Not yet recorded.
+
+## The six-part contract
+
+1. **What I changed:** Nothing. I am read-only and wrote no file.
+2. **Why:** To review the new draft of S-001 / E-003 from round one, as the brief asked, and to add the Design join-up review.
+3. **What I verified:**
+   - I read the files listed above in full or at the cited lines.
+   - I recomputed the run, reserve-split and checkpoint arithmetic for options A to D and for 40, 60 and 100 pairs.
+   - I read the runner functions, `glob_to_regex`, PACKS.toml and SURFACES.md for lane and pack facts.
+   - I grepped the extract for `arm`, C1 to C3 and spec words.
+   - I checked the cited intake lines, RESULT.md lines and ruling lines against the text.
+4. **What is undone:**
+   - I could not run a command, so I did not run `wc -c` on the pack, sizing.py, arrivals.py or any test.
+   - I did not read the three role files, the playbook or the C-files.
+   - I did not read E-001, E-002, Q-008 or the Service Desk's files.
+   - Whether the sheets repository is really absent from other sessions is unknown to every record, so K1 to K6 are checked at first use only.
+5. **Needed outside my lane:**
+   - The Definer: findings 1 to 12.
+   - The owner: question 8 (finding 5) and finding 10, ahead of the freeze.
+   - The Chief of Staff: the PACKS.toml starting state (finding 9).
+6. **Open questions:**
+   - What starts a pair's arms when a piece is dispatched, and who wakes the work session?
+   - Does the owner accept the per-kind reading of "each judging in their own sessions"?
+   - May exports of private-repository work be placed in public Model-Lab?
+
+Files: /home/user/Model-Lab/specs/S-001.md, /home/user/Model-Lab/experiments/E-003.md, /home/user/Model-Lab/experiments/E-003/check-author-extract.md, /home/user/Model-Lab/docs/design/JOIN_UP_REVIEW.md, /home/user/Model-Lab/governance/PACKS.toml, /home/user/Model-Lab/governance/HOLDOUTS.md, /home/user/Model-Lab/governance/SURFACES.md, /home/user/Model-Lab/governance/checks/session_runner.py, /home/user/Model-Lab/governance/checks/govlib.py, /home/user/Model-Lab/intake/P-001-environment-2026-11-04.md, /home/user/Model-Lab/src/E-001/RESULT.md, /home/user/Model-Lab/decisions/questions/P-001-plan-stop-2.md, /home/user/Model-Lab/decisions/questions/P-001-heldback-store.md, /home/user/Model-Lab/decisions/questions/P-001-model-lab-public.md, /home/user/Model-Lab/docs/PROJECT.md, /home/user/Model-Lab/reviews/S-001/plan.md, /home/user/Model-Lab/triage/P-001-S-001-round-5.md
