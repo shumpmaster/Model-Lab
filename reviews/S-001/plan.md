@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-The Critic's plan review of specs/S-001.md and experiments/E-003.md, on a different model from the writer (brief: docs/briefs/28-critic.md), verbatim. Recorded by the orchestrator. Session session_01QBwHGLd77YbwCSMSPU26vW, 2026-11-04.
+The Critic's plan review of specs/S-001.md and experiments/E-003.md, on a different model from the writer (brief: docs/briefs/28-critic.md), verbatim (FAIL at rounds 1 and 2; PASS at round 3). Recorded by the orchestrator. Session session_01QBwHGLd77YbwCSMSPU26vW, 2026-11-04.
 
 ## Round 1
 Verdict: FAIL
@@ -214,3 +214,76 @@ New findings
 9. **Non-blocking: the judging limits are honestly stated.** The same-provider, unmeasured-consistency, C1-teaching-to-the-check and 8-cards limits are all present (S-001.md:102). Owner cards from G2 and G3 now address a judge that wrongly passes or fails. Plans may have few G2 outputs at a 5% start. E-003.md:60 handles this by moving the cards to other groups.
 
 Please resubmit with finding 1 fixed. Findings 2 to 8 can be fixed in the same pass.
+
+## Round 3
+Verdict: PASS
+
+Plan review, round 3 of S-001 / E-003 at commit da1d44f. I read the spec, E-003, the extract, both scripts and experiments/E-003/output.txt. I checked the figures against the output rather than running the scripts, since I have no shell.
+
+Round-2 new findings
+
+1. **Resolved (was blocking).**
+   - S-001.md:103-113 sets up two separate Check author dispatches.
+     - (a) is blind, on a per-task pack `S-001-holdout`, which holds the extract and the role files and playbooks it names, and nothing else. No `{spec}`, no `{ruling}`, and the withheld paths are listed under `must_not_see`.
+     - (b) writes S-001's locked checks on the standing pack, with the spec.
+   - AC4 (S-001.md:130) requires that the two sessions never overlap and that (b) never sees a held-back check.
+   - J8 (S-001.md:147) gives a testable check on the pack entry. It fails if the entry is missing, if a withheld path matches, if the entry carries `{spec}`, `{ruling}`, may_read or include_feedback, or if the extract holds a change id, the word "arm" or a change-text sentence.
+   - E-003.md:12 and :29 agree: no blind dispatch until the pack is in place and J8 passes.
+   - "Needed outside this spec's lane" (S-001.md:204-205) names the owners.
+   - The soundness of this fix depends on the pack entry actually being merged (see new finding 3).
+
+2. **Resolved.**
+   - The extract (check-author-extract.md:3-4, :37-38) no longer says anything about what the test changes. It says only "Files not listed in your pack are not yours to read."
+   - It names no change and no arm. I checked the text and found no "arm" and no C-ids.
+
+3. **Resolved.**
+   - Weeks are now quoted at the Service Desk's pace, with the three-project pace in brackets and labelled "only if the other projects resume" (S-001.md:15, :70, :74, :90, :94).
+   - The headline ranges no longer rely on POOM or Model-Lab.
+
+4. **Resolved.**
+   - experiments/E-003/output.txt holds the saved output of both scripts.
+   - I checked every figure in the spec against it, line by line. All agree.
+     - The weeks columns match (output lines 42-93).
+       - Built work 40/60/100 is 5–10 (4), 7–15 (6) and 12–25 (9).
+       - Plans is 14–28 (7), 21–42 (10) and 35–70 (17).
+       - Research is 21–43 (16), 32–64 (24) and 53–107 (39).
+     - The powers match: 0.84/0.57/0.34 and the rest, plus the judge-noise column.
+     - The runs and tokens match (178, 266, 442; 134, 200, 332).
+     - The options match.
+       - A: 732 runs, 60–121 (39) and 32–64 (24).
+       - B: 490 runs, 40–81 and 21–43.
+       - C: 7–15.
+       - D: 1,040 runs, 87–173 and 53–107.
+     - The review points match: 22 to 45 plan pairs, 15 to 30 research pairs, and built work reaching its 60.
+     - The eligible-per-week figures match (1.4 to 2.9, 4.1 to 8.1, 0.9 to 1.9).
+     - Part 3's recent-pace counts match, including "13 built stages on 25 October" (I counted 13 in output line 24).
+     - Part 4's "4 of 6", "0 of 6", "0 of 8" and "29 of 29 have a model line, none a start-commit line" match.
+   - I also read the code that prints them. Part 4's new Model-Lab brief line is implemented at arrivals.py:167-171, and the briefs do carry `model:` lines (for example docs/briefs/01-critic.md:4).
+   - The cross-check lines (SD 30 Sept to 1 Nov, POOM 24 Sept to 24 Oct, ML 1 Nov) show no counted record falls outside the 24 Sept to 1 Nov window.
+
+5. **Resolved.** S-001.md:15, :47, :48 and open question 5 (:197) now say that Model-Lab's briefs carry the brief and the model but not the start commit.
+
+6. **Resolved.** sizing.py:43 now says 4 of 6.
+
+7. **Resolved.** S-001.md:69 states that the two window ends are the Definer's reading of Q-008, with the cross-check as the safeguard.
+
+8. **Resolved.**
+   - C2 is now stated as 10 fixed words, 11 with the list (S-001.md:30, C2 file line 7).
+   - The "year" wording is replaced by the actual weeks (S-001.md:178).
+
+New material, all non-blocking
+
+1. **The extract tells the blind author to write the built-work check from "the frozen spec the stage builds"** (check-author-extract.md:13). The check is written once per kind before the kind opens, and the pack holds no `{spec}` (S-001.md:108). A future stage's spec cannot be in it. Reword it to a generic standard from the build-review role file, with the spec supplied to the judge at judging time through the task statement ("Judge it against" in E-003.md:50).
+
+2. **Adding governance/PACKS.toml to Areas touched (S-001.md:150) sits uneasily with the spec's own text.**
+   - S-001.md:164 and :204 say governance/** is the Chief of Staff's lane, and "proposes" is that role's authority; the change needs the owner's approval as a rule change.
+   - No builder lane may edit it, so listing it does not give the Builder rights. It only lets the Chief of Staff's change pass an areas check.
+   - Say that plainly in the Areas note.
+   - The owner's approval of the rule change is not among the open questions (S-001.md:192-199). Add it as a line to open question 5 or 6, or name it in the gate case.
+   - If the owner declines the pack change, AC4 cannot be met. Say that the test then does not start.
+
+3. **A small overstatement in S-001.md:86.** "Research stopped there would almost certainly read 'not shown'" holds for 15 pairs (0.06 to 0.10) but not for 30 pairs (0.57 / 0.40 / 0.26, output line 71). Say "at 15; likely at 30".
+
+4. **The Orchestrator confirms the pack in the gate case.** That is a good control. Make sure the Chief of Staff's gate document includes it, and that the Critic's gate check can verify it. This is a note for the gate stage, not for the spec.
+
+Everything else that I checked in rounds 1 and 2 stands as resolved. The plan can be frozen once these non-blocking points are handled or accepted. None of them changes a threshold, a size or an option.
