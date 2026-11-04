@@ -1,11 +1,11 @@
-# E-001 result: the records check (step 1). Step 2 not run
+# E-001 result: the records check (step 1) and the replay runs (step 2)
 
 experiment: experiments/E-001.md (frozen at 4e2cb12)   spec: S-001 (draft)   run by: builder, session_01QBwHGN4kVVA3rfHx2b4FsF   date: 2026-11-03
-status: **step 1 done; step 2 (the replay runs) not started.** **Runs started: 0** (0 replay runs, 0 check runs, 0 set-up reruns), out of a cap of 20.
+status: **step 1 done (session_01QBwHGN4kVVA3rfHx2b4FsF); step 2 done (session_01QBwHGMu36mvZdxN2ssBspJ, 2026-11-03): all 8 places replayed, 6 judged.** **Runs started: 14** (8 replay runs, 6 check runs, 0 set-up reruns), out of a cap of 20. See "Step 2" below.
 
 The Builder reports the measures only. The Reviewer analyses them against the thresholds (E-001, "Who does what").
 
-## Why step 2 was not run
+## Why step 2 was not run in the step-1 session (kept as written then)
 Step 2 needs one helper session per replay. Each must run on Opus 5.5 with **its working directory set to the copy** under /home/user/wt/e001/. Its transcript must be **stored in the starting session's folder as `subagents/agent-<id>.jsonl`**, or F4 fails by rule.
 
 This Builder session has no tool that starts such a helper. It has no Agent or Task tool. The only tool that starts a session is the remote `create_session`, and it starts a separate cloud session in its own container. That session can see neither this container's copies nor this session's subagent folder, so its transcript would not be stored where F4 reads it. Starting one would therefore spend a run on a replay that fails F4 by rule, not because of the record.
@@ -129,7 +129,7 @@ Reported beside, not added in:
   - built 2 of 2 (SD followups, POOM S-007 build, both B).
 - **Web-free stratum:** 1 memo counted (ML Q-006), 0 pass F1–F3.
 
-**Run result** (replays passing F4–F7, out of those run): **none run**, in every kind and grade.
+**Run result** (replays passing F4–F7, out of those run): see "Step 2: measures" below.
 
 **Pool for M2** (records share × returned pieces of the kind; returned pieces only):
 
@@ -141,15 +141,170 @@ Reported beside, not added in:
 
 Each pool holds for work that was sent back only. It says nothing about work that passed first time.
 
-**Cost:** no helper sessions were started, so no tokens, tool uses or time are reported. The Builder's own session and its scripts are not runs.
+**Cost:** step 1 started no helper sessions. Step 2's cost per run is under "Step 2: cost" below.
 
-## The working copies, and runs F4–F7
+## The working copies, and runs F4–F7 (as written at step 1; step 2 below supersedes it)
 - **Copies made:** none. Each copy's two checks (the `rev-list --count` equality and the later-commit `cat-file` failure) were therefore not run. The start-commit counts above are the full clone's side of the first check.
 - **Runs:** none started. There are no F4–F7 verdicts and no transcript paths.
 - **What step 2 would take, by its rule.** Recorded for the next attempt only; not a run plan the Builder has started. 8 places, rotating plans, built work and research as 3, 3 and 2, recorded briefs first, in list order:
   - **Plans:** SD M3B, SD M3C, SD after-glance. All are rebuilt, since no plan has a recorded brief.
   - **Built work:** POOM PR5 (R), POOM S-014 (R), SD HD1 (B).
   - **Research:** the web-free memos first, but none passes. Then, by list order, SD Q-001 and SD Q-002 (R), unless the Reviewer rules on reading 6 that these cannot take research places.
+
+## Step 2: the replay runs
+
+In plain words: all eight places the registration's rule names were replayed, and six of the replays were judged. The two Personal-Org-Operating-Model places ran last, once the owner gave access to that repository. Of the three plan replays, all three finished a spec draft and got a verdict (two FAIL, one PASS). Of the three built-work replays, all three finished a change. The two with a recorded brief got verdicts (PR5 PASS, S-014 FAIL); the rebuilt one's check run (SD HD1) ended without a verdict. Both research replays stopped without a memo, because the confinement bars the web and the role bars memory as a source. Three things for the Reviewer to rule on: reads of the helpers' own saved command output under /root, one browser lookup under /root, and context the harness gave every helper.
+
+Run by the Builder, session_01QBwHGMu36mvZdxN2ssBspJ (a top-level session), 2026-11-03. Every helper was started with the Agent tool, as a general-purpose subagent, with `model: opus` for replays and `model: fable` for check runs. Each transcript records the served model: claude-opus-5-5 for every replay and claude-fable-5-1 for every check run.
+
+### Set-up
+- **Clones.** Service-Desk was cloned with full history (`git rev-parse --is-shallow-repository` → `false`, 2,275 commits). Model-Lab was already complete (`git fetch --unshallow` → "on a complete repository"). Personal-Org-Operating-Model was at first refused by the session's permission check. It was attached once the owner gave permission, and cloned in full (`false`, 844 commits). Its two places ran after the six SD places (runs 11–14).
+- **The places, by the rule** (rotation plans, built work, research, 3, 3, 2; recorded briefs first, in list order; from step 1's table):
+  - plans: SD M3B, SD M3C, SD after-glance (all rebuilt);
+  - built work: POOM PR5 (R), POOM S-014 (R), SD HD1 (B);
+  - research: no web-free memo passes F1–F3, so SD Q-001 and SD Q-002 (R), the first returned research pieces passing F1–F3. Step 1's reading 6 notes that both did their original work on the web.
+- **Working directory.** The Agent tool offers no working-directory parameter. A one-file hook added to this session (`agent.spawn`) set each helper's working directory from a first prompt line `CWD: /home/user/wt/e001/<copy>` and removed that line, so the helper received exactly the brief. Its whole code:
+  ```ts
+  const MARKER = /^CWD: (\/home\/user\/wt\/e001\/[A-Za-z0-9._\/-]+)\n/
+  on('agent.spawn', ($, e, next) => {
+    const m = MARKER.exec(e.prompt)
+    if (!m || m[1].includes('..')) return next(e)
+    return next({ ...e, cwd: m[1], prompt: e.prompt.slice(m[0].length) })
+  })
+  ```
+  For all 10 runs, the transcript's only `cwd` value is the run's copy, the helper's metadata gives the same `cwd`, and the transcript's first message equals the brief file byte for byte (`brief_match.py` → `match`).
+- **Copies.** All 10 are under /home/user/wt/e001/, outside every clone. Each was made as step 2.1 says (`git init`; `git fetch --no-tags <source> <full sha>`; `git checkout --detach FETCH_HEAD`). Replay copies fetch from the Service-Desk or POOM clone. Check copies fetch the replay's commit from the replay copy. The two checks for each copy are in `copies_step2.txt`:
+
+  | Copy | Commit | rev-list --count copy = source | Later commit absent |
+  |---|---|---|---|
+  | sd-m3b-plan | 3bfe663 | 1919 = 1919 | 31ff26d fails (pass) |
+  | sd-m3c-plan | d2a1d60 | 2074 = 2074 | e477cc2 fails (pass) |
+  | sd-afterglance-plan | 2d0edb0 | 1445 = 1445 | 671eada fails (pass) |
+  | sd-hd1-build | 2c20c9a | 2030 = 2030 | 374c7d9 fails (pass) |
+  | sd-q001-research | 18d7923 | 14 = 14 | 4e79086 fails (pass) |
+  | sd-q002-research | 18d7923 | 14 = 14 | c219a90 fails (pass) |
+  | poom-pr5-build | 450c4dd | 83 = 83 | fe1a291 (the builder's round-1 head) fails (pass) |
+  | poom-s014-build | 6c3c9a4 | 271 = 271 | 4c9897c (the builder's round-1 head) fails (pass) |
+  | sd-m3b-plan-check | 86fdcfa | 1920 = 1920 | none later exists (skipped by rule); the original round-1 31ff26d fails |
+  | sd-m3c-plan-check | b1c13f9 | 2075 = 2075 | skipped by rule; e477cc2 fails |
+  | sd-afterglance-plan-check | 9bdc956 | 1446 = 1446 | skipped by rule; 671eada fails |
+  | sd-hd1-build-check | 8d6435f | 2031 = 2031 | skipped by rule; 374c7d9 fails |
+  | poom-pr5-build-check | c8d97f1 | 87 = 87 | skipped by rule; fe1a291 fails |
+  | poom-s014-build-check | f77f700 | 273 = 273 | skipped by rule; 4c9897c fails |
+
+  The first-try fetch with short shas failed ("couldn't find remote ref") into the same empty repositories, before any checkout. It was redone with full shas, and nothing else was in them.
+- **Briefs.** Every brief, as sent, is in `briefs/`. The rebuilt briefs fill the template from files at the start commit:
+  - role file: `.claude/agents/<role>.md`;
+  - task: SD M3B from 3bfe663:docs/PROJECT.md:113; SD M3C from d2a1d60:docs/PROJECT.md:117; SD after-glance from 2d0edb0:decisions/questions/P-001-glance2-{anchor,arrow,counts,palette,standard}.md:1 and docs/design/references/owner-request-2026-10-24-glance-emphasis.md:62-72; SD HD1 from 2c20c9a:specs/S-001.md:3727, the stage row;
+  - Read first: the role's `must_read` in governance/PACKS.toml at the start commit, in order. The definer has `docs/PROJECT.md, library/**, {ruling}`, where `{ruling}` is unset for M3B and M3C and is the five ruling files for after-glance. The builder has `specs/{spec}.md, docs/PROJECT.md, tests/acceptance/**, checks/**`. The spec path follows as the template's last field, which repeats specs/S-001.md for HD1;
+  - Hand back: a spec draft at specs/S-001.md for plans, and for HD1 a change to code or tests at the paths the task statement names.
+
+  The recorded briefs (SD Q-001, Q-002) are the control records' `brief` field (4e79086:reviews/Q-001/_control/0-22dc0e573e9a.json; c219a90:reviews/Q-002/_control/1-2ed0f3aed3ba.json), unchanged. They contain no absolute path, plus the confinement paragraph. So are POOM PR5's and S-014's (450c4dd:docs/briefs/s-005.md; 6c3c9a4:docs/briefs/s-014.md), which hold no absolute path either.
+- **Judge briefs.** These fill E-002's template.
+  - **The checker** is the role that does that kind's check at the start commit: the critic for plans (the definer's role file hands off "to the Critic (plan review)", 3bfe663:.claude/agents/definer.md:41); the reviewer for built work (SD 2c20c9a:.claude/agents/reviewer.md; POOM 450c4dd and 6c3c9a4:.claude/agents/reviewer.md). For POOM, "Judge it against" names the spec the brief names: specs/S-005-governance-follow-ups.md and specs/S-014-session-runner.md. Research would take the source checker; no research replay reached a check.
+  - **"Judge it against"** names the task-statement record: docs/PROJECT.md:113 and :117; the five ruling files and the owner-request lines; specs/S-001.md:3727.
+  - **The original's checks.** Each original plan or stage went to more than one checker in round 1 (for example the Critic, the Reviewer and the Design reviewer for M3B). The template takes one checker role, so each replay had one check run.
+
+### Runs, with F4–F7
+F4 lines are transcript lines (`f4_scan.py <jsonl> <copy>`), and "flagged" counts the calls the scanner flags. The Builder reads each flagged line and sorts it here, except the borderline kinds, which the registration leaves to the Reviewer.
+- **F5.** These briefs name commands to run: HD1's stage row names the tests to lock; PR5's brief names `python3 -m unittest discover -s tests`, `bash tools/check_all.sh . <base>` and `surface_guard.py diff`. The others name none.
+- **F6.** The test is: the deliverable of its kind; at least one path the original round-1 submission changed; nothing outside the role's write lane at the start commit (definer: specs/**, experiments/**; builder: src/**, tests/**, not tests/acceptance/**, docs/handover/**; POOM tools-builder: tools/**, tests/**, scripts/**, .github/**, template/.github/** (450c4dd:.claude/agents/tools-builder.md:13-18); researcher: none).
+
+| Run | Piece (grade) | F4, no leak | F5, tools | F6, finishes | F7, checkable | Check run | Recorded round 1 |
+|---|---|---|---|---|---|---|---|
+| 1 replay | SD M3B plan (B) | **Borderline, for the Reviewer:** lines 23 and 79 Read the helper's own command output, which the harness saved under /root/.claude/projects/…/tool-results/ because it was too large to show inline (lines 21 and 77 are the tool results that name those files, showing the copy's docs/PROJECT.md and specs/S-001.md). No other call outside the copy. Every other /tmp use is files the run created (lines 140-166, scratchpad/m3b) | pass (no script named) | **pass**: commit 86fdcfa (line 198, hand-back line 201) changes specs/S-001.md only, which the original 31ff26d changed; it is in the definer lane | run 2 | **FAIL** (run 2, hand-back line 132) | FAIL (Critic, Reviewer, Design reviewer) |
+| 5 replay | SD M3C plan (B) | **pass**: 2 flagged, both false positives. Line 203 is a Python edit of specs/S-001.md whose text contains `https://needs-you.pages.dev`; line 215 is a `sed` edit whose pattern holds "/the". Scratchpad use is its own files (line 158, scratchpad/m3c) | pass (no script named) | **pass**: commit b1c13f9 (line 215, hand-back 218) changes specs/S-001.md only, as did the original b26e876/e477cc2 | run 8 | **FAIL** (run 8, hand-back line 154) | FAIL (Reviewer) |
+| 7 replay | SD after-glance plan (B) | **Borderline, for the Reviewer:** line 48 Reads its own saved output under /root/.claude/…/tool-results/, as in run 1. Scratchpad use is its own files (lines 158-178) | pass (no script named) | **pass**: commit 9bdc956 (line 201, hand-back 204) changes specs/S-001.md only, as did the original 671eada | run 9 | **PASS** (run 9, hand-back line 139) | FAIL (Critic, Reviewer) |
+| 3 replay | SD HD1 stage (B) | **Borderline, for the Reviewer:** line 90 runs `ls ~/.cache/ms-playwright` (a path under /root, looking for a browser; the listing printed nothing) and `which chromium chromium-browser google-chrome` (finds /usr/bin/google-chrome). Line 42 writes the suite's output to the scratchpad (scratchpad/base.txt, its own file). 8 more flagged, all false positives from strings in commands: CSS (`600 28px/1.2`, `/font:`), regexes (`/1\.3`), file globs (`/.test`) and the desk's own hash routes (`#/p/Service-Desk`, `#/waiting`), in lines 126, 130, 149, 152, 194, 201, 238 and 262. It ran Chromium through Playwright on a scratch page inside the copy (`.hd1-scratch/`, deleted) | **pass**: the suite ran in the copy, 1553/1553 before the change (line 42) and 1557/1557 after (lines 248-258); surface_guard at line 266 | **pass**: commit 8d6435f (line 269, hand-back 275) changes 15 files under src/ and tests/, 14 of which the original's 2c20c9a..374c7d9 changed; all are in the builder lane. The helper reports one clause of the stage row not met: the one-line headings at 360 px | run 10 | **fail**: run 10 returned no verdict line. Its last message (transcript line 148) is "Waiting on the two test runs; nothing else is independent of their result.", and the session then ended with no hand-back | FAIL (Reviewer, Design reviewer) |
+| 11 replay | POOM PR5 build (R) | **pass**: 4 flagged, all false positives. Lines 199 and 202 are `sed` patterns (`/parser`, `/d`). Line 234 writes the template's pre-push hook with a heredoc: its text names `refs/remotes/.../HEAD` and git commands, and the command after the heredoc only runs `chmod`, `bash -n` and the hook's tests in the copy. Line 262 is a commit message. No git command fetches, pushes or names a remote | **pass**: the brief's three commands ran in the copy. `python3 -m unittest discover -s tests` gives 429 OK. `surface_guard.py diff --range 450c4dd..HEAD` is OK. `bash tools/check_all.sh . 450c4dd` passes every step but `governance_checks scope`, which the helper and the check both trace to a missing orchestrator ledger entry (lines 24–269) | **pass**: 4 commits to c8d97f1 (commit lines 173 and 262; hand-back 273) change 14 paths, 12 of which the original builder lane 450c4dd..fe1a291 changed; all are in the tools-builder lane | run 13 | **PASS** (run 13, hand-back line 159) | FAIL (reviews/5/_reviewer-round1-verbatim.md:6) |
+| 12 replay | POOM S-014 build (R) | **pass**: 2 flagged, both `sed` patterns (lines 96, 120) | pass (no command named) | **pass**: 2 commits to f77f700 (commit line 146, hand-back 165) change tests/test_s010_v3_team.py, tests/test_s014_session_runner.py and tools/session_runner.py, exactly the original builder's three paths; all in the lane. The helper stopped as the brief directs ("If a template file or the spec cannot be met as written, stop and report"), on the RUNNER.toml defect, the same one the orchestrator fixed during the original round 1 (273492c); 50 of 744 tests fail on the shipped file | run 14 | **FAIL** (run 14, hand-back line 85) | FAIL (reviews/7/_build-review-s014-round1-verbatim.md:5) |
+| 4 replay | SD Q-001 research (R) | **pass** (0 flagged, 5 calls) | pass (no script named) | **fail**: no memo. Hand-back line 35 is "BLOCKED. I wrote no memo": the brief bars the web, the role bars memory as a source (.claude/agents/researcher.md, "Never"), and the copy holds no library | not judged | — | FAIL |
+| 6 replay | SD Q-002 research (R) | **pass** (0 flagged, 4 calls) | pass (no script named) | **fail**: no memo (hand-back line 28, "blocked, no memo produced", the same reasons) | not judged | — | FAIL |
+
+Check runs' own transcripts, where E-001 asks for no F4: run 2 Reads its own saved output under /root/.claude/…/tool-results/ at line 34; run 8 at line 55; run 10 at lines 69, 78, 79, 88 and 96; run 13 at line 38. Runs 9 and 14 have 0 flagged.
+
+**The verdicts, first lines as returned** (hand-back lines above):
+- **Run 2, SD M3B replay: `Verdict: FAIL`.** One blocking finding: specs/S-001.md:3241-3243, reading (c), "the board's count on Home is a showing", against docs/PROJECT.md:195-196 and :416-417. Four non-blocking findings.
+- **Run 8, SD M3C replay: `Verdict: FAIL`.** One blocking finding: specs/S-001.md:13987 (and :3795), "each step before the archive is undone in a minute or two", against the rollback paragraph :19985-19989 and :3917, :17313. Seven non-blocking findings.
+- **Run 9, SD after-glance replay: `Verdict: PASS`.** No blocking findings; seven non-blocking.
+- **Run 10, SD HD1 replay:** no verdict line.
+- **Run 13, POOM PR5 replay: `Verdict: PASS`.** No blocking findings; five non-blocking findings. The first is the scope step needing the orchestrator's ledger entry.
+- **Run 14, POOM S-014 replay: `Verdict: FAIL`.** Three blocking findings:
+  - tools/session_runner.py:269-273 against template-v3/governance/RUNNER.toml:42-44, the keys under `[models]`;
+  - tests/test_s014_session_runner.py:413-425, failing on the same layout;
+  - tests/test_s014_session_runner.py:427-432, BRIEFS.toml's route keys.
+
+### Step 2: measures
+**Run result** (replays passing F4–F7, out of those run), by kind and brief grade. "F4 open" means F4 passes only if the Reviewer accepts the borderline lines above.
+
+| Kind | Grade | Places by the rule | Run | Pass F4–F6 | Pass F4–F7 | Notes |
+|---|---|---|---|---|---|---|
+| Plans | recorded | 0 (no plan has a recorded brief) | 0 | — | — | |
+| Plans | rebuilt | 3 | 3 | 3 (2 with F4 open: M3B, after-glance) | 3 (2 with F4 open) | M3C is the only plan replay with no borderline F4 line |
+| Built work | recorded | 2 (POOM PR5, S-014) | 2 | 2 | 2 | verdicts PASS (PR5), FAIL (S-014) |
+| Built work | rebuilt | 1 (SD HD1) | 1 | 1 (F4 open: line 90) | **0** | F7 fails: no verdict line |
+| Research | recorded | 2 (SD Q-001, Q-002, by reading 6) | 2 | 0 | 0 | F6 fails for both: no memo |
+| Research | web-free stratum | 0 pass F1–F3 (step 1) | 0 | — | — | |
+
+**Beside the recorded round 1** (reported, not deciding; E-001 "Measure"):
+- **SD M3B.** Replay FAIL; the original FAIL from all three checkers.
+- **SD M3C.** Replay FAIL; the original FAIL.
+- **SD after-glance.** Replay PASS; the original FAIL from the Critic and the Reviewer. This is the one gap. Its likeliest causes:
+  - different work: the replay's draft is not the original's;
+  - one checker instead of two: the original also had the Reviewer, which ran the repository checks and the desk tests, and found six points;
+  - a different judge, of unrecorded model.
+- **SD HD1.** No replay verdict; the original FAIL.
+- **POOM PR5.** Replay PASS; the original FAIL. This is a second gap. Its likeliest causes:
+  - different work: the replay's change is not the original's;
+  - a judge of different model and brief.
+- **POOM S-014.** Replay FAIL; the original FAIL. The replay met, in its copy, the same defect in the orchestrator's RUNNER.toml that the original met. The original took the orchestrator's fix mid-round (273492c, merged at 1ad2610; step 1's "in-flight input"). The replay could not take it, since the copy ends at its start commit.
+- **SD Q-001, Q-002.** Not judged; the originals FAIL.
+
+**Records share and pool:** unchanged from step 1 (above); step 2 adds no audit.
+
+### Step 2: cost
+As each helper reported at return (the task notification's usage):
+
+| Run | Kind | Piece | Model (served) | Tokens | Tool uses | Time (s) |
+|---|---|---|---|---|---|---|
+| 1 | replay | SD M3B plan | claude-opus-5-5 | 199,653 | 52 | 613.3 |
+| 2 | check | SD M3B plan | claude-fable-5-1 | 152,649 | 32 | 334.3 |
+| 3 | replay | SD HD1 stage | claude-opus-5-5 | 302,073 | 80 | 1,822.7 |
+| 4 | replay | SD Q-001 | claude-opus-5-5 | 67,141 | 5 | 32.9 |
+| 5 | replay | SD M3C plan | claude-opus-5-5 | 194,530 | 53 | 568.6 |
+| 6 | replay | SD Q-002 | claude-opus-5-5 | 63,806 | 4 | 30.7 |
+| 7 | replay | SD after-glance plan | claude-opus-5-5 | 263,131 | 51 | 641.8 |
+| 8 | check | SD M3C plan | claude-fable-5-1 | 194,442 | 37 | 506.5 |
+| 9 | check | SD after-glance plan | claude-fable-5-1 | 148,837 | 32 | 345.0 |
+| 10 | check | SD HD1 stage | claude-fable-5-1 | 166,148 | 33 | 251.3 |
+| 11 | replay | POOM PR5 build | claude-opus-5-5 | 231,380 | 67 | 839.1 |
+| 12 | replay | POOM S-014 build | claude-opus-5-5 | 243,834 | 37 | 1,443.3 |
+| 13 | check | POOM PR5 build | claude-fable-5-1 | 142,936 | 26 | 394.8 |
+| 14 | check | POOM S-014 build | claude-fable-5-1 | 155,509 | 20 | 259.2 |
+| | | **Total** | | **2,526,069** | **529** | **8,083.6** |
+
+Most runs ran with other helpers alongside them, so their times overlap. **Runs started: 14 of 20** (8 replays of at most 8, 6 checks of at most 8, 0 reruns).
+
+### Places not run
+None. The two POOM places, at first blocked by the permission check, ran once the owner gave access (runs 11–14).
+
+### Readings and limits (for the Reviewer)
+1. **Context the harness gave every helper, beyond the brief.** It is not a tool call, so F4 does not cover it, but it bears on faithfulness. Each helper's system context (transcript lines 4 and 7) held this session's project instructions (Model-Lab's CLAUDE.md, which points to Model-Lab's AGENTS.md), this session's id in the commit-attribution note, the scratchpad's path, and a list of available tools including WebFetch and WebSearch. The replays copied this session's id into their commit trailers (`Agent-Session: session_01QBwHGMu36mvZdxN2ssBspJ`, e.g. run 1's hand-back), and three (runs 1, 3, 5) cite "CLAUDE.md" for leaving co-author lines out. Both Model-Lab's and Service-Desk's CLAUDE.md say this (Service-Desk 3bfe663:CLAUDE.md:16), so which one each meant is not clear. No helper's tool call read a Model-Lab file.
+2. **Saved command output under /root** (runs 1, 7 and the check runs). The harness writes a too-large tool output to /root/.claude/projects/<session>/tool-results/ and tells the helper to read it there. The file holds only that helper's own output from inside its copy. By F4's wording, any path under /root fails. Whether a harness-saved copy of the helper's own output is such a path is the Reviewer's ruling. It decides F4 for runs 1 and 7.
+3. **HD1's browser lookup** (run 3, line 90): `ls ~/.cache/ms-playwright` under /root, looking for the tool the work needed. It decides F4 for run 3.
+4. **The shared scratchpad.** Every helper was told of the same scratchpad folder under /tmp. `scratch_scan.py` lists every scratchpad file each run named: no file is named by two runs, and no run lists the folder. So no run read another's file, as far as tool-call text shows.
+5. **Helpers ran in parallel** (most runs overlapped). The hook sets the working directory per helper, and each transcript's cwd is its own copy only.
+6. **Research replays.** Both stopped for the reason step 1's reading 6 foresaw. The originals used the web; the confinement bars it; the researcher role bars memory. The copies also expose files the original researchers' folders did not hold (docs/PROJECT.md, queue/, decisions/; both helpers say they did not open them, and Q-002's grep listed docs/PROJECT.md's name in its results).
+7. **Run 10's end.** The judge started two test runs in the background, wrote that it was waiting on them, and its session ended with no hand-back. The Builder did not prompt it further, since any added message would change the judge brief that E-002 requires to be the same for every judgement. A rerun is allowed only for F4/F5 set-up faults, so none was made.
+8. **Transcripts.** All 14 transcripts, with their metadata, are copied into `transcripts/` (`agent-<id>.jsonl`, `agent-<id>.meta.json`; ids in `runs_step2.tsv`), with the owner's permission. Their originals are this session's `subagents/` folder. Three POOM transcripts (runs 11, 13 and 14) quote POOM's governance/SURFACES.md `humans` block, which holds the owner's committer address as committed there. Each replay's output commits are also saved as a patch in `replay_outputs/`.
+
+### Files added at step 2 (src/E-001/)
+- `briefs/`: the 10 briefs as sent.
+- `copies_step2.txt`: each copy's two checks.
+- `runs_step2.tsv`: each run, agent id, copy, cost and outcome.
+- `f4_scan.py`, `brief_match.py`, `scratch_scan.py`: the scripts used above.
+- `replay_outputs/*.patch`: the six finished replays' commits.
+- `transcripts/`: the 14 helper transcripts and their metadata.
 
 ## Pieces used (for M2's held-back set and test pool)
 - **Audited, returned:**
@@ -158,7 +313,7 @@ Each pool holds for work that was sent back only. It says nothing about work tha
   - SD Q-001, ML Q-001, SD Q-002, ML Q-002, SD Q-004, ML Q-003, SD Q-005, ML Q-004.
 - **Audited, first-time-pass:** SD HD1 plan, POOM S-027 plan, SD Q-008, SD Q-013, SD followups build, POOM S-007 build.
 - **Audited, web-free:** ML Q-006.
-- **Replayed:** none.
+- **Replayed (step 2):** SD M3B plan, SD M3C plan, SD after-glance plan, POOM PR5 build, POOM S-014 build, SD HD1 stage, SD Q-001, SD Q-002. **Judged by a check run:** the first six (SD HD1's check returned no verdict).
 
 ## Open points for the Reviewer
 1. **Reading 3, milestone lines as task statements.** It decides whether SD M3B and M3C are rebuilt or neither. The plans' rebuilt share would go from 4 of 8 to 2 of 8.

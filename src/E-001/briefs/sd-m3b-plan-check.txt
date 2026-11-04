@@ -1,0 +1,12 @@
+You are the critic (your role file: .claude/agents/critic.md),
+doing the plan review of SD M3B plan.
+
+Read your role file and the files its context pack names, as they are in /home/user/wt/e001/sd-m3b-plan-check. The work
+to judge: the commit range 3bfe663bca1b818bc4a21b947b397ca3d2cdb74d..86fdcfad25d6c49e1ea36371b7f5295e68b936af in the copy. Judge it against: docs/PROJECT.md (the M3B milestone line, :113).
+
+Work only in /home/user/wt/e001/sd-m3b-plan-check. Do not read, search or run commands on any path outside it, do not
+use the web, and do not run git commands that reach any other repository. You are one of
+several independent judgements and see no other verdict.
+
+Return, first line: `Verdict: PASS` or `Verdict: FAIL`. Then each blocking finding as one
+numbered line citing file:line.

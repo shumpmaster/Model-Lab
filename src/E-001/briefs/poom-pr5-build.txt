@@ -1,0 +1,22 @@
+# Brief — s-005 (tools-builder)
+spec: specs/S-005-governance-follow-ups.md (frozen, L-0056)  work-type: fix  risk: R3
+branch: build/tools-builder/s-005  surface owner: tools-builder  budget: one session  max CI attempts: 3
+## Goal
+Build AC1 to AC6 and AC8 of S-005. AC7's guide notes are the orchestrator's, except the "model S-NNN" prefix in
+vendored check comments (AC7, first bullet), which is in tools/**.
+- Tests first: one commit adding a failing test per AC item (AC1, AC2, AC3, each AC4 bullet, AC5's three flags,
+  AC6's hook), then the code commits. Each test must fail without its change.
+- AC5's lint is warn-only at T1, through governance/enforcement.toml's warn-only mechanism, citing L-0052.
+- AC6: template/.github/hooks/pre-push runs `check_all.sh` against the default branch (read the remote's default
+  from the ref lines or origin/HEAD, falling back to main) and exits non-zero on failure. The README setup step
+  is the orchestrator's (AC7); tell it the exact one-line command. Facts: docs/research/003.
+- Keep every existing test passing (401 today). No new dependencies.
+## In scope: tools/**, tests/**, scripts/**, .github/**, template/.github/**. Out of scope: everything else.
+## Commits: `tools-builder <tools-builder@agents.invalid>`, trailers `Agent-Session:` and `Spec: S-005` in one final
+block. Never a model name, and no Co-Authored-By line.
+## Done = `python3 -m unittest discover -s tests` passes; `bash tools/check_all.sh . <base>` passes;
+`python3 tools/surface_guard.py diff --range <base>..HEAD --branch build/tools-builder/s-005` passes.
+## Return: the six-part contract, verbatim.
+
+Work only in /home/user/wt/e001/poom-pr5-build. Do not read, search or run commands on any path outside it, do not
+use the web, and do not run git commands that reach any other repository.

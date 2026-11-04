@@ -1,0 +1,1727 @@
+From 27857057f71d9bfd5cd864ad36d78d1e56c958fd Mon Sep 17 00:00:00 2001
+From: tools-builder <tools-builder@agents.invalid>
+Date: Tue, 3 Nov 2026 21:52:49 +0000
+Subject: [PATCH 1/4] S-005: failing tests for AC1 to AC7 (tests first)
+
+One test class per acceptance item: the superseded-spec trailer (AC1), the
+governance job's persist-credentials (AC2), the scope check since the merge
+base (AC3), the four S-004 follow-ups (AC4), the facts lint's three flags and
+its warn-only mode (AC5), the opt-in pre-push hook (AC6) and the model prefix
+on vendored spec ids (AC7's tools part). All 28 fail before the code commits.
+
+Agent-Session: session_01QBwHGMu36mvZdxN2ssBspJ
+Spec: S-005
+---
+ tests/test_s005.py | 540 +++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 540 insertions(+)
+ create mode 100644 tests/test_s005.py
+
+diff --git a/tests/test_s005.py b/tests/test_s005.py
+new file mode 100644
+index 0000000..4e8ed04
+--- /dev/null
++++ b/tests/test_s005.py
+@@ -0,0 +1,540 @@
++"""Model S-005: governance follow-ups from the pilot (AC1 to AC7's tools part).
++
++Each test class names the acceptance criterion it covers. Every test here failed
++before its change (AC8).
++"""
++
++import json
++import os
++import re
++import shutil
++import subprocess
++import unittest
++
++import _util
++import digest
++import governance_checks
++import govlib
++import ledger_check
++import owner_signal
++import review_check
++import spec_check
++import surface_guard
++from test_review_check import RISK, SURFACES as REVIEW_SURFACES
++
++CHECK_ALL = os.path.join(_util.TOOLS, "check_all.sh")
++CI = os.path.join(_util.REPO, ".github/workflows/ci.yml")
++TEMPLATE_WF = os.path.join(_util.REPO, "template/.github/workflows/governance.yml")
++HOOK = os.path.join(_util.REPO, "template/.github/hooks/pre-push")
++LEDGER = "# LEDGER\n\n## L-0001 — Start\ndate: 2026-09-01\ntype: ruling\nscope: all\ndecision: Begin.\n"
++
++
++def run(cmd, cwd, env=None, stdin=None):
++    proc = subprocess.run(cmd, cwd=cwd, env=env, input=stdin, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
++    return proc.returncode, proc.stdout.decode("utf-8", "replace")
++
++
++# --------------------------------------------------------------------------
++# AC1: a builder commit whose Spec: names a superseded spec fails
++
++
++RANGE_SURFACES = """\
++```roster
++api-builder     builder     installed  autonomous
++reviewer        reviewer    installed  autonomous
++```
++
++```surface:orchestrator
++docs/**
++governance/**
++specs/**
++```
++
++```surface:api-builder
++src/**
++```
++
++```surface:reviewer
++```
++"""
++
++
++def spec_doc(status, sid="S-001", body="## Acceptance criteria\nAC1 x\n"):
++    return "# Spec %s — T\n\nstatus: %s   frozen_at: x   workstream: w\nproblem: p\n\n%s" % (sid, status, body)
++
++
++def commit_json(agent, spec, n, paths=("src/a.py",)):
++    lines = ["Agent-Session: sess-1"] + (["Spec: %s" % spec] if spec else [])
++    return {"sha": "%040x" % n, "parents": ["%040x" % (n + 1000)], "author_name": agent,
++            "author_email": "%s@agents.invalid" % agent, "paths": list(paths),
++            "message": "Change\n\nBody.\n\n%s\n" % "\n".join(lines)}
++
++
++class SupersededSpecTests(_util.TempDirCase):
++    def setUp(self):
++        super().setUp()
++        self.write("governance/SURFACES.md", RANGE_SURFACES, dedent=False)
++        self.write("docs/LEDGER.md", LEDGER, dedent=False)
++        self.write("specs/S-001-old.md", spec_doc("superseded"), dedent=False)
++        self.write("specs/S-002-new.md", spec_doc("frozen", "S-002"), dedent=False)
++
++    def walk(self, commits):
++        path = self.write("_commits.json", json.dumps(commits), dedent=False)
++        return _util.run_main(surface_guard, ["diff", "--range", "base..HEAD", "--root", self.root,
++                                              "--commits-from", path])
++
++    def test_builder_commit_against_a_superseded_spec_fails(self):
++        rc, out, err = self.walk([commit_json("api-builder", "S-001", 1)])
++        self.assertEqual(rc, 1, out + err)
++        self.assertIn("Spec: S-001", out)
++        self.assertIn("superseded", out)
++        self.assertIn("specs/S-001-old.md", out)
++        # A frozen spec is fine, and an orchestrator commit is not a builder commit.
++        rc, out, err = self.walk([commit_json("api-builder", "S-002", 1)])
++        self.assertEqual(rc, 0, out + err)
++        rc, out, err = self.walk([commit_json("orchestrator", "S-001", 1, paths=("specs/S-001-old.md",))])
++        self.assertEqual(rc, 0, out + err)
++
++
++# --------------------------------------------------------------------------
++# AC2: the governance job checks out with persist-credentials: false
++
++
++def job_block(lines, job):
++    start = lines.index("  %s:" % job)
++    end = next((i for i in range(start + 1, len(lines))
++                if lines[i].startswith("  ") and not lines[i].startswith("   ") and lines[i].strip()
++                and not lines[i].lstrip().startswith("#")), len(lines))
++    return lines[start:end]
++
++
++def checkout_step(block):
++    start = next(i for i, l in enumerate(block) if l.strip() == "- uses: actions/checkout@v4")
++    out = [block[start]]
++    for line in block[start + 1:]:
++        if line.startswith("      - "):
++            break
++        out.append(line)
++    return out
++
++
++class PersistCredentialsTests(unittest.TestCase):
++    def test_governance_job_checkout_drops_the_token(self):
++        for wf in (CI, TEMPLATE_WF):
++            with open(wf, encoding="utf-8") as fh:
++                lines = fh.read().splitlines()
++            step = [l.strip() for l in checkout_step(job_block(lines, "governance")) if not l.strip().startswith("#")]
++            self.assertIn("persist-credentials: false", step, wf)
++            self.assertIn("fetch-depth: 0", step, wf)
++
++
++# --------------------------------------------------------------------------
++# AC3: the scope check counts extends_scope entries since the merge base with the default branch
++
++
++def sprint(scope):
++    return "# Sprint\nstatus: open\nworkstream: main\nscope: %s\n" % scope
++
++
++class ScopeSinceMergeBaseTests(_util.TempDirCase):
++    def setUp(self):
++        super().setUp()
++        self.origin = os.path.join(self.root, "origin")
++        self.work = os.path.join(self.root, "work")
++        os.makedirs(self.origin)
++        _util.git(self.origin, "init", "-q")
++        self.put(self.origin, "docs/sprints/m1.md", sprint("src/**"))
++        self.put(self.origin, "docs/LEDGER.md", LEDGER)
++
++    def put(self, repo, rel, text):
++        path = os.path.join(repo, rel)
++        os.makedirs(os.path.dirname(path), exist_ok=True)
++        with open(path, "w", encoding="utf-8", newline="\n") as fh:
++            fh.write(text)
++
++    def commit(self, repo):
++        _util.git(repo, "add", "-A")
++        _util.git(repo, "commit", "-q", "--allow-empty", "-m", "c")
++        return _util.git(repo, "rev-parse", "HEAD").strip()
++
++    def extend(self, repo, eid="L-0002"):
++        with open(os.path.join(repo, "docs/LEDGER.md"), "a", encoding="utf-8") as fh:
++            fh.write("\n## %s — Widen\ndate: 2026-09-02\ntype: ruling\nextends_scope: tools/**\n" % eid)
++
++    def clone(self):
++        self.commit(self.origin)
++        _util.git(self.root, "clone", "-q", self.origin, self.work)
++        _util.git(self.work, "checkout", "-q", "-b", "topic")
++
++    def scope(self, base, *extra):
++        return _util.run_main(governance_checks, ["scope", "--base", base, "--root", self.work] + list(extra))
++
++    def test_extension_pushed_earlier_on_the_branch_counts(self):
++        self.clone()
++        self.extend(self.work)
++        first_push = self.commit(self.work)
++        self.put(self.work, "tools/t.py", "x\n")
++        self.commit(self.work)
++        rc, out, err = self.scope(first_push)
++        self.assertEqual(rc, 0, out + err)
++        self.assertIn("extended by L-0002", out)
++        self.assertIn("origin/main", out)
++
++    def test_explicit_default_branch(self):
++        _util.git(self.origin, "checkout", "-q", "-b", "trunk")
++        self.clone()
++        self.extend(self.work)
++        first_push = self.commit(self.work)
++        self.put(self.work, "tools/t.py", "x\n")
++        self.commit(self.work)
++        rc, out, err = self.scope(first_push, "--default-branch", "trunk")
++        self.assertEqual(rc, 0, out + err)
++        self.assertIn("origin/trunk", out)
++
++    def test_extension_already_on_the_default_branch_does_not_count(self):
++        self.extend(self.origin)
++        self.clone()
++        base = self.commit(self.work)
++        self.put(self.work, "tools/t.py", "x\n")
++        self.commit(self.work)
++        rc, out, _ = self.scope(base)
++        self.assertEqual(rc, 1, out)
++        self.assertIn("tools/t.py: outside the sprint scope", out)
++        self.assertIn("since the merge base with origin/main", out)
++
++    def test_check_all_passes_the_default_branch(self):
++        _util.git(self.origin, "checkout", "-q", "-b", "trunk")
++        self.clone()
++        base = self.commit(self.work)
++        env = dict(os.environ, GOV_DEFAULT_BRANCH="trunk")
++        rc, out = run(["bash", CHECK_ALL, ".", base], cwd=self.work, env=env)
++        self.assertIn("== governance_checks scope --base %s" % base, out)
++        self.assertIn("origin/trunk", out)
++
++    def test_workflows_pass_the_default_branch(self):
++        for wf in (CI, TEMPLATE_WF):
++            with open(wf, encoding="utf-8") as fh:
++                text = fh.read()
++            gov = text[text.index("- name: Governance checks"):text.index("- name: Record owner signal inputs")]
++            self.assertIn("GOV_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}", gov, wf)
++
++
++# --------------------------------------------------------------------------
++# AC4: the S-004 follow-ups (L-0046)
++
++
++class QuestionsUnwritableTests(_util.TempDirCase):
++    def test_unwritable_summary_path_exits_2_with_an_error_line(self):
++        self.git_init()
++        _util.git(self.root, "commit", "-q", "--allow-empty", "-m", "c")
++        _util.git(self.root, "update-ref", "refs/remotes/origin/main", "HEAD")
++        bad = os.path.join(self.root, "missing-dir", "q.json")
++        rc, out, err = _util.run_main(review_check, ["questions", "--default-branch", "main",
++                                                     "--summary-json", bad, "--root", self.root])
++        self.assertEqual(rc, 2, out + err)
++        self.assertRegex(err, r"(?m)^ERROR: ")
++        # The error path too (no origin/nope), when its summary can't be written either.
++        rc, out, err = _util.run_main(review_check, ["questions", "--default-branch", "nope",
++                                                     "--summary-json", bad, "--root", self.root])
++        self.assertEqual(rc, 2, out + err)
++        self.assertRegex(err, r"(?m)^ERROR: ")
++
++
++class EmptySignalCodeTests(_util.TempDirCase):
++    def test_config_check_warns_on_an_empty_list(self):
++        self.write("governance/SURFACES.md", REVIEW_SURFACES, dedent=False)
++        self.write("governance/risk-paths.toml", "signal_code = []\n" + RISK, dedent=False)
++        rc, out, _ = _util.run_main(review_check, ["lint", "--root", self.root])
++        self.assertEqual(rc, 0, out)
++        self.assertRegex(out, r"(?m)^WARN: governance/risk-paths.toml: signal_code = \[\]")
++        self.write("governance/risk-paths.toml", 'signal_code = ["src/**"]\n' + RISK, dedent=False)
++        rc, out, _ = _util.run_main(review_check, ["lint", "--root", self.root])
++        self.assertNotIn("WARN:", out)
++
++
++def review(action, other=0):
++    return json.dumps({"owner_action": action, "other_findings": other, "reasons": ["R3"], "risk": "R3"})
++
++
++class AfterAgentsCountTests(unittest.TestCase):
++    def test_count_includes_failed_steps(self):
++        steps = json.dumps([{"name": "surface_guard check", "exit": 1}, {"name": "digest check", "exit": 1},
++                            {"name": "spec_check status", "exit": 0}, {"name": "review_check pr 9", "exit": 1}])
++        ok = json.dumps({"unit-tests": "success"})
++        bad = json.dumps({"unit-tests": "failure", "smoke-test": "success"})
++        v = owner_signal.verdict_status
++        self.assertEqual(v(review("after_agents", 3), steps, ok), ("pending", "Owner: after agents · 5 other finding(s)"))
++        self.assertEqual(v(review("after_agents", 3), steps, bad), ("pending", "Owner: after agents · 6 other finding(s)"))
++
++
++class NoAbbreviationTests(_util.TempDirCase):
++    def test_abbreviated_flags_are_rejected(self):
++        cases = (
++            (surface_guard, ["check", "--ro", self.root]),
++            (spec_check, ["status", "--ro", self.root]),
++            (governance_checks, ["sprints", "--ro", self.root]),
++            (ledger_check, ["check", "--ro", self.root]),
++            (digest, ["check", "--ro", self.root]),
++            (review_check, ["lint", "--ro", self.root]),
++            (owner_signal, ["post", "--dry", "--root", self.root]),
++        )
++        for module, argv in cases:
++            rc, out, err = _util.run_main(module, argv)
++            self.assertEqual(rc, 2, "%s %s: %s" % (module.__name__, argv, out + err))
++
++    def test_abbreviated_summary_flag_is_a_usage_error(self):
++        target = os.path.join(self.root, "s.json")
++        rc, _, err = _util.run_main(review_check, ["pr", "9", "--files-from", self.files_list(["x"]),
++                                                   "--summary", target, "--root", self.root])
++        self.assertEqual(rc, 2, err)
++        self.assertFalse(os.path.exists(target))
++
++
++# --------------------------------------------------------------------------
++# AC5: the facts lint, warn-only at T1 per model L-0052
++
++
++def lint_spec(status, facts=None, limits=None):
++    body = "## Acceptance criteria\nAC1 x\n"
++    if facts is not None:
++        body += "\n## Facts relied on (each with evidence)\n" + facts
++    if limits is not None:
++        body += "\n## Known limits\n" + limits
++    body += "\n## Risks and mitigations\nNone.\n"
++    return spec_doc(status, body=body)
++
++
++GOOD_FACTS = ("- **F1:** the guard reads trailers (tools/surface_guard.py:292).\n"
++              "- **F2:** the step lists it: `git ls-tree HEAD tools/` shows six files.\n"
++              "- **F3:** hooks run once enabled (docs/research/003, P1).\n"
++              "- **F4:** a fact can span lines, with its evidence\n"
++              "  on the next one (tools/govlib.py:12-20).\n")
++
++
++class FactsLintTests(_util.TempDirCase):
++    def setUp(self):
++        super().setUp()
++        self.git_init()
++        self.write("docs/LEDGER.md", LEDGER, dedent=False)
++        self.write("AGENTS.md", "tier: T1\n", dedent=False)
++        self.write("specs/S-001-a.md", lint_spec("draft"), dedent=False)
++        self.base = self.commit()
++
++    def commit(self):
++        _util.git(self.root, "add", "-A")
++        _util.git(self.root, "commit", "-q", "--allow-empty", "-m", "c")
++        return _util.git(self.root, "rev-parse", "HEAD").strip()
++
++    def freeze(self, facts=None, limits=None):
++        self.write("specs/S-001-a.md", lint_spec("frozen", facts, limits), dedent=False)
++        self.commit()
++        return _util.run_main(spec_check, ["facts", "--base", self.base, "--root", self.root])
++
++    def test_missing_facts_section(self):
++        rc, out, err = self.freeze()
++        self.assertEqual(rc, 0, out + err)
++        self.assertRegex(out, r"(?m)^WARN: specs/S-001-a.md: .*no 'Facts relied on' section")
++        self.assertIn("WARN-ONLY: 1 finding(s), warn-only per model L-0052", out)
++
++    def test_fact_without_evidence(self):
++        rc, out, err = self.freeze(GOOD_FACTS + "- **F5:** the API returns JSON.\n")
++        self.assertEqual(rc, 0, out + err)
++        self.assertRegex(out, r"(?m)^WARN: specs/S-001-a.md line \d+: fact has no evidence")
++        self.assertIn("F5", out)
++        self.assertIn("WARN-ONLY: 1 finding(s)", out)
++
++    def test_known_limit_naming_a_platform_behaviour_without_evidence(self):
++        limits = ("- GitHub retries a failed status post.\n"
++                  "- Merge commits aren't checked.\n"
++                  "- Above tier: on pull_request, the workflow file comes from the PR.\n"
++                  "- GitHub caps descriptions at 140 characters (docs/research/003, F10).\n")
++        rc, out, err = self.freeze(GOOD_FACTS + "- **Known limits:** the runner's git keeps hooks off.\n", limits)
++        self.assertEqual(rc, 0, out + err)
++        found = re.findall(r"(?m)^WARN: .*known limit names a platform behaviour.*$", out)
++        self.assertEqual(len(found), 2, out)
++        self.assertIn("GitHub retries", out)
++        self.assertIn("runner's git", out)
++        self.assertNotIn("Merge commits", "\n".join(found))
++        self.assertNotIn("Above tier", "\n".join(found))
++
++    def test_clean_spec_passes_and_known_limits_none(self):
++        rc, out, err = self.freeze(GOOD_FACTS + "- **Known limits:** none that rest on platform behaviour.\n")
++        self.assertEqual(rc, 0, out + err)
++        self.assertNotIn("WARN", out)
++        self.assertIn("OK:", out)
++
++    def test_only_specs_being_frozen_are_linted(self):
++        self.write("specs/S-002-b.md", spec_doc("frozen", "S-002"), dedent=False)
++        self.base = self.commit()
++        self.write("specs/S-003-c.md", spec_doc("draft", "S-003"), dedent=False)
++        self.commit()
++        rc, out, err = _util.run_main(spec_check, ["facts", "--base", self.base, "--root", self.root])
++        self.assertEqual(rc, 0, out + err)
++        self.assertNotIn("WARN", out)
++        # A spec added already frozen is being frozen.
++        self.write("specs/S-004-d.md", spec_doc("frozen", "S-004"), dedent=False)
++        self.commit()
++        rc, out, err = _util.run_main(spec_check, ["facts", "--base", self.base, "--root", self.root])
++        self.assertIn("WARN: specs/S-004-d.md", out)
++        self.assertNotIn("S-002-b.md", out)
++
++    def test_error_at_t2_and_when_enforced(self):
++        self.write("AGENTS.md", "tier: T2\n", dedent=False)
++        rc, out, _ = self.freeze()
++        self.assertEqual(rc, 1, out)
++        self.assertIn("FAIL: 1 violation(s)", out)
++        self.write("AGENTS.md", "tier: T1\n", dedent=False)
++        self.write("governance/enforcement.toml",
++                   '[checks]\n"spec_check.facts" = { mode = "enforce", ledger = "L-0001" }\n', dedent=False)
++        rc, out, _ = _util.run_main(spec_check, ["facts", "--base", self.base, "--root", self.root])
++        self.assertEqual(rc, 1, out)
++
++    def test_check_name_is_listed(self):
++        self.assertIn("spec_check.facts", govlib.CHECK_NAMES)
++        self.assertNotIn("spec_check.facts", govlib.NEVER_WARN)
++
++    def test_check_all_runs_it_with_a_base(self):
++        self.freeze()
++        rc, out = run(["bash", CHECK_ALL, ".", self.base], cwd=self.root)
++        self.assertIn("== spec_check facts --base %s" % self.base, out)
++        self.assertIn("WARN  spec_check facts --base %s (1 finding(s), warn-only per model L-0052)" % self.base, out)
++        rc, out = run(["bash", CHECK_ALL, "."], cwd=self.root)
++        self.assertNotIn("spec_check facts", out)
++
++
++# --------------------------------------------------------------------------
++# AC6: the template's opt-in pre-push hook
++
++
++STUB = """#!/usr/bin/env bash
++echo "STUB ARGS:$*"
++echo "STUB BRANCH:${GOV_BRANCH:-}"
++exit "${STUB_EXIT:-0}"
++"""
++
++
++class PrePushHookTests(_util.TempDirCase):
++    def setUp(self):
++        super().setUp()
++        self.remote = os.path.join(self.root, "remote.git")
++        self.work = os.path.join(self.root, "work")
++        _util.git(self.root, "init", "-q", "--bare", self.remote)
++        os.makedirs(self.work)
++        _util.git(self.work, "init", "-q")
++        os.makedirs(os.path.join(self.work, ".github/hooks"))
++        shutil.copy(HOOK, os.path.join(self.work, ".github/hooks/pre-push"))
++        stub = os.path.join(self.work, "governance/checks/check_all.sh")
++        os.makedirs(os.path.dirname(stub))
++        with open(stub, "w") as fh:
++            fh.write(STUB)
++        os.chmod(stub, 0o755)
++        self.commit("one")
++        _util.git(self.work, "remote", "add", "origin", self.remote)
++
++    def commit(self, msg):
++        with open(os.path.join(self.work, "f.txt"), "a") as fh:
++            fh.write(msg + "\n")
++        _util.git(self.work, "add", "-A")
++        _util.git(self.work, "commit", "-q", "-m", msg)
++        return _util.git(self.work, "rev-parse", "HEAD").strip()
++
++    def enable(self):
++        _util.git(self.work, "config", "core.hooksPath", ".github/hooks")
++
++    def push(self, *args, exit_code=0):
++        env = dict(os.environ, STUB_EXIT=str(exit_code))
++        return run(["git", "-c", "user.name=T", "-c", "user.email=t@example.invalid", "push"] + list(args),
++                   cwd=self.work, env=env)
++
++    def remote_sha(self, branch):
++        proc = subprocess.run(["git", "rev-parse", "-q", "--verify", "refs/heads/%s" % branch], cwd=self.remote,
++                              stdout=subprocess.PIPE)
++        return proc.stdout.decode().strip() or None
++
++    def test_hook_is_executable_and_valid_bash(self):
++        self.assertTrue(os.access(HOOK, os.X_OK))
++        rc, out = run(["bash", "-n", HOOK], cwd=_util.REPO)
++        self.assertEqual(rc, 0, out)
++
++    def test_off_until_enabled(self):
++        rc, out = self.push("origin", "HEAD:refs/heads/main", exit_code=1)
++        self.assertEqual(rc, 0, out)
++        self.assertNotIn("STUB", out)
++
++    def test_runs_against_the_default_branch_and_blocks_on_failure(self):
++        self.enable()
++        # First push: no origin/main yet, so the checks run without a base.
++        rc, out = self.push("-u", "origin", "HEAD:refs/heads/main")
++        self.assertEqual(rc, 0, out)
++        self.assertIn("STUB ARGS:.\n", out)
++        main = self.remote_sha("main")
++        _util.git(self.work, "checkout", "-q", "-b", "topic")
++        head = self.commit("two")
++        rc, out = self.push("origin", "topic", exit_code=1)
++        self.assertNotEqual(rc, 0, out)
++        self.assertIn("STUB ARGS:. %s" % main, out)
++        self.assertIn("STUB BRANCH:topic", out)
++        self.assertIsNone(self.remote_sha("topic"))
++        rc, out = self.push("origin", "topic")
++        self.assertEqual(rc, 0, out)
++        self.assertEqual(self.remote_sha("topic"), head)
++
++    def test_no_verify_skips_it(self):
++        self.enable()
++        rc, out = self.push("--no-verify", "origin", "HEAD:refs/heads/main", exit_code=1)
++        self.assertEqual(rc, 0, out)
++        self.assertNotIn("STUB", out)
++
++    def test_default_branch_from_origin_head(self):
++        self.enable()
++        rc, out = self.push("--no-verify", "origin", "HEAD:refs/heads/trunk")
++        self.assertEqual(rc, 0, out)
++        trunk = self.remote_sha("trunk")
++        _util.git(self.work, "fetch", "-q", "origin")
++        _util.git(self.work, "symbolic-ref", "refs/remotes/origin/HEAD", "refs/remotes/origin/trunk")
++        self.commit("two")
++        rc, out = self.push("origin", "HEAD:refs/heads/topic")
++        self.assertEqual(rc, 0, out)
++        self.assertIn("STUB ARGS:. %s" % trunk, out)
++
++    def test_deleting_a_branch_runs_no_checks(self):
++        rc, out = self.push("origin", "HEAD:refs/heads/main", "HEAD:refs/heads/old")
++        self.assertEqual(rc, 0, out)
++        self.enable()
++        rc, out = self.push("origin", ":old", exit_code=1)
++        self.assertEqual(rc, 0, out)
++        self.assertNotIn("STUB", out)
++
++    def test_generated_project_ships_the_hook_executable(self):
++        target = os.path.join(self.root, "project")
++        rc, out = run(["bash", os.path.join(_util.REPO, "scripts", "new-project.sh"), target], cwd=self.root)
++        self.assertEqual(rc, 0, out)
++        hook = os.path.join(target, ".github/hooks/pre-push")
++        self.assertTrue(os.access(hook, os.X_OK), hook)
++
++
++# --------------------------------------------------------------------------
++# AC7 (tools part): vendored check comments cite the model's spec ids as "model S-nnn"
++
++
++class ModelPrefixTests(unittest.TestCase):
++    # A spec id in a format example such as `[S-001]` or `[S-001, S-002]` is not a citation.
++    EXAMPLE = re.compile(r"\[(S-\d{3,}(, )?)+\]")
++
++    def test_spec_ids_carry_the_model_prefix(self):
++        bad = []
++        for name in sorted(os.listdir(_util.TOOLS)):
++            if not (name.endswith(".py") or name.endswith(".sh")):
++                continue
++            with open(os.path.join(_util.TOOLS, name), encoding="utf-8") as fh:
++                for lineno, line in enumerate(fh, 1):
++                    text = self.EXAMPLE.sub("", line)
++                    for m in re.finditer(r"\bS-\d{3,}\b", text):
++                        if not re.search(r"\b[Mm]odel\b", text[:m.start()]):
++                            bad.append("%s:%d: %s" % (name, lineno, line.strip()))
++                            break
++        self.assertEqual(bad, [], "\n".join(bad))
++
++
++if __name__ == "__main__":
++    unittest.main()
+-- 
+2.43.0
+
+
+From 6c758f045756fe4fc47481547a103dbc8e487a07 Mon Sep 17 00:00:00 2001
+From: tools-builder <tools-builder@agents.invalid>
+Date: Tue, 3 Nov 2026 21:58:08 +0000
+Subject: [PATCH 2/4] S-005: the checks (AC1, AC3, AC4, AC5, AC7's tools part)
+
+- AC1: surface_guard's range walk fails a builder commit whose Spec: trailer
+  names a spec that is superseded in the working tree (govlib.spec_statuses).
+- AC3: governance_checks scope also counts extends_scope: entries added since
+  the merge base of HEAD and the default branch (--default-branch NAME, else
+  origin/HEAD's target, else origin/main); check_all passes
+  GOV_DEFAULT_BRANCH through.
+- AC4: `questions` prints an ERROR: line and exits 2 when its summary can't
+  be written; the config check warns on signal_code = []; the after-agents
+  count adds failed steps and tests; every tool's parser (govlib.ArgumentParser)
+  rejects abbreviated flags.
+- AC5: spec_check facts --base REF lints each spec being frozen for a
+  "Facts relied on" section, evidence on each fact, and evidence on each
+  known limit that names a platform behaviour. New check spec_check.facts,
+  warn-only by default at T0 and T1 per model L-0052 (govlib.DEFAULT_WARN,
+  applied in report unless enforcement.toml lists it), an error from T2.
+  check_all runs it with a base.
+- AC7: vendored comments cite the model's spec ids as "model S-nnn".
+
+Agent-Session: session_01QBwHGMu36mvZdxN2ssBspJ
+Spec: S-005
+---
+ tools/check_all.sh         |  17 +++--
+ tools/digest.py            |   3 +-
+ tools/governance_checks.py |  78 ++++++++++++++++----
+ tools/govlib.py            |  93 +++++++++++++++++++-----
+ tools/ledger_check.py      |   3 +-
+ tools/owner_signal.py      |  10 +--
+ tools/review_check.py      |  37 +++++++---
+ tools/spec_check.py        | 143 +++++++++++++++++++++++++++++++++++--
+ tools/surface_guard.py     |  33 +++++----
+ 9 files changed, 345 insertions(+), 72 deletions(-)
+
+diff --git a/tools/check_all.sh b/tools/check_all.sh
+index 7cea035..9e475cb 100755
+--- a/tools/check_all.sh
++++ b/tools/check_all.sh
+@@ -6,15 +6,17 @@
+ # fails; the script exits non-zero if any step failed.
+ #   BASE_REF  adds the commit-range walk (BASE_REF..HEAD), the ledger's
+ #             append-only comparison, the frozen-spec and spec-predates checks,
+-#             and the sprint-scope check.
++#             the facts lint (model S-005 AC5) and the sprint-scope check.
+ #   PR        with BASE_REF, checks that PR's required review verdicts
+ #             (reviews/PR/) instead of only linting them.
+ #   GOV_BRANCH (environment) is passed to the range walk as --branch.
+-#   GOV_SUMMARY_DIR (environment, spec S-004 AC2), when set, makes this script
++#   GOV_DEFAULT_BRANCH (environment, model S-005 AC3) is passed to the scope
++#             check as --default-branch.
++#   GOV_SUMMARY_DIR (environment, model S-004 AC2), when set, makes this script
+ #             write DIR/steps.json (each step's name and exit code) and pass
+ #             --summary-json DIR/review.json to `review_check pr`. The output
+ #             is unchanged.
+-# A check set to warn-only in governance/enforcement.toml (spec S-003) still
++# A check set to warn-only in governance/enforcement.toml (model S-003) still
+ # runs and prints WARN: lines; its step is summarised as WARN and doesn't fail.
+ # --list-checks prints the check names that file may use.
+ # The Python tools are found next to this script, so it works both in the
+@@ -33,6 +35,7 @@ BASE="${2:-}"
+ PR="${3:-}"
+ GOV_BRANCH="${GOV_BRANCH:-}"
+ GOV_SUMMARY_DIR="${GOV_SUMMARY_DIR:-}"
++GOV_DEFAULT_BRANCH="${GOV_DEFAULT_BRANCH:-}"
+ 
+ if ! ROOT="$(cd "$ROOT_ARG" 2>/dev/null && pwd)"; then
+   echo "ERROR: root directory '$ROOT_ARG' does not exist" >&2
+@@ -99,8 +102,12 @@ run_step "spec_check status" "$PY" "$HERE/spec_check.py" status --root "$ROOT"
+ if [ -n "$BASE" ]; then
+   run_step "spec_check frozen --base $BASE" "$PY" "$HERE/spec_check.py" frozen --base "$BASE" --root "$ROOT"
+   run_step "spec_check predates --base $BASE" "$PY" "$HERE/spec_check.py" predates --base "$BASE" --root "$ROOT"
+-  run_step "governance_checks scope --base $BASE" \
+-    "$PY" "$HERE/governance_checks.py" scope --base "$BASE" --root "$ROOT"
++  run_step "spec_check facts --base $BASE" "$PY" "$HERE/spec_check.py" facts --base "$BASE" --root "$ROOT"
++  scope_args=(scope --base "$BASE" --root "$ROOT")
++  if [ -n "$GOV_DEFAULT_BRANCH" ]; then
++    scope_args+=(--default-branch "$GOV_DEFAULT_BRANCH")
++  fi
++  run_step "governance_checks scope --base $BASE" "$PY" "$HERE/governance_checks.py" "${scope_args[@]}"
+ fi
+ run_step "surface_guard charters --check" "$PY" "$HERE/surface_guard.py" charters --check --root "$ROOT"
+ 
+diff --git a/tools/digest.py b/tools/digest.py
+index 5af1bc3..9bbb315 100755
+--- a/tools/digest.py
++++ b/tools/digest.py
+@@ -11,7 +11,6 @@ file, or on a pack over the word budget.
+ Exit 0 = pass, 1 = rule violated, 2 = usage or parse error.
+ """
+ 
+-import argparse
+ import os
+ import re
+ import sys
+@@ -197,7 +196,7 @@ def budget_violations(packs, max_words):
+ 
+ 
+ def main(argv=None):
+-    parser = argparse.ArgumentParser(prog="digest.py", description=__doc__.split("\n")[0])
++    parser = g.ArgumentParser(prog="digest.py", description=__doc__.split("\n")[0])
+     sub = parser.add_subparsers(dest="cmd")
+     for name in ("build", "check"):
+         p = sub.add_parser(name)
+diff --git a/tools/governance_checks.py b/tools/governance_checks.py
+index 36b23bc..a465b27 100755
+--- a/tools/governance_checks.py
++++ b/tools/governance_checks.py
+@@ -6,7 +6,7 @@ Usage:
+   governance_checks.py questions [--root DIR]
+   governance_checks.py reviewers [--root DIR]
+   governance_checks.py builders  [--root DIR] [--base REF]
+-  governance_checks.py scope     --base REF [--root DIR] [--files-from FILE]
++  governance_checks.py scope     --base REF [--root DIR] [--files-from FILE] [--default-branch NAME]
+   governance_checks.py all       [--root DIR] [--base REF]
+ 
+ `all` runs sprints, questions, reviewers and builders, and also scope when
+@@ -18,15 +18,16 @@ build/<id>/<task> refs, local and remote, that are not yet merged into the
+ base. Open pull requests cannot be seen without the host's API, so a PR whose
+ branch was deleted, or opened from a fork, is invisible to it.
+ 
+-`scope` (spec S-003) checks that every path changed in BASE...HEAD (or listed
++`scope` (model S-003) checks that every path changed in BASE...HEAD (or listed
+ in FILE) matches a glob in an open sprint's `scope:` line, or in the
+-`extends_scope:` of a ledger entry added in BASE..HEAD. Bookkeeping paths
++`extends_scope:` of a ledger entry added in BASE..HEAD or since the merge base
++of HEAD and the default branch (origin/NAME with --default-branch, else
++origin/HEAD's target, else origin/main; model S-005 AC3). Bookkeeping paths
+ (the ledger, the digest, sprints, questions and reviews) are always in scope.
+ 
+ Exit 0 = pass, 1 = rule violated, 2 = usage or parse error.
+ """
+ 
+-import argparse
+ import os
+ import re
+ import sys
+@@ -43,10 +44,10 @@ QUESTION_LABELS = ("WHY:", "OPTIONS:", "RECOMMENDATION:", "RISK CLASS:",
+ AGENTS_REL = ".claude/agents"
+ # Owner ruling: reviewer-class agents may hold only these tools.
+ REVIEWER_TOOLS = ("Read", "Grep", "Glob", "LS", "Bash", "WebSearch", "WebFetch")
+-# Readers and researchers hold no shell (L-0006, spec S-002).
++# Readers and researchers hold no shell (L-0006, model S-002).
+ NO_SHELL_TOOLS = ("Read", "Grep", "Glob", "LS", "WebSearch", "WebFetch")
+ SHELL_TOOLS = ("bash",)
+-# Always in scope (spec S-003 §2).
++# Always in scope (model S-003 §2).
+ BOOKKEEPING_GLOBS = ("docs/LEDGER.md", "docs/DIGEST.md", "digest/**", "docs/sprints/**",
+                      "questions/**", "reviews/**")
+ 
+@@ -65,7 +66,7 @@ def first_field(text, key, whole=False, where=None):
+     Returns the whole trimmed value when `whole` is true, else its first word;
+     '' for an empty value; None when the line is absent. A line whose visible
+     text starts with `key:` behind Unicode format (Cf) characters is a
+-    UsageError (spec S-003 §6)."""
++    UsageError (model S-003 §6)."""
+     g.reject_hidden_key(text, key, where or "text")
+     rx = re.compile(r"^%s:(.*)$" % re.escape(key))
+     for line in text.splitlines():
+@@ -112,7 +113,7 @@ def check_sprints(root):
+ 
+ 
+ def _scope_violations(rel, scope):
+-    """The S-003 rule for an open sprint's `scope:` line."""
++    """The model S-003 rule for an open sprint's `scope:` line."""
+     if scope is None:
+         return ["%s: open sprint has no 'scope:' line — list the globs it may touch, comma-separated "
+                 "('**' for everything)" % rel]
+@@ -144,14 +145,59 @@ def scope_changed_files(root, base):
+                                              "%s...HEAD" % base]))))
+ 
+ 
+-def check_scope(root, base, files=None):
+-    """Every changed path is inside an open sprint's scope, an extends_scope entry, or bookkeeping."""
++def default_ref(root, name=None):
++    """The default branch's remote-tracking ref: origin/NAME when a name is given, else
++    origin/HEAD's target, else origin/main. None when the ref isn't in this clone."""
++    if name:
++        if name.startswith("-") or not g.git_ok(root, ["check-ref-format", "--branch", name]):
++            raise g.UsageError("default branch %r is not a branch name" % name)
++        candidates = ["refs/remotes/origin/%s" % name]
++    else:
++        candidates = []
++        try:
++            target = g.git(root, ["symbolic-ref", "-q", "refs/remotes/origin/HEAD"]).decode().strip()
++        except g.GitError:
++            target = ""
++        if target.startswith("refs/remotes/origin/"):
++            candidates.append(target)
++        candidates.append("refs/remotes/origin/main")
++    for ref in candidates:
++        if g.git_ok(root, ["rev-parse", "--verify", "-q", "%s^{commit}" % ref]):
++            return ref
++    return None
++
++
++def scope_extension_base(root, default_branch=None):
++    """(merge-base sha, short ref name) of HEAD and the default branch, or (None, why)."""
++    ref = default_ref(root, default_branch)
++    if ref is None:
++        return None, ("origin/%s is not in this clone" % default_branch if default_branch
++                      else "neither origin/HEAD nor origin/main is in this clone")
++    short = ref[len("refs/remotes/"):]
++    try:
++        mb = g.git(root, ["merge-base", ref, "HEAD"]).decode().strip()
++    except g.GitError:
++        return None, "no merge base between %s and HEAD" % short
++    return mb, short
++
++
++def check_scope(root, base, files=None, default_branch=None):
++    """Every changed path is inside an open sprint's scope, an extends_scope entry, or bookkeeping.
++
++    extends_scope: entries count when added since the base, or since the merge base
++    with the default branch, so an extension pushed earlier on the same branch still
++    counts on a push run (model S-005 AC3)."""
+     g.verify_commit(root, base)
+     if files is None:
+         files = scope_changed_files(root, base)
+     sprints = open_sprint_scopes(root)
++    mb, short = scope_extension_base(root, default_branch)
++    added = g.added_ledger_entries(root, base)
++    if mb is not None:
++        seen = set(e.id for e in added)
++        added += [e for e in g.added_ledger_entries(root, mb) if e.id not in seen]
+     extends = []
+-    for e in g.added_ledger_entries(root, base):
++    for e in sorted(added, key=lambda e: g.id_sort_key(e.id)):
+         value = e.get("extends_scope")
+         if value is not None:
+             extends.append((e.id, g.split_globs(g.strip_comment(value))))
+@@ -169,6 +215,11 @@ def check_scope(root, base, files=None):
+     notes.append("NOTE: %d changed path(s) checked against the scope of %s%s"
+                  % (len(set(files)), where,
+                     "; extended by %s" % ", ".join(i for i, _ in extends) if extends else ""))
++    if mb is not None:
++        notes.append("NOTE: extends_scope: entries counted since the base and since the merge base with %s (%s)"
++                     % (short, mb[:12]))
++    else:
++        notes.append("NOTE: extends_scope: entries counted since the base only (%s)" % short)
+     return v, notes
+ 
+ 
+@@ -352,7 +403,7 @@ CHECKS = (("sprints", check_sprints), ("questions", check_questions), ("reviewer
+ 
+ 
+ def main(argv=None):
+-    parser = argparse.ArgumentParser(prog="governance_checks.py", description=__doc__.split("\n")[0])
++    parser = g.ArgumentParser(prog="governance_checks.py", description=__doc__.split("\n")[0])
+     sub = parser.add_subparsers(dest="cmd")
+     for name in ("sprints", "questions", "reviewers", "builders", "scope", "all"):
+         p = sub.add_parser(name)
+@@ -362,6 +413,7 @@ def main(argv=None):
+         if name == "scope":
+             p.add_argument("--base", required=True)
+             p.add_argument("--files-from")
++            p.add_argument("--default-branch")
+     try:
+         args = parser.parse_args(argv)
+     except SystemExit as exc:
+@@ -378,7 +430,7 @@ def main(argv=None):
+                 v, n = fn(args.root, args.base)
+             elif name == "scope":
+                 files = g.read_file_list(args.files_from) if getattr(args, "files_from", None) else None
+-                v, n = fn(args.root, args.base, files)
++                v, n = fn(args.root, args.base, files, getattr(args, "default_branch", None))
+             else:
+                 v, n = fn(args.root)
+         except g.UsageError as exc:
+diff --git a/tools/govlib.py b/tools/govlib.py
+index b216cf2..c77beba 100755
+--- a/tools/govlib.py
++++ b/tools/govlib.py
+@@ -4,6 +4,7 @@ Standard library only. Every tool in this directory imports this module, so
+ it is copied alongside them into a generated project's governance/checks/.
+ """
+ 
++import argparse
+ import datetime
+ import os
+ import re
+@@ -50,6 +51,16 @@ class GitError(UsageError):
+ # Files and git
+ 
+ 
++class ArgumentParser(argparse.ArgumentParser):
++    """argparse without flag abbreviations (model S-005 AC4): `--summary` is not `--summary-json`.
++
++    Subparsers made with add_subparsers().add_parser() are of this class too."""
++
++    def __init__(self, *args, **kwargs):
++        kwargs.setdefault("allow_abbrev", False)
++        super().__init__(*args, **kwargs)
++
++
+ def decode_utf8(data, where):
+     """Decode bytes as UTF-8; anything else is a UsageError (exit 2) naming `where`."""
+     try:
+@@ -67,7 +78,7 @@ def read_bytes(path):
+ 
+ 
+ _BARE_CR_RE = re.compile(r"\r(?!\n)")
+-# The line rule (spec S-003 §6): every C0 control but TAB and LF (CR only as part
++# The line rule (model S-003 §6): every C0 control but TAB and LF (CR only as part
+ # of CRLF, checked above), every C1 control (U+0085 included), and the Unicode
+ # line and paragraph separators.
+ _LINE_RULE_RE = re.compile("[\x00-\x08\x0b\x0c\x0e-\x1f\x80-\x9f\u2028\u2029]")
+@@ -87,7 +98,7 @@ def reject_bare_cr(text, where):
+ 
+ 
+ def reject_bad_chars(text, where):
+-    """Apply the character rules to decoded text: L-0013's bare CR, then S-003's line rule.
++    """Apply the character rules to decoded text: L-0013's bare CR, then model S-003's line rule.
+ 
+     One UsageError (exit 2) for the first rejected character of the file."""
+     reject_bare_cr(text, where)
+@@ -107,7 +118,7 @@ def strip_cf(text):
+ 
+ def reject_hidden_key(text, key, where):
+     """A line whose visible text starts with `key:` but that has Cf characters before it
+-    is a UsageError (spec S-003 §6: the tier line and first_field)."""
++    is a UsageError (model S-003 §6: the tier line and first_field)."""
+     prefix = key + ":"
+     for n, line in enumerate(text.split("\n"), 1):
+         if not line.startswith(prefix) and strip_cf(line).startswith(prefix):
+@@ -144,7 +155,7 @@ def load_json(text, where):
+ 
+ 
+ def check_text(data, where, newline=None):
+-    """Apply the shared read rules (L-0013, S-003 §6) to bytes read from a file or from git.
++    """Apply the shared read rules (L-0013, model S-003 §6) to bytes read from a file or from git.
+ 
+     The bytes must be strict UTF-8, must not contain a carriage return that is
+     not immediately followed by LF, and must not contain any other control
+@@ -806,7 +817,7 @@ def commit_paths(root, sha):
+ 
+ 
+ # --------------------------------------------------------------------------
+-# Specs, and ledger fields that refer to specs or extend scope (spec S-003)
++# Specs, and ledger fields that refer to specs or extend scope (model S-003)
+ 
+ 
+ SPECS_REL = "specs"
+@@ -875,6 +886,25 @@ def spec_files_at(root, rev):
+     return sorted(out)
+ 
+ 
++def spec_statuses(root):
++    """{spec id: (rel, status)} for the spec files in the working tree at root.
++
++    A file whose name has no spec id, or an id used twice, is left out (spec_check
++    status reports those)."""
++    out, seen = {}, set()
++    for name in spec_files(root):
++        sid = spec_id(name)
++        if sid is None:
++            continue
++        if sid in seen:
++            out.pop(sid, None)
++            continue
++        seen.add(sid)
++        rel = "%s/%s" % (SPECS_REL, name)
++        out[sid] = (rel, spec_status(read_text(os.path.join(root, rel)))[0])
++    return out
++
++
+ def parse_id_list(value, item_re, what):
+     """Parse a bracketed, comma-separated list such as `[S-001, S-002]`.
+ 
+@@ -950,13 +980,13 @@ def read_tier(root):
+ 
+ 
+ # --------------------------------------------------------------------------
+-# governance/risk-paths.toml (spec S-002)
++# governance/risk-paths.toml (model S-002)
+ 
+ 
+ RISK_TOP_KEYS = ("unmatched", "classes", "reviews", "paths", "tests", "dependencies", "signal_code")
+ RISK_DOMAIN_KEYS = ("risk", "reviews", "checks")
+ 
+-# Spec S-003 §Format changes: the optional [tests] and [dependencies] tables.
++# Model S-003 §Format changes: the optional [tests] and [dependencies] tables.
+ # A missing table, or a missing key in a present table, takes these defaults.
+ TESTS_DEFAULTS = (
+     ("globs", ["tests/**", "**/*_test.py", "**/test_*.py", "**/*.test.js", "**/*.spec.ts"]),
+@@ -969,7 +999,7 @@ DEPENDENCIES_DEFAULTS = (
+     ("manifests", ["requirements*.txt", "pyproject.toml", "package.json", "package-lock.json",
+                    "go.mod", "Cargo.toml"]),
+ )
+-# Spec S-004 AC6: the paths whose change trips the owner-signal tripwire. A top-level
++# Model S-004 AC6: the paths whose change trips the owner-signal tripwire. A top-level
+ # `signal_code = [...]` list replaces them.
+ SIGNAL_CODE_DEFAULTS = (".github/**", "tools/**", "tests/**", "scripts/**", "governance/checks/**", "src/**")
+ 
+@@ -1185,13 +1215,13 @@ def load_risk_paths(root, reviewer_ids):
+ 
+ 
+ # --------------------------------------------------------------------------
+-# governance/enforcement.toml: warn-only mode per check (spec S-003 §5)
++# governance/enforcement.toml: warn-only mode per check (model S-003 §5)
+ 
+ 
+ ENFORCEMENT_REL = "governance/enforcement.toml"
+ ENFORCEMENT_MODES = ("warn", "enforce")
+ 
+-# Every check S-001 to S-003 define, by its fixed name; `check_all.sh --list-checks` prints them.
++# Every check model S-001 to S-003 define, by its fixed name; `check_all.sh --list-checks` prints them.
+ CHECK_NAMES = (
+     "surface_guard.map",               # check: the map's structure, humans and exempt blocks
+     "surface_guard.ownership",         # check: every tracked file has exactly one owner
+@@ -1218,6 +1248,7 @@ CHECK_NAMES = (
+     "spec_check.status",
+     "spec_check.frozen",
+     "spec_check.predates",
++    "spec_check.facts",                # a spec being frozen lists its facts with evidence (model S-005 AC5)
+     "enforcement.lint",                # governance/enforcement.toml itself is valid
+ )
+ 
+@@ -1229,10 +1260,17 @@ NEVER_WARN = ("surface_guard.map", "ledger_check.append_only", "review_check.own
+               "review_check.config", "enforcement.lint")
+ 
+ 
++# Checks that are warn-only by default at these tiers, each citing the model's ledger entry
++# that says so (model S-005 AC5: the facts lint warns at T1 per model L-0052, and is an error
++# from T2). A project's enforcement.toml can still list the check, e.g. with mode = "enforce".
++DEFAULT_WARN = {"spec_check.facts": (("T0", "T1"), "model L-0052")}
++
++
+ class Enforcement(object):
+     def __init__(self):
+         self.warn = {}        # check name -> ledger id
+         self.problems = []    # lint problems; when any, nothing is warned
++        self.listed = set()   # check names the file lists, whatever their mode
+ 
+     def ledger_for(self, name):
+         return self.warn.get(name)
+@@ -1258,6 +1296,7 @@ def parse_enforcement(text, ledger_ids):
+     for name in sorted(checks):
+         ctx = '%s: [checks] "%s"' % (where, name)
+         value = checks[name]
++        enf.listed.add(name)
+         if name not in CHECK_NAMES:
+             p.append("%s is not a check name (list them with check_all.sh --list-checks)" % ctx)
+             continue
+@@ -1287,7 +1326,8 @@ def parse_enforcement(text, ledger_ids):
+ def load_enforcement(root):
+     """Read governance/enforcement.toml: the one place every tool learns each check's mode.
+ 
+-    A missing file enforces everything. Read errors (encoding, the line rule,
++    A missing file enforces everything; report() then adds DEFAULT_WARN's
++    checks at their tiers (model S-005 AC5). Read errors (encoding, the line rule,
+     nesting) are UsageErrors (exit 2). Lint problems are kept in .problems;
+     `review_check lint` reports them, and while any exists every check is
+     enforced."""
+@@ -1300,13 +1340,29 @@ def load_enforcement(root):
+     return parse_enforcement(text, ids)
+ 
+ 
++def default_warn(root, enf):
++    """{check name: ledger id}: DEFAULT_WARN's checks at this tier that the file doesn't list.
++
++    Empty while the file has problems (every check is then enforced), or when the
++    tier can't be read (the tier check reports that)."""
++    if enf.problems:
++        return {}
++    try:
++        tier, _ = read_tier(root)
++    except UsageError:
++        return {}
++    return dict((name, lid) for name, (tiers, lid) in DEFAULT_WARN.items()
++                if tier in tiers and name not in enf.listed)
++
++
+ def report(root, findings, notes, ok_msg, enforcement=None, out=None, errors=False):
+     """Print a tool's result under enforcement.toml and return its exit code.
+ 
+     `findings` is a list of (check name, message). Findings of a warn-only
+     check print as `WARN: <message>` and don't fail; a `WARN-ONLY:` line then
+-    summarises them for check_all.sh. Anything else prints as before and fails.
+-    With `errors` (usage errors already printed), no OK line is printed and the
++    summarises them for check_all.sh. A check in DEFAULT_WARN is warn-only at
++    its tiers unless the file lists it (model S-005 AC5). Anything else prints
++    as before and fails. With `errors` (usage errors already printed), no OK line is printed and the
+     result is 2 unless a finding failed.
+     """
+     out = out or sys.stdout
+@@ -1317,8 +1373,13 @@ def report(root, findings, notes, ok_msg, enforcement=None, out=None, errors=Fal
+     if enf.problems:
+         notes = list(notes) + ["NOTE: %s has problems (see review_check lint); every check is enforced"
+                                % ENFORCEMENT_REL]
+-    warned = [(n, m) for n, m in findings if enf.ledger_for(n)]
+-    failed = [m for n, m in findings if not enf.ledger_for(n)]
++    defaults = default_warn(root, enf) if findings else {}
++
++    def ledger_for(name):
++        return enf.ledger_for(name) or defaults.get(name)
++
++    warned = [(n, m) for n, m in findings if ledger_for(n)]
++    failed = [m for n, m in findings if not ledger_for(n)]
+     for n in notes:
+         print(n, file=out)
+     for m in failed:
+@@ -1329,7 +1390,7 @@ def report(root, findings, notes, ok_msg, enforcement=None, out=None, errors=Fal
+         print("FAIL: %d violation(s)" % len(failed), file=out)
+         return 1
+     if warned:
+-        ids = sorted(set(enf.ledger_for(n) for n, _ in warned), key=id_sort_key)
++        ids = sorted(set(ledger_for(n) for n, _ in warned), key=id_sort_key)
+         print("WARN-ONLY: %d finding(s), warn-only per %s" % (len(warned), ", ".join(ids)), file=out)
+     if errors:
+         return 2
+diff --git a/tools/ledger_check.py b/tools/ledger_check.py
+index 08159cd..f9ba3bc 100755
+--- a/tools/ledger_check.py
++++ b/tools/ledger_check.py
+@@ -7,7 +7,6 @@ Usage:
+ Exit 0 = pass, 1 = rule violated, 2 = usage or parse error.
+ """
+ 
+-import argparse
+ import os
+ import sys
+ 
+@@ -66,7 +65,7 @@ def prefix_violations(root, ledger_rel, current_bytes, base):
+ 
+ 
+ def main(argv=None):
+-    parser = argparse.ArgumentParser(prog="ledger_check.py", description=__doc__.split("\n")[0])
++    parser = g.ArgumentParser(prog="ledger_check.py", description=__doc__.split("\n")[0])
+     sub = parser.add_subparsers(dest="cmd")
+     p = sub.add_parser("check")
+     p.add_argument("--root", default=".")
+diff --git a/tools/owner_signal.py b/tools/owner_signal.py
+index 715c865..4dac803 100644
+--- a/tools/owner_signal.py
++++ b/tools/owner_signal.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""owner_signal — publish whether the owner is needed as two commit statuses (spec S-004).
++"""owner_signal — publish whether the owner is needed as two commit statuses (model S-004).
+ 
+ Usage:
+   owner_signal.py record --dir DIR [--test ID=OUTCOME ...] [--output FILE]
+@@ -38,7 +38,6 @@ if sys.version_info < (3, 11):
+     print("ERROR: Python 3.11+ is required (tomllib)", file=sys.stderr)
+     sys.exit(2)
+ 
+-import argparse  # noqa: E402
+ import json  # noqa: E402
+ import os  # noqa: E402
+ import re  # noqa: E402
+@@ -167,7 +166,10 @@ def verdict_status(review_text, steps_text, tests_text):
+     if action == "approved":
+         return "success", "Owner approved"
+     if action == "after_agents":
+-        return "pending", "Owner: after agents · %d other finding(s)" % review["other_findings"]
++        # The review check's findings plus every other failed step and test (model S-005 AC4).
++        failed = sum(1 for name, rc in steps if rc != 0 and not name.startswith(REVIEW_STEP_PREFIX))
++        failed += sum(1 for outcome in tests.values() if outcome != "success")
++        return "pending", "Owner: after agents · %d other finding(s)" % (review["other_findings"] + failed)
+     # needed: only when every other check_all step passed and every test step succeeded.
+     others_pass = all(rc == 0 for name, rc in steps if not name.startswith(REVIEW_STEP_PREFIX))
+     tests_pass = all(outcome == "success" for outcome in tests.values())
+@@ -345,7 +347,7 @@ def cmd_record(args, env=None):
+ 
+ 
+ def main(argv=None):
+-    parser = argparse.ArgumentParser(prog="owner_signal.py", description=__doc__.split("\n")[0])
++    parser = g.ArgumentParser(prog="owner_signal.py", description=__doc__.split("\n")[0])
+     sub = parser.add_subparsers(dest="cmd")
+     p_rec = sub.add_parser("record")
+     p_rec.add_argument("--dir", required=True)
+diff --git a/tools/review_check.py b/tools/review_check.py
+index 5057aca..2314f89 100644
+--- a/tools/review_check.py
++++ b/tools/review_check.py
+@@ -9,10 +9,10 @@ Usage:
+ 
+ Reads governance/risk-paths.toml (a path's risk class and the reviews a change
+ needs), governance/SURFACES.md (the reviewer-class roster) and the verdict
+-files reviews/<PR>/<reviewer-id>.md (spec S-002). `owner` is the reserved
++files reviews/<PR>/<reviewer-id>.md (model S-002). `owner` is the reserved
+ reviewer id of the human owner. Requires Python 3.11+ (tomllib).
+ 
+-`pr` also raises flags (spec S-003), each of which adds `owner` to the
++`pr` also raises flags (model S-003), each of which adds `owner` to the
+ required reviews: a changed test file ([tests] globs) that was deleted, gained
+ a line with a skip marker or a broad catch, or has fewer assertions; and any
+ changed dependency manifest ([dependencies] manifests). An added dependency
+@@ -21,8 +21,8 @@ dependencies/devDependencies range) fails outright. Contents are compared
+ between the merge base of BASE and HEAD, and HEAD. These are text heuristics.
+ 
+ `pr --summary-json FILE` also writes the owner's state as JSON on every exit
+-path (spec S-004 AC1): other_findings, owner_action, risk and reasons.
+-`questions` (spec S-004 AC3) writes the open question files as JSON: on the
++path (model S-004 AC1): other_findings, owner_action, risk and reasons.
++`questions` (model S-004 AC3) writes the open question files as JSON: on the
+ default branch (HEAD is origin/NAME) every questions/*.md not starting with
+ '_'; elsewhere those that differ from the merge base with origin/NAME. It is
+ not a check; only CI's record step runs it (exit 0, or 2 with an error summary).
+@@ -35,7 +35,6 @@ if sys.version_info < (3, 11):
+     print("ERROR: Python 3.11+ is required (tomllib)", file=sys.stderr)
+     sys.exit(2)
+ 
+-import argparse  # noqa: E402
+ import difflib  # noqa: E402
+ import json  # noqa: E402
+ import os  # noqa: E402
+@@ -69,7 +68,7 @@ def parse_verdict(text):
+     or tabs. Lines split on LF only, and one trailing CR is dropped, so no other
+     character (form feed, \\x1c, U+2028 ...) ends a line. Any line on which
+     `Verdict:` appears anywhere but at the start makes the file malformed
+-    (spec S-003 §6)."""
++    (model S-003 §6)."""
+     if text.startswith("\ufeff"):
+         text = text[1:]
+     lines = [l[:-1] if l.endswith("\r") else l for l in text.split("\n")]
+@@ -126,9 +125,14 @@ def lint(root):
+     rp, problems = g.load_risk_paths(root, reviewer_ids)
+     out.rp = rp
+     out.findings.extend(("review_check.config", p) for p in problems)
++    if rp is not None and not problems and rp.signal_code == []:
++        # Valid, but it turns the owner-verdict tripwire off (model S-005 AC4).
++        out.notes.append("WARN: %s: signal_code = [] turns the owner-verdict tripwire off — no code change "
++                         "is reported; remove the key to use the defaults" % g.RISK_PATHS_REL)
+     out.enforcement = g.load_enforcement(root)
+     out.findings.extend(("enforcement.lint", p) for p in out.enforcement.problems)
+-    files, out.notes = verdict_files(root)
++    files, verdict_notes = verdict_files(root)
++    out.notes.extend(verdict_notes)
+     allowed = set(reviewer_ids) | {g.OWNER}
+     for pr, stem, rel in files:
+         verdict = parse_verdict(g.read_text(os.path.join(root, rel), newline=""))
+@@ -345,7 +349,7 @@ def cmd_pr(args, state=None):
+ 
+ 
+ # --------------------------------------------------------------------------
+-# Spec S-004: the owner summary (AC1) and the questions subcommand (AC3)
++# Model S-004: the owner summary (AC1) and the questions subcommand (AC3)
+ 
+ REASON_CODES = ("R0", "R1", "R2", "R3", "test-weakening", "dependency", "domain")
+ _FLAG_CODES = {FLAG_REASONS["test"]: "test-weakening", FLAG_REASONS["dependency"]: "dependency"}
+@@ -442,14 +446,25 @@ def open_questions(root, default_branch):
+     return [p for p in files if p in changed]
+ 
+ 
++def _write_questions(path, data):
++    """Write the questions summary; on failure print an ERROR: line and return False (model S-005 AC4)."""
++    try:
++        write_json(path, data)
++    except OSError as exc:
++        print("ERROR: can't write the questions summary %s: %s" % (path, exc), file=sys.stderr)
++        return False
++    return True
++
++
+ def cmd_questions(args):
+     try:
+         files = open_questions(args.root, args.default_branch)
+     except g.UsageError as exc:
+         print("ERROR: %s" % exc, file=sys.stderr)
+-        write_json(args.summary_json, {"state": "error", "open": None, "files": []})
++        _write_questions(args.summary_json, {"state": "error", "open": None, "files": []})
++        return 2
++    if not _write_questions(args.summary_json, {"state": "ok", "open": len(files), "files": files}):
+         return 2
+-    write_json(args.summary_json, {"state": "ok", "open": len(files), "files": files})
+     print("Open questions: %d" % len(files))
+     for p in files:
+         print("  %s" % p)
+@@ -469,7 +484,7 @@ def cmd_classify(args):
+ 
+ 
+ def main(argv=None):
+-    parser = argparse.ArgumentParser(prog="review_check.py", description=__doc__.split("\n")[0])
++    parser = g.ArgumentParser(prog="review_check.py", description=__doc__.split("\n")[0])
+     sub = parser.add_subparsers(dest="cmd")
+     p_lint = sub.add_parser("lint")
+     p_lint.add_argument("--root", default=".")
+diff --git a/tools/spec_check.py b/tools/spec_check.py
+index 1a300f7..4895d77 100644
+--- a/tools/spec_check.py
++++ b/tools/spec_check.py
+@@ -5,11 +5,12 @@ Usage:
+   spec_check.py status   [--root DIR]
+   spec_check.py frozen   --base REF [--root DIR]
+   spec_check.py predates --base REF [--root DIR]
++  spec_check.py facts    --base REF [--root DIR]
+ 
+ A spec is a specs/*.md file whose name doesn't start with `_`. Its id is its
+ file-name prefix (S-nnn), and its status is the first word after the first
+ column-0 `status:` in its header (the lines before the first `## ` heading):
+-draft, frozen or superseded (spec S-003).
++draft, frozen or superseded (model S-003).
+ 
+   status    every spec has a valid status, and every ledger `spec:` or
+             `amends:` value names an existing spec.
+@@ -22,14 +23,23 @@ draft, frozen or superseded (spec S-003).
+             commit in which the spec is frozen is a strict ancestor of every
+             commit in REF..HEAD that introduces the entry (L-0028). A
+             `spec_blob:` must equal the spec's blob at one such commit.
+-
+-`frozen` and `predates` read committed content only (REF and HEAD), not the
++  facts     every spec being frozen in REF..HEAD (frozen at HEAD, not frozen or
++            superseded at REF) has a "Facts relied on" section; each fact in it
++            has evidence (a path with a line, a command, or a docs/research/
++            citation); and each known limit (a "Known limits" item there, or an
++            item of a "## Known limits" section) that names a platform behaviour
++            has evidence too. Above-tier limits and "none" are not linted
++            (model S-005 AC5). These are text heuristics. Warn-only at T0 and
++            T1, per model L-0052; an error from T2, or when enforcement.toml
++            lists it.
++
++`frozen`, `predates` and `facts` read committed content only (REF and HEAD), not the
+ working tree. Commit hashes in messages identify the commits involved.
+ Exit 0 = pass, 1 = rule violated, 2 = usage or parse error.
+ """
+ 
+-import argparse
+ import os
++import re
+ import sys
+ 
+ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+@@ -253,18 +263,137 @@ def check_predates(root, base):
+     return v, notes
+ 
+ 
+-CHECKS = {"status": check_status, "frozen": check_frozen, "predates": check_predates}
++# --------------------------------------------------------------------------
++# facts: the facts lint (model S-005 AC5; model L-0039, L-0052)
++
++FACTS_HEADING_RE = re.compile(r"^## +facts relied on\b", re.I)
++LIMITS_HEADING_RE = re.compile(r"^## +known limits?\b", re.I)
++# A fact item's evidence: a path with a line (`tools/x.py:12`, `ci.yml:22-30`, or a path
++# and a bare `:12` in the same item), a command in backticks (two or more words, the first
++# a program or path name), or a docs/research/ citation.
++PATH_LINE_RE = re.compile(r"[\w.-]*[\w-]\.[A-Za-z0-9]+:\d+")
++PATH_RE = re.compile(r"(?:[\w.-]+/)+[\w.-]*\.[A-Za-z0-9]+")
++BARE_LINE_RE = re.compile(r"(?:^|[\s(])\:\d+")
++CODE_RE = re.compile(r"`([^`\n]+)`")
++COMMAND_RE = re.compile(r"^\$?\s*[A-Za-z0-9_./-]+(?:\s+\S+)+$")
++RESEARCH_RE = re.compile(r"docs/research/")
++# A known limit "names a platform behaviour" when it names one of these (case-insensitive,
++# whole words). Text heuristics, like the test-weakening flags (model S-003).
++PLATFORM_RE = re.compile(
++    r"\b(?:github|gitlab|actions?|workflows?|runners?|ubuntu|macos|windows|linux|git|api|apis|http|https|"
++    r"tokens?|registry|registries|npm|pypi|browsers?|platforms?|os|cron|webhooks?|forks?|"
++    r"python|bash|shell|docker|cloud|hosts?|hosting|statuses|rate limits?)\b", re.I)
++# Known limits out of the lint's scope: a reviewer's above-tier findings (OPERATING_MODEL §12),
++# and "none".
++LIMIT_EXEMPT_RE = re.compile(r"^(?:\*\*)?\s*(?:above tier\b|known limits?:?\s*(?:\*\*)?\s*none\b|none\b)", re.I)
++KNOWN_LIMIT_ITEM_RE = re.compile(r"^(?:\*\*)?\s*known limits?\b", re.I)
++
++
++def has_evidence(text):
++    if PATH_LINE_RE.search(text) or RESEARCH_RE.search(text):
++        return True
++    if PATH_RE.search(text) and BARE_LINE_RE.search(text):
++        return True
++    for code in CODE_RE.findall(text):
++        code = code.strip()
++        if COMMAND_RE.match(code) and ":" not in code.split()[0] and "=" not in code:
++            return True
++    return False
++
++
++def _sections(lines):
++    """[(heading index, heading line, [(lineno, item text)])] for every `## ` section.
++
++    An item is a `- ` or `* ` bullet at column 0, plus the indented lines that follow it."""
++    out = []
++    cur = None
++    item = None
++    for i, line in enumerate(lines):
++        line = line.rstrip("\r")
++        if line.startswith("## "):
++            cur = (i, line, [])
++            out.append(cur)
++            item = None
++            continue
++        if cur is None:
++            continue
++        if line.startswith("- ") or line.startswith("* "):
++            item = [i + 1, line[2:].strip()]
++            cur[2].append(item)
++        elif item is not None and line[:1] in (" ", "\t") and line.strip():
++            item[1] += " " + line.strip()
++        else:
++            item = None
++    return [(i, h, [tuple(x) for x in items]) for i, h, items in out]
++
++
++def _short(text, n=70):
++    text = text.replace("**", "")
++    return text if len(text) <= n else text[:n - 1] + "…"
++
++
++def facts_problems(rel, text):
++    """The facts lint's findings for one spec's text."""
++    v = []
++    sections = _sections(text.split("\n"))
++    facts = [s for s in sections if FACTS_HEADING_RE.match(s[1])]
++    if not facts:
++        return ["%s: being frozen with no 'Facts relied on' section — list each fact the spec relies on, "
++                "with its evidence (model L-0039)" % rel]
++    limits = []
++    for _, _, items in facts:
++        for lineno, item in items:
++            if KNOWN_LIMIT_ITEM_RE.match(item):
++                limits.append((lineno, item))
++            elif item.startswith("A known limit that rests on"):
++                continue   # the template's guidance line
++            elif not has_evidence(item):
++                v.append("%s line %d: fact has no evidence (a path with a line, a command, or a "
++                         "docs/research/ citation): %s" % (rel, lineno, _short(item)))
++    for _, _, items in (s for s in sections if LIMITS_HEADING_RE.match(s[1])):
++        limits.extend(items)
++    for lineno, item in limits:
++        if LIMIT_EXEMPT_RE.match(item) or not PLATFORM_RE.search(item) or has_evidence(item):
++            continue
++        v.append("%s line %d: known limit names a platform behaviour without evidence — spike it or cite "
++                 "the evidence (model L-0052): %s" % (rel, lineno, _short(item)))
++    return v
++
++
++def check_facts(root, base):
++    """Return (violations, notes): the facts lint for every spec being frozen in BASE..HEAD.
++
++    A spec is being frozen when it is frozen at HEAD and was not frozen or superseded at
++    the base (or didn't exist there). Committed content only."""
++    g.verify_commit(root, base)
++    g.verify_commit(root, "HEAD", "HEAD")
++    v, linted = [], 0
++    for name in g.spec_files_at(root, "HEAD"):
++        rel = _rel(name)
++        new = g.git_text(root, "HEAD", rel)
++        if new is None or g.spec_status(new)[0] != "frozen":
++            continue
++        old = g.git_text(root, base, rel)
++        if old is not None and g.spec_status(old)[0] in ("frozen", "superseded"):
++            continue
++        linted += 1
++        v.extend(facts_problems(rel, new))
++    return v, ["NOTE: %d spec(s) being frozen since the base ref linted for facts" % linted]
++
++
++CHECKS = {"status": check_status, "frozen": check_frozen, "predates": check_predates, "facts": check_facts}
+ OK_MESSAGES = {
+     "status": "every spec has a valid status and every ledger spec reference resolves",
+     "frozen": "no frozen spec changed since the base ref",
+     "predates": "every spec-reporting ledger entry follows its spec's freeze",
++    "facts": "every spec being frozen lists its facts with evidence",
+ }
+ 
+ 
+ def main(argv=None):
+-    parser = argparse.ArgumentParser(prog="spec_check.py", description=__doc__.split("\n")[0])
++    parser = g.ArgumentParser(prog="spec_check.py", description=__doc__.split("\n")[0])
+     sub = parser.add_subparsers(dest="cmd")
+-    for name in ("status", "frozen", "predates"):
++    for name in ("status", "frozen", "predates", "facts"):
+         p = sub.add_parser(name)
+         p.add_argument("--root", default=".")
+         if name != "status":
+diff --git a/tools/surface_guard.py b/tools/surface_guard.py
+index 7ff64cf..f384dd1 100755
+--- a/tools/surface_guard.py
++++ b/tools/surface_guard.py
+@@ -8,7 +8,7 @@ Usage:
+   surface_guard.py whois PATH... [--root DIR]
+   surface_guard.py charters [--check | --write] [--root DIR]
+ 
+-Reads governance/SURFACES.md (OPERATING_MODEL.md section 8; specs S-001, S-002).
++Reads governance/SURFACES.md (OPERATING_MODEL.md section 8; model S-001, S-002).
+ `diff --range` walks every commit in BASE..HEAD and checks who wrote it (agent
+ identity or the humans block), its Agent-Session/Spec trailers, the paths it
+ touched, the build-branch rule and test-author independence. Merge commits and
+@@ -16,11 +16,10 @@ commits in the `exempt` block are skipped. Commits are judged against the
+ surface map in the working tree at --root.
+ `charters` checks (or rewrites) the generated Surface section of every
+ builder-class agent's .claude/agents/<id>.md, between the markers
+-<!-- surface:begin --> and <!-- surface:end --> (spec S-003 §4).
++<!-- surface:begin --> and <!-- surface:end --> (model S-003 §4).
+ Exit 0 = pass, 1 = rule violated, 2 = usage or parse error.
+ """
+ 
+-import argparse
+ import json
+ import os
+ import re
+@@ -151,7 +150,7 @@ def diff_violations(s, agent, files):
+ 
+ 
+ # --------------------------------------------------------------------------
+-# diff --range (spec S-002)
++# diff --range (model S-002)
+ 
+ 
+ BUILD_BRANCH_RE = re.compile(r"^build/([^/]+)/(.+)$")
+@@ -233,8 +232,12 @@ def current_branch(root):
+         return "HEAD"
+ 
+ 
+-def range_violations(s, commits, history, branch):
+-    """Return ([(check name, violation)], notes, counts) for a range walk."""
++def range_violations(s, commits, history, branch, specs=None):
++    """Return ([(check name, violation)], notes, counts) for a range walk.
++
++    `specs` is {spec id: (rel, status)} from the working tree; a builder commit whose
++    Spec: trailer names a superseded spec fails (model S-005 AC1)."""
++    specs = specs or {}
+     v, notes = [], []
+     roster = dict((r.id, r) for r in s.roster)
+     humans = s.human_emails()
+@@ -289,10 +292,16 @@ def range_violations(s, commits, history, branch):
+                       % (c.short, agent, len(sessions))))
+         elif not sessions[0]:
+             v.append((TRAILERS, "%s: agent commit by '%s' has an empty Agent-Session trailer" % (c.short, agent)))
+-        specs = c.trailer("Spec")
+-        if len(specs) > 1:
++        spec_ids = c.trailer("Spec")
++        if len(spec_ids) > 1:
+             v.append((TRAILERS, "%s: agent commit by '%s' has %d Spec trailers — at most one is allowed"
+-                      % (c.short, agent, len(specs))))
++                      % (c.short, agent, len(spec_ids))))
++        if agent in roster and roster[agent].cls == "builder":
++            for sid in spec_ids:
++                rel, status = specs.get(sid, (None, None))
++                if status == "superseded":
++                    v.append((TRAILERS, "%s: builder commit by '%s' names Spec: %s, which is superseded (%s) — "
++                              "build against the spec that supersedes it" % (c.short, agent, sid, rel)))
+         if branch_id is not None and agent != branch_id:
+             v.append(("surface_guard.range.branch", "%s: commit by '%s' on branch %s — only '%s' or a human may "
+                       "commit there" % (c.short, agent, branch, branch_id)))
+@@ -342,7 +351,7 @@ def run_range(args, s):
+     else:
+         commits, history = load_commits_git(args.root, base, head)
+         branch = args.branch if args.branch is not None else current_branch(args.root)
+-    v, notes, (n, m, e, h) = range_violations(s, commits, history, branch)
++    v, notes, (n, m, e, h) = range_violations(s, commits, history, branch, g.spec_statuses(args.root))
+     # The walk trusts the map, so a broken map (including an exemption that
+     # cites no ledger entry) fails the walk too, not only `check`.
+     map_v, _ = structure_violations(s)
+@@ -359,7 +368,7 @@ def _tag(name, lines):
+ 
+ 
+ # --------------------------------------------------------------------------
+-# charters (spec S-003 §4)
++# charters (model S-003 §4)
+ 
+ 
+ AGENTS_REL = ".claude/agents"
+@@ -420,7 +429,7 @@ def check_charters(s, root, write=False):
+ 
+ 
+ def main(argv=None):
+-    parser = argparse.ArgumentParser(prog="surface_guard.py", description=__doc__.split("\n")[0])
++    parser = g.ArgumentParser(prog="surface_guard.py", description=__doc__.split("\n")[0])
+     sub = parser.add_subparsers(dest="cmd")
+     p_check = sub.add_parser("check")
+     p_check.add_argument("--root", default=".")
+-- 
+2.43.0
+
+
+From ec29b11be71c44791f7f93225315e064202fa461 Mon Sep 17 00:00:00 2001
+From: tools-builder <tools-builder@agents.invalid>
+Date: Tue, 3 Nov 2026 21:58:08 +0000
+Subject: [PATCH 3/4] S-005: governance job drops the token and passes the
+ default branch (AC2, AC3)
+
+Both workflows' governance job now checks out with persist-credentials: false,
+as the owner-signal job already does, so the token is not on disk while the
+PR's code runs. The Governance checks step sets GOV_DEFAULT_BRANCH, which the
+scope check uses for its merge base.
+
+Agent-Session: session_01QBwHGMu36mvZdxN2ssBspJ
+Spec: S-005
+---
+ .github/workflows/ci.yml                  | 6 ++++++
+ template/.github/workflows/governance.yml | 6 ++++++
+ 2 files changed, 12 insertions(+)
+
+diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+index 0b8c907..b647395 100644
+--- a/.github/workflows/ci.yml
++++ b/.github/workflows/ci.yml
+@@ -19,9 +19,12 @@ jobs:
+     steps:
+       # fetch-depth: 0 fetches the full history and every branch as
+       # refs/remotes/origin/*, which the range walk and the builders check read.
++      # persist-credentials: false keeps the token off disk while the PR's code
++      # runs; nothing in this job fetches again (model S-005 AC2).
+       - uses: actions/checkout@v4
+         with:
+           fetch-depth: 0
++          persist-credentials: false
+ 
+       - uses: actions/setup-python@v5
+         id: setup-python
+@@ -57,6 +60,9 @@ jobs:
+           PR: ${{ github.event.pull_request.number }}
+           # The branch the range walk applies the build/<id>/<task> rule to.
+           GOV_BRANCH: ${{ github.head_ref || github.ref_name }}
++          # The scope check counts extends_scope: entries since the merge base with
++          # origin/<this branch> (model S-005 AC3).
++          GOV_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+         run: |
+           BASE="${PR_BASE:-$PUSH_BEFORE}"
+           # On a pull_request, HEAD is GitHub's merge ref: when it has two parents,
+diff --git a/template/.github/workflows/governance.yml b/template/.github/workflows/governance.yml
+index d74e72d..3664791 100644
+--- a/template/.github/workflows/governance.yml
++++ b/template/.github/workflows/governance.yml
+@@ -19,9 +19,12 @@ jobs:
+     steps:
+       # fetch-depth: 0 fetches the full history and every branch as
+       # refs/remotes/origin/*, which the range walk and the builders check read.
++      # persist-credentials: false keeps the token off disk while the PR's code
++      # runs; nothing in this job fetches again (model S-005 AC2).
+       - uses: actions/checkout@v4
+         with:
+           fetch-depth: 0
++          persist-credentials: false
+ 
+       - uses: actions/setup-python@v5
+         id: setup-python
+@@ -49,6 +52,9 @@ jobs:
+           PR: ${{ github.event.pull_request.number }}
+           # The branch the range walk applies the build/<id>/<task> rule to.
+           GOV_BRANCH: ${{ github.head_ref || github.ref_name }}
++          # The scope check counts extends_scope: entries since the merge base with
++          # origin/<this branch> (model S-005 AC3).
++          GOV_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+         run: |
+           BASE="${PR_BASE:-$PUSH_BEFORE}"
+           # On a pull_request, HEAD is GitHub's merge ref: when it has two parents,
+-- 
+2.43.0
+
+
+From c8d97f1b0d0ff26f023758369e395df9c3852572 Mon Sep 17 00:00:00 2001
+From: tools-builder <tools-builder@agents.invalid>
+Date: Tue, 3 Nov 2026 21:58:08 +0000
+Subject: [PATCH 4/4] S-005: opt-in pre-push hook in the template (AC6)
+
+template/.github/hooks/pre-push runs governance/checks/check_all.sh against
+the remote's default branch (refs/remotes/<remote>/HEAD's target, else main;
+without a base when that ref isn't in the clone yet) and blocks the push on a
+failure. A push that only deletes refs runs no checks. It is off until a
+project runs `git config core.hooksPath .github/hooks`, and --no-verify skips
+it. new-project.sh keeps it executable.
+
+Agent-Session: session_01QBwHGMu36mvZdxN2ssBspJ
+Spec: S-005
+---
+ scripts/new-project.sh          |  4 ++
+ template/.github/hooks/pre-push | 71 +++++++++++++++++++++++++++++++++
+ 2 files changed, 75 insertions(+)
+ create mode 100755 template/.github/hooks/pre-push
+
+diff --git a/scripts/new-project.sh b/scripts/new-project.sh
+index 4419a7c..830ff62 100755
+--- a/scripts/new-project.sh
++++ b/scripts/new-project.sh
+@@ -46,6 +46,10 @@ TARGET="$(cd "$TARGET" && pwd)"
+ 
+ # Copy the template, dotfiles included.
+ cp -R "$REPO/template/." "$TARGET/"
++# The opt-in pre-push hook (model S-005 AC6) must stay executable for git to run it.
++if [ -f "$TARGET/.github/hooks/pre-push" ]; then
++  chmod +x "$TARGET/.github/hooks/pre-push"
++fi
+ 
+ # Install the governance checks.
+ mkdir -p "$TARGET/governance/checks"
+diff --git a/template/.github/hooks/pre-push b/template/.github/hooks/pre-push
+new file mode 100755
+index 0000000..1a0de28
+--- /dev/null
++++ b/template/.github/hooks/pre-push
+@@ -0,0 +1,71 @@
++#!/usr/bin/env bash
++# pre-push: run the governance checks before a push (model S-005 AC6).
++#
++# Off until the project turns it on, once per clone:
++#   git config core.hooksPath .github/hooks
++# A convenience, not a rule: `git push --no-verify` skips it, and CI still decides.
++#
++# git runs this with the remote's name and URL as arguments, and one line per ref
++# on stdin: <local ref> <local sha> <remote ref> <remote sha>. It runs
++# governance/checks/check_all.sh against the remote's default branch: the target of
++# refs/remotes/<remote>/HEAD, else main. When that remote-tracking ref isn't in this
++# clone yet (a first push), the checks run without a base. A non-zero exit blocks the
++# push. A push that only deletes refs runs no checks.
++
++set -u
++
++remote="${1:-origin}"
++zero="0000000000000000000000000000000000000000"
++
++pushes=0
++others=()
++head="$(git rev-parse -q --verify HEAD 2>/dev/null || true)"
++while read -r local_ref local_sha remote_ref remote_sha; do
++  [ -n "${local_sha:-}" ] || continue
++  # A deletion pushes no commits (an all-zero local sha, of either hash length).
++  if [ -z "${local_sha//0/}" ]; then
++    continue
++  fi
++  pushes=$((pushes + 1))
++  if [ "$local_sha" != "$head" ]; then
++    others+=("$local_ref")
++  fi
++done
++if [ "$pushes" -eq 0 ]; then
++  exit 0
++fi
++
++top="$(git rev-parse --show-toplevel)" || exit 1
++check_all="$top/governance/checks/check_all.sh"
++if [ ! -f "$check_all" ]; then
++  echo "pre-push: $check_all not found; push blocked (git push --no-verify skips this hook)" >&2
++  exit 1
++fi
++
++default="main"
++target="$(git symbolic-ref -q "refs/remotes/$remote/HEAD" 2>/dev/null || true)"
++if [ -n "$target" ] && [ "${target#refs/remotes/$remote/}" != "$target" ]; then
++  default="${target#refs/remotes/$remote/}"
++fi
++
++base="$(git rev-parse -q --verify "refs/remotes/$remote/$default^{commit}" 2>/dev/null || true)"
++branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo HEAD)"
++
++if [ "${#others[@]}" -gt 0 ]; then
++  echo "pre-push: NOTE: the checks run on HEAD ($branch), not on ${others[*]}" >&2
++fi
++
++cd "$top" || exit 1
++if [ -n "$base" ]; then
++  echo "pre-push: governance checks against $remote/$default ($base)" >&2
++  GOV_BRANCH="$branch" GOV_DEFAULT_BRANCH="$default" bash "$check_all" . "$base"
++else
++  echo "pre-push: $remote/$default is not in this clone; governance checks without a base" >&2
++  GOV_BRANCH="$branch" GOV_DEFAULT_BRANCH="$default" bash "$check_all" .
++fi
++rc=$?
++if [ "$rc" -ne 0 ]; then
++  echo "pre-push: governance checks failed (exit $rc); push blocked" >&2
++  exit 1
++fi
++exit 0
+-- 
+2.43.0
+
