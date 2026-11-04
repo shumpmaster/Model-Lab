@@ -24,7 +24,7 @@ import re
 import unittest
 
 from e003_support import (Base, good_manifest, manifest_violations, norm, parse_manifest, pack_entry,
-                          manifest_kind, recorded_manifests, session_runner)
+                          manifest_kind, manifest_markers, recorded_manifests, session_runner)
 
 AGENT = ".claude/agents/reviewer.md"
 KIND_FILES = ["experiments/E-003.md", "experiments/E-003/sizing.py", "specs/S-001.md",
@@ -142,10 +142,13 @@ class TestJ7Classify(Base):
 class TestJ7Recorded(Base):
     def test_every_recorded_analysis_manifest_conforms(self):
         named = bool(os.environ.get("S001_MANIFEST"))
-        # A record named by S001_MANIFEST is checked here only if it is an analysis manifest or is
-        # malformed (no file lines, kind None); a well-formed manifest of the other kind is J8's.
+        # A record named by S001_MANIFEST is checked here if its files include experiments/E-003.md or it
+        # has no file lines; a record carrying both kinds' files is checked, and failed, by J7 and J8 alike.
+        def mine(t):
+            has_files, blind, analysis = manifest_markers(t)
+            return analysis or not has_files
         found = [(rel, t) for rel, t in recorded_manifests()
-                 if manifest_kind(t) == "analysis" or (named and manifest_kind(t) is None)]
+                 if (mine(t) if named else manifest_kind(t) == "analysis")]
         if not found:
             self.skipTest("S001_MANIFEST names a manifest of the other kind (J8's); this test checks analysis "
                           "manifests" if named else
