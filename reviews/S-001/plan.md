@@ -1,6 +1,6 @@
 Verdict: PASS
 
-The Critic's plan review of specs/S-001.md and experiments/E-003.md, on a different model from the writer (brief: docs/briefs/28-critic.md), verbatim (FAIL at rounds 1 and 2; PASS at round 3). Round 4 is the join-up review closing Design (brief: docs/briefs/33-critic.md, session session_01QBwHGMBo8kZsMCS2EvKNwd, 2026-11-04, on claude-sonnet-5-5): FAIL, four blocking findings; under the plan stop rule this went to the owner, who chose one focused confirmation review (decisions/questions/P-001-plan-stop.md). Round 5 is that review (brief: docs/briefs/38-critic.md, on claude-sonnet-5-5): FAIL, two new blocking findings; it went back to the owner, who chose to re-specify how the test is run as a new draft reviewed from round one (decisions/questions/P-001-plan-stop-2.md). The new draft's rounds are recorded below as "New draft, round <n>" (brief for round 1: docs/briefs/42-critic.md): round 1 FAIL, four blocking findings; round 2 FAIL, one blocking finding; round 3 PASS, with the join-up review passing. Round 4 (brief: docs/briefs/57-critic.md, session session_01QBwHGKFFgmANWaCNGxCLZd, on claude-sonnet-5-5) is a focused check of the Definer's fix to the order of the kinds and its weeks (commit e504ea0): PASS. Recorded by the orchestrator. Session session_01QBwHGLd77YbwCSMSPU26vW, 2026-11-04.
+The Critic's plan review of specs/S-001.md and experiments/E-003.md, on a different model from the writer (brief: docs/briefs/28-critic.md), verbatim (FAIL at rounds 1 and 2; PASS at round 3). Round 4 is the join-up review closing Design (brief: docs/briefs/33-critic.md, session session_01QBwHGMBo8kZsMCS2EvKNwd, 2026-11-04, on claude-sonnet-5-5): FAIL, four blocking findings; under the plan stop rule this went to the owner, who chose one focused confirmation review (decisions/questions/P-001-plan-stop.md). Round 5 is that review (brief: docs/briefs/38-critic.md, on claude-sonnet-5-5): FAIL, two new blocking findings; it went back to the owner, who chose to re-specify how the test is run as a new draft reviewed from round one (decisions/questions/P-001-plan-stop-2.md). The new draft's rounds are recorded below as "New draft, round <n>" (brief for round 1: docs/briefs/42-critic.md): round 1 FAIL, four blocking findings; round 2 FAIL, one blocking finding; round 3 PASS, with the join-up review passing. Round 4 (brief: docs/briefs/57-critic.md, session session_01QBwHGKFFgmANWaCNGxCLZd, on claude-sonnet-5-5) is a focused check of the Definer's fix to the order of the kinds and its weeks (commit e504ea0): PASS. Round 5 (brief: docs/briefs/59-critic.md, same session and model) is a focused check of the Definer's second fix, to the owner's part (commit 46685a1): PASS. Recorded by the orchestrator. Session session_01QBwHGLd77YbwCSMSPU26vW, 2026-11-04.
 
 ## Round 1
 Verdict: FAIL
@@ -996,3 +996,39 @@ Contract:
 - undone: I did not read the rest of the spec or re-run earlier rounds' checks. I did not run sizing.py (no shell), so I rely on output.txt matching it. I read the code, which computes the sums and maxima those figures need.
 - needed outside your lane: the Orchestrator records this verbatim in reviews/S-001/plan.md as round 4, and notes that a round is counted.
 - open questions: none for the Definer. The owner's choice among the four orders stays with open question 4.
+
+## New draft, round 5 (commit 11bd031; brief 59, a fresh session; a focused check of the Definer's fix 46685a1)
+Verdict: PASS
+
+Findings (none blocking):
+
+1. Not blocking. Table arithmetic. I recomputed the K7 and K5 columns from the table's own *w* (output.txt lines 90-93: A 60–121, B 40–81, C 7–15, D 87–173).
+   - K7 columns are w, 3w and 4w, and they match for every option. A is 60–121, 180–363, 240–484. B is 40–81, 120–243, 160–324. C is 7–15, 21–45, 28–60. D is 87–173, 261–519, 348–692.
+   - The K5 column (3 + 3w for A and D, 1 + 3w for C) gives 183–366, 123–246, 22–46 and 264–522. Line 135's 4w + the base sessions gives A 243–487, B 163–327, C 29–61 and D 351–695. All match.
+   - The sum of the kinds' weeks for D is 86–174 against the table's 87–173. That is rounding in the source output.txt, not something this fix introduced.
+
+2. Not blocking. The wake-message sentence at line 135 (w, 3w, 4w) matches K7 at line 189 and the cadence at lines 162-164.
+   - The judging session gets 1 a week.
+   - The work session gets 2 a week once the Orchestrator's task into it also fails.
+   - The owner's ask for the weekly landing is 1 a week and matches the Orchestrator's once-a-week landing at line 163.
+   - Line 114's row, the line 128 header, line 135, line 350 and line 359 all say the same thing. Line 350 now points to "The owner's actions per option", which holds the ranges. Line 359's "or ask the Orchestrator's session for the weekly landing, only where K7 fails" is consistent with K7.
+
+3. Not blocking. Line 17 is now true.
+   - "One to four a week": wake messages run from 1 (judging only) to 4 (1 + 2 + 1).
+   - New sessions run 1 + 3, or 1 + 4 with the Orchestrator's session. Line 112 and line 187 (twice a week for the work session plus once for judging) agree.
+   - Worst case wake messages: 240–484 for option A is 4w. Worst case new sessions: 243–487 is 4w + 3. Both match the table. The earlier "180 to 360" understatement is gone.
+   - The two worst cases are presented as alternatives ("or"), not summed. That fits K5 and K7, since a new session is itself the wake. It is a reasonable reading.
+
+4. Not blocking, wording only. "up to 240 to 484" at line 17 reads awkwardly (a range after "up to"). It is accurate, so I did not fail on it.
+
+5. Not blocking. The K7 column shows three cumulative cases. A failure only in the Orchestrator's session (about 2w) is not shown, but it falls inside the stated range, so nothing is false.
+
+6. Scope. I can't see the diff, so I compared the changed lines with the old wording you gave me. Beyond the stated changes I saw nothing new. Line 16 (540–1,090 wakes) and line 18 (336 sessions) are untouched and not made false by the fix. Run, token and week totals are unchanged.
+
+Six-part contract:
+- Changed: nothing. I wrote nothing; this is a read-only check.
+- Why: round 5 plan review of the fix in commit 46685a1, which corrected line 17's worst case and added the owner's weekly-landing ask to the K7 range.
+- Verified: line 17's figures and its "one to four a week", line 114, the line 128 header, lines 130-133, line 135, line 350 and line 359 against output.txt lines 90-93, K5 (lines 182-187), K7 (line 189), lines 112 and 163, and line 187. Every figure recomputes.
+- Undone: I did not read the git diff, since I have no shell. I did not re-check text the fix left alone, such as the 7-a-week wake counts and the 336-session figure, beyond confirming the fix doesn't contradict them.
+- Needed outside your lane: none.
+- Open questions: none new. Open question 8 still asks the owner to accept the ranges.
