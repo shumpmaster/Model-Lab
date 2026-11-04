@@ -64,3 +64,4 @@ The owner chose: "A: rewrite, full review (Recommended)".
 2. The owner creates the private repository for the sheets and checks it is not added to every new session.
 3. The Definer's new draft (brief: the answer records, round 5's findings, triage/P-001-S-001-round-5.md, the intake record, the tools' files); then the plan review from round one, with the tools' files in the Critic's brief.
 4. Then the join-up review again, the Design standard milestones' records, and the Build gate case from the draft at f2f5a45.
+5. The per-task reading lists (`S-001-holdout` corrected, `S-001-analysis` new, commit ec29f46) were taken out of PR #41 by a revert, so no rule change waits for approval there; redo them to match the rewritten plan, then a Reviewer and the owner's verdict (R3).
