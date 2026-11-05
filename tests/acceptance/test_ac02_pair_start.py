@@ -95,8 +95,17 @@ class TestAC2(Base):
         self.make_entry("research")
         arms = self.plan("C3")
         self.check_copies(arms)
-        paras = [p for p in arms["change"]["brief"].split("\n\n") if p not in arms["control"]["brief"].split("\n\n")]
-        self.assertEqual(len(paras), 1)
+        ctl, chg = arms["control"]["brief"], arms["change"]["brief"]
+        for a, b in ((ctl, arms["control"]["copy"]), (chg, arms["change"]["copy"])):
+            self.assertNotIn(self.real, a, "the real repository's absolute path is replaced by the copy's")
+            self.assertIn(b, a)
+        ctl_c = ctl.replace(arms["control"]["copy"], "<COPY>")
+        chg_c = chg.replace(arms["change"]["copy"], "<COPY>")
+        expected_ctl = self.brief.replace(self.real, "<COPY>")
+        self.assertEqual(ctl_c, expected_ctl, "nothing but the path changed in the no-change brief")
+        self.assertNotEqual(chg_c, ctl_c)
+        paras = [p for p in chg_c.split("\n\n") if p not in ctl_c.split("\n\n")]
+        self.assertEqual(len(paras), 1, "exactly one paragraph differs")
         self.assertTrue(paras[0].startswith("A source you cannot open is not by itself a fault"), paras[0])
 
     def test_a_pair_is_refused_when_the_start_is_more_than_seven_days_after_dispatch(self):
