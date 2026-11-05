@@ -173,7 +173,8 @@ class TestExport(Tmp):
         s = git(r, "rev-parse", "HEAD")
         out = os.path.join(self.tmp, "out")
         args = ["make", "--kind", "built", "--repo", r, "--out", out, "--checker-role", "reviewer",
-                "--role-file", ".claude/agents/reviewer.md", "--start", s, "--final", s]
+                "--role-file", ".claude/agents/reviewer.md", "--start", s, "--final", s,
+                "--task-statement-path", "specs/S-1.md"]
         self.assertEqual(run("export.py", *args, "--label", "A1").returncode, 0)
         self.assertEqual(run("export.py", *args, "--label", "A1").returncode, 1)
         self.assertEqual(run("export.py", *args, "--label", "start").returncode, 1)

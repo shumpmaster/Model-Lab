@@ -27,11 +27,17 @@ plan    Makes the two fresh copies of the entry's start commit under --repos-roo
         Each arm also carries `prompt`: its brief followed by E-001's confinement paragraph with its
         copy's path, the text a run is started with.  With --no-run no session is started.  A pair is
         refused (no arms) if --now is more than 7 days after the dispatch, or the change cannot be
-        filled (C1 without the plan-check role file, C2 with an empty list).
+        filled (C1 without the plan-check role file, C2 with an empty list).  The plan is refused (exit
+        1, a set-up fault, copies removed) when a brief still names an absolute path that is neither in
+        its copy nor a system path E-001's F4 allows (/usr, /bin, /lib, /etc, /dev/null): for example
+        the real repository's path when the entry gives no `real_path` to replace.
 audit   E-003 Exclusions 1, from git: the pair is left out when a named input changed on the default
         branch between the start commit and the real round-1 submission (the default branch as it was at
-        the submission's committer date), or when the submission takes in a commit of the default
-        branch that is not an ancestor of the start commit.  A named folder counts its files.
+        the submission's committer date); when the submission takes in a commit of the default branch
+        that is not an ancestor of the start commit; when it takes in any other commit that is neither
+        its own nor an ancestor of the start (its own commits being its first-parent line back to the
+        start, so a merge from any branch, its own side branches included, leaves it out); or when it
+        does not descend from the start commit.  A named folder counts its files.
 context-compare  E-003 Exclusions 3: the two arms' starting context (every transcript line before the
         first assistant line) must match once each copy path is read as one placeholder and the change
         paragraph is taken out; ids and times that differ in every session (uuid, parentUuid,
@@ -47,6 +53,7 @@ import datetime
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -59,6 +66,25 @@ SEVEN_DAYS = datetime.timedelta(days=7)
 CONFINEMENT = ("Work only in {copy}. Do not read, search or run commands on any path outside it, do not\n"
                "use the web, and do not run git commands that reach any other repository.")
 TASK_RX = re.compile(r"(?im)^(task statement|your task|task)\s*:")
+# An absolute path in a brief (as transcript_check.py finds one in a command), and the system paths E-001's
+# F4 lets a run read, which a brief may name.
+ABS_RX = re.compile(r"(?<![\w.~*?\]/$}-])(/[A-Za-z0-9._@+-][^\s'\"`;|&<>(){},]*)")
+URL_RX = re.compile(r"\b[A-Za-z][A-Za-z0-9+.-]*://[^\s'\"`<>]*")
+SYSTEM = ("/usr", "/bin", "/lib", "/etc", "/dev/null")
+
+
+def stray_paths(brief, copy):
+    """Absolute paths in a brief that are neither inside the copy nor a system path F4 allows (J2: the real
+    repository's path is replaced by the copy's, nothing else changed; a path left over would send the run
+    outside its copy)."""
+    out = []
+    for m in ABS_RX.finditer(URL_RX.sub(" ", brief)):
+        p = os.path.normpath(m.group(1).rstrip(".,:"))
+        inside = p == copy or p.startswith(copy.rstrip("/") + "/")
+        system = any(p == r or p.startswith(r + "/") for r in SYSTEM)
+        if not inside and not system:
+            out.append(p)
+    return out
 
 
 def not_eligible(reason, entry=None):
@@ -220,6 +246,13 @@ def cmd_plan(a):
     for arm, copy in copies.items():
         b = e["brief"].replace(real, copy) if real else e["brief"]
         briefs[arm] = b
+    for arm, copy in copies.items():
+        stray = stray_paths(briefs[arm], copy)
+        if stray:
+            for c in copies.values():
+                shutil.rmtree(c, True)
+            L.refuse("refused: set-up fault: the brief names an absolute path that is not the copy's (%s); give the "
+                     "entry its real_path, or record the brief without it" % stray[0])
     task = task_statement(briefs["change"])
     if a.change == "C1":
         if not L.git_ok(copies["change"], "cat-file", "-e", "HEAD:%s" % C.PLAN_CHECK_ROLE_FILE):
@@ -260,12 +293,22 @@ def cmd_audit(a):
             names = L.git(repo, "diff", "--name-only", start, tip, "--", *a.named_input).split("\n")
             L.emit({"include": False, "reason": "in-flight inputs: %s changed on %s before the round-1 submission"
                     % (", ".join(n for n in names if n) or ", ".join(a.named_input), branch)})
-        own = set(L.git(repo, "rev-list", "%s..%s" % (start, sub)).split())
+        reached = set(L.git(repo, "rev-list", "%s..%s" % (start, sub)).split())
         main = set(L.git(repo, "rev-list", "%s..%s" % (start, tip)).split())
-        foreign = sorted(own & main)
+        foreign = sorted(reached & main)
         if foreign:
             L.emit({"include": False, "reason": "the submission takes in %d commit(s) of %s that are not ancestors "
                     "of the start commit" % (len(foreign), branch)})
+    # Its own commits are its first-parent line from the submission back to the start commit; any other
+    # commit it reaches that is not an ancestor of the start was taken in, from whatever branch.
+    if not L.git_ok(repo, "merge-base", "--is-ancestor", start, sub):
+        L.emit({"include": False, "reason": "the submission does not descend from the start commit"})
+    reached = set(L.git(repo, "rev-list", "%s..%s" % (start, sub)).split())
+    own = set(L.git(repo, "rev-list", "--first-parent", "%s..%s" % (start, sub)).split())
+    taken = reached - own
+    if taken:
+        L.emit({"include": False, "reason": "the submission takes in %d commit(s) that are neither its own (its "
+                "first-parent line) nor ancestors of the start commit" % len(taken)})
     L.emit({"include": True, "reason": ""})
 
 
