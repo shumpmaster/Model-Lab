@@ -7,6 +7,9 @@ Run every test of this folder with
     python3 -m unittest discover -s tests/acceptance -p 'test_*.py'
 or one file with
     python3 -m unittest discover -s tests/acceptance -p 'test_j7*.py'
+Before a blind dispatch run J8 with S001_BLIND_MANIFEST=<brief record>, and before the analysis dispatch
+J7 with S001_ANALYSIS_MANIFEST=<brief record>; each test checks only its own setting's record, whatever it
+holds, and never skips it
 (from the repository root).
 
 THE INTERFACES THE TESTS CALL (the Builder's harness; none exists yet).  The spec fixes the pieces
@@ -461,10 +464,11 @@ def make_pairs(spec, locked=()):
     return out
 
 
-def recorded_manifests():
-    """[(brief path, text)] of every docs/briefs record holding a `## Pack manifest` section; the
-    S001_MANIFEST environment variable (a path from the repository root) names one to check instead."""
-    env = os.environ.get("S001_MANIFEST")
+def recorded_manifests(setting=None):
+    """[(brief path, text)] of every docs/briefs record holding a `## Pack manifest` section.  If the
+    environment variable `setting` is set (J8: S001_BLIND_MANIFEST; J7: S001_ANALYSIS_MANIFEST; a path from
+    the repository root), that one record is returned whatever it holds, and nothing is scanned."""
+    env = os.environ.get(setting) if setting else None
     paths = []
     if env:
         paths = [env]
@@ -476,7 +480,7 @@ def recorded_manifests():
         with open(os.path.join(ROOT, rel), encoding="utf-8") as fh:
             text = fh.read()
         if env or re.search(r"^## Pack manifest[ \t]*$", text, re.M):
-            out.append((rel, text))   # a record named by S001_MANIFEST is checked whatever it holds
+            out.append((rel, text))   # a record named by the setting is checked whatever it holds
     return out
 
 
@@ -491,16 +495,6 @@ def manifest_kind(text):
     if "experiments/e-003/check-author-extract.md" in paths or ".claude/agents/check-author.md" in paths:
         return "blind"
     return None
-
-
-def manifest_markers(text):
-    """(has_files, has_blind, has_analysis) from the parsed file lines: blind = the extract or
-    .claude/agents/check-author.md; analysis = experiments/E-003.md.  A record carrying both kinds'
-    markers is both."""
-    files, _, _, _ = parse_manifest(text)
-    paths = {norm(p) for _, p in files}
-    blind = bool(paths & {"experiments/e-003/check-author-extract.md", ".claude/agents/check-author.md"})
-    return bool(files), blind, "experiments/e-003.md" in paths
 
 
 def good_manifest(paths, commit="0123456789abcdef0123456789abcdef01234567", brief="ab" * 32):
