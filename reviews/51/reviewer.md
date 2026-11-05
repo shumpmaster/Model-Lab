@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Reviewer on pull request #51 (R3), brief 78 (docs/briefs/78-reviewer.md) for round 1, brief 81 for round 2 and brief 84 for round 3; each a fresh session on a different model from the locked checks' writer. Recorded verbatim by the Orchestrator, 2026-11-04. The first line is the latest round's verdict; round 1's was FAIL and round 2's PASS.*
+*The Reviewer on pull request #51 (R3), brief 78 (docs/briefs/78-reviewer.md) for round 1, brief 81 for round 2, brief 84 for round 3 and brief 89 for round 4, the one review the owner ruled (decisions/questions/P-001-checks-stop.md); each a fresh session on a different model from the locked checks' writer. Recorded verbatim by the Orchestrator, 2026-11-04. The first line is the latest round's verdict; round 1's was FAIL, round 2's PASS and round 3's FAIL.*
 
 ## Round 1 (commit b991248)
 
@@ -187,3 +187,97 @@ The Check author's corrections fix both blocking findings from round 1. Findings
 - **Open questions:**
   - (a) Should J8, when no manifest is named, also check a record that carries both kinds' markers (finding 3)?
   - (b) Should the interface note's list of creating calls be exhaustive or only examples (finding 4)?
+
+## Round 4 (commit 34d7a45)
+
+I reviewed commit 9b9b28b, merged as 34d7a45, in the read-only copy at /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/fix-pr51d. I ran every row of the trace's case table and found no failure.
+
+**Findings**
+
+1. **Not blocking. Every cell of rows A to E, including the blind-dispatch cell, now meets S-001's J7 and J8.**
+   - I built 15 records outside the repository, in /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/rev4-records/. The script that wrote them is /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/mkrec.py.
+   - I ran each test file alone, with the other two settings explicitly unset.
+   - **With its own setting**, each test checked the named record and never skipped it:
+
+   | Record | J8 (S001_BLIND_MANIFEST) | J7 (S001_ANALYSIS_MANIFEST) |
+   |---|---|---|
+   | A1 no section | FAIL | FAIL |
+   | A2 two blocks | FAIL | FAIL |
+   | A3 no line parses | FAIL | FAIL |
+   | A4 wrong info string | FAIL | FAIL |
+   | B1 correct blind manifest | **ok** | FAIL |
+   | B2 blind, no extract | FAIL | FAIL |
+   | B3 blind plus specs/S-001.md | FAIL | FAIL |
+   | B4 blind plus holdouts/x.md | FAIL | FAIL |
+   | C1 correct analysis manifest | FAIL | **ok** |
+   | C2 analysis, no sizing.py | FAIL | FAIL |
+   | C3 the blind-dispatch cell (E-003.md in place of the extract, check-author.md left out) | FAIL | FAIL |
+   | D1 both markers | FAIL | FAIL |
+   | D2 analysis plus the extract | FAIL | FAIL |
+   | E1 neither marker | FAIL | FAIL |
+   | E2 neither marker | FAIL | FAIL |
+
+   - **Each failure is for the reason the spec gives:**
+     - C3 in J8: "experiments/E-003.md: not allowed by must_read", "experiments/E-003.md: matched by must_not_see", "the extract is not in the manifest". This meets S-001:270 ("never … experiments/E-003.md"; "lacks the extract").
+     - D1 in J8: E-003.md not allowed by must_read, and matched by must_not_see.
+     - E1 in J8: "the extract is not in the manifest".
+     - D2 in J7: "check-author-extract.md: not allowed by must_read".
+     - E2 in J7: E-003.md, the verdict record and the card file are required and missing.
+     - A1 in J7: "no section headed exactly `## Pack manifest`".
+     - B1 in J7: the blind files are not allowed, and the analysis files are missing.
+     - C1 in J8: the analysis files are not allowed or are withheld, and the extract is missing.
+   - B1 exiting 0 in J8 is what E-003:33 needs ("J8's test passes on it"). A correct blind record is not failed by the gate.
+   - Code: test_j8_holdout_pack.py:164-174, test_j7_analysis_pack.py:147-157, e003_support.py:467-484.
+
+2. **Not blocking. Each test ignores the other test's setting and S001_MANIFEST, as the ruling says.**
+   - For all 15 records, J8 with only S001_ANALYSIS_MANIFEST set, or only S001_MANIFEST set, falls back to scanning docs/briefs. It skips with "no blind dispatch has recorded a manifest yet … set S001_BLIND_MANIFEST=…" and exits 0.
+   - J7 does the same, with the matching analysis message.
+   - No record in docs/briefs holds a `## Pack manifest` section yet, so the scan finds nothing.
+
+3. **Not blocking; a risk to carry. A wrong or empty setting still skips with exit 0, which could read as a pass at E-003:33.**
+   - Run with the old name (S001_MANIFEST), the other test's name, or `S001_BLIND_MANIFEST=""`, J8 skips and exits 0. I reproduced the empty value: "OK (skipped=1)", rc 0.
+   - The ruling chose this behaviour, and the skip message names the right setting.
+   - Still, no operating text tells the Orchestrator which setting to use: neither E-003 Step 1 (:33) nor S-001 J8 names it. Only the tests' docstrings do (J8:17-20, J7:19-22; e003_support.py:10-12).
+   - A missing path errors (FileNotFoundError, rc 1). That is safe.
+
+4. **Not blocking, and unchanged by this commit (carried over from Reviewer round 3, finding 3).**
+   - With no setting, the scan still classifies records with `manifest_kind`. So a record with both markers is checked by J7 only, and a record with neither marker by neither test.
+   - No synthetic test exercises the named-record path (Critic round 5, finding 5).
+   - The docstrings are now accurate: the J7 and J8 docstrings saying a named record could be skipped are fixed.
+
+5. **Not blocking. The change touches nothing else.**
+   - 9b9b28b changes only the three files: e003_support.py, test_j7_analysis_pack.py and test_j8_holdout_pack.py. `git diff 8cf1e31 34d7a45 --stat` shows the same three files, and nothing else.
+   - The removed `manifest_markers` has no remaining user (grep).
+   - The full suite at HEAD: 228 tests, 183 failures, 2 skips. Every failure is "interface missing: src/E-003/… is not built yet", and none is in J7 or J8.
+   - Compared with bef590a (a `git archive` copy), the only result changes are:
+     - the two skip messages;
+     - three tests that need git, which errored or failed in the archive copy (no .git) and are ok at HEAD.
+   - So no test that a correct build would pass now fails.
+
+6. **Not blocking. check_all.sh (`bash governance/checks/check_all.sh . 2350130 51`) exits 1: 23 steps PASS and 2 FAIL.**
+   - `review_check pr 51`: reviews/51/owner.md is missing (R3, test weakening), and reviews/51/reviewer.md still ends at the round-3 FAIL. Both clear only when this round and the owner's verdict are recorded.
+   - `record_checks merges --base 2350130`: 49 commits have no `Item:` trailer. This is the known local-only cause (LL-29) and not this change's doing.
+   - Every other step passes, including surface_guard, spec_check frozen, v3_checks freeze, holdouts and joins.
+
+**Six-part contract**
+
+- **Changed:** nothing. I am read-only, and `git status --short` in fix-pr51d was empty before and after. I ran Python with PYTHONDONTWRITEBYTECODE=1. My records and outputs are in the scratchpad: rev4-records/, mkrec.py, rev4-suite-new.txt, rev4-suite-base.txt, rev4-checkall.txt and rev4-base/.
+- **Why:** the owner's ruling A (ruling-checks-stop.md) asks for one focused review that runs every row of the trace's case table (triage/P-001-S-001-checks-round-5.md) against the changed J7 and J8.
+- **Verified:**
+  - 15 records × 6 runs: J8 and J7 each with its own setting, with only the other test's setting, and with only S001_MANIFEST.
+  - Failure reasons captured for 8 key cells, plus a missing path and an empty setting.
+  - The full suite at HEAD and at bef590a, and the result diff between them.
+  - check_all.sh with base 2350130 and PR 51.
+  - The scope of 9b9b28b and of the merge.
+  - The text read against S-001:269-270 and E-003:33.
+- **Undone:**
+  - I did not run the bef590a suite in a git checkout. Its three git-dependent differences come from the archive copy.
+  - I did not read docs/reports/**.
+  - The review check needs the owner's verdict.
+- **Needed outside its surface:**
+  - The Orchestrator records this return as round 4 in reviews/51/reviewer.md.
+  - The owner gives a verdict in reviews/51/owner.md (R3, test weakening).
+  - Optional: whoever owns E-003 or the dispatch steps names `S001_BLIND_MANIFEST` and `S001_ANALYSIS_MANIFEST` in the step that runs J8 or J7 (finding 3).
+- **Open questions:**
+  - (a) Should a set but empty or unknown setting, or a leftover S001_MANIFEST, fail rather than fall back to a skip that exits 0 (finding 3)? The ruling as worded allows the skip.
+  - (b) Should synthetic tests cover the named-record path (finding 4)?

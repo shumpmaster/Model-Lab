@@ -453,7 +453,7 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Caught by:** the Critic and the Reviewer.
 - **Cause:** as LL-53: each fix was made and checked against the finding it answered, not against the whole set of records the test must classify; the selection logic has four inputs and was never written as a table of every case.
 - **Correction proposed:** a fix to classification logic lists every input combination and its required result before it is written, and the check reruns all of them; for the model, LL-55's rule on how check rounds are counted covers locked checks too.
-- **Status:** open; at the stop, for the owner.
+- **Status:** fixed here: the owner ruled one focused round (decisions/questions/P-001-checks-stop.md), each test got its own setting, and the Reviewer's run of every case passed (reviews/51/reviewer.md, round 4); model change open with LL-55.
 
 ### LL-62 An answer branch was pushed in the same step as its commit, before any check ran (LL-06, LL-29, LL-42, LL-48 recurred)
 - **What happened:** recording the owner's answer to the checks' stop question, the Chief of Staff committed and pushed cos/p001-answer-checks-stop in one command, with no check run first. The full check, run straight after on that exact commit merged onto the default branch, passed, so nothing wrong was pushed.
