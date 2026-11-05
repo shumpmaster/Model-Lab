@@ -12,9 +12,12 @@ C2, C3) or "arm", or holds a sentence of a change text.  It is meaningful only o
 and the manifest is recorded, so it runs before each blind dispatch."
 
 No Builder code is needed.  The entry and extract tests run now.  The recorded-manifest test checks every
-`## Pack manifest` section in docs/briefs/*.md whose parsed file lines include the extract or .claude/agents/check-author.md (or
-the one named by S001_MANIFEST); it is skipped, saying so, while no blind dispatch has recorded one --
-run it with S001_MANIFEST=<brief record> before each dispatch.  The same checks run on synthetic
+`## Pack manifest` section in docs/briefs/*.md whose parsed file lines include the extract or
+.claude/agents/check-author.md; it is skipped, saying so, while no blind dispatch has recorded one.  Before
+each blind dispatch run it as
+    S001_BLIND_MANIFEST=<the dispatch's brief record> python3 -m unittest discover -s tests/acceptance -p 'test_j8*.py'
+With that setting the test checks that record, whatever it holds (no file lines, either kind's files,
+neither), and never skips it; it ignores S001_ANALYSIS_MANIFEST and S001_MANIFEST.  The same checks run on synthetic
 manifests, good and deliberately broken.
 """
 import os
@@ -22,7 +25,7 @@ import re
 import unittest
 
 from e003_support import (Base, CHANGE_FILE, CHANGE_TEXT, ROOT, good_manifest, manifest_violations, norm,
-                          manifest_kind, manifest_markers, parse_manifest, pack_entry, pattern_matches, recorded_manifests)
+                          manifest_kind, parse_manifest, pack_entry, pattern_matches, recorded_manifests)
 
 AGENT = ".claude/agents/check-author.md"
 EXTRACT = "experiments/E-003/check-author-extract.md"
@@ -158,20 +161,16 @@ class TestJ8Validation(Base):
 
 class TestJ8Recorded(Base):
     def test_every_recorded_blind_dispatch_manifest_conforms(self):
-        named = bool(os.environ.get("S001_MANIFEST"))
-        # A record named by S001_MANIFEST is checked here if its files include the extract or
-        # .claude/agents/check-author.md, or it has no file lines; so a blind manifest that wrongly lists
-        # experiments/E-003.md is checked, and failed, here too (S-001 J8: "never ... experiments/E-003.md").
-        def mine(t):
-            has_files, blind, analysis = manifest_markers(t)
-            return blind or not has_files
-        found = [(rel, t) for rel, t in recorded_manifests()
-                 if (mine(t) if named else manifest_kind(t) == "blind")]
+        named = bool(os.environ.get("S001_BLIND_MANIFEST"))
+        # S001_BLIND_MANIFEST names the blind dispatch's record: checked whatever it holds, never skipped
+        # (S-001 J8: the pack holds "never ... experiments/E-003.md", and the extract must be present).
+        # Unset: the scan of docs/briefs, taking records whose parsed files include the extract or
+        # check-author.md.
+        found = [(rel, t) for rel, t in recorded_manifests("S001_BLIND_MANIFEST")
+                 if named or manifest_kind(t) == "blind"]
         if not found:
-            self.skipTest("S001_MANIFEST names a manifest of the other kind (J7's); this test checks blind-dispatch "
-                          "manifests" if named else
-                          "no blind dispatch has recorded a manifest yet (J8 runs before each blind dispatch; "
-                          "set S001_MANIFEST=<brief record> to check one)")
+            self.skipTest("no blind dispatch has recorded a manifest yet (J8 runs before each blind dispatch; "
+                          "set S001_BLIND_MANIFEST=<brief record> to check one)")
         for rel, text in found:
             self.assertEqual(holdout_problems(text), [], rel)
 

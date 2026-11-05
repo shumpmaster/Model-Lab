@@ -14,9 +14,12 @@ patterns compared case-folded, as session_runner.py's `norm` does."
 No Builder code is needed.  The pack-entry tests run against governance/PACKS.toml now.  The
 recorded-manifest test checks every `## Pack manifest` section found in docs/briefs/*.md whose files
 include experiments/E-003.md (classified by the parsed file lines, not by the record's text, so the blind
-dispatch's manifest, which also lists reviewer.md, is not taken for one; or the one named by S001_MANIFEST); it
-is skipped, saying so, while no analysis dispatch has recorded one -- the spec says the test is
-"meaningful only once ... the manifest is recorded", and the analysis is dispatched last.  The same
+dispatch's manifest, which also lists reviewer.md, is not taken for one); it is skipped, saying so, while
+no analysis dispatch has recorded one -- the spec says the test is "meaningful only once ... the manifest
+is recorded", and the analysis is dispatched last.  Before the analysis dispatch run it as
+    S001_ANALYSIS_MANIFEST=<the dispatch's brief record> python3 -m unittest discover -s tests/acceptance -p 'test_j7*.py'
+With that setting the test checks that record, whatever it holds (no file lines, either kind's files,
+neither), and never skips it; it ignores S001_BLIND_MANIFEST and S001_MANIFEST.  The same
 checks run on synthetic manifests, good and deliberately broken, so the test is not vacuous.
 """
 import os
@@ -24,7 +27,7 @@ import re
 import unittest
 
 from e003_support import (Base, good_manifest, manifest_violations, norm, parse_manifest, pack_entry,
-                          manifest_kind, manifest_markers, recorded_manifests, session_runner)
+                          manifest_kind, recorded_manifests, session_runner)
 
 AGENT = ".claude/agents/reviewer.md"
 KIND_FILES = ["experiments/E-003.md", "experiments/E-003/sizing.py", "specs/S-001.md",
@@ -141,18 +144,14 @@ class TestJ7Classify(Base):
 
 class TestJ7Recorded(Base):
     def test_every_recorded_analysis_manifest_conforms(self):
-        named = bool(os.environ.get("S001_MANIFEST"))
-        # A record named by S001_MANIFEST is checked here if its files include experiments/E-003.md or it
-        # has no file lines; a record carrying both kinds' files is checked, and failed, by J7 and J8 alike.
-        def mine(t):
-            has_files, blind, analysis = manifest_markers(t)
-            return analysis or not has_files
-        found = [(rel, t) for rel, t in recorded_manifests()
-                 if (mine(t) if named else manifest_kind(t) == "analysis")]
+        named = bool(os.environ.get("S001_ANALYSIS_MANIFEST"))
+        # S001_ANALYSIS_MANIFEST names the analysis dispatch's record: checked whatever it holds, never
+        # skipped.  Unset: the scan of docs/briefs, taking records whose parsed files include E-003.md.
+        found = [(rel, t) for rel, t in recorded_manifests("S001_ANALYSIS_MANIFEST")
+                 if named or manifest_kind(t) == "analysis"]
         if not found:
-            self.skipTest("S001_MANIFEST names a manifest of the other kind (J8's); this test checks analysis "
-                          "manifests" if named else
-                          "no analysis dispatch has recorded a manifest yet (J7 runs before each analysis dispatch)")
+            self.skipTest("no analysis dispatch has recorded a manifest yet (J7 runs before each analysis dispatch; "
+                          "set S001_ANALYSIS_MANIFEST=<brief record> to check one)")
         for rel, text in found:
             kind = (re.search(r"reviews/E-003/(built|plans|research)/", text) or [None, "built"])[1]
             self.assertEqual(analysis_problems(text, kind), [], rel)
