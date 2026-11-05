@@ -3,6 +3,7 @@
   python3 -I src/E-003/export.py make --kind plans|built|research --repo DIR --label L --out DIR
           --checker-role ID --role-file PATH [--task-statement-path P] [--task-statement-text T]
           [--memo-path P] (--start SHA --final SHA | --memo-commit SHA) [--no-deliverable]
+        (--task-statement-path is required for built work and research, --task-statement-text for plans)
   python3 -I src/E-003/export.py finish --out DIR --kind K
   python3 -I src/E-003/export.py verify --out DIR --kind K
   python3 -I src/E-003/export.py list BUNDLE
@@ -99,6 +100,9 @@ def cmd_make(a):
             L.refuse("refused: research needs --memo-path")
     elif not (a.start and a.final) or a.memo_commit:
         L.refuse("refused: plans and built work take --start and --final")
+    if a.kind in ("built", "research") and not a.task_statement_path:
+        L.refuse("refused: %s needs --task-statement-path (J3: the fill values carry the task statement's path)"
+                 % a.kind)
     if a.kind == "plans" and not a.task_statement_text:
         L.refuse("refused: plans need --task-statement-text (the task statement of the worker's recorded brief)")
     os.makedirs(a.out, exist_ok=True)
