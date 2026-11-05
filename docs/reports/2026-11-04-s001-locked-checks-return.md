@@ -264,3 +264,50 @@ The trial records were removed afterwards.
   - check-author check-author@agents.invalid
   - check-author check-author@agents.invalid
   - check-author check-author@agents.invalid
+
+## The focused round the owner ruled (brief 88), commit 9b9b28b
+
+## Brief 88: J7 and J8 now each read their own setting and check that record whatever it holds, in commit 9b9b28b on top of bef590a
+
+New commit: `9b9b28b`, same worktree and branch (`build/check-author/s001-locked`). Not pushed, same trailers.
+
+**What changed**
+- `tests/acceptance/e003_support.py`:
+  - `recorded_manifests(setting=None)` returns, when the named environment variable is set, only that record, whatever it holds. It scans `docs/briefs` only when the variable is unset, as before.
+  - I deleted `manifest_markers`, which nothing uses now.
+  - The header's run instructions name the two settings.
+- `tests/acceptance/test_j8_holdout_pack.py` (`TestJ8Recorded` and the docstring):
+  - J8 reads only `S001_BLIND_MANIFEST`. With it set, J8 checks that record whatever it holds and never skips it.
+  - It ignores `S001_ANALYSIS_MANIFEST` and `S001_MANIFEST`.
+  - Unset, the scan takes records whose parsed files include the extract or `check-author.md`, and the skip message says so.
+- `tests/acceptance/test_j7_analysis_pack.py` (`TestJ7Recorded` and the docstring): the same for J7 with `S001_ANALYSIS_MANIFEST`. The unset scan takes records whose files include `E-003.md`.
+- Nothing else changed.
+
+**The runs.**
+- I ran each test alone with `-k Recorded`.
+- The records were in a folder outside the repository, so the scan could not pick them up.
+- The row letters follow the trace's table. The last row is the blind-dispatch cell the trace names: `experiments/E-003.md` in place of the extract and `check-author.md`.
+
+| Record named for the test | J8 (`S001_BLIND_MANIFEST`) | J7 (`S001_ANALYSIS_MANIFEST`) |
+|---|---|---|
+| A, no file lines | fail | fail |
+| B, blind marker only (a well-formed blind manifest) | pass, on its merits | fail (no `E-003.md`) |
+| C, analysis marker only (a well-formed analysis manifest) | fail (lacks the extract; `E-003.md` withheld) | pass, on its merits |
+| D, both markers | fail | fail |
+| E, neither marker | fail | fail |
+| Blind manifest with `E-003.md` in place of the extract and `check-author.md` | fail | fail |
+
+No cell skips. These match what the trace requires for a record named for that test.
+
+Setting only the other test's variable, or `S001_MANIFEST`, leaves the test as it is with nothing set. I ran A and D with each of those on both tests, and every run was OK with one skip (the baseline).
+
+**Results**
+- Suite: 228 tests, 43 pass, 2 skip, 183 fail. All 183 failures are "interface missing", because the Builder's `src/E-003/` scripts do not exist yet. The counts are unchanged.
+- `bash governance/checks/check_all.sh . 7d6c999` prints "OK: all governance checks passed".
+- `surface_guard.py diff --range 7d6c999..build/check-author/s001-locked --branch build/check-author/s001-locked` prints "OK: 6 commit(s) ... checked (0 merge(s) skipped, 0 exempt, 0 human)".
+- `git log --format='%an %ae' -3` gives:
+  - check-author check-author@agents.invalid
+  - check-author check-author@agents.invalid
+  - check-author check-author@agents.invalid
+
+**Not touched.** The trace's non-blocking leftovers stay as they were. These include the `/tmp` interface note's "Edit" wording and the scan-mode cases.
