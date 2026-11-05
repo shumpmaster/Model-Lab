@@ -1,0 +1,20 @@
+# Brief 67 — definer — S-001 and E-003: the Build-gate rulings settled in the plan, and the freeze
+
+session: session_01QBwHGJ9ZMyT9fK17HjfmCc
+model: claude-opus-5-5 (its checks, the Critic and the freeze gate's CI check; the Critic runs on claude-sonnet-5-5; D-056). A fresh session.
+start: Model-Lab@480fb62e61dcca1a9be3ecff35541c18290f6647 (branch build/definer/s001-freeze, in its own worktree /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/wt-definer)
+recorded: at hand-out, 2026-11-04 (LL-04, LL-24)
+
+## Brief
+
+You are the Definer (your role file: .claude/agents/definer.md). Today is 2026-11-04. Work only in your own worktree, /tmp/claude-0/-home-user/a9cd8a0a-147c-550f-94b8-72427d1045fd/scratchpad/wt-definer, on the local branch build/definer/s001-freeze (made from commit 480fb62). Commit as `definer <definer@agents.invalid>` (`git -c user.name=definer -c user.email=definer@agents.invalid commit`) with the trailers `Agent-Session: session_01QBwHGJ9ZMyT9fK17HjfmCc` and `Spec: S-001`. Do not push.
+
+The owner passed the Build gate: "Proceed, size A (Recommended)" (decisions/questions/P-001-build-gate.md), and ruled the terms "All as recommended", A for terms 1 to 7 and the plan's answer for 8 to 11 (decisions/questions/P-001-build-gate-terms.md, whose "How it is carried out" maps each term to the plan's open question; the card as asked is `git show 2350130:questions/P-001-build-gate-terms.md`, and the gate card `git show 2350130:questions/P-001-build-gate.md`). Docs/PROJECT.md's V1 and M2 now carry the plan's proposed texts (open questions 1 and 2), pending the Critic's check of the M2 line.
+
+The task, in specs/S-001.md and experiments/E-003.md only:
+1. Settle each of the plan's nine open questions as ruled: size A (60 pairs of each kind; built work, then plans, then research); one kind after another, with no overlap; research tested, last; no fixed time limit, the review points as written; the judges within the owner's plan; one judging session per kind (AC5 and J5 stand as written); only pieces from public repositories enter, today the Service Desk and Model-Lab (E-003's eligibility gains that condition; say where the "only if the other projects resume" figures now overstate, without recomputing them); recording at hand-out by the Chief of Staff, with the starting-point field Model-Lab's brief records now carry (`start:`, docs/briefs/README.md in brief 67's own branch; name it, do not depend on its path); C3's tolerance as written; the owner's part and fallbacks as written; the reading lists approved (reviews/44/owner.md). Turn "Open questions for the owner" into a record of these rulings, each citing its answer record, and bring every line that offered a choice now ruled (the header's `budget`, "Pairs per kind", "Order", "Needed outside", the brief for the surface owner) into line. Change no acceptance criterion, join or figure the rulings do not require; if a ruling needs a criterion changed, stop and say so instead.
+2. Freeze S-001 and E-003 as the freeze gate requires: read governance/checks/spec_check.py and v3_checks.py (`freeze`, `ready`, `trace`, `joins`) and how E-001's `frozen:` line was set, and set S-001's `status`/`frozen_at` and E-003's `frozen:` the same way.
+3. Before you commit, check each sentence you change against the record it states, not only against this brief (LL-53); where a figure would change, read the code that produces it (LL-54); none should.
+4. After committing, run `bash governance/checks/check_all.sh . origin/main` in your worktree and report the summary. Expected: `record_checks merges` (a known local false failure on Orchestrator record commits, LL-29) and `v3_checks joins` (no join tests exist yet; the Check author writes them next); report any other failure as real. Also run `python3 governance/checks/surface_guard.py diff --range 480fb62..build/definer/s001-freeze --branch build/definer/s001-freeze`.
+
+Return the six-part contract, with each changed passage quoted (old and new), the commit ids, and `git log --format='%an %ae' -3`.

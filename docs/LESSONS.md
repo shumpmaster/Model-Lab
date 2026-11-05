@@ -417,3 +417,47 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** the check was run on the working tree before the edit was committed, and not again on the commit given to the Critic.
 - **Correction proposed:** run the form check on the exact commit a helper's fixed copy is made from, as for a push.
 - **Status:** fixed here (practice changed); closed for the model unless it recurs.
+
+## 2026-11-04 — Build gate of P-001, session_01QBwHGJ9ZMyT9fK17HjfmCc
+
+### LL-57 Read-only Critics were briefed to run git commands they cannot run
+- **What happened:** brief 66 told the Critic to read the reworded lines with `git show`; the Critic has no shell, so it judged the lines from the current text only and said so in its return. The first draft of brief 69 again pointed it at `git diff` and `git show`; the Chief of Staff caught that before dispatch and gave it fixed copies at each commit to compare instead (docs/briefs/69-critic.md).
+- **Caught by:** the Critic (reviews/P-001-build-terms/critic.md, round 1, opening paragraph), then the Chief of Staff.
+- **Cause:** the brief was written from the Chief of Staff's own tools, not the helper's; the Critic's agent file grants Read, Grep and Glob only.
+- **Correction proposed:** before a brief names a command, check the helper's tool grant; for a read-only checker, give a fixed copy for each version it must compare. For the model: the brief template names the helper's tools.
+- **Status:** fixed here (practice changed); model change open.
+
+### LL-58 Four line pointers in the fair test's plan pointed at the wrong lines through five plan rounds
+- **What happened:** S-001's "Facts relied on" and one other line cited docs/PROJECT.md:96, :99 (twice) and :147 for V1, the starting figures and the outside-provider rule; those lines held other text. The plan passed five review rounds with them. The Critic's check of the settled text, run before the freeze landed, found them; the Definer corrected them and froze again (reviews/S-001/_critic-settled.md, round 1, finding 1).
+- **Caught by:** the Critic.
+- **Cause:** line-number citations drift as the cited file changes, and no check reads them; the plan reviews checked what the facts say, not where the pointers land.
+- **Correction proposed:** a check that each `file:line` citation in a spec exists and holds the cited words, or citations by section heading; for the model, with LL-54, the plan-review brief asks for every pointer behind a decision figure to be opened.
+- **Status:** fixed here (corrected before the freeze); model change open.
+
+### LL-59 A checker's brief first named the same model as the work it checks
+- **What happened:** brief 73 first set the Critic on claude-sonnet-5-5 to check the Check author's locked checks, which were written on claude-sonnet-5-5. Found and corrected to claude-opus-5-5 before dispatch.
+- **Caught by:** the Chief of Staff, rereading the brief before dispatch.
+- **Cause:** the Critic's usual model was carried over from briefs where the writer was the Chief of Staff (claude-opus-5-5); the model-diversity pair is the checker and the work's own writer, which changes with the work.
+- **Correction proposed:** every checker brief names the checked work's writer and model, and the pair is compared before dispatch (as LL-03 asks); for the model, the runner's diversity check covers conversation-started helpers.
+- **Status:** fixed here (corrected before dispatch); model change open with LL-03.
+
+### LL-60 Three reading-only Critic rounds passed locked tests that would fail a correct build
+- **What happened:** the Critic passed S-001's locked checks at round 3. The required Reviewer on pull request #51, which can run code, then found two tests that a correct build would fail: an AC6 fixture whose expected class contradicts E-003 Step 5, and J4 string matches that a byte-faithful fill of E-002's template cannot meet, since the template wraps the phrase across a line (reviews/51/reviewer.md, findings 1 and 2). It reproduced both with reference scripts. The checks were not yet locked, so they went back to the Check author.
+- **Caught by:** the Reviewer.
+- **Cause:** the Critic holds no shell, so it judged each test's expectation by reading; round 2 re-read only the changed files, and no round ran an expectation against the frozen text.
+- **Correction proposed:** a check of locked tests runs each expectation against a small reference built from the frozen text before it passes (the Reviewer's method here); for the model, Build-1's record is the Critic's pass, so either the Critic's check of tests gets a shell or the Reviewer's run is part of Build-1.
+- **Status:** open; the checks are being corrected before they lock.
+
+### LL-61 Each fix to one test's record selection opened a new hole beside it
+- **What happened:** J7's and J8's choice of which recorded manifest to check was changed four times (rounds 2 to 5 of the locked checks). Each change closed the case its finding named and opened a neighbouring one: a malformed record skipped, then a blind manifest listing the registration skipped, then a blind manifest lacking the extract skipped (reviews/S-001/_critic-checks.md, rounds 2 to 5; reviews/51/reviewer.md, round 3). Round 5 of the Critic and round 3 of the Reviewer failed the same hole independently. The Chief of Staff stopped there and put the stop to the owner, rather than run a sixth round under no rule (LL-55).
+- **Caught by:** the Critic and the Reviewer.
+- **Cause:** as LL-53: each fix was made and checked against the finding it answered, not against the whole set of records the test must classify; the selection logic has four inputs and was never written as a table of every case.
+- **Correction proposed:** a fix to classification logic lists every input combination and its required result before it is written, and the check reruns all of them; for the model, LL-55's rule on how check rounds are counted covers locked checks too.
+- **Status:** fixed here: the owner ruled one focused round (decisions/questions/P-001-checks-stop.md), each test got its own setting, and the Reviewer's run of every case passed (reviews/51/reviewer.md, round 4); model change open with LL-55.
+
+### LL-62 An answer branch was pushed in the same step as its commit, before any check ran (LL-06, LL-29, LL-42, LL-48 recurred)
+- **What happened:** recording the owner's answer to the checks' stop question, the Chief of Staff committed and pushed cos/p001-answer-checks-stop in one command, with no check run first. The full check, run straight after on that exact commit merged onto the default branch, passed, so nothing wrong was pushed.
+- **Caught by:** the Chief of Staff, reading its own command after it ran.
+- **Cause:** a small records commit, made right after the owner answered, felt too simple to check; the rule lives in the session's working notes, not in a hook.
+- **Correction proposed:** as LL-48: a pre-push hook that runs the checks the way CI does, so the rule does not rest on memory.
+- **Status:** open (recurred).
