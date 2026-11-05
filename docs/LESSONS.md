@@ -477,3 +477,10 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** the writer knew the owner's words from the conversation and treated them as on record; the written rule sat in the folder's README, which the writer had read but did not search for when asking "what rule covers this".
 - **Correction proposed:** record the owner's session instructions as intake when they are given, before any card relies on them (done here: intake/P-001-owner-instruction-2026-11-05.md); before a card says "no rule covers it", search the affected folder's README and the files' own notes; for the model, the question template asks for each option's departure from any written rule.
 - **Status:** fixed here (the intake record); model change open.
+
+### LL-65 The Check author and the Builder signed with the same session id, so one range holding both fails the surface guard
+- **What happened:** every helper this session started signed its commits with the top-level session's id (`Agent-Session: session_01QBwHGNGKXFwvVVdzkei5aT`), as the briefs told them and as earlier sessions did. The surface guard reads a range holding the Check author's test correction and the Builder's harness commits as one session that "wrote both checks and code" for S-001, and fails it. Each pull request's own range passes, so the two land separately (pull request #57 first, then the harness) (reviews/57/reviewer.md, finding 1).
+- **Caught by:** the Reviewer, running the full check on a copy holding both.
+- **Cause:** CLAUDE.md's trailer is `<session id>`, and a helper started with the Agent tool has no session id of its own that the brief records; the guard's rule assumes one session per role.
+- **Correction proposed:** land check and build changes in separate pull requests until the trailer can tell helpers apart; for the model, a helper's commits carry its own id (for example `<session id>/<role>-<brief>`), and the guard and the session runner agree on that form.
+- **Status:** open.
