@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Critic on questions/P-001-ac2-research-test.md, brief 93 (docs/briefs/93-critic.md, on branch claude/chief-of-staff-p001-build-5m9j1d) for round 1 and brief 94 for round 2; a fresh session, resumed for round 2, on a different model from the card's writer. Recorded verbatim by the Orchestrator, 2026-11-05. The first line is the latest round's verdict; round 1's was FAIL. One quotation in round 1, finding 1, is shown as [its verdict line, PASS], since the review check accepts that line's label only at the start of a line.*
+*The Critic on questions/P-001-ac2-research-test.md, brief 93 (docs/briefs/93-critic.md, on branch claude/chief-of-staff-p001-build-5m9j1d) for round 1, brief 94 for round 2 and brief 95 for round 3; a fresh session, resumed for rounds 2 and 3, on a different model from the card's writer. Recorded verbatim by the Orchestrator, 2026-11-05. The first line is the latest round's verdict; rounds 1 and 2 were FAIL. One quotation in round 1, finding 1, is shown as [its verdict line, PASS], since the review check accepts that line's label only at the start of a line.*
 
 ## Round 1 (commit 4b34d74)
 
@@ -104,3 +104,48 @@ Six-part contract
 - Undone: I ran nothing. I did not re-open the files that round 1 covered, because the coordinator said nothing changed in them. I could not check the claude/... branch. No record in my view says the build's fault is being fixed.
 - Needed outside my surface: the Chief of Staff fixes findings 1 and 2, and ideally 3 to 6. Then a round 3 Critic reads the card.
 - Open questions: none beyond the card's own.
+
+## Round 3 (commit 63bb738)
+
+Both round 2 blockers are fixed, and I found nothing new that blocks. The two non-blocking points below are optional.
+
+1. Not blocking. Round 2 finding 1 is fixed.
+   - The opening paragraph now says the build has "a blocking fault of its own, which the Builder has been sent back to fix".
+   - Context bullet 23 cites docs/briefs/92-builder.md for it. The brief is Build round 2 of 3 and tells the Builder to fix finding 1, the blocking fault in the leak check.
+   - It also tells the Builder to fix findings 2, 3, 4 and 6, which is "four of the review's five other findings".
+   - Finding 5 is left alone, as the card implies.
+   - The brief also says the failing research test is not to be changed and is "going to the owner". That agrees with the card.
+
+2. Not blocking. Round 2 finding 2 is fixed.
+   - A, B, C and D each carry a Reversible line, and each matches its route.
+   - A and B are reversible by a further change, with the precedent staying on record.
+   - C is reversible only by a further superseding entry.
+   - D is reversible only by planning the test again.
+   - Gain, cost and what each rules out are all present.
+
+3. Not blocking. Findings 3 to 6 of round 2 are fixed.
+   - Branch name: brief 92 itself places the Reviewer's record "on branch claude/chief-of-staff-p001-build-5m9j1d". That supports the record location in Context bullets 21 and 22.
+   - B: its cost now states that it goes against your instruction to keep these points for a later change.
+   - D: the "stop rule's last route" phrase is gone.
+   - DEFAULT and TIMEOUT: the card now says why it has no default, namely that adopting A without you would set aside your words that locked checks are not edited.
+
+4. Not blocking. Fairness, whose judgement is whose, and plainness all hold.
+   - The options do not lean. A's precedent and rule-setting-aside are named as costs, and C's gain is stated fairly.
+   - The recommendation is labelled the Chief of Staff's judgement, at medium confidence.
+   - The owner's words are quoted and cited to the intake record.
+   - The opening paragraph has no paths or ids, and it leads with what is wrong and what you decide.
+   - The card is cut down to its decision. The Context bullets are long but required.
+
+5. Not blocking, two optional nits.
+   - The header line "REVERSIBILITY: reversible" is a card-level label. D and C are narrower, and the options say so.
+   - "The Chief of Staff's working branch" is a description. The records name only the branch, not whose it is. It is harmless.
+
+Unchanged-sentence checks from round 2 still hold: the test lines, J2, E-001:102, E-003:115, the README, the e003_support.py:4 note, LL-61, PROJECT.md M4, reviews/51, and the intake quote.
+
+Six-part contract
+- Changed (by file): none. I have no write tool.
+- Why: round 3 cold read of the redrafted card questions/P-001-ac2-research-test.md in fix-ask3, against the decision-card standard.
+- Verified (command + output): I read only. I opened the new card and docs/briefs/92-builder.md in full. I compared each changed sentence with the round 2 card and its records. I did not re-open the other cited records, because they are unchanged and round 2 read them. I did not read the Builder's report or the Reviewer's record again, though I read both in rounds 1 and 2. I did not read docs/reports/** beyond that.
+- Undone: I ran nothing. I did not re-open the files that round 2 covered. I did not confirm that the Builder was actually dispatched on brief 92, only that the brief exists. The card's "has been sent back" rests on the brief.
+- Needed outside my surface: the Orchestrator records this as round 3 in reviews/P-001-ac2-research-test/critic.md. The Chief of Staff can then report to the owner.
+- Open questions: none.
