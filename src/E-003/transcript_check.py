@@ -289,9 +289,14 @@ class Checker:
             p = m.group(1).rstrip(".,")
             if not self.path_ok(p, mode, base=here):
                 raise Leak("a command on a path outside the copy")
+        # A lone `/`, `/.` or `/..` is the root folder only where a command takes it as a path: as a shell
+        # word of its own (`find / -name x`, `ls /`), or in inline code as the string a path call is given
+        # (`os.listdir('/')`).  Inside quoted text (`echo "a / b"`) or as division in code it is not one.
+        if family is None and w in ROOT_WORDS:
+            raise Leak("a command on the root folder")
+        if family not in (None, TEXT) and ROOT_CALL_RX.search(s):
+            raise Leak("inline code on the root folder")
         for tok in TOKEN_SPLIT.split(s):
-            if family is None and tok in ("/", "/.", "/.."):
-                raise Leak("a command on the root folder")   # in code, a lone `/` is division
             if tok and not tok.startswith("/") and ".." in tok.split("/"):
                 if "$" in tok or not self.path_ok(tok, mode, base=here):
                     raise Leak("a relative path that leaves the copy")
@@ -306,6 +311,11 @@ CODE_FLAGS = {"python": ("-c",), "pypy": ("-c",), "node": ("-e", "-p", "--eval",
               "osascript": ("-e",)}
 AWKS = ("awk", "gawk", "mawk", "nawk")
 SIGIL_FAMILIES = ("perl", "php")
+ROOT_WORDS = ("/", "/.", "/..")
+# A call that takes a path, given the root folder as a string literal.
+ROOT_CALL_RX = re.compile(r"\b(listdir|scandir|chdir|walk|open|opendir|readdir|readdirSync|readdirsync|statSync|"
+                          r"stat|lstat|exists|existsSync|isdir|isfile|iterdir|glob|rmtree|Path|PurePath|"
+                          r"readFileSync|readFile|Dir\.entries|Dir\.glob|File\.read)\s*\(\s*(['\"])/\.{0,2}\2")
 TEXT = "text"
 SHELL = "shell"
 PATTERN_COMMANDS = ("sed", "grep", "egrep", "fgrep", "rg")
