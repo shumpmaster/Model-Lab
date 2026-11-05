@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Critic on questions/P-001-harness-landing.md, brief 101 (docs/briefs/101-critic.md, on branch claude/chief-of-staff-p001-build-5m9j1d) for round 1; a resumed session on a different model from the card's writer. Recorded verbatim by the Orchestrator, 2026-11-05. The first line is the latest round's verdict.*
+*The Critic on questions/P-001-harness-landing.md, brief 101 (docs/briefs/101-critic.md, on branch claude/chief-of-staff-p001-build-5m9j1d) for round 1 and brief 102 for round 2; a resumed session on a different model from the card's writer. Recorded verbatim by the Orchestrator, 2026-11-05. The first line is the latest round's verdict; round 1's was FAIL. After round 2 passed, the Chief of Staff changed only what attributes or removes claims, on round 2's finding 4: the WHY's line on not offering a change to the check is now the Chief of Staff's stated reason, and its words "outside this decision" are removed.*
 
 ## Round 1 (commit 211e335)
 
@@ -61,3 +61,49 @@ Six-part contract
 - Undone: I ran nothing, including the guard. The conclusion in finding 1 comes from reading the code, not from running it. I did not read the whole of the 2,000-line v3_checks.py, only the parts that name session ids. I did not confirm that PR #57 merged.
 - Needed outside my surface: the Chief of Staff redrafts the card for findings 1 and 2, and ideally 3 to 6. Then round 2.
 - Open questions: does the independence rule fire in the landing range, or only later? That depends on whether any checked commit in the range carries "Spec: S-001". The Chief of Staff can settle it by running `surface_guard.py diff` on the exempted range before the card is filed.
+
+## Round 2 (commit 387af76)
+
+Both round 1 blockers are fixed, and I found nothing new that blocks. Findings 3 to 5 are optional.
+
+1. Not blocking. Round 1 finding 1 (what an exemption skips) is fixed, and the intake record supports it.
+   - Context bullet 3 now says the check "takes the specs from the commits checked and the sessions from every commit reachable, exempt or not". That matches surface_guard.py: `independence_violations` reads its specs from the checked commits, and its sessions from `history`, which is every non-merge commit reachable.
+   - Option B now says it lands, and that "every later commit of the builder's on this plan then fails the same check, from any session". The intake record (the Option B section) shows the landing range OK with 3 exempt, then a later builder commit from `session_other` failing with "the exempt commits are still in the history the check reads".
+   - B's cost and its "Rules out: later work under this plan, until that fix" now follow from that run. The "exempt commits also skip their other checks" matches the code.
+
+2. Not blocking. Round 1 finding 2 (option C) is fixed.
+   - C now says a new cloud session is started with its own id, "as an earlier step's builder was". docs/briefs/25-builder.md supports that: the Builder there ran as a separate cloud session with its own session id.
+   - LL-65 supports "a helper started from this session has no id of its own on record".
+   - "Gain: … no new signing form" is consistent.
+   - The cost is now "estimated from this time's 1.3 and 1.0 million tokens, fewer if its findings are fixed first". That is labelled an estimate. The token totals are true (sums of the session file's helper lines: 1,340,245 and 964,635).
+   - C was not run on a copy, and the card does not claim it was. The recommendation says A is "the only option tried".
+
+3. Not blocking. Option A is supported by the runs and is stated plainly.
+   - The intake record shows the same tree as 9caff21 (`git diff --quiet 9caff21 HEAD`), the landing range OK with 4 commits checked, and a later builder commit from `session_other` OK.
+   - The card says the check "compares the ids as text, so it accepts the label". That is honest that the check is met by the form of the id, not by a real separate session.
+   - Two small gaps. The run compared only the final tree, so "byte for byte" per commit is left to the reviewer, as the card says. And "passes … on later work" holds only while later helpers sign with a label, which the cost line says.
+   - "Reversible: yes" for A is a little generous. The label stays in the history and the precedent stays too. Optional wording: "the change, yes; the label stays on record".
+
+4. Not blocking. The WHY says "Changing the check itself is not offered: it is a governance file, outside this decision, and the operating model's change is already proposed." That is the Chief of Staff's judgement stated as fact. Label it as such, for example "I leave it out because…". LL-65's "correction proposed" and status "open" support the "already proposed" part. The owner could still rule on a guard change, so the card should not say it is outside the decision.
+
+5. Not blocking, smaller points.
+   - The intake record also says the full governance check on A passes every step except `record_checks merges`, which fails locally on any orchestrator merge commit (LL-29). The card does not mention it, which is fine because that failure is not the check at issue.
+   - No run covers B's or C's full check. The card only claims the guard runs.
+   - C does not say who starts the cloud session. If the owner does, that is a cost to the owner.
+   - The recommendation's reasons are now neutral. "Hides" and "repeats a build that passed" are gone, and the reason is the tried result. Whose judgement is whose is clear, since the recommendation is labelled the Chief of Staff's, at medium confidence.
+   - The opening is plain and has no paths or ids. It says what failed and what the owner decides, and it admits the earlier mistake in the first person. The card is short enough.
+
+Citations checked and true: reviews/S-001 round 3 PASS; reviews/57 section 1, finding 1 and owner.md; surface_guard.py; SURFACES.md exempt block (ledger entry, R3); CLAUDE.md; briefs 25, 90 and 99; LL-65; and the token totals.
+
+Six-part contract
+- Changed (by file): none. I have no write tool.
+- Why: round 2 cold read of the redrafted questions/P-001-harness-landing.md. It checks that each changed sentence is true of its record and that the intake runs support what each option is said to do.
+- Verified (command + output): I read only.
+  - The new card and the intake record of runs.
+  - docs/briefs/25-builder.md.
+  - LL-65 (in the fix-rec2 copy).
+  - My round 1 reads of surface_guard.py, SURFACES.md, CLAUDE.md, reviews/57, reviews/S-001, briefs 90 and 99, and the session file; I treated them as unchanged. I did not re-open them.
+  - I did not read docs/reports/**.
+- Undone: I ran nothing. I rely on the Chief of Staff's recorded runs for what the guard does on each option. I did not re-run them, and C was not run by anyone. I did not re-compare the round 1 card line by line, beyond reading its sentences in memory.
+- Needed outside my surface: the Orchestrator records this as round 2 in reviews/P-001-harness-landing/critic.md. The Chief of Staff can then take the card to the owner.
+- Open questions: none.
