@@ -461,3 +461,12 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** a small records commit, made right after the owner answered, felt too simple to check; the rule lives in the session's working notes, not in a hook.
 - **Correction proposed:** as LL-48: a pre-push hook that runs the checks the way CI does, so the rule does not rest on memory.
 - **Status:** open (recurred).
+
+## 2026-11-05 — Build of P-001, session_01QBwHGNGKXFwvVVdzkei5aT
+
+### LL-63 The full check read red on the default branch because this repository's own clone was shallow
+- **What happened:** the full governance check, run on the default branch before Build-2's brief, failed `v3_checks holdouts`: the history walk met the shallow clone's cut-off commits, which look like root commits adding every file, governance/HOLDOUTS.md among them. After `git fetch --unshallow origin` the same check on the same commit passed. Nothing was pushed or handed out on the red result.
+- **Caught by:** the Chief of Staff, reading the code that decides the check (LL-54) before acting on it.
+- **Cause:** the sessions' fresh clones are shallow; the handoffs say to unshallow Service-Desk and Personal-Org-Operating-Model before history counts, but not Model-Lab itself before its own checks.
+- **Correction proposed:** every session unshallows each clone before any check; for the model, check_all.sh refuses to run, with a plain message, in a shallow repository.
+- **Status:** open.
