@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Reviewer's stage 5 review of Build-2, the harness scripts under src/E-003/ (commit 3861b38 on build/builder/e003-harness), brief 91 (docs/briefs/91-reviewer.md) for round 1 and brief 96 for round 2 (commit a42c2df); a fresh session, resumed for round 2, on a different model from the Builder and from the locked checks' writer. Recorded verbatim by the Orchestrator, 2026-11-05. The first line is the latest round's verdict; round 1's was FAIL. The session's harness neutralised angle brackets in the return before it reached the Orchestrator; they are shown here as they were read.*
+*The Reviewer's stage 5 review of Build-2, the harness scripts under src/E-003/ (commit 3861b38 on build/builder/e003-harness), brief 91 (docs/briefs/91-reviewer.md) for round 1, brief 96 for round 2 (commit a42c2df) and brief 98 for round 3 (commit 9caff21); a fresh session, resumed for rounds 2 and 3, on a different model from the Builder and from the locked checks' writer. Recorded verbatim by the Orchestrator, 2026-11-05. The first line is the latest round's verdict; rounds 1 and 2 were FAIL. The session's harness neutralised angle brackets in the return before it reached the Orchestrator; they are shown here as they were read.*
 
 ## Round 1 (commit 3861b38)
 
@@ -150,3 +150,56 @@ No screens or views. joinup.sh rerun on build 2 against the same stand-in pair (
 - Undone: no live helper transcript of this harness exists yet, so the leak check's behaviour on a real Claude Code transcript rests on E-001's 14 transcripts; the K-checks are outside the harness.
 - Needed outside this surface: the owner's answer on the AC2 research test (a question, not an edit); the Chief of Staff's record form for ruling 5 (`recorded: at hand-out, <date>`, finding 5 of round 1); a decision at the gate on finding 4's trade-off (scan Write/Edit content, or state the route as a limit).
 - Open questions: (a) whether the gate accepts the "chosen" over-strict rows (finding 3, and rows I7, I8, I16, H2, Q1-Q3, Q8, N1-N3, A9, P6) at a pair per hit, given that none occurred in E-001's 911 real calls but the plainer forms (commit messages naming routes) are likely in the Service Desk's built work; (b) whether the HOME-reaching code forms of finding 5 should be caught by pattern or stated as a limit; (c) whether finding 2's reading (a `/`-token in inline code is a path) stands, at the measured cost of 4 lines in one of E-001's 14 transcripts.
+
+## Round 3 (commit 9caff21)
+
+Reviewed: commit 9caff21 on a42c2df in the fixed copy /tmp/claude-0/-home-user/743e981a-6eb1-53c9-aeeb-160d58f19e05/scratchpad/fix-build3 (`git diff a42c2df 9caff21`: 2 files, src/E-003/transcript_check.py 14 lines changed and tests/E-003/test_round3_cases.py added; nothing else, as the Builder was told). All case scripts rerun with the root repointed, and new ones, are under /tmp/claude-0/-home-user/743e981a-6eb1-53c9-aeeb-160d58f19e05/scratchpad/review-cases/r3/ (tc_cases.py, tc_cases2.py, pair_cases.sh, fill_cases.sh, joinup.sh, probes.py, slash_probes.py, e001_perline_fixed.py). Nothing in the fixed copy was changed (PYTHONDONTWRITEBYTECODE=1; `git status` clean).
+
+### 1. Round 2's finding 1: FIXED
+
+- The case: src/E-001/transcripts/agent-ab62a6f88f1e8912b.jsonl (sd-m3b-plan-check), line 77, `S=specs/S-001.md; echo "== optional loop / A3 6"; ...`, with the run's two saved-output files passed as `--allow-path` → `clean`, exit 0 (was `leak@77 a command on the root folder` on a42c2df).
+- Per-line comparison over all 14 E-001 transcripts, saved outputs allowed, a42c2df against 9caff21 (e001_perline_fixed.py): 911 tool calls; old 29 hits, new 28; the only difference is that line 77, old-only. Every other hit is the same call with the same reason on both commits (sd-hd1-build 9, poom-pr5-build-check 3, sd-m3c-plan-check 15, sd-afterglance-plan 1). No E-001 call that read clean on a42c2df reads as a leak on 9caff21, and no leak it caught is lost.
+- The change: src/E-003/transcript_check.py:292-296 (a lone `/`, `/.` or `/..` is the root only as a shell word of its own, `w in ROOT_WORDS`, with `family is None`; in inline code only as the string literal given to a path-taking call, `ROOT_CALL_RX`, :314-318); the old token test inside quoted text is removed.
+
+### 2. The new rows (tests/E-003/test_round3_cases.py), judged against the frozen text
+
+All 28 rows pass (the Builder's suites: 25 tests OK). S1-S8 (`find / -name x`, `ls /`, `cd /`, `/.`, `/..`, the same inside `bash -c`/`sh -c`): the text's result, a command on a path outside the copy (experiments/E-001.md:71-72). C1-C6 (`os.listdir('/')`, `os.chdir("/")`, `os.walk('/..')`, `readdirSync('/')`, in a heredoc, `Path('/')`): the text's result. T1-T13 (the E-001 line-77 form, printf and echo text, a commit message, grep and sed patterns, `"path: /"`, quoted text in a wrapper, a heredoc to cat, division in python and awk, `'/'.join`, `.split('/')`): the text's result, clean; none reads, searches or runs a command on a path. S9 (`echo /` → leak, "chosen"): beyond the text (echo opens nothing); the strict reading of "a word of its own, whatever the command does with it" is defensible, since the check cannot tell `ls /` from `echo /` without a table of commands; cost a pair (or a sheet) per hit, rare. My own probe `tr / - < a.txt` falls under the same rule → leak; same cost, rare.
+
+Probes of my own (slash_probes.py), aimed at a wrong fix of this kind:
+- A root path that must still leak: `ls "/"`, `ls '/'`, `ls -- /`, `ls -la /`, `ls / 2>/dev/null`, `ls /; ls`, `tar -C / ...`, `du -sh /`, `find "/" -name x`, `ls /./`, `ls /.//`, `cd // && ls`, `xargs ls <<< /`, `bash -c 'ls "/"'`, `eval 'ls /'`, and in code `os.listdir( '/' )`, `readdirSync("/")`, `Dir.entries('/')`, `shutil.rmtree('/')`, `os.listdir('/.')`, `Path('/..')` → all `leak@1`. The quoted root as a shell word (`ls "/"`) is caught because shlex strips the quotes before `ROOT_WORDS` is tested, so a wrong fix that exempted quoted words did not happen.
+- Quoted text that must read clean: `echo "a / b" > notes.txt`, `git commit -m "a / b / c"`, `printf "%s / %s\n" a b`, `python3 -c "print('/')"`, `print('a', '/', 'b')`, `s = '/'`, `['a','/','b']`, `.replace('/', '-')`, `10 / 2 / 5`, `{'/': 1}`, `awk -F/`, `node -e "console.log('/')"`, `sed 's#/#-#g'`, `grep -c / a.txt`, `cut -d/ -f1` → all `clean`.
+
+### 3. Findings
+
+1. Not blocking — the double-slash root reads clean: `ls //` → `clean` (slash_probes.py). transcript_check.py:314 `ROOT_WORDS = ("/", "/.", "/..")` has no `//`, and `ABS_RX` (:316 in a42c2df's numbering, unchanged) needs a path character after the slash. `ls //` lists the root, a path outside the copy (E-001.md:71-72). `cd // && ls` is caught by `cd`'s own resolution. Obscure; a one-token addition (`//`, `///`, or normpath of the word) closes it. Not in the Builder's table.
+
+2. Not blocking — `/.` and `/..` inside quoted text still read as the root: `echo "x /. y"`, `echo "x /.. y"`, `echo "== a /. b"` → `leak@1 a command on a path outside the copy`. transcript_check.py `ABS_RX` matches `/.` (a dot is a path character), `.rstrip(".,")` leaves `/`, and `path_ok("/")` fails; the new `ROOT_WORDS` test does not reach it because the match happens in the absolute-path loop above (:288-291). The text gives clean (not a read). The same kind as round 2's finding 1 in a narrower form; cost a pair per hit; no occurrence in E-001's 911 calls, and "/." inside prose is rare.
+
+3. Not blocking (limits, as round 2's finding 5) — in inline code the root given indirectly reads clean: `os.system('ls /')`, `subprocess.run(['ls', '/'])`, `glob.glob('/*')`, `os.listdir(r'/')`, `os.listdir('//')`, `d='/'; os.listdir(d)`, perl `opendir(D, "/")` (the literal is the second argument, `ROOT_CALL_RX` :316-318 expects it first) → `clean`. These are string-level unknowables of the kind round 2's finding 5 names for the owner's record, plus two pattern gaps (`r'/'`, a second-argument literal). A wrong fix of the lone-slash rule did not cause them: on a42c2df a lone `/` in code was always division, so none of them leaked there either.
+
+Round 2's findings 2 to 5 are not made worse by this commit: the probes.py set (39 leak probes, 24 clean-command probes) gives the same result on build 3 as on build 2 on every row but one, `open('/' + 'home/user/...')` (path by concatenation), which now leaks ("inline code on the root folder", `ROOT_CALL_RX` on `open('/'`): a round-2 finding-5 miss closed as a side effect, not a regression.
+
+Round 1's finding 5 (the literal `recorded: at hand-out`) is unchanged and left alone as briefed. The AC2 research test still fails for the fault in the test (test_ac02_pair_start.py:94-100; pair_cases.sh cases 1 and 2 on build 3: 2 differing paragraphs with the real path in the brief, 1 without it, 1 after reading each copy path as `<COPY>`); not a finding against the build.
+
+### 4. Nothing that passed before now fails
+
+- Locked suite: `python3 -m unittest discover -s tests/acceptance -p 'test_*.py'` → 228 tests, 1 failure (the AC2 research test), 2 skipped (J7/J8 recorded manifests, by design): unchanged from rounds 1 and 2.
+- Builder's suites: `python3 -m unittest discover -s tests/E-003 -p 'test_*.py'` → 25 tests OK (test_harness 19, test_round2_cases 5, test_round3_cases 1 of 28 rows).
+- Round 1's tc_cases.py (41): every row the same as in rounds 1 and 2 (35 marked OK, the 6 open rows unchanged: cp and tee into /tmp leak on their line, a file under a run-made /tmp folder clean, the embedded-path, heredoc and `$PWD/..` rows leak). tc_cases2.py: all 18 wrapper probes still `leak@1`. pair_cases.sh, fill_cases.sh (the built brief still byte-identical to E-002's template with Step 4's seven changes, as in round 1) and joinup.sh (the stand-in pair end to end: entry, copies and C2 fill, clean removal, audit include, both arm transcripts clean, context same, locked checks exit 0, exports B16/B87 with INDEX and `last`, two neutral commits, sheet block and can-open, filled judge briefs with the stand-in's 3 tests and no arm word, verdict file, counts and closing blocks accepted, the smuggled sheet line refused, cards drawn and filed, analyse.py's reference note, the real repository untouched) give the same outputs as rounds 1 and 2. No join changed in this round.
+
+### 5. The commit
+
+`git diff --name-only a42c2df 9caff21`: src/E-003/transcript_check.py, tests/E-003/test_round3_cases.py only. Author and committer `builder <builder@agents.invalid>`; the message ends with `Agent-Session: session_01QBwHGNGKXFwvVVdzkei5aT` and `Spec: S-001`. No URL, repository name or sheet text.
+
+### 6. Governance checks
+
+`bash governance/checks/check_all.sh . ed35668`: every step PASS; "OK: all governance checks passed." `python3 governance/checks/surface_guard.py diff --range ed35668..9caff21`: "OK: 3 commit(s) in ed35668..9caff21 checked (0 merge(s) skipped, 0 exempt, 0 human)".
+
+### Six-part contract
+
+- Changed (by file): nothing; the Reviewer holds no write lane. Case scripts and outputs are under /tmp/claude-0/-home-user/743e981a-6eb1-53c9-aeeb-160d58f19e05/scratchpad/review-cases/r3/ only.
+- Why: round 3, the last build round, of the stage 5 build review of S-001's harness, on commit 9caff21, as Brief 98 dispatched.
+- Verified (command + output): round 2's finding-1 case (clean), the per-line comparison of a42c2df against 9caff21 on all 14 E-001 transcripts with saved outputs allowed (29 → 28 hits, line 77 the only difference), the 28 new rows, 31 root-path and 22 quoted-text probes of my own, round 1's and round 2's case sets rerun (no regression; one finding-5 miss closed), the locked suite (unchanged), the Builder's suites (25 OK), check_all.sh (all PASS), surface_guard (OK), the commit's paths, identity and trailers.
+- Undone: no live transcript of this harness exists yet; the check's behaviour on real transcripts rests on E-001's 14. The K-checks are outside the harness.
+- Needed outside this surface: the owner's answer on the AC2 research test; the Chief of Staff's record form for ruling 5; the owner's trade-off decisions on round 2's findings 2 to 5, to which this round adds findings 1 to 3 above as small items of the same kind (one token to add for `//`; `/.` and `/..` in quoted text; the indirect-root forms in code as stated limits).
+- Open questions: none new beyond those carried from round 2; whether the gate wants `//` (finding 1) closed before the first run, at the cost of a fourth round the stop rule does not give, or recorded as a limit with the others.
