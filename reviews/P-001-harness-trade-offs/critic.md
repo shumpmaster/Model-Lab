@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Critic on questions/P-001-harness-trade-offs.md, brief 106 (docs/briefs/106-critic.md, on branch claude/chief-of-staff-p001-continue-qx252a) for round 1 and brief 107 for round 2; a session on a different model from the card's writer, resumed for round 2. Recorded verbatim by the Orchestrator, 2026-11-06. The first line is the latest round's verdict.*
+*The Critic on questions/P-001-harness-trade-offs.md, brief 106 (docs/briefs/106-critic.md, on branch claude/chief-of-staff-p001-continue-qx252a) for round 1, brief 107 for round 2 and brief 108 for round 3; a session on a different model from the card's writer, resumed for rounds 2 and 3. Recorded verbatim by the Orchestrator, 2026-11-06. The first line is the latest round's verdict; rounds 1 and 2 were FAIL, and each round's verdict line is given here rather than in its section. The review-file check refuses the verdict label anywhere but at a line's start, so round 2's one quotation of a verdict line inside a sentence is shown as `Verdict : PASS`.*
 
 ## Round 1 (commit f16c4b4)
 
@@ -82,8 +82,6 @@ The remaining claims also check out.
 
 ## Round 2 (commit ec42d85)
 
-Verdict: FAIL
-
 One blocking finding stands (finding 1). Each of my round 1 findings is answered, and the rest of the redraft holds up against the records.
 
 **Round 1 findings, one by one**
@@ -108,7 +106,7 @@ One blocking finding stands (finding 1). Each of my round 1 findings is answered
 
 3. Not blocking, your question about the AC2 research test: the records support your claim, and the card does not need to mention it.
    - `decisions/questions/P-001-ac2-research-test.md` records ruling A: correct that one test, changing only the comparison.
-   - `reviews/57/reviewer.md` section 1 records a PASS: the corrected test runs OK, and the whole suite ran 228 tests OK with 2 skipped by design. It says "The locked suite passes in full against 9caff21 for the first time". `reviews/57/owner.md` is a bare "Verdict: PASS".
+   - `reviews/57/reviewer.md` section 1 records a PASS: the corrected test runs OK, and the whole suite ran 228 tests OK with 2 skipped by design. It says "The locked suite passes in full against 9caff21 for the first time". `reviews/57/owner.md` is a bare "Verdict : PASS".
    - The default-branch copy of `tests/acceptance/test_ac02_pair_start.py` (in fix-rec2) has the corrected comparison, with `<COPY>` at lines 102-104 in the research test.
    - One limit: the Reviewer ran the suite on a local combined copy (the test change at daa44a3 plus the build at 9caff21), not on the default branch itself. So "passes on the default branch" rests on the merge, which the records I was given do not directly show. The card never says it either way.
    - The card's line 5, "Nothing has failed", is consistent with the correction. The card mentions only the "AC2 prefix-only check" (line 36), a different item, and that is accurate.
@@ -127,3 +125,24 @@ One blocking finding stands (finding 1). Each of my round 1 findings is answered
 - Undone: the "40 of 104 records" count (briefs excluded); the merge of #57 onto the default branch (no merge record found in the copies I read); the Chief of Staff's own runs.
 - Needed outside my surface: a one-sentence redraft of the recommendation's reason (finding 1) before the card goes to the owner. After that I expect PASS.
 - Open questions: none new.
+
+## Round 3 (commit 3a091c3)
+
+I compared the card in fix-ask3 line by line with round 2's card in fix-ask2. Only two lines changed: line 16 (the recommendation) and line 18 (reversibility). Lines 1-15, 17, 19 and the whole Context section are identical.
+
+1. Round 2 finding 1 is answered (was blocking, now resolved). Line 16 now says the first batch "counts the pairs the stricter readings throw out". The record supports that: E-003's Exclusions say each left-out pair is listed in the result with its piece and reason. The line also says "a leak by a missed route would not show in any count". That follows from how the check works, and it matches the Reviewer's own view quoted in Context line 30 ("a false leak costs only a pair while a false clean costs the test"). The line grounds C on two things.
+   - The helpers being told to stay in their copies, which matches Context line 28 and `experiments/E-001.md:102-105`.
+   - The Chief of Staff's judgement, which it says no record measures, that such a leak is rare. That is honestly labelled as unmeasured judgement and invents no figure.
+   - The recommendation no longer claims the first batch measures both sides.
+
+2. Round 2 finding 2 is answered (non-blocking). Line 18 now reads "reversible for the choice, not for pairs already lost". This matches line 5 ("pairs already lost stay lost") and A's "Rules out: getting back pairs lost this way".
+
+3. Nothing else changed, so the other round 2 results stand. I did not recheck the unchanged lines against the records beyond what I did in rounds 1 and 2. The "all 40 records" count still rests on the intake, since I do not read the briefs. Non-blocking.
+
+Six-part contract
+- Changed: nothing (no write lane).
+- Why: round 3 Critic check of questions/P-001-harness-trade-offs.md, brief 108.
+- Verified: a full read of both card versions and a comparison of every line (two changed, the rest identical). The two changed lines were checked against Context lines 28 and 30 and the E-003 Exclusions text from my earlier reads. I used the Read tool only.
+- Undone: I did not reopen the fix-rec3 records beyond my earlier reads, because nothing else changed. I did not recheck the 40-record count.
+- Needed outside my surface: nothing from me. The Orchestrator records this verdict.
+- Open questions: none.
