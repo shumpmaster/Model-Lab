@@ -483,11 +483,18 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Caught by:** the Reviewer, running the full check on a copy holding both.
 - **Cause:** CLAUDE.md's trailer is `<session id>`, and a helper started with the Agent tool has no session id of its own that the brief records; the guard's rule assumes one session per role.
 - **Correction proposed:** landing separately does not help (corrected the same day, after the Chief of Staff read the guard's code: the first version of this entry proposed it); how the harness lands goes to the owner (questions/P-001-harness-landing.md); for the model, a helper's commits carry its own id (for example `<session id>/<role>-<brief>`), and the guard and the session runner agree on that form.
-- **Status:** open.
+- **Status:** fixed here: the owner ruled A (decisions/questions/P-001-harness-landing.md); the Builder re-signed its commits as `session_01QBwHGNGKXFwvVVdzkei5aT/builder-90` and the harness landed in pull request #60; the model change is open.
 
 ### LL-66 A push went in the same command as its checks again (LL-06, LL-29, LL-42, LL-48, LL-62 recurred)
 - **What happened:** after recording brief 102, the Chief of Staff ran the full check on the exact commit and the push of claude/chief-of-staff-p001-build-5m9j1d in one shell command, so the push did not wait for the result to be read. The result was the known local failure only (LL-29), so nothing wrong was pushed.
 - **Caught by:** the Chief of Staff, reading its own command after it ran; reported to the owner in the same turn.
 - **Cause:** the session had run the same check-then-push pair many times, and the two steps were joined to save a call; the rule rests on memory.
 - **Correction proposed:** as LL-48: a pre-push hook that runs the checks the way CI does.
+- **Status:** open (recurred).
+
+### LL-67 Helper token figures were added up as if each round's were its own, though they are running totals (LL-34 recurred)
+- **What happened:** the harness reports a resumed helper's tokens as its running total, not the round's: the Builder's re-signing round made 5 tool calls and reported 519,881. The tenth handoff and the harness-landing question summed the Builder's three rounds (1,340,245) and the Reviewer's (964,635) as costs, so the "1.3 and 1.0 million" in option C overstated them; the session lines record each figure as reported.
+- **Caught by:** the Chief of Staff, comparing the re-signing round's figure with its work.
+- **Cause:** LL-34's rule (count resumed helpers' increases only) was in the handoff but not applied when the figures were summed.
+- **Correction proposed:** as LL-34: a session line records the increase since the helper's last line; for the model, the session line takes a field for the running total and one for the increase.
 - **Status:** open (recurred).
