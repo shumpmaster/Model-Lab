@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Critic on docs/briefs/113-work-session.md, brief 114 (docs/briefs/114-critic.md, on branch claude/p-001-model-lab-continue-ohykg9) for round 1 and brief 115 for round 2; a session on a different model from the brief's writer, resumed for round 2. Recorded verbatim by the Orchestrator, 2026-11-06. The first line is the latest round's verdict, and each round's verdict line is given here rather than in its section (LL-68).*
+*The Critic on docs/briefs/113-work-session.md, brief 114 (docs/briefs/114-critic.md, on branch claude/p-001-model-lab-continue-ohykg9) for round 1, brief 115 for round 2 and brief 116 for round 3; a session on a different model from the brief's writer, resumed for rounds 2 and 3. Recorded verbatim by the Orchestrator, 2026-11-06. The first line is the latest round's verdict; rounds 1 and 2 were FAIL, and each round's verdict line is given here rather than in its section (LL-68).*
 
 ## Round 1 (commit 78cdfec)
 
@@ -143,3 +143,32 @@ Round 2 on docs/briefs/113-work-session.md (fix-work2). Most round 1 findings ar
 - **undone:** no script run by me; I did not read export.py `cmd_make` past line 136; I did not check whether `git clone` of a bundle keeps tag `start` beyond the Orchestrator's report; I did not confirm the builder review filename in Service-Desk.
 - **needed outside my surface:** Orchestrator to fix findings 1 to 3 in the brief and decide on 4 to 9.
 - **open questions:** (a) For a no-spec task, which path should the held export use, and who rules? (b) Should the opening time use the first or last sheet.md/HOLDOUTS commit?
+
+## Round 3 (commit 3260c00)
+
+Round 3 on docs/briefs/113-work-session.md (fix-work3 against fix-work2). All three round 2 blocking findings are answered. The two sentences I could not source are marked below. I ran no scripts; I judged the Orchestrator's runs against the code.
+
+### Round 2 findings: status
+1. **Audit read a stale branch (blocking):** answered. Step 9 now passes `--default-branch origin/main`, after a `git fetch` in that clone. `cmd_audit` hands the name to `git rev-list ... --before=<t> <branch>` and `git log`, so `origin/main` resolves; the Orchestrator's run agrees. The scan also now reads `origin/main`.
+2. **`entry` re-run used the wrong time (blocking):** answered. Step 9 says to use `--now` as the found-at time from the pair's `scan.tsv` line, so the 7-day test (pair.py line 187) is applied at scan time. `--round-1-verdict-at` is the committer date of the verdict record's first commit on `origin/main`, which pair.py lines 183-186 use as written.
+3. **A no-spec task could not be held (blocking):** answered. The held export takes the first path of C2's list, recorded as provisional. At release the Orchestrator rules the task statement's path and the export is re-made with it. The bundle is unchanged and only the fill file's path differs, which fits export.py (`--task-statement-path` goes only into `<label>.fill.json`). A pair left out by a leak or by `rerun-decision` now gets no export at all.
+4. **Opening time looser than round 1 (non-blocking):** answered. Step 6 now finds the first commit of `git log --reverse ... origin/main -- reviews/E-003/built/sheet.md governance/HOLDOUTS.md` at which `can-open` is eligible, testing each commit's two files in turn. This is the same definition as kind.py's.
+5. **Date-only dispatch against opening time:** answered. A date-only record counts as dispatched at its day's start, so a record of the opening day is not eligible. It is marked as the stricter Orchestrator's reading.
+6. **The never-list lost two prohibitions:** answered ("never merge, push to or open a pull request on any branch but your Model-Lab push branch").
+7. **`initiation: human_request` had no source:** partly answered. It now carries a reason ("since the owner started this session with this brief to set it up"). See non-blocking 1.
+8. **Apostrophe in the fill:** answered. The `change.filled` command reads the fill from the saved plan file as JSON, and the `$(...)` form passes the fill to `verify-removal` whole. The Orchestrator ran both on an apostrophe-bearing fill. `$(...)` does not re-expand its output, so quotes, `$` and backticks in the fill stay literal.
+9. **Service-Desk review file:** answered. Step 9 names `reviews/<pull request>/reviewer.md` for both repositories, which the coordinator confirmed.
+
+### Non-blocking
+1. `initiation: human_request` is justified by "its description asks for", which I cannot check against any record; the intake (:39) does not mention the parameter. It is acceptable if the tool's own description requires it, and the lead can see that description.
+2. The nested double quotes in the `verify-removal` command work in bash only. The brief assumes bash, so this is fine, but the lead should run it as written and not in another shell.
+3. Step 6's opening time calls `can-open` at each commit "on that commit's two files". At an early commit where one file does not exist, use a path that does not exist, as step 3 does.
+4. Labels are drawn "as soon as the arms are checked", even for a pair later left out. That wastes no run, but the drawn labels of a left-out pair should be recorded or the pair number kept, so the draw order stays stable.
+
+### Six-part contract
+- **changed:** none (read-only critique).
+- **why:** check round 3 of brief 113 against my round 2 findings, the spec, the cited records and the scripts' code.
+- **verified:** read the round 3 brief and my earlier records; compared them with round 2; checked audit/entry/export/kind logic in the code I read in rounds 1 and 2; took the Orchestrator's reported runs (audit with `origin/main`, the apostrophe fill) as consistent with the code.
+- **undone:** I ran no script. I did not re-read the code paths for commands the brief did not change. I did not check the tool descriptions for `initiation`.
+- **needed outside my surface:** none required to start; non-blocking items 1 to 4 are for the Orchestrator's judgement.
+- **open questions:** none.
