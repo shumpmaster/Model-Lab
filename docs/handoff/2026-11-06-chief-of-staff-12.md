@@ -1,0 +1,19 @@
+# Handoff — the prompt engine (P-001), 6 November 2026, twelfth stopping point
+
+*Written by the Chief of Staff (session_01QBwHGKmmzB2PF2wo11LAAC). It follows docs/handoff/2026-11-06-chief-of-staff-11.md.*
+
+## Where it stands
+- **The owner ruled A and C on the harness trade-offs** (asked in this session from questions/P-001-harness-trade-offs.md, PR #63; Critic PASS at round 3, reviews/P-001-harness-trade-offs/critic.md): the leak check's stricter readings are kept and the routes it misses are recorded as known limits; the harness is unchanged. The answer record is on branch cos/p001-answer-harness-trade-offs (decisions/questions/P-001-harness-trade-offs.md, the question file deleted), pushed with **no pull request yet**: it may be opened only once #63 is on the default branch (AGENTS.md §5). If #63 merged, merge main into that branch, run the check, open its pull request.
+- **PR #62** (orch/p001-signing-form) waits for the owner's merge: CLAUDE.md gives helpers `Agent-Session: <session id>/<role>-<brief>`, and the Orchestrator and the Chief of Staff the bare id (the Chief of Staff's names its session-lines file). The agent files under .claude/agents/ still show the bare form; that folder is R3 and was left.
+- **The built-work sheet session's briefs are written**, on this records branch: brief 109 (the blind Check author's record: set id S-001-built-1, model claude-sonnet-5-5, the pack manifest at 60bda83, the helper brief), and brief 110 (the sheet lead's brief, with the owner's first message). J8's test passed on brief 109 with `S001_BLIND_MANIFEST=docs/briefs/109-check-author-blind.md`, checked and not skipped (the recorded test ran "ok"; a wrong path errors); the whole locked suite passes, 228 tests with J7's recorded test skipped (no analysis record yet). The Critic's check of 109 and 110 is brief 111; its verdict is recorded in reviews/P-001-sheet-briefs/critic.md if it returned before this handoff was committed, otherwise it was still running.
+- **Lesson LL-68** added (a review record broke the review-file form; caught before the push).
+
+## Next, in order
+1. Check the live state of #62, #63 and the records pull request (LL-11, LL-38), and main's questions/ (LL-30). Open the answer pull request once #63 is merged.
+2. Finish the sheet briefs' Critic rounds (brief 111 onwards); after any fix, re-run J8 with S001_BLIND_MANIFEST on the exact commit and confirm it was checked, not skipped.
+3. **The work session's brief** (the Builder's role in the first built-work work session, which the owner starts with Model-Lab and Service-Desk): the daily scan and wake (`create_trigger`, its fixed message), the label draw's seed written before the kind opens, the records under src/E-003/records/built/, K1 at its start before anything else, K5, K6 (no `add_repo` of the sheets repository, no `list_events`), K7; helper commits signed `<session id>/builder-<brief>` (PR #62). Have the Critic check it.
+4. **The K1 sequence** (S-001, K1 "When"): the owner starts the sheet session with brief 110 (the Chief of Staff gives the commit and SHA-256 of the record as pushed); the sheet lead runs K2 and K3 and waits; the owner gives its session id; this session and the first work session each run the probe (listing, parts i to iii) and record it (this session in reviews/E-003/built/sessions.md); the owner gives the sheet lead both records' commits.
+5. The three non-blocking points on the locked checks and the AC2 prefix-only check stay for a later superseding change.
+
+## Token checkpoint
+This session's own use at the last reading: about 317,000 of 1,000,000 tokens of context, estimated cost about $7.25, before the sheet briefs. Helpers: the Critic on the trade-offs card, 81,351 then running totals 96,148 and 104,196 (increases 14,797 and 8,048, LL-67), so about 104,000 in all. No test runs have been used: the fair test's 732 runs start with the first kind.
