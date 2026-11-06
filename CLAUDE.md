@@ -12,8 +12,13 @@ AGENTS.md wins and the conflict is a bug to fix.
   Reviewer-class agents have no branch.
 - Identity: a builder commits with
   `git -c user.name=<id> -c user.email=<id>@agents.invalid commit`, and the message ends with a
-  trailer paragraph holding `Agent-Session: <session id>` and `Spec: <spec id>`. The orchestrator
-  commits the same way as `orchestrator`. Never add model names or AI co-author lines to commits.
+  trailer paragraph holding `Agent-Session: <session id>/<role>-<brief>` and `Spec: <spec id>`:
+  the id of the session that started the helper, then the helper's role and its brief's number
+  (for example `session_01ABC/builder-90`), so two helpers of one session never share a signature
+  (decisions/questions/P-001-harness-landing.md). The orchestrator commits the same way as
+  `orchestrator`, and the Chief of Staff as `chief-of-staff`, each with the bare
+  `Agent-Session: <session id>` (the Chief of Staff's names its session-lines file). Never add
+  model names or AI co-author lines to commits.
 - Before accepting a builder's branch:
   `python3 governance/checks/surface_guard.py diff --range <base>..build/<id>/<task> --branch build/<id>/<task>`.
   Then run the full suite, dispatch the required reviewers, record their verdicts verbatim in
