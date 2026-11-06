@@ -1,6 +1,6 @@
 Verdict: FAIL
 
-*The Critic on questions/P-001-harness-trade-offs.md, brief 106 (docs/briefs/106-critic.md, on branch claude/chief-of-staff-p001-continue-qx252a) for round 1; a fresh session on a different model from the card's writer. Recorded verbatim by the Orchestrator, 2026-11-06. The first line is the latest round's verdict.*
+*The Critic on questions/P-001-harness-trade-offs.md, brief 106 (docs/briefs/106-critic.md, on branch claude/chief-of-staff-p001-continue-qx252a) for round 1 and brief 107 for round 2; a session on a different model from the card's writer, resumed for round 2. Recorded verbatim by the Orchestrator, 2026-11-06. The first line is the latest round's verdict.*
 
 ## Round 1 (commit f16c4b4)
 
@@ -79,3 +79,51 @@ The remaining claims also check out.
 - Undone: the "40 of 104 brief records" count; OPERATING_MODEL §4/§5 is not in my copies; `docs/briefs/**` was not read, as instructed; the options' effect on the hidden `ROOT_WORDS`/`ABS_RX` code was not re-run.
 - Needed outside my surface: a rewrite by the card's author (findings 1-3 first). The Orchestrator records this verdict.
 - Open questions: (a) Does a Reviewer ruling on a borderline call (`experiments/E-001.md:77`) still apply under E-003's mechanical "Either leak leaves the pair out"? (b) Who decides whether a post-pass, owner-ruled harness change counts as a fourth round? (c) Should the owner be offered a gaps-only option?
+
+## Round 2 (commit ec42d85)
+
+Verdict: FAIL
+
+One blocking finding stands (finding 1). Each of my round 1 findings is answered, and the rest of the redraft holds up against the records.
+
+**Round 1 findings, one by one**
+- Finding 1 (B's token cost overstated) is answered. Card line 11 now gives the first build and review (355,075 and 245,508), then the later increments of about 120,000 and 36,000 (builder) and 102,000 and 24,000 (reviewer). From the session file, the builder's totals are 355,075, 474,630 and 510,540, so the increments are 119,555 and 35,910. The reviewer's are 245,508, 347,728 and 371,399, so 102,220 and 23,671. All of these match, and Context line 33 states the running totals correctly (LL-67). The caveat "in sessions that had already read the work" is honest, because B uses a fresh builder.
+- Finding 2 (opening paragraph) is answered. Line 5 now says what is asked, that nothing failed or was changed, and that pairs already lost stay lost. It says there is no default, and it defines the leak check. Some words are still unexplained ("locked checks", "hidden check", "batch"), but I count that as non-blocking.
+- Finding 3 (omitted rows) is answered by Context line 25, which lists I7, I8, I16, H2, Q8, N1-N3, A9 and P6. Round 2 section 4 and open question (a) of `reviews/S-001/_reviewer-build.md` support that list, including "P6 at the piece with no run spent". Line 11 also says which of them B leaves unchanged.
+- Finding 4 (the claim that no rule covers a fourth round) is answered. The wording is now "no record found", and it appears at lines 11 and 16 and in Context line 32.
+- Finding 5 (A's costs) is answered. Line 10 now says the pair is "never rerun". That is supported by Exclusions' opening line, "none is re-tried". A's line also says the check is voided and the batch waits for the owner (`specs/S-001.md:216`), and that a later change means batches judged by different rules. Context line 27 states the borderline fact accurately: E-001:77 gives a borderline path to the Reviewer, and E-003 Exclusions 2 names no such step. The "false clean costs the test" quote in Context line 30 is verbatim from round 1 finding 1.
+- Finding 6 (bundled options) is answered by the split into Part 1 (A, B) and Part 2 (C, D).
+- Finding 7 is answered, because "likely" now appears in A's cost.
+- Finding 8 (the default) is answered by the paragraph's "There is no default: this waits for you".
+- Finding 9 (length) is only partly answered. There are still 16 Context bullets, and the options are dense. Non-blocking.
+
+**New findings**
+1. BLOCKING: the recommendation's reason overclaims (line 16, "the costs on both sides are unmeasured, the first batch measures them").
+   - The first batch can count the pairs the stricter readings throw out, because the left-out pairs are listed with their reasons (E-003 line 94, and intake section 5).
+   - It cannot measure what the missed routes in Part 2 cost. A route that reads clean is not seen, so C's cost is a missed leak, which no run counts.
+   - The Reviewer's own stance is that a missed leak costs the test (Context line 30). The reason therefore tilts toward A and C on a claim the records do not support.
+   - Fix: limit the sentence to the stricter readings, and say plainly that a missed leak would not show up in the first batch's counts.
+
+2. Not blocking: line 18 says REVERSIBILITY "reversible", and line 5 says "Either choice can be undone later, but pairs already lost stay lost". A's "Rules out: getting back pairs lost this way" agrees with line 5. The lines are consistent, but a reader of line 18 alone may be misled. Optional: write "reversible for the choice, not for lost pairs".
+
+3. Not blocking, your question about the AC2 research test: the records support your claim, and the card does not need to mention it.
+   - `decisions/questions/P-001-ac2-research-test.md` records ruling A: correct that one test, changing only the comparison.
+   - `reviews/57/reviewer.md` section 1 records a PASS: the corrected test runs OK, and the whole suite ran 228 tests OK with 2 skipped by design. It says "The locked suite passes in full against 9caff21 for the first time". `reviews/57/owner.md` is a bare "Verdict: PASS".
+   - The default-branch copy of `tests/acceptance/test_ac02_pair_start.py` (in fix-rec2) has the corrected comparison, with `<COPY>` at lines 102-104 in the research test.
+   - One limit: the Reviewer ran the suite on a local combined copy (the test change at daa44a3 plus the build at 9caff21), not on the default branch itself. So "passes on the default branch" rests on the merge, which the records I was given do not directly show. The card never says it either way.
+   - The card's line 5, "Nothing has failed", is consistent with the correction. The card mentions only the "AC2 prefix-only check" (line 36), a different item, and that is accurate.
+   - My round 1 finding 2 item about the failing test is therefore withdrawn.
+
+**Claims checked and supported**
+- The new claims at lines 10, 11, 13, 14 and 15 match the records.
+- Line 14's "closes the route the Reviewer found more common for writing scripts" and "two test files" match round 2 finding 4.
+- Line 13 matches round 1 finding 1.
+- Line 11's list of what B leaves alone matches the intake sections 1-3 and Q1-Q3 and S9.
+
+**Six-part contract**
+- Changed: nothing (no write lane).
+- Why: round 2 Critic check of questions/P-001-harness-trade-offs.md, brief 107.
+- Verified: the redraft against round 1's findings and against the Reviewer's file, E-001, E-003, S-001, the session file's helper lines, LL-67, and the 57 records. Read via Read and Grep only.
+- Undone: the "40 of 104 records" count (briefs excluded); the merge of #57 onto the default branch (no merge record found in the copies I read); the Chief of Staff's own runs.
+- Needed outside my surface: a one-sentence redraft of the recommendation's reason (finding 1) before the card goes to the owner. After that I expect PASS.
+- Open questions: none new.
