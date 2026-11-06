@@ -498,3 +498,12 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** LL-34's rule (count resumed helpers' increases only) was in the handoff but not applied when the figures were summed.
 - **Correction proposed:** as LL-34: a session line records the increase since the helper's last line; for the model, the session line takes a field for the running total and one for the increase.
 - **Status:** open (recurred).
+
+## 2026-11-06 — Build of P-001, session_01QBwHGKmmzB2PF2wo11LAAC
+
+### LL-68 A review record broke the review-file form when a later round was added
+- **What happened:** adding the Critic's round 2 to reviews/P-001-harness-trade-offs/critic.md, the Orchestrator kept that round's own verdict line in its section and copied a sentence quoting another file's verdict line mid-line; `review_check lint` refuses both. Caught by the full check run on the exact commit before the push; the record now follows the earlier multi-round records (one verdict line, each round's verdict in the header) and notes the one quotation shown with a space.
+- **Caught by:** the full governance check, in the separate check worktree before the push (the practice from LL-48 and LL-56).
+- **Cause:** the round was appended as returned, without reading how earlier multi-round records meet the form; a verbatim return can hold text the form refuses.
+- **Correction proposed:** before recording a later round, follow the form an existing multi-round record uses, and run `review_check lint` on it; for the model, the review-record form says how a later round and a quoted verdict line are recorded.
+- **Status:** fixed here; model change open.
