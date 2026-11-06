@@ -1,6 +1,6 @@
 Verdict: FAIL
 
-*The Critic on docs/briefs/113-work-session.md, brief 114 (docs/briefs/114-critic.md, on branch claude/p-001-model-lab-continue-ohykg9) for round 1; a session on a different model from the brief's writer. Recorded verbatim by the Orchestrator, 2026-11-06. The first line is the latest round's verdict, and each round's verdict line is given here rather than in its section (LL-68).*
+*The Critic on docs/briefs/113-work-session.md, brief 114 (docs/briefs/114-critic.md, on branch claude/p-001-model-lab-continue-ohykg9) for round 1 and brief 115 for round 2; a session on a different model from the brief's writer, resumed for round 2. Recorded verbatim by the Orchestrator, 2026-11-06. The first line is the latest round's verdict, and each round's verdict line is given here rather than in its section (LL-68).*
 
 ## Round 1 (commit 78cdfec)
 
@@ -86,3 +86,60 @@ Step order matches the spec: K1 listing and probe, seed, wake, every-turn K5/K6/
 - **undone:** no script run (Orchestrator's runs trusted). I did not read judge.py, block.py or the rest of export.py and transcript_check.py. I did not check Service-Desk control-file contents beyond their location, and did not confirm the default-branch names.
 - **needed outside my surface:** Orchestrator to fix blocking items 1 to 3 in the brief and answer 10's file and branch questions.
 - **open questions:** (a) Should a held pair's arm output be bundled and pushed before the audit, or held unpushed and treated as a set-up fault if lost? (b) Is the Orchestrator's hand-out the intended source of `real_path`?
+
+## Round 2 (commit 7cc5c73)
+
+Round 2 on docs/briefs/113-work-session.md (fix-work2). Most round 1 findings are answered. Three new or changed sentences are wrong or unrunnable as written, and I mark them blocking. I ran no scripts. I judged the Orchestrator's runs against the code: the export clone/re-make against export.py (the bundle holds tag `start` and branch `<label>`, so `--start start --final <label>` resolves in a clone), `entry --round-1-verdict-at` against pair.py lines 183-186, `change.filled` against change.py, and exit 5 against the Orchestrator's report.
+
+### Round 1 findings: status
+1. **Pieces dispatched before the kind opened:** answered. Step 7 gives `not-eligible: dispatched before the kind opened`, and `opened.md` gives the opening time. See findings 4 and 5 for flaws in how the opening time is fixed and compared.
+2. **`real_path`:** answered in step 8, with "listed, not rerun" for a refusal it does not cure.
+3. **Held pair's output on a reclaimable machine:** answered by held exports pushed in `records/built/held/<n>`, with "a held export lost is a set-up fault, never an arm's FAIL". It has a hole (finding 3).
+4. **Context-compare inputs:** answered. The change-paragraph recipe is correct for `context-compare` (it strips `\r\n`), and the two copy paths are given.
+5. **Rerun history events and how a rerun is run and counted:** answered. A "no alias for the model" case is now listed, not rerun.
+6. **Unmarked readings:** now marked (the S-001/E-003 name rule, the model rule, the hold).
+7. **Unsupported wake time and "owner's brief asks":** removed. `initiation: human_request` is kept without a source (finding 7).
+8. **Locked-check command:** answered. `NO TESTS RAN` (exit 5) is now `locked: unrun`, which matches the Orchestrator's run; in a `&&` chain exit 5 stops the chain, which reads as unrun.
+9. **Listing line and real round-1 verdict:** answered. The `listing:` line avoids the `k1-` prefix, so brief 110 step 6 will not trip on it. The `pairs/<n>.json` list now holds the real round-1 submission and verdict and their record.
+10. **Gaps in where things come from:** answered, except the `--default-branch` argument (finding 1) and the `--now` reuse (finding 2).
+11. **Naming secret-marking:** answered by the added exception.
+12. **K1 on request:** answered ("whenever the owner asks").
+13. n/a.
+
+### Blocking
+1. **The audit reads a stale branch.**
+   - Step 9 passes `--default-branch main` to `pair.py audit`, but the whole brief reads `origin/main` and says never to merge into the branch.
+   - `audit` resolves `main` in `/home/user/<repo>`. That is the local branch. In Service-Desk it is the clone-time checkout, and `git fetch` does not advance it. In Model-Lab it may be absent.
+   - Round-1 verdicts arrive after the clone, so the in-flight check (Exclusions 1) would read old history and wrongly include pairs.
+   - Fix: pass `--default-branch origin/main`. `rev-list` accepts it.
+   - The scan's "each repository's main" should also read `origin/main`.
+2. **"Run `entry` again" with the wrong time silently drops valid pairs.**
+   - Step 9 runs `entry` again with `--round-1-verdict-at`, but does not say which `--now`.
+   - `cmd_entry` still applies `now - dispatched_at > 7 days` (pair.py line 187). A round-1 verdict usually lands days after dispatch, so using the current time gives `first found more than 7 days after its dispatch (late)` for a pair that started in time.
+   - Fix: say to reuse the `--now` of the scan that found the record (found-at in `scan.tsv`).
+3. **A pair whose task names no spec cannot be held.**
+   - Step 9 makes the held export first, with `--task-statement-path <the spec C2's list names first>`. export.py requires that flag for built work.
+   - With no spec there is no value, so `make` cannot run. The brief says "The copies may then go", and Release says "the pair stays held".
+   - The eligible piece's deliverable would be gone before the Orchestrator rules.
+   - Fix: state what path the held export takes for a no-spec task (for example the first path of C2's list, recorded as provisional), or keep the copies' committed trees pushed another way. Also say that a pair left out (leak, or `rerun-decision` says leave-out) gets no export at all.
+
+### Non-blocking
+4. **The opening time is looser than round 1's.**
+   - Step 6 now uses the first commit that holds `reviews/E-003/built/sheet.md`. A void or stopped block recorded earlier, then replaced by a full block, would give too early an opening and admit pieces dispatched while no check existed.
+   - It should also be the commit where HOLDOUTS.md holds the line, since `can-open` needs both.
+   - Fix: use the first commit at which `can-open` returns eligible, found by testing along `git log --reverse`, as round 1's wording did. Or use the last commit that changed sheet.md or HOLDOUTS.md before eligibility.
+5. **Dispatch-versus-opening comparison is undefined.**
+   - Model-Lab records carry a date only. The opening time has a time.
+   - Say to compare dates and treat the opening day itself as not eligible (the stricter reading), and mark it.
+6. **The never-list lost two prohibitions.** "Never merge, push to or open a pull request in any repository other than your push branch" is now only "never push to any branch but...". Restore the no-merge and no-pull-request words.
+7. **`initiation: human_request` has no source in the records I found.** The intake (:39) does not mention it. It is acceptable if the tool's own description requires it. Say so.
+8. **Fill in a shell argument.** The one-line `change.filled` command passes `'<the plan's fill>'` in single quotes. A fill containing an apostrophe breaks it. Read the fill from `plan`'s output file instead.
+9. **Service-Desk round-1 record.** "The round-1 verdict file under reviews/<item>/" is vague; I saw `reviews/Q-016/critic.md`. Name the builder's review file (probably `reviewer.md`) once known.
+
+### Six-part contract
+- **changed:** none (read-only critique).
+- **why:** check round 2 of brief 113 against round 1's findings, the spec, and the script code and the Orchestrator's reported runs.
+- **verified:** read both briefs and my round 1 record, export.py (lines 1-47, 91-136, 206), pair.py `entry`/`plan`/`audit`, change.py, and the Service-Desk review layout; judged the reported unittest exit 5, `entry --round-1-verdict-at`, and the export/clone/re-make results against the code.
+- **undone:** no script run by me; I did not read export.py `cmd_make` past line 136; I did not check whether `git clone` of a bundle keeps tag `start` beyond the Orchestrator's report; I did not confirm the builder review filename in Service-Desk.
+- **needed outside my surface:** Orchestrator to fix findings 1 to 3 in the brief and decide on 4 to 9.
+- **open questions:** (a) For a no-spec task, which path should the held export use, and who rules? (b) Should the opening time use the first or last sheet.md/HOLDOUTS commit?
