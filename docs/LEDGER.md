@@ -93,3 +93,17 @@ options_considered: proceed at sizes A to D; hold; recycle into Design; kill.
 decided_by: owner
 proposed_by: chief-of-staff
 reversibility: irreversible
+
+## L-0007 — The built-work held-back check S-001-built-1 is written, and its fingerprint recorded
+date: 2026-11-07
+type: reading
+supersedes: []
+scope: P-001
+expires: never
+asked: The built-work sheet session (brief 119) returned its full block (reviews/E-003/built/sheet.md): the blind Check author's check, 8 tests, placed at holdouts/S-001-built-1.md in the sheets repository at commit c4a42d5d566ede55f0585dcd1d8ca8b64b993cb5, with the pack matched, the transcript clean, the canary unseen and K2 to K4 passed (E-003 Step 1, step 6; S-001 J4).
+decision: The set S-001-built-1 and its fingerprint ee47900c8fdd0e9c599ad7838d051dfaa5b517a02c23dc6d3211da2b34152fc3 are recorded in governance/HOLDOUTS.md, and the block byte for byte as reviews/E-003/built/sheet.md. K1's transcript read stands as the limit the owner ruled (decisions/questions/P-001-k1-transcript-reach.md).
+licenses_next: The built-work comparison opens once this is on the default branch (src/E-003/kind.py can-open); the work session starts pairs for pieces dispatched after that.
+holdouts: changed
+decided_by: orchestrator (a record of the sheet route; no ruling)
+proposed_by: claude-opus-5-5 (the Orchestrator in the Chief of Staff's session)
+reversibility: irreversible
