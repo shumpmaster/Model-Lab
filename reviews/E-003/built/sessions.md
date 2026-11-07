@@ -7,3 +7,4 @@
 2026-11-07T19:45Z k1-ii: refused fatal: could not read Username for 'https://github.com': terminal prompts disabled
 2026-11-07T19:45Z k1-iii: returned 1 events
 2026-11-07T19:45Z k1: fail
+2026-11-07T20:20Z limit: the transcript read (part iii) was not refused; the owner ruled to go on with it stated as a limit (decisions/questions/P-001-k1-transcript-reach.md)
