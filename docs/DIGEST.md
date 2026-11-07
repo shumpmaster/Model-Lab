@@ -1,5 +1,5 @@
 # DIGEST — generated from docs/LEDGER.md; do not edit by hand
-As of 2026-11-04: 2 active rulings and 0 kills, from 6 ledger entries.
+As of 2026-11-07: 2 active rulings and 0 kills, from 7 ledger entries.
 
 ## Active rulings
 

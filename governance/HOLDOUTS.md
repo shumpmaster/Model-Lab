@@ -6,4 +6,5 @@ field `holdouts: changed`.*
 
 ```holdouts
 # <set id>  <fingerprint>
+S-001-built-1  ee47900c8fdd0e9c599ad7838d051dfaa5b517a02c23dc6d3211da2b34152fc3
 ```

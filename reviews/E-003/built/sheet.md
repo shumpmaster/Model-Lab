@@ -1,0 +1,15 @@
+set: S-001-built-1
+repository-commit: c4a42d5d566ede55f0585dcd1d8ca8b64b993cb5
+path: holdouts/S-001-built-1.md
+fingerprint: ee47900c8fdd0e9c599ad7838d051dfaa5b517a02c23dc6d3211da2b34152fc3
+tests: 8
+pack: match
+scan: clean
+model: claude-sonnet-5-5
+runs: 1
+tokens: 74629
+k1-canary: unseen
+k2: pass
+k3: pass
+k4: pass
+k5: untested
