@@ -1,6 +1,6 @@
 Verdict: FAIL
 
-*The Critic on docs/briefs/124-orchestrator-landing.md and docs/briefs/125-judging-lead.md, brief 126 (docs/briefs/126-critic.md, on branch claude/p-001-model-lab-continue-ohykg9) for round 1; a session on a different model from the briefs' writer. Recorded verbatim by the Orchestrator, 2026-11-08. The first line is the latest round's verdict, and each round's verdict line is given here rather than in its section (LL-68).*
+*The Critic on docs/briefs/124-orchestrator-landing.md and docs/briefs/125-judging-lead.md, brief 126 (docs/briefs/126-critic.md, on branch claude/p-001-model-lab-continue-ohykg9) for round 1 and brief 127 for round 2; a session on a different model from the briefs' writer, resumed for round 2. Recorded verbatim by the Orchestrator, 2026-11-08. The first line is the latest round's verdict, and each round's verdict line is given here rather than in its section (LL-68).*
 
 ## Round 1 (commit ef3e2b0)
 
@@ -63,3 +63,41 @@ What holds. Both briefs carry the spec's steps in its order:
 - Open questions: where a held-pair or `locked: unrun` ruling is recorded for the work session to read (item 5). Whether the owner accepts the extra `ls-remote` route in K3 (item 8).
 
 Files read are in /tmp/claude-0/-home-user/9a06fe22-60e0-580d-8926-30c8a46558b9/scratchpad/fix-judge/ (docs/briefs/124-orchestrator-landing.md, docs/briefs/125-judging-lead.md, src/E-003/*.py, specs/S-001.md, experiments/E-003.md, reviews/E-003/built/*).
+
+## Round 2 (commit 62ec610)
+
+I read the round 2 copies of briefs 124 and 125 in fix-judge2 against my round 1 findings. I could not run commands (no shell). I relied on your report that `next-step`, `check-model`, `counts.py due` and the six SHA-256s check out. I confirmed the briefs' command lines against the scripts' argparse by reading them.
+
+**Round 1 findings**
+
+| # | Round 1 finding | Round 2 |
+|---|---|---|
+| 1 | Folders never made | Answered. Brief 125 step 2 makes `/tmp/s001-judge-built`, `/tmp/s001-judge-briefs` and `/tmp/s001-judge-lists`, and step 6 uses them. |
+| 2 | K1 records read once | Answered. Step 9 re-reads any listed record whose SHA-256 changed and checks only the lines added since. |
+| 3 | Blocks before any INDEX read | Partly answered, see finding 1 below. |
+| 4 | Commands did not match the interfaces | Answered. Brief 124 step 5 gives `due` with all its flags and says where each value comes from (`cards-sent.md`, `counts.json`, `opened.md`). Step 6 gives `verdicts.py check` with `--index --filelists --tests 8 --set`, records each accepted block as its own `counts-<n>.md` (so `card --judging` gets a single 13-line file), and cuts the closing block's verdict lines out. This fits `counts.py` and `verdicts.py`. |
+| 5 | Ruling had no route back to the work session | Answered. Brief 124 step 4 has the owner send the work session one line naming `decisions/questions/<name>.md`, which it follows as the Orchestrator's ruling. Brief 113 supports this: its step 8 says "the Orchestrator rules on that pair at its landing" for `locked: unrun`, and its step 9 says a held pair stays held for the Orchestrator's ruling. |
+| 6 | `next-step` state, follow-up mechanism, tokens | Answered. The state JSON matches `judge.py`. Continuing the helper by agent id (SendMessage) is stated and excluded from the `send_message` bar. Tokens are summed over judges, with a resumed judge's last figure counting once. LL-67 supports this (running totals). |
+| 7 | `counts.py` and cap | Answered. The `counts.py` reference is gone. Reserve rules are stated (every run after an output's first judge comes from the reserve; when it is spent, the verdict is `none`, per Sample). `check-model` is added with the right flags. |
+| 8 | `ls-remote` coverage | Answered. It is now in K3 with a refusal path, and the reading is stated as needed ("no raw address names main's tip"). |
+| 9 | "Not reached" values | Answered. `untested` is given for `k4`, `k5` and `k7`. |
+| 10 | Brief 124 step 3 | Answered. If last week's pull request is open, the landing joins it. The Reviewer record is pushed after the PR number exists, with a round added (LL-68, consistent with that lesson). A guard failure goes to the owner. |
+| 11 | `k1-records.md` | Answered. Nothing is added twice; the existing file already lists `sessions.md`. |
+| 12 | Label-draw bar | Answered. It is in the header of brief 125. |
+
+**New findings**
+
+1. **Blocking.** Brief 125 step 1 hands out the counts block "with `k2: fail`" before step 2 runs `ls-remote`, which is where the first `index-commit` comes from. At the start, a K2 failure therefore still has no value for `index-commit`, and `verdicts.py check --counts` would refuse the block. Step 2 handles this for `k3` only. Fix: run `ls-remote` before the K2 listing, or say that a K2 failure at the start also reads `ls-remote` first (the same "only if it gave a commit" rule).
+2. Not blocking. Brief 124 step 6 uses `<lists>` without saying where it is or that you make it. Say a new folder outside the repository, as brief 125 does.
+3. Not blocking. Brief 125 step 7 relies on the SendMessage tool being available to the judging session. The record shows resumed helpers (LL-67) but not that this session holds the tool. Add a fallback: if it is not available, treat the follow-up as unsent and start the one new judge.
+4. Not blocking. Brief 124 step 24 no longer says to write the ruling-B `limit:` line for later K1 records. The existing line stays in `sessions.md`, so this is only a note.
+
+**Six-part contract**
+- Changed: nothing. I hold no write tool.
+- Why: to check that each round 1 finding is answered and that each changed sentence is supported by its record.
+- Verified: by reading the code and records. Each point above cites the record or script it rests on (briefs 113, `counts.py`, `verdicts.py`, `judge.py`, LL-67, LL-68).
+- Undone: I did not re-run any command. I rely on your reports of the runs and of the six SHA-256s.
+- Needed outside my lane: Chief of Staff or Orchestrator to fix finding 1 in brief 125 (a one-sentence change) and optionally findings 2 and 3.
+- Open questions: whether the judging session holds SendMessage (finding 3).
+
+Files read: /tmp/claude-0/-home-user/9a06fe22-60e0-580d-8926-30c8a46558b9/scratchpad/fix-judge2/docs/briefs/124-orchestrator-landing.md and /tmp/claude-0/-home-user/9a06fe22-60e0-580d-8926-30c8a46558b9/scratchpad/fix-judge2/docs/briefs/125-judging-lead.md.
