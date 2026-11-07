@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Critic on docs/briefs/124-orchestrator-landing.md and docs/briefs/125-judging-lead.md, brief 126 (docs/briefs/126-critic.md, on branch claude/p-001-model-lab-continue-ohykg9) for round 1 and brief 127 for round 2; a session on a different model from the briefs' writer, resumed for round 2. Recorded verbatim by the Orchestrator, 2026-11-08. The first line is the latest round's verdict, and each round's verdict line is given here rather than in its section (LL-68).*
+*The Critic on docs/briefs/124-orchestrator-landing.md and docs/briefs/125-judging-lead.md, brief 126 (docs/briefs/126-critic.md, on branch claude/p-001-model-lab-continue-ohykg9) for round 1, brief 127 for round 2 and brief 128 for round 3; a session on a different model from the briefs' writer, resumed for rounds 2 and 3. Recorded verbatim by the Orchestrator, 2026-11-08. The first line is the latest round's verdict; rounds 1 and 2 were FAIL, and each round's verdict line is given here rather than in its section (LL-68).*
 
 ## Round 1 (commit ef3e2b0)
 
@@ -101,3 +101,26 @@ I read the round 2 copies of briefs 124 and 125 in fix-judge2 against my round 1
 - Open questions: whether the judging session holds SendMessage (finding 3).
 
 Files read: /tmp/claude-0/-home-user/9a06fe22-60e0-580d-8926-30c8a46558b9/scratchpad/fix-judge2/docs/briefs/124-orchestrator-landing.md and /tmp/claude-0/-home-user/9a06fe22-60e0-580d-8926-30c8a46558b9/scratchpad/fix-judge2/docs/briefs/125-judging-lead.md.
+
+## Round 3 (commit 7c9f8cb)
+
+I compared briefs 124 and 125 in fix-judge3 with round 2's in fix-judge2, reading the changed sentences against the scripts and records they cite. I did not run commands (no shell).
+
+**Round 2 findings**
+
+1. Blocking, now answered. Brief 125 step 1 no longer hands out `k2: fail` before an `index-commit` exists. It tells the owner K2 failed, and hands out the counts block only once the step 2 `git ls-remote … refs/heads/main` has given a commit. Step 2 carries the same rule for K3. This matches J5, which gives no counts form without a 40-hex `index-commit`, and `parse_counts_lines`, which requires one.
+2. Not blocking, answered. Brief 124 step 6 now says `<lists>` is a new folder in the Orchestrator's scratch folder, outside every clone.
+3. Not blocking, answered. Brief 125 step 7 gives a fallback if the session cannot continue a helper: record the follow-up as not sent, then act on `next-step` as if it had been sent. That starts the one new judge. This fits `judge.py`, where `follow_up_sent: true` with no verdict returns `new-session`. It also matches E-003 Reruns (a), which allows one new session after a missing verdict.
+4. Not blocking, unchanged. Brief 124 still does not mention the ruling-B `limit:` line. The existing line already stands in sessions.md, so I leave it as a note.
+
+Nothing else in the two briefs differs in a way I found to be unsupported by its record.
+
+**Six-part contract**
+- Changed: nothing. I hold no write tool.
+- Why: to check that the round 2 findings are answered and the changed sentences are supported.
+- Verified: by reading the briefs against judge.py, verdicts.py, e003lib.py (the counts-block form) and S-001 J5 and E-003 Reruns. Round 2's script SHA-256 checks are as you reported them.
+- Undone: no commands were run.
+- Needed outside my lane: none.
+- Open questions: none.
+
+Files: /tmp/claude-0/-home-user/9a06fe22-60e0-580d-8926-30c8a46558b9/scratchpad/fix-judge3/docs/briefs/124-orchestrator-landing.md and /tmp/claude-0/-home-user/9a06fe22-60e0-580d-8926-30c8a46558b9/scratchpad/fix-judge3/docs/briefs/125-judging-lead.md.
