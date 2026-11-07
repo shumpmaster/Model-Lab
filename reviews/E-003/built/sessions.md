@@ -8,3 +8,8 @@
 2026-11-07T19:45Z k1-iii: returned 1 events
 2026-11-07T19:45Z k1: fail
 2026-11-07T20:20Z limit: the transcript read (part iii) was not refused; the owner ruled to go on with it stated as a limit (decisions/questions/P-001-k1-transcript-reach.md)
+2026-11-07T23:10Z sheet block (reviews/E-003/built/sheet.md): k1-canary: unseen
+2026-11-07T23:10Z sheet block: k2: pass
+2026-11-07T23:10Z sheet block: k3: pass
+2026-11-07T23:10Z sheet block: k4: pass
+2026-11-07T23:10Z sheet block: k5: untested
