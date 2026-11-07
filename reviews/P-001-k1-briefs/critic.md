@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Critic on docs/briefs/119-sheet-lead.md and the changes to docs/briefs/113-work-session.md after the owner's K1 ruling, brief 120 (docs/briefs/120-critic.md, on branch claude/p-001-model-lab-continue-ohykg9) for round 1 and brief 121 for round 2; the Critic session of briefs 114 to 116, resumed, on a different model from the briefs' writer. Recorded verbatim by the Orchestrator, 2026-11-07. The first line is the latest round's verdict, and each round's verdict line is given here rather than in its section (LL-68).*
+*The Critic on docs/briefs/119-sheet-lead.md and the changes to docs/briefs/113-work-session.md after the owner's K1 ruling, brief 120 (docs/briefs/120-critic.md, on branch claude/p-001-model-lab-continue-ohykg9) for round 1, brief 121 for round 2 and brief 122 for round 3; the Critic session of briefs 114 to 116, resumed, on a different model from the briefs' writer. Recorded verbatim by the Orchestrator, 2026-11-07. The first line is the latest round's verdict; rounds 1 and 2 were FAIL, and each round's verdict line is given here rather than in its section (LL-68).*
 
 ## Round 1 (commit e0411a9)
 
@@ -60,4 +60,32 @@ Round 2 (brief 121) of brief 119. I compared /tmp/claude-0/-home-user/9a06fe22-6
 - **verified:** diffed 119 between fix-rule and fix-rule2 (session line and step 6 only). Diffed 113 and sessions.md between the copies (identical). Read the new step 6 against each line of sessions.md and against brief 113's record forms.
 - **undone:** none.
 - **needed outside my surface:** the Orchestrator to reword step 6's listing condition (finding 1).
+- **open questions:** none.
+
+## Round 3 (commit b30746c)
+
+Round 3 (brief 122) of brief 119: my round 2 finding is answered, and nothing else changed. I diffed /tmp/claude-0/-home-user/9a06fe22-60e0-580d-8926-30c8a46558b9/scratchpad/fix-rule3/docs/briefs/119-sheet-lead.md against fix-rule2. Only step 6's listing condition differs. Brief 113 and the Orchestrator's sessions.md are byte-identical to round 2.
+
+### Round 2 finding
+1. **The listing test that stopped on the Orchestrator's record (was blocking):** answered. Step 6 now reads "no `listing:` line lists shumpmaster/secret-marking among the session's repositories (a line that records it absent passes)".
+   - **The Orchestrator's record passes.** Its listing line lists four repositories and records "shumpmaster/secret-marking absent". It also meets every other condition of step 6:
+     - `k1-i` and `k1-ii` read `refused`;
+     - `k1-iii` reads `returned 1 events`, with a `limit:` line naming decisions/questions/P-001-k1-transcript-reach.md;
+     - `k1:` reads `fail`, and part (iii) is the only part not refused.
+   - **Brief 113's record passes the same way.** Its listing line is `listing: <repositories, comma-separated>`, so it names secret-marking only if the repository is attached.
+   - **The step still stops on every other case S-001 K1 and the ruling name:**
+     - the repository listed among a session's repositories;
+     - part (i) or part (ii) not refused;
+     - part (iii) returned without the `limit:` line;
+     - the canary shown.
+
+### Findings
+None.
+
+### Six-part contract
+- **changed:** none (read-only check).
+- **why:** check round 3 of brief 119 against my round 2 finding and the records step 6 reads.
+- **verified:** diff of brief 119 between fix-rule2 and fix-rule3 (step 6's listing condition only); diffs of brief 113 and sessions.md (identical); new step 6 read against each line of sessions.md and brief 113's record forms.
+- **undone:** none.
+- **needed outside my surface:** none.
 - **open questions:** none.
