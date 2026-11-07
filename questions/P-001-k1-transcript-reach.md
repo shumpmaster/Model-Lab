@@ -1,0 +1,26 @@
+# Ruling needed: a session can read another session's transcript, so the marking sheets could reach the work once they exist; fix the access, go on with it stated as a limit, or stop
+
+Milestone: M4
+
+The first check before the fair test writes any marking sheet has failed in the Orchestrator's session. Nothing has been exposed, since no sheet exists yet, and no test run has been spent. The check tried three ways to reach the private sheets repository. Reading it through GitHub and fetching it with git were both refused. But reading the sheet session's transcript worked: this session read one event of it, and more were there. Once a sheet is written, that transcript holds the sheet's text, so any session that does or starts the work could read the sheet that way. The work session's brief tells it never to do so, but nothing blocks it. The sheet session is waiting, and it will not write a sheet unless every route is refused, so nothing goes forward until you rule. The work session has not been started.
+
+WHY: the test's fairness rests on the sheets never reaching the sessions that do or start the work; the spec stops the test here and asks you (S-001, K1). Leaving it unruled holds the whole test before its first kind.
+OPTIONS:
+  A. Change the access so the transcript read is refused, then run the check again — the cleanest result, if a way exists. No record or document found here gives one: the environment's documentation says the repository's own tool settings, where a block on that tool could go, are read only by a session holding one repository, and the work session holds two. If you know a setting in your account that stops one session reading another's transcript, this is the option; otherwise it cannot be carried out. Cost: finding and making the change; then both checks run again. Rules out: nothing.
+  B. Go on, with this reach written into every kind's record as a limit — the sheet is then kept from the work by each brief's ban on reading other sessions' transcripts, the ban on attaching the sheets repository, and the transcript check, which counts any such tool call by a helper (a doer, the Check author or a judge) as a leak; nothing checks the leads' own sessions (the Orchestrator's and the work session's) for it. Cost: the result says the sheet was kept by instruction, not by access, for those two sessions; the sheet session's brief must be changed to accept a part-(iii) read stated as this limit, so that brief goes back to the Critic and a new sheet session is started (the waiting one stops on this result). Rules out: nothing; A can still follow if a way is found.
+  C. Stop the test — no runs are spent and nothing is exposed. Rules out: the fair test, and with it the changes' measured result.
+RECOMMENDATION: B, with medium confidence (the Chief of Staff's judgement): A has no known route, and under B every helper that could carry a sheet is checked mechanically, leaving only the two lead sessions, whose briefs bar the read. What would change it: a setting that blocks the read (then A), or wanting the sheet kept by access alone (then C).
+WHO HAS CHECKED IT: the Orchestrator ran the probe and recorded it; the Critic checks this card.
+RISK CLASS: R0 (questions/**)   REVERSIBILITY: reversible until a sheet is written; a sheet a session has read cannot be unread   BLAST RADIUS: every kind of the fair test; under B also brief 110 and a new sheet session
+DEFAULT: none, since the spec leaves this to you and a sheet once read cannot be unread   TIMEOUT: none
+
+## Context
+- In the Orchestrator's session, before any sheet: reading the sheets repository through GitHub and fetching it with git were refused; one `list_events` call on the sheet session returned one event and reported more (source: reviews/E-003/built/sessions.md)
+- K1's probe has three parts and passes only if every part is refused; if any part succeeds before the first sheet, no sheet is written and the Orchestrator files a question: change the access and run again, go on with the reach stated as a limit, or stop (source: specs/S-001.md:171-177)
+- A sheets-side session's transcript holds the sheet, and the design never uses `list_events`; the briefs of the Orchestrator's and every work session bar it (source: specs/S-001.md:159)
+- The tools' descriptions say `list_events` reads another session's transcript events (source: intake/P-001-environment-2026-11-04.md:41)
+- The work session's brief bars `list_events`, `get_event` and `send_message` on any session, except K1's probe (source: docs/briefs/113-work-session.md, "What you never do")
+- The transcript check counts a tool it does not know, an MCP tool among them, as a leak (source: src/E-003/transcript_check.py:40)
+- The sheet lead goes on only if every `k1-` part line in both records reads `refused` (source: docs/briefs/110-sheet-lead.md:46)
+- The environment's documentation, read 2026-11-07: tool rules in a repository's settings file are read only by a session holding one repository (source: the session.permissions page, as read in session_01QBwHGNPFytF6t2VG6mnugn)
+- The work session is started with Model-Lab and Service-Desk (source: docs/briefs/113-work-session.md, "The owner's first message")
