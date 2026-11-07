@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Critic on questions/P-001-k1-transcript-reach.md, brief 117 (docs/briefs/117-critic.md, on branch claude/p-001-model-lab-continue-ohykg9) for round 1; a session on a different model from the card's writer. Recorded verbatim by the Orchestrator, 2026-11-07; the session's own harness note above the return is not part of it and is left out. The first line is the latest round's verdict, and each round's verdict line is given here rather than in its section (LL-68).*
+*The Critic on questions/P-001-k1-transcript-reach.md, brief 117 (docs/briefs/117-critic.md, on branch claude/p-001-model-lab-continue-ohykg9) for round 1 and brief 118 for round 2; a session on a different model from the card's writer, resumed for round 2. Recorded verbatim by the Orchestrator, 2026-11-07; the session's own harness note above the return is not part of it and is left out. The first line is the latest round's verdict; round 1 was FAIL, and each round's verdict line is given here rather than in its section (LL-68).*
 
 ## Round 1 (commit ad296ab)
 
@@ -49,3 +49,50 @@ Six-part contract
 - Undone: the environment documentation page itself, which I could not open. I judged it only on the verbatim sentence you gave me.
 - Needed outside my surface: the Chief of Staff must fix findings 1 to 3 and re-file the card. Finding 3 may also need a check of whether the Orchestrator's helpers are covered by any transcript check, which is a question for the spec's owner.
 - Open questions: does a deny rule for an MCP tool in a repository's settings file follow the same one-repository rule as allow rules? Is there an account-level or managed setting that blocks `list_events`?
+
+## Round 2 (commit 9c9fd04)
+
+Compared: /tmp/claude-0/-home-user/9a06fe22-60e0-580d-8926-30c8a46558b9/scratchpad/fix-k1b/questions/P-001-k1-transcript-reach.md against round 1's card in fix-k1 and my round 1 verdict at fix-k1b/reviews/P-001-k1-transcript-reach/critic.md. I checked every changed or new sentence against its cited record, not only against the finding it answers.
+
+Round 1 findings
+
+1. Reversibility label (was blocking): answered. The line now reads "REVERSIBILITY: irreversible (going on is open to change until a sheet is written, but a sheet once read cannot be unread)". The first word is "irreversible", so the asks-merge path cannot auto-close it, and it matches DEFAULT: none. The parenthesis is a little double-edged but does not change the first word. Not blocking.
+
+2. Documentation source (was blocking): answered.
+   - Context line 27 quotes the sentence verbatim and attributes it to the session.permissions page.
+   - Option A now says the page is about allow rules for commands, and that a rule blocking this tool sitting there under the same condition is "the Orchestrator's inference, not the documentation's statement".
+   - It also says an account-level or other setting "was not looked for and may exist".
+   - "Cannot be carried out" and "no known route" are gone. The recommendation now says "no way to block the read was found".
+   - "Four" repositories for this session matches the four in sessions.md.
+   - The use of the source is fair now.
+
+3. "Every helper checked" overclaim (was blocking): answered. Option B now says the transcript check flags the read after it happens, detects it and does not block it, and covers the doers, the sheet's writer and the judges. It also says the check is not run on the two sessions themselves or on this session's own helpers.
+   - Context line 25 cites transcript_check.py:1-40. Lines 9-10 name arms and source checks (the work side), the blind Check author (the sheet lead) and judges (the judging lead), so this is supported. The "not run on" part is read from the check's own list of what it is used on, which is a fair reading but an inference from absence.
+   - Context line 21 cites S-001:150 for this session's helpers, and that line lists the normal Check author, the analysing Reviewer and the Critic.
+
+4. Cost to the cards' side (was non-blocking): answered. The opening says "this session, which writes your sample cards and the gate case". B's cost says the sheet is kept "from the side that writes your cards and the gate case by instruction". Context line 20 cites S-001:18, which says this and says "likely". The spec-foresaw claim is supported.
+
+5. Briefs 110 and 113 (was non-blocking): answered. Blast radius names both. B's cost covers both records. Context line 24 now cites step 2 of brief 113 (stop on `k1: fail`), and its K1 step does hold the "do nothing more until the owner rules" wording.
+
+6. Plain opening (was non-blocking): mostly answered.
+   - The opening now explains the private repository, the sheet and the two sessions in plain words, with no paths or ids. It leads with the failure and says what the owner must do.
+   - Context line 28 now cites brief 113, "The owner's first message", and the handoff docs/handoff/2026-11-06-chief-of-staff-13.md. That handoff's token checkpoint says "No test runs have been used", which supports "no run of the test has been started". Its support for "has not been started" is by the brief's ordering and that line, which is acceptable.
+   - The title is still a long sentence. That is a leftover and does not block.
+
+New or changed sentences, also checked
+- "The spec named this as a likely limit before it was frozen": supported by S-001:18.
+- "The sheet-writing session is waiting and will not write a sheet unless every way in was refused": supported by brief 110 step 6 (line 46) and the sessions.md header.
+- "Will read the same if it holds the tool": supported by brief 113 step 2, which makes the part (iii) call only if the session holds `list_events`.
+- "The ban on attaching the private repository": supported by the add_repo bar in brief 113 line 20 and S-001 K6. It is not in the Context list, which is a small gap that does not block.
+
+Non-blocking points remaining
+- The title is long (see finding 6).
+- Context line 27 says "read 2026-11-07" while the phrase "its session.permissions page" can't be opened by the owner. The verbatim quote makes this acceptable.
+
+Six-part contract
+- Changed: nothing (no write lane).
+- Why: round 2 check that each round 1 finding is answered and each changed sentence is supported by its cited record.
+- Verified: read the round 2 card; the round 1 verdict; src/E-003/transcript_check.py lines 1-24 and, from round 1, lines 25-64; docs/handoff/2026-11-06-chief-of-staff-13.md lines 18-22; and the rest of the cited records from round 1 (S-001 lines 1-188, brief 113 lines 20 and 33-34, brief 110 line 46). I did not diff the two cards mechanically. I compared the round 2 card line by line from my round 1 reading. I did not re-run the questions check, which you say passes. I did not open the documentation page.
+- Undone: none.
+- Needed outside my surface: the Orchestrator records this verdict verbatim in the round 2 section of the critic record.
+- Open questions: none new. The two open questions in my round 1 report (deny rules for MCP tools; account-level settings) are now put to the owner by option A.
