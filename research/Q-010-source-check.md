@@ -1,4 +1,4 @@
-Verdict: FAIL
+Verdict: PASS
 
 *The Source checker's check of research/Q-010-memo.md. Each round on a different model from the Researcher; recorded verbatim by the Orchestrator (session_01QBwHGNSLmSrYQgS6BPjV8p) from the helper's return, 2026-11-08; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
 
@@ -125,5 +125,41 @@ Q-010-14 says only that large effects replicated better, so it is already correc
 5. Minor, non-blocking:
    - Part 1d's heading "realist... configurations tested inside trials" reads as if tests were run. F010-11 only says that testing "should be perfectly possible within an RCT".
    - F010-23's "must be 'contextualized'" is stronger than the reader's "call for", and the paper was never opened.
+
+Tokens: I cannot see my token total.
+
+## Round 3 (brief 177)
+
+The round's verdict was PASS.
+
+Round 3 re-check of /home/user/Model-Lab/research/Q-010-memo.md. I re-opened these pages on 2026-11-08: arXiv 2606.08529 (abstract), arXiv 1705.06429 (abstract), METR, the Google Cloud DORA post, Jeremiah Lee's Spotify post, Bonell (PMC5045599) and Bean (PMC12920132). The Bonell and Bean quotes came by WebFetch, because curl got the same PMC bot-wall page for both. I did not re-open Mitchell. Its wording rests on round 2's re-open.
+
+| id | result | reason |
+|---|---|---|
+| F010-11 | holds | The memo now says "proposed for testing inside trials". The page has "Testing these should be perfectly possible within an RCT" and "whether this is the case or not is ultimately an empirical question". It reports no empirical findings and no transfer test. The memo's gloss "whether it works" is looser than the page, where "this" refers to the planned analyses (see minor point 1). |
+| F010-19 | holds | "Small lab effects transferred worst" is gone. The memo says only that large effects replicated more reliably than medium and small ones, which matches round 2's reading of Mitchell's abstract. |
+| F010-21 | holds | The memo says Zimmermann built "a decision tree to select the training project". It adds that Herbold reports it improves success only for narrow subsets. The "pre-transfer screen" wording is gone, and the Gaps line and proposed question 2 now describe a training-project selector. Herbold's abstract opened: it is a systematic mapping study, so "secondary mapping study" is right. Whether the 21/622 figure appears in it was settled in round 2's full-text read, not by this abstract. |
+| F010-23 | holds | The wording is "call for findings to be 'contextualized'", the Input reader's wording. The memo grades it assumed (search-only), says the paper was not opened, and uses it in no proposed entry. SINTEF still returns 403. |
+| F010-26 | holds | The abstract confirms every point the memo makes about it. These include "rejected in direction", "tier-scaling holds only at Level 1", "within a single model (Opus, Level 2, robust slice)", and the family-versus-tier conditioning. The same abstract says the planner-executor prediction was falsified. The memo also says "abstract only" and "single-author preprint". |
+| F010-28 | holds | METR says "may overestimate AI agent real-world performance" and gives 18 issues. The page also says test-passing PRs still needed substantial extra work. The "one model, 18 issues" hedge now appears in the short answer, Part 2 and the "what each answer would change" section. |
+| F010-29 | holds | The abstract says standard benchmarks and simulated patient interactions "do not predict the failures", with 1,298 UK participants and a preregistered human experiment. The setting is medical advice, and the memo now says so in the short answer, Part 2 and the closing paragraph. |
+| F010-30 | holds | The page says "substantially either amplify or unlock the benefits of AI" and "almost 5,000 respondents". The user-centric sentence is exact, and the word "correlat" does not appear on the page. The memo attributes "correlational" to the Input reader and notes the page does not say so. |
+| Short answer; "what each answer would change"; "how far the evidence carries over" | hold | All three now carry the "may overestimate" hedge and the medical qualifier. The closing paragraph reads "suggests ... can fail" and stays marked as opinion. |
+| Proposed entries 17 and 21 | hold | Entry 17 now carries "within a single model (Opus, Level 2)". Entry 21 says "said to amplify or unlock" and "no prospective test seen". |
+
+I checked every item rounds 1 and 2 marked not confirmed, and none is still relied on. The F010-5 "166" and convergence claim, the F010-18 r=0.85, the F010-19 figures, the F010-27 52.6%→8.4%, the F010-21 same-domain claim and Microsoft stake, the F010-2 AidGrade stake and the F010-17 platform stake are all removed. F010-23 is search-only and is used in no entry. Round 2's items for F010-1, 2, 3, 4, 5, 10, 13, 17, 18, 24, 25, 27 and 31 still hold. I also re-read the F010-31 Ivarsson quote on Lee's page, and it is exact.
+
+**Library entries:** I checked Q-010-1 to Q-010-21 and Q-010-P1 in /home/user/lib-q-010 against the corrected memo. None conflicts with it, so I changed nothing and made no commit. The worktree is clean.
+- Q-010-17 already has "within a single model (Opus, Level 2, robust slice)" and "not a test of a method".
+- Q-010-21 already has "the reader's reading; the page does not say", "dora.dev not opened by the source checker" and "no test that applied the model before a practice was moved".
+- Q-010-14 already says large effects replicated better and does not claim small effects did worst.
+- Q-010-19 and Q-010-20 carry the medical-advice qualifier and the "18 issues, one model" qualifier.
+- Q-010-5, Q-010-9 and Q-010-13 correctly exclude the unconfirmed material.
+- Q-010-2, Q-010-10, Q-010-17, Q-010-18 and Q-010-P1 keep grade C, which differs from the memo's B and is the more conservative grade.
+
+**What the memo must still correct:** nothing blocking. These three minor wording points are non-blocking:
+1. F010-11 (Part 1d): "whether it works 'is ultimately an empirical question'" glosses the page. The sentence refers to whether the planned analyses will clarify how and why the intervention works. Suggested wording: "the authors say what their planned analyses will show 'is ultimately an empirical question'".
+2. "What each answer would change", first bullet: "The only methods with good scored records are forecasting methods" is stronger than Part 2's "fairly good". The memo itself weakens it. F010-14 is a press release only, and F010-16 fails on rank ordering. Suggested wording: "fairly good".
+3. F010-30: "(also dora.dev ..., not opened)" is true for the Source checker. The Input reader listed that page as opened. Suggested wording: "not opened by the Source checker".
 
 Tokens: I cannot see my token total.
