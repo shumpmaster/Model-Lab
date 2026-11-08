@@ -1,0 +1,126 @@
+Verdict: PASS
+
+*The Critic on docs/briefs/124-orchestrator-landing.md and docs/briefs/125-judging-lead.md, brief 126 (docs/briefs/126-critic.md, on branch claude/p-001-model-lab-continue-ohykg9) for round 1, brief 127 for round 2 and brief 128 for round 3; a session on a different model from the briefs' writer, resumed for rounds 2 and 3. Recorded verbatim by the Orchestrator, 2026-11-08. The first line is the latest round's verdict; rounds 1 and 2 were FAIL, and each round's verdict line is given here rather than in its section (LL-68).*
+
+## Round 1 (commit ef3e2b0)
+
+I read briefs 124 and 125 against S-001 (the sections you named, K1 to K7, J3 to J5, AC5, AC8), E-003 (Step 4, Sample, Exclusions), the scripts in src/E-003/, AGENTS.md, CLAUDE.md, briefs 113 and 119, P-001-k1-transcript-reach.md, and the reviews/E-003/built/ records. I have no shell, so I judged commands only by reading the code. I could not compute the SHA-256s the briefs list, so those are unchecked. I did not re-judge your runs (export.py make, the clone checked out at the label, fill_judge_brief.py, followup-text, list).
+
+What holds. Both briefs carry the spec's steps in its order:
+- Brief 124 has the weekly wake, K7, the K5 wake order, the guard, suite, Reviewer and merge route, counts and blocks.
+- Brief 125 has K2, K3, K5, the Tuesday wake, the fingerprint check, the copy, fill, judge, reruns, transcript check, J5 line, counts and closing blocks.
+- The cap of 132 matches `caps()` (120 + 12).
+- The 14 J5 fields match `verdicts.py`.
+- The K3 SHA-256s for transcript_check.py and e003lib.py match brief 119.
+- The hook marker matches the label rule.
+- The commands for `judge.py followup-text`, `parse-return`, `export.py list`, `verify` and `fill_judge_brief.py` match the scripts' flags.
+
+**Blocking**
+
+1. Brief 125 step 6: the first fill would refuse. `fill_judge_brief.py` never creates a folder and refuses if `--out`'s folder is missing, but the brief never creates `/tmp/s001-judge-briefs`. `<lists>` is used (the `<label>.files` redirect, `--filelists`) and never defined or created. The brief also says that a refusal means no judgement and tell the owner, so the brief as written stops at its first judgement. Fix: make both folders in K3's set-up, and name `<lists>`.
+
+2. Brief 125 step 9: the K1 record check is weaker than the spec. It reads each record "that you have not read before". The records are append-only: each turn adds lines to sessions.md and to the work session's `session-*.md`. A file read once would never be read again, so later `k1-` lines and the canary check on them are skipped. S-001 K1 says "the K1 records added since its last block". Fix: re-read a listed file whenever it changed since the last block (by SHA-256 or line count) and check its new lines.
+
+3. Brief 125 steps 1 and 2: a block handed out before any INDEX is read cannot be valid. `k2: fail` and `k3: fail` blocks are handed out at the start, but `index-commit` must be 40 hex (`parse_counts_lines`). The brief says "the commit you last read the INDEX at", which does not exist yet, so `verdicts.py check --counts` refuses the block. Fix: say what goes there, for example the `ls-remote` tip. Note that a K3 failure may also mean `ls-remote` fails.
+
+4. Brief 124 steps 5 and 6: the commands do not match the interfaces.
+   - `counts.py due` is given with no arguments, but it requires `--kind --side --runs --run-cards-sent --weeks --review-cards-sent`. No record keeps "cards sent", and `--weeks` has no stated source (opened.md).
+   - `counts.py card` needs `--kind --work --judging --weeks`. `--judging` must be one 13-line block file (`parse_counts_lines`), but counts.md is an append-only file of many blocks.
+   - `verdicts.py check` needs `--index --filelists --tests 8 --set S-001-built-1`, and takes a file, not text. The brief does not say to put each passed block or closing block into a temporary file. The closing block needs the verdict-file part cut out to record verdicts.tsv.
+   - Fix: give the commands whole, and say where each number comes from.
+
+5. Brief 124 step 4 against brief 113: the ruling has no way back to the work session. Brief 113 says the Orchestrator "rules on that pair at its landing" (`locked: unrun`) and releases a held no-spec pair "with that path". Brief 124 instead asks the owner a question. But nothing says where the ruling is recorded or how the work session reads it. Brief 113 reads only `rulings.md`, which is for counts. The Orchestrator cannot write src/**. So a held pair stays held for good, and a `locked: unrun` pair has no recorded outcome for the analysis. Fix: name the file on main that holds the ruling and have brief 113 read it, or say that the owner relays it. The reading itself (ask the owner) is the stricter one and is needed, so keep it.
+
+**Non-blocking**
+
+6. Brief 125 step 7:
+   - `judge.py next-step --state` takes JSON `{"verdict","follow_up_sent","sessions"}`, and the brief shows no shape for it. For `sessions`, the script's rule is that 2 means leave out.
+   - "Send it, in the same helper" names no mechanism, while the header bars `send_message`. Say that it continues the helper by its agent id and is not the session `send_message`.
+   - It does not say what goes in `tokens` when a follow-up or a new session was used.
+   - The `differs` flow (one new judge) is only named.
+
+7. Brief 125 step 7 refers to `counts.py cap`, but counts.py is not among the fetched and hashed scripts. The brief also gives no instruction for when the 12-run reserve is spent (leave the output out and list it, per Sample). `reserve-used` is not defined. `judge.py check-model` is unused (AC5), and `brief_match.py` is not hashed (it is described in-line). Either drop the reference or add and hash the script.
+
+8. Brief 125 step 5, the `ls-remote` reading. It is needed: nothing else pins a commit, since a raw URL on the branch name is not fixed. It is not "stricter", though. It is a second route (git over github.com) that K3 never tests, and brief 119 bars any route other than raw. Add `ls-remote` to K3, and say what to do if it is refused (`k3: fail`). Keep `main` as the landing branch: it is stricter and fits AGENTS §5 (no agent merges) and brief 113's `origin/main` reads.
+
+9. Brief 125 gives `k2`, `k3`, `k5` and `k7` no value for "not reached". Say `untested`, as brief 119 does, and `k5: untested` if no turn found the marker gone.
+
+10. Brief 124 step 3 order and steps:
+    - The Reviewer's record path needs the PR number, which exists only after the PR is opened. Say it is pushed after opening.
+    - It does not say what happens if last week's PR is still unmerged. The range `origin/main..` would re-include it. Say whether to reuse the PR or wait.
+    - "Anything else … the work session's next record shows why" has no route, because the Orchestrator cannot message that session. Use "give the finding to the owner for the work session", as the FAIL clause does.
+
+11. Brief 124 step 3 and `k1-records.md`: the file already lists sessions.md. Say not to add a path twice. Brief 124 also never says to write the `limit:` line (ruling B) for later K1 records. The existing one is already there, so this is minor.
+
+12. Brief 125 says to read only the named paths. Add that the lead reads no other file of src/E-003/records/, since pairs/*.json hold the label draw, which the spec says the judging session never holds.
+
+**Six-part contract**
+- Changed: nothing. I hold no write tool.
+- Why: to check that both briefs carry out the spec, scripts and records, as asked.
+- Verified: by reading the code and records. The findings above cite the code and records they rest on. I could not run commands and I could not check the SHA-256 values.
+- Undone: the SHA-256s in brief 125 (steps 2 and 3) are unchecked. Your runs were not repeated.
+- Needed outside my lane: the fixes to briefs 124 and 125 (Chief of Staff or Orchestrator). Item 5 may also need a change to brief 113, and the choice of ruling channel goes to the owner.
+- Open questions: where a held-pair or `locked: unrun` ruling is recorded for the work session to read (item 5). Whether the owner accepts the extra `ls-remote` route in K3 (item 8).
+
+Files read are in /tmp/claude-0/-home-user/9a06fe22-60e0-580d-8926-30c8a46558b9/scratchpad/fix-judge/ (docs/briefs/124-orchestrator-landing.md, docs/briefs/125-judging-lead.md, src/E-003/*.py, specs/S-001.md, experiments/E-003.md, reviews/E-003/built/*).
+
+## Round 2 (commit 62ec610)
+
+I read the round 2 copies of briefs 124 and 125 in fix-judge2 against my round 1 findings. I could not run commands (no shell). I relied on your report that `next-step`, `check-model`, `counts.py due` and the six SHA-256s check out. I confirmed the briefs' command lines against the scripts' argparse by reading them.
+
+**Round 1 findings**
+
+| # | Round 1 finding | Round 2 |
+|---|---|---|
+| 1 | Folders never made | Answered. Brief 125 step 2 makes `/tmp/s001-judge-built`, `/tmp/s001-judge-briefs` and `/tmp/s001-judge-lists`, and step 6 uses them. |
+| 2 | K1 records read once | Answered. Step 9 re-reads any listed record whose SHA-256 changed and checks only the lines added since. |
+| 3 | Blocks before any INDEX read | Partly answered, see finding 1 below. |
+| 4 | Commands did not match the interfaces | Answered. Brief 124 step 5 gives `due` with all its flags and says where each value comes from (`cards-sent.md`, `counts.json`, `opened.md`). Step 6 gives `verdicts.py check` with `--index --filelists --tests 8 --set`, records each accepted block as its own `counts-<n>.md` (so `card --judging` gets a single 13-line file), and cuts the closing block's verdict lines out. This fits `counts.py` and `verdicts.py`. |
+| 5 | Ruling had no route back to the work session | Answered. Brief 124 step 4 has the owner send the work session one line naming `decisions/questions/<name>.md`, which it follows as the Orchestrator's ruling. Brief 113 supports this: its step 8 says "the Orchestrator rules on that pair at its landing" for `locked: unrun`, and its step 9 says a held pair stays held for the Orchestrator's ruling. |
+| 6 | `next-step` state, follow-up mechanism, tokens | Answered. The state JSON matches `judge.py`. Continuing the helper by agent id (SendMessage) is stated and excluded from the `send_message` bar. Tokens are summed over judges, with a resumed judge's last figure counting once. LL-67 supports this (running totals). |
+| 7 | `counts.py` and cap | Answered. The `counts.py` reference is gone. Reserve rules are stated (every run after an output's first judge comes from the reserve; when it is spent, the verdict is `none`, per Sample). `check-model` is added with the right flags. |
+| 8 | `ls-remote` coverage | Answered. It is now in K3 with a refusal path, and the reading is stated as needed ("no raw address names main's tip"). |
+| 9 | "Not reached" values | Answered. `untested` is given for `k4`, `k5` and `k7`. |
+| 10 | Brief 124 step 3 | Answered. If last week's pull request is open, the landing joins it. The Reviewer record is pushed after the PR number exists, with a round added (LL-68, consistent with that lesson). A guard failure goes to the owner. |
+| 11 | `k1-records.md` | Answered. Nothing is added twice; the existing file already lists `sessions.md`. |
+| 12 | Label-draw bar | Answered. It is in the header of brief 125. |
+
+**New findings**
+
+1. **Blocking.** Brief 125 step 1 hands out the counts block "with `k2: fail`" before step 2 runs `ls-remote`, which is where the first `index-commit` comes from. At the start, a K2 failure therefore still has no value for `index-commit`, and `verdicts.py check --counts` would refuse the block. Step 2 handles this for `k3` only. Fix: run `ls-remote` before the K2 listing, or say that a K2 failure at the start also reads `ls-remote` first (the same "only if it gave a commit" rule).
+2. Not blocking. Brief 124 step 6 uses `<lists>` without saying where it is or that you make it. Say a new folder outside the repository, as brief 125 does.
+3. Not blocking. Brief 125 step 7 relies on the SendMessage tool being available to the judging session. The record shows resumed helpers (LL-67) but not that this session holds the tool. Add a fallback: if it is not available, treat the follow-up as unsent and start the one new judge.
+4. Not blocking. Brief 124 step 24 no longer says to write the ruling-B `limit:` line for later K1 records. The existing line stays in `sessions.md`, so this is only a note.
+
+**Six-part contract**
+- Changed: nothing. I hold no write tool.
+- Why: to check that each round 1 finding is answered and that each changed sentence is supported by its record.
+- Verified: by reading the code and records. Each point above cites the record or script it rests on (briefs 113, `counts.py`, `verdicts.py`, `judge.py`, LL-67, LL-68).
+- Undone: I did not re-run any command. I rely on your reports of the runs and of the six SHA-256s.
+- Needed outside my lane: Chief of Staff or Orchestrator to fix finding 1 in brief 125 (a one-sentence change) and optionally findings 2 and 3.
+- Open questions: whether the judging session holds SendMessage (finding 3).
+
+Files read: /tmp/claude-0/-home-user/9a06fe22-60e0-580d-8926-30c8a46558b9/scratchpad/fix-judge2/docs/briefs/124-orchestrator-landing.md and /tmp/claude-0/-home-user/9a06fe22-60e0-580d-8926-30c8a46558b9/scratchpad/fix-judge2/docs/briefs/125-judging-lead.md.
+
+## Round 3 (commit 7c9f8cb)
+
+I compared briefs 124 and 125 in fix-judge3 with round 2's in fix-judge2, reading the changed sentences against the scripts and records they cite. I did not run commands (no shell).
+
+**Round 2 findings**
+
+1. Blocking, now answered. Brief 125 step 1 no longer hands out `k2: fail` before an `index-commit` exists. It tells the owner K2 failed, and hands out the counts block only once the step 2 `git ls-remote … refs/heads/main` has given a commit. Step 2 carries the same rule for K3. This matches J5, which gives no counts form without a 40-hex `index-commit`, and `parse_counts_lines`, which requires one.
+2. Not blocking, answered. Brief 124 step 6 now says `<lists>` is a new folder in the Orchestrator's scratch folder, outside every clone.
+3. Not blocking, answered. Brief 125 step 7 gives a fallback if the session cannot continue a helper: record the follow-up as not sent, then act on `next-step` as if it had been sent. That starts the one new judge. This fits `judge.py`, where `follow_up_sent: true` with no verdict returns `new-session`. It also matches E-003 Reruns (a), which allows one new session after a missing verdict.
+4. Not blocking, unchanged. Brief 124 still does not mention the ruling-B `limit:` line. The existing line already stands in sessions.md, so I leave it as a note.
+
+Nothing else in the two briefs differs in a way I found to be unsupported by its record.
+
+**Six-part contract**
+- Changed: nothing. I hold no write tool.
+- Why: to check that the round 2 findings are answered and the changed sentences are supported.
+- Verified: by reading the briefs against judge.py, verdicts.py, e003lib.py (the counts-block form) and S-001 J5 and E-003 Reruns. Round 2's script SHA-256 checks are as you reported them.
+- Undone: no commands were run.
+- Needed outside my lane: none.
+- Open questions: none.
+
+Files: /tmp/claude-0/-home-user/9a06fe22-60e0-580d-8926-30c8a46558b9/scratchpad/fix-judge3/docs/briefs/124-orchestrator-landing.md and /tmp/claude-0/-home-user/9a06fe22-60e0-580d-8926-30c8a46558b9/scratchpad/fix-judge3/docs/briefs/125-judging-lead.md.
