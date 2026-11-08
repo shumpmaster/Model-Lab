@@ -118,7 +118,7 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Caught by:** the Chief of Staff, at setup.
 - **Cause:** the model never needed two projects in one repository before.
 - **Correction proposed:** options to the owner before the second idea's Discovery starts. Options were brought in Service-Desk (questions/P-002-plan-place.md, PR #268), where the desk's new work hit the same limit; on 2026-11-03 the owner chose B, "B: own plan, tools first (Recommended)": the model's tools change so a repository holds one plan document per project item, under Personal-Org-Operating-Model's own rules (Service-Desk decisions/questions/P-002-plan-place.md). The same change serves the second idea here.
-- **Status:** open (the tools change is not yet specified or built).
+- **Status:** fixed here: model 3.7.0 (S-035) gave each project item a plan of its own, and Model-Lab adopted 3.7.2 (docs/LEDGER.md L-0008).
 
 ### LL-17 The pace outran the owner
 - **What happened:** results and asks arrived faster than the owner could follow; the owner asked for a single status page.
@@ -507,3 +507,12 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** the round was appended as returned, without reading how earlier multi-round records meet the form; a verbatim return can hold text the form refuses.
 - **Correction proposed:** before recording a later round, follow the form an existing multi-round record uses, and run `review_check lint` on it; for the model, the review-record form says how a later round and a quoted verdict line are recorded.
 - **Status:** fixed here; model change open.
+
+## 2026-11-08 — Start of the screening (P-002), session_01QBwHGNSLmSrYQgS6BPjV8p
+
+### LL-69 A route card was put to the Critic before the change it routes was sized (the Service Desk's launch-plan lesson recurred)
+- **What happened:** the Chief of Staff drafted the card asking how the screening starts (upgrade Model-Lab to model 3.7.2, then file the new project) before listing what the upgrade changes. The Critic failed it three times, each time on the upgrade's reach: research filed early would count in the prompt engine's records (round 1), the upgrade changes check results and more than the checks (rounds 1 and 2), and the prompt engine's tests read two replaced scripts and the packs file, so a before-and-after test pass guards only part of it (round 3). The card hit the three-round limit (reviews/P-002-route/critic.md).
+- **Caught by:** the Critic, rounds 1 to 3.
+- **Cause:** the upgrade's footprint was taken from the change notes and the Service Desk's ledger, not from a file-by-file comparison of Model-Lab against the model, and no one checked which of the prompt engine's tests, packs or scripts each changed file reaches. The same root cause as the Service Desk launch plan's rounds 2 and 3 (Service-Desk reviews/M3C/_triage-r3-critic-verbatim.md): the route put before the plan was sized.
+- **Correction proposed:** before a card routes a change, the change's footprint is written down from the files themselves, with what each changed file reaches, and the card cites that record; for the model, the Chief of Staff's card says a route card cites a sized footprint.
+- **Status:** open.
