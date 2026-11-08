@@ -1,13 +1,13 @@
 # Q-012 memo, 2026-11-08: how fast findings about practice lose validity, and how organisations keep their practice up to date
 
-*The Researcher's memo for Q-012, round 2 (brief 172, docs/briefs/172-researcher.md), revised after the Source checker's round 1 (research/Q-012-source-check.md); round 1 was brief 163, in this file's history. Recorded verbatim by the Orchestrator (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-08, from the helper's return; only this italic line is the Orchestrator's, replacing round 1's.*
+*The Researcher's memo for Q-012, round 3 (brief 179, docs/briefs/179-researcher.md), revised after the Source checker's round 2 (research/Q-012-source-check.md); rounds 1 (brief 163) and 2 (brief 172) are in this file's history. Recorded verbatim by the Orchestrator (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-08, from the helper's return; only this italic line is the Orchestrator's.*
 
 **Answer in brief.** Findings about building with AI models do lose validity. No study measures how fast for *practice* findings in this field, though. The nearest evidence is indirect: hosted model behaviour changed within three months (F012-3), benchmarks introduced in 2023 rose 19 to 67 points within a year (F012-5), and gains from prompting techniques depend on the model generation (F012-4; library Q-009-F5-3). Together these point to a shelf life measured in months, not years. That is an estimate. Fields that measure decay directly (medicine, Stack Overflow) find much slower rates, but also that a sizeable share of findings is already outdated when published (F012-2; library Q-009-F13-5). On how organisations keep up:
-- **No review** is the common default, and in it decay goes unnoticed (F012-2, F012-7).
+- **No review** is, in my reading, the common default (opinion). The sources give shares left alone: about 80% of obsolete Stack Overflow answers are never updated (F012-2), and 88% of one cohort of Cochrane reviews had been inactive for 5.5 years or more (F012-7).
 - **Fixed schedules** exist (ISO every 5 years, Shekelle's advice of every 3) but have no measured yield. NICE reportedly dropped its fixed 5-year schedule for priority-based watching (search-only).
-- **Event-triggered review** is cheaper, but the only comparison found is a small pilot (F012-15). One AI incident was caught only after release, by the public (search-only).
-- **Continuous intake (living reviews)** catches new evidence earliest, but every evaluation found reports heavy workload and drop-off. Its sources are mostly its own advocates.
-- **Automated reading** cuts screening work a lot, but recall varies widely by tool and setting. Summaries and citations made by AI are unreliable. The tool-maker's own figures could not be confirmed, and the only independent tests are much less favourable. Every standards body and study author found keeps people checking the output.
+- **Event-triggered review** has no cost figures. The only comparison found is a small pilot of two signal methods (F012-15), not a comparison with scheduled review. One AI incident was caught only after release, by the public (search-only).
+- **Continuous intake (living reviews)** found new evidence earliest in the one test found, for a single review (F012-21). Two evaluations report heavy workload (F012-18, F012-19), and only 35% of COVID-19 living reviews were updated at least once (F012-20). Its sources are mostly its own advocates.
+- **Automated reading** cuts screening work a lot, but recall varies widely by tool and setting. Summaries and citations made by AI are unreliable. The tool-maker's own figures could not be confirmed, and the only independent tests are much less favourable. No source found recommends unchecked automated reading. The joint statement of the review bodies (F012-35) and the authors of F012-26, F012-27, F012-29 and F012-31 keep people checking the output.
 
 The evidence on cost, and on what each way catches and misses, comes almost entirely from evidence synthesis in medicine. The AI-specific sources are mostly 2025–2026 preprints.
 
@@ -16,7 +16,7 @@ Grades: **B** means the Input reader reports it from a page it opened. These are
 ## 1. Do findings lose validity, and how fast?
 
 **Medicine and software (measured decay, other fields)**
-- **Fact, B (F012-1, Poynard et al. 2010, https://ideas.repec.org/a/plo/pone00/0012044.html, abstract only):** Of 474 liver-disease conclusions from 1945–1999, re-rated in 2009, 60% were still judged true, 19% obsolete and 21% false. The 45-year half-life in the authors' 2002 paper is search-only: **assumed (search-only)**.
+- **Fact, B (F012-1, Poynard et al. 2010, https://ideas.repec.org/a/plo/pone00/0012044.html, abstract only):** Of 474 liver-disease conclusions from 1945–1999, updated in 2009, 60% were still judged true, 19% obsolete and 21% false. The 45-year half-life in the authors' 2002 paper is search-only: **assumed (search-only)**.
 - **Fact, library weak (C), Q-005-LF-Q005-15 (repeated by F012-12, Shekelle et al. 2001):** Half of 17 AHRQ guidelines were outdated by 5.8 years, and reassessment every 3 years was recommended. F012-12 adds that 90% were still valid only up to 3.6 years, and that the method combined panel surveys with a literature search. Those additions are **B** (https://www.rti.org/publication/validity-agency-healthcare-research-and-quality-clinical-practice-guidelines-how-quickly-do). Stake: minor, the authors are guideline methodologists.
 - **Fact, library moderate (B), Q-009-F13-5 (Shojania et al. 2007):** Systematic reviews went a median 5.5 years before a signal that an update was needed. 23% had a signal within 2 years, and 7% already at publication.
 - **Fact, B (F012-2, Zhang et al. 2019, https://arxiv.org/abs/1903.12282):** 58.4% of obsolete Stack Overflow answers were probably obsolete when posted, and only 20.5% of obsolete answers are ever updated. This is the nearest field to software practice in the record, and it is about answers, not practice guidance.
@@ -57,7 +57,7 @@ Grades: **B** means the Input reader reports it from a page it opened. These are
 
 **Cost**
 - **Fact, B (F012-8, Borah et al. 2017, https://pmc.ncbi.nlm.nih.gov/articles/PMC5337708):** In a convenience sample of 195 registered reviews (192 with time data), a systematic review took a mean of 67.3 weeks (median 65.8, IQR 41.6), with a mean of about 5 authors. The abstract also gives 42 weeks for funded reviews against 26 for unfunded. These cannot be reconciled with the 67.3-week mean, and the paper leaves them unresolved, so this memo does not rely on them.
-- **Estimate (the source's own), B, opened by the Source checker (F012-9, Michelson & Reuter 2019, relayed by https://researchgold.org/blog/systematic-review-statistics):** Each systematic review costs about $141,194.80. The primary paper reaches this figure from an economic formula, so it is an estimate, not a measured cost. The figure of about 1.72 person-years appears only on the blog: **assumed (search-only)**.
+- **Estimate (the source's own), B, opened by the Source checker (F012-9, Michelson & Reuter 2019, primary paper opened by the Source checker via Europe PMC; its URL is not recorded in the check):** Each systematic review costs about $141,194.80. The primary paper reaches this figure from an economic formula, so it is an estimate, not a measured cost. The figure of about 1.72 person-years appears only on a blog relaying the paper (https://researchgold.org/blog/systematic-review-statistics): **assumed (search-only)**.
 - **Opinion:** These are the costs of a full medical systematic review. A one-off scan of AI practice reading would be far smaller in scope, so the figures transfer as an upper bound only.
 
 **What it caught and missed**
@@ -130,8 +130,8 @@ Grades: **B** means the Input reader reports it from a page it opened. These are
   | Citation alerts (Scopus Citing References) | 5.2 h | 1 |
 
   The new trials did not change the review's results. This is the clearest cost-against-catch evidence in the record, for one review.
-- **Fact, B (F012-22, Simpson et al. 2004, https://www.cambridge.org/core/journals/international-journal-of-technology-assessment-in-health-care/article/assessing-the-accuracy-of-forecasting-applying-standard-diagnostic-assessment-tools-to-a-health-technology-early-warning-system/70CDD85E14DDBF0DEE69A99B43FCF92A, abstract):** The UK horizon-scanning early-warning system had 71% sensitivity, 73% specificity and 14% positive predictive value. Most items it flagged did not matter. The gold standard was imperfect.
-- **Fact, B (F012-23, Bouwman et al. 2020, https://www.usenix.org/conference/usenixsecurity20/presentation/bouwman):** Two commercial threat-intelligence feeds overlapped only 2.5–4.0% for 22 shared actors, and shared indicators appeared about a month later in the other feed. Customers judge feeds by informal heuristics, not measured coverage.
+- **Fact, B (F012-22, Simpson et al. 2004, https://www.cambridge.org/core/journals/international-journal-of-technology-assessment-in-health-care/article/assessing-the-accuracy-of-forecasting-applying-standard-diagnostic-assessment-tools-to-a-health-technology-early-warning-system/70CDD85E14DDBF0DEE69A99B43FCF92A, abstract):** The UK horizon-scanning early-warning system had 71% sensitivity, 73% specificity and 14% positive predictive value, so 86% of its positive predictions were not borne out. The gold standard was imperfect.
+- **Fact, B (F012-23, Bouwman et al. 2020, https://www.usenix.org/conference/usenixsecurity20/presentation/bouwman):** Two commercial threat-intelligence feeds had an average overlap of only 2.5–4.0% in their indicators. The study examined 22 threat actors; the page does not show whether the overlap figure is limited to them. Shared indicators appeared about a month later in the other feed. Customers judge feeds by informal heuristics, not measured coverage.
 - **Opinion:** Any one outside feed covers only part of what exists.
 
 **Gap:** No figures for the cost of producing a living review or guideline. Packer 2012 (10 years of horizon scanning) gave no results in its abstract.
@@ -157,7 +157,7 @@ Grades: **B** means the Input reader reports it from a page it opened. These are
   - Even if confirmed, these figures measure different tasks (screening and extraction accuracy, not search sensitivity), so they would not be a head-to-head contradiction. The only independent tests found are much less favourable.
 
 **Extracting and summarising**
-- **Fact, B (F012-31, Lagisz et al. 2025, preprint, https://ecoevorxiv.org/repository/view/9909/):** Elicit's extracted values agreed 90% across accounts, but its supporting quotes matched only 46% and its reasoning 30%. In high-accuracy mode these fell to 10% and 0%. The authors say it complements but does not replace human extractors.
+- **Fact, B (F012-31, Lagisz et al. 2025, preprint, https://ecoevorxiv.org/repository/view/9909/):** Elicit's extracted values agreed 90%, but its supporting quotes matched only 46% and its reasoning 30%. In high-accuracy mode these fell to 10% and 0%. The authors say it complements but does not replace human extractors.
 - **Fact, B (F012-32, Peters & Chin-Yee 2025, https://arxiv.org/abs/2504.00025v1, abstract):** LLM summaries of science overgeneralised in 26–73% of cases; this range covers DeepSeek, ChatGPT-4o and LLaMA 3.3 70B. The odds of broad generalisation were nearly 5 times those of human summaries (odds ratio 4.85, CI 3.06–7.70). The page says this held for most LLMs, that prompting for accuracy did not remove it, and that newer models "tended to" do worse.
 - **Fact, B (F012-33, DeepTRACE 2025, https://arxiv.org/abs/2509.04499):** Deep-research and generative-search systems made many statements their listed sources do not support, with citation accuracy of 40–80% across systems. The authors' affiliation (possibly Salesforce, a stake) is unconfirmed.
 - **Fact, B (F012-34, Rao et al. 2026, https://arxiv.org/abs/2604.03173):** 3–13% of citation URLs from LLMs and deep-research agents were hallucinated, and 5–18% did not resolve. A URL checker cut non-resolving links to under 1%. Stake: the authors release the checker.
@@ -182,7 +182,7 @@ Grades: **B** means the Input reader reports it from a page it opened. These are
   - If findings last years, as the medical evidence from a different field suggests, that favours infrequent review or none.
   - If the two classes of finding differ, different shelf lives per class may be needed.
 - **Who or what does each step.**
-  - Evidence that tools screen with high recall and cut work (F012-24, F012-27; F012-28 search-only) supports tools at the ranking and screening step.
+  - Evidence that tools can screen with high recall and cut work supports tools at the ranking and screening step. That evidence is F012-24, at a 99% recall setting, and F012-27, whose sensitivity ranged 58–100% across runs; F012-28 is search-only.
   - Evidence that tools search poorly (F012-29), extract unsupported quotes (F012-31), overgeneralise (F012-32) and mis-cite (F012-33, F012-34) supports people at the search, summary and claim-checking steps, or a check placed after each of those steps.
   - Independent tests of Elicit (F012-29, F012-31) are much less favourable than the tool-maker's own figures, which are unconfirmed (F012-30). This bears on whether vendor figures can set where checks sit.
 - **Where checks sit.** The failures found are concentrated in summarising, citation and partial coverage by any one feed (F012-23). The joint statement (F012-35) says human oversight should run across all steps.
@@ -190,7 +190,7 @@ Grades: **B** means the Input reader reports it from a page it opened. These are
   - A full one-off review takes a mean of about 67 weeks with about 5 authors, an upper bound (F012-8).
   - Continuous intake costs 5 minutes to 32 hours a month per review (F012-18), up to 11 FTE in a crisis (F012-19).
   - Cheap alerts cost 5–9 hours a year but miss 3 of 4 new trials (F012-21).
-  - Living efforts stall without dedicated resources (F012-18; library Q-009-F13-6).
+  - Living reviews need considerable resources (library Q-009-F13-6). In one pilot, some teams slowed their cadence or dropped the automation (F012-18).
   - Scheduled and event-triggered review have no cost evidence at all.
 
 ## Questions I add (not closed)
@@ -206,7 +206,7 @@ Grades: **B** means the Input reader reports it from a page it opened. These are
 - Garner 2016 (BMJ update checklist).
 - The FAA airworthiness-directive rules.
 - The OpenAI sycophancy postmortem (opened).
-- Michelson & Reuter 2019 (primary).
+- Michelson & Reuter 2019: the Source checker opened the primary via Europe PMC, but its URL is not yet recorded.
 - Heron 2023 full text.
 - otto-SR full text, with its competing interests.
 - Poynard 2002 (the half-life).
@@ -218,7 +218,7 @@ Grades: **B** means the Input reader reports it from a page it opened. These are
 
 ## Proposed library entries (statement | type | grade | shelf life proposed)
 
-1. Of 474 liver-disease conclusions (1945–1999) re-rated in 2009, 60% were judged true, 19% obsolete and 21% false (Poynard 2010) | fact | B | 10 years
+1. Of 474 liver-disease conclusions (1945–1999) updated in 2009, 60% were judged true, 19% obsolete and 21% false (Poynard 2010) | fact | B | 10 years
 2. 58.4% of obsolete Stack Overflow answers were probably obsolete when posted, and 20.5% of obsolete answers are ever updated (Zhang 2019) | fact | B | 5 years
 3. GPT-3.5 and GPT-4 behaviour changed substantially between March and June 2023, and the authors call for continuous monitoring (Chen, Zaharia, Zou), quoted as two separate fragments | fact | B | 2 years
 4. Gains from structured prompting shrink or turn negative on newer GPT models but persist on Qwen, so strategies must be adapted per model family and generation (Rudyk 2026) | fact | B | 12 months
@@ -234,31 +234,33 @@ Grades: **B** means the Input reader reports it from a page it opened. These are
 14. The Australian COVID-19 living guidelines published 20 weekly updates in about 5 months with 11 FTE, and workload and fatigue were the main challenges (Turner 2022; self-evaluation; abstract and results disagree on satisfaction) | fact | B | 5 years
 15. In a one-year test, only an automated full search found all 4 new trials, 6–12 months early, at 17.1 h against 12.4 h for the reference standard; similar-article alerts (9.4 h) and citation alerts (5.2 h) each found 1 of 4 (Gates 2021) | fact | B | 5 years
 16. A UK health-technology early-warning system had 71% sensitivity, 73% specificity and 14% positive predictive value (Simpson 2004) | fact | B | 10 years
-17. Two commercial threat-intelligence feeds overlapped only 2.5–4.0% on shared actors (Bouwman 2020) | fact | B | 5 years
+17. Two commercial threat-intelligence feeds had an average overlap of only 2.5–4.0% in their indicators (Bouwman 2020) | fact | B | 5 years
 18. Cochrane's RCT classifier found 99.5% of 44,007 RCTs (93.8% counting thin records), with precision about 8% and a 40–70% cut in screening (Thomas 2021; the tool's builders) | fact | B | 3 years
 19. Earlier stopping rules for prioritised screening gave inconsistent recall, and a statistical rule kept recall reliable while saving about 17% (Callaghan 2020) | fact | B | 5 years
 20. LLM screening sensitivity varied by model and configuration (a GPT-4o mini configuration 56.2%, a Llama 3 70B configuration 77.5%), and manual validation remains necessary (López-Pineda 2025) | fact | B | 12 months
 21. GPT-4o screening in a living review excluded no finally-included study in single-pass runs, with one erroneous exclusion in 730 repeated-run decisions; it cut simulated workload 79–86% and needs human oversight (Homiar 2025) | fact | B | 12 months
 22. Independently tested, Elicit's search sensitivity averaged 39.5% against 94.5% for traditional searching (Lau & Golder 2025) | fact | B | 12 months
-23. Elicit's supporting quotes and reasoning matched across accounts only 46% and 30%, falling to 10% and 0% in high-accuracy mode (Lagisz 2025, preprint) | fact | B | 12 months
+23. Elicit's supporting quotes and reasoning matched only 46% and 30%, falling to 10% and 0% in high-accuracy mode (Lagisz 2025, preprint) | fact | B | 12 months
 24. Summaries of science by DeepSeek, ChatGPT-4o and LLaMA 3.3 70B overgeneralised in 26–73% of cases, with nearly 5 times the odds of human summaries (OR 4.85); per the page this held for most LLMs, and newer models tended to do worse (Peters & Chin-Yee 2025) | fact | B | 2 years
 25. Citation accuracy of deep-research and generative-search systems ranged 40–80% (DeepTRACE 2025) | fact | B | 12 months
 26. 3–13% of citation URLs from LLMs and deep-research agents were hallucinated, and URL checking cut non-resolving links to under 1% (Rao 2026; the authors' own tool) | fact | B | 12 months
 27. The Cochrane, Campbell, JBI and CEE joint statement says reviewers should keep human oversight and accountability, demonstrate tool soundness and fully report AI use | fact | B | 3 years
 28. NICE replaced fixed 5-year surveillance with priority-based surveillance and exceptional reviews on significant new evidence | fact | assumed (search-only) | 3 years. Not to be filed until someone opens the NICE page.
-29. A cheap alert finds little of what matters; pair it with a periodic fuller search and measure what each finds (origin F012-21, F012-22, F012-23) | pattern | opinion built on B sources | 3 years
+29. A cheap alert found 1 of 4 new trials in the one test found, and any one outside feed covers only part of what exists; pair a cheap alert with a periodic fuller search and measure what each finds (origin F012-21, F012-23) | pattern | opinion built on B sources | 3 years
 30. Let tools rank and screen for recall; have people verify each summary, quote and citation that a decision rests on (origin F012-24 to F012-35, excluding the unopened F012-28 and F012-30) | pattern | opinion built on B sources | 12 months
 
 ## Finding ids relied on
 
-F012-1 to F012-35. Search-only or unconfirmed, staying assumed and out of the library: F012-13, F012-16, F012-17, F012-28, F012-30, and the blog-only 1.72 person-years in F012-9 and the workload tie and advice in F012-20. Library entries cited: Q-005-LF-Q005-15, Q-005-LP-Q005-09, Q-009-F5-3, Q-009-F5-6, Q-009-F5-8, Q-009-F13-5, Q-009-F13-6, Q-004-F-Q004-3, Q-004-F-Q004-4, Q-004-F-Q004-8, Q-004-P-Q004-1, Q-009-F1-1, Q-009-F8-4, Q-009-F10-3.
+F012-1 to F012-35. Search-only or unconfirmed, staying assumed and out of the library: F012-13, F012-16, F012-17, F012-28, F012-30, the blog-only 1.72 person-years in F012-9, and the workload tie and advice in F012-20. Library entries cited: Q-005-LF-Q005-15, Q-005-LP-Q005-09, Q-009-F5-3, Q-009-F5-6, Q-009-F5-8, Q-009-F13-5, Q-009-F13-6, Q-004-F-Q004-3, Q-004-F-Q004-4, Q-004-F-Q004-8, Q-004-P-Q004-1, Q-009-F1-1, Q-009-F8-4, Q-009-F10-3.
 
 Points for the Source checker:
-- F012-8: now stated as mean 67.3 and median 65.8 in a convenience sample of 195, with the funded and unfunded figures marked unresolved.
-- F012-14: now 8 of 19, with no denominator for the retirement notice.
-- F012-19: the abstract and results disagree on satisfaction.
-- F012-3 does not duplicate Q-009-F5-3 (different authors and study), and is now marked as two fragments.
-- F012-12 adds to Q-005-LF-Q005-15 only the 3.6-year figure and the method.
+- "Answer in brief": the no-review, event-triggered, continuous-intake and automated-reading bullets are restated to the sources named in round 2's corrections 1–5.
+- F012-22: "most items did not matter" is replaced by the arithmetic from the 14% positive predictive value (86% not borne out).
+- F012-23 and entry 17: the overlap is no longer tied to the 22 actors.
+- F012-31 and entry 23: "across accounts" is dropped.
+- F012-1 and entry 1: "updated in 2009".
+- F012-9: the cost is now cited to the primary (opened via Europe PMC), and the blog only for the 1.72 person-years. The primary's URL is not in the check record, so I could not give it.
+- Pattern 29: reworded and F012-22 dropped as an origin, in line with the filed P1.
 
 ## Tokens
 
@@ -268,37 +270,27 @@ My token count is not visible to me.
 
 ## Change list (item: what changed, and the correction it answers)
 
-1. **F012-21 table (section 6) and entry 15:** I swapped the labels, so similar-article alerts (PubMed Similar Articles) now show 9.4 h and citation alerts (Scopus Citing References) 5.2 h, and added both times to entry 15. Correction 1.
-2. **F012-11 and entry 10:** "requires" became "are planned", with roles "including determining the frequency", in a voluntary framework. Correction 2.
-3. **F012-35, entry 27 and "Where checks sit":** "requires" became "should", noting "must" is used only for tool developers; "places human oversight" became "says human oversight should run". Correction 2.
-4. **F012-6 and entry 6:** "cause drift" became "can introduce behavioural drift". Correction 3.
-5. **F012-14 and entry 11:** "a substantive share lagged" and "often lag" became 8 of 19 (42%), plus the median ratio of 1.12 and "greater than 3 times". I noted the abstract gives no denominator for the retirement notice. In consequence, the section 4 opinion now says cadences were missed "for a minority (8 of 19)". Correction 4.
-6. **F012-18 and entry 13:** "participants judged" became "one Cochrane author called it". Correction 5.
-7. **F012-19 and entry 14:** "failures" became "challenges". Correction 5.
-8. **F012-26 and entry 20:** the two figures are now named as single configurations (CHAT_2; LLA_2, Llama 3 70B), not model-wide. Correction 6.
-9. **F012-27 and entry 21:** "excluded no finally-included study" is now limited to single-pass runs. I added the 1 of 730 erroneous exclusion and the unreconciled 73 against 63 counts. Correction 7.
-10. **F012-8 and entry 8:** these now name the convenience sample of 195 and the median of 65.8, and mark the funded and unfunded 42 against 26 weeks as unreconciled and not relied on. I dropped the old median-against-mean caveat as settled, and the "What is affordable" line now reads "a mean of about 67 weeks". Correction 8.
-11. **F012-32 and entry 24:** these name the three models and state "nearly 5 times" as an odds ratio (4.85). "Did not fix it / newer models did worse" is softened to the page's "most LLMs" and "tended to". Correction 9.
-12. **F012-15:** I dropped the stake note "the authors include the developers of both methods". Correction 10.
-13. **F012-22 and entry 16:** I dropped the stake note "authors are from the centre being evaluated" and the "self-evaluation" tag in entry 16. Correction 10.
-14. **F012-9:** this moved from assumed to "B, opened by the Source checker" for $141,194.80, and the mark changed from fact to estimate (the source's own formula). The 1.72 person-years stays assumed as blog-only. Correction 11.
-15. **F012-20:** this is split. The 97, 34 and 35% figures are now "B, opened by the Source checker"; the workload tie and the core-team advice stay assumed. In consequence, F012-20 is removed from the "Living efforts stall" line in "What each answer would change". Correction 11.
-16. **Grades legend:** I added "B, opened by the Source checker", and widened "assumed" to cover pages opened without the claimed content. This follows from corrections 11 and 13.
-17. **Q-009-F5-8 (section 4):** I removed "tied to a fixed publishing cycle" and noted the entry says the page does not state the Radar cadence. Correction 12.
-18. **Q-004-F-Q004-4 (section 1):** "retired 12 to 14 months" became four retired at 12–13 months, plus one not due until 2026-11-30 (about 14 months). Correction 12.
-19. **F012-30 (section 7):** it now says the page was opened but the figures were not found. The subhead "tool-maker and independent tests disagree" is restated as "the tool-maker's figures are unconfirmed, and independent tests are much less favourable". Correction 13, and the rule to restate claims marked not confirmed.
-20. **Knock-on edits from the F012-30 change:** the opening answer's Elicit bullet and the "Who or what does each step" disagreement bullet are restated the same way. Correction 13.
-21. **Entry 28:** it now says "not to be filed until someone opens the NICE page". Correction 13.
-22. **Pattern 30:** the origin now excludes F012-28 and F012-30. Correction 13.
-23. **"Finding ids relied on":** the list of items that stay assumed is updated. Correction 13.
-24. **F012-3 and entry 3:** both are now marked as two separate fragments, not one sentence. Correction 14.
-25. **Points for the Source checker:** updated to match the changes above.
+1. **"Answer in brief", continuous intake bullet:** I replaced "every evaluation found reports heavy workload and drop-off" with the two workload evaluations (F012-18, F012-19) and the 35% update rate (F012-20, figures only). I replaced "catches new evidence earliest" with "found new evidence earliest in the one test found, for a single review (F012-21)". Round 2 corrections 1 and 4.
+2. **"Answer in brief", automated reading bullet:** I replaced "Every standards body and study author found keeps people checking" with the section 7 opinion ("no source found recommends unchecked automated reading"), and named only the supported sources: F012-35 and the authors of F012-26, 27, 29 and 31. Round 2 correction 2.
+3. **"Answer in brief", event-triggered bullet:** I dropped "cheaper" and added "has no cost figures". F012-15 is now described as a pilot of two signal methods, not a comparison with scheduled review. Round 2 correction 3.
+4. **"Answer in brief", no-review bullet:** it is now marked as opinion, and "decay goes unnoticed" is dropped. It now cites the shares the sources give (about 80% never updated, F012-2; 88% inactive, F012-7). Round 2 correction 5.
+5. **F012-22 (section 6):** "Most items it flagged did not matter" became "86% of its positive predictions were not borne out" (100 − 14). Round 2 correction 6.
+6. **Pattern 29 (knock-on from item 5):** "A cheap alert finds little of what matters" became "found 1 of 4 new trials in the one test found", plus the partial-coverage point. F012-22 is dropped as an origin, because after item 5 it no longer supports "what matters". This also matches the filed P1. Mark unchanged (opinion built on B sources). Follows from round 2 correction 6.
+7. **F012-31 and entry 23:** "across accounts" is dropped. Round 2 correction 7.
+8. **F012-1 and entry 1:** "re-rated" became "updated". Round 2 correction 8.
+9. **F012-23 and entry 17:** "for 22 shared actors" / "on shared actors" became an average overlap "in their indicators". The line now notes that the study examined 22 actors, and that it is not shown whether the overlap is limited to them. Round 2 correction 9.
+10. **"What each answer would change", affordability:** "Living efforts stall without dedicated resources" became "need considerable resources (Q-009-F13-6)", with the F012-18 note that some teams slowed their cadence or dropped the automation. Round 2 correction 10.
+11. **"What each answer would change", who does each step:** "tools screen with high recall" became "can screen with high recall". It is now qualified by F012-24's 99% recall setting and F012-27's 58–100% sensitivity range. Round 2 correction 10.
+12. **F012-9:** this is now cited to the Michelson & Reuter 2019 primary, opened by the Source checker via Europe PMC. The blog URL is kept only for the blog-only 1.72 person-years. The "Sources needed" line for Michelson & Reuter now asks only for the primary's URL, which is not recorded in the check. Round 2 correction 11.
+13. **Header italic line, "Points for the Source checker" and this change list:** these replace round 2's versions. The previous round's change list is in the file's history.
+
+No mark changed apart from those above. The opening answer changed only as listed in items 1–4.
 
 ## Finding ids for the Source checker to re-check
 
-- **Findings:** F012-3, F012-6, F012-8, F012-9, F012-11, F012-14, F012-15, F012-18, F012-19, F012-20, F012-21, F012-22, F012-26, F012-27, F012-30, F012-32, F012-35.
-- **Library citations:** Q-009-F5-8, Q-004-F-Q004-4.
-- **Proposed entries 3, 6, 8, 10, 11, 13, 14, 15, 16, 20, 21, 24, 27, 28 and pattern 30:** if the library worktree keeps the round 1 filings, check them against the new wording.
+- **Findings:** F012-1, F012-9, F012-22, F012-23, F012-31. Also the "Answer in brief" bullets, as they rely on F012-2, 7, 15, 18, 19, 20, 21, 26, 27, 29, 31 and 35.
+- **"What each answer would change":** the affordability and who-does-each-step lines, which rely on F012-18, F012-24, F012-27 and library Q-009-F13-6.
+- **Proposed entries 1, 17 and 23, and pattern 29:** check them against the filed Q-012-1, Q-012-17, Q-012-23 and P1 in /home/user/lib-q-012.
 
 ## Tokens
 
