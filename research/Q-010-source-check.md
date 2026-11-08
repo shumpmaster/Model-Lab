@@ -77,3 +77,53 @@ Left out: memo entry 22. An absence claim across a search cannot be source-check
 11. Load-bearing facts need two sources. Most memo findings, including the short-answer claims about naive extrapolation, have one source. 61% rests on one secondary page.
 
 Tokens: I cannot see my token total.
+
+## Round 2 (brief 171)
+
+The round's verdict was FAIL.
+
+All 11 round 1 corrections are addressed in the memo. FAIL is for four outside claims still worded more strongly than the sources support, listed at the end. Two of these I confirmed by re-opening pages (Mitchell, F010-19; Herbold, F010-21). Two come from round 1's own record (F010-30, F010-28/F010-29).
+
+Re-opened this round: Mitchell's abstract on psychologicalscience.org, and Herbold 2017 (arXiv 1705.06429, full PDF). Everything else is checked against round 1's record.
+
+| id | result | reason |
+|---|---|---|
+| F010-1 | holds | Exact NBER quote, "more likely to adopt", "analysed after the fact". |
+| F010-2 | holds | 635 papers and 15,024 estimates, "paraphrasing", no AidGrade stake, grade C. Vivalt is still unopened and disclosed as such. |
+| F010-3 | holds | Low bias is for IHDP only, SDDAP "none... reliably", and the DR/RSMSE quote is exact. "Retrospective" is the memo's own word, not the page's. It is consistent with completed earlier studies and is not stronger than the source. |
+| F010-4 | holds | "Removes most of the differences", "surmise", and the inference is marked Estimate. |
+| F010-5 | holds | "166" and the convergence claim are gone. "Increases with increasing differences in education levels" is attributed to the checker's full-text reading. |
+| F010-10 | holds | "B, secondary only", with Little's post named and the LSE page flagged as unresolved. |
+| F010-13 | holds | "Designed a priori", "exploratory", and "not a test of transfer". |
+| F010-17 | holds | 66 of 100, academics beat non-academics, no platform stake. |
+| F010-18 | holds | r=0.85 deleted. The 70 experiments, post-cutoff result and "systematically overestimated" are as confirmed. |
+| F010-19 | partly holds | The figures are dropped, and the sign-change and I-O claims match the abstract. "Small lab effects transferred worst" does not hold. The abstract says only that large effects replicated "more reliably than medium and small". It does not rank small below medium. |
+| F010-21 | partly holds | The 21/622 = 3.4% with its recall/precision/accuracy > 0.75 definition, "B secondary" and "primary not opened" are correct. The description of the decision trees (Part 1d) does not hold: Herbold says Zimmermann's tree selects the training product, and raises success only in narrow subsets (0.324 in one). It does not "estimate before trying whether it would succeed". Round 1 flagged this and the memo chose to leave it. |
+| F010-24 | holds | No venue, named exceptions kept. |
+| F010-25 | holds | "Challenges the accuracy-on-the-line pattern, does not name Miller". |
+| F010-26 | holds | "Rejected in direction", tier-scaling holds at Level 1, other predictions held or were falsified, and "the one pre-registered transfer prediction" is gone. Minor: "up to 28 points" omits "within a single model (Opus, Level 2)". |
+| F010-27 | holds | Both abstract quotes are as confirmed, and the 52.6%→8.4% figure is deleted. |
+| F010-31 | holds | Quote credited to Ivarsson, former-employee stake stated. |
+
+Proposed entries 1–5, 9, 12, 14, 16, 17 and 23, and the short answer and "what each answer would change" section, match the corrected items. The exceptions are the problems listed below. No item that round 1 marked not confirmed is still relied on. Search-only F010-23 is labelled as such and used in no entry.
+
+**Library entries:** I checked Q-010-1 to Q-010-21 and Q-010-P1 in /home/user/lib-q-010. No entry conflicts with the corrected memo, so I changed nothing and made no commit. Several entries carry caveats the memo dropped, and they stay accurate because they are attributed:
+- the AidGrade stake in Q-010-2;
+- the "reader reports" platform stake in Q-010-12;
+- "Correction to the memo" in Q-010-9 and Q-010-18, which refers to round 1's memo.
+
+Q-010-14 says only that large effects replicated better, so it is already correct on the point where the memo overstates. The grades C for entries 2, 10, 17, 18 and the pattern still differ from the memo's, as filed in round 1.
+
+**What the memo must still correct**
+1. F010-19 (Part 2): drop "small lab effects transferred worst". Say only that large lab effects replicated in the field more reliably than medium and small ones.
+2. F010-21 (Part 1d): replace "built decision trees to estimate before trying a prediction whether it would succeed" with "built a decision tree to select the training project". Remove "the only software-engineering pre-transfer screen found" unless it is re-worded to match. Herbold reports it improves success only for narrow subsets.
+3. F010-30 (Stake line): "The data are correlational survey data" is the Input reader's reading and is not on the page. Attribute it ("the Input reader reads it as correlational") or drop it. Also note that the page says "amplify or unlock".
+4. Benchmark-to-real claims:
+   - The short answer says "Benchmark and simulated-user results did not predict what happened with real users" under "In software and AI". It also says AI-specific evidence "shows that transfer ... often fails".
+   - F010-29 is a medical-advice study, not software. F010-28 says benchmarks "may overestimate", from one model and 18 issues.
+   - Add the medical qualifier and the "may overestimate" hedge in the short answer, in the "what each answer would change" section ("performed poorly") and in the closing "how far the evidence carries over" paragraph.
+5. Minor, non-blocking:
+   - Part 1d's heading "realist... configurations tested inside trials" reads as if tests were run. F010-11 only says that testing "should be perfectly possible within an RCT".
+   - F010-23's "must be 'contextualized'" is stronger than the reader's "call for", and the paper was never opened.
+
+Tokens: I cannot see my token total.
