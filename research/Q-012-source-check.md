@@ -189,3 +189,52 @@ I checked the other entries against the memo and left them as they were. The pat
 11. **F012-9:** the memo says "opened by the Source checker" but gives only the blog URL. Cite the primary (Michelson & Reuter 2019, opened via Europe PMC).
 
 I cannot see my token count.
+
+## Round 3 (brief 181)
+
+The round's verdict was FAIL.
+
+All listed items hold, and all 11 round 2 corrections are applied. The FAIL is for four outside claims in the memo that are worded more strongly than the checks confirmed (see "What the memo must still correct").
+
+Pages were re-opened only for F012-35 and F012-23 (below). Everything else was checked against the rounds 1 and 2 record.
+
+| Id / item | Result | Reason |
+|---|---|---|
+| F012-1 / entry 1 | holds | "updated in 2009" matches the page. The 45-year half-life stays assumed. |
+| F012-9 | holds | The $141,194.80 is cited to the primary (Michelson & Reuter, opened by round 1 via Europe PMC) as a formula estimate. The 1.72 person-years is blog-only and marked assumed. The primary's URL is still unrecorded, and the memo says so. |
+| F012-22 | holds | "86% of positive predictions not borne out" is 100 − 14. The authorship stake note stays dropped. |
+| F012-23 / entry 17 | holds | I re-opened the USENIX page. It says "Even for 22 specific threat actors – which both vendors claim to track – … average overlap of only 2.5% to 4.0%". The memo now ties the overlap to the indicators and says it is not shown whether the figure is limited to the 22 actors. |
+| F012-31 / entry 23 | holds | "Across accounts" is gone from the memo. |
+| Answer in brief: no-review | holds | Marked as opinion. The 80% (F012-2) and 88% (F012-7) match the record. |
+| Answer in brief: event-triggered | holds | "Cheaper" is dropped, "no cost figures" is stated, and F012-15 is described as two signal methods compared. |
+| Answer in brief: continuous intake | holds | Restated to F012-18, F012-19 and the 35% update rate. "Earliest" is limited to the one test, for a single review (F012-21). |
+| Answer in brief: automated reading | holds, with the caveat under correction 1 | Names F012-35 and the authors of F012-26, 27, 29 and 31, and uses the "no source found recommends…" wording. |
+| "What each answer would change": affordability | holds | "Considerable resources" (Q-009-F13-6) and "some teams slowed or dropped" (F012-18). |
+| "What each answer would change": who does each step | holds | "Can screen", qualified by 99% recall (F012-24) and 58–100% (F012-27). |
+| Items rounds 1 and 2 marked not confirmed | none relied on | F012-13, 16, 17, 28 and 30, the 1.72 person-years, and the F012-20 workload tie are all marked assumed or search-only. Entry 28 stays unfiled. |
+
+**Entries changed.** One commit, `202a7d7`, in /home/user/lib-q-012 on build/source-checker/q-012, author source-checker, not pushed. Its last paragraph is exactly the two required lines.
+- `/home/user/lib-q-012/library/facts/Q-012-17.md`: it said "both vendors track 22 specific threat actors". The page says the vendors claim to track them, so the entry now says that.
+- `/home/user/lib-q-012/library/facts/Q-012-23.md`: it cited memo wording ("across accounts") that the memo has dropped. It now says what was compared was not stated on the abstract page.
+- `/home/user/lib-q-012/library/patterns/Q-012-P1.md`: it referred to a memo phrase ("finds little of what matters") that no longer exists. The reference is removed.
+
+I read entries 1, 2, 7, 9, 15, 21, 22 and 24 and found nothing needing change. I did not read entries 3 to 6, 8, 10 to 14, 16, 18 to 20 and 25 to 27 this round, because round 2 had already aligned them.
+
+**What the memo must still correct**
+1. **Elicit comparison.**
+   - The memo says independent tests of Elicit are "much less favourable" than the tool-maker's figures. This appears in the Answer in brief, in section 7 ("The only independent tests found are much less favourable") and in "What each answer would change".
+   - The tool-maker's figures (F012-30) are unconfirmed, so there is nothing confirmed to compare against.
+   - F012-31's 90% value agreement is not clearly less favourable than the claimed 94–99% extraction accuracy.
+   - Say only what F012-29 and F012-31 measured.
+2. **"Already outdated when published".**
+   - The Answer in brief says "a sizeable share of findings is already outdated when published" (F012-2; Q-009-F13-5).
+   - F012-2's 58.4% is a share of the *obsolete* answers, not of all answers.
+   - Q-009-F13-5's confirmed figure is 7% of reviews at publication.
+   - Section 1's "lower bound on the share that is wrong at publication" has the same problem.
+3. **Joint statement.** "What each answer would change" says the joint statement (F012-35) says human oversight "should run across all steps". I re-opened the statement. It says "AI and automation in evidence synthesis should be used with human oversight", and it does not list stages or say "across all steps". The same line says the failures are "concentrated in summarising, citation and partial coverage". That is the memo's reading, and F012-29 is a search failure. Label it as opinion or reword.
+4. **Smaller wordings.**
+   - "Cheap alerts cost 5–9 hours a year but miss 3 of 4 new trials" needs "in one test, for one review".
+   - "Gains … hold on Qwen" (F012-4) should be limited to Few-Shot and CCoT on one task, as round 1 recorded.
+   - "Fields that measure decay directly … find much slower rates" has no confirmed Stack Overflow rate behind it. F012-2 gives shares, not a rate, and the 45-year half-life is assumed.
+
+Token count: I cannot see it.
