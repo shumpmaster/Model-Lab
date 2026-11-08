@@ -97,3 +97,55 @@ Nothing was left out. Not filed, as the memo also did not propose them: F014-5, 
 13. F014-33: restore "too often" in "moved glacially". F014-34: the page says 5,700 items on the MBS, not "reviewed". F014-19: the authors work at a member agency rather than "ran" it. F014-10 and entry 7: the primary paper is now opened at abstract level, and Aggarwal's 18% differs from 9/47 = 19.1%.
 14. The "Library files read" list should include F13-2, F13-8 and F7-7. The cited Q-009 entries are on branches q009-a and q009-b, not on portfolio main.
 15. F014-21, F014-31: remain unconfirmed, so keep them marked assumed.
+
+## Round 2 (brief 175)
+
+The round's verdict was FAIL.
+
+All 15 round 1 corrections are applied and hold. The scan of the rest of the memo found five outside claims worded more strongly than the sources, so it is not clean. I did not re-open the pages. Round 1's records were enough for every re-checked id.
+
+| id | Result | Reason |
+|---|---|---|
+| F014-1 | holds | The memo now says 149 of 1,633 cause attributions, not 9.1% of the 630 accidents, and says the bases differ. |
+| F014-7 | holds | It is now two audits' recommendations, marked opinion. The refinery audit gives close-out and the time limit. The Middle East plant audit gives routine review of open MOCs. |
+| F014-8 | holds | "Consultant" and "hypothetical" are gone, and the stake reads "none stated on the page". |
+| F014-9 | holds | The value-for-money wording is the report PDF's own. The memo says it was confirmed from the PDF, not the web page. |
+| F014-10 | holds | It is graded on the primary abstract. 9 of 47 is 19.1% against the paper's 18%, which the memo notes. The charity quote is marked search-only. |
+| F014-13 | holds | It is a modelled "would have displaced". The release calls the threshold probably too high. The "displaces more than it gains" rule is marked as the memo's own opinion. |
+| F014-14 | holds | It is one interviewee's estimate that the decision-making body accepted recommendations about half the time. Government "almost always" followed the Board. The advisory share is split out. The heading is neutral, and F014-14 no longer counts as override. |
+| F014-17 | partly holds | "Do not do" reminders are narrowed to one included study (two NICE topics). However, "Without a sustainability plan, clinicians revert" is still under Fact. Round 1 found it is the authors' argument. |
+| F014-19 | holds | It now says "work at a member agency". |
+| F014-20 | holds | "Existed earlier" and "stopped" are removed, and the memo says it is not evidence of stopping. |
+| F014-21 | holds as marked | It stays marked assumed and unconfirmed, and is not proposed. It is still used as support in two places (see below). |
+| F014-23 | holds | Stabilized maintenance keeps a 10-year status review. The current ANSI text is flagged as not opened. |
+| F014-25 | holds | The status record is separate from the "Rejected Ideas" purpose. The memo says the page does not state index retention. |
+| F014-29 | holds | It is marked as opened by the checker, not proposed, and the page is undated. |
+| F014-32 | holds | It is no longer under cost of declining. The cause given is lack of harmonisation. |
+| F014-33 | holds | "Too often moved glacially" is restored, and the memo says the report itself was not opened. |
+| F014-34 | holds | The page says 5,700 items on the MBS, not "reviewed". It is kept as commentary only. |
+| F014-35 | holds | "Told them that work wasn't welcome", individuals from Apple, Mozilla and Opera, and the "I get paid for it" stake are all as round 1 found them. |
+
+No item round 1 marked not confirmed is relied on as fact. F014-31 and F014-21 are labelled assumed throughout, but F014-21 still props up two conclusions (point 5 below).
+
+**Library entries changed** (one commit, `ceac97c` on build/source-checker/q-014, library/ only, not pushed)
+- The patterns P22, P23 and P24 and their README rows.
+- P22 said "expiry date", but the memo now says "time limit". P22 also said the sources were "not recommendations", yet the audit items are recommendations. Both are fixed, and the stray reference to the memo's wider wording is removed.
+- P23's title said a "do not do" list "rarely changes practice", but the finding rests on one included study. The title is narrowed to that.
+- P24's title said provisional approvals "mostly end up confirmed", but the source is one scheme, the reformed Cancer Drugs Fund. The title is narrowed to that.
+- The fact entries Q-014-1, -4, -6, -7, -9, -10, -12, -14, -17, -20 and -21 already match the corrected memo, so I left them alone. Some contain sentences about what "the memo" said in round 1. These are stale but do not conflict.
+
+**What the memo must still correct**
+1. Opening bullet 2 and §5, "Provisional adoption with re-appraisal tends to confirm":
+   - The source says 19 of 20 exits were "recommended", not "approved".
+   - It says 60% "did not fully resolve" the doubt. The opening bullet drops "fully".
+   - The heading "tends to become permanent" and the line "Estimate. Provisional approvals mostly become permanent" go beyond one scheme, 20 technologies and one consultancy abstract.
+2. §5 F014-17: move "clinicians revert without a sustainability plan" out of Fact and attribute it as the authors' argument, as the library entry does.
+3. §2 F014-6 and the "what each answer would change" list: the paper only asks "Could a short and long form … be used?". "The author suggests short and long forms" and "short and long forms of review by risk" are stronger than that. "By risk" is not on the page.
+4. §4 F014-33: "This is a cost of slow retirement" is the memo's reading, unmarked. The review is about slow action on harm. Mark it as opinion.
+5. §6 closing opinion and the "stopping rules" bullet: "weak links to the people who decide" and "F014-21 show neglect" still lean on unconfirmed F014-21. For health scanning, drop F014-21 as support, or say the claim rests on Zalando (F014-26) and EuroScan staffing (F014-19) only.
+
+Smaller points, optional:
+- §1 says MOC accidents "did not decrease" as fact. The authors assert it with no trend figures.
+- The opening bullet "many change failures trace to … temporary changes" rests on 10.1%. Planned changes are the largest share, at 45.6%.
+
+I cannot see my total tokens.
