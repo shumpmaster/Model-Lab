@@ -1,14 +1,14 @@
 # Q-014 memo: what organisations that scan outside practice found when judging, approving, declining, retiring and stopping (2026-11-08)
 
-*The Researcher's memo for Q-014, round 2 (brief 170, docs/briefs/170-researcher.md), revised after the Source checker's round 1 (research/Q-014-source-check.md); round 1 was brief 162, in this file's history. Recorded verbatim by the Orchestrator (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-08, from the helper's return; only this italic line is the Orchestrator's, replacing round 1's.*
+*The Researcher's memo for Q-014, round 3 (brief 178, docs/briefs/178-researcher.md), revised after the Source checker's round 2 (research/Q-014-source-check.md); rounds 1 (brief 162) and 2 (brief 170) are in this file's history. Recorded verbatim by the Orchestrator (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-08, from the helper's return; only this italic line is the Orchestrator's.*
 
-*Researcher, 2026-11-08, revised after source-check round 1. Sources: the Input reader's findings (research/Q-014-input.md), which are untrusted, the Source checker's round-1 findings (research/Q-014-source-check.md), and the portfolio library. I did not use the web, and model memory is not used as a source.*
+*Researcher, 2026-11-08, revised after source-check rounds 1 and 2. Sources: the Input reader's findings (research/Q-014-input.md), which are untrusted, the Source checker's round-1 and round-2 findings (research/Q-014-source-check.md), and the portfolio library. I did not use the web, and model memory is not used as a source.*
 
 The evidence does not show whether scanning and adopting outside practice brings benefit, no benefit or harm. No source compares organisations that scan with ones that do not. What it does show, across process safety, health technology assessment, standards bodies and software, is a set of failure patterns that keep recurring:
 
 - **Adopting is easier than retiring.** Practices stay in place after their evidence goes. Rules to stop doing something either go unapplied or barely change practice.
-- **"Adopt now, review later" tends to become permanent.** Under the reformed Cancer Drugs Fund, 19 of 20 provisional drugs were later approved, even though 60% of the reviews had not resolved the original doubt.
-- **Heavy, one-size-fits-all approval invites bypassing.** Many change failures trace to having no change process at all, or to temporary changes.
+- **In one scheme, "adopt now, review later" almost always ended in a recommendation.** Under the reformed Cancer Drugs Fund, 19 of 20 provisional drugs were later recommended, even though 60% of the reviews had not fully resolved the original doubt. This is one scheme of 20 technologies; whether it holds elsewhere is untested.
+- **Heavy, one-size-fits-all approval invites bypassing.** Many change failures trace to having no change process at all. Temporary changes are one share of MOC failures (10.1%); planned changes are the largest share (45.6%).
 - **A scanner that is not tied to a decision tends to fade.** In the one software case, a radar with no formal process was easy to ignore and depended on fading volunteer effort.
 
 Some fixes are described, but none has had its outcome measured:
@@ -36,7 +36,8 @@ The cost of adopting is quantified in a few health cases. The cost of declining 
 - **Opinion.** Every finding below is therefore observational.
 
 **Process-safety change control (MOC) shows harm when the process is absent or weak, not proof that it helps.**
-- **Fact, B (F014-1, exact).** Across 630 chemical-industry accidents from 1990 to 2015, MOC failure made up 9.1% of the cause attributions (149 of 1,633 attributions, since accidents had multiple causes). It is not 9.1% of the 630 accidents. MOC-related accidents did not decrease over the period.
+- **Fact, B (F014-1, exact).** Across 630 chemical-industry accidents from 1990 to 2015, MOC failure made up 9.1% of the cause attributions (149 of 1,633 attributions, since accidents had multiple causes). It is not 9.1% of the 630 accidents.
+  - **Opinion (the authors' assertion, B, F014-1).** The authors state that MOC-related accidents did not decrease over the period; they give no trend figures.
   - *Disagreement:* the same paper cites a study (Gambetti 2013, not opened) putting 80% of large incidents down to MOC failure. A separate search (F014-5, B) found only 4 of 891 eMARS reports explicitly MOC-related, and its author doubts the data's quality. The figures differ by an order of magnitude and use different bases (cause attributions, large incidents, reports), probably because incidents are coded differently.
 - **Fact, B (F014-4).** In OSHA's refinery inspections (2007–2011), MOC was 9% of process-safety citations, and 42% of those were for having no MOC system established or in use.
   - The OSHA figures are secondary.
@@ -86,7 +87,7 @@ The cost of adopting is quantified in a few health cases. The cost of declining 
   - Temporary changes were 10.1% of MOC failures and are linked to time pressure.
   - Requested (planned) changes were the largest share of MOC failures (45.6%).
   - Under urgency, breakdown changes saw bypassing and simplified risk assessment.
-- **Opinion, B (F014-6, F014-7).** Heavy, uniform MOC is seen as bureaucratic and invites bypassing. Signatories pile up to cover competence gaps. The author suggests short and long forms.
+- **Opinion, B (F014-6, F014-7).** Heavy, uniform MOC is seen as bureaucratic and invites bypassing. Signatories pile up to cover competence gaps. The author asks whether a short and long form could be used; this is posed as a question, not a recommendation.
   - *Stake:* consultancy.
 - **Opinion, B (fetch) (F014-8).** Shortcuts follow when MOC takes longer than the change itself. A repeat change may skip full MOC only if the earlier one was properly documented.
   - *Stake:* none stated on the page.
@@ -134,7 +135,8 @@ The cost of adopting is quantified in a few health cases. The cost of declining 
 **Cost of declining.**
 - **Fact, B (fetch); opinion-laden (F014-35).** In 2004 the W3C "told them that work wasn't welcome" (continuing HTML work), and individuals from Apple, Mozilla and Opera founded WHATWG outside W3C. W3C later "changed its mind" and let XHTML2's charter expire at the end of 2009.
   - *Stake:* the author says "I get paid for it"; no payer is named.
-- **Fact, B (fetch, secondary on the official review) (F014-33).** The Cumberlege review found a system that failed to listen to patients and, when it acted, "too often moved glacially". This is a cost of slow retirement.
+- **Fact, B (fetch, secondary on the official review) (F014-33).** The Cumberlege review found a system that failed to listen to patients and, when it acted, "too often moved glacially".
+  - **Opinion (mine).** I read this as a cost of slow retirement. The review itself is about slow action on harm, not about retirement.
   - The report itself was not opened.
 - **Gap.** No source quantifies the cost of a rejected proposal. The UK Accelerated Access Review's slow-adoption figures could not be confirmed.
 
@@ -152,11 +154,11 @@ The cost of adopting is quantified in a few health cases. The cost of declining 
   - The RFC's own counts are inconsistent (61 vs 44).
 - **Opinion.** "Retire unless someone speaks up" was used there to clear a backlog.
 
-**Provisional adoption with re-appraisal tends to confirm.**
+**In one scheme, provisional adoption with re-appraisal almost always ended in a recommendation.**
 - **Fact, B (fetch) (F014-12).** Under the reformed Cancer Drugs Fund, 19 of 20 exits were recommended, yet 12 of 20 (60%) did not fully resolve the original uncertainty.
   - *Stake:* the authors' consultancy serves pharmaceutical clients.
   - **Assumed (search-only):** a 2025 abstract reports 23 of 24 re-appraisals positive.
-- **Estimate.** Provisional approvals mostly become permanent.
+- **Opinion.** In this one scheme (20 technologies, one consultancy abstract), provisional recommendations mostly became full ones. Whether provisional approvals elsewhere behave the same way is untested.
 
 **Tiered lifetimes by maturity.**
 - **Fact, B (fetch; page truncated) (F014-30).** Kubernetes does not remove GA APIs within a major version. Beta APIs are served at least 9 months or 3 releases after deprecation. Alpha APIs can be removed without notice.
@@ -167,7 +169,8 @@ The cost of adopting is quantified in a few health cases. The cost of declining 
 - **Opinion, assumed (search-only) (F014-31).** The authors argue that never removing deprecated features has cheapened deprecation.
 
 **Telling people to stop rarely works alone.**
-- **Fact, B (fetch) (F014-17).** A scoping review of 109 papers found active change interventions most likely to produce de-adoption. In one included study (two NICE topics), "do not do" reminders showed no association with practice change. That is not a finding of the review as a whole. Without a sustainability plan, clinicians revert.
+- **Fact, B (fetch) (F014-17).** A scoping review of 109 papers found active change interventions most likely to produce de-adoption. In one included study (two NICE topics), "do not do" reminders showed no association with practice change. That is not a finding of the review as a whole.
+- **Opinion, B (fetch) (F014-17).** The authors argue that without a sustainability plan, clinicians revert.
 - **Fact, B (fetch, via news) (F014-18).** Of 7 Choosing Wisely low-value services, 2 declined slightly, 3 stayed flat and 2 rose.
   - *Stake:* the data and lead author are from Anthem, an insurer.
 
@@ -206,7 +209,7 @@ The cost of adopting is quantified in a few health cases. The cost of declining 
   - The Source checker opened the abstract and did not find either statement in it. This stays unconfirmed.
   - *Stake:* the authors run the programme.
 - **Fact, B (exact) (F014-19).** Almost half of EuroScan agencies had fewer than 2 full-time staff.
-- **Opinion.** The recorded way scanning fails is neglect: weak links to the people who decide, and thin staffing. A decision to stop has not been recorded.
+- **Opinion.** The recorded way scanning weakens is neglect, not a decision to stop. This rests on Zalando's radar, which had no formal process and faded (F014-26), and on thin EuroScan staffing (F014-19) only. F014-21 is unconfirmed and is not relied on. A decision to stop has not been recorded.
 
 **Not found.** Whether AHRQ's horizon scanning or HealthPACT closed, and any company that announced dropping its tech radar.
 
@@ -279,7 +282,7 @@ None of these needs a paid source or a level-5 expert as far as I can tell. The 
   - tiered stability with stated removal notice (F014-30);
   - named, accountable decision-makers for retirement (F014-26);
   - records of rejected and superseded proposals (F014-25; library F7-6);
-  - short and long forms of review by risk (F014-6).
+  - short and long forms of review (F014-6, posed there only as a question).
 
   None has outcome evidence, so each would enter as an opinion-grade pattern.
 - **Documented harms become things to avoid.** Documented:
@@ -287,34 +290,34 @@ None of these needs a paid source or a level-5 expert as far as I can tell. The 
   - temporary changes (F014-2);
   - heavy uniform process that invites bypassing (F014-6, -8);
   - adoption without an evaluable outcome (F014-9);
-  - provisional approval that confirms without resolving doubt (F014-12);
+  - provisional approval that, in one scheme, was recommended without fully resolving doubt (F014-12);
   - advisory scanning whose advice is watered down (F014-34, commentary only). F014-14 does not show override: in one interviewee's estimate, advice was accepted about half the time by the decision-making body, and government almost always followed the Board;
   - slow action on harm (F014-33);
   - deprecation without removal (F014-31, search-only).
-- **Finding no benefit, or a high cost of declining.** No net-benefit evidence was found either way. The cost of declining is documented only anecdotally (F014-35, -33). The cost of adopting is quantified only in health (F014-9, and the modelled F014-13). How much this weighs on whether and how to scan is for the owner to judge.
+- **Finding no benefit, or a high cost of declining.** No net-benefit evidence was found either way. The cost of declining is documented only anecdotally (F014-35; F014-33 on my reading only). The cost of adopting is quantified only in health (F014-9, and the modelled F014-13). How much this weighs on whether and how to scan is for the owner to judge.
 - **Retirement and stopping rules that worked or failed.**
   - *Failed:* passive "do not do" reminders (one included study in F014-17; F014-18) and a review rule never applied (F014-24).
   - *Active de-adoption:* associated with change, in one scoping review (F014-17).
   - *Automatic lapse:* exists, with no outcome measured.
-  - *Stopping rules:* none with any record of working or failing were found. F014-20 shows only that no coordinated process existed in 2022. F014-26 and F014-21 (search-only) show neglect, not rules.
+  - *Stopping rules:* none with any record of working or failing were found. F014-20 shows only that no coordinated process existed in 2022. F014-26 shows neglect, not rules; F014-21 is search-only and unconfirmed, so it is not relied on.
 
 ---
 
 ## Proposed library entries
 *(statement | type | grade | proposed shelf life; all grades pending the source check)*
 
-1. Han Siong et al. 2017: across 630 chemical-industry accidents (1990–2015), MOC failure made up 9.1% of cause attributions (149 of 1,633), with no decrease over the period; they cite Gambetti's 80% as a disagreeing figure | fact | B | 5 years
+1. Han Siong et al. 2017: across 630 chemical-industry accidents (1990–2015), MOC failure made up 9.1% of cause attributions (149 of 1,633); the authors assert no decrease over the period, without trend figures; they cite Gambetti's 80% as a disagreeing figure | fact | B | 5 years
 2. Han Siong et al.: temporary changes were 10.1% of MOC failures, linked to time pressure; Flixborough recommended the same review as for permanent changes | fact | B | 5 years
 3. Laughland (ABB, consultancy stake): OSHA refinery inspections 2007–2011, MOC was 9% of citations and 42% of those were for no MOC system (secondary figures) | fact | B | 5 years
 4. Laughland: two named audits (a Seveso III refinery, a Middle East chemical plant) recommended formal close-out, time limits on temporary MOCs and a routine review of all open MOCs; these are recommendations, not general findings | opinion | B | 5 years
-5. Laughland: MOC seen as bureaucratic risks bypassing; suggests short and long forms | opinion | B | 5 years
+5. Laughland: MOC seen as bureaucratic risks bypassing; asks whether a short and long form could be used | opinion | B | 5 years
 6. NAO 2015: Cancer Drugs Fund cost £968m (Oct 2010 – Mar 2015), overspent, and its effect on outcomes could not be evaluated; the work was not designed to assess value for money (report PDF) | fact | B | 10 years
 7. Aggarwal et al., Annals of Oncology 28(8) (abstract opened): of 47 fund indications, 18% met ESMO benefit criteria (9 of 47, which is 19.1%) and 55% (26) had been rejected by NICE; a patient charity disagreed (search-only) | fact | B (abstract only) | 10 years
 8. Haycock et al. (ISPOR 2022, pharma-consultancy stake): 19 of 20 Cancer Drugs Fund exits recommended; 60% did not fully resolve the original uncertainty | fact | B | 3 years
 9. Claxton et al. (York release): NHS threshold estimated at £18,317 per QALY (2008 spending); in a modelled hypothetical, ranibizumab for DMO would have displaced 4,367 QALYs; the release says the threshold in use is probably too high | estimate | B | 5 years
 10. Leggett et al. 2012: barriers to health-technology reassessment; many programmes advisory; one interviewee estimated the decision-making body accepted recommendations about half the time, with government almost always following the Board | fact | B | 5 years
 11. Docherty et al. 2011: of 65 "cannot recommend" Cochrane reviews, 43% gave disinvestment candidates; many interventions were already out of use | fact | B | 10 years
-12. Niven et al. 2015: active change interventions most likely to produce de-adoption; in one included study, "do not do" reminders not associated with change; reversion without a sustainability plan | fact | B | 5 years
+12. Niven et al. 2015: active change interventions most likely to produce de-adoption; in one included study, "do not do" reminders not associated with change; the authors argue clinicians revert without a sustainability plan | fact (the reversion point is the authors' argument) | B | 5 years
 13. Rosenberg et al. (via AJMC; Anthem stake): of 7 Choosing Wisely services, 2 declined, 3 stayed flat, 2 rose (data to 2013) | fact | B | 5 years
 14. Packer et al. 2015 (authors at a member agency): of 15 EuroScan agencies, 5 named removing obsolete technology as a purpose; almost half had under 2 FTE | fact | B | 5 years
 15. ISO/TC 211: IS reviewed every 5 years, TS every 3; confirm, revise or withdraw by vote; withdrawal needs a further 8-week ballot | fact | B | 3 years
@@ -326,7 +329,7 @@ None of these needs a paid source or a level-5 expert as far as I can tell. The 
 21. Medicines Australia 2022: no nationally coordinated horizon-scanning process in Australia (not evidence that one existed or stopped) | fact | B | 2 years
 22. Pattern: give every temporary change a time limit, close changes out formally, and review all open items routinely. Origin: two audits' recommendations and Flixborough (items 2, 4). Effect unmeasured | pattern | opinion built on B | 3 years
 23. Pattern: pair any "stop doing" ruling with active change work, not a list alone. Origin: items 12 (one included study for the reminders result) and 13 (medicine) | pattern | opinion built on B | 3 years
-24. Pattern: expect provisional approvals to confirm; state in advance what evidence would reverse one. Origin: item 8 | pattern | opinion built on B | 3 years
+24. Pattern: in the one scheme studied (the reformed Cancer Drugs Fund), provisional approvals mostly ended recommended; state in advance what evidence would reverse one. Origin: item 8 | pattern | opinion built on B | 3 years
 
 Not proposed: F014-28 (unreliable source); search-only items F014-21 and -31 until opened (-21 was opened at abstract level and not confirmed); F014-23 (a 2016 slide; current ANSI text not opened) and F014-29 (attributed staff opinion, undated page), both now opened by the Source checker but not proposed in this round; F014-11, -16, -27, -33, -34, -35 (attributed opinion or secondary; fileable only as attributed opinion if the checker wishes).
 
@@ -354,49 +357,32 @@ I cannot see my total tokens.
 
 ---
 
-# Change list
+# Change list (this round, answering source-check round 2)
 
-| # | Item | What changed | Correction |
+| # | Item | What changed | Correction (round 2) |
 |---|---|---|---|
-| 1 | §3 F014-14; heading; "what each answer would change"; entry 10 | "Interviewees" and "government accepted … half the time" became one interviewee's estimate that the decision-making body accepted recommendations about half the time, with government almost always following the Board. The heading "its advice is often overridden" became "how far its advice is taken up is mixed". The advisory share is split out as a fact. F014-34 is kept as commentary only. In the harms list, F014-14 no longer counts as override. | 1 |
-| 2 | Opening, 4th bullet | "A scanner not tied to a decision gets ignored … 'customers' are lacking" became "tends to fade", supported by Zalando (F014-26) alone. F014-14 no longer supports "ignored", and F014-21 is not confirmed. | 1, 15 |
-| 3 | §6 F014-20; entry 21; gap 15; stopping-rules bullet | Deleted "a national unit had existed earlier" and "when it stopped, and why, is unknown". Added that the item is not evidence of stopping. Gap 15 rephrased to ask whether such a unit ever existed. | 2 |
-| 4 | §4 F014-35; stakes row | "W3C members voted down" became the W3C "told them that work wasn't welcome". "Browser makers" became "individuals from Apple, Mozilla and Opera". "The vote count is search-only" was deleted. The stake "worked on HTML5" became "says 'I get paid for it', payer not named", the stake the check confirmed. | 3 (and the stake-note instruction) |
-| 5 | §4 F014-32; §2 F014-32; "what each answer would change"; entry 20 | Removed F014-32 from "Cost of declining" and from the cost-of-declining evidence. §2 now gives the cause as a lack of harmonised approaches. | 4 |
-| 6 | §1 F014-1; entry 1 | 9.1% is now 149 of 1,633 cause attributions, not 9.1% of the 630 accidents. In the disagreement note, the bases are said to differ. | 5 |
-| 7 | §5 F014-7; opening 3rd bullet; patterns list; harms list; entry 4; pattern 22 | "Audits found …" became recommendations from two named audits, each recommendation attributed to its audit. The mark changed from fact/opinion to opinion. "Temporary changes left open" became "temporary changes" (F014-2), since F014-7 no longer supports "left open". Pattern 22's origin is now two audits' recommendations. In the opening fixes list and the transfer note, "expiry dates" became "time limits". | 6 |
-| 8 | §5 F014-17; failed-rules bullet; entry 12; pattern 23 | "Do not do" reminders with no association are narrowed to one included study (two NICE topics), not the review as a whole. | 7 |
-| 9 | §5 F014-25; entry 17 | The status record ("still important to have a record") is now separate from the "Rejected Ideas" section, which serves to avoid repeat proposals. Added that the page does not say Rejected or Withdrawn PEPs stay in the index. | 8 |
-| 10 | §2 F014-8; stakes table | Dropped "consultant" and "hypothetical". The stake is now "none stated on the page", and the Sutton row is removed. | 9 |
-| 11 | §4 F014-13; entry 9; "what each answer would change" | The displacement is now marked as a modelled hypothetical ("would have displaced"), with the release's view that the threshold is probably too high. The "above the threshold displaces more than it gains" rule is now marked as my opinion, not the page's. | 10 |
-| 12 | §1 F014-9; entry 6 | The value-for-money statement is now the report's own wording, confirmed from the report PDF by the checker. | 11 |
-| 13 | §5 F014-23; §5 F014-29; "Not proposed"; finding ids | F014-23 moved from assumed to B, and stabilized maintenance now keeps a 10-year status review instead of being exempt. F014-29 moved from assumed to B. Both are still not proposed, with the reason given. | 12 |
-| 14 | §4 F014-33; §3 F014-34; §2 F014-19 and stakes row; §1 F014-10, entry 7, gap 1 | "Too often" restored before "moved glacially". "5,700 items reviewed" became "on the MBS". "Ran a member agency" became "work at a member agency". F014-10 is now graded on the primary abstract, with the 18% vs 9/47 = 19.1% note. In entry 7, the charity's disagreement is marked search-only. | 13 |
-| 15 | Library files read; finding ids | Added F13-2, F13-8 and F7-7, which I read in this round. Noted that the Q-009 entries sit on branches q009-a and q009-b, not portfolio main. | 14 |
-| 16 | §5 F014-31; §6 F014-21; "Not proposed" | Both are kept as assumed. Added that the checker could not open -31, and that -21's abstract, once opened, did not contain the quoted statements. | 15 |
-| 17 | Researcher italic line; grading key | These now say the memo is revised after round 1, and that B covers pages the Source checker opened. | consequence of 10–13 |
+| 1 | Opening bullet 2 | "Tends to become permanent" became "In one scheme … almost always ended in a recommendation". "Approved" became "recommended", and "had not resolved" became "had not fully resolved". I added that this is one scheme of 20 technologies and is untested elsewhere. | 1 |
+| 2 | §5 CDF heading and closing line; harms list; pattern 24 | The heading is now scoped to one scheme. "Estimate. Provisional approvals mostly become permanent" became an opinion limited to this scheme (20 technologies, one consultancy abstract), and it says the general case is untested. The harms-list line and pattern 24 are narrowed to the one scheme, to match the library's P24 title. | 1 |
+| 3 | §5 F014-17; entry 12 | "Without a sustainability plan, clinicians revert" is moved out of Fact into a separate Opinion, attributed to the authors. Entry 12 now attributes it as the authors' argument. | 2 |
+| 4 | §2 F014-6; "what each answer would change" patterns list; entry 5 | "The author suggests short and long forms" became "the author asks whether a short and long form could be used", posed as a question. "Short and long forms of review by risk" became "short and long forms of review (posed there only as a question)". "By risk" is dropped. Entry 5 is reworded to match. | 3 |
+| 5 | §4 F014-33; "Finding no benefit" bullet | "This is a cost of slow retirement" is now marked as my opinion, and it notes the review is about slow action on harm. The F014-33 citation as a cost of declining is marked "on my reading only". | 4 |
+| 6 | §6 closing opinion; "stopping rules" bullet | "Weak links to the people who decide" is dropped. The opinion now rests on Zalando (F014-26) and EuroScan staffing (F014-19) only, and says F014-21 is not relied on. The stopping-rules bullet no longer cites F014-21 as showing neglect. | 5 |
+| 7 | §1 F014-1; entry 1 | "MOC-related accidents did not decrease" moved out of Fact. It is now an opinion: the authors' assertion, with no trend figures. Entry 1 is reworded to match. | optional point 1 |
+| 8 | Opening bullet 3 | "Or to temporary changes" became: temporary changes are one share (10.1%), and planned changes are the largest share (45.6%). | optional point 2 |
+| 9 | Researcher italic line | Now says the memo is revised after source-check rounds 1 and 2. | consequence |
 
-The opening answer otherwise stands. The CDF figures, the adopt/retire gap and the absence of benefit evidence are unchanged.
+The rest of the opening answer stands. Nothing else was changed, and no new outside claims were added.
 
 # Finding ids for the Source checker to re-check
 
-F014-1, F014-7, F014-8, F014-9, F014-10, F014-13, F014-14, F014-17, F014-19, F014-20, F014-21, F014-23, F014-25, F014-29, F014-32, F014-33, F014-34, F014-35.
+F014-1, F014-2, F014-3, F014-6, F014-12, F014-17, F014-19, F014-21, F014-26, F014-33.
 
-Library entries to re-check: Q-014 entries 1, 4, 6, 7, 9, 10, 12, 14, 17, 20, 21 and patterns 22, 23. Library file list: Q-009-F13-2, F13-8 and F7-7.
+Library entries to re-check: Q-014 entries 1, 5, 12 and pattern 24, whose filed versions may now differ from the memo's wording.
 
 # Notes for the Orchestrator
 
-- **Points I left alone.** The check's findings table raises points that are not in its "must correct" list. As told, I did not change them:
-  - F014-6: the short/long form is posed as a question.
-  - F014-1: "not decreasing" is stated with no trend figures.
-  - F014-17: reversion is the authors' argument.
-  - F014-26: the "too high number" sentence covers tooling.
-  - F014-28: "demoted" is loose.
-  - F014-9: the overspend was 35%.
-  - F014-11 and F014-18: the dates.
-
-  Say if any of these should be made in a further round.
-- **Header line.** The first italic line is yours and still names brief 162. Update it for this round's brief if needed.
+- **Header line.** I left the first italic line, which is yours, verbatim. It still describes round 2 (brief 170), so you may want to update it for this round's brief.
+- **Earlier change list.** The previous round's change list, re-check list and notes are replaced by the ones above.
 
 # Tokens
 
