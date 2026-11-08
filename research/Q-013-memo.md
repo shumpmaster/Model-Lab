@@ -1,16 +1,18 @@
-# Q-013 memo: what few-run trials of a process change can show (Researcher, 2026-11-08)
+# Q-013 memo: what few-run trials of a process change can show (Researcher, 2026-11-08; revised after source check round 1)
 
-*The Researcher's memo for Q-013 on brief 156 (docs/briefs/156-researcher.md), 2026-11-08, recorded verbatim by the Orchestrator (session_01QBwHGNSLmSrYQgS6BPjV8p) from the helper's return; only this italic line is the Orchestrator's. Its B items stay unconfirmed until the Source checker has opened them (research/Q-013-source-check.md).*
+*The Researcher's memo for Q-013, round 2 (brief 169, docs/briefs/169-researcher.md), revised after the Source checker's round 1 (research/Q-013-source-check.md); round 1 was brief 156, in this file's history. Recorded verbatim by the Orchestrator (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-08, from the helper's return; only this italic line is the Orchestrator's, replacing round 1's.*
 
-**Answer as far as the evidence goes.** With one to a few tens of runs, a trial can reliably find only large effects. Two things are done under my own stated assumptions (Calc, below): a paired comparison of 10 runs detects, at 80% power, a difference of roughly one standard deviation of the run-to-run differences, and 20 runs detect about two-thirds of one. For pass/fail work, the library's McNemar arithmetic gives about 0.70–0.77 power for a 20-point gain at 50 paired tasks, and about 0.25 for a 10-point gain.
+**Answer as far as the evidence goes.** With one to a few tens of runs, a trial can reliably find only large effects. Two things are done under my own stated assumptions (Calc, below): a paired comparison of 10 runs detects, at 80% power, a difference of roughly one standard deviation of the run-to-run differences, and 20 runs detect about two-thirds of one. For pass/fail work, the library's McNemar arithmetic (Q-003-F-i) gives two figures, both resting on assumed discordance rates:
+- about 0.70–0.77 power for a 20-point gain at 50 paired tasks, assuming 25% of tasks pass only under the new arm and 5% only under the old;
+- about 0.25 for a 10-point gain, assuming 15% and 5%.
 
-Below that level the trouble goes beyond missing real effects. The results that do come out significant often overstate the effect and sometimes have the wrong sign (Gelman & Carlin). A significant result is also less likely to be real (Button et al.), especially where most ideas fail (Larsen et al. report more than half fail, and 90% or more in some domains).
+Below that level the trouble goes beyond missing real effects. The results that do come out significant often overstate the effect and sometimes have the wrong sign (Gelman & Carlin). A significant result is also less likely to be real (Button et al.), especially where most changes fail. Larsen et al. report that more than half of ideas fail, and that in some domains 90% or more of experiments fail, counting bad ideas and buggy implementations together.
 
-Pairing each run with its own control is the largest gain available. Two practices keep the nominal false-result rate honest:
-- **A frozen plan.** Undisclosed flexibility, including choosing measures or re-running, raises false positives far above 5% (Simmons et al.; Gelman & Loken; Henderson et al. on random seeds).
+Pairing each run with its own control reduces the variance of the difference (library Q-003-F-a, B, single origin). That it is the largest gain available is my opinion. Two practices keep the nominal false-result rate honest:
+- **A frozen plan.** Undisclosed flexibility, including choosing measures or re-running, raises false positives far above 5% (Simmons et al.; Gelman & Loken). In one experiment, random seed alone produced statistically different distributions of results (Henderson et al., who measure no false-positive rate).
 - **Either no repeated looks or a pre-declared sequential rule.** Five uncorrected looks raise 5% to 14% (Lakens). Pocock, O'Brien-Fleming, SPRT or always-valid p-values control it.
 
-Bayesian methods do not remove the peeking problem when default priors are used; the sources disagree only for purely subjective priors. With small samples, default priors can also act as strong priors. Single-case and crossover designs can work, but serial correlation and carryover cut their power sharply.
+On Bayesian methods and peeking, the sources agree about purely subjective priors: Bayesian updating then does not depend on the stopping rule. They disagree about default or pragmatic priors. There, the resilience to optional stopping "can break down" (de Heide & Grünwald), though not for every default prior: their "Type 0" priors are fine. A blogger's simulation of a fixed posterior threshold with peeking gave 80% false positives. In small-sample Bayesian SEM, default priors can also act as highly informative priors. Single-case and crossover designs can work, but serial correlation and carryover cut their power sharply.
 
 On whether trials may run at the same time, the evidence is thin and comes from huge-scale web A/B testing. There, interactions were rare, but they could not have been found at few-run scale. Factorial designs are a deliberate way to run several changes at once. An eval vendor advises one change at a time.
 
@@ -21,15 +23,16 @@ I found no evidence on what a trial costs, other than one vendor's illustrative 
 ## 1. What size of effect few runs can detect, and the chance of a false result
 
 - **Paired t-test power.** One example gives about 0.4 power at n=10 and 0.72 at n=20 for its stated difference; it judges 20 or fewer runs inadequate for that difference. A pingouin example detects d≈0.66 at n=20 with 80% power.
-  - Fact. Grade: assumed (search-only). F013-1, https://support.minitab.com/minitab/help-and-how-to/statistics/power-and-sample-size/how-to/hypothesis-tests/power-and-sample-size-for-paired-t/interpret-the-results/key-results
+  - Minitab example: Fact. Grade B. F013-1, https://support.minitab.com/minitab/help-and-how-to/statistics/power-and-sample-size/how-to/hypothesis-tests/power-and-sample-size-for-paired-t/interpret-the-results/key-results
+  - Pingouin example: Fact. Grade: assumed (search-only).
   - Stake: Minitab sells statistics software.
-  - The raw-unit figure needs the example's SD before it means anything, and I do not have it.
+  - The raw-unit figure needs the example's SD before it means anything, and the page does not give it.
 - **My own calculation.** Paired t-test, two-sided alpha 0.05, 80% power. The minimum detectable effect, in SDs of the paired differences, is about (1.96+0.84)/√n, plus a small-sample t correction:
   - n=10: about 0.9–1.0
   - n=20: about 0.63–0.66
   - n=30: about 0.51–0.53
   - Estimate (Calc). It assumes independent runs and normal differences. The n=20 figure agrees with the pingouin extract (F013-1). The Source checker should recompute it.
-- **Pass/fail work (library, not re-researched).** 10 discordant pairs need 9 in one direction to be significant, and 20 need 15. At 50 paired tasks, power is about 0.70–0.77 for a 20-point gain and about 0.24–0.25 for a 10-point gain. Unpaired 50 against 50 detects about 28 points.
+- **Pass/fail work (library, not re-researched).** 10 discordant pairs need 9 in one direction to be significant, and 20 need 15. At 50 paired tasks, power is about 0.70–0.77 for a 20-point gain (assuming 25% and 5% discordance) and about 0.24–0.25 for a 10-point gain (assuming 15% and 5%). Unpaired 50 against 50 detects about 28 points.
   - Fact. Library Q-003-F-i, strong (Calc), with the discordance rates as assumptions.
 - **A practitioner's pass-rate calculation.** A 100-example eval detects about a 15-point difference, and a paired (McNemar) design needs "an order of magnitude fewer examples" than two independent arms.
   - Fact (practitioner calculation). Grade B. F013-5, https://dev.to/gabrielanhaia/eval-set-sizing-the-statistical-power-math-behind-llm-ab-tests-4gpc
@@ -43,7 +46,7 @@ I found no evidence on what a trial costs, other than one vendor's illustrative 
 - **Illustration of the false-result chance (my calculation, using Button et al.'s logic).** Take alpha 0.05 and power 0.3, which is typical of a few-run trial of a moderate effect.
   - If half the tried changes are real, about 86% of significant results are true.
   - If 10% are real, about 40% are true.
-  - Estimate (Calc, illustrative). The 10% case uses the "90% or more fail in some domains" rate from F013-27 (B). That rate comes from web-scale experiment programmes, and whether it holds for process changes is unknown.
+  - Estimate (Calc, illustrative). The 10% case uses the "90% or more" rate from F013-27 (B). That rate is for experiments that failed, from a combination of bad ideas and buggy implementation, not for ideas with no real effect. Reading it as "90% of changes have no real effect" is therefore an assumption. The rate also comes from web-scale experiment programmes, and whether it holds for process changes is unknown.
 - **Run-to-run noise in agent and model evaluation.**
   - In 8 models with 3 runs each, a single run reversed at least one pairwise ranking in 10 of 12 slices. Two runs removed about 83% of those reversals, and pairwise significance conclusions never flipped.
     - Fact. Grade B. F013-6, https://arxiv.org/abs/2509.24086 (preprint; the figures come from the fetch tool's summary).
@@ -61,7 +64,7 @@ I found no evidence on what a trial costs, other than one vendor's illustrative 
   - **Disagreement:** practitioners say low-traffic sites can still test bigger changes (search-only).
   - Transfer: web traffic economics, not staff-time trials. Very weak transfer.
   - Note for the Source checker: the Input reader's cost gap note calls this finding "F013-23". The finding that holds the euro figures is F013-26.
-- **Indirect evidence on the value side.** More than 50% of ideas fail in general, and 90% or more in some domains. Most positive changes are small, so experiments struggle for adequate power.
+- **Indirect evidence on the value side.** More than 50% of ideas fail in general. In some domains, 90% or more of experiments fail, from a combination of bad ideas and buggy implementation. Most positive changes are small, so experiments struggle for adequate power.
   - Fact. Grade B. F013-27, https://ar5iv.labs.arxiv.org/html/2212.11366
   - Stake: some authors are industry experimentation practitioners.
 - **Sequential designs can lower the expected cost.** They need fewer participants on average (Lakens, F013-13, B). The SPRT has the smallest average sample number for its error rates (F013-17, assumed search-only). The "40–60% saving" figure comes from a vendor calculator (search-only) and should not be used.
@@ -71,37 +74,38 @@ I found no evidence on what a trial costs, other than one vendor's illustrative 
 ## 3. Designs available for so few runs
 
 - **Paired, crossover and N-of-1 designs.**
-  - Crossover designs need fewer subjects when within-subject variation is small. Carryover, period effects and dropouts can make the data "nearly useless", and two-stage carryover tests are discredited ("efficiency is often a mirage").
+  - Crossover designs need fewer subjects when within-subject variation is small. Carryover, period effects and dropouts can make the data "nearly useless". Two-stage carryover tests "seem to have been discredited" (Senn), and "efficiency is often a mirage".
     - Opinion and fact from a practitioner poster. Grade B. F013-23, https://support.sas.com/resources/papers/proceedings/proceedings/sugi24/Posters/p221-24.pdf (1999; pages 1–2 opened).
-  - An N-of-1 crossover simulation with 400 observations and a 0.3 SD effect gave 0.85 power with no serial correlation. With serial correlation 0.75, a single-period design fell to 0.13 power, and 40 alternating periods recovered it to 0.68. Power to detect carryover was weak.
+  - An N-of-1 crossover simulation with 400 observations and a 0.3 SD effect gave 0.85 power with no serial correlation. With serial correlation 0.75, a single-period design fell to 0.13 power. 40 periods per intervention (80 in all) recovered it to 0.68. Power to detect carryover was weak.
     - Fact. Grade B. F013-22, https://pmc.ncbi.nlm.nih.gov/articles/PMC6787650/
     - Transfer: consecutive pieces of an organisation's work done by the same people or agents are plausibly serially correlated, so alternating arms often matters. This transfer is an opinion.
 - **Single-case designs (WWC standards).**
-  - A case acts as its own control. The standard requires three demonstrations of the effect and at least four A/B phases, and a basic AB design rarely supports causal inference. The panel itself says the three-demonstrations rule has "no formal basis" and is a conceptual norm.
+  - A case acts as its own control. The 2010 pilot standard requires three demonstrations of the effect, at least four A/B phases, and at least 5 data points per phase to meet standards (3 to meet them with reservations). With a basic AB design, valid causal inference is "difficult". The panel itself says the three-demonstrations rule has "no formal basis" and is a conceptual norm.
     - Fact. Grade B. F013-21, https://ies.ed.gov/ncee/WWC/Docs/ReferenceResources/wwc_scd.pdf (2010 pilot version; pages 1–6).
-  - Later versions require 5 data points per phase. CEC's research division disputes that minimum. Both are search-only.
+  - CEC's research division disputes the 5-data-point minimum (search-only).
   - Library Q-009-F4-5 (B): only 4 of 115 medical N-of-1 studies met WWC standards.
 - **Sequential and adaptive designs.**
   - Pocock and O'Brien-Fleming boundaries or alpha spending control error across looks and need fewer participants on average. Estimates from a trial that stops early overstate the effect.
     - Fact (an established method). Grade B. F013-13, https://lakens.github.io/statistical_inferences/10-sequential.html
-  - Always-valid p-values (mSPRT) allow stopping at any time while controlling Type I error, at some cost in sample size and power.
+  - Always-valid p-values (mSPRT) allow stopping at any time while controlling Type I error, and let users trade off sample size and power efficiently.
     - Fact. Grade B. F013-16, https://arxiv.org/abs/1512.04922
     - Stake: authors are linked to Optimizely (search-only).
   - SPRT optimality: F013-17, assumed (search-only).
 - **Small-sample Bayesian methods.**
-  - These are not a quick fix. With small samples, default priors can act as highly informative priors. The paper advises using them only with real prior information plus a sensitivity analysis.
+  - These are not a quick fix. In Bayesian structural equation modelling (SEM) with small samples, default priors can act as highly informative priors. The paper advises priors drawn from previous research or from thought about which values are implausible, together with a sensitivity analysis.
     - Fact and opinion. Grade B. F013-24, https://www.frontiersin.org/articles/10.3389/fpsyg.2020.611963/full
     - The same point is attributed to McNeish 2016 (search-only).
-  - A trade press summary says FDA draft guidance (January 2026) treats borrowing of prior data as especially valuable where small populations limit traditional designs.
+    - Transfer: the source's setting is SEM. Applying it to simpler few-run comparisons is my opinion.
+  - A trade press summary (14 January 2026) of FDA draft guidance says Bayesian methods "may be especially valuable in rare disease and pediatric trials". It makes the point about using prior or external data in a separate sentence.
     - Fact about a summary. Grade B. F013-25, https://appliedclinicaltrialsonline.com/view/fda-issues-draft-guidance-advance-bayesian-methods-clinical-trials
     - The FDA text was not opened, and it is a draft.
-    - Transfer: the gain depends on having trustworthy prior data, which for a new process change an organisation usually lacks. This is an opinion.
+    - Transfer: where the gain comes from prior or external data, it depends on having trustworthy prior data, which for a new process change an organisation usually lacks. This is an opinion.
 - **Gap.** No head-to-head comparison of these designs at n of 1–30 was found. The comparison above is put together from separate sources (opinion).
 
 ## 4. Frozen plan, re-running until a better answer, and repeated looks
 
 - **Re-running and selection.**
-  - Ten RL runs that differed only in random seed, split into two groups of five, looked like different algorithms. Selecting the top-N trials, or averaging fewer than 5 runs, was common and misleading.
+  - In one experiment (TRPO on HalfCheetah-v1), ten RL runs that differed only in random seed were split into two groups of five, and the groups gave "statistically different distributions". Selecting the top-N trials, or averaging fewer than 5 runs, was common and misleading. The paper measures no false-positive rate.
     - Fact. Grade B. F013-8, https://ar5iv.labs.arxiv.org/html/1709.06560
   - Undisclosed flexibility, including optional stopping and choice of measures, raises real false-positive rates far above 5%.
     - Fact. Grade B. F013-9, https://stafforini.com/works/simmons-2011-falsepositive-psychology-undisclosed/
@@ -113,7 +117,7 @@ I found no evidence on what a trial costs, other than one vendor's illustrative 
   - Registered Reports, whose plans are peer-reviewed before data, had 44% positive results against 96% in standard reports (71 against 152 papers).
     - Fact. Grade B. F013-18, https://www.psychologicalscience.org/journals/ampps/25152459211007467/
     - A search extract says the authors do not claim this proves the format reduces bias.
-  - In 193 matched pairs, preregistered studies did not have fewer positive results, smaller effects or fewer errors. They had more power analyses and larger samples, and there was no robust evidence that preregistration prevents p-hacking.
+  - 193 preregistered studies, compared with 193 related studies, did not have fewer positive results, smaller effects or fewer errors. They had more power analyses and larger samples, and there was no robust evidence that preregistration prevents p-hacking.
     - Fact. Grade B. F013-19, https://research-portal.uu.nl/en/publications/preregistration-in-practice-a-comparison-of-preregistered-and-non/
   - Reconciliation (opinion): a plan that is reviewed and binding (F013-18) may differ from a plan that is only filed (F013-19).
   - Critics argue that preregistration does not fix the underlying problems.
@@ -128,7 +132,7 @@ I found no evidence on what a trial costs, other than one vendor's illustrative 
     - Transfer: for a few-run trial, even 3–5 informal looks matter.
 - **Bayesian monitoring: the sources disagree.**
   - Miller's page (F013-11) and Etz summarising Rouder (F013-14, B) say optional stopping does not affect the interpretation of posterior odds. https://alexanderetz.com/2016/03/06/sunday-bayes-optional-stopping-is-no-problem-for-bayesians/ ; Rouder's original was not opened.
-  - De Heide & Grünwald say this resilience breaks down with default or pragmatic priors, though not with purely subjective ones.
+  - De Heide & Grünwald agree for purely subjective priors: Bayesian procedures then "do not depend on the stopping rule". They say the resilience "can break down" with default or pragmatic priors, and they separate default priors that are "no-problem-at-all" (Type 0) from those that are not.
     - Fact. Grade B. F013-15, https://ar5iv.labs.arxiv.org/html/1708.08278 (read in part).
   - A blogger's simulation found that a fixed posterior threshold with peeking gave 80% false positives.
     - Fact (practitioner simulation). Grade B. F013-12, https://www.alexmolas.com/2025/10/30/bayesian-ab-test-peeking.html
@@ -163,12 +167,12 @@ I found no evidence on what a trial costs, other than one vendor's illustrative 
 
 ## What each answer would change (as Q-013 puts it; not a recommendation)
 
-- **If few-run trials cannot separate real effects from noise,** adoption rests on whatever other evidence there is. The evidence fits this reading for small effects: below roughly 0.5 SD at 20–30 paired runs, or below about 20 points on pass/fail work at tens of tasks. Significant results there are also likely to be exaggerated.
+- **If few-run trials cannot separate real effects from noise,** adoption rests on whatever other evidence there is. The evidence fits this reading for small effects: below roughly 0.5 SD at 20–30 paired runs, or below about 20 points on pass/fail work at tens of tasks (under the assumed discordance rates). Significant results there are also likely to be exaggerated.
 - **If they can separate only large effects, or only in some designs,** a trial can gate only changes expected to matter that much. The evidence fits this reading best:
   - effects of about 1 SD at about 10 paired runs, or about 0.65 SD at 20;
   - paired or alternating designs with a frozen plan;
   - a fixed number of runs or a pre-declared sequential rule.
-  - Single-period or AB designs, uncorrected peeking, and default-prior Bayesian stopping fall outside this.
+  - Outside this reading fall: single-period or AB designs, uncorrected peeking, and Bayesian stopping with default or pragmatic priors, where the resilience to optional stopping can break down.
 - **If they can,** a trial can serve as the gate. No source shows this for effects of ordinary size at few runs.
 - **On simultaneous changes,** the evidence separates two cases:
   - Changes crossed by randomised design may run together (factorial, F013-28b).
@@ -181,24 +185,25 @@ I found no evidence on what a trial costs, other than one vendor's illustrative 
 1. Small, noisy studies give significant estimates of exaggerated size (power below 0.5) or the wrong sign (power below 0.1); design calculations should use effect sizes from outside the study (Gelman & Carlin 2014) | fact | B | 10 years
 2. Low power lowers both the chance of detecting a real effect and the chance that a significant result is real (Button et al. 2013); disputed on dependence on prevalence | fact | B | 10 years
 3. Uncorrected repeated looks raise a nominal 0.05 alpha to 0.142 after 5 looks; group-sequential boundaries or alpha spending control it, and early-stop estimates overstate effects (Lakens, citing Armitage 1969) | fact | B | permanent (mathematics)
-4. Always-valid p-values (mSPRT) permit continuous monitoring with Type I error control, trading sample size and power (Johari, Pekelis & Walsh); stake: Optimizely | fact | B | 10 years
-5. Optional stopping is safe for Bayesian inference with subjective priors but not with default or pragmatic priors (de Heide & Grünwald); disagrees with Rouder via Etz | fact | B | 10 years
-6. With small samples, default Bayesian priors can act as highly informative priors; use real prior information with a sensitivity analysis (Smid & Winter 2020) | fact | B | 10 years
-7. Registered Reports had 44% positive results against 96% in standard reports (Scheel et al. 2021), but matched preregistered studies showed no fewer positive results (van den Akker et al. 2024): the sources disagree | fact | B | 5 years
+4. Always-valid p-values (mSPRT) permit continuous monitoring with Type I error control and let users trade off sample size and power efficiently (Johari, Pekelis & Walsh); stake: Optimizely | fact | B | 10 years
+5. With purely subjective priors, Bayesian procedures do not depend on the stopping rule. With default or pragmatic priors, resilience to optional stopping can break down, though "Type 0" default priors are fine (de Heide & Grünwald). Rouder, via Etz, says optional stopping is no problem | fact | B | 10 years
+6. In small-sample Bayesian SEM, default priors can act as highly informative priors; use priors from previous research or from thought about implausible values, with a sensitivity analysis (Smid & Winter 2020) | fact | B | 10 years
+7. Registered Reports had 44% positive results against 96% in standard reports (Scheel et al. 2021), but preregistered studies compared with related studies showed no fewer positive results (van den Akker et al. 2024): the sources disagree | fact | B | 5 years
 8. Undisclosed analytic flexibility, including optional stopping, raises false-positive rates far above 5% (Simmons et al. 2011) | fact | B | 10 years
-9. Seed-only differences between groups of five RL runs looked like different algorithms; top-N selection is misleading (Henderson et al.) | fact | B | 5 years
-10. In N-of-1 crossover designs, serial correlation sharply cuts power (0.85 to 0.13 at r=0.75), and many alternating periods partly recover it (0.68) (Wang & Schork 2019) | fact | B | 10 years
-11. The WWC single-case "three demonstrations" rule has no formal basis by the panel's own account; basic AB designs rarely support causal inference (Kratochwill et al. 2010) | fact | B | 10 years
+9. In one RL experiment (TRPO, HalfCheetah-v1), two groups of five runs that differed only in random seed gave statistically different distributions; top-N selection is misleading (Henderson et al.) | fact | B | 5 years
+10. In N-of-1 crossover designs, serial correlation sharply cuts power (0.85 to 0.13 at r=0.75), and 40 periods per intervention partly recover it (0.68) (Wang & Schork 2019) | fact | B | 10 years
+11. The WWC single-case "three demonstrations" rule has no formal basis by the panel's own account; the 2010 pilot requires at least 5 data points per phase (3 with reservations), and basic AB designs make valid causal inference difficult (Kratochwill et al. 2010) | fact | B | 10 years
 12. Microsoft ExP found interactions between concurrent A/B tests rare (0.002% of pair-metrics in one of four products) at web scale, with possible undetected interactions; stake: own platform; not for few-run settings | fact | B | 3 years
 13. Factorial designs need fewer subjects than one experiment per factor and can estimate interactions (Collins, Dziak & Li 2009) | fact | B | permanent (method)
 14. Minimum detectable paired effect at alpha 0.05 and 80% power is about 0.9–1.0 SD of differences at n=10, 0.63–0.66 at n=20 and 0.51–0.53 at n=30, assuming independent, normal differences | fact (calculation) | Calc, to be recomputed by the Source checker | permanent for the mathematics
-15. Pattern: gate a change by a few-run trial only if the expected effect is at least the design's minimum detectable effect; pair or alternate the runs, freeze k, the measure and the stopping rule (fixed, or a declared sequential boundary), and report every run | pattern | opinion built on B sources plus library Q-003-P-a and Q-003-F-i | 3 years
+15. Pattern: gate a change by a few-run trial only if the expected effect is at least the design's minimum detectable effect; pair or alternate the runs, freeze k, the measure and the stopping rule (fixed, or a declared sequential boundary), and report every run | pattern | opinion built on B sources plus library Q-003-P-a, Q-003-F-a and Q-003-F-i | 3 years
 16. Pattern: let trials overlap only when crossed by randomised (factorial) assignment; otherwise run them in turn | pattern | opinion built on B sources (F013-28b, F013-28c) plus library F8-6 and F8-8; the sources disagree | 3 years
 
 ## Finding ids relied on (for the Source checker)
 
 - **Opened by the Input reader:** F013-2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 21, 22, 23, 24, 25, 26, 27, 28, 28b, 28c
-- **Search-only, so assumed:** F013-1, 17, 20, and the sub-notes under F013-1, 2, 11, 17, 21, 24, 26, 27, 28c
+- **Opened by the Source checker, round 1:** F013-1 (the Minitab page; now B)
+- **Search-only, so assumed:** the F013-1 pingouin extract, F013-17, F013-20, and the sub-notes under F013-2, 11, 17, 21, 24, 26, 27, 28c
 - **Library:** Q-003-F-a, Q-003-F-i, Q-003-P-a, Q-009-F4-2, F4-5, F8-4, F8-5, F8-6, F8-7, F8-8
 - **Calc items to recompute:** minimum detectable effect by n (section 1); the PPV illustration (section 1)
 - **Flags:**
@@ -206,6 +211,50 @@ I found no evidence on what a trial costs, other than one vendor's illustrative 
   - F013-21 has no stake field.
   - Fetch-tool quotes need exact re-checking: F013-5, F013-6, F013-15, and the Table 5 figures in F013-28b.
 - **Sources needed but not gathered:** Rouder 2014 (original); the FDA draft guidance text; the CEC position paper; any independent costing of trials; any study of few-run trials or concurrent changes in software or agent workflows. No level-5 expert or paid source is requested.
+
+## Tokens
+I cannot see my token count.
+
+---
+
+## Change list
+
+| # | Item | What changed | Answers correction |
+|---|---|---|---|
+| 1 | Answer, Bayesian paragraph | The old line, "disagree only for purely subjective priors", was wrong. It now says the sources agree for purely subjective priors and disagree for default or pragmatic priors. It uses "can break down" and says Type 0 default priors are fine. | 1 |
+| 2 | Section 4, F013-15 | "Breaks down" became "can break down". Added the subjective-prior quote and the Type 0 distinction. | 1 (and the F013-15 row) |
+| 3 | Entry 5 | Restated the same way as item 2. | 1 |
+| 4 | "What each answer would change", last point of the second reading | "Default-prior Bayesian stopping" became "default or pragmatic priors, where the resilience can break down". | 1 |
+| 5 | Answer, pairing sentence | Now cites Q-003-F-a (B, single origin) for variance reduction only. "Largest gain available" is marked as my opinion. Q-003-F-a added to entry 15's basis. | 2 |
+| 6 | Section 3, F013-21 | The 5-points-per-phase rule (3 with reservations) is now in the 2010 pilot itself. "Later versions" was removed. AB designs: "rarely supports" became "difficult". The CEC dispute is kept, still search-only. | 3 |
+| 7 | Entry 11 | Restated the same way as item 6. | 3 |
+| 8 | Section 3, F013-23 | "Are discredited" became "seem to have been discredited (Senn)". | 3 |
+| 9 | Section 4, F013-8 | Removed "looked like different algorithms". Now: "statistically different distributions", in one TRPO/HalfCheetah-v1 experiment. Added that the paper measures no false-positive rate. | 4 |
+| 10 | Answer, frozen-plan bullet | Henderson moved out of the "false positives far above 5%" claim into its own sentence, with the same caveat as item 9. | 4 |
+| 11 | Entry 9 | Restated the same way as item 9. | 4 |
+| 12 | Answer, Button/Larsen sentence | "Most ideas fail" became "most changes fail". The 90% is now experiment failure counting bad ideas and buggy implementations. | 5 |
+| 13 | Section 1, PPV illustration | Added the caveat that the 90% includes buggy implementations, so reading it as a 90% no-effect share is an assumption. Still Estimate (Calc, illustrative). | 5 |
+| 14 | Section 2, F013-27 | 90% reworded as experiment failure from bad ideas plus buggy implementation. | 5 |
+| 15 | Section 3, F013-16, and entry 4 | "At some cost in sample size and power" became "trade off sample size and power efficiently". | 6 |
+| 16 | Section 3, F013-24 | Bayesian SEM setting named. "Real prior information" became priors from previous research or from thought about implausible values. Transfer to simpler comparisons added, marked opinion. | 6 |
+| 17 | Answer, F013-24 sentence, and entry 6 | Restated the same way as item 16. | 6 |
+| 18 | Section 3, F013-25 | "Borrowing of prior data" replaced. The article's wording is Bayesian methods "may be especially valuable in rare disease and pediatric trials", with prior or external data in a separate sentence. Article date added. The transfer opinion is now conditional on the gain coming from prior data. | 6 |
+| 19 | Section 4, F013-19, and entry 7 | "Matched pairs" / "matched preregistered studies" became 193 preregistered studies "compared with 193 related studies". | 6 |
+| 20 | Section 3, F013-22, and entry 10 | "40 alternating periods" became "40 periods per intervention (80 in all)". | 6 |
+| 21 | Answer, McNemar figures | The assumed discordance rates (25%/5% and 15%/5%) are now stated in the answer. Also added to section 1 and to the first reading in "What each answer would change". | 7 |
+| 22 | Section 1, F013-1, and the "Finding ids relied on" lists | The Minitab page moved from assumed to B (the check confirmed it). The pingouin extract stays assumed. "I do not have the SD" became "the page does not give it". | 8 and the F013-1 row (move from assumed to B) |
+| 23 | F013-17, F013-20, Button reply, Simmons body (optional stopping), Rouder 2014, Armitage 1969, FDA text | Unchanged. All still assumed or open. | 8 |
+
+- **Stake notes:** the check marked none as unconfirmed, so none were dropped. The Optimizely link (F013-16) stays labelled search-only, as before.
+- **Fact/estimate/opinion marks:** only the pairing claim (now opinion) and the F013-1 grade changed. The PPV illustration stays an illustrative estimate, with a stronger caveat.
+
+## Finding ids for the Source checker to re-check
+
+- **Findings:** F013-1 (the Minitab grade move), F013-8, F013-15, F013-16, F013-19, F013-21, F013-22, F013-23, F013-24, F013-25, F013-27.
+- **Answer paragraph:** the Bayesian wording, the pairing sentence and the McNemar assumptions.
+- **Library entries now cited in the answer:** Q-003-F-a and Q-003-F-i.
+- **Proposed entries reworded:** 4, 5, 6, 7, 9, 10, 11 and 15.
+- **Calc:** the PPV illustration's caveat.
 
 ## Tokens
 I cannot see my token count.
