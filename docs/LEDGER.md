@@ -107,3 +107,16 @@ holdouts: changed
 decided_by: orchestrator (a record of the sheet route; no ruling)
 proposed_by: claude-opus-5-5 (the Orchestrator in the Chief of Staff's session)
 reversibility: irreversible
+
+## L-0008 — Model v3.7.2 adopted: a later project item may have a plan of its own, keeping the Critic's role file for experiment E-003
+date: 2026-11-08
+type: ruling
+supersedes: []
+scope: project
+expires: never
+asked: Model-Lab runs model 3.6.0, whose checks assume one project per repository, so the second idea (the screening of cutting-edge practice, P-002) cannot be filed here (docs/LESSONS.md LL-16). Bring Model-Lab to 3.7.2 (S-035 one plan per project item; S-036 the check run's copy; S-037 a cut-short history), as the owner ruled on 2026-11-08 ("Upgrade now, then start (Recommended)", questions/P-002-route.md), without disturbing the prompt engine (P-001)?
+decision: Copied byte for byte from the model at a1706c2 (tools/ and template-v3/ unchanged since b18259c, 3.7.2): governance/checks/ governance_checks.py, govlib.py, orchestrator.py, orchestrator_git.py, session_runner.py and v3_checks.py (each was the model's 3.6.0 copy, 3a2606a); template-v3's .github/workflows/orchestrator.yml, governance/BRIEFS.toml, intake/requests/README.md, docs/SETUP.md, docs/gates/_GATE.md, docs/users/_PROFILE.md, .claude/agents/builder.md, definer.md and researcher.md, and docs/projects/README.md and _TEMPLATE.md (new). The model's 3.6.0-to-3.7.2 change is applied to governance/PACKS.toml (docs/projects lines in nine standard roles; this repository's roles, S-001-analysis and S-001-holdout among them, unchanged) and governance/SURFACES.md (two lines). OPERATING_MODEL_VERSION reads 3.7.2. Two known deviations: .claude/agents/critic.md keeps its 3.6.0 text until experiment E-003 has its result, because E-003's held-back checks are written from it as it stands (experiments/E-003.md:31); until then each brief sending the Critic a P-002 plan carries its S-035 line, and the file takes the model's copy in a change of its own after E-003. docs/PROJECT.md keeps its section 3 instruction line unchanged, so the prompt engine's plan reads exactly as before. On a copy of main, every prompt-engine test and every governance check gave the same result before and after (intake/P-002-upgrade-footprint-2026-11-08.md). Nothing written before is rewritten.
+licenses_next: The screening files its project request with its own plan, docs/projects/P-002.md, before any of its research; its Discovery begins. LL-16 is closed by this entry.
+decided_by: owner (ruled on 2026-11-08 in session_01QBwHGNSLmSrYQgS6BPjV8p; merges this pull request)
+proposed_by: chief-of-staff
+reversibility: reversible
