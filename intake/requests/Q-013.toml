@@ -1,0 +1,6 @@
+kind = "research"
+# P-002 (the screening), Discovery; from the research shortlist of the groundwork map (research/Q-009-memo.md).
+# Full question: research/Q-013.md, checked by the Critic for neutral phrasing (reviews/P-002-research-questions/critic.md).
+question = """
+See research/Q-013.md.
+"""
