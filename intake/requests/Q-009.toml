@@ -1,0 +1,6 @@
+kind = "research"
+# Groundwork map for P-002 (model S-020). The full question, checked by the Critic for neutral
+# phrasing (reviews/Q-009/critic.md), is research/Q-009.md.
+question = """
+Groundwork map: screening outside practice in AI-assisted software and product building, and carrying the practices that hold up into a written operating method that a pipeline of AI agents under one human owner runs on. See research/Q-009.md for the full question, the decision it serves and its depth.
+"""
