@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Source checker's check of research/Q-009-memo.md, round 1, in two parts run side by side: part 1 (areas 1 to 7, brief 141) and part 2 (areas 8 to 13, brief 142), each on a different model from the Researcher. Recorded verbatim by the Orchestrator (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-08, from each helper's return; part 2's return was read from its transcript after the session restarted. Each part's own verdict line is recorded as "The part's verdict was …" (LL-68). The round fails because part 1 fails. The entries each part filed are on branches build/source-checker/q009-a and q009-b of the portfolio repository, not yet merged.*
+*The Source checker's check of research/Q-009-memo.md, round 1, in two parts run side by side: part 1 (areas 1 to 7, brief 141) and part 2 (areas 8 to 13, brief 142), each on a different model from the Researcher. Recorded verbatim by the Orchestrator (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-08, from each helper's return; part 2's return was read from its transcript after the session restarted. Each part's own verdict line is recorded as "The part's verdict was …" (LL-68). Round 1 failed because part 1 failed; round 2 (brief 147), on the revised memo, passes. The entries each part filed are on branches build/source-checker/q009-a and q009-b of the portfolio repository, not yet merged.*
 
 ## Round 1, part 1 (areas 1 to 7)
 
@@ -176,3 +176,55 @@ Second sources: none of my share has two independent sources opened. Pairs such 
 13. E2 / F13-1 and F5-8: the page is silent on a twice-yearly cadence, so keep that assumed.
 
 Total tokens: not visible to me.
+
+## Round 2 (brief 147, on the revised memo)
+
+The round's verdict was PASS.
+
+I re-checked every id the memo lists, plus all 13 corrections round 1 asked for. All hold. I re-opened six pages where round 1's record was thin (Graphite, DORA, Thoughtworks, EurekAlert, and arXiv 2604.03196 in its abstract and html forms). Both Chowdhury fetches were summarising fetches, as in round 1. Everything else rests on round 1's record.
+
+| Id | Result | Reason |
+|---|---|---|
+| F6-2 | holds | The memo states it as not confirmed and no longer relies on it. The "hit-or-miss" sentence is deleted from F1. |
+| F3-3 | holds | Re-opened. The page says "nearly half (39%)", "plateaued" and "superseded by" a newer study. That study is "on average, 3.3 points lower". "About half" is attributed to press and search only. |
+| F3-5 | holds | The stake note is dropped, and the page lists no affiliations. |
+| F6-3 | holds | Worded as a preprint listing hosted by Microsoft Research, with one of three experiments run at Microsoft. "Management Science" is gone. |
+| F6-7 | holds | Re-opened the html. "This pattern suggests that human involvement substantially improves merge outcomes, even when CRAs are present." Table 1 is not strictly monotonic (Mixed(CRA) 63.25% above Mixed 61.09%). The authors are Chowdhury et al. The memo keeps it assumed and not filed. |
+| F4-8 | holds | The memo now uses "should be rigorously evaluated before deployment". |
+| F3-2 | holds | The memo uses "difficult to determine how technologies will behave once deployed". |
+| F5-2 | holds | The memo uses "only marginal benefits despite substantial time costs (20-80% increase)". |
+| F5-3 | holds | The memo says "GPT-3.5-era models only". |
+| F2-4 | holds | The memo uses "45 percent of cases". The OWASP and "tasks" wording is removed. |
+| F3-7 | holds | The memo uses "including AI-generated ones" and Stenberg's "AI generated or not". It says the case is about low-quality volume. |
+| F2-2 | holds | Moved to [B, source-checked]. It claims only the ISO catalogue page (edition 2, 2023-11-15, "nine characteristics"). The list of nine and the standard text stay unread, and the Gaps entry stays. |
+| F7-5 | holds | Moved to [B, source-checked] on "frequent, small additions", abstract only. |
+| F10-5 | holds (removal) | The sentence and its "Disagree" are gone from J2. No other use of it in the memo. |
+| F13-4 | holds | The Ioannidis claim is kept as assumed. The commentary is cited by title and authors only, with its text unread. |
+| F11-9 | holds | The Register is cited for the leak only. The ban comes from The Star (Bloomberg, 2023-05-02), marked as a substitute source. |
+| F9-6 | holds | The SEC order 34-70694 is cited, with "more than $460 million". |
+| F9-2 | holds | The memo has "In Google's experience". |
+| F9-5 | holds | The memo has "With a sufficient number of users of an API". |
+| F8-4 | holds | The memo reads "32% fewer behavioural quality issues … a further 4% fewer". |
+| F1-2 / F12-3 | holds | The memo says "only very weak evidence" is about the speed-up having grown since early 2025, not the −18% result. |
+| F12-1 | holds | The memo says it is the same paper's first-version count (4.53M), before post-processing, so one source, not two. |
+| F13-11 | holds | The memo says the claim rests on a tertiary Wikipedia page citing a 2016 LinkedIn post, and gives the Economist figure "perhaps a fifth". |
+| F13-12 | holds | The memo gives the glossary definition and cites Rogers (1983). It stays assumed. |
+| F13-5 | holds | The memo says median time free of a signal, not time to an actual update. |
+| F5-8 | holds | The fade rule is quoted correctly. The twice-yearly cadence stays assumed. |
+
+Items round 1 marked not confirmed: F6-2 and F10-5 are not relied on. F1-4, F1-5, F5-5, F13-7 and F6-7 stay assumed or search-only, and none is filed. F13-7 appears in no memo item (NICE appears only in M3, as F13-7).
+
+Scan of the rest of the memo for wording stronger than confirmed. Nothing found. Spot checks against the pages:
+- **F13-1 "senior board":** Thoughtworks describes the TAB as "some of Thoughtworks' senior technologists", and the meeting runs four days.
+- **L3 / G6 batch claim (F7-7):** DORA says heavyweight approval slows delivery, "leading to the release of larger batches less frequently", with "higher levels of risk and thus higher change fail rates".
+- **A4 / F1-3 "146 of 363":** EurekAlert says "27% (363/1344) of articles … tested an established one", and 146 (40.2%) of those were ineffective. The memo says "tests", where the page says "articles". This is a trivial difference and I did not require a fix.
+- **F2-3 "about half":** the METR quote is "roughly half".
+- **F5-7 "flipped sign":** this agrees with the exact DORA quote.
+
+Library entries changed: one commit in /home/user/lib-a on build/source-checker/q009-a. It touches library/facts/Q-009-F2-2.md and library/facts/Q-009-F7-5.md. Both said "the memo marks this item assumed", which is now false. They now say round 1 marked them assumed and round 2 carries them as [B, source-checked]. The commit message ends with the required last paragraph (the Agent-Session and Spec lines). I added no Co-Authored-By line, because the brief fixed the last paragraph. Nothing was pushed.
+
+/home/user/lib-b needed no change and I committed nothing there. Its entries for F9-6, F9-2, F9-5, F8-4, F12-1, F12-3, F13-5, F13-11, F13-12 and F11-9 already match the corrected memo. The other entries I read in lib-a (F3-5, F6-3, F4-8, F3-2, F5-2, F5-3, F2-4, F3-7, F5-8, F1-2, F6-1) are consistent with the memo. Some say "the memo's wording was stronger" about round 1 text. That is a historical note, not a conflict, so I left them.
+
+Memo must still correct: nothing is required. Two optional notes:
+- The Orchestrator's italic recording line under the title is unchanged, and the Researcher says the Orchestrator may want to update it.
+- Neither tokens line (the memo's or mine) reports a figure. I cannot see my total tokens.
