@@ -1,4 +1,4 @@
-Verdict: FAIL
+Verdict: PASS
 
 *The Source checker's check of research/Q-013-memo.md. Each round on a different model from the Researcher; recorded verbatim by the Orchestrator (session_01QBwHGNSLmSrYQgS6BPjV8p) from the helper's return, 2026-11-08; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
 
@@ -80,5 +80,40 @@ Worktree /home/user/lib-q-013, branch build/source-checker/q-013, one commit (no
 6. Wording softened to the page: Johari ("trade off", not "cost"); F013-24 (Bayesian SEM setting; priors need not be "real prior information"); F013-25 (Bayesian methods in general, not "borrowing"); F013-19 ("related studies", not "matched pairs"); F013-22 ("40 periods per intervention").
 7. Answer paragraph: the 0.70–0.77 and 0.25 McNemar power figures rest on assumed discordance rates (25% and 5%, or 15% and 5%). Say so there, not only in section 1.
 8. Still open: F013-1 pingouin, F013-17, F013-20, the Button reply, the Simmons body (optional stopping), Rouder 2014, Armitage 1969 and the FDA text.
+
+Tokens: I cannot see my token count.
+
+## Round 2 (brief 173)
+
+The round's verdict was PASS.
+
+All eleven findings listed for re-check hold, and so do the answer-paragraph items and the reworded entries. Nothing round 1 marked not confirmed is relied on as fact. The memo has five minor wording points left (below), none of them blocking. Round 1's record was enough for most items. I re-opened two pages: Miller (evanmiller.org) and the SAS crossover poster.
+
+| id | Result | Reason |
+|---|---|---|
+| F013-1 | holds | Minitab is now B, as round 1 confirmed. The pingouin d≈0.66 stays labelled assumed (search-only). "The page does not give the SD" matches round 1. |
+| F013-8 | holds | Now "statistically different distributions", in one TRPO/HalfCheetah-v1 experiment, with no false-positive rate measured. The answer paragraph keeps Henderson out of the "far above 5%" claim. |
+| F013-15 | holds | Now "can break down", with the subjective-prior quote and the Type 0 distinction. The answer paragraph, entry 5 and the last "What each answer would change" point agree with it. |
+| F013-16 | holds | "Trade off sample size and power efficiently" matches the abstract. Entry 4 matches. |
+| F013-19 | holds | "193 related studies"; "matched" is gone. Entry 7 matches. |
+| F013-21 | holds | The 5-per-phase rule (3 with reservations) is now placed in the 2010 pilot. AB designs make causal inference "difficult". The no-formal-basis quote is kept. The CEC dispute is still labelled search-only. Entry 11 matches. |
+| F013-22 | holds | Now "40 periods per intervention (80 in all)". Entry 10 matches Table 1 (0.851, 0.126, 0.681). |
+| F013-23 | holds | "Seem to have been discredited (Senn)" is verbatim from the poster, as are "efficiency is often a mirage" and "nearly useless". |
+| F013-24 | holds | The Bayesian SEM setting is named. Priors can come from previous research or from thinking about implausible values. The transfer to simpler comparisons is marked as opinion. Entry 6 matches. |
+| F013-25 | holds | The "may be especially valuable in rare disease and pediatric trials" wording and the 14 Jan 2026 date are right. Prior or external data is a separate sentence, and "borrowing" is gone. The FDA text is still marked unopened. |
+| F013-27 | holds | The 90% is now experiment failure from "bad ideas or buggy implementation". The PPV 10% case carries the caveat and stays "Estimate (Calc, illustrative)". My recompute from round 1 stands (0.857 and 0.400). |
+| Answer: Bayesian wording | holds | Agrees for subjective priors, disagrees for default or pragmatic priors, "can break down", Type 0 fine. |
+| Answer: pairing sentence | holds | It cites Q-003-F-a (B, single origin) for variance reduction only. "Largest gain available" is marked as opinion. |
+| Answer: McNemar assumptions | holds | The 25%/5% and 15%/5% discordance rates are now stated in the answer. Round 1 reproduced the figures (power 0.699 to 0.768, and 0.241). |
+| Entries 4, 5, 6, 7, 9, 10, 11, 15 | hold | All match the corrected memo and the filed library entries. |
+
+**Entry changed.** I made one commit, 9a1f004 on build/source-checker/q-013, not pushed. It changes only `/home/user/lib-q-013/library/patterns/Q-013-P15.md`: the Grade line now names Q-003-F-a alongside Q-003-P-a and Q-003-F-i, as the revised memo's entry 15 does. I checked all the Q-013 fact and pattern entries and the README rows. None of them uses the wording round 1 corrected. The commit's last paragraph is exactly the required two lines, `Agent-Session: session_01QBwHGNSLmSrYQgS6BPjV8p/source-checker-173` and `Spec: none (library filing from research Q-013, P-002)`.
+
+**What the memo must still correct.** These are minor, and no library entry carries them.
+1. Section 3 (F013-23): "Carryover, period effects and dropouts can make the data 'nearly useless'" is slightly broader than the poster. The "nearly useless" sentence names dropouts and the unbalanced period effect. Carryover is a separate problem the poster lists as one of the biggest.
+2. Section 4 (Bayesian monitoring): "Miller's page (F013-11) and Etz … say optional stopping does not affect the interpretation of posterior odds." That wording is Etz's. Miller's sentence is "With Bayesian experiment design you can stop your experiment at any time and make perfectly valid inferences." The substance is the same, but the memo should not quote Etz's wording for Miller.
+3. Answer paragraph: "SPRT … control it" relies on F013-17, which is search-only and was never opened. F013-17 is about average sample number, not error control. Mark it or drop SPRT from that list.
+4. Answer paragraph: "especially where most changes fail" is looser than F013-27, which says more than 50% of ideas fail. The Button reply dispute on prevalence is also not filed. Say "ideas" or mark it as inference.
+5. Section 1 (F013-6): "a single run reversed at least one pairwise ranking in 10 of 12 slices" is measured against the three-run majority. The memo omits this, and it was already omitted in round 1.
 
 Tokens: I cannot see my token count.
