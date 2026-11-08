@@ -138,6 +138,48 @@ The round's verdict was PASS (round 3).
 
 Both round-2 blocking findings are fixed. I have no shell, so I could not run the trial, count bytes, or read git history. Everything I could check against the files holds.
 
+**What I confirmed**
+- **File count.** The record's table gives 20 files: 18 changed and 2 added (the two docs/projects files).
+  - The 18 are 6 scripts, 3 agent files, the workflow, 5 forms and lists (SETUP, _GATE, _PROFILE, BRIEFS, requests/README), PACKS, SURFACES and the version file.
+  - critic.md and docs/PROJECT.md are kept.
+  - The card's "20 files" and its description in line 5 match the table.
+- **Agent files.** In the model's template, only critic, researcher, builder and definer carry the S-035 wording. Model-Lab has none of it. Keeping critic.md leaves exactly three agent files changed, as stated.
+- **docs/projects lines.** The model's PACKS.toml has these lines in nine roles, as the record says. The record's list of the nine matches the model's PACKS.toml. S-001-holdout and S-001-analysis are Model-Lab's own and are not in the model.
+- **Experiment and tests.**
+  - experiments/E-003.md:31 names critic.md, reviewer.md, source-checker.md and the software playbook.
+  - governance/PACKS.toml:103-121 is the S-001-holdout pack. Its must_read matches the record: the extract, those three agent files and docs/playbooks.
+  - The test_ac11 line that reads critic.md is at line 86, as the record says. Keeping critic.md unchanged removes the experiment problem I raised in round 2.
+  - Searching .claude/agents in the model's template and Model-Lab's copy, I found no other agent file that the upgrade changes and the pack reads.
+- **Research matching.** The claim in the card (line 23) and record holds in both directions.
+  - In Model-Lab's v3_checks.py, `GROUNDWORK_PREFIXES` is "Groundwork map:" and "Discovery map:" (line 436). Groundwork items are picked out at lines 853-854.
+  - `match(..., research=True)` (lines 959-970) takes the latest Discovery run, across all items, that begins at or before the record.
+  - The model's 3.7.2 tools/v3_checks.py has the same constant and the same rule (lines 603, 1148-1153).
+  - So A's cost (2) states the screening-to-prompt-engine direction ("file the screening's project before its research"). It also states the prompt-engine-to-screening direction ("no new request while the screening is in Discovery, or check that any it files is counted to it").
+- **Context sources opened and supported.**
+  - decisions/questions/P-001-work-repo.md (ruling A).
+  - portfolio IDEAS.md (2026-11-01 order; 2026-11-08 kick-off; the note that Model-Lab runs 3.6.0).
+  - governance/OPERATING_MODEL_VERSION, which reads 3.6.0, and the model's VERSION, which reads 3.7.2.
+  - CHANGELOG 3.7.0, 3.7.1 and 3.7.2.
+  - risk-paths.toml, where governance/** is R3.
+  - LL-16, open.
+  - handoff 14 ("Next, in order", item 1: the weekly task is still to be created).
+  - reviews/P-002-route/critic.md and questions/P-002-route-stop.md exist.
+- **Cost (1).** The 3.7.1 and 3.7.2 differences (design images left out; "sprint was merged" becomes a note in a one-commit copy, while the pull request's own checks keep it) are stated with the "weaker, not equal" caveat and who still enforces it.
+- **Record wording.** The record's "surface-map check counts two more files" is right. surface_guard.py:544 prints "N file(s) each have exactly one owner".
+- **Method.** The trial is stated plainly enough to repeat. It gives:
+  - the model commits;
+  - the Python version;
+  - the exact test and check commands;
+  - the way PACKS.toml and SURFACES.md were applied (`git diff … | git apply -p2`);
+  - the normalising `sed`, the sort and the hash recipe;
+  - where the lists were kept (scratch only, so the trial is repeated, not re-read).
+- **Form.**
+  - The card opens by leading with the earlier failure.
+  - The options are fairly put, each with gain, cost and reversibility.
+  - The recommendation carries a confidence level and what would change it, and does not claim to be the only reasonable choice.
+
+Files read (all under /home/user/): Model-Lab/questions/P-002-route.md, Model-Lab/intake/P-002-upgrade-footprint-2026-11-08.md, Model-Lab/reviews/P-002-route-2/critic.md, Model-Lab/questions/_TEMPLATE.md, Model-Lab/questions/P-002-route-stop.md, Model-Lab/governance/PACKS.toml, Model-Lab/governance/checks/v3_checks.py, Model-Lab/experiments/E-003.md, Model-Lab/specs/S-001.md, Personal-Org-Operating-Model/tools/v3_checks.py, Personal-Org-Operating-Model/template-v3/governance/PACKS.toml, Personal-Org-Operating-Model/CHANGELOG.md, portfolio/ideas/IDEAS.md.
+
 **Findings (all non-blocking)**
 
 1. **Card line 25 (Context); S-033.** The owner's "Size it first (Recommended)" answer has no answer record yet. The card says so honestly. Please file the answer record (and put questions/P-002-route-stop.md on main) before the card goes to the owner, so the quoted words can be checked.
@@ -146,7 +188,5 @@ Both round-2 blocking findings are fixed. I have no shell, so I could not run th
 4. **Record line 33; card (not mentioned).** The upgrade does not change the pack (51,253 bytes before and after). That figure already differs from the 50,540 frozen at specs/S-001.md:295. I could not recompute it. The record leaves this to the prompt engine's owner and the card does not mention it. It would be better to hand it on explicitly, for example as a one-line note in the handoff, since a frozen figure that no longer matches is the kind of thing the earlier rounds were about.
 5. **Record lines 30-33.** Not stated whether E-003 runs under test read the live definer.md, builder.md or researcher.md, which the upgrade changes by one line each. From experiments/E-003 I see the held-back check pack reading critic, reviewer, source-checker and the playbook, and the arms using replayed copies. I found nothing that reads those three files, but the record does not say it checked. One sentence would close it.
 6. **Card line 14 (DEFAULT and TIMEOUT "none").** This differs from AGENTS.md §5 (reversible questions adopt the recommendation at timeout) and from the template. The card gives its reason, namely that starting a project is the owner's ruling, and the earlier stop card did the same. I accept it as a deliberate, stated choice.
-
-(The round's "What I confirmed" section, listing the file count, agent files, docs/projects lines, experiment and tests, research matching, Context sources, cost (1), record wording, method and form as holding, is kept in the session's transcript; its findings above are verbatim.)
 
 *After this round the Chief of Staff applied findings 2, 3 and 5 (wording and one search line); finding 1 waits on the stop question reaching main; finding 4 is handed on in the session's handoff.*
