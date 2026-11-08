@@ -1,4 +1,4 @@
-Verdict: FAIL
+Verdict: PASS
 
 *The Critic on the re-made route card questions/P-002-route.md and the sizing record it rests on, intake/P-002-upgrade-footprint-2026-11-08.md, made at the owner's ruling "Size it first (Recommended)" (questions/P-002-route-stop.md). Each round is a fresh session on a different model from the card's writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), and its return is recorded verbatim, its own verdict line as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
 
@@ -131,3 +131,22 @@ The round's verdict was FAIL (round 2). The three round-1 defects are mostly fix
    - Please state the exact command and normalisation, or say the hashes are not meant to be reproduced.
 
 9. **Non-blocking. Record line 8.** The summary sentence says "the surface map counts two more files", but line 34 says the two extra files are the new docs/projects files counted by check_all. The wording should match.
+
+## Round 3 (commit before this record)
+
+The round's verdict was PASS (round 3).
+
+Both round-2 blocking findings are fixed. I have no shell, so I could not run the trial, count bytes, or read git history. Everything I could check against the files holds.
+
+**Findings (all non-blocking)**
+
+1. **Card line 25 (Context); S-033.** The owner's "Size it first (Recommended)" answer has no answer record yet. The card says so honestly. Please file the answer record (and put questions/P-002-route-stop.md on main) before the card goes to the owner, so the quoted words can be checked.
+2. **Card line 9, cost (2).** The words "it is in Build, where none is planned" carry no source in Context. I could not find a record that says no early-stage research request is planned. Add a citation, or soften it to "none is planned that I know of".
+3. **Card line 9, cost (1).** This is the densest part of the card for a non-expert. "Automatic check of a builder's work", "the 'sprint was merged' test" and "the pull request's own checks, which see the full history" appear together without a plain sentence on what is lost. It is fair and complete, but it could say "a missed bad sprint line would be caught later, at the pull request".
+4. **Record line 33; card (not mentioned).** The upgrade does not change the pack (51,253 bytes before and after). That figure already differs from the 50,540 frozen at specs/S-001.md:295. I could not recompute it. The record leaves this to the prompt engine's owner and the card does not mention it. It would be better to hand it on explicitly, for example as a one-line note in the handoff, since a frozen figure that no longer matches is the kind of thing the earlier rounds were about.
+5. **Record lines 30-33.** Not stated whether E-003 runs under test read the live definer.md, builder.md or researcher.md, which the upgrade changes by one line each. From experiments/E-003 I see the held-back check pack reading critic, reviewer, source-checker and the playbook, and the arms using replayed copies. I found nothing that reads those three files, but the record does not say it checked. One sentence would close it.
+6. **Card line 14 (DEFAULT and TIMEOUT "none").** This differs from AGENTS.md §5 (reversible questions adopt the recommendation at timeout) and from the template. The card gives its reason, namely that starting a project is the owner's ruling, and the earlier stop card did the same. I accept it as a deliberate, stated choice.
+
+(The round's "What I confirmed" section, listing the file count, agent files, docs/projects lines, experiment and tests, research matching, Context sources, cost (1), record wording, method and form as holding, is kept in the session's transcript; its findings above are verbatim.)
+
+*After this round the Chief of Staff applied findings 2, 3 and 5 (wording and one search line); finding 1 waits on the stop question reaching main; finding 4 is handed on in the session's handoff.*
