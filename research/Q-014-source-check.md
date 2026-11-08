@@ -149,3 +149,53 @@ Smaller points, optional:
 - The opening bullet "many change failures trace to … temporary changes" rests on 10.1%. Planned changes are the largest share, at 45.6%.
 
 I cannot see my total tokens.
+
+## Round 3 (brief 180)
+
+The round's verdict was FAIL.
+
+All ten re-check ids hold. The round 2 corrections are applied. The scan of the rest of the memo found outside claims worded more strongly than the sources, so it is not clean. I re-opened these sources: Han Siong PDF, Laughland PDF, ISPOR abstract (F014-12), Nachtnebel abstract (F014-21), Zalando post, and RFC 4450. I could not re-open Niven (PMC served a bot check) or Tingle (Cloudflare block). For those I relied on rounds 1 and 2 and on the filed library entries.
+
+| id | Result | Reason |
+|---|---|---|
+| F014-1 | holds | Confirmed in the PDF. "149 out of 1,633 accidents ... due to multiples causations" is a share of cause attributions. "Not decreasing" is asserted with no trend figures, and the memo now says so as opinion. The "probably because incidents are coded differently" clause is stronger than the reader's "possibly" (see correction 8). |
+| F014-2 | holds | The Flixborough recommendation is exact. Temporary changes are 10.1% of the failure typology, caused by time constraint and urgency. |
+| F014-3 | holds, one attribution point | 45.6% for requested changes and the bypass and simplified risk assessment wording are exact. The approval-responsibility sentence is the paper's own text for planned changes, not a named external guidance (see correction 3). |
+| F014-6 | holds | §2 now says "asks whether a short and long form could be used". The patterns list reads "posed there only as a question", and "by risk" is gone. The paper's wording is "Is this really necessary? Could a short and long form ... be used". The summary uses of F014-6 are overstated (see correction 1). |
+| F014-12 | holds, small caveats | 19 of 20 exits were recommended and 12 of 20 (60%) "did not fully resolve" the uncertainty. Both are in the abstract. Two details are not in it: the abstract excludes "one terminated evaluation", and it says "recommended", not "full" approval (see correction 7). |
+| F014-17 | holds | The reversion point is now a separate Opinion attributed to the authors. The reminders result is limited to one included study. The wording "most likely to produce de-adoption" is more causal than the source's "associated with" (see correction 7). |
+| F014-19 | holds | "Work at a member agency" and the 5 of 15 and under-2-staff figures match round 1. As support for the §6 conclusion it is weak (see correction 5). |
+| F014-21 | holds as marked | The abstract has neither the "lacks customers" phrase nor "impact not evaluated". It reports users satisfied with the outputs. The memo says it stays unconfirmed, does not propose it, and no longer relies on it. It is still labelled "Fact" (see correction 6). |
+| F014-26 | holds | "Easy to ignore due to lack of a formal process" is exact. The page says the radar "relied on voluntary contributions degrading in frequency", which matches "fading volunteer effort". Heads' accountability for removing failed experiments, "archive HOLD entries" and the three languages are all on the page. |
+| F014-33 | holds | "Too often moved glacially" is kept. "Cost of slow retirement" is marked as the memo's own opinion. The memo says the report itself was not opened. I could not re-open the page. |
+
+No item that rounds 1 or 2 marked not confirmed (F014-21, F014-31) is relied on as fact. F014-28 is marked unreliable and not proposed.
+
+**Library entries changed:** none. No commit was made. I read Q-014-1, -5, -12, -13, P22, P23 and P24 in /home/user/lib-q-014.
+- Entries 1, 5 and 12 match the corrected memo. Q-014-1 contains a stale sentence about "the memo's wording" from round 1. It does not conflict, so I left it.
+- P24 is narrower than the memo's pattern 24. It drops the "state in advance what evidence would reverse one" clause. That is a gap, not a conflict.
+
+**What the memo must still correct**
+1. The summary wording on bypassing rests on opinion and a stated concern, not documented findings.
+   - Opening bullet 3 says "Heavy, one-size-fits-all approval invites bypassing".
+   - The "Documented harms" list gives "heavy uniform process that invites bypassing (F014-6, -8)".
+   - Laughland (F014-6) states a "concern" and gives no measured rate. Sutton (F014-8) is opinion. Attribute both, or move the line out of "Documented".
+2. Opening bullet 3, "Many change failures trace to having no change process at all". The support is 39 OSHA citations (42% of 92 MOC citations) and 4 of 891 eMARS reports. Those are citations and reports, not failures. Reword to say that, or drop it.
+3. §3, "Process-safety guidance calls for carefully defined approval responsibility". The sentence is the Han Siong authors' own text about planned changes, not a named guidance document. Attribute it to the paper and limit it to planned changes. The same applies to the "signatories pile up" line in §2: the source says "may have been added".
+4. Opening bullets 1 and 4 are stated as general rules, while the body marks the support as thin.
+   - "Practices stay in place after their evidence goes" and "Rules to stop doing something ... barely change practice" rest on one included study, 2 of 7 Choosing Wisely services, one RFC and a library assertion (F13-3).
+   - "A scanner that is not tied to a decision tends to fade" rests on one Zalando case. That case says "lack of a formal process", not "not tied to a decision".
+   - Hedge these as the memo does elsewhere.
+5. §6 closing opinion. "The recorded way scanning weakens is neglect" rests on one case, Zalando. F014-19 shows that EuroScan agencies are small, not that any scanning weakened. Say "one recorded case" and drop F014-19 as support for weakening.
+6. §6, F014-21 is labelled "Fact, assumed". Relabel it "Unconfirmed claim", and note that the abstract reports users satisfied.
+7. Smaller wording points:
+   - F014-12: say "excluding one terminated evaluation".
+   - F014-12: change "provisional recommendations mostly became full ones" to "were recommended at exit".
+   - F014-17: use "associated with" in place of "most likely to produce".
+   - "What each answer would change": "Failed: passive 'do not do' reminders (F014-17; F014-18)". Choosing Wisely is a campaign with 2 of 7 services declining, not a reminders trial. Say "little change", not "failed".
+   - RFC 4450 line: "used to clear a backlog" is not the RFC's stated purpose, which was "to determine how many Proposed Standards could be considered obsolete". It is labelled Opinion, but say so or drop it.
+8. F014-1 disagreement note: change "probably because incidents are coded differently" to "possibly", as the Input reader wrote.
+
+I cannot see my total tokens.
+
+Relevant files: /home/user/Model-Lab/research/Q-014-memo.md, /home/user/Model-Lab/research/Q-014-source-check.md, and the worktree /home/user/lib-q-014 (branch build/source-checker/q-014, unchanged, HEAD ceac97c).
