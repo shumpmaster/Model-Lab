@@ -1,4 +1,4 @@
-Verdict: FAIL
+Verdict: PASS
 
 *The Source checker's check of research/Q-011-memo.md. Each round on a different model from the Researcher; recorded verbatim by the Orchestrator (session_01QBwHGNSLmSrYQgS6BPjV8p) from the helper's return, 2026-11-08; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
 
@@ -85,5 +85,47 @@ Worktree /home/user/lib-q-011, branch build/source-checker/q-011, one commit wit
 9. F011-8 and the top summary: the article says 62%, so say "about 62% to 64%".
 10. F011-25: drop "from medical librarianship". The author is a university library.
 11. Library note: Q-009-F3-4 and F12-1 do not themselves say popularity signals are unreliable.
+
+Total tokens: not visible to me.
+
+## Round 2 (brief 167)
+
+The round's verdict was PASS.
+
+All eleven round 1 corrections are made, and every re-checked id holds. No item that round 1 marked not confirmed is still relied on: F011-2 and F011-18 stay marked "assumed (search-only)" and are caveated, and F011-6's 8.64 odds ratio is likewise marked search-only. The scan of the rest of the memo found four outside claims worded slightly more strongly than the sources support. I rate them minor and none changes an answer, so I did not fail the round on them (listed at the end).
+
+I re-opened the TechCrunch page (F011-11), arXiv 2603.20450 (F011-20), the Minhas PDF (F011-6) and the getcoai page (F011-19). The other ids were checked against round 1's record.
+
+| id | result | reason |
+|---|---|---|
+| F011-5 | holds | "primarily formed from personal experience" and "do not necessarily correspond with the actual evidence" match the page as round 1 recorded it. |
+| F011-7 | holds | "Major explanatory factor (31 percent)", classifier 1.3 percent and the "who does the work" quote match round 1. The re-analysis dispute is marked unverified. |
+| F011-8 | holds | 162 of 255 is 63.5%, and the article's 62% is stated as a lower bound. "About 62% to 64%" is used consistently in the top answer, the §2 estimate and the "read more cheaply" line. |
+| F011-11 | holds | I re-opened the page. Epoch's "might be due to" lists a more powerful internal scaffold, more test-time compute and a different FrontierMath subset. The lower-bound score "matches the score Epoch observed", with no number given. The page says Epoch "was criticized for waiting to disclose funding from OpenAI". All of this matches the memo. |
+| F011-13 | holds | "Cheating with solutions given in the issue report or its comments", "suspicious because tests were inadequate", and filtering of "problematic issues" (12.47% to 3.97%) match round 1. |
+| F011-14 | holds | The Scale AI stake is now marked as the Input reader's note and not shown on the abstract page. |
+| F011-17 | holds | The page gives no plateau share. "About half" is attributed to F011-18 (assumed) plus the memo's own inference. "39%" is called a different statistic. The top line and the cost line now say "surpassed in number". |
+| F011-20 | holds | I re-read the abstract. The caution is for peer-review estimates, and the page says detectors "misclassify mixed reviews". The memo marks the extension to F011-17 to F011-19 as its own inference. The opening says "not established", not "disputed". |
+| F011-25 | holds | "Authored by Flinders University Library". The "medical librarianship" phrase is gone. |
+| F011-28 | holds | Snyk "authors the page and recommends its own Snyk Agent Scan", with no "sells". The 76 versus 3,984 subset caveat is added. The figures 46.8%, 0.52%, 76 and 13.4% match round 1. |
+| Q-009-F3-4 / F12-1 library note | holds | The note says the entries show "stars are used to promote projects". The step to "popularity signals are unreliable" is marked as the memo's inference (opinion). |
+| Opening answer, ML reproduction line | holds | It says "about 62% to 64%", and shows the article's 62% and 162/255 = 63.5%. |
+| Opening answer, machine-written line | holds | Medium 40–47% and CS abstracts 17.5% are attributed to detector-based estimates. The web-article claim is "surpassed in number", and "about half" rests on the unopened follow-up. |
+| Proposed entries 2, 3, 7, 8, 14, 15, 19 | hold | Each matches its corrected F011 item and round 1's wording. |
+
+I also confirmed from the Minhas PDF that "133 included replication studies" is on the page, and that the Medium CEO "downplays" the findings, which fits the memo's "disputes that it matters".
+
+**Entry changed**
+
+I changed /home/user/lib-q-011/library/facts/Q-011-15.md and committed once as 3a1a811 on build/source-checker/q-011, with the required trailers, not pushed. The entry said "Detectors are disputed (see Q-011-14)". That conflicts with the memo's corrected "reliability not established". It now says reliability is not established, and that Q-011-14 covers peer reviews only and did not test this detector.
+
+I checked all the other Q-011 entries and the pattern against the corrected memo, and none conflicts. Q-011-14's "none reached the accuracy needed" is on the abstract. Q-011-2, Q-011-8 and Q-011-19 still contain round 1 notes about what the memo said at that time. These are accurate historical notes, not conflicts, so I left them. The library grades stay as filed in round 1 (Q-011-1 and Q-011-15 are C), which differs from the memo's "B" proposals, as before.
+
+**What the memo must still correct (minor, none load-bearing)**
+
+1. F011-4: "unfiltered borrowing can cost more than it pays" is not supported. The page shows only harm (15.4% of apps, 97.9% of those with an insecure snippet), with no benefit measured and nothing about filtering. Mark it as the memo's inference, or say "can introduce insecure code".
+2. F011-21, entry 16 and the top-line: the page says "up to 17.5%", but the memo says "about 17.5%" and "reached about 17.5%". Use "up to".
+3. F011-16: "Standard risk-of-bias checks did not catch this" is slightly stronger than the page, which says the bias "cannot be explained by standard 'Risk of bias' assessments". Use the page's wording.
+4. F011-28: "the gap comes mostly from how each one counts" is an inference, since the page shows only that the sources measure different things. Mark it as inference.
 
 Total tokens: not visible to me.
