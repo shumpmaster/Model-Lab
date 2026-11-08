@@ -123,3 +123,69 @@ Worktree /home/user/lib-q-012, branch build/source-checker/q-012, one commit, no
 12. **Library citations:** Q-009-F5-8 does not support "tied to a fixed publishing cycle". Q-004-F-Q004-4's "retired 12 to 14 months" includes one ID not yet retired.
 13. **Still unopened (403 or no content):** F012-13, 16, 17, 28 and 30. They must stay assumed and out of the library. Proposal 28 stays out until someone opens the NICE page.
 14. **F012-3:** the quote is two fragments; mark it so, or have it re-read.
+
+## Round 2 (brief 176)
+
+The round's verdict was FAIL.
+
+All 14 round 1 corrections and all 17 listed findings now hold. The FAIL is for outside claims in the memo's "Answer in brief" bullets that go beyond what the sources support. Pages were re-opened only for F012-5 and F012-7, where round 1's record left a doubt. Everything else was checked against round 1's record.
+
+## Re-checked ids
+
+| Id | Result | Reason |
+|---|---|---|
+| F012-3 | holds | Marked as two separate fragments. Not a duplicate of Q-009-F5-3. |
+| F012-6 | holds | Now "can introduce behavioural drift". Exploratory, own framework noted. |
+| F012-8 | holds | Convenience sample of 195, mean 67.3, median 65.8. The 42 against 26 weeks is marked unreconciled and not relied on. |
+| F012-9 | holds | $141,194.80 is marked as the source's own estimate. The 1.72 person-years stays assumed. |
+| F012-11 | holds | "are planned", frequency left to roles, voluntary framework. |
+| F012-14 | holds | 8 of 19 (42%), median ratio 1.12, "greater than 3 times", no denominator for the retirement notice. |
+| F012-15 | holds | The developer-stake note is dropped. |
+| F012-18 | holds | "Probably unsustainable" is attributed to one Cochrane author. |
+| F012-19 | holds | "Challenges" replaces "failures". Satisfaction disagreement noted. |
+| F012-20 | holds | Only the 97, 34 and 35% figures are relied on. The workload tie and core-team advice stay assumed. Removed from the "stall" line. |
+| F012-21 | holds | Labels fixed: Similar Articles 9.4 h, Scopus Citing References 5.2 h. |
+| F012-22 | holds | The authorship stake note is dropped. The sentence "Most items it flagged did not matter" is still stated as part of the fact. See correction 6 below. |
+| F012-26 | holds | CHAT_2 and LLA_2 are named as single configurations. |
+| F012-27 | holds | Limited to single-pass runs. 1 of 730 and the 73 against 63 counts added. |
+| F012-30 | holds | Stays assumed. Page opened, figures not found. Not relied on. The Elicit bullets are restated. |
+| F012-32 | holds | Three models named, odds ratio 4.85, "most LLMs" and "tended to". |
+| F012-35 | holds | "Should", with "must" only for tool developers. |
+| Q-009-F5-8 | holds | Memo now notes the page does not state the Radar cadence. |
+| Q-004-F-Q004-4 | holds | Four retired at 12–13 months, one not due until 2026-11-30. |
+
+Items round 1 marked not confirmed (F012-13, 16, 17, 28, 30, and the blog-only parts of F012-9 and F012-20) are labelled assumed in the memo. Entry 28 is not to be filed, and none of them feeds a library entry or pattern. The exception is the "Answer in brief" bullet that still leans on the F012-20 workload tie (see correction 1).
+
+Two re-opened pages:
+- **F012-5:** the AI Index page says "Just a year later … scores rose by 18.8, 48.9, and 67.3 percentage points". So "within a year" holds.
+- **F012-7:** the Hoffmeyer abstract says "Fifty-five percent were published for the first time between 1996 and February 2015" and "88% of these had been inactive for 5.5 years or more". The memo's wording matches this.
+
+## Library entries changed
+
+One commit, `fda24e1`, author source-checker, in the worktree /home/user/lib-q-012 on branch build/source-checker/q-012, not pushed. It carries the required last paragraph with `Agent-Session: session_01QBwHGNSLmSrYQgS6BPjV8p/source-checker-176`.
+
+The commit changes 9 files: `Q-012-6`, `-10`, `-11`, `-14`, `-15`, `-16`, `-20`, `-24` and `-27`, all under `library/facts/`. Facts, grades and filings are unchanged. I removed notes that described the memo's round 1 wording, such as "memo's 'requires'", "cause drift", "often lag", "failures" and the swapped labels. Those notes were false once the memo was corrected. In `Q-012-16` I also removed "possible self-evaluation", which the memo dropped. The page does not show whether the authors are at the centre evaluated, and that is now stated that way.
+
+I checked the other entries against the memo and left them as they were. The patterns P1 and P2 are consistent with the memo.
+
+## What the memo must still correct
+
+1. **"Answer in brief", continuous intake bullet:** "every evaluation found reports heavy workload and drop-off" is too strong.
+   - F012-14 found most living reviews kept close to their planned period.
+   - The F012-20 workload tie is unconfirmed.
+   - F012-21 and F012-22 are not workload evaluations.
+   - Restate it to F012-18 and F012-19, and the 35% update rate.
+2. **"Answer in brief", automated reading bullet:** "Every standards body and study author found keeps people checking" is only supported for F012-26, 27, 29, 31 and 35. Page-level support was not shown for F012-24, 25, 33 and 34. Name the sources, or weaken to the section 7 opinion ("no source found recommends unchecked automated reading").
+3. **"Answer in brief", event-triggered bullet:** "Event-triggered review is cheaper" has no source, and section 5 says there are no cost figures. F012-15 compares two signal methods, not event-triggered against scheduled review. Drop "cheaper".
+4. **"Answer in brief", continuous intake bullet:** "catches new evidence earliest" rests on one review (F012-21). Qualify it.
+5. **"No review" bullet:** "common default, and decay goes unnoticed" is an inference. F012-2 and F012-7 give uncorrected or inactive shares, not "unnoticed". Mark it as opinion or reword.
+6. **F012-22:** "Most items it flagged did not matter" is the memo's reading of a 14% positive predictive value. Reword to "86% of positive predictions were not borne out", or label it as opinion.
+7. **F012-31:** "across accounts" was never seen on the page. Drop it from the F012-31 line and entry 23, or mark it unconfirmed. The library entry already flags it.
+8. **F012-1 and entry 1:** the page says "updated in 2009", not "re-rated". The library entry already uses "updated".
+9. **F012-23:** it is not shown that the 2.5–4.0% overlap is limited to the 22 shared actors. Soften "for 22 shared actors".
+10. **"What each answer would change":**
+    - "Living efforts stall without dedicated resources" is stronger than F012-18, where some teams slowed or dropped, and Q-009-F13-6, which says "considerable resources". Reword.
+    - "Tools screen with high recall" cites F012-27, whose title and abstract sensitivity ranged 58–100%. Qualify it.
+11. **F012-9:** the memo says "opened by the Source checker" but gives only the blog URL. Cite the primary (Michelson & Reuter 2019, opened via Europe PMC).
+
+I cannot see my token count.

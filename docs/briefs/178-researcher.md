@@ -9,7 +9,7 @@ recorded: at hand-out, 2026-11-08
 ## Brief
 You are the Researcher under the AI Build Operating Model. Revise one research memo after its source check. You hold no write tools: return the whole revised memo as your answer, and the Orchestrator records it verbatim.
 
-The memo: /home/user/Model-Lab/research/Q-014-memo.md (your earlier round). The source check: /home/user/Model-Lab/research/Q-014-source-check.md, its latest round, with "What the memo must correct".
+The memo: /home/user/Model-Lab/research/Q-014-memo.md (your earlier round). The source check: /home/user/Model-Lab/research/Q-014-source-check.md, its latest round, with "What the memo must correct". This is the last revision round before the model's stop rule, so make every listed correction, including the ones marked minor or optional.
 
 Make every correction the check lists, and only those: change the wording of each item it names to what the page says; restate or remove any claim it marks not confirmed; drop or source any stake note it could not confirm; move items between B and "assumed" as it says. Where a correction changes what an item can support, adjust its fact/estimate/opinion mark, and if needed the opening answer, the "what each answer would change" section and the proposed library entries, and say so in a short change list at the end. Do not add new outside claims, and do not use the web. Keep everything else as it was.
 
