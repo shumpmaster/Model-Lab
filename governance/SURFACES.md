@@ -41,6 +41,7 @@ docs/**
 !docs/gates/**/*-proposal.md
 !docs/users/PROFILE.md
 !docs/PROJECT.md
+!docs/projects/**
 !docs/handover/**
 digest/**
 reviews/**
@@ -76,6 +77,7 @@ library/**
 ```surface:chief-of-staff
 AGENTS.md
 docs/PROJECT.md
+docs/projects/**
 intake/**
 decisions/**
 questions/**
