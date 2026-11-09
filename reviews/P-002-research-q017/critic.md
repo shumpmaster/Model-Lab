@@ -1,6 +1,6 @@
 Verdict: FAIL
 
-*The Critic's neutrality check (D-055) of research question Q-017 for P-002: round 1 (FAIL), round 2 (FAIL), round 3 (FAIL; the stop rule applies), then the deciding check the owner ruled (FAIL); briefs 216 to 218 and 221. Each round a fresh session on a different model from the question's writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
+*The Critic's neutrality check (D-055) of research question Q-017 for P-002: round 1 (FAIL), round 2 (FAIL), round 3 (FAIL; the stop rule applies), then the deciding check the owner ruled (FAIL); briefs 216 to 218 and 221. Each round a fresh session on a different model from the question's writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's. The review-file check refuses the verdict label anywhere but at a line's start, so the deciding check's one quotation of a verdict line inside a sentence is shown as `Verdict : PASS | FAIL …` (as in reviews/P-001-harness-trade-offs/critic.md).*
 
 ## Round 1 (brief 216)
 
@@ -222,7 +222,7 @@ The question is now blind and neutral enough, and round 3's blocking finding is 
 **Blocking findings: the rounds coding (rounds.py and the three .rounds.jsonl files)**
 
 1. Briefs and READMEs are coded as passing verdicts.
-   - rounds.py reads every `.md` under reviews/. A reviewer's brief holds a template line, "Verdict: PASS | FAIL with evidence per item", and the coder takes it as `pass`.
+   - rounds.py reads every `.md` under reviews/. A reviewer's brief holds a template line, "Verdict : PASS | FAIL with evidence per item", and the coder takes it as `pass`.
    - In the Personal-Org-Operating-Model rounds file, 9 rows are brief files, for example reviews/2/_reviewer-brief1-verbatim.md, reviews/3/_reviewer-brief-s004.md, reviews/4/_reviewer-brief.md and _reviewer-brief-round2.md, and reviews/5/ and reviews/7/ equivalents.
    - I read reviews/3/_reviewer-brief-s004.md in the repository; its only verdict line (line 27) is that template.
    - `reviews/README.md` is also coded as a `pass` in Service-Desk (line 544) and Model-Lab (line 187), with checker "unknown".
