@@ -1896,7 +1896,9 @@ def check_freeze(root, base, milestones=False):
 def check_holdouts(root, base):
     g.verify_commit(root, base)
     g.verify_commit(root, "HEAD", "HEAD")
-    touched = g.rev_list(root, ["--full-history", "%s..HEAD" % base, "--", "./" + HOLDOUTS_REL])
+    # The first-parent line, each commit against its first parent: a merge counts only if it changes the file on
+    # the line it lands on, so a branch started before a holdouts change does not read as changing it (P-001).
+    touched = g.rev_list(root, ["--first-parent", "%s..HEAD" % base, "--", "./" + HOLDOUTS_REL])
     changed = bool(touched) or g.git_blob(root, base, HOLDOUTS_REL) != g.git_blob(root, "HEAD", HOLDOUTS_REL)
     if not changed:
         return [], ["NOTE: %s unchanged in %s..HEAD" % (HOLDOUTS_REL, base)]
