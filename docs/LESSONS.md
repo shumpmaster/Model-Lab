@@ -547,5 +547,6 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Caught by:** the Critic, in the deciding check.
 - **Cause:** the verdict records have grown in several formats over three repositories, and the script assumed two of them; a hand check of a dozen files of each format would have shown the rest.
 - **Correction proposed:** before any extract or count is handed on, sample its output against the records it reads, one file of each format and naming pattern, and record the sample with the extract.
-- **Status:** open; the next step is the owner's (questions/P-002-q017-decide.md).
+- **Recurred (2026-11-09):** the hand check run after the owner's ruling sampled each field against git but did not test the coding of kinds itself, or look for one pull request number counted twice; the Critic found six review-record commits coded as squash merges (reviews/P-002-research-q017/critic.md, deciding check of the narrowed question). A sample must also test each coding rule's edge cases, and simple invariants such as one line per pull request number.
+- **Status:** open; the next step is the owner's (questions/P-002-q017-next.md).
 
