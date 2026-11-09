@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Critic on questions/P-002-q017-next.md, the card after the narrowed Q-017's check: round 1 (FAIL), round 2 (FAIL); briefs 225 and 226. Each round a fresh session on a different model from the card's writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
+*The Critic on questions/P-002-q017-next.md, the card after the narrowed Q-017's check: round 1 (FAIL), round 2 (FAIL), round 3 (PASS); briefs 225 to 227. Each round a fresh session on a different model from the card's writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's. After round 3, its findings 1 to 3 were applied as wording.*
 
 ## Round 1 (brief 225)
 
@@ -72,3 +72,28 @@ One blocking finding (an overstated claim that props up the recommendation). Eve
 - Context lines 31 to 35 match the records. The form follows the template and AGENTS.md §5, except for DEFAULT/TIMEOUT, which are justified.
 
 Files read: /home/user/Model-Lab/questions/P-002-q017-next.md, /home/user/Model-Lab/reviews/P-002-q017-next/critic.md, /home/user/Model-Lab/reviews/P-002-research-q017/critic.md, /home/user/Model-Lab/decisions/questions/P-002-q017-decide.md, /home/user/Model-Lab/research/Q-017-extract/README.md, /home/user/Model-Lab/research/Q-017-extract-sample.md, /home/user/Model-Lab/docs/LESSONS.md, /home/user/Model-Lab/docs/projects/P-002.md (section 7 lines only), /home/user/Personal-Org-Operating-Model/OPERATING_MODEL.md, /home/user/Model-Lab/questions/_TEMPLATE.md. I did not re-read research/Q-017.md in full, so I did not re-check the 327/321 split beyond the prs file counts.
+
+## Round 3 (brief 227)
+
+The round's verdict was PASS.
+
+I could not run git, so I checked the card against the extract and the records only. I opened every Context source: Q-017-extract-sample.md, LESSONS.md (LL-73), reviews/P-002-research-q017/critic.md, decisions/questions/P-002-q017-decide.md, P-002 section 7, OPERATING_MODEL §4, the template, and the extract README and files. I did not re-read Q-017.md. I re-checked the 327/321 and squash counts from the extract's prs files.
+
+**Round 2 findings (from reviews/P-002-q017-next/critic.md)**
+- R2-1, blocking: the claim that every failure was in the script or hand check. Answered. Line 11 now says the first three checks failed on wording and on what the researcher could see, and the last two on script mistakes. That matches the record: three neutrality rounds failed on wording, leaks and readable files, then the deciding checks failed on the rounds coding and the squash coding. The WHY and RECOMMENDATION no longer lean on the false claim.
+- R2-2: A would drop the squash class, and the vague "rules most likely to go wrong". Answered. Line 16 says there are no squash merges left because these six were the only ones. Line 17 says each rule is tested on edge cases, with one pull request number appearing once. This matches the extract: 6 squash rows in Service-Desk.prs.jsonl, 327 lines there, 458 in all.
+- R2-3, plainness: mostly answered. Line 9 explains "hand check" and "the extract". See finding 3 below for what remains.
+- R2-4: a sixth failure would send the owner back to B. Answered. Line 18 says "you are back at B with six checks spent and no past figures".
+
+**Findings on this version**
+1. [Non-blocking] Line 16, "counts as merges only GitHub's own merge commits". The extract's `merge-pr` kind also covers local merges whose subject names a pull request. For example, the Critic's deciding check found 8 Service-Desk `how: merge` pull requests with agent merge authors, and line 2446 of the commits file is a "Claude" local merge. The README says "GitHub made" for them. The card does not say what happens to those 8 under A. If the script really counts only GitHub's merges, the 321 could shift again. Say whether those local merges stay in or drop out.
+2. [Non-blocking] Line 5 and the RISK line call this reversible and say "Nothing here is irreversible". Line 24 says B's delay "cannot be won back". The cost is stated honestly, but "reversible" understates it. Reword it as "reversible, but time lost on B is not recovered".
+3. [Non-blocking] Plainness on a phone. "Blind and neutral" (lines 7 and 25) has no gloss. Context lines 34 and 35 use "LL-73", "R12" and "pre-mortem" with only a short gloss. "Coded" and "script" are understandable. Add a clause to the first.
+4. [Non-blocking] Line 11 says "five checks by the Critic". It then says the first three failed on wording and what the researcher could see. A reader may still take "five checks" as five script checks, but line 11 now separates them clearly.
+5. [Non-blocking] Form. DEFAULT and TIMEOUT are "none", which departs from the template. This is justified, because the stop rule sends the choice to the owner. Line 28 says "deliberately", and the ruling card also had no default.
+
+**Passes**
+- Neither option accepts work despite a failed check. A is a re-specify followed by one focused confirmation check, and failure returns to the owner. B is a drop, plus a re-scope of how the starting figure is taken. Both are among the stop rule's fixed options (OPERATING_MODEL §4, lines 205 to 208), and Context line 36 quotes the rule correctly.
+- The options are fairly put, each with gain, cost and undo. A's cost admits the sixth check can fail. B's cost admits that it reverses the plan's order, that the target is chosen without past levels, and that the delay is lost. The R12 and R17 wording matches P-002 section 7.
+- The facts and examples match the records. The six phantoms are 327 minus 321 in Service-Desk. The hand check tested fields but not coding kinds, which matches the sample's "not covered" note. LL-73 records the recurrence and points to this card. The card's description of the deciding check matches the Critic's record.
+- The recommendation states its confidence and what would change it. The card names reviews/P-002-q017-next/critic.md, which exists.

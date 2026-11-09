@@ -16,3 +16,6 @@ Say for each round 2 finding whether it is answered. The standard: Personal-Org-
 Open every Context source (under /home/user/: Model-Lab, Personal-Org-Operating-Model; the question itself, research/Q-017.md, and its extract, research/Q-017-extract/) and confirm it. You may read the decisions/questions/ records the card cites; do not read the rest of Model-Lab docs/projects/ or decisions/.
 
 Return, first line exactly `Verdict: PASS` or `Verdict: FAIL`, then numbered findings with the line, blocking or non-blocking. Do not fix the card.
+
+## Outcome
+Verdict: PASS (reviews/P-002-q017-next/critic.md, round 3)
