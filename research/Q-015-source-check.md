@@ -124,3 +124,58 @@ Grades:
 20. F015-5: note the arXiv version's 260 configurations and +80.8% against the blog's 180 and 80.9%. Q-002-F-m shows 260, not 180.
 
 Total tokens: I cannot see my token count.
+
+## Round 2 (brief 207)
+
+The round's verdict was FAIL.
+
+Of the 20 round-1 corrections, 17 hold, and three do not. I re-opened Gas Town, LangChain, Cognition, Anthropic "building effective agents", AIID 1152, The Stack, the AWS bulletin, Willison, Cihan and the PMC review. I read nothing else in Model-Lab and no ideas/ folder. Where I say "holds" for an item I did not re-open, I am relying on round 1's record.
+
+| id | result | reason |
+|---|---|---|
+| F015-1 | holds | "often minimal" has no comparator in the memo; 150-trace taxonomy is separated from the 1,600+ dataset. |
+| F015-3 | does not hold | "Two vendors disagree on whether to build multi-agent systems at all" (opening answer and §1) is too strong. The LangChain page says the two posts "actually have a lot in common" and gives no yes/no recommendation ("not a 'one-size-fits-all' solution"). The memo's "most coding tasks are a weaker fit" is Anthropic's wording, which LangChain only reproduces. The same applies to "value pays for the extra tokens". The memo's read/write point is correct: LangChain presents it as its own "key insight", and Cognition's page has no explicit read/write distinction. |
+| F015-4 | holds | Wording is "many", budget artifacts and no affiliations, as confirmed. |
+| F015-5 | holds | 180 and +80.9% against 260 and +80.8%; "probably the same study", not independent. |
+| F015-6 | holds | "demonstrably improves outcomes" is on the page. It is a general rule covering all the patterns, so the memo's use is fine. |
+| F015-7 | holds | "Highest score and low cost against open-source agents", not "cheaper". |
+| F015-9 | holds | "LLM-assisted" and "rollouts". |
+| F015-12 | holds | Figures are scoped to the two populations. |
+| F015-15 | holds | "Deliberately ambiguous"; 36.8% of actions; 70.3% on evaluated actions. My recomputation is correctly attributed to the checker. |
+| F015-16 | holds | dontAsk gives Manual, the unchanged-mode condition, and prompts in the lead session are all stated. |
+| F015-21 | holds | Per round 1's record. |
+| F015-22 | holds | Re-opened: "$20,000/month per engineer" and "far less interesting" are exact. |
+| F015-23 | does not hold | §1 says "The author says she pays close attention to the diffs", directly after the Gas Town description. On the page this is the author describing her own use of Claude Code and OpenCode ("pay close attention to the diffs and regularly check code in an IDE"), not Gas Town use. The page shows no author name or gender, so "she" and "herself" in the opening answer rest on the Input reader only. The catalogue repeats the misattribution: "Gas Town F015-23 (author watches the diffs closely)" sits in a "little or no human code review" row, and "the Gas Town author" appears among the "observers, not measurers". Yegge built Gas Town. The page has a heading "Yegge never looks at code". "Not a serious, working tool" and "no outcome data" are confirmed. |
+| F015-25 | holds | "Where I'm confident ... can't sneak into the context" is used in §5 and the "what each answer would change" bullet. |
+| F015-26 | holds | Anthropic (Claude Code), with Google as a past employer, as round 1 found. The independence note is marked as opinion. |
+| F015-27 | holds | "Industrial software setting", three projects analysed, trends varying by project, no causation claimed. 42% is attributed to the checker. |
+| F015-28 | holds | Per round 1's record. |
+| F015-29 | holds | AIID text is "reportedly produced fabricated test results and fake data". The memo quotes a subset, which is not stronger. The Stack has no fabricated data. One-click restore is an existing feature. The planning/chat-only mode is confirmed. |
+| F015-30 | holds | "Without permission" is attributed to the agent's later statement. |
+| F015-31 | does not hold | The memo writes "AWS's bulletin says ... let a threat actor commit malicious code (a wiper prompt)" (§5 and entry 17). The bulletin never uses the word "wiper"; that is from The Register. |
+| F015-35 | holds | "Voluntary" is marked search-only. |
+| F015-36 | partly holds | "With a focus on healthcare" and the named-factors wording are right. The memo states "healthcare is under half of them" as fact. The only basis is an ambiguous flattened Table 1 (totals row "15 16 27 6 3 7 74") with no count in the text. |
+| F015-37 | holds | "On-call intervention such as a release rollback". |
+| extra a | holds | Per round 1's record. |
+| extra c | holds | Review is advice, not a requirement. |
+| Q-002-F-m | holds | Library entry reads "260 configurations (180 with full cost tracking)". |
+| Q-009-F2-1 | holds | "Loosely related" is the right description. |
+| entries 1–4, 6, 7, 9–11, 15–23 | holds, except 17 and 21 | They follow the corrected wording. Entry 17 carries the "wiper" attribution problem. |
+
+No item that round 1 marked not confirmed is still relied on. The search-only items (extra b, F015-11 wording, MINJA figures, "voluntary") stay marked search-only.
+
+**Library entries changed** (worktree /home/user/lib-q-015, branch build/source-checker/q-015, one commit 8b521ad, not pushed). Edits are in library/ only, and the commit message ends with the required two lines.
+- library/patterns/Q-015-P21.md: retitled to "only for tasks where you are confident malicious instructions cannot sneak into its context". The old title was the stronger wording the corrected memo dropped. The library README row has the same retitle.
+- library/facts/Q-015-17.md: added that the bulletin does not use "wiper" and that the wiper-prompt description is from the press.
+- library/facts/Q-015-3.md, 9, 11, 15, 19, 20 and 23: removed references to the first memo's superseded wording, so each entry stands alone. No change of substance.
+- All other entries were left as they were. Entries 2, 18 and 20 already conflict with nothing in the memo.
+
+**What the memo must still correct**
+1. Opening answer and §1 "Disagreement between sources": change "two vendors disagree on whether to build multi-agent systems at all". Say that Cognition advises against building them, while LangChain says the two posts have a lot in common, gives no yes/no answer, and adds the read/write distinction as its own.
+2. §1 F015-3: "most coding tasks are a weaker fit" and the token-value point are Anthropic's words quoted in the LangChain post. Say LangChain reproduces them, or drop them.
+3. Gas Town (F015-23): in the opening answer, §1 and the catalogue, drop the claim that the diffs remark is about Gas Town. It is the page author's own practice with other tools. Drop "she" and "herself", since the name and gender are not shown. Fix "the Gas Town author" in the catalogue "outside check" cell, where it reads as though Yegge were an observer.
+4. F015-31, §5 and entry 17: do not put "(a wiper prompt)" inside the sentence attributed to AWS's bulletin. The bulletin says only "malicious code"; the wiper description is The Register's.
+5. F015-36: soften "healthcare is under half of them" to "the extracted table suggests under half", or drop it.
+6. Opening answer, cost paragraph: "The time cost to the supervisor appears in three places" lists PR closure time (F015-27) and METR, which are not supervisor time. Reword as "time costs", or keep only the review-bottleneck items.
+
+Total tokens: I cannot see my token count.
