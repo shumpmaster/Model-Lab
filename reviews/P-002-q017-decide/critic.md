@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Critic on questions/P-002-q017-decide.md, the card after Q-017's deciding check: round 1 (FAIL); brief 222. Each round a fresh session on a different model from the card's writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
+*The Critic on questions/P-002-q017-decide.md, the card after Q-017's deciding check: round 1 (FAIL), round 2 (PASS); briefs 222 and 223. Each round a fresh session on a different model from the card's writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's. After round 2, its new findings 1, 2, 3 and 5 were applied as wording.*
 
 ## Round 1 (brief 222)
 
@@ -53,3 +53,59 @@ Files read:
    - /home/user/Model-Lab/research/Q-006-memo.md
    - /home/user/Model-Lab/research/Q-008-memo.md
    - /home/user/Personal-Org-Operating-Model/OPERATING_MODEL.md
+
+## Round 2 (brief 223)
+
+The round's verdict was PASS.
+
+Round 2 check of /home/user/Model-Lab/questions/P-002-q017-decide.md. I read it cold, then opened the Context sources I am allowed to read: the stop ruling, the Critic's file on Q-017, Q-017.md, the extract README, LL-73, the Q-006 and Q-008 memos, OPERATING_MODEL §2 and §4, AGENTS §5 and the template. None of the options amounts to accepting work despite a failed check:
+- A re-scopes the question and requires one more check.
+- B re-specifies the rounds coding and requires one confirmation review.
+- C drops the count.
+Each option sends a failure back to the owner. The card's wording of the stop rule at line 40 matches OPERATING_MODEL §4. The ruling (line 35), LL-73 (open, next step the owner's) and the round 3 finding 7 citation (line 36) all match their records. Gain, cost and reversibility are given for all three options, and the recommendation says what would change it.
+
+**Round 1 findings**
+1. Blocking, the claim that the commit and pull-request extracts "passed": ANSWERED.
+   - Line 7 now says the check did not test those extracts for accuracy.
+   - Option A's gain says "from the extracts the earlier round found workable, once checked".
+   - Line 36 cites round 3, finding 7, which does say "Items 1-3 and 5 are workable from the extract".
+2. Non-blocking, "my script" blamed the wrong role: ANSWERED. Lines 7 and 9 name the Orchestrator and its script.
+3. Non-blocking, what happens to the failed rounds files: MOSTLY ANSWERED.
+   - Line 14 says the rounds files are removed, the question is narrowed, and the short check covers the narrowed question and the two extracts.
+   - It still does not say whether the rounds script and the README text about rounds go too (see 3 below).
+4. Non-blocking, B's fix list: ANSWERED. Line 19 now has the tie-break, the rule for a first round with no verdict, and "date a verdict by the last change to its verdict line, or mark it overwritten". These match the deciding check's "what would make it pass".
+5. Non-blocking, plainness: MOSTLY ANSWERED.
+   - Line 5 says what the owner chooses and that nothing is irreversible.
+   - Line 7 explains "extracts".
+   - Line 9 now says "passing its check at the first try" and "failing three checks in a row" in place of the jargon.
+   - The WHY has no file path or R-number.
+   - Some density remains (see 4 below).
+6. Non-blocking, DEFAULT and TIMEOUT "none": ACCEPTED as in round 1.
+   - The reason is on the card, and it matches the owner's ruling that a failure comes back to them.
+   - The "WHO HAS CHECKED IT" line is one of the seven parts D-019 requires, so it is fine.
+7. Non-blocking, exact dates: ANSWERED. Line 16 gives the dispatch log stopping on 2026-10-08 and other records about 2026-10-30. This matches Q-006 (lines 392 and 198).
+
+**New findings, all non-blocking**
+1. Line 37 cites the Q-006 and Q-008 memos for "the dispatch log they read stops on 2026-10-08". Only Q-006 says so (line 392). Q-008 supports the 2026-11-01 date and the "piece" unit, but I found no 10-08 or 10-30 date in it. The card's "their" covers both counts, so it is slightly overstated. Say "Q-006's".
+2. Option A's cost does not say it can fail again, although B's does ("a check that can fail again"). The commit and pull-request extracts have not yet been hand-checked, so A carries the same risk. Line 14's closing "a failure comes back to you" partly covers it. A and B are put slightly unevenly.
+3. Line 14 says "the rounds files are removed from the extract". It is not clear whether that includes rounds.py or the README's rounds text. The Researcher's reading limit is the whole extract folder (Q-017.md line 41). State that the question's item 4 and the README are edited too.
+4. Phone plainness:
+   - Line 9 is a long paragraph. Its last clause, "dated some final verdicts before the failures that came before them", is hard to follow.
+   - "Piece" (line 16) and "blind" (line 7) are not explained.
+   - Line 16's cost is a dense run of dates.
+5. D-019's "what happens if the owner doesn't decide" is given only as "DEFAULT: none". Add a clause saying the count and the target wait.
+6. I did not open docs/projects/P-002.md, which is barred. I saw R12 in a grep line in that file (line 107) and in a handoff file, so the R12 risk exists. I could not confirm that it sits in "section 7".
+
+Files read:
+- /home/user/Model-Lab/questions/P-002-q017-decide.md
+- /home/user/Model-Lab/reviews/P-002-q017-decide/critic.md
+- /home/user/Model-Lab/decisions/questions/P-002-q017-stop.md
+- /home/user/Model-Lab/reviews/P-002-research-q017/critic.md
+- /home/user/Model-Lab/research/Q-017.md
+- /home/user/Model-Lab/research/Q-017-extract/README.md
+- /home/user/Model-Lab/docs/LESSONS.md
+- /home/user/Model-Lab/AGENTS.md
+- /home/user/Model-Lab/questions/_TEMPLATE.md
+- /home/user/Model-Lab/research/Q-006-memo.md
+- /home/user/Model-Lab/research/Q-008-memo.md
+- /home/user/Personal-Org-Operating-Model/OPERATING_MODEL.md
