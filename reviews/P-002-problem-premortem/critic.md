@@ -1,6 +1,6 @@
 Verdict: FAIL
 
-*The Critic's check of P-002's problem statement and what other fields found (docs/projects/P-002.md section 2) and its pre-mortem (section 7): round 1 (FAIL); brief 193. Each round a fresh session on a different model from the plan's writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
+*The Critic's check of P-002's problem statement and what other fields found (docs/projects/P-002.md section 2) and its pre-mortem (section 7): round 1 (FAIL), round 2 (FAIL); briefs 193 and 194. Each round a fresh session on a different model from the plan's writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
 
 ## Round 1 (brief 193)
 
@@ -70,3 +70,45 @@ Findings (B = blocking, N = non-blocking):
     - R7's "Input reader" is not explained.
 
 Not a finding: the placeholder that the strategy chain follows once the value target is ruled is stated openly, and I did not count it against the plan.
+
+## Round 2 (brief 194)
+
+The round's verdict was FAIL.
+
+Round 2 check of /home/user/Model-Lab/docs/projects/P-002.md: the problem statement, "What other fields found" (section 2), and the pre-mortem (section 7). I compared them with the library entries (Q-011-4, Q-012-4, Q-012-17, Q-014-12, Q-014-13, pattern Q-014-P22), the Q-010, Q-011, Q-012, Q-013 and Q-014 memos, decisions/questions/P-002-target.md, the shortlist, and docs/PROJECT.md. One finding blocks (item 1). The rest do not.
+
+Round 1 findings:
+1. No transfer check (blocking): answered. Each point now has Conditions, Transfer and May mean here, with fact, estimate or opinion marked on the evidence lines. The Q-014-P22 and Q-012-P1 untested-transfer caveats are carried.
+2. Unsourced claims in the problem statement (blocking): partly answered. See item 1 below.
+3. The problem statement stated the solution (blocking): answered. It now gives the gap and three limits, with no trial, keep or retire design.
+4. R2, R5 and R9 pulled against each other (blocking): answered, with one remaining weakness (item 4 below).
+5. Missing risks (blocking): answered. R12 (measure and judge), R13 (cost), R14 (trial harm) and R15 (order) were added. One gap remains (item 6 below).
+6. Early signs were late outcomes (non-blocking): mostly answered. R1, R4 and R10 now have observable signs, and the R10 answer now meets its risk.
+7. Claims stronger than their sources (non-blocking): answered. "Fewer held" now carries its 26% and preprint base. Q-011-11 is marked as an association. Q-012-3 is marked as model drift, not practice decay. Q-012-4 is marked weak, abstract only, one task type, with the Qwen contrast. Q-012-15 carries "did not alter the results". Q-012-17 is marked as overlap, not a miss rate.
+8. Stakes and who-says-it (non-blocking): answered. The insurer, the vendor blog, the Zalando self-report and the consultancy opinion are named. R6 now cites Q-014-18.
+9. Q-013 hedge (non-blocking): answered. 80% power and the assumptions are stated, and the text now concerns repeated looks. This matches the memo.
+10. "May mean here" read as decisions (non-blocking): partly answered. See item 2 below.
+11. Fit with Part 2 (non-blocking): fine.
+12. Plainness (non-blocking): partly answered. See item 7 below.
+
+Judgement 1: The problem statement uses no industry's terms ("one person", "delegated workers"). It states a problem, not a solution. It fits P-002-target.md: share of work carried, justified trust, promising methods and not mistaking share for quality. It correctly does not use the 90% figure.
+
+Judgement 2: The section 2 figures match their sources: 26% and 82%; 2,707 firms; 15.4% and 97.9%; 46.8% and 0.52%; the Q-012-3 and Q-012-4 quotes; 1 of 4 alerts; 2.5% to 4.0%; 2 of 7 services; the Q-014-12 quote; Zalando as a self-report; the Q-013 power figures; the Q-010 and Q-011 absence claims. I did not re-open Q-014-4, Q-014-18 or Q-012-15 beyond the memo lines; they matched the memo.
+
+Findings:
+1. (Blocking) Problem statement, first limit ("Which ways of running the team would help is unknown"). It is still unsourced and unmarked.
+   - "The ways change quickly" cites nothing.
+   - "Few have been tested by anyone independent of the people reporting them" cites nothing. Q-011-input says there is no systematic rate for vendor or practitioner claims, so this is the Chief of Staff's reading, not a fact.
+   - "Where claims were re-tested, fewer held (Q-011-1, Q-011-4)" generalises from one secondary-cited software-engineering mapping and one preprint abstract. The section 2 bullet hedges these correctly, but the statement does not.
+   - Round 1 item 2 was blocking. Mark these as opinion or estimate, or add a source and the hedge used in the section 2 bullet.
+2. (Non-blocking) Several "May mean here" lines still read as plan decisions: "check outside material before it runs", "each kept method needs a set review", "use more than one source", "a few chosen sources". The header calls them opinion, which helps. Phrasing them as readings would finish round 1 item 10.
+3. (Non-blocking) R7 cites shortlist item 6 for more than it says. Item 6 holds only "Yes, no data out". "Read only as data, by the one role allowed to read the web" and "outside code, prompts and skills are checked before use" are the model's and the plan's, not the owner's. Cite the model rule or label them proposals.
+4. (Non-blocking) R9 names the R2/R5 tension but resolves nothing. It hands the "not shown" outcome (stop, or keep on trial with a review date) to the owner at the value-target card, with no stated default. That fits the owner's "faith" line, and the early sign is observable. The risk is named, not met.
+5. (Non-blocking) R15 says screening that does not touch instructions "can start first". That sits uneasily with the owner's order, "first the prompting idea, then the cutting edge idea" (Part 2). Say plainly that the owner decides it at the Design gate.
+6. (Non-blocking) One missing risk remains: integration into the operating model and desk. The owner's purpose is "a pipeline to integrating those back into the operating model and ultimately service desk", and the desk is "never updated automatically". Nothing covers adopted methods failing to land, or several adopted methods interacting. The Q-013 memo says few-run trials cannot see interactions.
+7. (Non-blocking) Plainness on a phone is better but not done.
+   - Prose still has "paired comparison", "80% power", "standard deviation of the run-to-run differences" and "curvilinearly (taking an inverted U-shape)".
+   - "Threat-indicator feeds" is jargon.
+   - The pre-mortem is still a five-column table with long cells.
+   - R13's source reads "the same record", which is unclear.
+   - Plain glosses would help, for example "10 runs only show a gain about as big as the usual run-to-run swing".
