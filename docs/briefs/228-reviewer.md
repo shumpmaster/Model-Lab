@@ -1,7 +1,7 @@
-# Brief 129 — reviewer — the holdouts check fix and the first weekly landing (R3)
+# Brief 228 — reviewer — the holdouts check fix and the first weekly landing (R3)
 
 session: session_01QBwHGNPFytF6t2VG6mnugn
-model: claude-fable-5-1 (the change's writer, the Chief of Staff and Orchestrator in the Chief of Staff's session, runs on claude-opus-5-5; the work session's builder too; D-056). A new Reviewer session.
+model: claude-fable-5-1 asked; served claude-fable-5-2, as the Reviewer reported (the change's writer, the Chief of Staff and Orchestrator in the Chief of Staff's session, runs on claude-opus-5-5; the work session's builder too; D-056). A new Reviewer session.
 start: Model-Lab@cb9882c86c167674aea3ce1044e38403d67c43bb (fixed copy /tmp/claude-0/-home-user/9a06fe22-60e0-580d-8926-30c8a46558b9/scratchpad/fix-71, branch claude/p-001-model-lab-continue-ohykg9), against main at e1e96d74272f84cb1a83e0ed9896816a9c00075c
 manifest: none. This brief records no pack manifest of its own, so neither S001_BLIND_MANIFEST (J8) nor S001_ANALYSIS_MANIFEST (J7) is set for it.
 recorded: at hand-out, 2026-11-09 (LL-04, LL-24)
