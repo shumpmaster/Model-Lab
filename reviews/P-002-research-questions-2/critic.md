@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Critic's neutrality check (D-055) of research questions Q-015 and Q-016 for P-002: round 1 (FAIL); brief 196. Each round a fresh session on a different model from the questions' writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
+*The Critic's neutrality check (D-055) of research questions Q-015 and Q-016 for P-002: round 1 (FAIL), round 2 (PASS); briefs 196 and 197. Each round a fresh session on a different model from the questions' writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's. After round 2, its new findings 1 and 3 were applied as wording.*
 
 ## Round 1 (brief 196)
 
@@ -75,3 +75,73 @@ Two blocking findings, one in each question. The rest are non-blocking. I did no
 - Both ask for the same kind of per-source stake information, but only Q-015 asks for it in words. Align them.
 
 **Blocking items to fix before dispatch:** item 1 (Q-015 line 5) and item 7 (Q-016 line 15). Resubmit for a recheck once they are fixed.
+
+## Round 2 (brief 197)
+
+The round's verdict was PASS.
+
+Both round 1 blocking findings are answered, and neither question has a new blocking finding. I did not read the barred folders. For the library I read README.md lines 1-185 and searched the rest for Q-010 to Q-016 rows and for topic words. I did not open individual entries. The README line that lists topics was too long to display, so finding 8 below is unchecked.
+
+**Round 1 findings, one by one**
+
+1. Q-015 maker-reported methods (blocking): **answered.**
+   - Lines 15-21 now put the weaknesses on the same footing as the claims. The weakness ask is explicit: "costs, limits, failure modes and reported incidents, and the conditions outside which it was not tested, asked for as fully as its claims" (line 19).
+   - The source's kind and stake, and "whether anyone outside the source has checked it", are asked for in the question text (line 16).
+   - Comparisons now name a single agent, people without agents and a simpler setup, "including where it did no better or worse" (line 20). Whether the method is still in use is asked at line 21.
+   - Line 23 gives makers' methods the same questions ("with the same questions asked of them") and makes novelty neither a reason to include nor a reason to leave out.
+   - Maker-reported methods are now treated evenly. Their weaknesses are asked for as fully as their claims.
+2. Q-015 adoption framing (non-blocking): **mostly answered.** "The organisation" is now defined as "one small organisation of agents supervised by one person". The decision and the change lines keep "set aside and recorded" and "gaps" beside "could be tried". See finding 1 below.
+3. Q-015 "improved" (non-blocking): **answered.** The word is gone. Line 11 says "kept and changed".
+4. Q-015 gaps (non-blocking): **answered.** Cost and time (line 13), permissions and tool access (line 10), incidents (line 12), comparison with people alone (line 20), survivorship (line 21) and outside checks (line 16) are all asked for. The "even thinly" instruction is gone. Eight areas at depth 3 is still large; see finding 2.
+5. Q-015 library exclusion (non-blocking): **answered.** Q-010 to Q-014 are dropped from the exclusion. Q-002, Q-003, Q-005, Q-007, Q-006, Q-008 and Q-009 are named. These are the checking, judging, handover and own-records entries I flagged.
+6. Q-015 form and plainness: **answered.**
+7. Q-016 "value target" (blocking): **answered.** The phrase is gone. Lines 24-26 say "a measure to use", "paired with a check or left out", and a share figure is "used only with what it counts, and its source's stake, stated". Nothing hints at a target share.
+8. Q-016 stake and outside check for published figures (non-blocking): **answered.** Line 14 asks for what each figure counts, who reported it, any stake, and whether anyone outside has checked it. This matches Q-015.
+9. Q-016 denominator and attribution (non-blocking): **answered.** Line 6 asks how "the work" is defined when people and AI both contribute, and how a person's part and an agent's part are told apart.
+10. Q-016 gaps (non-blocking): **answered.** Each item I listed is now a bullet:
+    - calibration "in either direction" (line 8);
+    - merged and surviving code (line 8);
+    - self-report versus logs versus review, and the cost of collecting (line 11);
+    - time saved and value versus share (line 10);
+    - lag (line 9);
+    - non-code work, including "whether any are known" (line 12);
+    - comparison with the same work done without AI (line 13).
+11. Q-016 library exclusion (non-blocking): **answered.** Line 18 names Q-005 (including alert override rates), Q-006 and Q-008 (return and first-pass counts) and Q-009.
+12. Q-016 topic words (non-blocking): **unchecked.** See finding 8 below.
+13. Overlap and ownership: **answered.** Q-015 line 25 and Q-016 line 16 each say the other owns the split. Q-016 owns review and override rates. Q-015 owns the ways of running and checking.
+
+**Checks on the revised text**
+
+(1) Neutrality. I found nothing blocking.
+- Neither question favours more autonomy over less, agents checking agents over people checking, or adopting over declining.
+- Checking is listed as "by other agents, by tests or by people" with no ranking (Q-015 line 9).
+- Q-015 line 7 asks about autonomy and "how that is decided and changed" without saying which way it should go.
+- Neither question names a target share of work or hints that one exists.
+- Q-016 line 14 asks for published share figures. The ask is neutral because it is bounded by "what each figure counts" plus stake and outside check.
+
+(2) Gaps. See findings 2 to 4 below.
+
+(3) Form. Both questions have the three sections, topics and depth, as in Q-012 and research/_QUESTION.md. The depth lines carry extra text in brackets beyond Q-012's "(graded memo)"; the extra text only restates what depth 3 means.
+
+(4) Plainness. The questions are plain for a Researcher who knows nothing of the project. They avoid project jargon. They define the scope as "one small organisation of agents supervised by one person". They refer to library entries by Q-number with a plain-words gloss.
+
+(5) Overlap. See finding 5 below.
+
+**New non-blocking findings**
+
+1. Q-015, lines 30-35. The decision line says "worth a trial" and the change line says "could be tried" before "set aside". The framing is still slightly adoption-first, though the balance is present. Optional fix: open the decision line with the keep-or-set-aside choice as a pair.
+2. Q-015, lines 5-13. Eight areas, each asked of every method, is a very wide catalogue at depth 3. Expect thin coverage in places. The "gaps" clause in line 35 handles this, so the Chief of Staff should accept it knowingly.
+3. Q-015 line 12, with Q-016 lines 9 and 14. Both cover "failures": Q-015 asks how they are found, recorded and traced, and Q-016 asks about defects, rework and failures in use. The ownership sentences cover review and override rates but not this seam. It is minor, because the angles differ (how failures are handled versus how they are measured). Optional fix: add one clause saying Q-016 owns measuring failure rates.
+4. Q-015 line 5. The words "in practice" and "for planning, strategy and software work" narrow the scope without defining "strategy work". This is fine for a Researcher, and the text is plain.
+5. Q-016 line 14. "Include published figures for the share of work done by AI in named organisations" is a request for facts, not a hint of a target. It is a little more specific than the rest of the question. No change is needed.
+6. Overlap with the library. Q-002-F-m, Q-009-F10-1 (token use), Q-009 F11 (prompt injection and permissions) and Q-007 already hold parts of Q-015 areas on checking, cost and permissions. Q-015 line 27 names those source questions, so the Researcher is told not to redo them. No change is needed. Q-010 to Q-014 (extrapolation, replication) are not an overlap with either question.
+7. Q-016 line 8. "How often AI output is kept, for example code that is merged and stays" overlaps in part with Q-009-F2-8 (Claude Code PRs, 83.8% merged, 45.1% needing changes). Q-009 is named in the exclusion, so this is covered.
+8. Topics. I did not verify the topic words ("ai-share-of-work" style tokens from round 1 are gone). Q-015's topics are agents, multi-agent-systems, human-oversight, evaluation, security and cost. Q-016's are measurement, agents, evaluation, adoption and records. They look standard and consistent with the library's usage. A topic-list check is a minor task for the Chief of Staff, not a block.
+
+Files read:
+- /home/user/Model-Lab/research/Q-015.md
+- /home/user/Model-Lab/research/Q-016.md
+- /home/user/Model-Lab/research/Q-012.md
+- /home/user/Model-Lab/research/_QUESTION.md
+- /home/user/Model-Lab/reviews/P-002-research-questions-2/critic.md
+- /home/user/portfolio/library/README.md
