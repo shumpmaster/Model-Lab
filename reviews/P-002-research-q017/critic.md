@@ -1,6 +1,6 @@
 Verdict: FAIL
 
-*The Critic's neutrality check (D-055) of research question Q-017 for P-002: round 1 (FAIL), round 2 (FAIL), round 3 (FAIL; the stop rule applies), then the deciding check the owner ruled (FAIL); briefs 216 to 218 and 221. Each round a fresh session on a different model from the question's writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's. The review-file check refuses the verdict label anywhere but at a line's start, so the deciding check's one quotation of a verdict line inside a sentence is shown as `Verdict : PASS | FAIL …` (as in reviews/P-001-harness-trade-offs/critic.md).*
+*The Critic's neutrality check (D-055) of research question Q-017 for P-002: round 1 (FAIL), round 2 (FAIL), round 3 (FAIL; the stop rule applies), then the deciding check the owner ruled (FAIL), then the deciding check of the narrowed question (FAIL); briefs 216 to 218, 221 and 224. Each round a fresh session on a different model from the question's writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's. The review-file check refuses the verdict label anywhere but at a line's start, so the deciding check's one quotation of a verdict line inside a sentence is shown as `Verdict : PASS | FAIL …` (as in reviews/P-001-harness-trade-offs/critic.md).*
 
 ## Round 1 (brief 216)
 
@@ -291,3 +291,52 @@ The question is now blind and neutral enough, and round 3's blocking finding is 
 A fresh Critic check should follow.
 
 Files read: /home/user/Model-Lab/research/Q-017.md, /home/user/Model-Lab/research/Q-017-extract/ (README.md, extract.py, rounds.py, the three .rounds.jsonl files, and keyword searches of the commits and prs files), /home/user/Model-Lab/reviews/P-002-research-q017/critic.md, /home/user/Model-Lab/decisions/questions/P-002-q017-stop.md, and verdict files in the three repositories (Service-Desk reviews/227, Personal-Org-Operating-Model reviews/3, 4, 32 and 40, Model-Lab reviews/S-001/plan.md). I read them from the working tree, not origin/main, so they may differ from the default branch.
+
+## Deciding check of the narrowed question (brief 224, decisions/questions/P-002-q017-decide.md)
+
+The round's verdict was FAIL.
+
+Q-017 narrowed question and extracts, deciding check. The question and extract are blind and neutral, and no rounds material remains. The extract's squash coding is wrong in Service-Desk, and the hand check did not catch it. This goes back to the owner per the ruling. I did not rewrite the question or the extract.
+
+Limit on my own test: my tools in this session had no shell and no git, so I could not run git show or git log against the three repositories. My test of accuracy is therefore a test of the extract against itself (counts, duplicates, field consistency, extract.py's logic) and not against origin/main. Finding 1 is evidence from the extract alone. It does not need the repositories to stand.
+
+1. [Blocking] Six "squash" pull requests in Service-Desk are not squash merges, and their numbers are counted twice.
+   - Evidence, /home/user/Model-Lab/research/Q-017-extract/Service-Desk.prs.jsonl:
+     - Lines 144, 146, 148, 150, 152 and 154 are `how: squash` for PR 182, 181, 180, 178, 177 and 176.
+     - Each has merge_commit_author "orchestrator" (agent). Each holds one commit whose only files are reviews/<n>/reviewer.md and, for most, design-reviewer.md. Those are review records of the PR with the same number.
+     - The same six numbers also appear as ordinary `how: merge` lines at 143, 145, 147, 149, 151 and 153.
+     - Service-Desk.commits.jsonl lines 1479, 1495, 1537 and 1539 show PR 182 and 177 as the pr of two commits each.
+   - Cause, extract.py lines 49 and 51: any single-parent commit whose subject ends "(#n)" is classed "squash-pr". These are orchestrator commits that record reviews and end by naming the PR they review. They are not merges of a pull request.
+   - Effect on the counts:
+     - Service-Desk shows 327 merged pull requests, of which 6 are phantoms. Per-month counts, the "squash" count, and the agent merging-account share are all wrong.
+     - A squash is supposed to take its author from the pull request's author. These six give an agent account, which contradicts the question's line on squashes.
+     - The later-change test also counts PR numbers twice.
+   - README lines 9 and 17 say "squash-pr" is a single-parent commit with a "(#n)" subject. That matches the code, so a Researcher following the README cannot tell these from real squashes. The question (item 2) tells the Researcher to count squashes separately and say what they show, so the six would be reported as real.
+   - The hand check missed it. Its sample did draw squash PRs 176 and 177, and it marked each "True" on the subject's PR number. It never asked whether that number belongs to a distinct merged pull request, and it never checked for duplicate numbers. Both 176 and 177 are in the phantom list.
+   - Fix needed: re-code or drop these six in the extract, or say in the README and question how to treat a number that appears as both a merge and a "squash". The hand check should then be redone on that point.
+
+2. [Blocking, same root as 1] The hand check is not sound or sufficient as written.
+   - It compares each field to git, but it never tests the kind coding itself. The cases that matter are:
+     - a single-parent commit whose subject merely ends "(#n)";
+     - a merge by an agent identity that is a local merge and not a GitHub merge. Service-Desk has 8 `how: merge` pull requests with agent merge authors, for example "definer", and line 2446 of the commits file is a "merge-pr" authored and committed by "Claude". The sample did not cover them.
+   - It also says its coverage gap is "commits by the other class other than merge commits". My search shows no "other"-class commit in the extract is plain or squash. All 135 "other" commits are merges: "Claude" local merges, and github-actions[bot] merges committed by GitHub in Service-Desk only. So that stated gap is empty, and it should say so. The hand check's "other" sample (Service-Desk 146 and 137, merge) did cover the class as it exists.
+   - Added, modified and deleted status: extract.py's name-status mapping is sound in code (A, M, D; "other" for anything else). The extract has no "other" status anywhere. The hand check covered 3 plain commits per repository, 15 in all, which is thin for a status field. The check I could do is consistency: every file in commits.jsonl has a status from {added, modified, deleted}.
+
+3. [Non-blocking] README lines 9 and 17 describe "merge-pr" as a merge commit "that GitHub made". The code also gives that kind to a local merge whose subject names a pull request. The question's line that "for a merge, the merge commit's author is the account that merged it" is then inexact for agent-authored merge-pr lines. The Researcher is told to state limits, and the README should say it.
+
+4. [Non-blocking] Item 4 and `mentions_prs` come from subjects only. Any "#n" in a subject is read as a pull request number, which may be an issue or a pull request of another repository, since all three repositories share one numbering style. The extract holds no revert at all (`revert: true` appears nowhere), and 213 commits have `mentions_prs` set. The question's separate reporting of reverts and naming covers this, but "cannot tell a PR from an issue or another repository's PR" belongs in item 5's limits.
+
+5. [Non-blocking] Item 3, "first added … per month and per merged pull request".
+   - prs.jsonl files carry no status field, only path and line counts. Status exists only in commits.jsonl. The count is repeatable through each PR's `commits` list. The question should say that, and which date gives the month (commit_date of the adding commit, or the PR's merged_at).
+   - A file added, deleted and re-added counts twice unless "first" is defined by earliest date. Matching a question to its answer by "adds the decision label and deletes the question label" is workable. Renames show as delete plus add under a new label, as the README says.
+
+6. [Non-blocking] "The decision it serves" still says "how its checked work fares". The narrowed question has no count for that, so this line is a leftover from the rounds item. Remove or reword it.
+
+7. [Non-blocking] The 466 "other-merge" commits (73 in Personal-Org-Operating-Model, 38 in Model-Lab, 355 in Service-Desk) are local merges of agent branches. Item 1's "commits on the default branch that belong to no merged pull request" will include the merge commits themselves. Add one line on whether to count the merge commits or only their content.
+
+Checks that passed:
+- Blindness and neutrality (check 1). The question is neutral. It names no project, target, direction or ruling, and it keeps "report every figure on equal terms", both ends for each count, and "does not judge whether the earlier change was at fault". No rounds file, rounds script or rounds wording remains. A glob of /home/user/Model-Lab/research/Q-017-extract/ shows only README.md, extract.py and the six jsonl files. A search for "round" in README.md and extract.py finds nothing. Matches in the jsonl files are file-path segments, which the "do not report any path" rule covers. The extract has no subject, message, title, branch or address field. Two stray words in the paths, "owner-answers" and "owner-request", are carried over from my earlier non-blocking note.
+- Internal consistency. The commit files total 4,664 lines (958 Model-Lab, 948 Personal-Org-Operating-Model, 2,758 Service-Desk). Each repository's count of merge-pr and squash-pr commits equals the number of lines in its prs file (84, 47 and 327, 458 in all). Every file path has a status from {added, modified, deleted}.
+- Question 3, repeatability. Items 1, 2 and 4 can be counted from the extract alone and repeated, once finding 1 is fixed. Item 2's "other" treatment is workable, since other consists of the "Claude" local merges (a default identity) and github-actions[bot] merges. Item 4's windows are defined by commit_date and merged_at in UTC, and its file overlap runs through prs.jsonl `files`, with the unreviewed exclusion of "logs, ledgers, digests, session records" workable from labels and path names.
+
+Files read: /home/user/Model-Lab/research/Q-017.md, /home/user/Model-Lab/research/Q-017-extract/ (README.md, extract.py, and searches of all six jsonl files), /home/user/Model-Lab/research/Q-017-extract-sample.md, /home/user/Model-Lab/reviews/P-002-research-q017/critic.md, /home/user/Model-Lab/decisions/questions/P-002-q017-decide.md.

@@ -94,3 +94,7 @@
 {"event": "helper", "session": "session_01QBwHGNSLmSrYQgS6BPjV8p", "role": "critic", "started": "2026-11-09T15:01:26Z", "ended": "2026-11-09T15:04:27Z", "reported": {"tokens": 125166, "tool_uses": 37, "duration_ms": 181137}}
 {"event": "helper", "session": "session_01QBwHGNSLmSrYQgS6BPjV8p", "role": "critic", "started": "2026-11-09T15:05:19Z", "ended": "2026-11-09T15:06:17Z", "reported": {"tokens": 46123, "tool_uses": 14, "duration_ms": 57525}}
 {"event": "helper", "session": "session_01QBwHGNSLmSrYQgS6BPjV8p", "role": "critic", "started": "2026-11-09T15:07:02Z", "ended": "2026-11-09T15:08:04Z", "reported": {"tokens": null, "tool_uses": null, "duration_ms": null}}
+{"event": "helper", "session": "session_01QBwHGNSLmSrYQgS6BPjV8p", "role": "critic", "started": "2026-11-09T15:13:34Z", "ended": "2026-11-09T15:15:16Z", "reported": {"tokens": 60366, "tool_uses": 31, "duration_ms": 101493}}
+{"event": "helper", "session": "session_01QBwHGNSLmSrYQgS6BPjV8p", "role": "critic", "started": "2026-11-09T15:16:13Z", "ended": "2026-11-09T15:17:12Z", "reported": {"tokens": 47936, "tool_uses": 23, "duration_ms": 58757}}
+{"event": "helper", "session": "session_01QBwHGNSLmSrYQgS6BPjV8p", "role": "critic", "started": "2026-11-09T15:17:58Z", "ended": "2026-11-09T15:18:39Z", "reported": {"tokens": 43141, "tool_uses": 15, "duration_ms": 41817}}
+{"event": "helper", "session": "session_01QBwHGNSLmSrYQgS6BPjV8p", "role": "critic", "started": "2026-11-09T15:19:07Z", "ended": "2026-11-09T15:19:48Z", "reported": {"tokens": 43274, "tool_uses": 14, "duration_ms": 40425}}

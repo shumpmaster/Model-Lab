@@ -28,6 +28,12 @@ def git(repo,*a): return subprocess.run(["git","-C",repo,*a],capture_output=True
 def run(repo, name):
     fmt="%x1e%H%x1f%P%x1f%aI%x1f%cI%x1f%an%x1f%ae%x1f%cn%x1f%s%x1f%b"
     raw=git(repo,"log","origin/main","--numstat","--no-renames","--format="+fmt)
+    st={}
+    cur=None
+    for line in git(repo,"log","origin/main","--name-status","--no-renames","--format=%x1e%H").split("\n"):
+        if line.startswith("\x1e"): cur=line[1:]; st[cur]={}
+        elif "\t" in line and cur:
+            s,path=line.split("\t",1); st[cur][path]=s[0]
     commits={}
     for rec in raw.split("\x1e")[1:]:
         head,_,rest=rec.partition("\x1f")
@@ -37,7 +43,7 @@ def run(repo, name):
         for line in tail.splitlines():
             parts=line.split("\t")
             if len(parts)==3 and (parts[0].isdigit() or parts[0]=="-"):
-                a,r,path=parts; files.append({"path":redact(path),"added":None if a=="-" else int(a),"removed":None if r=="-" else int(r)})
+                a,r,path=parts; files.append({"path":redact(path),"status":{"A":"added","M":"modified","D":"deleted"}.get(st.get(h,{}).get(path),"other"),"added":None if a=="-" else int(a),"removed":None if r=="-" else int(r)})
         m=re.match(r"Merge pull request #(\d+) from ([^\s]+)",s)
         sq=re.search(r"\(#(\d+)\)$",s)
         coauth=[cls(n.strip(),e.strip()) for n,e in re.findall(r"^Co-authored-by:\s*(.*?)\s*<([^>]+)>",tail,re.M)]
