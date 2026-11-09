@@ -1,0 +1,7 @@
+kind = "research"
+milestone = "Discovery-2"
+# P-002 (the screening), Discovery: the starting figures for its value target, from the organisation's own records (docs/projects/P-002.md, section 7, pre-mortem R12).
+# Full question: research/Q-017.md, to be checked by the Critic for neutral phrasing before any Researcher sees it.
+question = """
+See research/Q-017.md.
+"""
