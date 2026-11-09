@@ -89,3 +89,72 @@ The 78 "decision" files include 26 under tests/. POOM's 29 include two in templa
 5. **Second view of lines.** The question asks for changed lines as a second view beside each count. §1 gives it. The §3 file counts, the §4 counts and the §2 shares of PRs give no lines. The memo should supply them or say why not.
 
 Files: /tmp/q017-check/q017.py, /tmp/q017-check/out.txt, /tmp/q017-check/own/recount.py, /tmp/q017-check/own/r2.py. The memo and extract under /home/user/Model-Lab/research/ were not changed, and I filed no library entries.
+
+## Round 2 (brief 232)
+
+The round's verdict was FAIL.
+
+The corrections are almost all made and every script figure reproduces. Three small items remain: one count that doesn't match the memo's own rule, an overbroad "every figure" sentence, and paths and file names left in the memo.
+
+I extracted the memo's script to /tmp/q017-check2/q017.py and ran `python3 -I q017.py /home/user/Model-Lab/research/Q-017-extract`. It exited with code 0 and wrote only under /tmp/q017-check2/. I also ran my own checks there (own.py, own2.py). I did not need the repositories. I read no forbidden material and did not use the web.
+
+## 1. Figures re-checked against the rerun
+
+| Figure | Result | Reason |
+|---|---|---|
+| Opening paragraph: 447 PRs (312 / 85 / 50) and lines (322,755 / 87,968 / 109,461) | holds | Matches the script output. |
+| Opening: plain commits by agent identity 94.2 / 98.9 / 97.8%, owner 5.8 / 1.1 / 2.2% | holds | Same as round 1. |
+| Opening: no co-author trailer; no commit marked revert | holds | Same as round 1. |
+| Opening: merging account 226 / 86 (Service-Desk), 85 (Model-Lab), 50 (POOM) | holds | Same as round 1. |
+| Opening: PRs with an owner-identity commit 48/312, 6/85, 16/50 | holds | Same as round 1. |
+| Opening: question-label files 540 / 82 / 29, decision-label 78 / 1 / 1 | holds | Same as round 1. |
+| Opening: 14-day file overlap 202 / 42 / 33; named 37 / 17 / 6 | holds | Same as round 1. |
+| Opening: 14-day incomplete groups 82 / 85 / 12, with 43 of 202, 7 of 37, 7 of 33, 0 of 6 | holds | Matches the rerun's complete/incomplete rows (159+43, 30+7, 26+7, 6+0). |
+| Opening: all 447 merged within 60 days of 2026-11-09 | holds | 312, 85 and 50 of the same totals. |
+| §1 monthly PR counts and lines, kind table, flagged 175 / 50 / 38 | holds | Exact match to the script output. |
+| §1 commit table and 375 / 59 split; 356 / 116 / 49 / 1 / 1 kinds | holds | Exact match. |
+| §1 29 and 1 PR-number gaps; 525 binary entries | holds | Exact match. |
+| §2 names, committer "Claude" on 684 / 6 / 25, 147 owner single-file commits and their split | holds | Exact match. |
+| §2 per-PR table, line splits, merging account by owner commit, commit-level shares, convention-start dates | holds | Exact match. |
+| §3 both tables, PR distributions, matching rows, moves 7 / 0 / 1 | holds | Exact match, including lines at first addition and changed lines of PRs that add one or more. |
+| §4 left-out counts and lines (71/2,622, 5,428; 51/685, 27,801; 8/575, 3,365), by class | holds | Exact match; the Model-Lab 15 are the extract's earlier versions and the Service-Desk 2 are lock files. |
+| §4 PRs with no file left to test (14 / 9 / 11) | holds | Exact match. |
+| §4 count table, all windows and groups | holds | Exact match. |
+| §4 line table, including the "earlier lines in shared files" column | holds | Exact match. |
+| §4 mentions_prs 148/148, 44/44, 52/53 | holds | Exact match. |
+| §5 author date differs from commit date on 86 / 43 / 18 | holds | My own count gives 86 / 43 / 18, but the script doesn't print it. |
+| §5 "3 in Service-Desk, 4 in POOM" record-named copies in test and template folders | does not hold | See "Still to correct", item 1. |
+| Figures round 1 confirmed | unchanged | None changed. The Researcher reports only dict key order differing, and that comparison was not rerun here. |
+
+## 2. Round 1's corrections
+
+| Correction | Result | Reason |
+|---|---|---|
+| 1. Three-way marks with "what it would take" | holds | The mark key, per-figure marks, and a "would take" line on each [P] and [N] item are present. The word "grade" no longer appears. |
+| 2a. "wrote" changed to "carry an agent identity as author" | holds | The opening paragraph and §2 say "carry". |
+| 2b. 14-day incomplete windows stated; overlap called coarse | holds | Stated in the opening paragraph. |
+| 2c. Label counts worded as labelled files, with where they sit | holds | Both the opening paragraph and §3 give the 253 / 190 / 97 and 26 locations, attributed to the source check. The 253+190+97 sum to 540. |
+| 3. Rule text matches the script | holds | The 12 numbered rules follow the script's order. The template rule comes after the label rules, and the inventory- files, `.jsonl.lock` and `_VERSION` are included. I compared every rule with `kind()`. |
+| 4. No specific paths in the script | mostly holds | See "Still to correct", item 3 for the memo prose. The script now uses folder-name and file-name-word classes (there is an upper-case ledger/digest word list and a `-lock.json` suffix rule), and no full path is listed. Folder names such as "template-v3" and "portfolio-template" remain as classes. I judge that acceptable. |
+| 5. Second view of lines in §2, §3, §4 | holds | Added, with reasons stated where lines are not given (re-additions, deletions, matching). The line figures match the rerun. |
+
+## 3. Wording against LL-71
+
+I read each sentence of the opening paragraph and the five item summaries. Each is worded no more strongly than its figure and carries a mark. "Carry an agent identity" is [P]. File overlap is called coarse and [P]. The label counts are [P]. Reverts are [P]. Windows are [S] as a split and [P] as a measure. Who is behind "Claude" is [N]. I found none overstated. The exception is the "every figure" sentence in item 2 below.
+
+## Still to correct
+
+1. **§5 "3 in Service-Desk, 4 in POOM" (record-named copies in test and template folders).**
+   - The count is not computed by the script.
+   - Under the memo's own rule 8, the word list plus names ending `_REGISTER` or `_REVIEW`, the POOM count is 7, not 4. The 4 counts only the word-list names. Service-Desk's 3 is right either way.
+   - All 7 POOM copies stay in the overlap test.
+   - Either state 7 or say which names the 4 covers, and make the script print it.
+2. **"Every figure is counted from the extract by the script at the end, except the label locations above."**
+   - This is overbroad. The script does not print the §5 author-date counts (86 / 43 / 18) or the copies counts above.
+   - Either add them to the script or narrow the sentence.
+3. **Paths and file names remain in the memo.**
+   - The italic first line names a brief path and the source-check file. It is the Orchestrator's own line, so the Orchestrator should decide.
+   - The final "Working files" line names /tmp/q017/, q017.py, new.out, orig.py, orig.out, cmp.py and memo.md. Remove it from the memo.
+   - These are not extract paths, but check 4 asks for no path or file name.
+
+I could not see my token total.
