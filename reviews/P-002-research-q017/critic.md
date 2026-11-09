@@ -1,6 +1,6 @@
 Verdict: FAIL
 
-*The Critic's neutrality check (D-055) of research question Q-017 for P-002: round 1 (FAIL), round 2 (FAIL); briefs 216 and 217. Each round a fresh session on a different model from the question's writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
+*The Critic's neutrality check (D-055) of research question Q-017 for P-002: round 1 (FAIL), round 2 (FAIL), round 3 (FAIL; the stop rule applies); briefs 216 to 218. Each round a fresh session on a different model from the question's writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
 
 ## Round 1 (brief 216)
 
@@ -156,3 +156,50 @@ Round 2 check of /home/user/Model-Lab/research/Q-017.md and its extract (README.
 13. Overlap with Q-006-memo and Q-008-memo: item 4 is stated as a recount, with the changed unit and the comparison made after the counts. Items 1-3 and 5 are new. This is not a re-run under D-047. Pass.
 
 **Blocking findings:** 1, 2, 4, 5. The rest are non-blocking. The question text itself is close to ready; the extract and the PR-counting rules are what fail the blindness and repeatability checks.
+
+## Round 3 (brief 218)
+
+The round's verdict was FAIL.
+
+Round 3 check of /home/user/Model-Lab/research/Q-017.md and its rebuilt extract. I read no commit subjects (the extract has none). I did not open docs/projects/, docs/PROJECT.md, the contents of decisions/ or questions/, or any ideas/ folder. I searched the extract's paths and listed some Model-Lab files, and I read one line each of intake/requests/Q-017.toml and the handoff files' grep counts. Line numbers refer to Q-017.md.
+
+**Round 2 findings: answered or not**
+- R2-1 (subjects carry rulings and aims; blocking): answered. The extract has no subject, message, title or branch field at all. README line 5 says so, and a search for those keys found nothing.
+- R2-2 (barred and project paths in `files`; blocking): mostly answered. questions/, decisions/, docs/projects/ and sessions/chief-of-staff/ paths and P-nnn segments are now opaque labels (README line 24, extract.py lines 13-20). Leftovers are in finding 3 below, non-blocking.
+- R2-3 (two Q-017s): answered at line 33, which says Service-Desk's Q-017 items are unrelated and may be read.
+- R2-4 (squash merges; blocking): answered. Line 13 separates squash from merge and says what a squash can and cannot show. The `how` field and README lines 17-19 give the rule. The null-subject problem no longer exists.
+- R2-5 (classing, and the PR-to-commit rule; blocking): answered. Line 9 classes from paths. prs.jsonl gives the PR's own commits and the union of their files (README lines 19 and 21), so no parent-walking is needed.
+- R2-6 (which date): answered. Line 9 says merged_at, UTC, and README line 18 says merged_at is the merge or squash commit's date. Minor gap in finding 5.
+- R2-7 (the "other" class and the owner address): answered. Line 12 asks for a treatment of "other", and README line 3 says the owner's configured address was used for classing and not written.
+- R2-8 (round dates): answered. Line 25 says to use the verdict file's text, then the file's commit date in commits.jsonl.
+- R2-12 (a gloss for each piece kind): partly answered, see finding 6.
+- Round 1 finding 13 (reading limits), which round 2 found unanswered: still NOT answered, see finding 1.
+
+**Findings**
+
+1. [Blocking] Lines 33 and 37-43 against the files the Researcher may read. Line 33 allows "the three repositories' current files" and bars only: questions/, decisions/, docs/projects/, docs/PROJECT.md, ideas/, sessions/chief-of-staff/, *-notes.md, reviews/P-002-research-q017/, and research/Q-017*.md in Model-Lab. Other files still carry the hoped-for answer, the Chief of Staff's recommendation or the owner's leanings. The extract also lists several of them in its `files`, so the Researcher is pointed at them.
+   - /home/user/Model-Lab/intake/requests/Q-017.toml says "P-002 (the screening) ... the starting figures for its value target ... pre-mortem R12". This is the exact signal round 1 finding 1 barred, and it contains the project name and the target. It is readable under line 33.
+   - /home/user/Model-Lab/docs/briefs/216-critic.md, 217-critic.md and 218-critic.md name Q-017 and are the briefs of its own check rounds. The extract lists docs/briefs/ paths.
+   - /home/user/Model-Lab/docs/handoff/2026-11-09-chief-of-staff-p002-3.md names Q-017 and P-002, and the other docs/handoff/*chief-of-staff* files (19 in Model-Lab, many `-p002-n` in the extract's Service-Desk list too) are Chief of Staff handoffs. Handoffs are the notes-like, recommendation-bearing files that the sessions/chief-of-staff and *-notes.md bars were meant to cover.
+   - digest/project.md and digest/p-001.md, docs/LESSONS.md (round 1 said lessons logs record rulings), and docs/reports/ were not named in the bar.
+   - The count work needs none of these. Item 4 needs reviews/, research/*-source-check.md and *-entries-check.md, and dispatch-log/. Item 5 already excludes logs and digests. Name the permitted records instead of the repositories' whole current files, or add these paths to the bar: intake/, docs/briefs/, docs/handoff/, digest/, docs/LESSONS.md and the other bar-adjacent paths. Alternatively the Orchestrator can strip them from the Researcher's copy of the repositories. Deleting a bar is not a fix, since the extract still lists the paths. I am not choosing for them.
+
+2. [Non-blocking, depends on 1] Line 33 itself names reviews/P-002-research-q017/. That tells the Researcher a project P-002 exists and that this question has been checked. It does no harm beyond that, but the same bar could be worded by pattern (for example "reviews/ for items about this question") without the project id. The question's own header (line 3) also names reviews/P-002-research-q017/.
+
+3. [Non-blocking] Path names that survive redaction still carry project ids and topics. extract.py line 20 redacts only a segment that starts with "P-" and three digits. These are not caught: docs/handoff/2026-11-08-chief-of-staff-p002-1.md and similar (lowercase "p002"), digest/p-004.md, docs/handoff/2026-11-04-chief-of-staff-widget.md, experiments/EXP-008-widget-refresh-documents.md, reviews/S-037/_owner-answer-q031.md, and reviews/S-037/_owner-instruction-2026-11-05.md. The file contents are not shown, so this is a topic and project-id leak rather than a ruling leak. Line 16's "use names only to count" covers only the labelled paths. Either widen the redaction (case-insensitive p-?\d{3}, "widget") or extend line 16's "do not report" to every file name.
+
+4. [Non-blocking] Lines 41-43. "Each count becomes a figure that later work can be compared against" signals that a later comparison is planned. Round 2 passed it and it names no direction or target, so I do not make it blocking. A plainer "a described baseline of the organisation's own records" would do. Neutrality otherwise holds. "Report every figure on equal terms", both-ends counts, and "does not judge whether the earlier change was at fault" are all kept, and no number or wording favours a high or low share.
+
+5. [Non-blocking] Line 27 and item 5. The windows are measured from the earlier PR's merged_at. The question does not say whether the later commit's author_date or commit_date decides whether it falls in the 14, 30 or 60 days, and the extract has both. Rebased commits make these differ. Name one.
+
+6. [Non-blocking] Plainness (line 18 and onward). "Built work (code, tests, tools)", "checker", "piece" and "round" are defined. Still unglossed: "records only", "other" kind, "gate case" (partly), "dispatch-log", "source check", "entries-check", and "critic of a question put to the owner". A Researcher who knows nothing of the project must infer them from the file names. One line each would do. "Records only" has no stated path rule, so that class cannot be repeated by someone else.
+
+7. [Non-blocking] Workability without git. Items 1-3 and 5 are workable from the extract: PRs and their own commits and files are given, the merge versus squash is a field, and the owner and agent classes are given. Item 4 is workable from the current files plus commits.jsonl for dates. Two things need a sentence: (a) commits with kind "plain" and pr null on the default branch that belong to no PR can only be told from branch commits through prs.jsonl `commits` lists, so say to use those lists as the assignment rule; (b) the extract has only commits reachable from origin/main, so closed-unmerged PRs and direct pushes appear only as plain commits, which line 9 already mostly says.
+
+8. Gaps. The set of counts is complete for the stated purpose (who made, who merged, how often asked, rounds, rework, limits). Each count is defined enough to repeat, given findings 5 to 7. Item 6 lists the right limits, including squash merges and identities that are not proof of authorship.
+
+9. Form. It matches research/_QUESTION.md: header, The question, The decision it serves, What each answer would change, and the topics and depth lines. It is long, with definitions inside six items, but it is workable.
+
+10. Overlap with research/Q-006-memo.md and Q-008-memo.md. Item 4 is stated as a recount with a changed unit (pieces tied to merged PRs), extended to 2026-11-09, and the comparison to the two memos is made after the Researcher's own counts. Items 1-3 and 5 are new. This is not a re-run under D-047.
+
+**Blocking: finding 1 only.** Everything else is non-blocking. If the Orchestrator restricts the Researcher's readable files (the intake request, the check-round briefs, the Chief of Staff handoffs, the digests and the lessons log), the question and extract would pass. This round 3 is the last before the stop rule; the fix is a bar and permitted-record list, not another rewrite of the counts.
