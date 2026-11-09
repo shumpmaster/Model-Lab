@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Critic's check of P-002's problem statement and what other fields found (docs/projects/P-002.md section 2) and its pre-mortem (section 7): round 1 (FAIL), round 2 (FAIL); briefs 193 and 194. Each round a fresh session on a different model from the plan's writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
+*The Critic's check of P-002's problem statement and what other fields found (docs/projects/P-002.md section 2) and its pre-mortem (section 7): round 1 (FAIL), round 2 (FAIL), round 3 (PASS); briefs 193 to 195. Each round a fresh session on a different model from the plan's writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's. After round 3, its findings 3 to 5 were applied as wording, and its two suggested risks (finding 6) were added as R17 and R18.*
 
 ## Round 1 (brief 193)
 
@@ -112,3 +112,83 @@ Findings:
    - The pre-mortem is still a five-column table with long cells.
    - R13's source reads "the same record", which is unclear.
    - Plain glosses would help, for example "10 runs only show a gain about as big as the usual run-to-run swing".
+
+## Round 3 (brief 195)
+
+The round's verdict was PASS.
+
+Round 3 check of /home/user/Model-Lab/docs/projects/P-002.md: the problem statement and "What other fields found" in section 2, and the pre-mortem in section 7. I compared them with the library entries Q-011-1, -4, -10, -11, -19, Q-012-4, -15, -17, Q-014-4, -12, -13 and -18, and with research/Q-013-memo.md and Q-011-memo.md. I also read decisions/questions/P-002-target.md, OPERATING_MODEL §5 (Input reader, D-064) and docs/PROJECT.md. I did not open the Q-012-3 and Q-010 entries or memo this round; round 2 found both faithful. I did not read docs/handoff/ or sessions/. No finding blocks. The findings below are non-blocking.
+
+**Round 2 findings**
+
+1. Problem statement, first limit (was blocking): answered.
+   - "The ways change quickly" and "reported by the people who make or use them, not tested by anyone independent" are now marked "In the Chief of Staff's reading (an opinion; no source gives a rate)". That matches Q-011-memo, which says no measured rate exists.
+   - The two re-test studies now carry their weak base: one secondary citation and one preprint abstract.
+   - The owner's "faith" quote is attributed to the owner and the record.
+2. "May mean here" read as decisions (non-blocking): mostly answered.
+   - The lines now read as readings: "expect a reported gain to be smaller", "may need checking", "may need a set review date", "may be needed".
+   - Two still lean toward instructions: "re-check a kept method when the model changes" and "a few chosen sources may serve better". The header marks all of them as opinion, so I leave them.
+3. R7 cited shortlist item 6 for more than it says (non-blocking): answered.
+   - The Input-reader rule is now cited to OPERATING_MODEL §5 and D-064. I confirmed lines 242 and 333 say it.
+   - "Outside code, prompts and skills are checked before use" is labelled "proposed here".
+   - Only "Yes, no data out" is credited to the owner.
+4. R9 names the tension but resolves nothing (non-blocking): still named, not met, but it now says so openly ("the risk is met only once the owner chooses"). It fits the owner's "faith" line, and the early sign is observable. Accepted.
+5. R15 against the owner's order (non-blocking): answered. The owner decides at the Design gate, and the owner's words stand until then.
+6. Missing integration risk (non-blocking): answered by R16. It cites the owner's "I dont want the desk to automatically get updated". It also cites Q-013 on interactions: the memo says a few-run trial lacks the power to see an interaction (line 146).
+7. Plainness (non-blocking): partly answered. See item 8 below.
+
+Round 1 findings that round 2 left partly answered:
+- Item 2 (unsourced claims in the problem statement) is now answered, as item 1 above shows.
+- Item 10 ("may mean here" as decisions) is now mostly answered, as item 2 above shows.
+- Item 12 (plainness) is still partly answered, as item 8 below shows.
+
+**Judgements**
+
+1. The problem statement uses no industry's terms ("one person", "delegated workers"). It states a problem, not a solution: three limits and one aim, with no trial, keep or retire design. It fits P-002-target.md: share of work carried, justified trust, promising methods and not mistaking share for quality. It does not use the 90% figure, which the owner's record says is not to be used as a fact.
+
+2. Sourcing. These match their sources, with the same base and hedge:
+   - 26% and 82%, with the "2014 study not opened" caveat (Q-011-1).
+   - The Q-011-4 quote, as a preprint abstract.
+   - 2,707 firms, as an association (Q-011-11).
+   - 15.4% and 97.9% (Q-011-10).
+   - Q-012-4: weak, abstract only, one task type, with the Qwen contrast.
+   - 1 of 4 alerts, with "did not alter the results" (Q-012-15).
+   - 2.5% to 4.0% as overlap, not a miss rate (Q-012-17).
+   - 2 of 7 services, with the insurer stake (Q-014-13).
+   - The Q-014-12 quote.
+   - Zalando as self-report (Q-014-18).
+   - The consultancy as opinion (Q-014-4).
+   - The Q-013 figures: "about as big as the usual swing" for 10 runs and "two-thirds" for 20. These are the memo's roughly one SD and 0.63 to 0.66 SD at 80% power, with its assumptions stated.
+
+3. Non-blocking: section 2, "What was copied without checking carried harm", Q-011-19 line.
+   - The entry says individual marketplaces were scanned, across 238,180 unique skills. The plan says "one ecosystem".
+   - "The two figures measure different things" is the entry's caveat about two sources, Holzbauer and Snyk. Both figures here come from Holzbauer's abstract.
+   - As written, the vendor blog looks like support for the 46.8% and 0.52%. The blog gives other figures (76 confirmed malicious, 534 with a critical issue).
+   - Reword the line to say which source gives which figure.
+
+4. Non-blocking: problem statement, third limit ("a rise in the share of work done can hide a fall in its quality").
+   - It is unsourced and unmarked. It points only to R3 and R7, and R3 cites the owner's aim, not evidence.
+   - It is reasoning, not a measured fact, but the knowledge method wants it labelled "opinion" or "reading".
+   - The first half, that outside reading may carry harm, is backed lower down by Q-011-10 and Q-011-19, but the statement does not cite them.
+
+5. Non-blocking: R3's source column is decisions/questions/P-002-target.md. That record states the aim, not the risk or the early sign. Fine as "the owner's aim", but it should say so.
+
+6. Pre-mortem coverage. The likeliest failures for this problem and these aims are present: R1 and R2 (adopting by popularity, trials too small), R3 and R12 (quality hidden by share, measure and judge), R4 and R14 (model change), R5 and R9 (retire against try), R7 (harm from outside text and code), R13 (cost), R15 and R16 (order and landing in the model and desk).
+   - Non-blocking suggestion: add a risk that the aim is set from an unchecked figure, the 90% example. Part 2 says it is not used as a fact, but nothing watches for the target being chased on it.
+   - Non-blocking suggestion: add owner review fatigue or a flood of proposals. R13 (the owner's hours) covers it only partly.
+
+7. Answers against risks, and early signs.
+   - Each answer meets its risk in the plan's terms. R2's "size written down before it runs" and R10's "clear misfits are not trialled" both act before the cost is spent.
+   - Early signs are observable: "no trial record", "model version recorded", "judge is the same kind of agent", "reading round missed".
+   - R5's sign ("instruction length rises at a review") needs a review to exist, which R5's own answer provides.
+
+8. Non-blocking: plainness on a phone. Better than round 2, but not done.
+   - The pre-mortem is still a five-column table with long cells. R7, R9 and R16 are paragraphs inside cells, which will be hard to read on a phone.
+   - Jargon remains: "preprint abstract", "secondary citation", the quoted "curvilinearly (taking an inverted U-shape)", "80% chance".
+   - The problem statement carries codes such as "Q-011-1, Q-011-4" and "pre-mortem R12" in prose, which mean nothing to the owner.
+   - "Input reader" is named but not explained in the table.
+   - R13 now cites the shortlist item directly, which fixes round 2's "same record" complaint.
+
+9. The "may mean here" lines are labelled opinion in the header ("candidates to test, not findings or decisions"). They read as the Chief of Staff's reading, not as findings. Fine.
+
+I did not fix the plan.
