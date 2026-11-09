@@ -1,6 +1,6 @@
-# Q-017 memo: who makes, merges and changes again the organisation's changes, as of 2026-11-09 (Researcher, round 2, 2026-11-09)
+# Q-017 memo: who makes, merges and changes again the organisation's changes, as of 2026-11-09 (Researcher, round 3, 2026-11-09)
 
-*The Researcher's memo for Q-017, round 2 (brief 231, docs/briefs/231-researcher.md), revised after the Source checker's round 1 (research/Q-017-source-check.md); round 1 (brief 229) is in this file's history. Recorded verbatim by the Orchestrator (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09, from the helper's return; only this italic line is the Orchestrator's.*
+*The Researcher's memo for Q-017, round 3, the last before the stop rule (brief 233), revised after the Source checker's round 2; rounds 1 and 2 (briefs 229 and 231) are in this file's history. Recorded verbatim by the Orchestrator (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09, from the helper's return, less its covering note and one line naming its working files; only this italic line is the Orchestrator's.*
 
 **Marks.** Each figure carries one of the question's three marks:
 - **[S] supported:** the extract records it, and the count follows from the rule stated here.
@@ -9,7 +9,7 @@
 
 A mark on a heading or a table holds for every figure under it unless a figure carries its own.
 
-The extract has 447 merged pull requests [S]: 312 in Service-Desk, 85 in Model-Lab and 50 in Personal-Org-Operating-Model (POOM). They change 322,755, 87,968 and 109,461 lines (added plus removed; binary files count none) [S]. Of plain (non-merge) commits, 94.2%, 98.9% and 97.8% carry an agent identity as author, and 5.8%, 1.1% and 2.2% carry the owner's identity [P: an identity is not proof of who did the work]. No commit carries a co-author trailer [S as a count of trailers]. The extract takes the merge commit's author as the account that merged. In Service-Desk that is the owner's account for 226 of 312 pull requests (72.4%) and a workflow bot for the other 86 (27.6%). In Model-Lab it is the owner's account for all 85, and in POOM for all 50 [S for the account; P for who acted through it]. 48/312 (15.4%), 6/85 (7.1%) and 16/50 (32.0%) pull requests contain at least one commit under the owner's identity [P]. Files first added under a question label number 540, 82 and 29, and under a decision label 78, 1 and 1 [P]. These count labelled files, not questions put to the owner or answers given. The label goes by folder name at any depth. The source check found, against git, that Service-Desk's 540 include 97 files in its test folder and 253 in a question folder nested in its decision folder, and that its 78 include 26 in the test folder. No commit subject starts "Revert" [P: a revert worded otherwise is not found]. Within 14 days of merging, a later merged pull request changed at least one of the same files (files edited in turn by design left out) for 202/312, 42/85 and 33/50 pull requests [P]. File overlap is a coarse test: it does not show that the same lines changed, or that the earlier change was reworked. A later commit's subject named the pull request's number within 14 days for 37, 17 and 6 [P: a number may be a record, an issue or another repository's pull request]. The 14-day counts include pull requests whose 14-day window was not complete on 2026-11-09: 82 of 312 in Service-Desk (43 of the 202 and 7 of the 37), all 85 in Model-Lab, and 12 of 50 in POOM (7 of the 33 and none of the 6). All 447 were merged less than 60 days before 2026-11-09, so no 60-day window is complete. Every figure is counted from the extract by the script at the end, except the label locations above. Those are the source check's finding from git and cannot be seen in the extract.
+The extract has 447 merged pull requests [S]: 312 in Service-Desk, 85 in Model-Lab and 50 in Personal-Org-Operating-Model (POOM). They change 322,755, 87,968 and 109,461 lines (added plus removed; binary files count none) [S]. Of plain (non-merge) commits, 94.2%, 98.9% and 97.8% carry an agent identity as author, and 5.8%, 1.1% and 2.2% carry the owner's identity [P: an identity is not proof of who did the work]. No commit carries a co-author trailer [S as a count of trailers]. The extract takes the merge commit's author as the account that merged. In Service-Desk that is the owner's account for 226 of 312 pull requests (72.4%) and a workflow bot for the other 86 (27.6%). In Model-Lab it is the owner's account for all 85, and in POOM for all 50 [S for the account; P for who acted through it]. 48/312 (15.4%), 6/85 (7.1%) and 16/50 (32.0%) pull requests contain at least one commit under the owner's identity [P]. Files first added under a question label number 540, 82 and 29, and under a decision label 78, 1 and 1 [P]. These count labelled files, not questions put to the owner or answers given. The label goes by folder name at any depth. The source check found, against git, that Service-Desk's 540 include 97 files in its test folder and 253 in a question folder nested in its decision folder, and that its 78 include 26 in the test folder. No commit subject starts "Revert" [P: a revert worded otherwise is not found]. Within 14 days of merging, a later merged pull request changed at least one of the same files (files edited in turn by design left out) for 202/312, 42/85 and 33/50 pull requests [P]. File overlap is a coarse test: it does not show that the same lines changed, or that the earlier change was reworked. A later commit's subject named the pull request's number within 14 days for 37, 17 and 6 [P: a number may be a record, an issue or another repository's pull request]. The 14-day counts include pull requests whose 14-day window was not complete on 2026-11-09: 82 of 312 in Service-Desk (43 of the 202 and 7 of the 37), all 85 in Model-Lab, and 12 of 50 in POOM (7 of the 33 and none of the 6). All 447 were merged less than 60 days before 2026-11-09, so no 60-day window is complete. Every figure in this memo is printed by the script at the end, or is a sum of figures it prints, except the label locations above and in §3. Those are the source check's finding from git and cannot be seen in the extract.
 
 ## 1. Units
 
@@ -160,7 +160,7 @@ The extract has 447 merged pull requests [S]: 312 in Service-Desk, 85 in Model-L
 
 ## 3. Questions put to the owner
 
-**Summary.** The counts are of files first added under a question or decision label [P]. A label is given by folder name at any depth. So the counts include labelled files in test and template folders, and in a question folder nested in the decision folder, and the extract cannot tell these apart. A question file does not show that the owner was asked, nor a decision file who answered. Matching a question to its answer is an estimate on a weak test [P], and mostly it cannot be done [N].
+**Summary.** The counts are of files first added under a question or decision label [P]. A label is given by folder name at any depth. So the counts include labelled files in test and template folders, and in a question folder nested in the decision folder (the source check's finding from git), and the extract cannot tell these apart. A question file does not show that the owner was asked, nor a decision file who answered. Matching a question to its answer is an estimate on a weak test [P]; beyond that test it cannot be done [N].
 
 **Rule.**
 - Each labelled file's events are sorted by commit_date.
@@ -223,7 +223,7 @@ The extract has 447 merged pull requests [S]: 312 in Service-Desk, 85 in Model-L
 
 ## 4. Merged changes later reverted or changed again
 
-**Summary.** No commit subject starts "Revert" [P]. Two things are counted for 14, 30 and 60 days [P]: later commits that name a pull request's number, and later merged pull requests that change one of the same files. File overlap is a coarse test, since the extract has no line-level history. A named number may be a record or an issue rather than a fix. Many windows are not yet complete, and every 60-day window is incomplete [S]. These are counts of later changes; they do not judge whether the earlier change was at fault.
+**Summary.** No commit subject starts "Revert" [P]. Two things are counted for 14, 30 and 60 days [P]: later commits that name a pull request's number, and later merged pull requests that change one of the same files. File overlap is a coarse test, since the extract has no line-level history. A named number may be a record or an issue rather than a fix. The 14-day window is not complete for 82, 85 and 12 pull requests, the 30-day window for 259, 85 and 27, and no 60-day window is complete [S]. These are counts of later changes; they do not judge whether the earlier change was at fault.
 
 **Rule.** For each pull request, three tests are run for windows of 14, 30 and 60 days after merged_at. A later commit falls in a window by its commit_date, and a later pull request by its merged_at.
 - **Revert:** a commit marked revert (its subject starts "Revert").
@@ -305,24 +305,24 @@ The extract has 447 merged pull requests [S]: 312 in Service-Desk, 85 in Model-L
 
 **Where the extract's coding may be wrong:**
 - Labelling is by folder name at any depth. A path anywhere under a question or decision folder gets that label. So test and template copies, and question files kept inside the decision folder, count under the question or decision label (the source check's figures are in §3). Any path containing the chief-of-staff role name becomes a handoff label, so an agent-definition file for that role would be classed as a record.
-- Copies of record-named files in test and template folders are classed as built by this memo's rule, and they stay in the overlap test (3 distinct files in Service-Desk, 4 in POOM).
+- Upper-case files named like the repository's own records (rule 8's word list, or a name ending "_REGISTER" or "_REVIEW") that sit in test or template folders are classed as built by this memo's rule, and they stay in the overlap test [S as counts by this rule]. As distinct files in merged pull requests: Service-Desk 3, all in the test folder and all on the word list; Model-Lab 0; POOM 7, all in template folders, 4 on the word list and 3 ending "_REGISTER" or "_REVIEW".
 - A rename shows as a delete plus an add, so moved files count as new.
 - The owner class rests partly on an author-name match.
 - A revert is found only by the subject prefix "Revert".
 - mentions_prs takes any "#n" in a subject.
 - A pull request merged by a local merge, not by GitHub, has no pull-request line.
-- Author date differs from commit date on 86, 43 and 18 commits (Service-Desk, Model-Lab, POOM) [S]. All dating here uses commit_date.
+- Author date differs from commit date on 86 of 2,758, 43 of 971 and 18 of 948 commits (Service-Desk, Model-Lab, POOM) [S]. All dating here uses commit_date.
 - Binary files count no lines.
 - The Model-Lab records contain earlier versions of this extract (15 files, left out of the overlap test as generated files).
 
 **What it would take to measure better:** pull-request metadata and review records; line-level history for each changed file; revert detection from the message body or the diff; unlabelled paths, or labels that keep the kind of folder; session and workflow logs tied to commits; and the conversation logs where decisions were given.
 
-## Script (run as `python3 -I q017.py <extract folder>`; it reads only the extract)
+## Script (run as `python3 -I <this script> <extract folder>`; it reads only the extract)
 
-The script classes paths by rules on folder names and file-name words, and it lists no single path or file. Its output for every figure of the first round is unchanged. This was checked against that round's script on all 4,292 distinct paths: each gets the same kind and the same left-out class. The script also prints the new line views.
+The script classes paths by rules on folder names and file-name words, and it lists no single path or file. It prints every figure in this memo, or the figures they are sums of, except the source check's label locations, which come from git.
 
 ```python
-# Q-017 counts. Reads only the extract folder. Run: python3 -I q017.py <extract folder>
+# Q-017 counts. Reads only the extract folder. Run: python3 -I <this script> <extract folder>
 import json, collections, datetime as dt, sys
 D=sys.argv[1].rstrip("/")+"/"   # the extract folder
 REPOS=["Service-Desk","Model-Lab","Personal-Org-Operating-Model"]
@@ -374,7 +374,8 @@ def by_design(p):
     if (top=="digest" and len(s)>1) or (rec_name(p) and stem(p)=="DIGEST"): return "digests"
     if (rec_name(p) and stem(p)!="DIGEST" and not stem(p).endswith("_REVIEW")) or (top=="intake" and len(s)==2 and p.endswith(".jsonl")):
         return "ledgers, registers, logs, changelog and version"
-    if any(x.endswith("-extract") for x in s[:-1]) or s[-1].endswith("-lock.json"): return "generated files"
+    if any(x.endswith("-extract") for x in s[:-1]): return "generated files: earlier versions of this extract"
+    if s[-1].endswith("-lock.json"): return "generated files: package lock files"
     return None
 KINDS=["built","plan","research","records","owner_qa","other"]
 def lines(f): return (f["added"] or 0)+(f["removed"] or 0)
@@ -443,7 +444,7 @@ for r in REPOS:
     pr_("    'other' authors by commit kind",dict(collections.Counter((c["author"],c["kind"]) for c in C if c["author_class"]=="other")))
     pr_("    agent-authored commits whose committer is 'Claude'",sum(1 for c in C if c["author_class"]=="agent" and c["committer"]=="Claude"))
     fa=min(c["commit_date"] for c in C if c["author_class"]=="agent")
-    pr_("    first agents.invalid commit",fa,"| non-agent commits before it",sum(1 for c in C if c["commit_date"]<fa and c["author_class"]!="agent"),
+    pr_("    first agents.invalid commit",fa,"| non-agent commits before it, by class",dict(collections.Counter(c["author_class"] for c in C if c["commit_date"]<fa and c["author_class"]!="agent")),
         "| owner plain commits after it",sum(1 for c in C if c["commit_date"]>=fa and c["author_class"]=="owner" and c["kind"]=="plain"))
     # per PR
     cat=collections.Counter(); catl=collections.Counter()
@@ -601,27 +602,45 @@ for r in REPOS:
     nums=sorted(prnums); pr_("   PR numbers",nums[0],"to",nums[-1],"; numbers in that range with no merged PR line:",len(set(range(nums[0],nums[-1]+1))-prnums))
     pr_("   label files first added, by author class of the adding commit:",
         dict(collections.Counter((p_[1:p_.index(":")],H[e[3]]["author_class"]) for p_,e in first.items())))
+    pr_("   commits with a co-author trailer:",sum(1 for c in C if c["co_author_classes"]),"| commits marked revert (subject starts 'Revert'):",sum(1 for c in C if c["revert"]))
+    pr_("   commits whose author_date differs from commit_date:",sum(1 for c in C if c["author_date"]!=c["commit_date"]),"of",len(C))
+    # copies: upper-case files named like the repository's own records (rule 8's word list, or a name ending _REGISTER or _REVIEW)
+    # that sit elsewhere than the top level or docs, so rule 8 does not class them as records
+    def rec_like(p): s_=stem(p); return caps(p) and (s_ in REC_WORDS or s_.endswith(("_REGISTER","_REVIEW")))
+    cps={f["path"] for p in P for f in p["files"] if rec_like(f["path"]) and not rec_name(f["path"])}
+    pr_("   record-named copies outside the top level and docs (distinct files in merged PRs):",len(cps),
+        "| by folder class, name class, kind, left out of the overlap test:",
+        dict(collections.Counter(("template folder" if parts(x)[0] in TEMPLATE_TOP else "test folder" if parts(x)[0]=="tests" else "other folder",
+             "word list" if stem(x) in REC_WORDS else "_REGISTER/_REVIEW", kind(x), bool(by_design(x))) for x in cps)))
 ```
 
 ---
 
 ## Change list (item: what changed → which correction it answers)
 
-- **Marks (new block at top):** replaced "grade A" with the question's three marks [S]/[P]/[N]. Every figure, table and heading now carries one, and each [P]/[N] says what is missing and what it would take to measure it. → Correction 1 (marking).
-- **Opening paragraph:** "Agent identities wrote" / "the owner's identity wrote" became "carry an agent identity as author" / "carry the owner's identity". It now says file overlap is a coarse test and not a measure of rework, and gives the 14-day incomplete groups (82 / 85 / 12, and their share of the 202 / 42 / 33 and 37 / 17 / 6). The label figures are worded as counts of labelled files, with where they sit (test folder, question folder nested in the decision folder), attributed to the source check's git finding. The "every figure is grade A" sentence was replaced. The whole paragraph was re-read against LL-71. → Corrections 1 and 2.
-- **Item summaries (new, §1–§5):** a summary line for each item, worded no more strongly than its figures and marked. Re-read against LL-71. → Corrections 1 and 2.
-- **§1 rule text:** rewritten as a numbered list in the script's exact order. The template/kit rule now sits after all label rules and before the review, dispatch and brief folders. The list now includes the inventory- files under records, the .jsonl.lock extension, and the governance _VERSION file under built. → Correction 3.
-- **Script:** the named file lists (the eleven files the check listed and the extract folder) were replaced by rules: upper-case record-word file names at the top level or in docs, a "-extract" folder suffix, a "-lock.json" suffix, .jsonl files directly in intake, a top-level ignore file, and a governance "_VERSION" name. Folder prefixes became folder-name classes. I checked it against the round-1 script on all 4,292 distinct paths: 0 differ in kind or left-out class. All round-1 figures are reproduced. The only differences are dict key order. → Correction 4.
-- **§4 left-out list:** now stated as the rule, not as files. It now includes lines (5,428 / 27,801 / 3,365). The Model-Lab "generated" note is corrected: the 15 are all this extract's earlier versions, not lockfiles. Service-Desk's 2 are package lock files. → Corrections 4 and 5, plus a wording fix I found myself.
-- **Second view of lines:**
-  - §2: lines for the with/without owner-commit rows, the all-agent rows, the merging account × owner commit split, and the plain-only split. It says why all-commit shares have no lines (merge commits list no files).
-  - §3: lines added at first addition (per month, through a PR, outside), and the lines of PRs that first-add one or more files against none. It says why there are no lines for re-additions, deletions and matching.
-  - §4: a full second table in lines, plus the earlier PRs' lines in shared files.
-  → Correction 5.
-- **§3 "Where the labelled files sit" (new) and §5 coding doubts:** the extract's labelling rule works at any depth, and the source check's folder counts are given by kind of folder, with no paths. §5 also notes that record-named copies in test and template folders (3 in Service-Desk, 4 in POOM) are classed as built. → Correction 2 (label counts).
-- **§2 "Claude":** no longer asserted to be "a tool's default identity". It is now tied to the README's example, with who is behind it marked [N]. → Correction 2 (wording strength).
-- **Header:** dropped the round-1 Orchestrator italic line and the brief reference. The Orchestrator should add its own recording line.
+- **§5, record-named copies:** "3 in Service-Desk, 4 in POOM" became 3 / 0 / 7. The script now counts them under the memo's own rule 8 (word list plus names ending _REGISTER or _REVIEW). Round 2's 4 counted only the word-list names; the other 3 end in _REGISTER or _REVIEW. The line now says where they sit (Service-Desk in the test folder, POOM in template folders), splits POOM 4 + 3, and says all are classed built and stay in the overlap test. → Round 2, correction 1.
+- **Script, new prints:**
+  - the record-named copies, by kind of folder, kind of name, kind and left-out status;
+  - commits whose author_date differs from commit_date (86/2,758, 43/971, 18/948; §5 now gives the totals too);
+  - commit-level counts of co-author trailers and revert flags (0 / 0 / 0), which back the opening's "no commit" statements; before, only per-PR and per-window counts were printed;
+  - the class of the one non-agent commit before the convention starts (owner in each repository; §2 states this);
+  - the "generated files" class split into earlier extract versions (Model-Lab 15) and package lock files (Service-Desk 2), as §4 and §5 state them.
+  - Every other line of output is unchanged. → Round 2, corrections 1 and 2.
+- **Opening paragraph, "every figure" sentence:** narrowed to "printed by the script at the end, or is a sum of figures it prints, except the label locations above and in §3." Some figures are sums, such as 318,799 lines and the 147 owner commits. → Round 2, correction 2.
+- **Script heading paragraph:** dropped the claim that the script had been checked against round 1's script "on all 4,292 distinct paths". That check was a separate working script, not this one. It now says what this script does. → Round 2, correction 2 (narrow sentences that claim more than the script does).
+- **Working files and paths:**
+  - removed the "Working files" line;
+  - the run line names no script file (`<this script>`);
+  - dropped the italic Orchestrator line, which named a brief path and the source-check file; adding one is for the Orchestrator to decide.
+  - → Round 2, correction 3.
+- **LL-71 re-read of the opening and the summaries:**
+  - The §4 summary's "Many windows are not yet complete" became the counts: 14-day 82 / 85 / 12, 30-day 259 / 85 / 27, no 60-day window complete. "Many" was a size judgment the question bars.
+  - In the §3 summary, "mostly it cannot be done" became "beyond that test it cannot be done".
+  - The §3 summary now credits the folder locations to the source check's finding from git.
+  - The opening paragraph and the §1, §2 and §5 summaries were re-read and left unchanged.
+  - → The LL-71 instruction.
+- **Title:** "round 2" became "round 3".
+- **Earlier corrections:** all of round 1's corrections are kept as they were: marks, wording strength, rule text matching the script, rules or classes in place of paths, and second views in lines.
 
-Working files (all under /tmp/q017/): q017.py (revised script), new.out (its output), orig.py and orig.out (round 1), cmp.py (the path-rule equivalence check), memo.md (this memo). Nothing in /home/user was changed.
 
-Total tokens: I cannot see my token count.
+Total tokens: I can't see my token count.
