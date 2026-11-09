@@ -148,3 +148,41 @@ Entries changed: I changed 10 library entries and made one commit on build/sourc
 - I did not change the other Q-016 entries or the README index. The memo's correction items 1 to 3 above do not affect the filed entries, which already word those points carefully.
 
 Tokens: I cannot see them.
+
+## Round 3 (brief 210)
+
+The round's verdict was FAIL.
+
+All round 2 corrections hold. The FAIL rests on two wordings outside those corrections, which a re-opened page contradicts or does not support (LL-71 scan), plus one inconsistent opinion line.
+
+| id | result | reason |
+|---|---|---|
+| F016-2 | holds for the Disagreement line; does not hold for attribution (see below) | The ~30% conflict is now "would conflict … not confirmed". I re-opened The Decoder. It says "the company says" for the 75% and gives no source for the 25% and 50%. It does not name Pichai as the source of the figures. His blog post is mentioned in a separate sentence about agentic workflows. |
+| F016-4 | holds | "The only outside check the Input reader found" matches the gap list. The 50% is of merged lines, from public quotes and private talks. |
+| F016-6 | holds | Marked not confirmed and no longer relied on. The "70, 80, 90%, company-wide, unit not stated" row rests on Redwood's page per round 2. |
+| F016-7 | holds | "not stated; Redwood sets it against merged lines" fits Redwood's page. |
+| F016-9, F016-10 | holds | The "not tested" claim is now attributed to the Input reader's gap list (opening answer, §1 Gap, entry 7). |
+| F016-12 | holds | I re-opened the page. Footnote 4 says V3 used Sonnet 4 for classification and V2 used Sonnet 3.7, and gives "45% … versus 49% with Sonnet 4". The classifier changed, and no accuracy figure is given. The §1, §5 and gaming-section softening of the self-preference link is right. |
+| F016-18 | holds | "The one design found" is fine. |
+| F016-19 | holds | "more likely to believe they wrote secure code" is in the abstract. |
+| F016-20 | does not hold as used | I re-opened the abstract. It reports 52% incorrect answers, 39% of the time users overlooked the misinformation, and a 35% preference for ChatGPT answers. It does not measure confidence or trust. |
+| F016-23 | holds | The gaming-section wording matches §3. |
+| F016-26 | holds | The gaming-section line is attributed to DORA citing Goodhart's law. |
+| Q-002-F-h, Q-007-F07 | holds | The memo now says these are about judging, not classifying. The library entries read the same way. |
+| Q-009-F1-1, Q-009-F10-7 | holds | The library entries cover forecast and belief of speed-up against measured 19% slowdown. The memo cites them for time only. |
+| Entry 7 | holds | It is worded to the gap list. |
+| F016-16 | holds (extra check) | The page does say "<50 sessions" (round 1 had not confirmed this), and the 5%/9% interrupts and the 20%/over 40% figures. |
+
+Nothing round 1 or round 2 marked not confirmed is still relied on. F016-6 is out, and F016-22 is flagged as not opened.
+
+**Entries changed.** One commit on build/source-checker/q-016: a0c9f88, library/ only, not pushed.
+- `/home/user/lib-q-016/library/facts/Q-016-2.md` and its row in `/home/user/lib-q-016/library/README.md`: dropped the "Pichai's figure" attribution. The entry now says the page does not name who gave the 50% and 25% figures, and that Pichai's blog post is mentioned in a separate sentence.
+- `/home/user/lib-q-016/library/patterns/Q-016-P25.md`: Q-016-13 is now described as people more likely to believe their insecure code was secure. Q-016-14 is now described as users overlooking misinformation, with a note that the abstract does not measure confidence. "Trust and correctness diverge" in the Q&A case is reworded to "overlooked misinformation".
+- Q-016-14 and the other entries needed no change.
+
+**What the memo must still correct**
+1. The Pichai attribution is not supported (F016-2). It appears in the §1 table Google row ("Pichai, via The Decoder"), in proposed entry 2 ("Pichai's figure"), and in the opening answer's "Every other figure comes from the company that sells the tool" only by implication, which is fine. Reword to "Google, via The Decoder ('the company says'); the page does not name who gave the 25% and 50%".
+2. F016-20 is cited for confidence running ahead of correctness. The opening answer says "confidence … ran ahead of what was measured: security or correctness (F016-19, F016-20)". The same wording is in entry 25 ("confidence ran ahead of quality in single studies … F016-20") and the §2 "Over-trust" heading. F016-20 shows users overlooking misinformation 39% of the time, not confidence. Cite F016-19 alone for belief, and F016-20 for "overlooked wrong answers".
+3. The closing opinion in the opening answer reads "the ones that do not rest on self-report or on a model's own classification are those from review and merge logs". That is worded as exhaustive and does not match the memo's own candidate list in "What each possible answer would change" (rework or change-fail counts, override or interrupt counts). Say "include" instead of "are those", or drop the exclusivity.
+
+Tokens: I cannot see them.
