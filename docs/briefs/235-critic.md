@@ -16,3 +16,6 @@ The standard: Personal-Org-Operating-Model/OPERATING_MODEL.md §2 (decision card
 Open every Context source and confirm it. Do not read Model-Lab docs/projects/ or decisions/.
 
 Return, first line exactly `Verdict: PASS` or `Verdict: FAIL`, then numbered findings with the line, blocking or non-blocking. Do not fix the card.
+
+## Outcome
+Verdict: FAIL (reviews/P-002-q017-memo-stop/critic.md, round 1)
