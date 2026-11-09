@@ -44,21 +44,21 @@ def run(repo, name):
             parts=line.split("\t")
             if len(parts)==3 and (parts[0].isdigit() or parts[0]=="-"):
                 a,r,path=parts; files.append({"path":redact(path),"status":{"A":"added","M":"modified","D":"deleted"}.get(st.get(h,{}).get(path),"other"),"added":None if a=="-" else int(a),"removed":None if r=="-" else int(r)})
-        m=re.match(r"Merge pull request #(\d+) from ([^\s]+)",s)
+        m=re.match(r"Merge pull request #(\d+)\b",s)
         sq=re.search(r"\(#(\d+)\)$",s)
         coauth=[cls(n.strip(),e.strip()) for n,e in re.findall(r"^Co-authored-by:\s*(.*?)\s*<([^>]+)>",tail,re.M)]
         two=len(p.split())>1
-        kind="merge-pr" if (two and (m or sq)) else ("squash-pr" if (sq and not two) else ("other-merge" if two else "plain"))
+        kind="merge-pr" if (two and cn=="GitHub" and (m or sq)) else ("other-merge" if two else "plain")
         commits[h]={"hash":h,"parents":p.split(),"author_date":utc(ad),"commit_date":utc(cd),"author":an,"author_class":cls(an,ae),
-            "committer":cn,"kind":kind,"pr":int(m.group(1)) if m else (int(sq.group(1)) if sq else None),
-            "revert":s.startswith("Revert"),"mentions_prs":sorted({int(x) for x in re.findall(r"#(\d+)",s)}-({int(m.group(1))} if m else set())-({int(sq.group(1))} if sq else set())),
+            "committer":cn,"kind":kind,"pr":(int(m.group(1)) if m else (int(sq.group(1)) if sq else None)) if kind=="merge-pr" else None,
+            "revert":s.startswith("Revert"),"mentions_prs":sorted({int(x) for x in re.findall(r"#(\d+)",s)}-(({int(m.group(1))} if m else set())|({int(sq.group(1))} if sq else set()) if kind=="merge-pr" else set())),
             "co_author_classes":coauth,"files":files}
     with open(f"/home/user/Model-Lab/research/Q-017-extract/{name}.commits.jsonl","w") as f:
         for c in commits.values(): f.write(json.dumps(c)+"\n")
     with open(f"/home/user/Model-Lab/research/Q-017-extract/{name}.prs.jsonl","w") as f:
         for c in commits.values():
-            if c["kind"] not in ("merge-pr","squash-pr"): continue
-            if c["kind"]=="merge-pr":
+            if c["kind"]!="merge-pr": continue
+            if True:
                 inner=[x for x in git(repo,"rev-list",f"{c['parents'][0]}..{c['parents'][1]}").split() if x in commits]
             else: inner=[c["hash"]]
             fl={}
@@ -68,7 +68,7 @@ def run(repo, name):
                     d["added"]+=x["added"] or 0; d["removed"]+=x["removed"] or 0
             cc={}
             for h in inner: cc[commits[h]["author_class"]]=cc.get(commits[h]["author_class"],0)+1
-            f.write(json.dumps({"pr":c["pr"],"how":"merge" if c["kind"]=="merge-pr" else "squash","merged_at":c["commit_date"],
+            f.write(json.dumps({"pr":c["pr"],"merged_at":c["commit_date"],
                 "merge_commit":c["hash"],"merge_commit_author":c["author"],"merge_commit_author_class":c["author_class"],
                 "commits":inner,"commit_author_classes":cc,"co_author_classes":sorted(set(sum((commits[h]["co_author_classes"] for h in inner),[]))),
                 "files":sorted(fl.values(),key=lambda d:d["path"])})+"\n")
