@@ -97,3 +97,54 @@ The branch is build/source-checker/q-016 in /home/user/lib-q-016. I made one com
 14. The library citations above: Q-009-F5-7, Q-012-22, the Q-009-F10-6 grade label, the Q-009-F1-1 caveat, the Q-011-14 scope, and Q-009-F2-4 "cases".
 15. The opening answer's "three preprints... disagree" should say they measure different outcomes: survival, churn, and corrective maintenance. The both-directions trust claim rests on F016-22, which I could not open.
 16. The Input reader's count of search-only findings (F016-6, 7, 34) does not match the memo's list (F016-6, 7, 18, 22, 34's paraphrase). Reconcile it.
+
+## Round 2 (brief 206)
+
+The round's verdict was FAIL.
+
+All 16 round 1 corrections and all re-check ids hold. The FAIL rests on three sentences, worded more strongly than the sources support, outside the round 1 list.
+
+Re-checked ids (round 1 record, plus re-opened pages for Redwood, The Register and DORA):
+
+| id | result | reason |
+|---|---|---|
+| F016-2 | holds | The row says 25% (Oct 2024), 50% (fall 2025), 75% (Apr 2026). The ~30% outlet is marked search-only. |
+| F016-3 | holds | The Register has "maybe 20 to 30 percent ... in some of our projects" and "probably all written by software". The memo's wording is unquoted and "outlets disagree" is gone. |
+| F016-5 | holds | The "interchangeable" claim is deleted; the 95%+ figure is marked not opened. |
+| F016-6 | holds | The Redwood page quotes Amodei: "70, 80, 90% of the code written at Anthropic is written by Claude" (September), company-wide. The memo marks F016-6 as recorded not confirmed and no longer relies on it. |
+| F016-7 | holds | "on many teams you know not uniformly" is on Redwood's page, so the search-only label is gone. |
+| F016-9 | holds | The page names no lead; Cursor is marked unconfirmed. |
+| F016-14 | holds | The memo says "drove ... rather than persistence". |
+| F016-17 | holds | The 6% is credited to Friedman et al. in the introduction. |
+| F016-18 | holds | Worded to the full text: classification only, baseline needed. |
+| F016-22 | holds | Marked assumed (403). Not relied on beyond the opening answer's note that it could not be opened, and the §2 gap and "thin evidence" lines. |
+| F016-26 | holds | The "might not be worth the initial investment" quote is confirmed, the page gives no cost figure, and the Quick Check, retrospectives and tools wording is right. |
+| F016-28 | holds | "Only alleged" is added; the overreach is removed. |
+| F016-33 | holds | The 240 count is gone; the Scale stake rests on the CAIS post. |
+| F016-34 | holds | 15.8% and "badly overshot" are confirmed; 16.1% is marked not opened. |
+| F016-35 | holds | 47.6% and "100x" are marked as search-only. |
+| F016-36 | holds | The 12%/25% (shoe design), the 40% not tied to inside the frontier, 19 points on complex tasks, and 24 and 13 points outside the frontier are all as the page gives. |
+| NBER w31161 | holds | 14%, 34%, 5,179 agents; "one firm" is dropped. |
+| Q-009-F1-1 | holds | The METR caveat is present. |
+| Q-009-F2-4 | holds | Says "cases". |
+| Q-009-F5-7 | holds | Throughput link turning positive, split from stability. |
+| Q-009-F10-6 | holds | Labelled weak C. |
+| Q-011-14 | holds | Peer reviews, five detectors. |
+| Q-012-22 | holds | Elicit search sensitivity. |
+
+Proposed entries 2, 3, 5, 7, 10, 15, 16, 22, 24 and 25 match the corrected items. No item round 1 marked not confirmed is still relied on: F016-6 is out and F016-22 is flagged.
+
+What the memo must still correct (LL-71 scan; all outside the round 1 list):
+1. The opening answer says "Neither has been tested for accuracy (F016-9, F016-10)", and proposed entry 7 says it as fact. Neither cited page says this; round 1 called it an unverified negative. Attribute it to the Input reader's gap list, as §1 does, and drop the F016-9/F016-10 cite from that sentence.
+2. §1 "Disagreement. The Google figures conflict between outlets (F016-2)" rests on the ~30% outlet, which is search-only and was not opened. Mark it search-only or drop it.
+3. §5 says model-run classifications "fall under the library's self-preference facts (Q-002-F-h, Q-007-F07)". Those facts are about LLM judges favouring their own generations, not about classifiers labelling transcripts. Soften this to "may be open to the same bias; not tested". The "Classification by a model" line in the gaming section is a similar stretch and needs the same softening.
+4. Minor: "What each answer would change" calls F016-18 "the one recorded design that checks reliance against correctness". Change "recorded" to "found", since the exhaustiveness is unverified.
+
+Entries changed: I changed 10 library entries and made one commit on build/source-checker/q-016 (87e6f05), not pushed. The edits remove stale notes about round 1 memo errors that the memo has since fixed, and the grades are unchanged.
+- Q-016-2, Q-016-3, Q-016-4, Q-016-10, Q-016-15, Q-016-16, Q-016-20 and Q-016-22 had those stale notes removed or reworded; Q-016-16 now says the three preprints measure different outcomes and do not point the same way.
+- Q-016-3 also gains the page's "probably all written by software", which I re-opened.
+- Q-016-5 notes the Amodei "70, 80, 90%" quote on Redwood's page, not filed as its own fact.
+- Q-016-7 no longer states Cursor's GitHub organisation as fact.
+- I did not change the other Q-016 entries or the README index. The memo's correction items 1 to 3 above do not affect the filed entries, which already word those points carefully.
+
+Tokens: I cannot see them.
