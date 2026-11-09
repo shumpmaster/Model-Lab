@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Critic on questions/P-002-q017-memo-stop.md, the stop card for the Q-017 memo: round 1 (FAIL); brief 235. Each round a fresh session on a different model from the card's writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
+*The Critic on questions/P-002-q017-memo-stop.md, the stop card for the Q-017 memo: round 1 (FAIL), round 2 (PASS); briefs 235 and 236. Each round a fresh session on a different model from the card's writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's. After round 2, its findings 7, 9 and 11 were applied as wording.*
 
 ## Round 1 (brief 235)
 
@@ -42,3 +42,47 @@ Findings:
 8. Non-blocking. Line 22 cites reviews/P-002-q017-memo-stop/critic.md, which does not exist until this verdict is recorded. That is acceptable if it is recorded before the card goes out.
 
 Files: /home/user/Model-Lab/questions/P-002-q017-memo-stop.md, /home/user/Model-Lab/research/Q-017-source-check.md, /home/user/Model-Lab/research/Q-017-memo.md
+
+## Round 2 (brief 236)
+
+The round's verdict was PASS.
+
+*The Critic on questions/P-002-q017-memo-stop.md, round 2, read cold. I opened all four Context sources and the memo, and confirmed them. I did not read docs/projects/ or decisions/. I couldn't confirm the card's "Milestone: Discovery-2" line, because that needs docs/projects/.*
+
+**Judgement**
+- **No acceptance despite a failed check.** Option A is the stop rule's "one focused confirmation review". Option B is a re-scope that does not use the failed sentence. Neither accepts the work.
+- **Facts.**
+  - Memo line 200 ("one to three pull requests at each count from 5 to 22") and the round 3 finding (counts 12, 13, 17, 19, 20, 21 have none) match the card.
+  - The OPERATING_MODEL §4 quote is accurate.
+  - The card's statement that round 3 confirmed every figure and found the earlier corrections held is accurate.
+- **Fairness.** Gain, cost and undo are given for both options. The recommendation is flagged as the Chief of Staff's judgement, with what would change it.
+
+**Round 1 findings**
+1. Round 1 finding 1 (blocking, the "confirmed three times" claim): answered. Line 7 now credits each round with what it did, and says round 3 confirmed the current memo's figures.
+2. Round 1 finding 2 (blocking, option B): answered.
+   - B now says the figures were confirmed as part of the memo.
+   - B takes the marks from the memo.
+   - B says restated limits would need their own check.
+   - "Gain: no more checks on the memo" now sits beside that cost and is fair. The card could make plainer that the check B avoids is replaced by one on the new wording.
+3. Round 1 finding 3 (A's cost): answered. Line 13 says the check could fail and the owner would then choose from re-specify, re-scope or drop. The Undo line ("nothing changes until the check is on record") is still thin but acceptable.
+4. Round 1 finding 4 (naming the fixed options): answered. A is named as the focused confirmation review and B as a re-scope.
+5. Round 1 finding 5 (DEFAULT and TIMEOUT): answered. Line 24 says the "none" is a deliberate departure and gives the reason.
+6. Round 1 finding 6 (plainness): mostly answered.
+   - Explained now: "source checker", the three marks, "value target" and "R0".
+   - Line 5 is shorter.
+   - Still unexplained: "stop rule", "re-specify" and "re-scope", "pull requests", and "the screening project" (line 23).
+   - Line 7 is still dense on a phone.
+   - Non-blocking.
+7. Round 1 finding 7 (script still holds the extract's label prefixes): not answered.
+   - Round 3 left it to the Orchestrator.
+   - If A is chosen, stripping them is a possible extra edit that would also need checking.
+   - A's "confirms that change and nothing else" does not mention it.
+   - Non-blocking, but it should be settled before the owner picks A.
+8. Round 1 finding 8 (the cited critic.md): answered. The file now exists.
+
+**New findings, all non-blocking**
+9. Line 7: "Round 2 found one figure wrong and one sentence too broad" leaves out round 2's third item (paths and working files left in the memo). It was fixed, and round 3 confirmed that. Round 1 is described as "all held", but it failed on marking, wording, rule text, paths and lines. Only its figures held. The card never says outright that rounds 1 and 2 also failed. Line 19 hints at it ("what failed earlier rounds").
+10. Line 9 (WHY): "which waits on them" and line 24 ("until you choose, the value target waits") are not backed by any Context source. Add a source, or cite the record that holds this.
+11. Line 22: "WHO HAS CHECKED IT" lists the Critic on this card. Round 1 of the Critic's check was a FAIL and this card is the revision. Say so, to keep the record honest.
+
+Files: /home/user/Model-Lab/questions/P-002-q017-memo-stop.md, /home/user/Model-Lab/research/Q-017-source-check.md, /home/user/Model-Lab/research/Q-017-memo.md, /home/user/Model-Lab/reviews/P-002-q017-memo-stop/critic.md
