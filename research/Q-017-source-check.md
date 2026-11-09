@@ -158,3 +158,45 @@ I read each sentence of the opening paragraph and the five item summaries. Each 
    - These are not extract paths, but check 4 asks for no path or file name.
 
 I could not see my token total.
+
+## Round 3 (brief 234)
+
+The round's verdict was FAIL.
+
+One sentence in the memo is wrong against the script output. Everything else holds. I extracted the memo's script to /tmp/q017-check3/q017.py. I ran `python3 -I q017.py /home/user/Model-Lab/research/Q-017-extract` with output to /tmp/q017-check3/out.txt. It exited 0 and wrote nothing to stderr. I did not need the repositories, read no forbidden material, and did not use the web. I could not see my token total.
+
+| Item | Result | Reason |
+|---|---|---|
+| Opening paragraph: 447 PRs (312/85/50) and lines 322,755 / 87,968 / 109,461 | holds | Match the output. |
+| Opening: plain commits by agent identity 94.2 / 98.9 / 97.8%, owner 5.8 / 1.1 / 2.2% | holds | Match the output. |
+| Opening: no co-author trailer; no commit marked revert | holds | The script now prints both as commit-level counts of 0 in all three repositories. |
+| Opening: merging account 226 / 86, 85, 50; PRs with an owner-identity commit 48/312, 6/85, 16/50 | holds | Match the output. |
+| Opening: label-file counts 540/82/29 and 78/1/1 | holds | Match the output. The 97/253/26 locations come from git (round 1) and are labelled as such. |
+| Opening: 14-day overlap 202/42/33 and named 37/17/6 | holds | Match the output. |
+| Opening: incomplete 14-day windows 82 (43 of 202, 7 of 37), 85, 12 (7 of 33, 0 of 6) | holds | Match the output's complete/incomplete rows. |
+| Opening: all 447 merged less than 60 days before 2026-11-09 | holds | 312/312, 85/85, 50/50. |
+| §1 monthly PR counts and lines, kind table, flagged 175/50/38, single-kind counts | holds | Exact match. |
+| §1 commit table, 375/59 split, 356/116/49/1/1, 525 binary entries, 29 and 1 gaps in PR numbers | holds | Exact match. |
+| §2 names and counts, "Claude" committer on 684/6/25, the 147 owner single-file commits and their split | holds | Exact match. |
+| §2 per-PR table and lines, merging account by owner commit, commit-level shares, convention-start dates, 119/8/17 | holds | Exact match. |
+| §3 both tables (months, lines, re-additions, deletions, still present, via PR or outside, agent/owner split, PR line splits) | holds | Exact match. |
+| §3 matching rows (3/49/78; 0/1/29; 0/1/12) and moves 7/0/1; Model-Lab and POOM PR distributions | holds | Exact match. |
+| §3 Service-Desk distribution: "one to three pull requests at each count from 5 to 22" | does not hold | Counts present: 5:2, 6:3, 7:1, 8:2, 9:2, 10:1, 11:2, 14:2, 15:1, 16:1, 18:1, 22:1. Counts 12, 13, 17, 19, 20 and 21 have no pull request, so "each count" is wrong. |
+| §4 left-out classes and lines (71/2,622 and 5,428; 51/685 and 27,801; 8/575 and 3,365); no file left 14/9/11 | holds | Exact match. |
+| §4 count table, all windows and groups, including the direct-commit column | holds | Exact match. |
+| §4 line table, including "earlier lines in shared files" | holds | Exact match. |
+| §4 mentions_prs 148/148, 44/44, 52/53 | holds | Exact match. |
+| §5 author date differs from commit date: 86/2,758, 43/971, 18/948 | holds | Now printed by the script. |
+| §5 record-named copies: Service-Desk 3, Model-Lab 0, POOM 7 (4 word list + 3 _REGISTER/_REVIEW), all classed built, none left out | holds | The script prints these. Round 2 correction 1 is made. |
+| Figures rounds 1 and 2 confirmed | unchanged | The changes against round 1's output are new print lines (line views, copies, author dates, co-author and revert counts) and a reformatted "non-agent commits before it" line. No earlier figure changed. |
+| Round 2 correction 1: the §5 copies count | holds | See the copies row above. |
+| Round 2 correction 2: "every figure" sentence narrowed and script prints what the memo cites | holds | The sentence now reads "printed by the script, or a sum of figures it prints, except the label locations". The sums I checked: 318,799 = 152,983 + 165,816, and 147 = 120 + 9 + 18. The script paragraph no longer claims a "4,292 paths" check. |
+| Round 2 correction 3: no paths or working files | holds | The "Working files" line is gone and the run line names no script file. The italic Orchestrator line names only a session id, and the text names "brief 233", which is a number, not a path. I found no slash path or file name with an extension in the prose. |
+| Round 1 corrections 1 to 5 (marks, "carry" wording, rule text matches script, rules in place of paths, line views) | hold | Marks and "would take" lines are present. "Wrote" is not used. The rule text follows the script's order. The line views are present, and the memo gives its reason where it gives none. |
+| LL-71 for the opening paragraph and the §1 to §5 summaries | holds | Each sentence is worded no more strongly than its figure and carries its mark. The §4 "Many windows" is now counts, and the §3 "mostly" is now "beyond that test". |
+| No path or file name in the memo and script | holds, with a note | The script lists only folder-name and file-name-word classes, as round 2 accepted. It also contains the extract's label prefixes (cos-session, cos-handoff, notes, project-plan, ideas, questions, decisions). The question bars reporting labels. I treat these as rule terms, not reported figures, and do not count the note against the verdict. The Orchestrator can decide whether to strip them. |
+
+## What the memo must still correct
+1. In §3, the Service-Desk distribution of pull requests by number of question-label files first added says "one to three pull requests at each count from 5 to 22". Not every count from 5 to 22 occurs. Replace it with the counts that do, for example "one to three pull requests at each of the counts 5 to 11, 14, 15, 16, 18 and 22, none at 12, 13, 17, 19, 20 or 21". Before the "one pull request adds 75" clause, the list is 5:2, 6:3, 7:1, 8:2, 9:2, 10:1, 11:2, 14:2, 15:1, 16:1, 18:1, 22:1.
+
+Files: /tmp/q017-check3/q017.py, /tmp/q017-check3/out.txt. The memo and extract were not changed, and I filed no library entries.
