@@ -541,3 +541,11 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** the commit before them, the answer record, was rightly the Chief of Staff's, and the identity was carried over without checking each file's owner.
 - **Correction:** the five commits were replaced before pushing by two, one per owner: the Orchestrator's records as `orchestrator`, and the session lines and the question as `chief-of-staff`. For later commits, split by owner, and run surface_guard before each push, as the session already does.
 - **Status:** fixed.
+
+### LL-73 A coding script was built over varied records without first checking it against a sample
+- **What happened:** for Q-017 the Orchestrator wrote rounds.py to code every verdict in reviews/, the source-check files and the dispatch log into rounds, and sent it to the owner's deciding check without first comparing its output with a sample of the files it read. The check found reviewer briefs and READMEs coded as passes, ordinary headings coded as rounds, one check split into several pieces, and single-file verdicts dated before the failures that preceded them (reviews/P-002-research-q017/critic.md, deciding check).
+- **Caught by:** the Critic, in the deciding check.
+- **Cause:** the verdict records have grown in several formats over three repositories, and the script assumed two of them; a hand check of a dozen files of each format would have shown the rest.
+- **Correction proposed:** before any extract or count is handed on, sample its output against the records it reads, one file of each format and naming pattern, and record the sample with the extract.
+- **Status:** open; the next step is the owner's (questions/P-002-q017-decide.md).
+

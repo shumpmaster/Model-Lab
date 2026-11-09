@@ -1,6 +1,6 @@
 Verdict: FAIL
 
-*The Critic's neutrality check (D-055) of research question Q-017 for P-002: round 1 (FAIL), round 2 (FAIL), round 3 (FAIL; the stop rule applies); briefs 216 to 218. Each round a fresh session on a different model from the question's writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
+*The Critic's neutrality check (D-055) of research question Q-017 for P-002: round 1 (FAIL), round 2 (FAIL), round 3 (FAIL; the stop rule applies), then the deciding check the owner ruled (FAIL); briefs 216 to 218 and 221. Each round a fresh session on a different model from the question's writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
 
 ## Round 1 (brief 216)
 
@@ -203,3 +203,91 @@ Round 3 check of /home/user/Model-Lab/research/Q-017.md and its rebuilt extract.
 10. Overlap with research/Q-006-memo.md and Q-008-memo.md. Item 4 is stated as a recount with a changed unit (pieces tied to merged PRs), extended to 2026-11-09, and the comparison to the two memos is made after the Researcher's own counts. Items 1-3 and 5 are new. This is not a re-run under D-047.
 
 **Blocking: finding 1 only.** Everything else is non-blocking. If the Orchestrator restricts the Researcher's readable files (the intake request, the check-round briefs, the Chief of Staff handoffs, the digests and the lessons log), the question and extract would pass. This round 3 is the last before the stop rule; the fix is a bar and permitted-record list, not another rewrite of the counts.
+
+## Deciding check (brief 221, decisions/questions/P-002-q017-stop.md)
+
+The round's verdict was FAIL.
+
+The question is now blind and neutral enough, and round 3's blocking finding is answered. The rounds coding fails: it would give wrong counts for first-try passes, rounds per piece and the stop rule. This goes back to the owner under /home/user/Model-Lab/decisions/questions/P-002-q017-stop.md. I did not rewrite the question or the extract.
+
+**Round 3's findings: answered or not**
+- Round 3, finding 1 (blocking: the readable files carried the intake request, handoffs, digests and lessons): ANSWERED. /home/user/Model-Lab/research/Q-017.md line 41 limits the Researcher to the extract folder and the question, and bars git, GitHub and the web. I found no ruling, recommendation, aim or project name in the question or in README.md. The extract holds no subject, message, title or branch. The only project items still visible are labelled `<…:id>` or `item-<id>`.
+- Finding 2 (the bar naming the P-002 review folder): ANSWERED. Neither the question nor its header names a P-002 review folder any more.
+- Finding 3 (project ids and topics left in path names): MOSTLY ANSWERED. extract.py line 21 now redacts `p-?\d{3}` and "widget", case-insensitively. Some names remain, for example `owner-request-…`, `owner-answers-…`, `reviews/S-037/_owner-answer-q031.md` and `_owner-instruction-…`. They show that an owner request or answer exists, not what it says. Line 41's "do not report any path" covers them. Non-blocking.
+- Finding 4 (the "later work can be compared against" wording): ANSWERED. Lines 45-47 now say "a described baseline".
+- Finding 5 (which date decides the windows): ANSWERED. Line 35 says the later commit's commit_date or the later pull request's merged_at, and line 9 says merged_at in UTC.
+- Finding 6 (glosses): PARTLY ANSWERED. "Checker", "piece", "round", "stop rule" and "source checker" are glossed. "Records only", "other" and "dispatch log" have no path rule and no gloss.
+- Finding 7 (assignment rule and closed pull requests): ANSWERED. Line 17 uses the pull request's own `commits` list as the rule, and lines 17 and 37 name direct pushes and closed-unmerged pull requests.
+
+**Blocking findings: the rounds coding (rounds.py and the three .rounds.jsonl files)**
+
+1. Briefs and READMEs are coded as passing verdicts.
+   - rounds.py reads every `.md` under reviews/. A reviewer's brief holds a template line, "Verdict: PASS | FAIL with evidence per item", and the coder takes it as `pass`.
+   - In the Personal-Org-Operating-Model rounds file, 9 rows are brief files, for example reviews/2/_reviewer-brief1-verbatim.md, reviews/3/_reviewer-brief-s004.md, reviews/4/_reviewer-brief.md and _reviewer-brief-round2.md, and reviews/5/ and reviews/7/ equivalents.
+   - I read reviews/3/_reviewer-brief-s004.md in the repository; its only verdict line (line 27) is that template.
+   - `reviews/README.md` is also coded as a `pass` in Service-Desk (line 544) and Model-Lab (line 187), with checker "unknown".
+   - These are invented rounds, and all are passes.
+
+2. Ordinary headings are coded as rounds.
+   - The splitter matches any heading that starts `## Round n`, so "## Round 1's B1, confirmed fixed" or "## Round 2 findings" becomes a round.
+   - Service-Desk reviews/227/reviewer.md has two real rounds. The extract gives three rows, the third "round 1, pass-from-file". I checked the headings at lines 135 and 176.
+   - Model-Lab reviews/S-001/plan.md: its "## Round 1 findings, one by one" and "## Round 2 findings" headings are coded as rounds 1 and 2, both `pass`. Its second series, headed "New draft, round 1" to "5", is not coded at all.
+   - The same file also has four duplicate rows for item-73125bf7, round 2 (rows 119-121).
+   - Duplicate round numbers with opposite verdicts break "first round" and "three in a row", and they distort `pass-from-file`.
+
+3. One check is split into several pieces, and one verdict is counted several times.
+   - The piece name keeps `_reviewer-verbatim.md` apart from `reviewer.md`.
+   - Personal-Org reviews/32: the round-1 FAIL file is one piece, and `reviewer.md` (the final PASS) is another. The extract therefore shows a piece that failed with no pass, and a piece that passed first time.
+   - The same split happens in reviews/40: r1 fail and r2 fail are one piece, and the pass in `reviewer.md` is another. A three-fail stop-rule count cannot be made from that.
+   - In reviews/4, the final PASS appears three times: round2-verbatim, `reviewer.md` and brief-round2. Their pieces differ, so the question's "matched by piece, checker and date" rule (line 28) cannot merge them.
+
+4. Dates on single-file verdicts give false first-try passes.
+   - For a file with no round sections, the date is the date the file was first added, but the verdict is the file's final content.
+   - Service-Desk Q-006 source check: the file row is `pass` dated 2026-10-02T00:31:04Z, but the dispatch log shows `fail` at 00:31:21 and the pass only on 10-04 (lines 5 and 758-774).
+   - Q-001 and Q-005 do the same: a file `pass` is dated seconds before the dispatch `fail`.
+   - "First round in date order" therefore returns a pass for pieces that failed first. The "matched by the dispatch line's record" rule has no tie-break either, because several dispatch lines share one record.
+
+5. Dispatch lines for roles that are not checkers are coded as rounds.
+   - rounds.py keeps every dispatch line that has a `verdict` key, including researcher, definer, definer-freeze, check-author and critic-triage, all with verdict `none` and no checker's outcome.
+   - Examples: Service-Desk rows 723-725, 748, 789-791 and 856.
+   - Item 4 says "a round is one line of the extract", so these inflate the rounds-per-piece counts and the `none` count. The README calls them "verdict records".
+   - The extract has no field that marks a row as an independent check.
+
+6. Item 4 of the question does not define ties, `none` first rounds or "kind".
+   - Many multi-round files carry identical dates. Examples: reviews/226 to 231 in Service-Desk, and several Model-Lab critic files (item-80d822b3, item-4747edb7, item-b72ccf4f, item-91f1840b). "First round in date order" has no tie-break, and the question does not say to use the round number.
+   - Many pieces open with round 1 `none`, with only the last round coded `pass-from-file`. For example, Model-Lab item-f204f458 and reviews/51 (rounds 1-3 `none`). The question does not say whether a piece whose first round is `none` counts as a first-try pass, a fail, or unknown.
+   - Line 33 asks for figures "per kind", but the rounds extract has no kind field and the question does not say how to derive one.
+   - A `none` record is not necessarily a pass or a fail, so rates computed without a stated rule cannot be repeated.
+
+**Non-blocking findings**
+
+7. Coding that is too coarse.
+   - `owner.md` rows (the owner's approval at merge) are coded as a checker "owner", so they enter piece and first-try counts as if they were independent checks.
+   - `plan.md` falls to checker "unknown", though README line 31 says plan-review files are the reviewer.
+   - Gate files (`_design-gate-n-critic.md`, `_build-gate-n-critic.md`) have no Verdict line and are coded `none`. They are gate opinions, not pieces.
+   - "Unknown", "owner" and similar checkers cover about 281 rows over the three files, counted together.
+   - Dispatch rows have `round: null` and a piece id such as "P-003", which does not match a verdict file's path, so linking pieces to pull requests through files works for the verdict files only.
+   - The dispatch log has some verdict lines tied to the reviews/S-00x/plan.md record; the verdict-file side of the same check cannot be matched by piece or date.
+
+8. Single-file verdicts overwritten between commits lose their earlier rounds, which is a limit to state under item 6.
+
+9. Questions and answers.
+   - The commits file records added and removed line counts only, not whether a file was added or deleted. "First added" can only mean the earliest commit listing that label, and removal of a question cannot be told from an edit.
+   - A rename changes the label, because the label is a hash of the path. A question moved to decisions/ would look like a new decision file.
+   - The question permits saying "cannot be matched", but item 6 should name these two limits.
+
+10. Gloss and path rules (carried from round 3, point 6). "Records only" and "other" have no path rule, so the Researcher invents one. That is acceptable only if the question says so, which line 9 does ("with a stated rule"). "Dispatch log" and "entries-check" are unglossed in the question; the README covers them.
+
+11. Form and overlap. The form matches research/_QUESTION.md. Item 4 is stated as a recount that keeps the comparison to the earlier memos until after the Researcher's own counts. This is not a re-run (D-047). The neutrality wording holds: "Report every figure on equal terms", both ends for every count, and "does not judge whether the earlier change was at fault".
+
+**What would make it pass.** Fix the coding and re-run rounds.py, or have the question tell the Researcher how to handle each case:
+- drop the brief and README files;
+- split sections only on "## Round n" headings that are followed by a verdict, or only at the start of a round;
+- group the series files and `reviewer.md` into one piece per PR and checker;
+- date single-file verdicts by the last commit that changed the Verdict line, or mark them as overwritten;
+- mark non-checker dispatch lines;
+- state the tie-break, and how a first round of `none` is counted.
+
+A fresh Critic check should follow.
+
+Files read: /home/user/Model-Lab/research/Q-017.md, /home/user/Model-Lab/research/Q-017-extract/ (README.md, extract.py, rounds.py, the three .rounds.jsonl files, and keyword searches of the commits and prs files), /home/user/Model-Lab/reviews/P-002-research-q017/critic.md, /home/user/Model-Lab/decisions/questions/P-002-q017-stop.md, and verdict files in the three repositories (Service-Desk reviews/227, Personal-Org-Operating-Model reviews/3, 4, 32 and 40, Model-Lab reviews/S-001/plan.md). I read them from the working tree, not origin/main, so they may differ from the default branch.

@@ -20,3 +20,6 @@ Check, and say for round 3's blocking finding and its six non-blocking points wh
 You may read the three repositories to check the coding, but do not read docs/projects/, docs/PROJECT.md, ideas/, or the contents of questions/ and decisions/ other than the ruling named above.
 
 Return, first line exactly `Verdict: PASS` or `Verdict: FAIL`, then numbered findings, blocking or non-blocking. Do not rewrite the question or the extract.
+
+## Outcome
+Verdict: FAIL (reviews/P-002-research-q017/critic.md, deciding check)
