@@ -1,6 +1,6 @@
 Verdict: FAIL
 
-*The Source checker's check of research/Q-014-memo.md. Each round on a different model from the Researcher; recorded verbatim by the Orchestrator (session_01QBwHGNSLmSrYQgS6BPjV8p) from the helper's return, 2026-11-08; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
+*The Source checker's check of research/Q-014-memo.md. Each round on a different model from the Researcher; recorded verbatim by the Orchestrator (session_01QBwHGNSLmSrYQgS6BPjV8p) from the helper's return, 2026-11-08 (rounds 1 to 3) and 2026-11-09 (round 4, the deciding round the owner ruled, decisions/questions/P-002-research-stop.md); each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
 
 ## Round 1 (brief 164)
 
@@ -199,3 +199,64 @@ No item that rounds 1 or 2 marked not confirmed (F014-21, F014-31) is relied on 
 I cannot see my total tokens.
 
 Relevant files: /home/user/Model-Lab/research/Q-014-memo.md, /home/user/Model-Lab/research/Q-014-source-check.md, and the worktree /home/user/lib-q-014 (branch build/source-checker/q-014, unchanged, HEAD ceac97c).
+
+## Round 4 (brief 188)
+
+The round's verdict was FAIL.
+
+All eight round 3 corrections are made, and the re-check ids hold except as noted below. The memo still has outside claims worded more strongly than the pages, so this goes back to the owner. I re-opened these pages: ISPOR abstract, RFC 4450, Cochrane/UKCC abstract, ISO/TC 211 page, Lamont BMJ blog, Laughland PDF, ASME 2016 slides, and the Pearls and Irritations (Croakey) MBS page. I did not re-open Niven or Tingle. I relied on rounds 1 to 3 and the filed entries for those. I read the Q-009 and Q-005 library entries in /home/user/portfolio/library/facts; they match the memo's wording.
+
+## Re-checked ids and the sentences or headings found wanting
+
+| id / sentence | Result | Reason |
+|---|---|---|
+| Round 3 corrections 1 to 6 and 8 (bypassing attributed; OSHA/eMARS are citations and reports; §3 is the paper's own recommendation; opening bullets 1 and 4 hedged; §6 "one recorded case"; F014-21 relabelled; "possibly") | hold | Each is made and worded within what rounds 1 to 3 confirmed. |
+| Correction 7a to 7d (F014-12, F014-17, "little change", "Not applied") | hold | The ISPOR abstract itself says "Excluding one terminated evaluation, 20 technologies … only one … not recommended" and "Despite ultimately being recommended, 12/20 (60.0%) … did not fully resolve the uncertainty". Both the 19-of-20 and 12-of-20 wording and the "12 of 20 recommended without resolving" line in "Documented harms" are supported. |
+| Correction 7e / §5 opinion: "Clearing a backlog was not the RFC's stated purpose" | does not hold as worded | RFC 4450 gives the experiment's purpose as "to determine how many Proposed Standards could be considered obsolete". It also calls the method a "Bulk Decommissioning Procedure", and says "The initial intent of the authors was to present a list of documents to be reclassified as Historic". The memo's flat negative about the RFC goes beyond the page. Drop it or quote both statements. |
+| F014-24 body (never followed; about 125; default retire; 61 vs 44) | holds | Confirmed in the RFC text. "Retire unless someone objects" is a fair opinion: any document could be removed "for virtually any reason, so long as a reason is provided". |
+| F014-1, -3, -6, -17, -21, -31 | hold | As rounds 1 to 3 found them. F014-21 and F014-31 are unconfirmed and not relied on. |
+| F014-2, -4, -5, -7, -8, -9, -13, -19, -20, -25, -26, -30, -33 summary citations | hold | The Laughland PDF says "9% of all citations" in a table of cited PSM elements, so "process-safety citations" is fair. The 39 of 92 figure is exact. |
+| F014-23 | holds | The ASME 2016 slide matches: 10 years loses ANS status for continuous or periodic maintenance; stabilized maintenance needs a status review every 10 years. |
+| F014-22, §3: "usually by simple majority" | does not hold | The ISO page says the decision "is often made by a simple majority". "Usually" is the Input reader's wording, not the page's. Filed entry 15 correctly says "often". |
+| F014-34, §3: "the minister watered advice down under clinician pressure" | does not hold | The page says only "given in to pressure"; it does not say clinicians. |
+| F014-34, §3: "only about 200 have been changed" | does not hold as worded | On the page, the 200 refers to the 5,700 items on the MBS. The same page says "To date, the Government has implemented 520 recommendations", which the memo omits. Placed after "1,400 recommendations", it reads as 200 of 1,400. |
+| Opening fixes list and candidates list: "tiered stability levels, each with its own removal notice" (F014-30) | does not hold | Alpha APIs "may be removed in any release without prior deprecation notice". Say "its own removal terms (alpha: none)". Entry 19 is correct. |
+| Same two lists: "named heads accountable" (F014-26) | does not hold | The page says Engineering Heads must commit to being accountable. "Named" is not on the page; drop it. |
+| Heading §2: "Disinvestment candidates largely dissolved on inspection" (F014-15) | does not hold | The abstract says 43% of 65 reviews "provided candidate interventions", "quantification … was difficult", and "many interventions were no longer used or had insufficient evidence". "Largely dissolved" is stronger than that. Suggested: "Of 65 'cannot recommend' Cochrane reviews, 43% gave disinvestment candidates; savings were hard to quantify". |
+| Heading §2: "One researcher argues that stopping needs more certainty than starting" (F014-16), and the body line and opening bullet 1 "An NIHR researcher argues/writes" | does not hold | Lamont reports "a really interesting contention explored in" a NICE (Garner) paper: "do not recommend" decisions need more certainty than "a treatment option left to the discretion of the clinician". She also says Henshall noted the same paradox. The page makes no comparison with starting. Attribute it to the NICE paper as reported by Lamont, and drop "than starting". |
+| Heading §1: "Health: an adoption route that bypassed full assessment cost a lot and could not be shown to help" | does not hold | No finding cited under it says "bypassed full assessment". F014-9 says the NAO could not evaluate impact. F014-10 reports 18% met ESMO criteria, so "could not be shown to help" is too strong. Suggested: "cost £968m and its effect on patient outcomes could not be evaluated". |
+| Heading §5: "Scheduled review with automatic lapse" | does not hold as general | Automatic loss of status is ANSI only (F014-23, a slide). ISO is a scheduled vote, as the memo's own change list item 11 says, and F5-8 is a fade rule. |
+| "What each answer would change": "Patterns that held up elsewhere become candidates" | does not hold | The bullet itself says none has outcome evidence. Use "Patterns described elsewhere". |
+| Same section: "Documented harms" heading | does not hold | F014-9, F014-12 and F014-33 are recorded problems or the memo's reading, not harms the sources document. Use "Recorded problems". |
+| Opening: "the cost of adopting is quantified only in health"; "the cost of declining appears in only one account"; §1 "No source measures the net benefit of a scanning programme" | wording stronger than recorded | The reader's gap statements say no controlled comparison, and no quantified cost of a rejected proposal. They name F014-35 and -16 for declining costs. The "only" claims and "net benefit" are the Researcher's own counts. Say "in the findings recorded" or mark them as opinion. |
+| All other summary sentences, the Opinion lines, "Thin, absent or from a different field" (8, 15, 5, 7 of 35 recounted) | hold | Each names its findings and is hedged or marked as the Researcher's opinion. |
+| Items marked not confirmed (F014-14 "half" as override, F014-21, F014-31, F014-28) | none relied on | F014-21 and F014-31 are labelled unconfirmed; F014-28 is given no weight. |
+
+## Library changes
+One commit, 8fa210a, on build/source-checker/q-014, library/ only, not pushed:
+- **Entry 5:** the title and statement now say the author states a concern, not a finding, that systems may be bypassed. The one-size-fits-all remark is separated from the personnel view.
+- **Entry 8:** the filed quote was not exact. It now gives the abstract's wording, including "Excluding one terminated evaluation" and "Despite ultimately being recommended", and says "recommended", not full approval.
+- **Entry 12:** the title uses the source's "associated with the greatest likelihood of de-adoption".
+- **Entry 16:** the RFC's stated purpose is added, together with the authors' initial intent to list documents for Historic.
+- **P23:** the title no longer says "alone" (it now says "one included study").
+- **P24:** "confirmed" is replaced by "recommended", and "excluding one terminated evaluation" is added.
+- **README:** the rows for these entries are updated to match.
+
+Entries 1, 12 and P22 otherwise match the corrected memo. The other facts (2, 3, 4, 6, 7, 9 to 11, 13 to 15, 17 to 21) were skimmed against the memo and need no change.
+
+## What the memo must still correct
+1. §3 F014-22: "usually" should be "often".
+2. §3 F014-34: drop "clinician" pressure. Say whether the 200 means items or recommendations. Note that the same page says the Government implemented 520 recommendations.
+3. §5 RFC opinion: drop "Clearing a backlog was not the RFC's stated purpose", or give both statements from the RFC.
+4. F014-30: replace "each with its own removal notice" with "its own removal terms (alpha: none)", in the fixes list and the candidates list.
+5. F014-26: remove "named" from "named heads", in both lists.
+6. Reword the §2 heading on F014-15 as suggested above.
+7. Reword the §2 F014-16 heading, body line and opening bullet 1 so the contention is attributed to the NICE paper as reported by Lamont, and drop "than starting".
+8. Reword the §1 health heading as suggested above.
+9. Reword the §5 heading so "automatic lapse" is limited to ANSI (per a slide).
+10. In "What each answer would change", change "held up elsewhere" to "described elsewhere" and "Documented harms" to "Recorded problems".
+11. Qualify the three absence or only-claims (cost of adopting quantified only in health; only one account of declining; "no source measures net benefit") as "in the findings recorded" or as the Researcher's opinion.
+
+Total tokens: I cannot see them.
+
+Files: /home/user/Model-Lab/research/Q-014-memo.md, /home/user/Model-Lab/research/Q-014-source-check.md, /home/user/lib-q-014 (branch build/source-checker/q-014, HEAD 8fa210a).

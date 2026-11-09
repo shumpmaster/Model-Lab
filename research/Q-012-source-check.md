@@ -1,6 +1,6 @@
 Verdict: FAIL
 
-*The Source checker's check of research/Q-012-memo.md. Each round on a different model from the Researcher; recorded verbatim by the Orchestrator (session_01QBwHGNSLmSrYQgS6BPjV8p) from the helper's return, 2026-11-08; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
+*The Source checker's check of research/Q-012-memo.md. Each round on a different model from the Researcher; recorded verbatim by the Orchestrator (session_01QBwHGNSLmSrYQgS6BPjV8p) from the helper's return, 2026-11-08 (rounds 1 to 3) and 2026-11-09 (round 4, the deciding round the owner ruled, decisions/questions/P-002-research-stop.md); each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
 
 ## Round 1 (brief 165)
 
@@ -238,3 +238,46 @@ I read entries 1, 2, 7, 9, 15, 21, 22 and 24 and found nothing needing change. I
    - "Fields that measure decay directly … find much slower rates" has no confirmed Stack Overflow rate behind it. F012-2 gives shares, not a rate, and the 45-year half-life is assumed.
 
 Token count: I cannot see it.
+
+## Round 4 (brief 187)
+
+The round's verdict was FAIL.
+
+Pages opened this round: PMC12483133 (F012-29) and PubMed 37660117 (F012-20). Everything else was checked against the round 1 to 3 record and the library files. The round 3 corrections and the earlier ones are made, and no item marked unconfirmed is relied on. The FAIL is for summary sentences and headings that are worded more strongly than the findings, or that name no findings.
+
+**Round 3 corrections**
+
+| Id | Result | Reason |
+|---|---|---|
+| Elicit comparison | holds | "Much less favourable" is gone everywhere. The memo says only what F012-29 and F012-31 measured, and says F012-30 is unconfirmed. |
+| "Outdated when published" | holds | 7% is an update signal (Q-009-F13-5). 58.4% is stated as a share of the obsolete answers. |
+| Joint statement (F012-35) | holds | It quotes "should be used with human oversight", says no stages are listed, and "concentrated in" is now labelled opinion. |
+| Smaller wordings: "one test, one review", F012-4 limited to Few-Shot/CCoT on one task, no "much slower rates" | holds | All three applied. |
+| F012-13, 16, 17, 28, 30, blog-only F012-9, F012-20 workload tie | not relied on | Each is marked assumed. No summary sentence leans on them. |
+
+**Wanting, and what the memo must still correct**
+
+| Where | Result | Reason |
+|---|---|---|
+| Answer in brief "No review" opinion, and section 2 opinion: "most items went without an update, even where updating was the norm" | does not hold | Q-009-F5-6 has a median of 3.3 years to first update, with 33 of 101 reviews updated within 2 years. Those reviews were updated late, not "without an update". F012-7 says inactive for 5.5 years or more, not never updated. The sources say "recommended", not "the norm". Reword to "without a timely update" and "where updating was recommended". |
+| Answer in brief, heading "Facts, from a different field (medicine)" | does not hold | Its last bullet is Stack Overflow (F012-2), which is software, not medicine. |
+| "Thin, absent or from a different field": exceptions to the medical record are "the AI-tool tests in section 7" | does not hold | F012-24, 25, 26, 27 and 29 are medical evidence-synthesis tests. Only F012-31 to 34 are outside that field. Name those ids. |
+| Transfer: "Outside AI practice comes largely from vendor posts, preprints and blogs. This memo's own AI sources are mostly arXiv or vendor pages." | does not hold | The first sentence names no finding or entry. "Vendor pages" matches only F012-17 and F012-30, which are unconfirmed and not used. The opened AI sources are arXiv or preprint pages (the "Thin" section says so), plus journal pages. The "unlikely to hold as given" opinion after it rests on this. |
+| Heading "Sources disagree on direction" (section 4) | does not hold | It holds one item, F012-13, which is unconfirmed. No disagreement between sources is shown. Rename it, for example "Unconfirmed report of a move away from a fixed schedule". |
+| Answer in brief, continuous intake: "Four of these sources carry a stake note… (F012-14, 18, 19, 20)" | partly holds | Stakes for F012-18 and F012-19 are supported (affiliations and self-evaluation). The stake notes for F012-14 ("living-review methodologists") and F012-20 ("authors run living reviews") are the Input reader's notes only. The PubMed page returned only a cookie notice, so I could not open it. Mark both as the reader's notes, not shown on the page. |
+| Heading "Extracting and summarising" (section 7) | minor | It holds F012-33 and F012-34, which are about citations. Use "Extracting, summarising and citing". |
+| Heading "Medicine and software (measured decay, other fields)" (section 1) | minor | Q-009-F13-5 measures a signal that an update may be needed, as section 3 says, not decay. F012-2 gives shares. Use "measured signals and shares". |
+| "The authors of F012-29 recommend Elicit only as a supplementary search tool" | minor | The page says "recommended as a supplementary search tool, but not sufficient to replace traditional search methods". It does not use "only". Quote that wording. |
+
+**Entries changed**
+
+One commit, `069adbf`, in /home/user/lib-q-012 on build/source-checker/q-012, not pushed. The last paragraph is exactly the two required lines, and I did not add the attribution trailers. Only library/ was touched.
+- `/home/user/lib-q-012/library/facts/Q-012-6.md`: the title said testing "found regressions"; it now says "can uncover … (exploratory, no figures)", the page's wording.
+- `/home/user/lib-q-012/library/facts/Q-012-16.md`: it referred to the memo's old "most items did not matter" wording. It now says the 14% means 86% of positive predictions were not borne out, and that any wider reading is not the source's.
+- `/home/user/lib-q-012/library/patterns/Q-012-P1.md`:
+  - The title and problem statement said a cheap alert "covers only part" and "one outside feed covers only part of what exists". They are now limited to the one test and the two feeds, with the wider reading marked opinion (M).
+  - The transfer note no longer rests on the unsupported "vendor posts, preprints and blogs" claim.
+
+Entries 4, 5, 19 and 22 match the corrected memo and are no stronger than their sources. I read the rest and found nothing else conflicting: 1 to 3, 7 to 15, 17, 18, 20, 21 and 23 to 27.
+
+I cannot see my token count.

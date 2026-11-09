@@ -531,4 +531,12 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Caught by:** the Source checker, rounds 1 to 3.
 - **Cause:** the Researcher's brief (docs/briefs/156 to 158, 162, 163) asked for each finding to be graded but not for each summary claim to carry the same hedge and source as the findings it rests on; and each revision brief said "make every correction ... and only those", so a summary built on a corrected item was not re-hedged unless the check named it.
 - **Correction proposed:** the Researcher's brief asks that every summary sentence name the finding ids it rests on and carry no stronger wording than they do; the revision brief adds "and re-check every summary sentence that rests on a corrected item". For the model, the Researcher's role file says the same. This is a brief-and-check pattern for the prompt engine (P-001) to weigh.
+- **Recurrence:** the focused round the owner ruled (decisions/questions/P-002-research-stop.md) gave the Researcher that correction (briefs 185, 186). Q-012's deciding check (brief 187) still failed: the round 3 corrections held and every summary sentence now names its ids, but several were still worded more strongly than those ids, a group heading named the wrong field, and some headings overstated what they held (research/Q-012-source-check.md, round 4). Naming the ids did not by itself keep the strength matched; a summary also repeated a source type ("vendor pages") that only unconfirmed items carried.
 - **Status:** open.
+
+### LL-72 Records the Orchestrator owns were committed under the Chief of Staff's name
+- **What happened:** on 2026-11-09 the Chief of Staff's session committed five local commits (the round 4 memos, their source checks, briefs 187 to 190, the Critic's record and LL-71's recurrence) as `chief-of-staff`, though research/, docs/briefs/, reviews/ and docs/LESSONS.md are the Orchestrator's surface and this session's earlier records were committed as `orchestrator`. None had been pushed.
+- **Caught by:** surface_guard diff, run on a simulated merge before the push.
+- **Cause:** the commit before them, the answer record, was rightly the Chief of Staff's, and the identity was carried over without checking each file's owner.
+- **Correction:** the five commits were replaced before pushing by two, one per owner: the Orchestrator's records as `orchestrator`, and the session lines and the question as `chief-of-staff`. For later commits, split by owner, and run surface_guard before each push, as the session already does.
+- **Status:** fixed.
