@@ -14,3 +14,6 @@ The question: /home/user/Model-Lab/research/Q-017.md, in the form of research/_Q
 Check: (1) neutrality: does any wording presume an answer, favour a high or low share, or signal what the owner wants, such as a target; (2) gaps an expert would expect in such a count, and whether each count is defined well enough to be repeated; (3) whether the reading limits are workable and enough to keep the Researcher blind (it may read only file names and commit dates under questions/ and decisions/, never their contents); (4) form; (5) plainness for a Researcher who knows nothing of this project; (6) overlap with research/Q-006-memo.md and Q-008-memo.md. Do not read Model-Lab docs/projects/, docs/PROJECT.md, the contents of decisions/ or questions/, or any ideas/ folder.
 
 Return, first line exactly `Verdict: PASS` or `Verdict: FAIL`, then numbered findings by line, blocking or non-blocking. Do not rewrite the question.
+
+## Outcome
+Verdict: FAIL (reviews/P-002-research-q017/critic.md, round 1)
