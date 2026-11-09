@@ -83,3 +83,4 @@
 {"event": "helper", "session": "session_01QBwHGNSLmSrYQgS6BPjV8p", "role": "researcher", "started": "2026-11-09T05:21:21Z", "ended": "2026-11-09T05:24:53Z", "reported": {"tokens": 70939, "tool_uses": 10, "duration_ms": 211986}}
 {"event": "helper", "session": "session_01QBwHGNSLmSrYQgS6BPjV8p", "role": "source-checker", "started": "2026-11-09T05:25:30Z", "ended": "2026-11-09T05:27:07Z", "reported": {"tokens": 127319, "tool_uses": 17, "duration_ms": 97021}}
 {"event": "helper", "session": "session_01QBwHGNSLmSrYQgS6BPjV8p", "role": "critic", "started": "2026-11-09T05:28:10Z", "ended": "2026-11-09T05:29:21Z", "reported": {"tokens": 62189, "tool_uses": 19, "duration_ms": 71430}}
+{"event": "helper", "session": "session_01QBwHGNSLmSrYQgS6BPjV8p", "role": "critic", "started": "2026-11-09T05:30:18Z", "ended": "2026-11-09T05:31:40Z", "reported": {"tokens": 56050, "tool_uses": 26, "duration_ms": 82318}}
