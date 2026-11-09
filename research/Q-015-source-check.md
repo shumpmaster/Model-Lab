@@ -179,3 +179,53 @@ No item that round 1 marked not confirmed is still relied on. The search-only it
 6. Opening answer, cost paragraph: "The time cost to the supervisor appears in three places" lists PR closure time (F015-27) and METR, which are not supervisor time. Reword as "time costs", or keep only the review-bottleneck items.
 
 Total tokens: I cannot see my token count.
+
+## Round 3 (brief 211)
+
+The round's verdict was FAIL.
+
+All six round 2 corrections hold. The FAIL rests on one new overstatement in the catalogue, found in the LL-71 scan (details under "What the memo must still correct").
+
+I re-opened LangChain, Cognition, the Gas Town page, A2A, Osmani and the Anthropic auto-mode post. For the other items I relied on rounds 1 and 2. I read nothing else in Model-Lab and no ideas/ folder.
+
+| id / item | result | reason |
+|---|---|---|
+| F015-2 | holds | Page has "in 2025, running multiple agents in collaboration only results in fragile systems" and "Actions carry implicit decisions...". It has no read/write distinction and no data, only examples. |
+| F015-3 | holds | Page says "they actually have a lot in common", "not a 'one-size-fits-all' solution", and gives no yes/no answer. "The key insight is that read actions are inherently more parallelizable than write actions" is LangChain's own. The token-spend and coding-fit passages are block quotes of Anthropic, and the memo credits them to Anthropic. |
+| F015-7 | holds | The replication line is gone. It now says highest score and "low cost" against open-source agents, and F015-8 is "an argument, not a replication". |
+| F015-12 | holds | Scoped to the two populations. "The Input reader found no other source" matches the gap list. |
+| F015-20 | holds | Opacity is tied to security. The steering committee is as listed (the page says "IBM Research"). The page has no outcome data. |
+| F015-21 | holds | Per rounds 1 and 2. "The page gives none" is the right wording for the missing comparison. |
+| F015-22 | holds | "At least $1,000", Willison's doubt, and the "far less interesting" line are as confirmed. The page has no outcome data. |
+| F015-23 | holds | Yegge is named as builder. The heading is "Yegge never looks at code. When should we stop looking too?". The diffs remark is about the author's own use of Claude Code and OpenCode. The page shows no author name, and the memo says so. "She" and "herself" are gone. "Not a serious, working tool" and the thousands-of-dollars cost are on the page. |
+| F015-24 | holds | Per round 1. Reading every PR is credited to F015-24 only. |
+| F015-25 | holds | "Where I'm confident ... can't sneak into the context" is used consistently. The bottleneck quote is credited to F015-25. |
+| F015-29 | holds | The "prompts not published" line is removed from the memo. "Reportedly" is used. Neither page shows the agent's permissions. |
+| F015-31 | holds | "Wiper" and trust-all-tools are credited to The Register. The syntax-error account is credited to AWS alone. |
+| F015-35 | holds | "Voluntary" and "draft" are marked search-only. The page gives no outcome data. |
+| F015-36 | holds | Now "suggests under half ... an estimate", with "focus on healthcare". |
+| Q-009-F1-1 | holds with a note | The memo's description matches the entry, which says 19% longer for experienced developers. See the METR note below. |
+| Proposed entry 17 | holds | The wiper description is the press's. The syntax-error account is AWS's alone. |
+| Opening answer | holds | The Input reader's gap wording is used. Cost and time are scoped correctly. "Start simple" and "transfer is an estimate" are marked as opinion. |
+| Catalogue rows "Simplest setup first", "Parallel agent teams", "Agent factory" | hold | Each holds as worded. |
+| Catalogue row "Classifier in place of approval prompts" | does not hold | See correction 1 below. |
+| "What each answer would change", all three bullets | hold | The 84% figure is not used to support no-approvals. The one-supervisor caveat is marked opinion. |
+
+No item that rounds 1 or 2 marked not confirmed is still relied on. The search-only items (extra b, F015-11 wording, MINJA figures, "voluntary", the Antigravity command) stay marked search-only.
+
+**Entries changed**
+
+One commit, 72f3c97, in /home/user/lib-q-015 on build/source-checker/q-015. It changes library/ only and is not pushed. The message ends with the required Agent-Session and Spec lines.
+- `library/facts/Q-015-23.md`: "healthcare may be well under half" now reads "appears to be under half ... an estimate from the flattened table; the text gives no count", to match the memo.
+- `library/facts/Q-015-18.md`: removed "The prompts were not published." The memo dropped it because neither the checks nor the gap list support it.
+
+All other entries (1–17, 19–22, 24, and patterns P21 and P22) already agree with the corrected memo. The README rows needed no change.
+
+**What the memo must still correct**
+1. Catalogue row "Classifier in place of approval prompts", last column. It says "In use per vendor (living docs)". F015-14 is a dated blog post (2026-03-25) describing auto mode as "a new mode". It is not living docs, and nothing opened shows it is in use now. Reword to something like "Offered per the vendor's 2026-03-25 post; current status not checked".
+
+Minor, optional:
+- §8 and the Time list cite METR "19% slower" through Q-009-F1-1. That entry records METR's own page saying the result no longer reflects current AI models. Add "(METR says this no longer reflects current models)", or keep the words as they stand and accept the library note.
+- "A 'Mayor' agent that never writes code": the page says the Mayor coordinates "without writing code". Use "does not write code".
+
+Total tokens: I cannot see my token count.
