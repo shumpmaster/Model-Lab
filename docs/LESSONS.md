@@ -550,3 +550,10 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Recurred (2026-11-09):** the hand check run after the owner's ruling sampled each field against git but did not test the coding of kinds itself, or look for one pull request number counted twice; the Critic found six review-record commits coded as squash merges (reviews/P-002-research-q017/critic.md, deciding check of the narrowed question). A sample must also test each coding rule's edge cases, and simple invariants such as one line per pull request number.
 - **Status:** open; the next step is the owner's (questions/P-002-q017-next.md).
 
+### LL-74 A session line already on main was edited in place
+- **What happened:** on 2026-11-09 the Chief of Staff's session filled in a helper's reported usage on its session line after that line had reached main, changing it rather than adding a line; the session-lines check allows only lines added to the end (model S-033 AC6).
+- **Caught by:** the governance checks on a simulated merge, before the push.
+- **Cause:** a habit of writing each helper's line with nulls when it starts and filling the figures in when its report arrives, which is safe only until the line is pushed.
+- **Correction:** the line was put back as it stands on main. From now on a helper's line is written once, when its report arrives, with the figures it gives.
+- **Status:** fixed.
+
