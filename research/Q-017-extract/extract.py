@@ -9,7 +9,7 @@ written. Dates are in UTC. Paths that name the owner's records, or a project ite
 an opaque label (see README.md).
 """
 import json, re, subprocess, sys, hashlib, datetime
-OWNER_ADDR = sys.argv[1]
+OWNER_ADDR = sys.argv[1] if len(sys.argv)>1 else ""
 PRIV = [("questions/","questions"),("decisions/","decisions"),("docs/projects/","project-plan"),
         ("docs/PROJECT.md","project-plan"),("ideas/","ideas"),("sessions/chief-of-staff/","cos-session")]
 def oid(s): return hashlib.sha1(s.encode()).hexdigest()[:8]
@@ -17,7 +17,8 @@ def redact(path):
     for pre,lab in PRIV:
         if path.startswith(pre) or ("/"+pre) in path: return f"<{lab}:{oid(path)}>"
     if path.endswith("-notes.md"): return f"<notes:{oid(path)}>"
-    return "/".join(re.sub(r"^P-\d{3}.*", lambda m: "P-item-"+oid(m.group(0)), seg) for seg in path.split("/"))
+    if path.startswith("docs/handoff/") or "chief-of-staff" in path: return f"<cos-handoff:{oid(path)}>"
+    return "/".join(("item-"+oid(seg)) if re.search(r"(?i)p-?\d{3}|widget", seg) else seg for seg in path.split("/"))
 def cls(name, email):
     if email.endswith("@agents.invalid"): return "agent"
     if name == "shumpmaster" or email == OWNER_ADDR or email.endswith("+shumpmaster@users.noreply.github.com"): return "owner"
@@ -65,5 +66,6 @@ def run(repo, name):
                 "merge_commit":c["hash"],"merge_commit_author":c["author"],"merge_commit_author_class":c["author_class"],
                 "commits":inner,"commit_author_classes":cc,"co_author_classes":sorted(set(sum((commits[h]["co_author_classes"] for h in inner),[]))),
                 "files":sorted(fl.values(),key=lambda d:d["path"])})+"\n")
-for name in ["Service-Desk","Model-Lab","Personal-Org-Operating-Model"]:
-    run("/home/user/"+name, name)
+if __name__=="__main__":
+    for name in ["Service-Desk","Model-Lab","Personal-Org-Operating-Model"]:
+        run("/home/user/"+name, name)
