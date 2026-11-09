@@ -18,3 +18,7 @@
 2026-11-08T18:41:53Z scan: 0 new records since the last scan; runs 0, tokens 0
 2026-11-08T19:16:36Z hook: added on the owner's permission, E-001's code with the marker /^CWD: (\/home\/user\/e003-copies\/[A-Za-z0-9._-]+)\n/; validates; loads once the owner turns on this session's mods
 2026-11-08T19:16:52Z hook: loaded (the owner turned on this session's mods)
+2026-11-09T18:40:53Z listing: shumpmaster/Service-Desk, shumpmaster/Model-Lab
+2026-11-09T18:41:11Z wake: scheduled wake for 2026-11-09T18:40:00Z arrived 2026-11-09T18:40:40Z and this turn ran
+2026-11-09T18:41:11Z marker: present (machine not new); fetched Model-Lab and Service-Desk; hook present
+2026-11-09T18:41:11Z scan: 0 new records since the last scan; runs 0, tokens 0
