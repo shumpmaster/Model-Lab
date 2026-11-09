@@ -67,9 +67,10 @@ specs/*.md file as spec_check reads it; "frozen" is its status word.
             holds reviews/<spec id>/plan.md whose verdict, read as review_check
             reads verdicts, is PASS. Its facts are checked by `spec_check facts`,
             which a v3 project enforces at every tier.
-  holdouts  (AC8, D-054) when governance/HOLDOUTS.md changes in REF..HEAD (any
-            commit touches it, or it differs between REF and HEAD), a ledger
-            entry added in REF..HEAD has the field `holdouts: changed`.
+  holdouts  (AC8, D-054) when governance/HOLDOUTS.md changes in REF..HEAD (a
+            commit on the first-parent line changes it against its first
+            parent, or it differs between REF and HEAD), a ledger entry added
+            in REF..HEAD has the field `holdouts: changed`.
 
 model S-023 adds the project's milestones (Part 1 section 3, one per line:
 `<name> (M<id>) · done when <what is achieved> · phase: <phase>`, optionally
