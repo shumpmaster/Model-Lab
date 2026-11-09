@@ -62,3 +62,4 @@
 {"event": "helper", "session": "session_01QBwHGNSLmSrYQgS6BPjV8p", "role": "critic", "started": "2026-11-09T00:18:23Z", "ended": "2026-11-09T00:19:22Z", "reported": {"tokens": 58830, "tool_uses": 21, "duration_ms": 58213}}
 {"event": "helper", "session": "session_01QBwHGNSLmSrYQgS6BPjV8p", "role": "critic", "started": "2026-11-09T00:20:17Z", "ended": "2026-11-09T00:21:04Z", "reported": {"tokens": 41489, "tool_uses": 19, "duration_ms": 47305}}
 {"event": "helper", "session": "session_01QBwHGNSLmSrYQgS6BPjV8p", "role": "source-checker", "started": "2026-11-09T01:00:15Z", "ended": "2026-11-09T01:03:46Z", "reported": {"tokens": 153351, "tool_uses": 49, "duration_ms": 210796}}
+{"event": "helper", "session": "session_01QBwHGNSLmSrYQgS6BPjV8p", "role": "source-checker", "started": "2026-11-09T01:00:15Z", "ended": "2026-11-09T01:05:31Z", "reported": {"tokens": 170743, "tool_uses": 61, "duration_ms": 316547}}
