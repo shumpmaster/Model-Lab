@@ -2,7 +2,7 @@
 
 session: session_01QBwHGNSLmSrYQgS6BPjV8p
 model: the Critic runs on a different model from the plan's writer, the Chief of Staff's session (D-056). Model names are kept out of this record by this session's standing instructions (LL-70).
-start: Model-Lab@166c5486d40b8f5bf7abbd587661c203103af484 plus the revised sections, uncommitted, in the live checkout; read live
+start: Model-Lab@b3810742f67e92a0279d9bc324bdd92817658aad, the revised sections committed; read live
 manifest: docs/projects/P-002.md; docs/PROJECT.md; decisions/questions/P-002-*.md; reviews/P-002-problem-premortem/critic.md; the cited research files; portfolio library/**; Personal-Org-Operating-Model/OPERATING_MODEL.md
 recorded: at hand-out, 2026-11-09
 
