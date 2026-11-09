@@ -1,0 +1,7 @@
+kind = "research"
+milestone = "Discovery-5"
+# P-002 (the screening), Discovery; from the gaps the pre-mortem names (docs/projects/P-002.md, section 7).
+# Full question: research/Q-016.md, to be checked by the Critic for neutral phrasing before any Researcher sees it.
+question = """
+See research/Q-016.md.
+"""
