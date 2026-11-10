@@ -1,6 +1,6 @@
 # Q-017 memo: who makes, merges and changes again the organisation's changes, as of 2026-11-09 (Researcher, round 3, 2026-11-09)
 
-*The Researcher's memo for Q-017, round 3, the last before the stop rule (brief 233), revised after the Source checker's round 2; rounds 1 and 2 (briefs 229 and 231) are in this file's history. Recorded verbatim by the Orchestrator (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09, from the helper's return, less its covering note and one line naming its working files; only this italic line is the Orchestrator's.*
+*The Researcher's memo for Q-017, round 3, the last before the stop rule (brief 233), revised after the Source checker's round 2; rounds 1 and 2 (briefs 229 and 231) are in this file's history. Recorded verbatim by the Orchestrator (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09, from the helper's return, less its covering note and one line naming its working files; only this italic line is the Orchestrator's. As the owner ruled (decisions/questions/P-002-q017-memo-stop.md), the Orchestrator then replaced one sentence in section 3, on Service-Desk's spread of pull requests by question-label files, with the counts the Source checker's round 3 listed; nothing else was changed.*
 
 **Marks.** Each figure carries one of the question's three marks:
 - **[S] supported:** the extract records it, and the count follows from the rule stated here.
@@ -197,7 +197,7 @@ The extract has 447 merged pull requests [S]: 312 in Service-Desk, 85 in Model-L
 | first-added outside any pull request | 26 (57 lines) | 1 (48) | 0 |
 | first-adding commit by agent / owner identity | 54 / 24 | 1 / 0 | 1 / 0 |
 
-- Service-Desk pull requests by the number of question-label files they first add: none 137; one 99; two 37; three 8; four 11; then one to three pull requests at each count from 5 to 22; one pull request adds 75.
+- Service-Desk pull requests by the number of question-label files they first add: none 137; one 99; two 37; three 8; four 11; then one to three pull requests at each of the counts 5 to 11, 14, 15, 16, 18 and 22 (5: 2, 6: 3, 7: 1, 8: 2, 9: 2, 10: 1, 11: 2, 14: 2, 15: 1, 16: 1, 18: 1, 22: 1), and none at 12, 13, 17, 19, 20 or 21; one pull request adds 75.
 - Model-Lab: none 37; one 31; two 11; three 2; four 2; five 1; seven 1.
 - POOM: none 38; one 6; two 4; six 1; nine 1.
 - No lines are given for re-additions, deletions and files still present. The lines of a deleted or re-added file measure its size, not an act of asking or answering, so they would add no second view of these counts.
