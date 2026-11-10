@@ -540,6 +540,7 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Caught by:** surface_guard diff, run on a simulated merge before the push.
 - **Cause:** the commit before them, the answer record, was rightly the Chief of Staff's, and the identity was carried over without checking each file's owner.
 - **Correction:** the five commits were replaced before pushing by two, one per owner: the Orchestrator's records as `orchestrator`, and the session lines and the question as `chief-of-staff`. For later commits, split by owner, and run surface_guard before each push, as the session already does.
+- **Recurred (2026-11-10):** the fourth handoff (docs/handoff/2026-11-10-chief-of-staff-p002-4.md) was committed as `chief-of-staff`, though docs/handoff/ is the Orchestrator's surface and the earlier handoffs were committed as `orchestrator`. surface_guard on the simulated merge caught it before the push, and the commit was remade as `orchestrator`. The handoff is written by the Chief of Staff but filed by the Orchestrator: check the owner of the folder, not the writer.
 - **Status:** fixed.
 
 ### LL-73 A coding script was built over varied records without first checking it against a sample
