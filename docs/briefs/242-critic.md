@@ -2,7 +2,7 @@
 
 session: session_01QBwHGKirN166RhxQTHuAt9
 model: the Critic runs on a different model from the card's writer, the Chief of Staff's session (D-056). Model names are kept out of this record by this session's standing instructions (LL-70).
-start: Model-Lab@cf2dbf3, read from a fixed copy at /home/user/ml-critic-242
+start: Model-Lab@963a575, read from a fixed copy at /home/user/ml-critic-242
 manifest: none
 recorded: at hand-out, 2026-11-10
 
