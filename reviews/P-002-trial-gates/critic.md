@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Critic on questions/P-002-trial-gates.md, the question on the owner's two approvals for each screened method (P-002): round 1 (FAIL), round 2 (FAIL); briefs 241 and 242. Each round a fresh session on a different model from the card's writer, started by the Chief of Staff (session_01QBwHGKirN166RhxQTHuAt9), 2026-11-10. Recorded verbatim by the Orchestrator from the helper's return; the round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
+*The Critic on questions/P-002-trial-gates.md, the question on the owner's two approvals for each screened method (P-002): round 1 (FAIL), round 2 (FAIL), round 3 (PASS); briefs 241, 242 and 243. Each round a fresh session on a different model from the card's writer, started by the Chief of Staff (session_01QBwHGKirN166RhxQTHuAt9), 2026-11-10. Recorded verbatim by the Orchestrator from the helper's return; the round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's. After round 3, its findings 1, 2, 3, 4, 5, 6, 8 and 9 were applied as wording; finding 7 (plainness) stays open.*
 
 ## Round 1 (brief 241)
 
@@ -247,5 +247,121 @@ Self-implication flag (D-050): round 1 of this card and round 3 of the value-tar
 - /home/user/ml-critic-242/docs/projects/P-002.md (section 7)
 - /home/user/ml-critic-242/docs/LESSONS.md (LL-08, LL-76)
 - /home/user/ml-critic-242/AGENTS.md (§5)
+- /home/user/Personal-Org-Operating-Model/OPERATING_MODEL.md (§1, §2, the experiment playbook)
+- /home/user/Personal-Org-Operating-Model/docs/archive/OPERATING_MODEL_v2.5.1.md (line 33)
+
+## Round 3 (brief 243)
+
+The round's verdict was PASS.
+
+Card checked: /home/user/ml-critic-243/questions/P-002-trial-gates.md, round 3, read cold. No finding blocks; nine are non-blocking, and findings 1 and 2 are the ones most worth fixing before the card is put. I hold no command tool, so I ran nothing; figures were checked against the printed output in the odds record. Every Context source was opened; one citation (the commit id on line 45) I could not confirm.
+
+Self-implication flag (D-050): rounds 1 and 2 of this card and round 3 of the value-target card were Critic checks. Finding 2 below repeats round 1's finding 4 and round 2's finding 5, and touches wording the value-target card also carried ("may come back only with a trial plan that is truly different") and passed with.
+
+## What holds
+
+- **The owner's design.**
+  - Lines 5 and 7 quote the owner word for word from /home/user/ml-critic-243/intake/P-002-owner-value-target-answers-2026-11-10.md, including the reason.
+  - Option A is the plain reading of "approve or reject the final implementation to the model", put first, and the narrower options follow it (LL-76).
+  - The writer's additions on lines 15 and 16 are marked "Added"; the time proposals are labelled proposals.
+- **The rules.**
+  - Line 5 quotes "Killed, not tuned" exactly from /home/user/Personal-Org-Operating-Model/docs/archive/OPERATING_MODEL_v2.5.1.md line 33; OPERATING_MODEL.md §1 item 4 does read "Unchanged".
+  - The recommended option's departure is in the first sentence, with the rule quoted (LL-08).
+  - Line 26 says why the planned second look is not a re-run.
+  - "Sends that change to the model as a proposal, as your part 4 answer did" matches part 4 option A of the value-target card and /home/user/ml-critic-243/decisions/questions/P-002-target.md line 17.
+- **Figures.** All match /home/user/ml-critic-243/intake/P-002-value-target-odds-2026-11-10.md at the 1 in 10 line, with fair rounding.
+
+  | Card says | Output |
+  |---|---|
+  | one look, about 7 in 10 and 4 in 10 | 0.71, 0.42 |
+  | two looks, about 9 in 10 and 7 in 10 | 0.92, 0.70 |
+  | "slightly stricter line" | 0.097 at each look |
+  | about 3 to 5 trials in 10 run twice as long | 0.27 to 0.48 for a real halving (0.38 to 0.39 for no effect) |
+  | harmless method turned away about 1 in 7 with one look, up to 1 in 5 with two | 1 - 0.92 x 0.93 = 0.145 (round 2); up to 0.20 (round 3) |
+
+- **Sources.**
+  - R1, R9, R16 and R18 are in /home/user/ml-critic-243/docs/projects/P-002.md section 7 as described; R1 is the first risk.
+  - The desk line matches answer 5 of /home/user/ml-critic-243/decisions/questions/P-002-groundwork-shortlist.md.
+  - "Null results are results. No re-running for a better answer" and "repeated reframing goes back to Discovery" are in the experiment playbook; "Never delegable: … rule changes" is in §2.
+  - The value-target Critic's round 3 does say it read the scripts and re-did the arithmetic by hand, and that no one else has run them.
+- **Form.** Template fields, the Milestone line and Context are present. There are three options, each with gain, cost and reversibility. No default and no timeout is right for a value target. The cost of leaving it unruled is stated. The recommendation gives its confidence and what would change it.
+
+## Round 2 findings
+
+| # | Round 2 finding | Status |
+|---|---|---|
+| 1 | Recommended option's relation to the two rules not accurate; undefined review after 30 more pieces (blocking) | Answered. The review is gone; "passed" now includes holding up, so only a passed method enters the model under B and C; the recommended option is now the one named as the departure. |
+| 2 | Recommendation claimed "what you asked for" for the narrower option (blocking) | Answered. The phrase now sits on A, which is the owner's wording; B's title says what B does. |
+| 3 | One look or two not said for each option | Partly. Each option now says. The cost of longer trials is charged to B alone: finding 1 below. |
+| 4 | What going outside the rule does to the rule | Answered (line 5). |
+| 5 | "Inside the rules" not shown for a fresh trial design | Partly. B's cost now gives both readings of "Killed, not tuned" and what follows from the stricter one; the playbook rule is still unsaid: finding 2 below. |
+| 6 | Loose definitions | Answered (line 11; "shuffled draws"). |
+| 7 | Owner's time: review uncounted, no time per card, cap against two weeks | Answered. The review is gone, time per card is said to be unknown, and results cards are never held back. One gap: finding 5 below. |
+| 8 | A's way back rested on an unruled review date | Answered: "by a model change, which you rule". |
+| 9 | Four options; cost of leaving it unruled | Answered. |
+| 10 | Round 1's outcome not given; independent run dropped | Answered (line 34). The line will need round 3's outcome when recorded. |
+| 11 | Plainness on a phone | Partly: finding 7 below. |
+| 12 | "Nothing is dropped by the pipeline" holds only in form under the narrower options | Stands as before, and is still disclosed by B's cost ("your approval cannot keep a 'not passed' method"). |
+| 13 | Context cites a question file due to be deleted | Answered in form; the commit id is unconfirmed: finding 8 below. |
+
+Round 1 findings left partly answered at round 2: 1 and 2 are answered (as round 2's 2 and 1 above); 7 and 9 are moot or answered by the new definition of "passed"; 10 and 11 are answered; 4 and 14 remain partly answered (findings 2 and 7 below).
+
+## Non-blocking
+
+1. **Lines 29 and 30: the cost of longer trials is charged to B but not to A, which has the same two looks.**
+   - A reads "Two looks planned" and its cost names only the rule and the first risk. B's cost adds "about 3 to 5 trials in 10 run twice as long".
+   - Both options run the same trial, so the cost is equal. A reader weighing A against B sees it under B only.
+   - This is round 2's finding 3 turned round: there the cost sat on one option and leaned against it; here it leans, mildly, toward the recommended one.
+   - It does not block because A says "Two looks planned", line 26 says what a second look adds, and line 33 says "if shorter trials matter more, C".
+
+2. **Lines 5 and 30: B's relation to "No re-running for a better answer" is still not said.**
+   - Line 5 says "B and C stay inside it", meaning "Killed, not tuned". B's own cost says that holds only on one reading; on the stricter one B "can only reject". So the flat first-line statement is conditional, and the card does not say who settles the reading.
+   - The playbook says "Null results are results. No re-running for a better answer." Its "new, genuinely different registration" sits under "When the test itself was wrong". B's new trial design follows a sound trial that came back "not passed".
+   - Line 26 says the second look is "not a re-run after seeing results". B's new design is drawn up after seeing results, and the card says nothing either way.
+   - Context line 48 cites the playbook, but no line in the card body uses it for B.
+   - It does not block: B is not recommended, the consequence of the stricter reading is on the card, and the limit ("fails twice goes back") and the Critic's check are there.
+
+3. **Line 29: A's cost does not say that "not passed" includes a method whose work held up worse.**
+   - Line 11 defines "not passed" as anything else, so it covers a trial where the method's pieces did worse on a check by more than chance.
+   - A's cost says "methods with no passed trial can enter the model" and names only "what is popular rather than what helps". It does not name harm.
+   - The owner said missing a helpful method and adopting a harmful one worry them "Both equally" (groundwork answer 3). The hold-up checks are the plan's guard against the second.
+   - It does not block: line 29 says the results card "says plainly when it was not passed and why", and the owner decides with that in front of them.
+
+4. **Lines 29 and 33: A makes the keep line the owner has just chosen advisory, and the card does not say so.**
+   - The owner chose "1 in 10 (catch more)" for part 2, which reads "A method is kept when … and the work holds up".
+   - Under A the line still judges the trial but no longer decides what is kept. The value-target card's "Kept methods stay only on their own results" would no longer hold either.
+   - "A small trial is weak evidence either way" is fair against the figures: a real halving is missed 1 to 3 times in 10 before the hold-up checks, and a useless method passes up to 1 time in 10.
+
+5. **Lines 38 to 41: one gap on the owner's time.**
+   - Under A, the card does not say whether approving the results card is itself the change to the operating model, or whether a separate model change follows for the owner to rule (R16: "lands through the model's own change process").
+   - Results cards are uncapped. That is bounded by the entry cards the owner approves, but the card does not say so.
+   - The figures 3 and "two weeks" have no source; they are rightly labelled proposals.
+
+6. **Line 30: "goes back to the screening" is not explained.** The playbook's words are "goes back to Discovery". The card does not say what it means for the method: dropped, or queued for a later entry card.
+
+7. **Plainness on a phone.**
+   - Line 5 runs to about 135 words, longer than at round 2. It carries the departure, the proposal to the model, the card's history, the owner's reason and the cost of waiting in one paragraph.
+   - Line 30 runs to about 120 words, and its last sentence (the two readings of the rule) is the hardest on the card.
+   - Line 19 is a heading with a 25-word bracket holding two figures before the table it introduces.
+   - The table itself is clear and answers the earlier "9 and 7 in 10" point.
+
+8. **Context line 45: "at commit 5995412" could not be confirmed.** I hold no command tool, and the id appears nowhere else in the records I can search. The question file itself is present and says what the line claims.
+
+9. **Line 15: "carries the trial's plan, which is then fixed" does not mention that the second look stops if the first look's hold-up checks fail.** The value-target card said so ("the second look stops and the method is dropped"). Under "Nothing is dropped by the pipeline" that result would now come to the owner; the card leaves it to inference.
+
+## Files read
+
+- /home/user/ml-critic-243/questions/P-002-trial-gates.md
+- /home/user/ml-critic-243/reviews/P-002-trial-gates/critic.md
+- /home/user/ml-critic-243/questions/P-002-value-target.md
+- /home/user/ml-critic-243/reviews/P-002-value-target/critic.md (round 3, by search)
+- /home/user/ml-critic-243/intake/P-002-owner-value-target-answers-2026-11-10.md
+- /home/user/ml-critic-243/intake/P-002-value-target-odds-2026-11-10.md
+- /home/user/ml-critic-243/questions/_TEMPLATE.md
+- /home/user/ml-critic-243/decisions/questions/P-002-groundwork-shortlist.md
+- /home/user/ml-critic-243/decisions/questions/P-002-target.md (line 17, by search)
+- /home/user/ml-critic-243/docs/projects/P-002.md (section 7)
+- /home/user/ml-critic-243/docs/LESSONS.md (LL-08, LL-76)
+- /home/user/ml-critic-243/AGENTS.md (§5)
 - /home/user/Personal-Org-Operating-Model/OPERATING_MODEL.md (§1, §2, the experiment playbook)
 - /home/user/Personal-Org-Operating-Model/docs/archive/OPERATING_MODEL_v2.5.1.md (line 33)
