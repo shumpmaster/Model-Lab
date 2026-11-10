@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Critic on questions/P-002-value-target.md, the value-target question for the screening (P-002): round 1 (FAIL), round 2 (FAIL); briefs 238 and 239. Each round a fresh session on a different model from the card's writer, started by the Chief of Staff (session_01QBwHGKirN166RhxQTHuAt9), 2026-11-10. Recorded verbatim by the Orchestrator from the helper's return; the round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's. The card the Critic read is the content of commit 451dd08 (the brief names 969bdc1, the same content before its committer was rewritten).*
+*The Critic on questions/P-002-value-target.md, the value-target question for the screening (P-002): round 1 (FAIL), round 2 (FAIL), round 3 (PASS); briefs 238, 239 and 240. Each round a fresh session on a different model from the card's writer, started by the Chief of Staff (session_01QBwHGKirN166RhxQTHuAt9), 2026-11-10. Recorded verbatim by the Orchestrator from the helper's return; the round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's. After round 3, its findings 1, 2, 3, 6 (who records the draw and works out the result), 8, 9, 10, 12 (why not being blind matters) and 13 were applied as wording; findings 4, 5, 7 and 11 were not acted on, and the rest of finding 6 and finding 12 stay open. The card the Critic read is the content of commit 451dd08 (the brief names 969bdc1, the same content before its committer was rewritten).*
 
 ## Round 1 (brief 238)
 
@@ -272,3 +272,169 @@ Self-implication flag (D-050): round 1 was a Critic check. No round 1 "holds" is
 - /home/user/ml-critic-239/decisions/questions/P-002-q017-decide.md
 - /home/user/portfolio/library/facts/Q-016-5.md
 - /home/user/Personal-Org-Operating-Model/OPERATING_MODEL.md (§1, §2, definition of ready, knowledge method, experiment playbook)
+
+## Round 3 (brief 240)
+
+The round's verdict was PASS.
+
+Card checked: /home/user/ml-critic-240/questions/P-002-value-target.md, round 3, read cold. No finding is blocking; thirteen are non-blocking. All three round 2 blocking findings are answered.
+
+I hold no command tool, so I ran nothing. I read the five scripts line by line and re-did the card's arithmetic by hand from the printed output. Nobody other than the writer has run the scripts. Every Context source was opened and says what its line claims.
+
+Self-implication flag (D-050): rounds 1 and 2 were Critic checks. No earlier "holds" is overturned. Findings 1 and 2 below are gaps that round 2 could have named and did not (its finding 5 gave "about half" for the target, at the same two starting shares).
+
+## What holds
+
+- **Scripts.**
+  - `two_look` keeps at look 1 when the Fisher value is at or under the line, goes on only when the method arm has strictly fewer touches, and tests all 60 per arm at the same line.
+  - `holdup.py` calls the test on the fault-free shares, so "worse" is the direction tested. Its 30-per-arm figures (0.42, 0.71) equal the touch test's figures for the same shares, as symmetry requires.
+  - `two_look_guard_false` is a true upper bound: it treats every trial as going on.
+  - `target_met` requires both `2*x<=y` and the Fisher line, as the card's V1 for option A is worded.
+  - Five drops: I re-did all eight rows by hand from the two-look figures with the 0.80 hold-up pass rate, and all match.
+- **Rounding.** Every figure on the card matches the output.
+
+  | Card line | Card says | Output |
+  |---|---|---|
+  | 21 | harm caught 3 to 7 in 10 (5 to 9 at 60 each way) | 0.30 to 0.71 (0.49 to 0.93) |
+  | 21 | harmless method fails 1 in 7; up to 1 in 5 with a second look | 0.145; 0.20 |
+  | 32 | 13 points | 0.127 |
+  | 34 | 4 to 5 in 10 | 0.41 to 0.54 |
+  | 46 to 47 | at most about 1 in 10; about 1 in 40 or less | 0.093 to 0.099; 0.021 to 0.024 |
+  | 68 | 8 and 4, against 4 and 2; 9 and 7, against 7 and 4; 3 to 7 in 10 go on | 0.77, 0.43, 0.41, 0.19; 0.92, 0.70, 0.71, 0.42; 0.27 to 0.71 |
+  | 90 | 1 to 4 in 10; 5 to 8 in 10 | 0.07 to 0.37; 0.47 to 0.77 |
+
+- **Mistakes per 10 (lines 51 to 56).** My sums from the fixed-line two-look output, missed plus useless kept:
+
+  | Share that really helps | Start | A: 1 in 10 | B: 1 in 40 |
+  |---|---|---|---|
+  | 1 in 10 | 1 in 2 | 0.08 + 0.84 = 0.92 | 0.23 + 0.22 = 0.45 |
+  | 1 in 10 | 3 in 10 | 0.30 + 0.89 = 1.19 | 0.57 + 0.19 = 0.76 |
+  | 5 in 10 | 1 in 2 | 0.40 + 0.47 = 0.87 | 1.15 + 0.12 = 1.27 |
+  | 5 in 10 | 3 in 10 | 1.50 + 0.50 = 2.00 | 2.85 + 0.11 = 2.96 |
+
+  The card's eight cells are these, rounded. The tie at "about 2 to 3 in 10" is right (0.32 and 0.22), and so is its direction.
+- **Q-017 sentences (lines 9 to 12, 22; Context 106 to 108).** All match /home/user/ml-critic-240/research/Q-017-memo.md.
+  - 94.2, 98.9 and 97.8% of non-merge commits, with the identity caveat.
+  - 15.4, 7.1 and 32.0% of pull requests, now "not reliably recorded".
+  - No "Revert" subject, with its caveat; fault not judged.
+  - Owner's time and conversation decisions are not in the extract.
+  - By kind: 29 + 21 + 5 = 55, 100 + 19 + 31 = 150, 90 + 8 + 26 = 124.
+  - September to 8 November, with 273 of the 447 in October.
+- **Other sources.**
+  - Both owner quotes on line 7 are exact.
+  - The rule on line 5 is quoted exactly, and its framing is now attributed to the record's note, not to the owner.
+  - "Both equally", "Yes, no data out", stay separate and "Set at Design gate" match answers 3, 6, 7 and 8.
+  - 2 of 44, the 1-in-40 line and the 30 real-use pieces match docs/PROJECT.md section 6.
+  - Q-016-5 says what line 35 says.
+  - Line 58 carries Q-013's caveats: bad ideas and faulty set-ups counted together, a web-scale figure, transfer unknown.
+  - "Killed, not tuned" and "No re-running for a better answer" are in the model as cited.
+  - The thirteen risks listed on line 114 exist, and their plans are carried.
+- **Form.** The template's fields, the Milestone line and Context are present. No default and no timeout is right for a value target. The departure leads the WHY with the rule quoted (LL-08), and the opening holds no paths or ids (S-026).
+
+## Round 2 findings: answered or not
+
+| # | Round 2 finding | Status |
+|---|---|---|
+| 1 | Part 2 recommendation misread the figures | Answered. The recommendation is gone, the table and tie point are correct, the caveats are restored, and harm is routed to the guard. No double count remains. See finding 4. |
+| 2 | Coin-toss costs and limits not stated | Answered. Pace by kind, the three repositories, per-piece switching, leakage, not blind, shuffled draws for 30 each way, and second-look timing are all on the card (lines 15, 17, 22 to 24, 68). Residuals in findings 5 to 7. |
+| 3 | Hold-up guard shown from one side | Answered (line 21). Residuals in findings 2 and 8. |
+| 4 | Two-look claim checked at two shares only | Answered (line 68: "fixed once the starting share is counted", "checked at starting shares of 1 in 2 and 3 in 10"). |
+| 5 | Target is before-and-after; odds not shown | Mostly answered (lines 32, 34). "The work holding up" is still undefined for the target's two periods (finding 3). |
+| 6 | Five drops in a row by chance | Answered (line 90); see finding 9. |
+| 7 | "Nine days of November" | Answered: "to 8 November" on lines 9 and 22. |
+| 8 | R14 not carried | Answered: usual checks, the owner's merge, "can be undone", the stop on broken work, and a model change voiding a trial. |
+| 9 | "Not recorded" stronger than the memo | Answered. |
+| 10 | "As your ruling already said" | Answered. |
+| 11 | "Not shown" credited to Q-013 | Answered: now "the plan's reading of the research, section 2". |
+| 12 | Plainness on a phone | Partly (finding 12). |
+| 13 | Plan line for the recommended set only | Answered: each option of part 1 has its line. |
+| 14 | Who builds the log, and when | Answered (line 26). |
+
+Round 1 items that round 2 left partly answered:
+
+| # | Round 1 item | Status |
+|---|---|---|
+| 3 | "Holds up" undefined as a test | Answered. |
+| 7 | Target not judgeable at its date | Answered, except the hold-up clause (finding 3). |
+| 15 | What must be built | Answered. |
+| 18 | Plan line, trial length, owner time | Answered. |
+| 20 | Plainness on a phone | Partly (finding 12). |
+
+## Judgement on the points the brief names
+
+- **Coin-toss design.** It is sound. With shuffled 30-and-30 assignment before work starts, Fisher's test is the randomisation test, so the false-keep figures do not depend on pieces being independent; only the power figures do. Its costs and limits are now stated.
+- **Two-look rule.** The code and every figure are correct as read.
+- **Part 2.** Offering no recommendation is honest. The tie point depends on a share no record gives, and the facts are shown evenly.
+- **Hold-up guard.** It is now shown from both sides.
+- **Trial length and the 12-month date.** They are consistent with the memo's counts.
+
+## Non-blocking
+
+1. **Lines 34 and 40 (part 1): "works from any starting figure" and "about 4 to 5 times in 10" hold only at the two starts computed.**
+   - The intake's round 3 computes the target at starts of 1 in 2 and 3 in 10 only. The card gives the figure without naming them, though line 68 does name them for its own figures.
+   - At lower starts the chance falls. By my hand arithmetic (exact Fisher, not run): with a starting count of 6 of 60, the lowest the stop line on line 91 lets through, the target is met only at 1 or fewer of 60 on the 1-in-10 line, and only at 0 of 60 on the 1-in-40 line. If the share truly halves, that happens about 2 times in 10 and 1 time in 20.
+   - Line 91 itself calls a low start "little room to gain".
+   - The recommendation's other reason, "it measures your involvement", is equally true of B and C.
+   - It is non-blocking because line 34 already says a miss is weak evidence and the start is unknown, C is offered for exactly this case, and line 38 keeps the part open until the first trial, after the starting count.
+
+2. **Lines 51 to 56 and 68: the keep odds and the mistakes table leave out the hold-up guard, and the card does not say so.**
+   - The intake says "the card's keep odds are before that". Line 21 says a harmless method fails the guard 1 time in 7, up to 1 in 5.
+   - So a useful halving kept "about 8 and 4 times in 10" is nearer 6 to 7 and 3 to 4. The table's "useful ones missed" is too low and its "useless ones kept" slightly too high.
+   - The tie point does not move, because the guard scales both lines alike.
+   - Line 90's five-drops figures do include the guard, so the card is not consistent with itself.
+
+3. **Lines 34 to 36: "with the work holding up" is still undefined for the target.** Line 18 defines holding up between a trial's two arms. The V1 lines apply it to two periods months apart. This is round 2 finding 5, last point, unanswered.
+
+4. **Line 62: part 2 has no recommendation, where D-019 asks for one with its confidence and what would change it.** I judge the purpose met: the line says what the choice turns on, and the question cannot default. Line 58's closing sentence, "Part 4's option A would let more untested methods in", points toward B without saying so. It is a fair fact, but it is the only pointer in the part.
+
+5. **Line 23: methods that cannot be switched piece by piece are "left to each trial's plan".** The card does not say on what line such a method is kept, or that the weaker plan comes to the owner. A before-and-after trial, which round 1 finding 2 was about, could return here.
+
+6. **Lines 15 and 17: a piece is a merged pull request, so work abandoned or never merged is unseen.**
+   - A method whose pieces are sent back and dropped pays no penalty.
+   - A piece's kind is settled by what the merged pull request changes, yet the draw is made before work starts. The memo flags 263 of 447 pull requests as touching more than one kind.
+   - The card does not say who makes and records the draw, or who computes a trial's result. D-047 asks for analysis by someone who did not run it.
+
+7. **Lines 92 and 93: "a change of AI model" is undefined, and its cost is not stated.** Trials run for weeks to months, and roles run on different models. The card does not say which change voids a trial, how often that is likely, or whether a "re-check" of a kept method is a fresh trial.
+
+8. **Line 21: the guard's examples are fault shares of 10 to 25 in 100, which the card does not say.**
+   - The only fault shares on record are far higher: 42 of 44, 14 of 19 and 48 of 80 pieces fail the first check, and those cannot double.
+   - The reopen share has no starting figure, and the card does not say so.
+   - "Up to 1 in 5" uses fault shares of 60% and 20%. With the two worst shares printed (0.118 and 0.115) it is 0.22.
+   - The two checks are assumed independent, in the intake only.
+
+9. **Line 90: the five-drops figures assume part 3's option A, under "Proposed under every option".** With one look (option B), drops in a row are more likely. By hand, at 1 in 40, a start of 3 in 10 and half of methods real, it is about 6 in 10 against the 4 shown. The low end, 0.07, is under 1 in 10.
+
+10. **Line 78 and line 5: "It goes to the operating model as a proposal at the end of the cycle" is ambiguous.** "It" could be the method or the lighter standard. The card does not say plainly whether choosing A lets one-source trials start in this project before the model's rule is changed.
+
+11. **Line 88: the target is checked again "at each screening review after that".** "Screening review" is not defined. The card does not say how a later check sits with the ruling on a miss in line 89.
+
+12. **Plainness on a phone (round 1 item 20, round 2 finding 12; still partly answered).**
+    - The table answers round 2's hardest sentence.
+    - The background before the options is now about twenty lines, against the five D-019 sets.
+    - Lines 18, 21, 68 and 94 are each well over 100 words.
+    - The owner is asked for four part rulings and eight proposals in one sitting.
+    - Line 24 says who knows which pieces carry the method, but not why that matters: agents could ask less on those pieces.
+
+13. **Lines 97 and 113: nobody but the writer has run the odds scripts, and the body does not say the figures are the writer's own.**
+    - The Critic read the code in all three rounds and ran nothing.
+    - The intake's round 3 records that the first version of the harm script printed 0.00 for every row before it was corrected.
+    - The figures I could cross-check by symmetry and by hand agree. An independent run before the Design gate would close the gap.
+    - Line 35 says who said the 90% and what it counts "are not recorded"; the ruling record says "not checked here".
+
+## Files read
+
+- /home/user/ml-critic-240/questions/P-002-value-target.md
+- /home/user/ml-critic-240/questions/_TEMPLATE.md
+- /home/user/ml-critic-240/reviews/P-002-value-target/critic.md
+- /home/user/ml-critic-240/intake/P-002-value-target-odds-2026-11-10.md
+- /home/user/ml-critic-240/research/Q-017-memo.md
+- /home/user/ml-critic-240/research/Q-013-memo.md
+- /home/user/ml-critic-240/docs/projects/P-002.md (sections 2 and 7)
+- /home/user/ml-critic-240/docs/PROJECT.md (section 6)
+- /home/user/ml-critic-240/docs/LESSONS.md (LL-08)
+- /home/user/ml-critic-240/AGENTS.md (§5)
+- /home/user/ml-critic-240/decisions/questions/P-002-target.md
+- /home/user/ml-critic-240/decisions/questions/P-002-groundwork-shortlist.md
+- /home/user/ml-critic-240/decisions/questions/P-002-q017-decide.md
+- /home/user/portfolio/library/facts/Q-016-5.md
+- /home/user/Personal-Org-Operating-Model/OPERATING_MODEL.md (§1, §2, definition of ready, stop rule, knowledge method, experiment playbook)
