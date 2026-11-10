@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Critic's neutrality check (D-055) of research question Q-017 for P-002: round 1 (FAIL), round 2 (FAIL), round 3 (FAIL; the stop rule applies), then the deciding check the owner ruled (FAIL), then the deciding check of the narrowed question (FAIL); briefs 216 to 218, 221 and 224. Each round a fresh session on a different model from the question's writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's. The review-file check refuses the verdict label anywhere but at a line's start, so the deciding check's one quotation of a verdict line inside a sentence is shown as `Verdict : PASS | FAIL …` (as in reviews/P-001-harness-trade-offs/critic.md).*
+*The Critic's neutrality check (D-055) of research question Q-017 for P-002: round 1 (FAIL), round 2 (FAIL), round 3 (FAIL; the stop rule applies), then the deciding check the owner ruled (FAIL), then the deciding check of the narrowed question (FAIL), then the deciding check of the fixed extract (PASS); briefs 216 to 218, 221, 224 and 228. After the last, its points 2A, 2B and 3a to 3e were applied as stated limits and wording. Each round a fresh session on a different model from the question's writer, started by the Chief of Staff (session_01QBwHGNSLmSrYQgS6BPjV8p), 2026-11-09. Recorded verbatim by the Orchestrator from each helper's return; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's. The review-file check refuses the verdict label anywhere but at a line's start, so the deciding check's one quotation of a verdict line inside a sentence is shown as `Verdict : PASS | FAIL …` (as in reviews/P-001-harness-trade-offs/critic.md).*
 
 ## Round 1 (brief 216)
 
@@ -340,3 +340,41 @@ Checks that passed:
 - Question 3, repeatability. Items 1, 2 and 4 can be counted from the extract alone and repeated, once finding 1 is fixed. Item 2's "other" treatment is workable, since other consists of the "Claude" local merges (a default identity) and github-actions[bot] merges. Item 4's windows are defined by commit_date and merged_at in UTC, and its file overlap runs through prs.jsonl `files`, with the unreviewed exclusion of "logs, ledgers, digests, session records" workable from labels and path names.
 
 Files read: /home/user/Model-Lab/research/Q-017.md, /home/user/Model-Lab/research/Q-017-extract/ (README.md, extract.py, and searches of all six jsonl files), /home/user/Model-Lab/research/Q-017-extract-sample.md, /home/user/Model-Lab/reviews/P-002-research-q017/critic.md, /home/user/Model-Lab/decisions/questions/P-002-q017-decide.md.
+
+## Deciding check of the fixed extract (brief 228, decisions/questions/P-002-q017-next.md)
+
+The round's verdict was PASS.
+
+Limit on my test: I had no shell and no git, only Read, Grep and Glob. I could not run extract.py or check the extract against the three repositories. My tests are of the extract against itself, plus a read of extract.py's logic. I did not re-run the Orchestrator's hand check in Q-017-extract-sample.md. I took its recorded figures as the Orchestrator's, and they agree with what I counted.
+
+1. The earlier blocking finding is fixed (blocking check: passed).
+- Pull request lines per file: Service-Desk 312, Model-Lab 85, Personal-Org-Operating-Model 50. These match the commits files' merge-pr counts (312, 85, 50) and the hand check's figures.
+- The six former phantoms (pull requests 176, 177, 178, 180, 181, 182) now appear once each in Service-Desk.prs.jsonl (lines 143 to 148). In commits.jsonl each has one "pr" value (lines 1479, 1504, 1517, 1531, 1537, 1541).
+- No "how" or "squash" field remains anywhere in the extract or in extract.py.
+- No single-parent commit is coded merge-pr or other-merge, and no two-parent commit is coded plain.
+- All 447 merge-pr commits have GitHub as committer. No other-merge commit has GitHub as committer.
+- No plain commit carries a pr number.
+- Commit file lines are 2758, 971 and 948. These equal the hand check's "extract equals default branch" figures, which I could not recheck against git.
+- No "other" file status appears, and 3,757 commit lines carry a status of added, modified or deleted.
+
+2. Coding rules and tests (non-blocking, with two gaps).
+- extract.py is sound. A pull request merge is a commit with two parents, committed by GitHub, whose subject starts "Merge pull request #n" or ends "(#n)". Every other merge is other-merge, and the pull request's own commits come from parent 1 to parent 2. This matches the README and the ruling.
+- The hand check's invariants test the changed rule directly. They cover one line per pull request number, no single-parent merge, no commit in two pull requests' lists, and every GitHub merge being a pull request line. The 15-item field sample against git is reasonable, and its "other" class is now only merges.
+- Gap A: no test covers a single-parent commit committed by GitHub whose subject names a pull request, which is what a real squash merge looks like. Such a commit would silently become plain and fall in "no merged pull request". I checked the extract: 147 plain commits are committed by GitHub (120 in Service-Desk), and none has a mentions_prs value. So no squash merge is hidden today. The test should be added, and the README should say that such commits are plain.
+- Gap B: the revert rule ("Revert" prefix) has no test, and the extract holds zero reverts. The question reports reverts separately, so this is only a stated-limit matter. A revert whose subject does not start "Revert" is not found.
+- The test "every GitHub merge is a pull request line" is partly circular, because it uses the same rule. It is still useful as a check on the count.
+
+3. Blindness, neutrality and repeatability.
+- Blind: no subject, title, message, branch or email field exists in the extract. Paths are labelled. The question gives no project name, target, direction or ruling.
+- Neutral: "Report every figure on equal terms", both ends for each count, and "does not judge whether the earlier change was at fault" are all kept.
+- Items 1, 2 and 4 can be counted from the extract alone and repeated.
+- My last check's non-blocking points that bear on the counts are still not answered in the question or README. Please state them as limits or add a sentence each:
+  a. Item 4 and mentions_prs: a "#n" in a subject may be an issue or another repository's pull request. 223 commits have mentions_prs set.
+  b. Item 3: prs.jsonl has no file status, so "first added" must go through each pull request's commits list. The question does not say which date gives the month, or how to treat a file that is added, deleted and added again.
+  c. Item 1: the 472 other-merge commits (364 in Service-Desk, 70 in Personal-Org-Operating-Model, 38 in Model-Lab) will fall in "commits that belong to no merged pull request". The question does not say whether to count the merge commits or only their content.
+  d. README: "merge-pr" is now accurate, but it should say the author of a merge-pr commit is the merging account only for GitHub's own merges.
+  e. "The decision it serves" (line 38) still says "how its checked work fares". The narrowed question has no such count, so reword or remove it.
+
+None of these blocks the count. Each makes a Researcher's figures harder to repeat unless it is stated as a limit.
+
+Files read: /home/user/Model-Lab/research/Q-017.md, /home/user/Model-Lab/research/Q-017-extract/README.md, /home/user/Model-Lab/research/Q-017-extract/extract.py, searches of the six .jsonl files in that folder, /home/user/Model-Lab/research/Q-017-extract-sample.md, /home/user/Model-Lab/reviews/P-002-research-q017/critic.md, /home/user/Model-Lab/decisions/questions/P-002-q017-next.md.
