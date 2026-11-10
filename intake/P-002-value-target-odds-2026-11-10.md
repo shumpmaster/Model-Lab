@@ -160,5 +160,108 @@ for share in (0.6,0.5,0.2,0.1):
     print(f"hold-up guard, check failed by {share:.0%} of pieces either way: method with no effect fails it {one_look(1-share,1-share,n,0.10):.3f}")
 ```
 
+## Round 3 (2026-11-10, after the Critic's round 2)
+
+Added after reviews/P-002-value-target/critic.md, round 2, findings 3, 5 and 6:
+- **The hold-up guard from both sides** (holdup.py). How often it catches a method that truly doubles a fault share, at 30 and 60 pieces per arm; and an upper bound on how often it fails a harmless method over two looks (one check, as if every trial went on to the second look). The harm test is called on the fault-free shares, so that "worse" is the direction tested. A first version called it the other way round and printed 0.00 for every row; it was corrected before use.
+- **The target** (round3.py, part 1). Part 1 option A's target is met when the latest 60 pieces' count needing the owner is at most half the starting 60's count and the fall clears the line; the figure is how often that happens when the share truly halves, and when nothing changes. The two periods are compared as two independent samples; anything else that changed between them is not modelled.
+- **Five drops in a row** (round3.py, part 2). The chance that five trials in a row end with the method dropped, under two looks at the fixed lines, with the hold-up checks passed with chance 0.80 (the two-look worst case, item 3), at two shares of methods that really help (a halving) and the rest doing nothing; trials are assumed independent.
+- The two hold-up checks are assumed independent of each other, here and in round 2.
+
+Output (python3 -I holdup.py):
+
+```
+HARM CAUGHT by one check (chance the guard fails a method that truly raises the fault share)
+ 30 per arm, fault share 10% -> 20%: caught 0.30
+ 30 per arm, fault share 15% -> 30%: caught 0.42
+ 30 per arm, fault share 25% -> 50%: caught 0.71
+ 60 per arm, fault share 10% -> 20%: caught 0.49
+ 60 per arm, fault share 15% -> 30%: caught 0.68
+ 60 per arm, fault share 25% -> 50%: caught 0.93
+HARMLESS METHOD FAILED by one check, two looks, as if every trial went on (an upper bound)
+ fault share 60%: 0.118
+ fault share 50%: 0.115
+ fault share 20%: 0.095
+ fault share 10%: 0.080
+```
+
+Output (python3 -I round3.py):
+
+```
+TARGET (part 1 A), 60 pieces each period, share truly halved
+ start 50%, line 1 in 10: met 0.53; met with no real change 0.000
+ start 50%, line 1 in 40: met 0.53; met with no real change 0.000
+ start 30%, line 1 in 10: met 0.54; met with no real change 0.012
+ start 30%, line 1 in 40: met 0.41; met with no real change 0.010
+FIVE DROPS IN A ROW, by chance
+ start 50%, line 1 in 10, 50% of methods real: a trial keeps 0.41; five drops 0.07
+ start 50%, line 1 in 10, 10% of methods real: a trial keeps 0.14; five drops 0.47
+ start 50%, line 1 in 40, 50% of methods real: a trial keeps 0.32; five drops 0.15
+ start 50%, line 1 in 40, 10% of methods real: a trial keeps 0.08; five drops 0.66
+ start 30%, line 1 in 10, 50% of methods real: a trial keeps 0.32; five drops 0.15
+ start 30%, line 1 in 10, 10% of methods real: a trial keeps 0.13; five drops 0.51
+ start 30%, line 1 in 40, 50% of methods real: a trial keeps 0.18; five drops 0.37
+ start 30%, line 1 in 40, 10% of methods real: a trial keeps 0.05; five drops 0.77
+HOLD-UP, two looks, harmless method fails one of two checks: up to 0.20
+```
+
+Script holdup.py:
+
+```python
+# Round 3: the hold-up guard from both sides. Same functions as twolook.py (twolook_lib.py).
+# The guard: one-sided Fisher at 1 in 10 in the harm direction, per check: the method arm has fewer
+# pieces free of the fault, so one_look is called on the fault-free shares.
+import sys; sys.path.insert(0,'.')
+from twolook_lib import *
+from math import comb
+print("HARM CAUGHT by one check (chance the guard fails a method that truly raises the fault share)")
+for n in (30,60):
+  for f0,f1 in ((0.10,0.20),(0.15,0.30),(0.25,0.50)):
+    print(f" {n} per arm, fault share {f0:.0%} -> {f1:.0%}: caught {one_look(1-f0,1-f1,n,0.10):.2f}")
+# Two looks: the guard is applied at 30 per arm and, if the trial goes on, again at 60 per arm.
+# Upper bound on a harmless method failing it: one check, both looks, as if every trial went on.
+def two_look_guard_false(f,n,a):
+    P=pmf(n,f); tot=0
+    for x in range(n+1):
+      for y in range(n+1):
+        w=P[x]*P[y]
+        if cdf(x,n,n,x+y)<=a: tot+=w
+        else: tot+=w*sum(P[u]*P[v] for u in range(n+1) for v in range(n+1) if cdf(x+u,2*n,2*n,x+y+u+v)<=a)
+    return tot
+print("HARMLESS METHOD FAILED by one check, two looks, as if every trial went on (an upper bound)")
+for f in (0.6,0.5,0.2,0.1):
+    print(f" fault share {f:.0%}: {two_look_guard_false(f,30,0.10):.3f}")
+```
+
+Script round3.py:
+
+```python
+# Round 3 figures. Same functions as twolook.py (twolook_lib.py).
+import sys; sys.path.insert(0,'.')
+from twolook_lib import *
+# 1. The target (part 1 A): the share needing the owner over the latest 60 pieces against the starting 60.
+#    Met when the latest count is at most half the starting count AND the fall clears the line (one-sided Fisher).
+def target_met(p0,p1,n,a):
+    P0,P1=pmf(n,p0),pmf(n,p1)
+    return sum(P1[x]*P0[y] for x in range(n+1) for y in range(n+1) if 2*x<=y and cdf(x,n,n,x+y)<=a)
+print("TARGET (part 1 A), 60 pieces each period, share truly halved")
+for p0 in (0.5,0.3):
+  for L,a in (("1 in 10",0.10),("1 in 40",0.025)):
+    print(f" start {p0:.0%}, line {L}: met {target_met(p0,p0/2,60,a):.2f}; met with no real change {target_met(p0,p0,60,a):.3f}")
+# 2. Five trials in a row end with the method dropped (two looks, the fixed lines; the hold-up checks
+#    passed by a harmless or helpful method with chance 0.80, the two-look worst case below).
+print("FIVE DROPS IN A ROW, by chance")
+H=0.80
+for p0 in (0.5,0.3):
+  for L,a in (("1 in 10",0.097),("1 in 40",0.022)):
+    real,_=two_look(p0,p0/2,30,a); null,_=two_look(p0,p0,30,a)
+    for pi in (0.5,0.1):
+      keep=H*(pi*real+(1-pi)*null)
+      print(f" start {p0:.0%}, line {L}, {pi:.0%} of methods real: a trial keeps {keep:.2f}; five drops {(1-keep)**5:.2f}")
+# 3. Hold-up checks over two looks: a harmless method fails at least one of the two checks
+#    (independent checks assumed), worst shares from holdup.py: 0.118 (60% fault) and 0.095 (20%).
+print(f"HOLD-UP, two looks, harmless method fails one of two checks: up to {1-(1-0.118)*(1-0.095):.2f}")
+```
+
 ## Routed to stage
 2 Shape (Discovery): evidence for the value-target question (Discovery-2).
