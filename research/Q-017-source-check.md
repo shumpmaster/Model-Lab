@@ -1,4 +1,4 @@
-Verdict: FAIL
+Verdict: PASS
 
 *The Source checker's check of research/Q-017-memo.md. Each round on a different model from the Researcher; recorded verbatim by the Orchestrator (session_01QBwHGNSLmSrYQgS6BPjV8p) from the helper's return, 2026-11-09; each round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
 
@@ -200,3 +200,22 @@ One sentence in the memo is wrong against the script output. Everything else hol
 1. In §3, the Service-Desk distribution of pull requests by number of question-label files first added says "one to three pull requests at each count from 5 to 22". Not every count from 5 to 22 occurs. Replace it with the counts that do, for example "one to three pull requests at each of the counts 5 to 11, 14, 15, 16, 18 and 22, none at 12, 13, 17, 19, 20 or 21". Before the "one pull request adds 75" clause, the list is 5:2, 6:3, 7:1, 8:2, 9:2, 10:1, 11:2, 14:2, 15:1, 16:1, 18:1, 22:1.
 
 Files: /tmp/q017-check3/q017.py, /tmp/q017-check3/out.txt. The memo and extract were not changed, and I filed no library entries.
+
+## Focused confirmation check (brief 237, decisions/questions/P-002-q017-memo-stop.md), 2026-11-10
+
+The round's verdict was PASS.
+
+The replaced sentence in section 3 matches the memo's own script output, and nothing else in the memo changed except the recording line's note of the edit.
+
+**Check 1: the replaced sentence against the script output**
+- I extracted the memo's script to /tmp/q017-check4/q017.py. I ran `python3 -I q017.py /home/user/Model-Lab/research/Q-017-extract` and wrote the output to /tmp/q017-check4/out.txt. It exited 0 with empty stderr.
+- The script prints, for Service-Desk, the number of pull requests by number of question-label files first added (out.txt line 51). It reads: 0:137, 1:99, 2:37, 3:8, 4:11, 5:2, 6:3, 7:1, 8:2, 9:2, 10:1, 11:2, 14:2, 15:1, 16:1, 18:1, 22:1, 75:1.
+- The new memo sentence is "none 137; one 99; two 37; three 8; four 11; then one to three pull requests at each of the counts 5 to 11, 14, 15, 16, 18 and 22 (5: 2, 6: 3, 7: 1, 8: 2, 9: 2, 10: 1, 11: 2, 14: 2, 15: 1, 16: 1, 18: 1, 22: 1), and none at 12, 13, 17, 19, 20 or 21; one pull request adds 75."
+- Every count and every number of pull requests agrees with the output. Each listed count has 1 to 3 pull requests. The counts 12, 13, 17, 19, 20 and 21 are absent from the output. This also agrees with the correction in my round 3 finding.
+
+**Check 2: nothing else changed**
+- `git diff origin/main -- research/Q-017-memo.md` shows 2 lines changed (2 insertions, 2 deletions).
+- The first is the italic recording line. It gained only a note that, as the owner ruled (decisions/questions/P-002-q017-memo-stop.md), the Orchestrator replaced one sentence in section 3 with the counts from my round 3, and that nothing else was changed. It adds no file path or figure beyond that ruling reference, and the ruling file's own text says the edit is to be noted in the recording line.
+- The second is the section 3 sentence above. The script block, tables and every other section are untouched, so the figures I confirmed in round 3 still hold.
+
+I read nothing from the barred folders, did not use the web, wrote only under /tmp/q017-check4/, and filed no library entries (a memo, not a map). I could not see my token total.

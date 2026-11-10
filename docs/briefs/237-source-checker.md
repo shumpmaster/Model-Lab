@@ -15,3 +15,6 @@ The memo: /home/user/Model-Lab/research/Q-017-memo.md. Your round 3 finding: /ho
 Check: (1) that the replaced sentence in section 3 now matches the memo's own script output for Service-Desk's pull requests by number of question-label files first added (rerun the script from the memo over /home/user/Model-Lab/research/Q-017-extract/ with python3 -I, writing only under /tmp/q017-check4/); (2) that nothing else in the memo changed except the recording line's note of the edit. Do not read docs/projects/, ideas/, sessions/chief-of-staff/, or the contents of questions/ and decisions/ other than the ruling named above; no web.
 
 Return: first line exactly `Verdict: PASS` or `Verdict: FAIL`; then what you checked and found. Report your total tokens if you can see them.
+
+## Outcome
+Verdict: PASS (research/Q-017-source-check.md, focused confirmation check)
