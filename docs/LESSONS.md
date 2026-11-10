@@ -573,4 +573,5 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Caught by:** the Critic, round 1 (reviews/P-002-trial-gates/critic.md).
 - **Cause:** the writer read the owner's words through the rule it expected the answer to keep (as in LL-05 and LL-08), instead of first offering what the owner said and then its cost.
 - **Correction proposed:** when the owner answers with their own design, the card's first option is that design as they worded it, with its departures from any rule stated and quoted from where the rule's words are; narrower options follow it. For the model, with LL-05: the question template says so.
-- **Status:** fixed here (redrafted for round 2); model change open.
+- **Recurred (2026-11-10, round 2):** the redraft put the owner's design first, but recommended a middle option as giving "your approval the last word on every result, which is what you asked for", though it could not put an unshown method into the model, the thing the owner named; and that option's review after 30 more pieces was a second test of a null result that the card neither defined nor counted (reviews/P-002-trial-gates/critic.md, round 2). A recommendation that is not the owner's design must not borrow its words.
+- **Status:** open (recurred; redrafted for round 3); model change open.
