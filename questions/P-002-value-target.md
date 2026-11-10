@@ -2,7 +2,7 @@
 
 Milestone: Discovery-2
 
-WHY: Part 4 of this card asks whether to go below a written rule of the operating model: "Every load-bearing fact cites a source someone else has opened and confirmed; two independent sources for load-bearing facts". Its option A would let a method be tried on one source. That is a lighter standard, so choosing it makes a proposal to the model, as the record of your ruling on the screening's aim noted. The rest of the card sets how success is measured, the target, the date and when we stop. That is yours alone and never defaults. Until it is set, the plan cannot say how a method is tried and kept, and the brief cannot go to you for the Design gate.
+WHY: Part 4 of this card asks whether to go below a written rule of the operating model: "Every load-bearing fact cites a source someone else has opened and confirmed; two independent sources for load-bearing facts". Its option A would let a method be tried in this project on one source, from now on. That is a lighter standard, so choosing it also sends the standard to the model as a proposal, as the record of your ruling on the screening's aim noted. The rest of the card sets how success is measured, the target, the date and when we stop. That is yours alone and never defaults. Until it is set, the plan cannot say how a method is tried and kept, and the brief cannot go to you for the Design gate.
 
 Your words: "how multi agent systems are run and optimized. For example, when anthropic says “90% of their work is performed by Claude” I want to achieve that level of agentic efficiency, trust, success in the strategy ideation and coding work from my operating model", and "Faith to me meant that we test/adopt methods that are promising rather than only those that are fully credentialed?" (your ruling on the aim).
 
@@ -18,10 +18,10 @@ Your words: "how multi agent systems are run and optimized. For example, when an
 - **Holds up**: the method's pieces do no worse, by more than chance at 1 in 10, on two checks: passing their independent check first time, and not being reopened for a fault within 30 days. A reopening is marked by the reviewer of the later change, not the piece's maker. You also see 5 of each trial's pieces at random, unlabelled; one you would not have accepted counts as reopened. A trial is judged 30 days after its last piece.
 
 **Limits of this design, under every option.**
-- **It is a coarse guard against harm.** A method that doubles how often pieces fail a check is caught only about 3 to 7 times in 10 at 30 pieces each way (5 to 9 in 10 at 60), and less often the rarer the fault. A harmless method fails it by chance about 1 time in 7 (up to 1 in 5 with a second look). The main protection stays the usual checks and your merge, which no trial skips, and the review date of every kept method. Plans pass their first check only 2 times in 44 today, so for plans that check guards little.
+- **It is a coarse guard against harm.** A method that doubles how often pieces fail a check, from 10, 15 or 25 in 100, is caught only about 3 to 7 times in 10 at 30 pieces each way (5 to 9 in 10 at 60), and less often the rarer the fault; the reopen share has no starting figure yet. A harmless method fails it by chance about 1 time in 7 (up to about 1 in 5 with a second look), taking the two checks as independent. The main protection stays the usual checks and your merge, which no trial skips, and the review date of every kept method. Plans pass their first check only 2 times in 44 today, so for plans that check guards little.
 - **Trials are slow.** In the count, which runs from September to 8 November with most of it from October, 55 pull requests touched research, 150 plans and 124 built work across the three repositories. At that pace one trial of research takes months, and of plans or built work several weeks, before any second look and the 30-day wait.
 - **Only methods that can be switched piece by piece fit.** A change to rules or to how sessions run cannot be, and a method that leaks into the "without" pieces shrinks the difference. How to try such methods is left to each trial's plan, which would say it is weaker.
-- **Not blind.** The agents and the Chief of Staff, who logs questions put in conversation by hand, know which pieces carry the method; only your 5-piece sample is unlabelled.
+- **Not blind.** The agents and the Chief of Staff, who logs questions put in conversation by hand, know which pieces carry the method; only your 5-piece sample is unlabelled. So agents could ask you less on those pieces; the hold-up checks are there to catch that. The draw is recorded in the log, and each trial's result is worked out by the Reviewer, not by whoever ran it.
 
 **What must be built.** A log of touches and reopenings, specced in Design and built by the Builder only after you approve the Design gate, with the spend ceiling. It reads records and changes nothing in the prompt engine's work. It counts a starting figure over 60 pieces before the first trial.
 
@@ -29,15 +29,15 @@ OPTIONS: in four parts, below, each ruled on its own.
 
 ## Part 1: the measure and the target
 
-The measure: the share of pieces that needed at least one touch. The starting figure is that share over the 60 pieces before the first trial, all kinds together (uncertain by about 13 points either way). At the date, it is counted again over the latest 60. The two counts are months apart, so anything else that changed in between, such as a new AI model or the prompt engine's changes, counts too; the trials, not the target, show which methods helped.
+The measure: the share of pieces that needed at least one touch. The starting figure is that share over the 60 pieces before the first trial, all kinds together (uncertain by about 13 points either way). At the date, it is counted again over the latest 60. Holding up, for the target, means the latest 60 pieces do no worse on the two checks than the starting 60, by more than chance at 1 in 10. The two counts are months apart, so anything else that changed in between, such as a new AI model or the prompt engine's changes, counts too; the trials, not the target, show which methods helped.
 
-  A. **Halve the share of work that needs you.** As it would be written: "V1: share of pieces needing at least one owner touch, over the latest 60 pieces, at most half the starting figure, the fall clearing chance at the part 2 line, with the work holding up; checked 12 months after the first trial starts". *Gain:* it measures your "efficiency, trust" as less of you per piece, from any starting figure. *Cost:* the starting figure is unknown until counted; and even if the share truly halves, the count shows it only about 4 to 5 times in 10, so a miss is weak evidence on its own.
+  A. **Halve the share of work that needs you.** As it would be written: "V1: share of pieces needing at least one owner touch, over the latest 60 pieces, at most half the starting figure, the fall clearing chance at the part 2 line, with the work holding up; checked 12 months after the first trial starts". *Gain:* it measures your "efficiency, trust" as less of you per piece, from any starting figure. *Cost:* the starting figure is unknown until counted; and even if the share truly halves, the count shows it only about 4 to 5 times in 10 at starts of 1 in 2 and 3 in 10, and less often at lower starts, so a miss is weak evidence on its own.
   B. **Nine pieces in ten need no touch.** As it would be written: "V1: at least 54 of the latest 60 pieces needed no owner touch, with the work holding up; checked 12 months after the first trial starts". *Gain:* it is the level you named. *Cost:* the 90% is your example and is not checked; who said it and what it counts are not recorded, and one informal outside estimate, graded weak, put the company-wide share of merged code at "more like 50%" (Q-016-5). If the start is already near nine in ten, the target says little; if far below, it may be out of reach.
   C. **Choose the measure now, set the number after the starting count.** As it would be written: "V1: share of pieces needing at least one owner touch, over the latest 60 pieces, target set by the owner once the starting 60 are counted; checked 12 months after the first trial starts". *Gain:* the number rests on the real starting figure. *Cost:* this part comes back to you.
 
 *Reversible:* yes, until the first trial starts; after that a change discards the starting count and is a new target.
 
-RECOMMENDATION (part 1): A, medium confidence: it measures your involvement and works from any starting figure. B if you want your own level as the target; C if you would rather see the starting figure first.
+RECOMMENDATION (part 1): A, medium confidence: it sets the target from the real starting figure without fixing a level now, though a low start makes it hard to show. B if you want your own level as the target; C if you would rather see the starting figure first.
 
 ## Part 2: how sure a trial must be before a method is kept
 
@@ -55,7 +55,7 @@ Mistakes per 10 methods tried (useful ones missed plus useless ones kept, with p
 | 5 in 10 | 1 in 2 | 0.9 | 1.3 |
 | 5 in 10 | 3 in 10 | 2.0 | 3.0 |
 
-The two tie when about 2 to 3 in 10 tried methods really help: below that B makes fewer mistakes, above it A does. No source gives that share for screened methods. In web experiments more than half of ideas fail, and in some areas 9 in 10 experiments do, counting bad ideas and faulty set-ups together (Q-013); whether that carries to screened methods is not known. Part 4's option A would let more untested methods in.
+These figures, like the keep odds in part 3, are before the hold-up checks, which fail a harmless method about 1 time in 7 to 1 in 5 and so lower every keep figure by about that much; the tie point does not move. The two tie when about 2 to 3 in 10 tried methods really help: below that B makes fewer mistakes, above it A does. No source gives that share for screened methods. In web experiments more than half of ideas fail, and in some areas 9 in 10 experiments do, counting bad ideas and faulty set-ups together (Q-013); whether that carries to screened methods is not known. Part 4's option A would let more untested methods in.
 
 *Reversible:* yes, until the first trial starts.
 
@@ -75,7 +75,7 @@ RECOMMENDATION (part 3): A, medium confidence: a fair second chance inside the r
 
 ## Part 4: what a method needs before it may be tried
 
-  A. **One source, opened and confirmed by someone else, describing it.** It is tried only once its conditions are read against ours (clear misfits are not tried) and any outside code, prompt or skill is checked before it runs, with no data out, as you ruled. It goes to the operating model as a proposal at the end of the cycle. Under part 3's A or B, keeping rests only on our own trial. *Gain:* new methods tried while new, as you asked. *Cost:* more trials of hype, each costing pieces, touches and weeks.
+  A. **One source, opened and confirmed by someone else, describing it.** It is tried only once its conditions are read against ours (clear misfits are not tried) and any outside code, prompt or skill is checked before it runs, with no data out, as you ruled. Trials on one source may start in this project; the lighter standard itself goes to the operating model as a proposal at the end of the cycle. Under part 3's A or B, keeping rests only on our own trial. *Gain:* new methods tried while new, as you asked. *Cost:* more trials of hype, each costing pieces, touches and weeks.
   B. **Two independent sources, as for any fact the work relies on.** *Gain:* fewer trials of hype; no departure from the rule. *Cost:* new methods often have one source, so they wait, against your "promising rather than only those that are fully credentialed".
 
 *Reversible:* yes.
@@ -87,14 +87,14 @@ RECOMMENDATION: A for parts 1, 3 and 4; none for part 2, as given there.
 **Proposed under every option** (proposals; your ruling makes them so):
 - **Date:** each trial is judged 30 days after its last piece; the target is checked 12 months after the first trial starts, since trials take weeks to months, and at each screening review after that. To set another date, or none, say so.
 - **Miss:** you rule whether to re-aim the screening or close it. Kept methods stay only on their own results; none is adjusted to pass.
-- **After the first five trials:** a summary comes to you, and you rule whether to go on. Five drops in a row can happen by chance even if methods help: about 1 to 4 times in 10 if half really help, and about 5 to 8 in 10 if 1 in 10 do.
+- **After the first five trials:** a summary comes to you, and you rule whether to go on. Five drops in a row can happen by chance even if methods help: with part 3's option A, about 1 to 4 times in 10 if half really help, and about 5 to 8 in 10 if 1 in 10 do; more often with one look.
 - **Stop and come back to you** if the starting count shows fewer than 6 of 60 pieces needed you (little room to gain).
 - **Stop a trial at once** if its first look fails the hold-up checks, or it breaks work you rely on. A change of AI model during a trial voids it.
 - **Every kept method:** a review date six months on and a way to remove it; a change of AI model triggers a re-check of the methods kept under the old one.
 - **Apart from the prompt engine:** one method per kind of work at a time. The hold-up checks use the prompt engine's measure, first-time pass, only as a guard. No method that could change how often work passes its first check is tried on a kind of work while the prompt engine is testing that kind or counting its 30 real-use pieces; the Design gate rules whether any trial may start before the prompt engine finishes.
 - **Your time:** touches are the measure, and each status update reports them; each trial adds 5 short reads and one result card. Spend and time ceilings are set at the Design gate, as you ruled; no trial runs before then.
 
-WHO HAS CHECKED IT: the Critic, on a different AI model from the writer (record: reviews/P-002-value-target/critic.md).
+WHO HAS CHECKED IT: the Critic, on a different AI model from the writer, passed it at round 3 (record: reviews/P-002-value-target/critic.md). The odds are the Chief of Staff's own calculations; the Critic read the code and checked them by hand, but no one else has run them, and an independent run is proposed before the Design gate.
 RISK CLASS: R3 (a value target, the owner's own ruling)   REVERSIBILITY: reversible until the first trial starts   BLAST RADIUS: how the screening's trials are run and judged, which methods are kept, and which reach the operating model and the desk
 DEFAULT: none — value targets are never delegated or defaulted   TIMEOUT: none
 
