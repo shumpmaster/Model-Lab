@@ -557,3 +557,12 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Correction:** the line was put back as it stands on main. From now on a helper's line is written once, when its report arrives, with the figures it gives.
 - **Status:** fixed.
 
+
+## 2026-11-10 — Discovery of the screening (P-002), session_01QBwHGKirN166RhxQTHuAt9
+
+### LL-75 The value-target card stated more than its records show, and quoted odds for a rule it had not worked out
+- **What happened:** the first draft of questions/P-002-value-target.md said a two-look trial rule keeps the false-keep chance at 1 in 10 without computing any two-look rule; called later changes "mostly ordinary follow-on work, not repairs" and questions "most of your involvement", which the count says it cannot show; gave option C starting figures for all pull requests, not the pieces of work the card defined; and compared each trial with the pieces done before it, a design the cited research warns against.
+- **Caught by:** the Critic, round 1 (reviews/P-002-value-target/critic.md).
+- **Cause:** the card was drafted from the figures and the design in mind, and each sentence was not read back against the record it cites; a claim about a rule was written before the rule was calculated (as in LL-26 and LL-36).
+- **Correction proposed:** before a card states what a rule does, compute that rule and record the calculation; read each sentence about the records against the memo's "cannot show" lists. For the model, with LL-46: the question template asks that every figure and every claim about a rule cite the calculation or record that shows it.
+- **Status:** fixed here (redrafted for round 2); model change open.
