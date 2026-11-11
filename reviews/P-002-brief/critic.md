@@ -1,6 +1,6 @@
 Verdict: FAIL
 
-*The Critic on P-002's brief (docs/projects/P-002.md, Part 1) before the Design gate: round 1 (FAIL), brief 246. A fresh session on a different model from the plan's writer, started by the Chief of Staff (session_01QBwHGJRsdA6DND96m5Z9xE), 2026-11-11, on the fixed copy Model-Lab@d96a853. Recorded verbatim by the Orchestrator from the helper's return; the round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
+*The Critic on P-002's brief (docs/projects/P-002.md, Part 1) before the Design gate: round 1 (FAIL), brief 246; round 2 (FAIL), brief 247. Each round a fresh session on a different model from the plan's writer, started by the Chief of Staff (session_01QBwHGJRsdA6DND96m5Z9xE), 2026-11-11, on fixed copies Model-Lab@d96a853 (round 1) and Model-Lab@6397b75 (round 2). Round 2's second-level headings are recorded one level lower, so they nest under their round. Recorded verbatim by the Orchestrator from the helper's return; the round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
 
 ## Round 1 (brief 246)
 
@@ -68,3 +68,89 @@ Other checks, no finding:
 - Section 9 "The owner is the user." agrees with the rest of the brief.
 
 Files read: /home/user/ml-fixed-245/docs/projects/P-002.md and the records named above, all under /home/user/ml-fixed-245/.
+
+## Round 2 (brief 247)
+
+The round's verdict was FAIL.
+
+Round 2 on docs/projects/P-002.md Part 1, read cold and compared with the records it cites. I ran nothing. Two round 1 findings are only partly answered (7 and 11). One new load-bearing unknown is missing (finding 1). The remaining findings are non-blocking.
+
+I could not check three things. The question files at commits 451dd08 and daf76d7 are not in this copy. The intake/P-002-owner-instruction-2026-11-11.md and docs/LESSONS.md LL-54 citations I checked only lightly. I did not read section 6's V1 line or the pre-mortem beyond agreement checks.
+
+### Round 1 findings, one by one
+
+1. Who picks leads and writes the research question: answered. Section 4 and section 8 "Screener" now give the Chief of Staff the picking and the question, and the Input reader the reading. This leaves a new non-blocking mismatch (finding 4).
+2. Guards on methods entering the operating model and on this project's own pieces: answered. Section 8 has the V2 pair and the "own pieces" pair, and the Dependencies sentence now says "Proposed for the owner to rule". Section 1 "Out" now says "designed so that" and points to the guards in section 8. Those guards are still proposals. The plan says so, so this is not a failure.
+3. Chief of Staff conditions cited to a record that does not hold them: answered. Dependencies says "as the Chief of Staff's own design". Sections 5 and 6 now cite "no trial before the gate" and answer 8 separately.
+4. Operating-model half of the desk citation: answered. "Out" cites trial-gates "How it is carried out" for the model.
+5. State of the independent odds run: answered. The M7 row says "not yet reached" and names the two failed rounds. The Reviewer record (reviews/P-002-value-target-odds/reviewer.md) agrees. Section 6 now says "up to about 0.106 at starting shares near 4 in 10 and 6 in 10", which matches the Reviewer's round 2 sweep (0.1062 maximum). The question-file commit hashes are unchecked (see "I could not check" above).
+6. "about 1 in 10": answered, in section 6 and in the section 8 "Line" term.
+7. Roles for the hand check and the outside-code check: partly answered. The extract route is now stated (Orchestrator extract, Researcher memo, Critic checks edge cases), citing P-002-q017-stop, -decide and -next. The place where outside code is checked is flagged as unset, with M10 and U4 owning it. The Researcher and Reviewer role files still sit awkwardly with these tasks (see finding 4). I count this as answered enough.
+8. Q-015 memo citation and missing Q-017 rulings: answered. Section 1 cites research/Q-015.md, which exists, says the memo is set aside, and cites P-002-research-stop-3. Section 7 lists the Q-017 rulings.
+9. Pace for the 12-month target: answered. U3's figures (124, 150, 55 over about seven weeks) match Q-017 §1: 90+8+26, 100+19+31 and 29+21+5. The memo marks "supported in part", and the plan says so. Finding 3 below adds a caveat.
+10. M8's why had no record: answered. LL-73, P-002-q017-next and Q-017 §5 are cited in "Records behind the whys". LL-73's title matches.
+11. Plainness: partly answered. Section 5 is now a list, and M10's done-when now says what the owner can see. Codes remain in prose (see finding 8).
+
+### Milestones (judgement 1)
+
+- All 14 standard lines (Discovery-1 to 8 and Design-1 to 6) are present, in form, taken on, with a plain why and no " · " inside any why.
+- M7 to M15 each have the name, done when, phase and why form. Each reads as an achievement, not a task. Names carry only the required (M#) tag.
+- M7's why holds: it cites LL-54, and the independent run is the owner's order.
+- M8's why holds, per the answer to round 1 finding 10.
+- M9's why is stronger than its record (finding 5).
+- M10, M12 and M13 whys hold against Q-012-15, Q-011-10 and Q-014-18.
+- Discovery-8's why only restates the milestone ("the owner rules the Design gate on a checked brief"). It does not say why the project needs it, but it is acceptable. Non-blocking.
+
+### Findings
+
+1. **BLOCKING. Section 7 unknowns and section 2 chain link 4. A load-bearing unknown is left out: can a method be switched on and off piece by piece?**
+   - The whole trial design rests on shuffled assignment of individual pieces to "the method or not".
+   - The Critic's earlier record (reviews/P-002-value-target/critic.md, line 209) said that a method that changes rules or session structure cannot be toggled per piece. It also said that a method which leaks to the "without" pieces shrinks the difference and reads as "not shown". The plan answers this nowhere.
+   - Section 6 only proposes "one method per kind of work at a time". R14 covers live work and model changes, not toggling.
+   - Definition of ready item 7 and the Design gate need each unknown named, with a test and a fallback.
+   - Needed: an unknown such as U5 with a test, for example a design check in M9 that each method can be applied piece by piece, and a fallback, for example only trial methods that can be switched per piece.
+
+2. **Non-blocking. Section 4, row "Reading the feeds (M12)".**
+   - The Input reader's role file gives its trigger as "A Researcher request for outside material" and its handoff as "Structured findings to the Researcher". The plan has it read feeds on a schedule and return to the Chief of Staff.
+   - Say that this is a project-specific brief for the role.
+   - The row "Starting each reading round on its schedule" names the Chief of Staff. Nothing in the plan says what actually starts a round on a schedule. Dispatch is by the Orchestrator (CLAUDE.md), and no scheduler is named.
+   - The plan never says that web searches and fetches are themselves outbound. The Input reader and Researcher hold WebSearch and WebFetch, and a query can carry project words. This pair is missing from section 8: "no data out" against reading outside text by search. State that queries and fetches carry no project data.
+
+3. **Non-blocking. Section 7 U3, "fewer than one trial needs".**
+   - The sentence follows 124, 150 and 55 and reads as if all three are short. Only research (55) is short of 60. Built (124) and plans (150) exceed 60.
+   - Q-017's by-kind table counts a pull request under every kind it touches. Single-kind pull requests are far fewer: built 1, 0, 0; plans 7, 0, 1; research 1, 0, 0.
+   - Section 8 lets a piece touch several kinds. A trial needs "pieces of one kind", and the plan does not say how a multi-kind piece is classed (M8 or M9 should).
+   - The pace is therefore an upper bound. Say so.
+
+4. **Non-blocking. Section 4, rows "Research on each lead" and "Checking outside code".**
+   - The Researcher is blind to the plan and rulings. Make sure the hand-check and lead questions arrive as questions, not as plan text.
+   - The Reviewer "never changes files". Whoever builds the sandbox for outside code is unnamed; M10 and U4 own that.
+
+5. **Non-blocking. Section 6 "How a method is tried and kept" and "Cost to the owner's time", M9's why, and the section 4 "short reads" row.**
+   - "30 pieces each way", "5 short reads per look" and "the owner's design, P-002-trial-gates.md" are not in the cited record. The decision file holds only "two looks planned per trial" and the approvals. The question files that held the sizes are removed.
+   - M9's why says "the owner ruled ... 30 pieces each way". That is stronger than its record. The odds intake (line 58) attributes these to "the card's part 3, option A".
+   - Cite the commit or intake that holds them, or mark them as the card's terms.
+
+6. **Non-blocking. Section 5 data classes.**
+   - governance/DATA-CLASSES.md is an unfilled template with different class names (Public, Internal code, Secrets, Personal, Regulated).
+   - The plan's five classes do not map onto them. "The AI service the sessions already run on" is not named.
+   - Say that the list is the project's own pending the file, and that the file's vendor row is still to be filled for T1.
+
+7. **Non-blocking. Section 6 last bullet.** It cites question files "at commit 451dd08 and daf76d7" that I could not open. Fine if recorded, but "the rest come from the two questions as filed" gives the owner nothing to check at a glance.
+
+8. **Non-blocking. Plainness on a phone.**
+   - Codes remain in prose: "pre-mortem R6, R8; M10, M12" in section 2's chain, "(M12)" in section 4, and "R12" and "Q-" tags throughout section 2.
+   - Section 8's constraint bullets are dense, with 11 pairs and many nested citations.
+   - Section 2's chain would read better if the codes were cut or kept to the end of each link.
+
+### Judgements 3 to 5
+
+- **Scope, owners, limits and terms agree with each other and with the rulings.**
+  - The route ruling matches (no new groundwork request during Discovery).
+  - The prompt engine's V2 (docs/PROJECT.md line 109) is now paired with M14 in section 8.
+  - The spend wording matches P-001-spend-ceiling, with the owner's override in place.
+  - "No data out" is kept. The owner's time ceiling is clearly for the gate. The "Proposed" list is not presented as ruled.
+- **The owners table gives each role work its role file allows**, apart from findings 2 and 4.
+- **Section 9** ("The owner is the user.") agrees with the rest of the brief.
+
+Files read: /home/user/ml-fixed-247/docs/projects/P-002.md, reviews/P-002-brief/critic.md, reviews/P-002-value-target-odds/reviewer.md, decisions/questions/P-002-value-target.md, -trial-gates.md, -route.md, -research-stop-3.md, -q017-next.md and -q017-decide.md, decisions/questions/P-001-spend-ceiling.md, research/Q-017-memo.md, docs/PROJECT.md, governance/DATA-CLASSES.md, AGENTS.md, .claude/agents/input-reader.md, reviewer.md and researcher.md, and /home/user/Personal-Org-Operating-Model/OPERATING_MODEL.md §4.
