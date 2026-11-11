@@ -21,5 +21,5 @@ BY STARTING SHARE, before the hold-up checks
   0.9  |   0.0677  0.0677         |   1.0000  1.0000  -0.0000     |   0.0066  0.0068            |   0.3800  0.3800
 
 WORST DOES-NOTHING PASS OVER EVERY SHARE ON THE GRID (0.001 to 0.999), refined by 0.0001
- (a) worst 0.1063 at 0.632; above 0.10 from 0.307 to 0.693 (246 grid shares)
+ (a) worst 0.1063 at 0.632; above 0.10 at shares from 0.307 to 0.429 and from 0.571 to 0.693 (246 grid shares)
  (b) worst 0.0982 at 0.6684; never above 0.10
