@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Reviewer's independent run of the odds behind P-002's value target (intake/P-002-value-target-odds-2026-11-10.md): round 1 (FAIL), brief 244; round 2 (FAIL), brief 245, the same helper resumed. A fresh session on a different model from the Chief of Staff's sessions that wrote the scripts, started by the Chief of Staff (session_01QBwHGJRsdA6DND96m5Z9xE), 2026-11-11, on the fixed copies Model-Lab@565aa90 (round 1) and Model-Lab@d96a853 (round 2). Recorded verbatim by the Orchestrator from the helper's return; the round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's. Its scripts and outputs were in the session's scratch folder and are not kept here; the second-way script is in the return below. The returns' second-level headings are recorded one level lower, and the last heading's full scratch path is shortened to S/second.py, so the record nests under its round.*
+*The Reviewer's independent run of the odds behind P-002's value target (intake/P-002-value-target-odds-2026-11-10.md): round 1 (FAIL), brief 244; round 2 (FAIL), brief 245; round 3 (PASS), brief 248; rounds 2 and 3 by the same helper, resumed. A fresh session on a different model from the Chief of Staff's sessions that wrote the scripts, started by the Chief of Staff (session_01QBwHGJRsdA6DND96m5Z9xE), 2026-11-11, on the fixed copies Model-Lab@565aa90 (round 1) and Model-Lab@d96a853 (round 2) and Model-Lab@6397b75 (round 3). Recorded verbatim by the Orchestrator from the helper's return; the round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's. Its scripts and outputs were in the session's scratch folder and are not kept here; the second-way script is in the return below. The returns' second-level headings are recorded one level lower, and the last heading's full scratch path is shortened to S/second.py, so the record nests under its round.*
 
 ## Round 1 (brief 244)
 
@@ -290,3 +290,36 @@ The corrections answer my round 1 findings 2 and 4, but one new claim in section
 - **Undone:** the question cards are still outside the copy. I did not run the hold-up half of V1 as a number.
 - **Needed outside my surface:** section 6 needs the range corrected, and Round 3's output needs a pointer to the Round 4 correction. I cannot edit either.
 - **Open questions:** should "about 1 in 10" stay as the plain-words figure with the true maximum given, or is the owner to see the range at all?
+
+## Round 3 (brief 248)
+
+The round's verdict was PASS.
+
+Round 3 check of /home/user/ml-fixed-247 against my outputs. Round 2's finding 1 and note 4 are both answered, and I found no unsupported figure or claim. I wrote nothing outside my scratch folder (S = /tmp/claude-0/-home-user/3632fc02-3869-5237-84a8-30f3cf85b850/scratchpad/odds-244/).
+
+1. **Round 2 finding 1 (the false-keep range): answered, non-blocking.**
+   - docs/projects/P-002.md section 6 (the "How a method is tried and kept" bullet) now reads: "overall chance stays about 1 in 10: 0.093 and 0.099 at the two starting shares computed, 1 in 2 and 3 in 10, and up to about 0.106 at starting shares near 4 in 10 and 6 in 10".
+   - My sweep (`python3 -I S/fine.py`) gives 0.0933 at a 50% start, 0.0989 at 30%, and a maximum of 0.1062 at 36% and 64%. It gives 0.1043 at 40% and 60% and over 0.10 across about 32% to 68%.
+   - The old "from 0.093 to 0.104" range is gone.
+   - The Round 4 section of the intake item says the same: 0.104 at 4 in 10 and 6 in 10, "at most about 0.106, near starts of 0.36 and 0.64", from a sweep of 2% to 98%. That is exactly what I ran. Round 4's reference to "reviewer.md, round 2" matches my round 2 report.
+
+2. **Round 2 note 4 (a pointer at the Round 3 output): answered, non-blocking.** Line 208 of the intake item now reads "*Corrected in round 4: the worst pair of shares gives 0.22, not 0.20; the line above and the script's 'worst shares' comment are kept as run.*" It sits directly under the round 3 output. A diff of the fixed copy against the original shows only this note and the Round 4 section added, so the scripts and their recorded output are unchanged. Keeping them as run, with the correction beside them, is clear.
+
+3. **Every other odds figure stated in sections 6, 7 and 8 and in Round 4: supported.**
+   - Hold-up: "1 - 0.882 x 0.885 = 0.22, about 1 in 4 or 5". This is 0.2195, and rounds fairly.
+   - Five drops with the hold-up pass at 0.78: my run moves the figures by 0.01 or less in every row and the rounded ranges do not change.
+   - Miss: "about 5 times in 10 (0.53 at 1 in 2, 0.54 at 3 in 10)". My exact figures are 0.5321 and 0.5362. "Less often once the work must also hold up, which the figure leaves out" is stated in words only. That is a fair statement and no script computes the number.
+   - Section 7 (U2) says the odds are shown at two illustrative shares, 1 in 2 and 3 in 10. That is true of the item's tables.
+   - Section 8 and the M7 line say the reviewer reproduced every line and agreed a second way. That is true, and "failed two rounds on how figures were stated" is accurate.
+   - Section 6's proposal to set the line so it stays at most 1 in 10 at every starting share, or keep it at about 1 in 10, makes no new numeric claim.
+
+4. **New claims: none unsupported.** I did not re-check the question cards, which are removed from the copy (the proposal bullet cites their commits).
+
+### Contract
+
+- **Changed:** nothing in any repository. I wrote nothing new this round, and reused S/fine.py and S/sweep.py from round 2.
+- **Why:** to confirm the round 2 corrections.
+- **Verified:** by diffing the item against the original, by reading sections 6, 7 and 8 and Round 4, and by checking each figure against the sweep, the exact second-way outputs and the round 1 re-run (all 62 recorded lines reproduced).
+- **Undone:** I did not quantify the target figure including the hold-up half of V1, and I did not re-read the removed question cards.
+- **Needed outside my surface:** none.
+- **Open questions:** none blocking. Whether to quantify the hold-up effect on the target is for the owner or the Design gate.
