@@ -598,3 +598,19 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** no one record listed which trial terms the owner ruled and which stayed proposals; the brief drew on the cards loosely; and the cards were deleted when answered and cited by commit, so the Critic had them only at round 3 (LL-57's lesson, a read-only checker needs a fixed copy of every version it must compare, applied too late). Triage flags rounds 1 and 2 for missing faults later found (D-050).
 - **Correction proposed:** when an owner ruling leaves part of a card as proposals, the decision record lists, item by item, what is ruled and what is proposed; and every checker brief that cites a deleted file hands the checker a copy of it from round 1. For the model, with LL-55: whether a brief's definition-of-ready check falls under the three-round stop rule.
 - **Status:** fixed here: the owner ruled one focused confirmation review (decisions/questions/P-002-brief-stop.md), and it passed (reviews/P-002-brief/critic.md, round 4); the model change is open.
+
+## 2026-11-11 — Design gate of the screening (P-002), session_01QBwHGJtTY3gJUPrQDDJkf5
+
+### LL-80 The Design gate question failed two Critic rounds before it passed at its third
+- **What happened:** the first draft of questions/P-002-design-gate.md recommended on the owner's own time, asked the owner to rule twenty proposals "as listed" without showing them, put the same proposals in two parts that could contradict each other, and gave the stricter two-look line as recommended with no stated cost. Round 2 found a time proposal still recommended, the Chief of Staff's own proposals not marked as such, and two proposals paraphrased under "as written". Round 3 passed (reviews/P-002-design-gate/critic.md). The gate case also needed a second version: the first drew Discovery as done and two milestone links no record holds (reviews/P-002/_design-gate-1-critic.md).
+- **Caught by:** the Critic, rounds 1 and 2; the gate Critic, case 1.
+- **Cause:** as LL-53: a card carrying a long list of terms was drafted by pointing at the list, not by putting each term on the card with its source and its gain and cost; and the time choices were grouped by topic, not by whose call they are.
+- **Correction proposed:** a card that asks the owner to rule a list shows every item on the card, marks each item's origin, keeps every choice about the owner's own time in a part with no recommendation, and gives each option a gain and a cost before the first round. For the model, with LL-53 and LL-55: the question template says so.
+- **Status:** fixed here; model change open.
+
+### LL-81 A commit mixed two owners' files after a soft reset left one staged (LL-18 recurred)
+- **What happened:** after a trial commit used to run the gate check was undone with a soft reset, the case file stayed staged, and the next commit, made as `orchestrator`, carried the Chief of Staff's gate case. The full check on a simulated merge failed it before any push; the commits were split by owner and remade.
+- **Caught by:** surface_guard diff, in the full check before the push.
+- **Cause:** a temporary commit to run a check on HEAD, then staging by directory, not by file.
+- **Correction proposed:** run a HEAD-reading check from a separate worktree, never by a temporary commit; stage by file, by lane.
+- **Status:** fixed (before push); closed for the model unless it recurs.
