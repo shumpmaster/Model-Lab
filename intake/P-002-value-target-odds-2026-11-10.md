@@ -205,6 +205,8 @@ FIVE DROPS IN A ROW, by chance
 HOLD-UP, two looks, harmless method fails one of two checks: up to 0.20
 ```
 
+*Corrected in round 4: the worst pair of shares gives 0.22, not 0.20; the line above and the script's "worst shares" comment are kept as run.*
+
 Script holdup.py:
 
 ```python
@@ -270,7 +272,7 @@ print(f"HOLD-UP, two looks, harmless method fails one of two checks: up to {1-(1
 
 The Reviewer, which did not write the scripts, re-ran every script above as written and reproduced every printed line, and checked the main figures a second way, by exact fraction arithmetic and by seeded simulation, with agreement throughout (reviews/P-002-value-target-odds/reviewer.md, round 1, findings 1 and 3). It found (same record, findings 2 and 4):
 - **The hold-up line in round3.py is mislabelled.** Its "worst shares" are 0.118 (60%) and 0.095 (20%), but the two worst printed by holdup.py are 0.118 (60%) and 0.115 (50%), which give 1 - 0.882 x 0.885 = 0.22, about 1 in 4 or 5, not "up to 0.20" (about 1 in 5). The Critic noted 0.22 at the value-target card's round 3 (reviews/P-002-value-target/critic.md, round 3); the card as put said "up to 1 in 5". The scripts above are kept as run; this line corrects the figure. With the hold-up pass at 0.78 instead of 0.80, the five-drops figures move by at most 0.01 and their rounded ranges do not change.
-- **The two-look line holds at about 1 in 10, not at most 1 in 10, at every starting share.** At a line of 0.097 at each look, a method that does nothing is kept 0.093 at a start of 1 in 2 and 0.099 at 3 in 10, as above, but 0.104 at starts of 4 in 10 and 6 in 10. The claim above was scoped to the two shares shown and is accurate; the plan's "stays at 1 in 10" is corrected to "about 1 in 10", and the trial design (M9) is proposed to set the line for every starting share or keep it as now.
+- **The two-look line holds at about 1 in 10, not at most 1 in 10, at every starting share.** At a line of 0.097 at each look, a method that does nothing is kept 0.093 at a start of 1 in 2 and 0.099 at 3 in 10, as above, but 0.104 at starts of 4 in 10 and 6 in 10, and at most about 0.106, near starts of 0.36 and 0.64, in a sweep of starting shares from 2% to 98% (reviews/P-002-value-target-odds/reviewer.md, round 2). The claim above was scoped to the two shares shown and is accurate; the plan's "stays at 1 in 10" is corrected to "about 1 in 10", and the trial design (M9) is proposed to set the line for every starting share or keep it as now.
 - **At the ruled 1 in 10 line, the target is met about 5 times in 10 when the share truly halves** (0.53 and 0.54), not "4 to 5": the 0.41 was the 1 in 40 line, which the owner did not choose. The figure counts the fall in touches only, not the hold-up half of V1.
 
 The second-way script is in the Reviewer's record.
