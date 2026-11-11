@@ -24,4 +24,4 @@ As handoff 8: the prompt engine's work untouched; no private details; checkers g
 - After a merged pull request, restart the push branch from main (`git checkout -B <branch> origin/main`) and push with `--force-with-lease`.
 
 ## Token checkpoint
-Nine helpers reported 744,115 tokens in all (sessions/chief-of-staff/session_01QBwHGN6YeYid8ERiP8HY5Z.jsonl).
+Eight helpers reported 744,115 tokens in all (sessions/chief-of-staff/session_01QBwHGN6YeYid8ERiP8HY5Z.jsonl).
