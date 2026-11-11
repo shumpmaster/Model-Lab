@@ -630,4 +630,13 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Caught by:** the Reviewer, rounds 1 and 2.
 - **Cause:** as LL-77: a summary figure was written from the printed table, not from the whole range the sentence claims; the script printed the nine shares and the extremes of one quantity, not of every quantity the text summarises.
 - **Correction proposed:** a sentence that states a range, a ceiling or a worst case states it over what the script computed for that quantity, and the script prints every such figure the text uses; read each "up to" and "from … to" against its own printed line. For the model, with LL-77: a figure-bearing plan's script prints every summary figure its text states.
-- **Status:** open; the third round is the last before the stop rule.
+- **Status:** closed 2026-11-11: round 3 passed (brief 266), after line.py was made to print every summary figure E-004 states (brief 265); one more rounding slip (0.0123 for 0.012351) was caught on the way.
+
+## 2026-11-11 — Design of the screening (P-002), session_01QBwHGJm2otqFdQxgZQ1fyx
+
+### LL-84 A read-only check wrote a bytecode file into its fixed copy: `python3 -I` ignores PYTHONDONTWRITEBYTECODE
+- **What happened:** the Reviewer on brief 266 ran the surface guard as `PYTHONDONTWRITEBYTECODE=1 python3 -I ...`, as its brief's recipe said; the guard imports a local module, so a `__pycache__` file was written into the copy it was told to leave untouched (reviews/P-002-two-look-line/reviewer.md, round 3, finding 6). It was git-ignored, so `git status` stayed clean; the orchestrator deleted it.
+- **Caught by:** the Reviewer, of itself.
+- **Cause:** `-I` implies `-E`, which ignores every `PYTHON*` variable, so the variable meant to stop bytecode had no effect.
+- **Correction proposed:** briefs for read-only checks give `python3 -I -B`, not the variable. The card check in the same session also showed the question check catching a field this session's first draft got wrong (REVERSIBILITY written with a trailing comma), unseen because only one failing check was read from the full run: read every FAIL line of check_all, not the one expected.
+- **Status:** open, until the next reviewer brief uses `-I -B`.
