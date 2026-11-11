@@ -1,6 +1,6 @@
 Verdict: PASS
 
-*The Critic's milestone-line check of M7's reworded line, brief 257, part B; a session on a different model from the writer. Recorded verbatim by the orchestrator, 2026-11-11. The six-part contract of the whole return is in reviews/P-002-design-gate-brief/critic.md, round 1. Orchestrator's confirmation asked for in finding 4: `git show --stat 9513e98` lists intake/P-002-value-target-odds-2026-11-10.md and reviews/P-002-value-target-odds/reviewer.md, so pull request #93 holds M7's work.*
+*The Critic's milestone-line check of M7's reworded line, brief 257, part B; a session on a different model from the writer. Recorded verbatim by the orchestrator, 2026-11-11. The six-part contract of the whole return is in reviews/P-002-design-gate-brief/critic.md, round 1. Orchestrator's confirmation asked for in finding 4: `git show --stat 9513e98` lists intake/P-002-value-target-odds-2026-11-10.md and reviews/P-002-value-target-odds/reviewer.md, so pull request #93 holds M7's work. In round 2, the words "Verdict: PASS" quoted mid-line are written "[its verdict line] PASS", the one change from verbatim, because the review lint reads a verdict only at the start of a line.*
 
 ## Round 1
 
@@ -41,7 +41,7 @@ Findings:
    - reviews/93/reviewer.md, finding 1, task 2, records the odds re-run in the PR: reviews/P-002-value-target-odds/reviewer.md rounds 1 to 3 (FAIL, FAIL, PASS) and the intake item's round 4 section.
    - That record names #93's range as 57f05d3..8af03d2, merged by 9513e98. The owner's intake item gives the same range and merge commit.
    - This settles the point my round 1 left open (reviews/P-002-m7-line/critic.md, finding 4). I read the Reviewer's file listing and have not run git myself.
-5. Not blocking. #93 was reviewed and passed. reviews/93/reviewer.md says Verdict: PASS, was made after the merge at the owner's instruction, and holds no blocking finding. Its two non-blocking findings (the committer field, and local paths in the records) do not touch the line. It did not judge the brief's content, as instructed. That is fine for a sprint link.
+5. Not blocking. #93 was reviewed and passed. reviews/93/reviewer.md says [its verdict line] PASS, was made after the merge at the owner's instruction, and holds no blocking finding. Its two non-blocking findings (the committer field, and local paths in the records) do not touch the line. It did not judge the brief's content, as instructed. That is fine for a sprint link.
 6. Not blocking, for the record. The owner's ruling (P-002-design-gate.md, Part 10 and line 26) also asks for ` · reached: 2026-11-11`. This line leaves it out on purpose, per LL-82 (open). It must be added later by a commit with an `Owner-Ruling:` trailer. Nothing here claims M7 reached.
 
 Contract:
