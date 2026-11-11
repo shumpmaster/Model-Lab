@@ -10,7 +10,7 @@ Every term of how a method is tried and kept is listed once below, marked either
 
 - **Ruled**: in the words of the owner's answer, in the ruling line of its record, or in the text of the option the owner chose, which that record says was ruled.
 - **Ruled, confirm**: in the text the owner answered (a card's words, its "under every option" lines or its limits), but not in the owner's words, the ruling line, or the record's account of what was ruled. The brief treats it as ruled; the gate asks the owner to confirm it.
-  One exception: the stop after a failed first look (P6) is in the trial-gates card's "under every option" lines but in the value-target card's proposals; it is marked proposed, the stricter of the two (the first difference, below).
+  Three exceptions, each marked proposed, the stricter reading, because a card also lists it under its proposals: the stop after a failed first look (P6) is in the trial-gates card's "under every option" lines (the first difference, below); and the 30 days before a trial is judged (P1) and the five unlabelled pieces (P14) are in the value-target card's "Holds up" words (the second difference, below).
 - **Proposed, card**: on a card under "Proposed under every option ... (proposals; your ruling makes them so)", which the value-target record says are "not yet ruled one by one" and go to the Design gate.
 - **Proposed, Chief of Staff**: on neither card; the Chief of Staff's own design.
 
@@ -21,11 +21,15 @@ Every term of how a method is tried and kept is listed once below, marked either
 - The owner's earlier answers: decisions/questions/P-002-groundwork-shortlist.md (**shortlist record**).
 - How the session put each card, in the owner's question tool: intake/P-002-owner-value-target-answers-2026-11-10.md and intake/P-002-owner-trial-gates-answer-2026-11-11.md. These hold the owner's words and the short form the tool showed, not the cards' full proposals lists, which only the two card files hold.
 
+## Set aside
+
+Part 3 of the value-target card (what happens to a trial that ends "not shown") is not in this list: the owner answered it with their own design, which the trial-gates card replaced (VT record, part 3). Its sentence that the two-look line is "fixed once the starting share is counted" is carried in the gate question with P18; its note that the held-up checks use the prompt engine's measure only as a guard is carried by P12.
+
 ## Ruled
 
 | # | Term | Mark | Where |
 |---|---|---|---|
-| T1 | A **piece** is a merged pull request, in any of the three repositories, that changes built work, a plan or research; one that only files or answers a question, or only adds records, is not a piece | Ruled | VT card, "Words used below", which part 1's option A uses; VT record, ruling line ("pieces of work") |
+| T1 | A **piece** is a merged pull request, in any of the three repositories, that changes built work, a plan or research; one that only files or answers a question, or only adds records, is not a piece | Ruled | VT card, "Words used below", which part 1's option A uses; VT record, ruling line ("pieces of work"); marked ruled, not to confirm, because the ruled target (T3, T4) is written in these words, unlike T23 to T26 |
 | T2 | A **touch** is a time the owner stepped in on a piece before it merged: a question about it, a fix the owner made, or a send-back; merging is not a touch | Ruled | As T1 |
 | T3 | The measure: the share of pieces needing at least one touch before merging | Ruled | VT record, part 1, "Halve share needing you (Recommended)"; VT card, part 1, option A |
 | T4 | The target: over the latest 60 pieces, at most half the starting figure counted over the 60 pieces before the first trial, the fall clearing chance at 1 in 10, with the work holding up | Ruled | VT record, parts 1 and 2; VT card, part 1, option A's line |
@@ -92,9 +96,10 @@ The brief's last bullet of section 6 lists P1, P4 to P12 and P14 to P16 (with th
 1. **Stopping after a failed first look (P6).** The TG card puts it under "Under every option", which option A carries, marked "Added by the Chief of Staff"; the VT card puts it in its proposals. The brief lists it as proposed. The gate asks the owner to rule it with the other proposals.
 2. **The owner's short reads (P14).** The VT card puts 5 unlabelled pieces per trial inside its definition of "holds up", and 5 short reads per trial in its proposals; the TG card proposes 5 per look, which is 10 for a trial that takes its second look. Both are proposals at most, as Triage found (triage/P-002-brief-round-3.md, section 4). The gate asks the owner which, if either.
 
-## Two figures on the cards since corrected
+## Three claims on the cards since found too strong
 
-The cards' figures were worked out by the Chief of Staff; the independent run corrected two of them in the brief and the odds record, not on the cards (reviews/P-002-value-target-odds/reviewer.md, round 1, findings 2 and 4):
+The cards' figures were worked out by the Chief of Staff. The independent run found three of them stated too strongly in the brief and the odds record, and the Chief of Staff corrected them there, not on the cards (reviews/P-002-value-target-odds/reviewer.md, round 1, findings 2 and 4, and its sweep). The Reviewer did not read the cards; their wording below is read from the card files:
 1. The value-target card says a true halving shows on the count "about 4 to 5 times in 10"; at the 1 in 10 line the owner chose, it is about 5 in 10 (0.53 and 0.54).
-2. Both cards say the held-up checks turn away a harmless method "up to 1 in 5" with two looks; the worst pair of starting shares gives 0.22.
+2. Both cards say the held-up checks turn away a harmless method "up to 1 in 5" with two looks; at the worst pair of assumed fault shares of the two checks (60% and 50%, within an assumed range of 10% to 60%), and taking the checks as independent, it is 0.22.
+3. Both cards say the second look's stricter line means a useless method "passes no more often"; across starting shares it reaches about 0.106 (T16, P18).
 
