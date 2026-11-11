@@ -1,6 +1,6 @@
 # E-004, the line at two looks (P18): both versions the owner's ruling left open
 # (decisions/questions/P-002-design-gate.md, Part 7, C), computed for a card of the owner's own.
-# Run: python3 -I experiments/E-004/line.py   (reads nothing; needs numpy; about a minute)
+# Run: python3 -I experiments/E-004/line.py   (reads nothing; needs numpy; about 25 seconds)
 #
 # The trial, as registered in experiments/E-004.md: each new piece of one kind is drawn to "with the
 # method" or "without"; look 1 at 30 pieces each way; if the method is not passed there and its pieces
@@ -161,6 +161,13 @@ print()
 print("WORST DOES-NOTHING PASS OVER EVERY SHARE ON THE GRID (0.001 to 0.999), refined by 0.0001")
 for name, R, line in (("(a)", Ra, 0.097), ("(b)", Rb, b_low)):
     over = [p for p in GRID if passes(*R, p, p)[0] > 0.10]
-    span = f"above 0.10 from {min(over)} to {max(over)} ({len(over)} grid shares)" if over else "never above 0.10"
+    bands = []                             # the shares above 0.10, as runs of neighbouring grid shares
+    for p in over:
+        if bands and round(p * 1000) == round(bands[-1][1] * 1000) + 1:
+            bands[-1][1] = p
+        else:
+            bands.append([p, p])
+    span = ("above 0.10 at shares " + " and ".join(f"from {a} to {b}" for a, b in bands)
+            + f" ({len(over)} grid shares)") if over else "never above 0.10"
     w, at = worst_null_refined(line)
     print(f" {name} worst {w:.4f} at {at}; {span}")
