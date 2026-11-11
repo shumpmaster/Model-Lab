@@ -1,6 +1,6 @@
 Verdict: FAIL
 
-*The Reviewer's independent run of the line at two looks (P-002, P18), both versions, brief 261, at commit e9f1f2f; a session on a different model from the script's writer, the Definer. Recorded verbatim by the orchestrator, 2026-11-11.*
+*The Reviewer's independent run of the line at two looks (P-002, P18), both versions, brief 261, at commit e9f1f2f; a session on a different model from the script's writer, the Definer. Recorded verbatim by the orchestrator, 2026-11-11. Round 1 FAIL (brief 261), round 2 FAIL (brief 264).*
 
 ## Round 1 (commit e9f1f2f)
 
@@ -119,3 +119,111 @@ The "1.0000" entries are 0.99995, rounded.
 1. Should the card show the second-look chance for both lines, since it is a cost to the owner that differs between them?
 2. Should line.py's print line be reworded and its output re-recorded, or is fixing E-004's wording alone enough, leaving the output as run?
 3. "At every starting share" is read as a 0.0001 grid (A7). My check bounds the gap between grid points at 0.000116 against a margin of 0.0018, so I treat it as settled. Does the owner's card need to say so?
+
+## Round 2 (commit ee6ebc3)
+
+Verdict: FAIL
+
+Round 2, brief 264, fixed copy /home/user/ml-fixed-264 at ee6ebc3. Every changed figure in E-004 and S-002 is correct by my own sums, and line.py reproduces its recorded output exactly. The FAIL rests on one small point of fairness (finding 1): the extra second looks under (b) are stated as a ceiling ("at most", "up to") taken over nine shares only, and the true ceiling over all shares is higher and sits between two of the nine. This is a judgement call; the sentences are true as worded. I recommend neither line.
+
+Nothing was written in the copy (`git status --short | wc -l` gives 0; `find . -name __pycache__ | wc -l` gives 0).
+
+## Part 1. Round 1 findings against 9d8710b
+
+| Round 1 finding | Answered? | Evidence |
+|---|---|---|
+| 1 (blocking): "(a) above 0.10 from 0.307 to 0.693" | Yes | E-004.md:122 now gives two bands, "about 0.31 to 0.43 and about 0.57 to 0.69", and says 0.0933 at 1 in 2 lies between. My sweep: bands `[[0.3068, 0.4293], [0.5707, 0.6932]]`. line.py's print line is fixed too: "from 0.307 to 0.429 and from 0.571 to 0.693 (246 grid shares)". |
+| 2: worst cases named at one share only | Yes | E-004 now names 0.368 and 0.632; 0.3316 and 0.6684; 0.343 and 0.657. All confirmed (see Verified 3). |
+| 3: second-look chance missing | Partly | The four lists of nine are added to E-004.md:124 and are all correct. The summary of the gap is where finding 1 below sits. |
+| 4: assumptions pointed to, not stated | Yes | E-004.md:125 states A1, A3, A5, A6 in plain words. Each matches the script's text. It also says what has not been worked out. S-002.md:87 now says "four of the script's eight". |
+| 5: small points | Yes | Header now says "about 25 seconds" (my run: 22.3 s). (a)'s range 0.09616 up to 0.09725 is given in E-004 and S-002; my exact fractions give 0.09615844 and 0.09725489. The earlier review's sentence is a review record, rightly left alone. |
+
+## Findings
+
+**1. Blocking, small. The extra second looks under (b) are given as a ceiling over nine shares, and the real ceiling is higher.**
+- Where: /home/user/ml-fixed-264/experiments/E-004.md:124, "So at these nine shares (b) takes the second look as often as (a) or more often: for a method that does nothing by at most 0.0123 ..., and for a true halving by at most 0.0315". And /home/user/ml-fixed-264/specs/S-002.md:10, "takes the second look, with its 60 more pieces, up to about 3 in 100 more often at the nine starting shares worked out".
+- The Definer's scratch figures are right. Over every share from 0.0001 to 0.9999 by 0.0001:
+  - True halving: largest gap 0.0367, flat from about 0.547 to 0.549 (0.2652 against 0.2285 at 0.548).
+  - Does nothing: largest gap 0.0131, at about 0.427 and at its mirror, about 0.573 (0.3964 against 0.3833). The Definer named 0.573 only.
+  - The gap is never negative at any share. So "as often as (a) or more often" holds everywhere, not only at the nine.
+- Command: `PYTHONDONTWRITEBYTECODE=1 python3 -I /tmp/claude-0/-home-user/050cc2ca-c3a4-5015-8eb5-9c67e3cf5108/scratchpad/rv264/chk.py`
+- Output:
+  - `2nd look (b)-(a), does nothing: max 0.01311 at [0.4264 ... 0.4269, 0.5731 ... 0.5736]; min 0.000000`
+  - `2nd look (b)-(a), halving: max 0.03667 at [0.5473 ... 0.549]; min 0.000000`
+  - `shares with halving gap > 0.0315: (0.5013, 0.5996, 984)`
+  - `shares with halving gap > 0.035: [(0.5219, 0.5757)]`
+  - `shares with null gap > 0.0123: [(0.3992, 0.4612), (0.5388, 0.6008)]`
+- Why it is not fair as it stands:
+  - The nine shares sit at the two edges of the hump. At almost every share between 1 in 2 and 6 in 10 the halving gap is larger than the "at most 0.0315" stated.
+  - In S-002.md:10 the two neighbouring figures ("up to about 0.106", "up to about 1 in 100 less often") are ceilings over all shares. The third "up to" is not, and the owner reads the three together. The true figure rounds to about 4 in 100, not 3.
+  - The tilt is toward (b): its cost looks smaller than its worst. Round 1 failed a wording that made (a) look worse than it is. The same standard applies here, in the text the owner rules from.
+  - The wording is honest about its limit ("at these nine shares"), which is why this is small. It is not false.
+- Fair wording across all shares, for E-004: "At every starting share (b) takes the second look as often as (a) or more often: for a method that does nothing by at most about 0.013 (near starting shares of 0.43 and 0.57), and for a true halving by at most about 0.037 (near 0.55; 0.2652 against 0.2285). At the nine shares listed the largest gaps are 0.0123 and 0.0314."
+- For S-002: "takes the second look, with its 60 more pieces, up to about 4 in 100 more often".
+- These figures are not in line-output.txt. E-004 says its figures come from line.py and its output. So the fix needs line.py to print the two ceilings and their shares, with the output re-recorded and run again by someone other than the Definer.
+
+**2. Not blocking. "at most 0.0315" is 0.0314.**
+- The unrounded figures at 6 in 10 are 0.222169 and 0.190730; the gap is 0.03144. At 1 in 2: 0.300552 and 0.269315; gap 0.03124.
+- 0.0315 is the difference of the two rounded figures. The sentence also sets the 1 in 2 pair (gap 0.0312) beside "at most 0.0315" as if equal.
+- Output: `0.6 0.190730 0.222169`, `0.5 0.269315 0.300552`.
+
+**3. Not blocking. Three statements in E-004 are true but are not in line-output.txt.**
+- E-004.md:121 says the versions come "from line.py and its output".
+- Not printed by line.py: (a)'s range of lines (0.09616 up to 0.09725); the mirror shares 0.368, 0.3316 and 0.657; the lower band edge figures "about 0.31 to 0.43" are printed, so those are fine.
+- All three are correct by my sums (Verified 3). The mirrors follow from swapping the two outcomes. If line.py is touched for finding 1, it could print these as well.
+
+**4. No finding. Every other changed sentence checks out.**
+- E-004.md:122 (a): nine does-nothing figures, nine halving figures, 0.1063 at 0.368 and 0.632, the two bands, "not ... outside them". Correct.
+- E-004.md:123 (b): nine and nine figures, 0.0982 at 0.3316 and 0.6684, next line 0.09359 reaching 0.1009 at 0.343 and 0.657, "0.0000 to 0.0097 less often". Correct (my worst gap: -0.00970 at 0.2984; never positive).
+- E-004.md:124: all 36 second-look figures correct. "0.0123 (at 4 in 10 and 6 in 10)" correct (0.01235). "60 more pieces, a second wait of 30 days and 5 more short reads" matches E-004's steps and docs/projects/P-002.md:187.
+- E-004.md:125: A1, A3, A5, A6 match the script's header. The grouping of A2, A4, A7, A8 is right.
+- S-002.md:87: both ranges, the two bands, and the list of what E-004 holds are correct.
+- Neither file recommends a line (S-002.md:10 "This plan does not choose"; S-002.md:196; E-004.md:10).
+- line.py's change is print-only: the band grouping and the header's run time. The diff of 9d8710b touches no computation.
+
+**5. The v2.5.1 section 12 reviewer checklist, item by item.**
+1. Mechanism, not just passing tests: yes. No hard-coded output; line.py's figures match an independent exact computation.
+2. Test-file changes: none in 9d8710b.
+3. Likeliest failures: a wrong figure reaching the owner's card (covered by this run); a peak hiding between listed shares (this is finding 1); a peak hiding between grid points (covered in round 1, gap at most 0.000116).
+4. New dependencies, permissions, network calls: none. line.py still imports only numpy and math.comb.
+5. Active rulings: none violated that I found. No line recommended.
+6. Redesign: not applicable.
+7. Surface: `python3 governance/checks/surface_guard.py diff --range 9d8710b^..9d8710b --branch build/definer/p002-two-look-wording` gives `OK: 1 commit(s) ... checked (0 merge(s) skipped, 0 exempt, 0 human)`. Author `definer <definer@agents.invalid>`, trailers `Agent-Session: session_01QBwHGN6YeYid8ERiP8HY5Z/definer-263` and `Spec: S-002`.
+- PR body: none was in my manifest, so the "What this means for you" rule had nothing to apply to. I could not check it. See open question 3.
+- Join-up section: not applicable; no screens or views.
+
+## Six-part contract
+
+**Changed (by file).** Nothing in any repository. Scratch only, under /tmp/claude-0/-home-user/050cc2ca-c3a4-5015-8eb5-9c67e3cf5108/scratchpad/rv264/: chk.py, chk.out, run2.txt.
+
+**Why.** Brief 264: round 2 of the independent run, after the Definer's commit 9d8710b.
+
+**Verified (command and output).**
+1. Re-run. `PYTHONDONTWRITEBYTECODE=1 python3 -I experiments/E-004/line.py`, output saved to scratch, then `diff` against experiments/E-004/line-output.txt: `IDENTICAL`, in 22.3 s.
+2. Scope of the change. `git diff 9d8710b^ 9d8710b --stat`: E-004.md, line-output.txt, line.py, S-002.md, 17 insertions and 8 deletions. `git diff 9d8710b ee6ebc3 --stat`: only docs/briefs/263-definer.md.
+3. Own sums (chk.py, written fresh this round). Fisher p-values by whole-number counts compared as exact fractions; the pass regions built from critical counts, not from line.py's tables; every share from 0.0001 to 0.9999. Output:
+   - `range (a): 0.096158 up to 0.097255` (exactly 0.09615844 and 0.09725489); `range (b): 0.092274 up to 0.093594`
+   - All nine rows of does-nothing passes, halving passes and both second-look columns equal line-output.txt to four places.
+   - `(a) worst null [(0.10634, 0.632), (0.10634, 0.368) ...] bands [[0.3068, 0.4293], [0.5707, 0.6932]]`
+   - `(b) worst null [(0.09818, 0.3316), (0.09818, 0.6684) ...] bands []`
+   - `next line worst null [(0.10086, 0.3427), (0.10086, 0.6573) ...] at .343 0.10086 at .657 0.10086`
+   - `halving pass (b)-(a): min -0.00970 at 0.2984, max 0.00000`
+   - Second-look gaps: as quoted under finding 1.
+   - `at 0.548 ... halving (a)(b) 0.2285 0.2652 diff 0.03667`; `at 0.573 null (a)(b) 0.3833 0.3964 diff 0.01311`; `at 0.427 null (a)(b) 0.3833 0.3964 diff 0.01311`
+4. Surface guard: OK, as in finding 5.
+
+**Undone.**
+- No seeded simulation this round. Round 1's simulation covered the pass figures. The second-look figures rest on my exact sums and line.py agreeing; they need only look 1's counts, so the sum is simple.
+- The second-look ceilings are on a 0.0001 grid. Both peaks are flat across several grid points, so I treat them as settled to four places.
+- I did not check docs/projects/P-002.md or any card for the second-look wording; none states it yet.
+- I did not test A1 or A6 failing, as in round 1.
+
+**Needed outside my surface.**
+- The Definer: state the second-look gap across all shares in E-004.md:124 and S-002.md:10 (finding 1); have line.py print the two ceilings and their shares and re-record the output; correct 0.0315 to 0.0314 if the nine-share figure is kept (finding 2); optionally print (a)'s range and the mirror shares (finding 3).
+- The Chief of Staff, for the card: use "up to about 4 in 100 more often for a true halving, about 1 in 100 for a method that does nothing", not the nine-share figures.
+- A further independent run of line.py's new output lines, if they are added.
+
+**Open questions.**
+1. Is finding 1 blocking in the orchestrator's eyes? The sentences are true as qualified. I rated it blocking because the owner will read "up to" as a ceiling and the neighbouring figures are ceilings over all shares.
+2. If the ceilings go into line.py, should it also print the share ranges where the gap exceeds the nine-share figures (halving: 0.501 to 0.600)?
+3. My standing instructions name docs/archive/OPERATING_MODEL_v2.5.1.md section 12. That file is not in this copy; I read it at /home/user/Personal-Org-Operating-Model/docs/archive/OPERATING_MODEL_v2.5.1.md. They also make a missing "What this means for you" opening in a PR body a FAIL. No PR body was given to me. If one exists for this work, it still needs that check.
