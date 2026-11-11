@@ -1,6 +1,6 @@
 Verdict: FAIL
 
-*The Critic on P-002's brief (docs/projects/P-002.md, Part 1) before the Design gate: round 1 (FAIL), brief 246; round 2 (FAIL), brief 247. Each round a fresh session on a different model from the plan's writer, started by the Chief of Staff (session_01QBwHGJRsdA6DND96m5Z9xE), 2026-11-11, on fixed copies Model-Lab@d96a853 (round 1) and Model-Lab@6397b75 (round 2). Round 2's second-level headings are recorded one level lower, so they nest under their round. Recorded verbatim by the Orchestrator from the helper's return; the round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
+*The Critic on P-002's brief (docs/projects/P-002.md, Part 1) before the Design gate: round 1 (FAIL), brief 246; round 2 (FAIL), brief 247; round 3 (FAIL), brief 249, the last before the stop rule. Each round a fresh session on a different model from the plan's writer, started by the Chief of Staff (session_01QBwHGJRsdA6DND96m5Z9xE), 2026-11-11, on fixed copies Model-Lab@d96a853 (round 1) and Model-Lab@6397b75 (round 2) and Model-Lab@0d37028 (round 3). Rounds 2 and 3's second-level headings are recorded one level lower, so they nest under their round. Recorded verbatim by the Orchestrator from the helper's return; the round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
 
 ## Round 1 (brief 246)
 
@@ -154,3 +154,79 @@ I could not check three things. The question files at commits 451dd08 and daf76d
 - **Section 9** ("The owner is the user.") agrees with the rest of the brief.
 
 Files read: /home/user/ml-fixed-247/docs/projects/P-002.md, reviews/P-002-brief/critic.md, reviews/P-002-value-target-odds/reviewer.md, decisions/questions/P-002-value-target.md, -trial-gates.md, -route.md, -research-stop-3.md, -q017-next.md and -q017-decide.md, decisions/questions/P-001-spend-ceiling.md, research/Q-017-memo.md, docs/PROJECT.md, governance/DATA-CLASSES.md, AGENTS.md, .claude/agents/input-reader.md, reviewer.md and researcher.md, and /home/user/Personal-Org-Operating-Model/OPERATING_MODEL.md §4.
+
+## Round 3 (brief 249)
+
+The round's verdict was FAIL.
+
+One blocking finding, on section 6's last bullet and the lines that rest on it. Everything else is non-blocking. I ran nothing. I did not read docs/handoff, docs/briefs or sessions. I could not open git history, so I checked commits 964da47 and 3ae1268 only through the two card files you gave me.
+
+### Round 2 findings, one by one
+
+- **R2-1 (U5, a method must be switchable piece by piece):** answered. U5 has a test and a fallback, and link 4 points to it. Its cite, reviews/P-002-value-target/critic.md round 2 blocking finding 2 (line 209), says what U5 claims.
+- **R2-2 (Input reader brief, no scheduler, web searches sent out):** answered.
+  - Section 4 says "a brief written for this project" and "No scheduler exists yet".
+  - The new section 8 pair on searches and fetches is present.
+  - The Input reader's role file still lists a Researcher request as its trigger and the Researcher as its handoff. The plan says so openly.
+- **R2-3 (U3 pace):** answered, with a residual (finding 5 below).
+- **R2-4 (Researcher blind to the plan; who builds the sandbox):** answered. The Builder sets up the place, the Reviewer checks, and M10 and U4 own what and where. The Researcher gets only a neutral question.
+- **R2-5 (sizes cited to a record that does not hold them):** only partly answered.
+  - The plan now cites the cards by commit, and M9's why is softened. I read both cards.
+  - Both cards hold 30 pieces each way and the second look of 30 more each way. They also hold the one-in-10 line and the 5 short reads.
+  - The 5 short reads and the "at most 3 waiting" and "two weeks" terms sit in the cards' lists marked "Proposed … your ruling makes them so". See finding 1.
+- **R2-6 (DATA-CLASSES):** answered. Section 5 says the list is the project's own until the blank file is filled, and that changing the file is put to the owner separately.
+- **R2-7 (hashes):** partly answered. See finding 2.
+- **R2-8 (codes in prose):** answered by the option I allowed. Codes now sit at the end of each link in section 2's chain. Section 8 is still dense but readable.
+- **Discovery-8's why:** improved and now holds.
+- **Round 1 findings 1 to 11:** all answered. Nothing was left partly answered.
+
+### Findings
+
+1. **BLOCKING. Section 6 last bullet, section 4 "short reads" row, section 6 "Cost to the owner's time", section 3 M9 why.**
+   - The last bullet says "Each of the others was proposed on one of the two cards". That is not true of two items in its list.
+     - "No method entering the operating model while the prompt engine counts the kind it changes" is on neither card. It comes from the Critic's round 1 finding and section 8.
+     - The two-look line "at most 1 in 10 at every starting share, or kept at about 1 in 10" comes from the odds intake round 4, not a card. The bullet itself cites the intake for it.
+   - The 5 short reads at each look are treated as settled. Section 4 calls them "a term of the card the owner answered", and section 6 adds them to the owner's cost. But the trial-gates card's "Proposed under every option, for your time" list holds them: "Two cards per trial …, and 5 short reads per look … (proposals; your ruling makes them so)".
+   - decisions/questions/P-002-value-target.md says the other proposals are "not yet ruled one by one".
+   - The 5 short reads also appear in the value-target card's "Words" section, so the position is ambiguous. But the plan lists the 3-card cap and the two-week limit as proposed and leaves the 5 reads off the same list, presenting them as ruled.
+   - Under your standard, presenting a gate item as ruled, or leaving one out, is a failure.
+   - The owner will set the time ceiling at the gate on a cost the plan states as given.
+   - Needed: add the 5 short reads to the proposed list, or show where the owner ruled them. Say which listed items are on a card and which are the Chief of Staff's own.
+
+2. **Non-blocking. Section 6 last bullet, "both files were removed when the owner answered, decisions/questions/P-002-value-target.md, 'What was put'".**
+   - Neither decision record says removed. Value-target's "What was put" points to intake/P-002-owner-value-target-answers-2026-11-10.md for the cards as put in the session. Trial-gates points to intake/P-002-owner-trial-gates-answer-2026-11-11.md.
+   - The record of the cards as put is the intake files. The commits are a second route, and the trial-gates card itself names a different value-target commit, 5995412 ("head of PR #90").
+   - Cite the intake files, and drop or source "removed".
+
+3. **Non-blocking. Section 4, row "Reading the feeds", and section 5 "Outside text … read only by the Input reader".**
+   - The Researcher (tools include WebSearch and WebFetch) and the Source checker also open outside sources for "Research on each lead".
+   - The plan never says whether those two read outside text directly or only through the Input reader. This sits uneasily with "the one role that reads outside text".
+   - Say how outside text reaches them, or scope the sentence to the feeds.
+
+4. **Non-blocking. Section 3, M9 "done when … is written in a registered experiment before any piece is assigned".**
+   - It reads close to a document-writing task, which is the problem round 2 fixed in M10.
+   - Consider "the owner can see the trial set down: …".
+   - M8's "written as rules" has the same flavour but also names applied results, so it holds.
+   - Every other milestone line is in form, reads as an achievement, has a plain why with no " · " inside it, and carries codes only as the required (M#) tag. Discovery-1 to 8 and Design-1 to 6 are all present, in form, with whys that hold.
+
+5. **Non-blocking. Section 7 U3, "over about seven weeks".**
+   - Q-017 §1 has no such span. The card says the count "runs from September to 8 November with most of it from October".
+   - "Seven weeks" comes from the Critic's earlier record (reviews/P-002-value-target/critic.md line 198), which is not a primary source. This is the line I passed in round 2, so treat this finding as flagged for self-implication (D-050).
+   - The counts themselves (124, 150, 55; single-kind 1, 8, 1) match Q-017's table.
+   - Cite the memo's own window.
+
+6. **Non-blocking. Section 2 chain link 4.** "So anything else that changes in those weeks falls on both sides alike" is stronger than the card's wording. The sentence after it, on U5 and leakage, covers it.
+
+### Parts checked and found sound
+
+- **Section 3 M9's other claims, plus M7 and Discovery-8.** M9's why matches the cards: 30 each way, one planned second look, two approvals. M7's why holds on LL-54 and the owner's order. M7 is correctly marked as not reached, and the Reviewer record passes at round 3.
+- **Section 4 M7 row.** It matches reviews/P-002-value-target-odds/reviewer.md: round 1 and round 2 failed, round 3 passed, and "up to about 0.106" matches the sweep.
+- **Section 5 data note.** It is consistent with DATA-CLASSES.md and AGENTS.md line 42 (required from T2).
+- **Section 7 U5.** It is complete and correctly marked as for the owner to accept at the gate.
+- **Section 8 web-search pair.** It is consistent with "no data out" (answer 6).
+- **Prompt engine and "no data out".** The plan keeps clear of both, and its guards are labelled proposed. Section 1's "Out" is scoped honestly.
+- **Owners table.** The roles match their role files, except finding 3.
+- **Section 9.** It agrees with the rest of the brief.
+- **Plainness.** Acceptable for a phone. Section 8's constraint list is long but each bullet is a plain pair.
+
+File read: /home/user/ml-fixed-249/docs/projects/P-002.md and the records named above, all under /home/user/ml-fixed-249/. The two card files are in /home/user/ml-fixed-249-cards/.
