@@ -1,0 +1,25 @@
+SELF-CHECK, line 0.097, plain loops against the vectorised code
+ start 0.5: does-nothing passes 0.0933 (loops) 0.0933 (vectorised)
+ start 0.3: does-nothing passes 0.0989 (loops) 0.0989 (vectorised)
+
+THE TWO LINES
+ (a) as worked out so far: 0.097 at each look; worst does-nothing pass 0.1063, at a starting share of 0.632
+ (b) at most 1 in 10 at every starting share: any line from 0.09227 up to, not including, 0.09359 gives the same decisions; worst does-nothing pass 0.0982, at a starting share of 0.6684
+     checked at every share from 0.0001 to 0.9999 by 0.0001: worst 0.0982, at 0.6684
+     the next line up, 0.09359, gives a worst does-nothing pass of 0.1009, at 0.343, so it is out
+
+BY STARTING SHARE, before the hold-up checks
+ share | does nothing passes (a) (b) | true halving passes (a) (b) (b)-(a) | second look taken, halving (a) (b) | does nothing (a) (b)
+  0.1  |   0.0677  0.0677         |   0.2753  0.2753  -0.0000     |   0.5800  0.5800            |   0.3800  0.3800
+  0.2  |   0.0908  0.0882         |   0.5192  0.5183  -0.0009     |   0.5431  0.5431            |   0.3824  0.3824
+  0.3  |   0.0989  0.0963         |   0.7009  0.6913  -0.0097     |   0.4779  0.4782            |   0.3827  0.3850
+  0.4  |   0.1043  0.0908         |   0.8325  0.8295  -0.0030     |   0.3793  0.3863            |   0.3808  0.3931
+  0.5  |   0.0933  0.0842         |   0.9231  0.9159  -0.0072     |   0.2693  0.3006            |   0.3890  0.4005
+  0.6  |   0.1043  0.0908         |   0.9671  0.9647  -0.0024     |   0.1907  0.2222            |   0.3808  0.3931
+  0.7  |   0.0989  0.0963         |   0.9910  0.9906  -0.0004     |   0.1082  0.1273            |   0.3827  0.3850
+  0.8  |   0.0908  0.0882         |   0.9989  0.9988  -0.0001     |   0.0354  0.0447            |   0.3824  0.3824
+  0.9  |   0.0677  0.0677         |   1.0000  1.0000  -0.0000     |   0.0066  0.0068            |   0.3800  0.3800
+
+WORST DOES-NOTHING PASS OVER EVERY SHARE ON THE GRID (0.001 to 0.999), refined by 0.0001
+ (a) worst 0.1063 at 0.632; above 0.10 from 0.307 to 0.693 (246 grid shares)
+ (b) worst 0.0982 at 0.6684; never above 0.10
