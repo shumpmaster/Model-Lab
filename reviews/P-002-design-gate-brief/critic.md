@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Critic's check of P-002's brief brought into line with the Design gate ruling (docs/projects/P-002.md at commit 59d5775), brief 257, part A; a session on a different model from the writer. Recorded verbatim by the orchestrator, 2026-11-11. Part B, the M7 line, is reviews/P-002-m7-line/critic.md.*
+*The Critic's check of P-002's brief brought into line with the Design gate ruling (docs/projects/P-002.md at commit 59d5775), brief 257, part A; a session on a different model from the writer. Recorded verbatim by the orchestrator, 2026-11-11. Round 1 FAIL (brief 257), round 2 PASS (brief 259); its non-blocking findings are left for the plan's next change. Part B, the M7 line, is reviews/P-002-m7-line/critic.md.*
 
 ## Round 1 (commit 59d5775)
 
@@ -49,4 +49,60 @@ Findings:
   - Fix findings 1 and 2, then have the Critic re-check A. Findings 3 to 7 are for the Chief of Staff to fix or ignore.
   - The Orchestrator confirms #93 against git.
   - The M7 commit's `Owner-Ruling:` trailer must name decisions/questions/P-002-design-gate.md.
+- **Open questions:** none for the owner. P18 stays for its own card.
+
+## Round 2 (commit dea20ae)
+
+Verdict: PASS
+
+Round 2 of the check of /home/user/ml-fixed-259/docs/projects/P-002.md at dea20ae. Both blocking findings from round 1 are answered. Nothing ruled is still called proposed, except R7, which the owner left standing in Part 1. Nothing is called ruled that was not.
+
+**Round 1 findings, one by one**
+- 1 (blocking, short-reads row): Answered. Line 154 now reads "Five per look, as the owner ruled ("5 per look", decisions/questions/P-002-design-gate.md, Part 6; ...)". That matches Part 6.
+- 2 (blocking, section 6 italic header): Answered. Line 180 now reads "...except the line at two looks (P18), which the owner left open for a card of its own during Design". That matches Part 7 and "How it is carried out". Every other trial term is covered by a ruled part: Part 3b (P15 to P17), Part 4 (the twelve), Part 5 (P1 to P11), Part 6 (P14), Part 8 (P12, P13, P19, P20).
+- 3 (U2 fallback): Answered. Line 222 now uses the ruled words: "the work stops and comes back to the owner", citing P5. This matches the record: "U2's fallback rests on P5, which is ruled".
+- 4 (R15 stale): Mostly answered. A pointer was added: "Ruled at the gate: trials may start with guards beside the prompt engine (... P12 and P13)". This matches Part 8, A. The earlier clause "The owner decides at the Design gate ... until then the owner's order stands" is still there in the present tense. The pointer makes it readable, so I count it answered. See finding 3 below.
+- 5 (R7 "proposed here"): The writer's reason holds. Part 1 lists "it calls one check you ruled 'proposed'" among the six faults, and the owner chose A, so they stand. The word is still wrong on the facts, because T10 is ruled. It is the owner's standing exception. Not blocking.
+- 6 (leftover text): The reasons hold in part.
+  - Line 193 is fixed. It now says "'The measure' is the value target (section 6)".
+  - R13 (line 209): The reason holds. It is the pre-mortem's response as passed. The owner-time ceiling was set at the gate, as "no cap". P17 gives the per-update report.
+  - R18 (line 214): The reason holds only in part. "The owner's hours are counted with the spend" still sits against line 187, "The owner's hours are not recorded". See finding 2.
+  - Lines 85 and 96: The reason holds. They are dated drafting notes on a plan the owner approved in Part 1, A.
+  - Line 238: The reason holds. "While this project is in Discovery" is a true statement of a ruling that held during Discovery. It does not claim to be current.
+- 7 (ceilings row): Answered. Line 159 now says "the existing AI plan only, and no cap on the owner's time (... Parts 2 and 3; section 5)". That matches Parts 2, 3a and 3b.
+
+**New and remaining findings (all non-blocking)**
+1. R7, line 203: "proposed here: outside code, prompts and skills are checked before use". This is the one ruled term still called proposed. It is covered by the owner's Part 1 choice. Fix it at the next change to the plan.
+2. R18, line 214: "the owner's hours are counted with the spend (R13)". The brief says elsewhere that the hours are not recorded and there is no cap. Likewise "A cap on open proposals" is, in the ruling, the queue of 3 (P15). This is the same tension as round 1, finding 6. A one-line pointer like R15's would settle it.
+3. Pre-mortem, now that "the measure" is the value target:
+   - R3's cell says "The measure pairs the share of work with how often it is sent back or fixed". V1 pairs the share with first-check passing and reopening within 30 days. Send-backs and fixes are touches, which are the share itself.
+   - R9 (line 205) says "the plan sets no default ... only once the owner chooses". The owner has since ruled that every result, passed or not, comes to a results card and nothing is dropped automatically (T13, T14).
+   - R15's opening clause is still in the present tense.
+   - These are passed pre-mortem text. They are for a pointer or a later change, not a block.
+4. M7 line (117): It has no `· sprints: PR #93` or `· reached: 2026-11-11`, while section 4 line 145 says the owner accepted M7 as reached. The record says the line takes both in a commit whose `Owner-Ruling:` trailer names the ruling record, after the Critic's check (part B). This is correct as long as that commit follows. Do not add "reached" any other way.
+
+**Changed sentences checked against the ruling and the question as filed**
+- Section 4 short-reads row: Matches Part 6.
+- Section 4 ceilings row: Matches Parts 2 and 3.
+- Section 6 italic header: Matches Part 7. P18 is correctly left open.
+- Section 6 last bullet (read as a check on the header): The counts (twelve confirmed, P1 to P11, P12 to P17, P19, P20) match. P18 is open, with a card of its own "before the trial design freezes".
+- Section 7 opening paragraph, "The measure" sentence: True. V1 is the value target.
+- R15 "What the plan does" cell: Matches Part 8, A. It does not overstate: the guards are cited.
+- U2 fallback: Matches P5 and "How it is carried out".
+- P18: Called open everywhere I looked (lines 180 and 188). No open term is called ruled.
+
+**Six-part contract**
+- **Changed:** nothing. Read-only. No files written.
+- **Why:** to check round 2 of part A against the ruling and the question as filed.
+- **Verified:**
+  - Each round 1 finding against the fixed file.
+  - Each changed sentence against /home/user/ml-fixed-259/decisions/questions/P-002-design-gate.md, /home/user/ml-cards/P-002-design-gate.md and /home/user/ml-fixed-259/docs/gates/P-002/trial-terms.md.
+  - A search for "propos", "still to be set", "not yet ruled" and "to be ruled" in P-002.md. I read every hit; none was a ruled term called proposed except R7.
+- **Undone:**
+  - I did not read /home/user/ml-cards/P-002-value-target.md or P-002-trial-gates.md. I relied on trial-terms.md for the terms they set, as in round 1.
+  - I ran no git, so the merge commit, the diff since round 1 and the `Owner-Ruling:` trailer are unchecked. I judged "changed" text from your list and by reading.
+  - I did not read docs/briefs, docs/reports, docs/handoff, sessions or any -notes.md file.
+- **Needed outside your surface:**
+  - Chief of Staff: optionally fix R7 and R18 and add pointers for R3, R9 and R15 (findings 1 to 3).
+  - Orchestrator: record this verdict verbatim, and make sure the M7 commit carries `· sprints: PR #93`, `· reached: 2026-11-11` and an `Owner-Ruling:` trailer naming decisions/questions/P-002-design-gate.md, after the Critic's check (part B).
 - **Open questions:** none for the owner. P18 stays for its own card.
