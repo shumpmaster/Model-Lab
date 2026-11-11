@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Critic on questions/P-002-design-gate.md, the question for the screening's Design gate (P-002): round 1 (FAIL), brief 253; round 2 (FAIL), brief 255. Each round a fresh session on a different model from the card's writer, started by the Chief of Staff (session_01QBwHGJtTY3gJUPrQDDJkf5), 2026-11-11, on fixed copies Model-Lab@5d26be1 (round 1) and Model-Lab@23c9962 (round 2, the same tree as 07668ce), with the two cards as put given as files. Recorded verbatim by the Orchestrator from the helper's return; the round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's. Round 2's own second-level headings are recorded one level lower, so they nest under their round. After round 2's copy was made, the card's REVERSIBILITY field was put in its one-word form, its exception moved into BLAST RADIUS, at commit c23a311; nothing else changed.*
+*The Critic on questions/P-002-design-gate.md, the question for the screening's Design gate (P-002): round 1 (FAIL), brief 253; round 2 (FAIL), brief 255; round 3 (PASS), brief 256, the last before the stop rule. Each round a fresh session on a different model from the card's writer, started by the Chief of Staff (session_01QBwHGJtTY3gJUPrQDDJkf5), 2026-11-11, on fixed copies Model-Lab@5d26be1 (round 1) and Model-Lab@23c9962 (round 2, the same tree as 07668ce) and Model-Lab@4f0aaa6 (round 3), with the two cards as put given as files. Recorded verbatim by the Orchestrator from the helper's return; the round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's. Rounds 2 and 3's own second-level headings are recorded one level lower, so they nest under their round. After round 2's copy was made, the card's REVERSIBILITY field was put in its one-word form, its exception moved into BLAST RADIUS, at commit c23a311; nothing else changed. After round 3, its findings 1 to 5 and 7 to 9 were applied as wording; finding 6 is answered only for the tier (the milestone names stay in the case and the plan).*
 
 ## Round 1 (brief 253)
 
@@ -219,3 +219,139 @@ I checked the redraft against questions/_TEMPLATE.md, docs/gates/P-002/trial-ter
 - **Undone:** I did not check the PR 93 and merge-commit 9513e98 claim, because I have no git. I did not check P-001-spend-ceiling beyond the card's wording. I did not read the Reviewer's "three restated" text in full. I did not read docs/briefs, reports, handoff or sessions, as ordered. I did not count the absent gate Critic record against the card.
 - **Needed outside my surface:** the Chief of Staff must fix findings 1-5 and should fix 6-10 in the same pass. A round 3 check is then needed.
 - **Open questions:** should P15 and P16 and the other time proposals sit in the time part (Part 3) with the caps and the reads? Should Part 8 be ruled before Part 1, so that 8 C maps to 1 B?
+
+## Round 3 (brief 256)
+
+The round's verdict was PASS.
+
+*The Critic on questions/P-002-design-gate.md, round 3 (the last before the stop rule). I read the card cold, as a smart non-expert would, on the fixed copy /home/user/ml-fixed-256. The two answered cards were read as files from /home/user/ml-cards/. No finding below is blocking. Findings 1 and 2 are the ones I would most want fixed before the owner sees the card.*
+
+### Round 2 findings, one by one
+
+1. **Part 5 recommended on the owner's time: mostly answered.**
+   - P15, P16 and P17 now sit in Part 3 with no recommendation. The card says so ("There is no recommendation anywhere in this part; it is your time"). Part 5 now holds only P1 to P11.
+   - Residue: P4 stays in Part 5 under "A, low confidence". P4 is a summary card on which you rule, and Part 5's own cost line says "P4 adds one card". Round 2 named P4 as bearing on time too. See finding 4.
+2. **Origin of P18, P19 and P20: answered.**
+   - The Words block defines the two origin tags. Part 7 says "list P18, the Chief of Staff's own". Part 8 tags P12 and P13 "from your cards" and P19 and P20 "the Chief of Staff's own". This matches trial-terms.
+3. **Part 8 C contradicted Part 1 A: answered.**
+   - Part 8 now has A and B only, and says it "assumes Design starts (Part 1, A); to hold everything instead, choose Part 1, B".
+   - B's "no trial until the prompt engine finishes" fits with Design starting.
+4. **Gain and cost missing or uneven: answered.**
+   - Every option in Parts 1, 2, 3, 5, 6, 7, 8, 9 and 10 now has a gain and a cost.
+   - Part 6 C states its cost: a piece you would not have accepted no longer counts as reopened. Part 6 B no longer adds a timing neither card had, and gives the second-look gap as its cost.
+   - Part 7 C's cost is not given in the options. See finding 2.
+5. **P15 and P16 not "as written": answered.**
+   - P15 now carries "the next waits in a queue the desk shows".
+   - P16 now carries "never more of them than the entry cards you approved".
+   - Both match trial-terms and the trial-gates card.
+6. **Context said "five" non-blocking findings: answered.** It now says "non-blocking findings, six of which the case carries as faults", which fits round 2's count.
+7. **Part 7 timing and wording: partly answered.**
+   - "As worked out so far" and "the line is fixed once the starting share is counted" are right (value-target card part 3A).
+   - Option C's "next gate, before the trial design is frozen" is still unclear. See finding 2.
+8. **Part 3 arithmetic: answered.**
+   - 10 reads is now stated as two looks.
+   - "Short read" is defined in Words.
+   - "But did not pass" is restored in Part 4.
+   - T28's wording is carried.
+9. **Jargon: mostly answered.**
+   - "Source checker", "ceilings", "standard steps" and "intent" are now explained, and the WHY says Discovery "closes at this ruling".
+   - "Tier, T1" is still unexplained. See finding 6.
+10. **Part 5's confidence claim cited no record: answered.** The sentence is gone. The remaining reason, "the plan relies on P5 for one fallback (Part 9)", is true: brief U2's fallback is the stop rule.
+
+Round 1 findings left partly answered in round 2 (3, 6 and 7): I find them answered. The confirmations are explained, the ruled-in-text versus ruled-in-words distinction is stated, the stricter line's cost is stated ("how much less has not been computed"), and the six faults are listed in Part 1.
+
+### Sentences changed since round 2, checked against their records
+
+- **Words block.**
+  - Piece, touch, trial and second look match trial-terms T1, T2, T23 and T16.
+  - "The prompt engine ... is in its building phase": P-001-build-gate says "moves into Build". Holds.
+  - The two origin tags match the trial-terms marks.
+- **Part 1.**
+  - The six faults match the case appendix (lines 119 to 124).
+  - The three-or-more-agents tier condition matches trial-terms line 92.
+  - "You are the plan's user" matches case section 8.
+  - Option A's wording is clear.
+  - One weak claim: see finding 7.
+- **Part 3.**
+  - The caps arithmetic holds: 2 entry cards and 10 reads is two looks, and 4 and 20 is four.
+  - P15, P16 and P17 match trial-terms and the trial-gates card word for word.
+  - The P16-against-cap conflict is stated (the results card goes past the month's cap and counts against the next).
+  - Gains and costs are stated and not leaning.
+  - See findings 3 and 5.
+- **Part 4.**
+  - There are twelve items and they are exactly T16, T23 to T30 and T32 to T34.
+  - Each matches its row, with the "added by the Chief of Staff" tags kept on T27 and T28.
+- **Part 5.**
+  - P1 to P11 match trial-terms.
+  - The P6 difference between the cards is stated correctly (trial-gates card "under every option"; value-target card as a proposal).
+- **Part 6.**
+  - The P14 difference is stated correctly (5 per trial against 5 per look).
+  - Part 6 C's cost is the real one.
+- **Part 7.**
+  - 0.093 and 0.099 are at half and 3 in 10 (reviewer: 0.0933 and 0.0989). The "up to about 0.106" holds (the sweep maximum is 0.1062).
+  - "About 0.07 at 1 in 10" holds (0.0677).
+  - A true halving passing about 9 and 7 in 10 holds (0.9231 and 0.7009).
+  - "Your cards said ... 'no more often'" is true of both cards.
+- **Part 8.**
+  - P12, P13, P19 and P20 are correctly attributed. P20 is worded as in trial-terms.
+  - See finding 8 on P19.
+- **Part 9.**
+  - U1 to U5 match brief section 7 on tests and fallbacks. U3 and U5 are now read in full.
+  - The note that U2's fallback holds only if P5 is kept is correct.
+- **Part 10's three claims.**
+  - 5 in 10 against "4 to 5" holds (reviewer 0.5321 and 0.5362; value-target card line 34).
+  - 0.22 against "1 in 5" holds (0.2195, at the worst assumed fault shares and with the two checks taken as independent). It is read from both cards.
+  - 0.106 against "no more often" holds.
+  - "It did not read the cards" holds.
+  - The assumptions and "leaves out the held-up half" match reviewer assumptions 1, 6 and 7.
+  - "FAIL, FAIL, PASS, agreed a second way" holds.
+- **Not in the checked list:** WHO HAS CHECKED IT is honestly worded. RISK CLASS, DEFAULT and TIMEOUT fit a phase gate. The case's Critic recommends proceed, which fits "case 2, which recommends proceed".
+
+### Findings
+
+1. **Non-blocking: Part 3's two choices use the same letters.**
+   - The ceiling is A, B or C, and the proposals choice is A or B, both inside Part 3. A one-letter answer for "Part 3" is ambiguous.
+   - Label them apart (for example 3a and 3b), or split the part.
+2. **Non-blocking, but the recommended option: Part 7 C's timing is vague, and it is not what the brief says.**
+   - It says "you rule it at the next gate, before the trial design is frozen". The next gate after this one is the Build gate.
+   - The brief puts M9, the trial design with "its two looks and their line", in one frozen plan inside Design (brief lines 100 and 127). The Build gate comes after Design.
+   - Part 5 C describes a mid-Design card, so a card could do it. The card must say which: a card of its own during Design, or the Build gate.
+   - C's cost does not mention that the stricter line stays uncomputed until then.
+3. **Non-blocking: Part 3's cap arithmetic depends on Part 6.** "10 reads covers two looks at 5 reads each" only holds if the owner rules 5 per look in Part 6. If they rule 6 B or C, the cap reading changes. Add one sentence.
+4. **Non-blocking: P4 is a time item and still carries a recommendation.**
+   - Part 5 recommends all eleven, including P4, which "adds one card".
+   - The owner can rule it differently under 5 B.
+   - Either say P4 is the owner's own call on their time, or move it beside P15 to P17.
+5. **Non-blocking: the summary card of P4 sits outside Part 3's caps.** The caps count entry cards, results cards and reads, not P4's summary card. Say so.
+6. **Non-blocking: jargon.**
+   - "Tier T1, as this repository's charter sets" is not explained for a cold reader.
+   - M7 to M15 are named in Part 1 A but never listed on the card.
+   - M7 is explained only in Part 10.
+7. **Non-blocking: the Part 1 recommendation is stretched.**
+   - "None of the six faults changes a term you have ruled or are asked to rule here" is loose.
+   - Faults 1 to 3 are about how terms T27, T28, T31 and the proposals were labelled, and Parts 4 and 5 correct those labels.
+   - Say "changes the content of no term".
+8. **Non-blocking: Part 8 narrows P19.** Trial-terms P19 says the prompt engine "is testing or counting" the kind. Part 8 A says "counts the kind it changes". The word "testing" is dropped. P12 in the same option keeps "tests or counts". Also, "the count ... from the start of Build" does not say which project's Build.
+9. **Non-blocking: U1's fallback is shortened.** Brief U1 also says "the target is put to the owner again if even that cannot be kept". The card leaves this out.
+
+### Six-part contract
+
+- **Changed:** nothing. I have no write tool.
+- **Why:** to check round 3 of the redraft as a cold reader, and each changed sentence against its record.
+- **Verified:**
+  - I read the card in full and `_TEMPLATE.md`.
+  - I read trial-terms, case 2, the gate Critic's view of case 2, both decision records, both card files and reviewer.md (all three rounds).
+  - I read `reviews/P-002-design-gate/critic.md`.
+  - I read the brief's lines 94 to 131 (milestones), 220 to 224 (U1 to U5) and 260 to 261, and the P-001 build-gate record.
+  - I confirmed by glob that the cited decision and review files exist.
+  - I checked the twelve confirmations, the P1 to P20 grouping, the figures 0.093, 0.099, 0.106, 0.22, 5 in 10, 0.07, 0.92 and 0.70, and the arithmetic of the caps.
+- **Undone:**
+  - I did not check "pull request 93 / merge commit 9513e98", because I have no git.
+  - I did not re-read reviews/P-002-brief/critic.md for the count of non-blocking findings. I trust round 2's count of eight with six carried.
+  - I did not open the P-001-spend-ceiling record beyond the card's wording.
+  - I did not read docs/briefs, reports, handoff or sessions, as ordered.
+- **Needed outside my surface:** none blocking. The Chief of Staff should fix findings 2, 1 and 4 before the card goes out, and 3 and 5 to 9 in the same pass if cheap. A fourth round is not needed for the non-blocking items.
+- **Open questions:**
+  - Does Part 7 C mean a mid-Design card or the Build gate?
+  - Should P4 go with the time proposals in Part 3?
+  - Should the owner see the M7 to M15 names on the card?
