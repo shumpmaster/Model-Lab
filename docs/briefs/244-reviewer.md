@@ -1,0 +1,20 @@
+# Brief 244 — reviewer — an independent run of the P-002 value-target odds
+
+session: session_01QBwHGJRsdA6DND96m5Z9xE
+model: the Reviewer runs on a different model from the Chief of Staff's sessions that wrote the scripts and this brief (D-056). Model names are kept out of this record by this session's standing instructions (LL-70).
+start: Model-Lab@565aa90, read from a fixed copy at /home/user/ml-odds-244
+manifest: intake/P-002-value-target-odds-2026-11-10.md; docs/projects/P-002.md section 6; decisions/questions/P-002-value-target.md; decisions/questions/P-002-trial-gates.md; questions as filed are not on main and are not read
+recorded: at hand-out, 2026-11-11
+
+## Brief
+You are the Reviewer under the AI Build Operating Model. You did not write the work you check. Your task: try to refute the odds behind the screening project's value target, by running their scripts yourself and by checking them a second way. The owner ruled the target and the trial design on these figures (decisions/questions/P-002-value-target.md; decisions/questions/P-002-trial-gates.md), and until now only their writer has run them; the Critic only read the code (intake/P-002-value-target-odds-2026-11-10.md, rounds 1 to 3).
+
+All Model-Lab paths are under the fixed copy /home/user/ml-odds-244/. Do not write anywhere in it or in any repository. Write your scripts and outputs only under /tmp/claude-0/-home-user/3632fc02-3869-5237-84a8-30f3cf85b850/scratchpad/odds-244/. Python 3 standard library only; run scripts with `python3 -I`.
+
+1. **Re-run.** Copy every script in the intake item exactly as written (power.py; twolook.py; twolook_lib.py, which is the part of twolook.py up to and including two_look; twolook2.py; holdup.py; round3.py). Run each and compare every printed line with the output the item records. Report each line that differs, and say whether the scripts ran as written or needed a change (and which).
+2. **Read the code against its words (LL-54).** For each script, say whether the code computes what the item's prose says it computes: the direction of each one-sided test, the two-look rule (go on only when the method's pieces needed the owner less often), the single line used at both looks, the hold-up guard's direction, the target rule (latest count at most half the starting count and the fall clearing the line), and the five-drops figure. Name any mismatch.
+3. **A second way.** Write your own code, from the rules as the item states them in words and not by copying, for at least: the one-look keep chances at 30 per arm; the two-look keep chances and the false-keep chance at the 1 in 10 line (0.097); the target figures at 60 pieces each period; and one hold-up row. Use either a different exact method or a seeded simulation of at least 200,000 runs per figure, and report the agreement, with the simulation's margin of error if you simulate.
+4. **The figures quoted from them.** Check every figure that docs/projects/P-002.md section 6, decisions/questions/P-002-value-target.md and decisions/questions/P-002-trial-gates.md quote or rest on against the output, at the ruled 1 in 10 line, and say whether each is stated fairly, with fair rounding. For example, section 6 says a real halving "shows on the count only about 4 to 5 times in 10".
+5. **Assumptions.** List the assumptions the figures rest on (for example, pieces independent of each other, the two hold-up checks independent) and say which, if false, would move a figure the owner ruled on, and in which direction. Do not judge whether the design is wise; judge only whether the odds are right and fairly stated.
+
+Return, first line exactly `Verdict: PASS` or `Verdict: FAIL` (FAIL if any recorded output line cannot be reproduced, if any code does not do what its words say, or if any quoted figure is unfair), then numbered findings, each marked blocking or non-blocking, with the command you ran and its output as evidence; then the six-part contract (changed, why, verified, undone, needed outside your surface, open questions). Put the full text of your second-way script in your return.
