@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Reviewer's independent run of the line at two looks (P-002, P18), both versions, brief 261, at commit e9f1f2f; a session on a different model from the script's writer, the Definer. Recorded verbatim by the orchestrator, 2026-11-11. Round 1 FAIL (brief 261), round 2 FAIL (brief 264).*
+*The Reviewer's independent run of the line at two looks (P-002, P18), both versions, brief 261, at commit e9f1f2f; a session on a different model from the script's writer, the Definer. Recorded verbatim by the orchestrator, 2026-11-11. Round 1 FAIL (brief 261), round 2 FAIL (brief 264), round 3 PASS (brief 266). The verdict above is the latest round's.*
 
 ## Round 1 (commit e9f1f2f)
 
@@ -227,3 +227,123 @@ Nothing was written in the copy (`git status --short | wc -l` gives 0; `find . -
 1. Is finding 1 blocking in the orchestrator's eyes? The sentences are true as qualified. I rated it blocking because the owner will read "up to" as a ceiling and the neighbouring figures are ceilings over all shares.
 2. If the ceilings go into line.py, should it also print the share ranges where the gap exceeds the nine-share figures (halving: 0.501 to 0.600)?
 3. My standing instructions name docs/archive/OPERATING_MODEL_v2.5.1.md section 12. That file is not in this copy; I read it at /home/user/Personal-Org-Operating-Model/docs/archive/OPERATING_MODEL_v2.5.1.md. They also make a missing "What this means for you" opening in a PR body a FAIL. No PR body was given to me. If one exists for this work, it still needs that check.
+
+## Round 3 (commit 5448c15)
+
+Verdict: PASS
+
+Round 3 passes. The Definer's change fixes all three of my round 2 findings, and I could not refute any of it. line.py's recorded output reproduces exactly. The first 25 lines are the same as at 1e9eab7, and the change to the script only adds code at the end. Every new output line, and every changed sentence in E-004 and S-002, matches sums I wrote fresh this round across every share from 0.0001 to 0.9999. The Definer's one change outside its brief, 0.0123 to 0.0124, is right: the exact figure is 0.01235056. Round 2 was wrong to accept 0.0123. One thing went wrong on my side. The guard script left one Python bytecode file in the copy, because the run recipe in my instructions does not stop that (finding 6). It changes nothing in the work, but the copy is no longer exactly as handed out. I recommend neither line. Since this round passes, S-002's three-round stop rule is not reached and nothing goes to the owner with Triage on this account.
+
+Fixed copy: /home/user/ml-fixed-266 at 5448c15. `git status --short | wc -l` gives 0. One ignored file was written there (finding 6).
+
+## Part 1. Round 2 findings against e5bf003
+
+| Round 2 finding | Answered? | Evidence |
+|---|---|---|
+| 1 (blocking): second-look gap given as a ceiling over nine shares only | Yes | E-004.md:124 now says "at every starting share from 0.0001 to 0.9999 ... never less often": 0.0131 for a method that does nothing (near 0.43 and 0.57; 0.3964 against 0.3833 at 0.5734) and 0.0367 for a true halving (near 0.55; 0.2651 against 0.2284 at 0.5482). The nine-share figures are kept and labelled as such. S-002.md:10 now says "up to about 4 in 100 more often", with the nine-share limit removed. line-output.txt:41-45 prints both ceilings, the shares around each one and a not-negative check. |
+| 2: 0.0315 should be 0.0314, and the 1-in-2 pair should not be set beside it as equal | Yes | E-004 says "0.0314 ... (0.2222 against 0.1907 at 6 in 10; at 1 in 2 the gap is 0.0312, 0.3006 against 0.2693)". |
+| 3: three E-004 figures were missing from line-output.txt | Yes | line-output.txt:27-33 now prints (a)'s range of lines (0.09616 up to 0.09725) and each worst case at both of its shares (0.632/0.368, 0.6684/0.3316, 0.343/0.657). |
+
+## Findings
+
+**1. Not blocking. Re-run matches, and the change only adds code.**
+- `time (PYTHONDONTWRITEBYTECODE=1 python3 -I experiments/E-004/line.py > rv266/run3.txt); diff rv266/run3.txt experiments/E-004/line-output.txt && echo IDENTICAL` gives `real 0m18.714s` and `IDENTICAL`.
+- `head -25 experiments/E-004/line-output.txt | diff - <(git show 1e9eab7:experiments/E-004/line-output.txt | head -25)` gives `FIRST25_SAME_AS_1e9eab7`. The old file had 25 lines; the new one has 45.
+- `git diff 1e9eab7 e5bf003 -- experiments/E-004/line.py | grep -E '^-[^-]'` returns nothing, so no line was removed or changed. All 64 added lines come after the last earlier print, at line 173.
+- What the added code does:
+  - a new function `second_look` (the look-1 part of the sum in `passes`);
+  - new names `a_low`, `a_next`, `Rn`, `FINE`;
+  - asserts that `second_look` equals `passes(...)[1]` at the nine shares;
+  - prints.
+- It reassigns no name used earlier, so the brief's "change no existing computation; additions to line.py print only" holds.
+
+**2. Not blocking. Every new line of line-output.txt matches my own sums.**
+- Command: `PYTHONDONTWRITEBYTECODE=1 python3 -I rv266/own.py`.
+- How own.py works, written fresh with no code from line.py:
+  - Fisher p-values are exact `Fraction`s, and the pass regions are built from them.
+  - The nine-share second-look chances are exact rationals.
+  - The 0.0001 sweep is in floats over regions built from those fractions.
+- Output:
+  - Lines: `(a) decides as any line from 0.09615844 up to, not incl., 0.09725489` and `(b) ... 0.09227380 up to, not incl., 0.09359355`.
+  - Worst cases: `a 0.09700 [(0.632, 0.10634), (0.368, 0.10634)]`, `b 0.09227 [(0.6684, 0.09818), (0.3316, 0.09818)]`, `next 0.09359 [(0.343, 0.10086), (0.657, 0.10086)]`.
+  - All 18 nine-share pairs match line-output.txt:36-39 to six places. For example, `nothing 0.4 (a) 0.380756 (b) 0.393106 gap 0.01235056`, `halving 0.6 (a) 0.190730 (b) 0.222169 gap 0.03143943` and `halving 0.5 ... gap 0.03123659`. Printed "+0.000014" for nothing at 0.2 is exactly 0.00001357. Printed "+0.000000" for halving at 0.2 is exactly 0.00000030.
+  - Every share: `nothing max 0.013113 at 0.5734 (a) 0.3833 (b) 0.3964; ... near-max from 0.4244 to 0.5756 n=92; gaps of near list: [(0.4289, 0.5711)]`, which matches "0.4244 to 0.4289 and 0.5711 to 0.5756". `halving max 0.036673 at 0.5482 (a) 0.2284 (b) 0.2651; near-max from 0.5468 to 0.5496`, which also matches.
+  - Never negative: `R1b subset of R1a: True cells in gap set: 4`. Under (b) the trial passes at look 1 only where (a) also passes, so (b)'s second-look set always contains (a)'s. The gap therefore cannot be negative at any share; this follows from how the rules are built. Float minimum `-1.11e-16` is rounding noise, below line.py's `-1e-12` cutoff.
+
+**3. Not blocking. Every changed sentence is correct.**
+- E-004.md:124: every figure matches finding 2. Rounding at 0.548 against 0.5482 explains the small differences from round 2's quoted figures (0.2652/0.2285 at 0.548; 0.2651/0.2284 at 0.5482). Own output: `at 0.548 (a) 0.2285 (b) 0.2652`.
+- S-002.md:10: "up to about 4 in 100 more often" fits 0.0367, and it now matches the two neighbouring "up to" figures, which are ceilings over all shares.
+- Neither file recommends a line (E-004.md:10 "it does not choose or recommend"; S-002.md:10 "This plan does not choose").
+- Search for stale figures: `grep -rn "0\.0123\b\|0\.0315\|3 in 100 more often"` outside reviews/ and briefs/ returns nothing.
+
+**4. Not blocking. My ruling on the Definer's change outside its brief (0.0123 to 0.0124): accept it.**
+- Exact gap at 4 in 10 and 6 in 10: 0.01235056 (finding 2 output). To four places that is 0.0124.
+- The old 0.0123 was the difference of the two rounded figures (0.3931 − 0.3808). That is the same fault as round 2's finding 2 (0.0315 against 0.0314), in the other direction.
+- Round 2 itself wrongly said "0.0123 (at 4 in 10 and 6 in 10) correct (0.01235)". That was my error: 0.01235 rounds up.
+- The change is outside the brief's wording, which named only 0.0314, but it is the same kind of fix, it is correct, and it touches none of the four files the brief excluded. The Definer's commit message states it.
+- Side effect, not blocking: E-004's rounded lists show 0.3808 and 0.3931, which differ by 0.0123, and 0.1907 and 0.2222, which differ by 0.0315. A careful reader may notice the stated gaps differ from those by 0.0001. Both stated gaps are right.
+
+**5. Not blocking, wording. "(the script's grid)" is a little loose.**
+- E-004.md:124 says "every starting share from 0.0001 to 0.9999, in steps of 0.0001 (the script's grid)".
+- line.py's `GRID` is 0.001 to 0.999 (line.py:39). The 0.0001 sweep is a separate `FINE` list (line.py:217). Header assumption A7 (line.py:30-32) does not mention it.
+- The figures are right either way. A7 could name the second-look sweep.
+
+**6. Not blocking for the work, but a breach of my brief: I wrote one file in the copy.**
+- `governance/checks/__pycache__/govlib.cpython-313.pyc`, 20:31:04 UTC. It was created when I ran `PYTHONDONTWRITEBYTECODE=1 python3 -I governance/checks/surface_guard.py ...`.
+- Cause: `-I` implies `-E`, so Python ignores every `PYTHON*` variable, including `PYTHONDONTWRITEBYTECODE`. line.py imports no local module and so left nothing; surface_guard imports govlib.
+- The file is git-ignored (`git status --short --ignored` shows `!! governance/checks/__pycache__/`), so `git status --short` still gives 0. I did not delete it, because the brief says write nothing in the copy.
+- Use `python3 -I -B` instead. Earlier rounds that ran the guard the same way may have left the same file in their copies.
+
+**7. The v2.5.1 §12 reviewer checklist, item by item.**
+1. Does the work do what it claims, or only pass tests? It does. Nothing is hard-coded, and every printed figure matches an independent exact computation (finding 2).
+2. Test-file changes: none. line.py's new asserts only add a check.
+3. Likeliest failures:
+   - A wrong figure reaching the owner's card: covered by findings 2 and 3.
+   - A ceiling hiding between the nine shares: fixed (Part 1, item 1).
+   - A peak hiding between grid points: both peaks are flat over 29 or more grid points (finding 2).
+4. New dependencies, permissions or network calls: none. The imports are still only numpy and math.comb.
+5. Active rulings: none violated that I found. No line is recommended. S-002 is still `status: draft` (S-002.md:3), so editing it needs no superseding entry.
+6. Redesign: not applicable.
+7. Surface: `python3 governance/checks/surface_guard.py diff --range e5bf003^..e5bf003 --branch build/definer/p002-two-look-ceilings` gives `OK: 1 commit(s) in e5bf003^..e5bf003 checked (0 merge(s) skipped, 0 exempt, 0 human)`, rc=0.
+   - Author: `definer <definer@agents.invalid>`.
+   - Trailers: `Agent-Session: session_01QBwHGJm2otqFdQxgZQ1fyx/definer-265` and `Spec: S-002`.
+   - Files: exactly the four the brief allows. `git diff e5bf003 5448c15 --stat` shows only docs/briefs/265-definer.md and a Chief of Staff session-lines file.
+
+Other charter items:
+- PR body ("What this means for you") and Tasks: my manifest holds no PR. The merge 5448c15 is local and its message is a title plus an `Agent-Session:` trailer, with no PR body. The rule had nothing to apply to, so it is not a FAIL here (open question 2).
+- Join-up section: not applicable, since this work has no screens or views.
+- S-002's opening summary is plain English.
+
+## Six-part contract
+
+**Changed (by file).**
+- In the repositories: nothing on purpose. The one file left by accident is /home/user/ml-fixed-266/governance/checks/__pycache__/govlib.cpython-313.pyc (finding 6).
+- Scratch files in /tmp/claude-0/-home-user/05f0729c-59b7-568d-bab0-5a59dfde631a/scratchpad/rv266/:
+  - own.py and own.out (my own sums);
+  - run3.txt (the re-run);
+  - out-1e9eab7.txt (the earlier recorded output).
+
+**Why.** Brief 266: round 3, the last before S-002's stop rule, reviewing the Definer's commit e5bf003 (brief 265).
+
+**Verified.** Findings 1 to 3 and 7, each with its command and output:
+- the re-run matches exactly (18.7 s);
+- the first 25 lines are unchanged from 1e9eab7, and from 9d8710b;
+- the line.py diff only adds code;
+- my exact sums match every new line and every changed sentence;
+- the surface guard gives OK.
+
+**Undone.**
+- No seeded simulation this round. The pass figures were simulated in round 1, and the second-look chances need only look-1 counts, which I summed exactly at the nine shares.
+- I did not run `governance/checks/check_all.sh`, which the brief does not ask for and which would likely write more bytecode.
+- As in earlier rounds, I did not test assumptions A1 or A6 failing.
+- I did not remove the bytecode file (finding 6).
+
+**Needed outside my surface.**
+- Orchestrator: delete /home/user/ml-fixed-266/governance/checks/__pycache__/ if the copy must stay as handed out. Correct the Python recipe in future reviewer briefs to `python3 -I -B`.
+- Optionally, the Definer: have A7 in line.py's header name the 0.0001 second-look sweep (finding 5).
+- Chief of Staff, for the card: use "up to about 4 in 100 more often for a true halving, about 1 in 100 for a method that does nothing", from E-004.md:124.
+
+**Open questions.**
+1. Round 2 accepted 0.0123 in error (finding 4). Should the review record carry a note against round 2's line, or is this round's ruling enough?
+2. My standing instructions make a PR body without a "What this means for you" opening a FAIL. No PR body for this work was in my manifest. If a PR is opened to land 5448c15, it still needs that check, and the Tasks tick check.
+3. My standing instructions say this repository keeps v2.5.1's process (L-0112). L-0112 applies that to v2.x projects. Model-Lab's AGENTS.md:1 calls it a v3 project, and governance/OPERATING_MODEL_VERSION says 3.7.2. I applied both the v2.5.1 §12 checklist and the v3 charter items. Which one governs should be settled.
