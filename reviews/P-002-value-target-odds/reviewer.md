@@ -1,6 +1,6 @@
 Verdict: FAIL
 
-*The Reviewer's independent run of the odds behind P-002's value target (intake/P-002-value-target-odds-2026-11-10.md): round 1 (FAIL), brief 244. A fresh session on a different model from the Chief of Staff's sessions that wrote the scripts, started by the Chief of Staff (session_01QBwHGJRsdA6DND96m5Z9xE), 2026-11-11, on the fixed copy Model-Lab@565aa90. Recorded verbatim by the Orchestrator from the helper's return; the round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's. Its scripts and outputs were in the session's scratch folder and are not kept here; the second-way script is in the return below. The return's two second-level headings are recorded one level lower, and the last heading's full scratch path is shortened to S/second.py, so the record nests under its round.*
+*The Reviewer's independent run of the odds behind P-002's value target (intake/P-002-value-target-odds-2026-11-10.md): round 1 (FAIL), brief 244; round 2 (FAIL), brief 245, the same helper resumed. A fresh session on a different model from the Chief of Staff's sessions that wrote the scripts, started by the Chief of Staff (session_01QBwHGJRsdA6DND96m5Z9xE), 2026-11-11, on the fixed copies Model-Lab@565aa90 (round 1) and Model-Lab@d96a853 (round 2). Recorded verbatim by the Orchestrator from the helper's return; the round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's. Its scripts and outputs were in the session's scratch folder and are not kept here; the second-way script is in the return below. The returns' second-level headings are recorded one level lower, and the last heading's full scratch path is shortened to S/second.py, so the record nests under its round.*
 
 ## Round 1 (brief 244)
 
@@ -251,3 +251,42 @@ print(f" caught 60/arm 10%->20%: {float(one(60,F(8,10),F(9,10),L10)):.4f}")
 ```
 
 Other files: S/run/*.py and S/run/*.out (the extracted item scripts and their outputs), and S/sweep.py (the starting-share sweep and the H sensitivity).
+
+## Round 2 (brief 245)
+
+The round's verdict was FAIL.
+
+This is my round 2 report, written after the corrections in /home/user/ml-fixed-245. It follows my round 1 report on /home/user/ml-odds-244, whose verdict was FAIL.
+
+The corrections answer my round 1 findings 2 and 4, but one new claim in section 6 is not supported by the scripts: the stated range of the two-look false-keep chance. I checked the Round 4 section of the intake item and section 6 of docs/projects/P-002.md in /home/user/ml-fixed-245 against my own outputs. Scratch folder S = /tmp/claude-0/-home-user/3632fc02-3869-5237-84a8-30f3cf85b850/scratchpad/odds-244/.
+
+1. **Blocking: the range "from 0.093 to 0.104, depending on the starting share" is wrong at both ends (section 6, "How a method is tried and kept").**
+   - Evidence: `python3 -I S/fine.py` sweeps the false keep at line 0.097 over starting shares from 2% to 98% in steps of 2%, using the original two_look.
+   - The maximum is 0.1062, at starts of 0.36 and 0.64. Every share from about 0.32 to 0.68 exceeds 0.10, not only 4 in 10 and 6 in 10.
+   - The minimum is far below 0.093: 0.0908 at a 20% start, 0.0677 at 10% and 0.041 at 5% (S/sweep.py in round 1).
+   - The Round 4 intake text itself is accurate. Its point figures 0.093, 0.099 and 0.104 are right and it does not claim a range.
+   - The fair statement: "about 1 in 10: below 1 in 10 at the starts shown (0.093, 0.099) and up to about 0.106 at starts near 4 in 10 and 6 in 10 (0.104 at exactly those two)".
+   - Section 6's range is a new claim that no script supports. The conclusion "about 1 in 10, not at most" still stands, and the excess is small (0.006).
+
+2. **My round 1 findings 2 and 4, and open questions (a) to (c).**
+   - **Finding 2 (the 0.20 mislabel): answered.** Round 4 gives 1 - 0.882 x 0.885 = 0.22, "about 1 in 4 or 5". That is right (0.2195) and fairly rounded. Its claim that H=0.78 moves the five-drops figures by at most 0.01 matches my run. Section 6 no longer says "1 in 5"; a grep finds no "1 in 5" in it. The card text itself is not in the copy, so I could not check it.
+   - **Finding 4 (the target rounding): answered.** Section 6 now says about 5 in 10 at the ruled line, "0.53 at 1 in 2, 0.54 at 3 in 10". My exact figures are 0.5321 and 0.5362. It also says the figure leaves out the hold-up half of V1.
+   - **Open question (a) (what 0.20 was meant to be): handled** by treating it as a mislabel and correcting the figure. The pairing intent is not stated, but nothing depends on it now.
+   - **Open question (b) (the target figure without the hold-up half): partly handled.** Section 6 says the figure is lower once the work must hold up, but gives no number, so it is "less often" only in words. That is fair, since no script computes it, but it is unquantified.
+   - **Open question (c) (the line at every starting share): handled.** It is put to the Design gate as a proposal: set the line so it is at most 1 in 10 at every starting share, or keep it as now.
+
+3. **New claims.** The only new figure beyond Round 4's corrections that the scripts do not support is the range in finding 1. Everything else is supported: 0.22, 0.78 against 0.80, 0.53 and 0.54, and 0.104 at 4 in 10 and 6 in 10 (my sweep gives 0.1043 at both).
+
+4. **Original scripts kept unchanged, with the correction stated beside them: non-blocking, clear enough.**
+   - Evidence: lines 1 to 267 of the fixed item are identical to the original, and only a blank line and the Round 4 section were added.
+   - Round 4 names the mislabel and gives the corrected figure.
+   - One weakness: the Round 3 section's output still shows "up to 0.20" and the script's comment still says "worst shares", with no pointer to Round 4 at that place. A reader who stops there is not warned. A one-line "corrected in Round 4: 0.22" beside the output would close it.
+
+### Contract
+
+- **Changed:** nothing in any repository. I wrote only S/fine.py.
+- **Why:** to test the new section 6 wording against the sweep.
+- **Verified:** by the command `python3 -I S/fine.py` (maximum and minimum of the false keep over the sweep), the diff of the item's first 267 lines against the original, and reading section 6 and Round 4.
+- **Undone:** the question cards are still outside the copy. I did not run the hold-up half of V1 as a number.
+- **Needed outside my surface:** section 6 needs the range corrected, and Round 3's output needs a pointer to the Round 4 correction. I cannot edit either.
+- **Open questions:** should "about 1 in 10" stay as the plain-words figure with the true maximum given, or is the owner to see the range at all?
