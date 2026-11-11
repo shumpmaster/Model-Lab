@@ -615,3 +615,12 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** a temporary commit to run a check on HEAD, then staging by directory, not by file.
 - **Correction proposed:** run a HEAD-reading check from a separate worktree, never by a temporary commit; stage by file, by lane.
 - **Status:** fixed (before push); closed for the model unless it recurs.
+
+## 2026-11-11 — Design of the screening (P-002), session_01QBwHGN6YeYid8ERiP8HY5Z
+
+### LL-82 M7's sprint and reached mark could not land: the checks cannot see a conversation-run gate, and a records-only sprint has no Reviewer record (LL-43 recurred)
+- **What happened:** the owner accepted M7 as reached and named pull request #93 as its work (decisions/questions/P-002-design-gate.md, Part 10). The Critic passed the reworded line (reviews/P-002-m7-line/critic.md). Run on a test commit in a separate worktree, the line failed two checks: `v3_checks milestones` ("M7 is marked reached … while the project is neither approved nor waiting on its Design gate"), since approval is read only from a pipeline status record this project does not have; and `v3_checks trace` ("M7's sprint PR #93 has no reviews/93/reviewer.md"), since #93 held records only and no Reviewer reviewed it as a pull request. The line was left as it was; the ruling stands on record.
+- **Caught by:** the full check, run before any commit of the line.
+- **Cause:** as LL-43: the tools read a project's approval only from pipeline records; and the sprint rule assumes every sprint's pull request had a Reviewer, which a records-only pull request (R0) does not need.
+- **Correction proposed:** with LL-43's model part: a conversation-run gate's ruling record reaches the checks; for the sprint rule, either a Reviewer's record of the sprint's pull request (made after merge, and saying so) or a rule that a records-only sprint's own check (here reviews/P-002-value-target-odds/reviewer.md) stands in. Until then M7's line waits, as P-001's M1 does.
+- **Status:** open; with LL-43.
