@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Critic on questions/P-002-two-look-line.md, the owner's card on the line at two looks (P-002, P18): round 1 (FAIL), brief 267, at commit e7569bc. A fresh session on a different model from the card's writer, started by the Chief of Staff (session_01QBwHGJm2otqFdQxgZQ1fyx), 2026-11-11. Recorded verbatim by the Orchestrator from the helper's return; the round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
+*The Critic on questions/P-002-two-look-line.md, the owner's card on the line at two looks (P-002, P18): round 1 (FAIL), brief 267, at commit e7569bc; round 2 (PASS), brief 268, at commit 79d8d5a. A fresh session on a different model from the card's writer, started by the Chief of Staff (session_01QBwHGJm2otqFdQxgZQ1fyx), 2026-11-11. Recorded verbatim by the Orchestrator from the helper's return; the round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's. After round 2, its findings 1 to 6 were applied as wording (commit after 79d8d5a).*
 
 ## Round 1 (commit e7569bc)
 
@@ -101,3 +101,106 @@ The card fails on one point, which blocks it. It never says what "the line" is. 
 **Open questions.**
 1. Option names (finding 4): E-004 uses the same names. Should the Definer rename them in E-004 too, so the card and the plan agree, or may the card use its own names?
 2. Finding 3 rests on what the owner was shown on two earlier cards. If the owner already read "passes no more often" as the firm 1 in 10, the card may need to say plainly that line A departs from that earlier wording.
+
+## Round 2 (commit 79d8d5a)
+
+The round's verdict was PASS.
+
+*The Critic on questions/P-002-two-look-line.md, the owner's card on the line at two looks (P-002, P18). This is round 2, brief 268, read from the fixed copy /home/user/ml-fixed-268 at 79d8d5a. It is a fresh session on a different model from the card's writer.*
+
+The card passes. It now says what "the line" is, and that was round 1's only blocking finding. The five findings that did not block are also answered. I checked every changed sentence and figure against line-output.txt, E-004.md and the two cards as put, and all of them match. I checked all 72 table figures again and they still match. Six small findings remain and none of them blocks. One of them (finding 1) is a point that round 1 passed and should not have, so I flag it under D-050.
+
+## Part 1. Round 1's findings against this card
+
+| Round 1 finding | Answered? | Evidence |
+|---|---|---|
+| 1 (blocking): "the line" not defined | Yes | Line 9 adds a Words entry. It says a look passes "when chance alone would give a gap this large at most 0.097 of the time (A) or 0.093 of the time (B)" and explains why the line sits below 1 in 10 (two chances to pass). This fits E-004 line 120 ("p-value is at most the line"). |
+| 2: other words not defined | Yes | Line 8 defines trial, screened method, piece and each way. Line 13 defines short read and line 14 defines hold-up checks. Line 12 gives the second look's cost. |
+| 3: A's cost left out the value-target promise | Yes | Line 48: "It meets the check shown on your value-target card, at starting shares of 1 in 2 and 3 in 10 (0.0933 and 0.0989); it does not meet the trial-gates card's unqualified 'passes no more often'." Context line 61 quotes ml-cards/P-002-value-target.md lines 46 and 68 word for word. Context line 62 quotes ml-cards/P-002-trial-gates.md line 26 word for word. |
+| 4: unequal option names | Yes | Lines 48 and 49 now use matching names ("A line of 0.097: ... slightly more useful methods pass" and "A line of 0.093: ... slightly fewer useful methods pass"). Context line 63 records the change from E-004's names (E-004 lines 122 and 123, quoted correctly). |
+| 5: WHO HAS CHECKED IT understated the corrections | Yes | Line 52 uses the wording I proposed. The "two gaps corrected by 0.0001" are 0.0315 to 0.0314 (Reviewer round 2, finding 2) and 0.0123 to 0.0124 (Reviewer round 3, finding 4). |
+| 6a: WHY did not lead with failures | Yes | Line 5 now opens with "failed twice before it passed" and with the dependent-pieces gap. It has no paths or ids. |
+| 6b: "0.093" meant two things | Yes | Line 48 writes "0.0933". |
+| 6c: B's cost blurred two figures and left out the owner's time | Yes | Line 49: "up to about 4 in 100 more often for a true halving (about 1 in 100 for a method that does nothing), each time with 60 more pieces, 30 more days and 5 more short reads for you." |
+
+## Part 2. Changed sentences and figures
+
+- **Pass table** (lines 18 to 29): all 36 figures match line-output.txt lines 13 to 21. The worst-case row, 0.1063 at 0.368 and 0.632 and 0.0982 at 0.3316 and 0.6684, matches lines 31 and 32.
+- **Second-look table** (lines 33 to 43): all 36 figures match lines 13 to 21. The card's column order differs from the file's, and each row was read across correctly.
+- **Line 45**: "never ... less often", about 1 in 100 near 0.43 and 0.57 (0.0131) and about 4 in 100 near 0.55 (0.0367). These match lines 41 to 45 and E-004 line 124.
+- **Option A** (line 48):
+  - the bands 0.31 to 0.43 and 0.57 to 0.69 (0.307 to 0.429 and 0.571 to 0.693, line 24);
+  - 0.1063 at 0.368 and 0.632;
+  - 0.0933 at 1 in 2, and at most 1 in 10 outside the bands;
+  - a gain of up to about 1 in 100 (0.0097).
+  - All are correct.
+- **Option B** (line 49): 0.0982 at 0.3316 and 0.6684; 0.0097 at most (E-004 line 123). Both correct.
+- **Line 12**: 60 more pieces, 30 days and 5 short reads match E-004 line 124 and Step 6.
+- **Assumptions** (line 53): A1, A3, A5 and A6 are unchanged and still match E-004 line 125.
+- **Fairness**: The headings, gains and costs are now balanced. Each option's cost sits next to the earlier promise it meets or breaks. There is no recommendation.
+- **Risk class R3, reversible for trials not yet started, no default, no timeout**: These match both cards as put (value-target lines 98 and 99, trial-gates lines 35 and 36) and fit a value target.
+
+## Findings
+
+**1. Not blocking. The words "on a card of its own" and "checked by someone other than their writer" are not the owner's words in Part 7. Self-implication flag (D-050): round 1 checked this bullet and passed it as "Part 7, verbatim".**
+- Where: Context, line 58, "The owner chose to decide the line on a card of its own during Design, on figures checked by someone other than their writer: 'Decide later on checked figures (Recommended)' (source: decisions/questions/P-002-design-gate.md, Part 7)". WHY, line 5, "You asked to decide this line on a card of its own, on checked figures."
+- Problem: Part 7 (design-gate record, line 16) holds only "Decide later on checked figures (Recommended)". The card of its own and the check by someone else come from the record's "How it is carried out", P18 bullet (line 27): "run by someone other than their writer, then put to the owner on a card of their own before the design freezes". That bullet is how the ruling is carried out, written by the Chief of Staff, not the owner's words.
+- Fix: in line 58, cite "Part 7, and 'How it is carried out', P18". In WHY, write "You chose to decide this line later, on checked figures; it comes to you on a card of its own, as recorded with your ruling."
+
+**2. Not blocking. "Leaned the right way" is not defined.**
+- Where: line 12, "only if look 1 ... leaned the right way and did not pass".
+- Fix: add "(fewer of the method's 30 pieces needed you than of the other 30; a tie does not go on)". This is E-004 Step 5, item 3.
+
+**3. Not blocking. The rule for the second look leaves out the hold-up checks.**
+- Where: line 12.
+- Problem: E-004 Step 5 item 4 and P6 say look 1 does not go on if its hold-up checks fail. Line 14 says those checks only lower the figures, and that is true. But line 12 reads as the full rule, and it is not.
+- Fix: write "leaned the right way, did not pass, and its work held up".
+
+**4. Not blocking, fairness. The reason given for making no recommendation names only one of A's gains.**
+- Where: line 51, "a judgement between a firm 1 in 10 and slightly more passes of useful methods".
+- Problem: A's other gain is fewer second looks, which saves the owner's time. It is left out, and "firm" set against "slightly" leans a little toward B.
+- Fix: "a judgement between 1 in 10 held at every starting share and slightly more passes of useful methods with slightly fewer second looks."
+
+**5. Not blocking. WHO HAS CHECKED IT stops at round 1.**
+- Where: line 52, "The Critic checked this card: round 1 failed it for leaving 'the line' undefined."
+- Fix: before the card is put, add "and passed it at round 2".
+
+**6. Not blocking. The stop-rule bullet cites a record that does not name this check.**
+- Where: Context, line 65, "S-002's stop rule of three rounds for this check ... (source: specs/S-002.md)".
+- Problem: S-002 line 193 says "plan rounds and build rounds, three each". It does not say this check counts as one of them. The Reviewer's round 3 is the record that applies the rule here ("S-002's three-round stop rule is not reached").
+- Fix: add reviews/P-002-two-look-line/reviewer.md, round 3, to the bullet's source.
+
+## Six-part contract
+
+**Changed (by file).** Nothing. I hold no write tool, and I wrote nothing in /home/user/ml-fixed-268 or /home/user/ml-cards.
+
+**Why.** Brief 268 (/home/user/Model-Lab/docs/briefs/268-critic.md) asks for round 2 on the card after its change in commit ce7556d.
+
+**Verified.**
+- I read in full:
+  - /home/user/ml-fixed-268/questions/P-002-two-look-line.md
+  - /home/user/ml-fixed-268/reviews/P-002-two-look-line/critic.md (round 1)
+  - /home/user/ml-fixed-268/reviews/P-002-two-look-line/reviewer.md (rounds 1 to 3)
+  - /home/user/ml-fixed-268/experiments/E-004/line-output.txt
+  - /home/user/ml-fixed-268/experiments/E-004.md, lines 60 to 135
+  - /home/user/ml-fixed-268/questions/_TEMPLATE.md
+  - /home/user/ml-fixed-268/decisions/questions/P-002-design-gate.md
+  - /home/user/ml-cards/P-002-value-target.md
+  - /home/user/ml-cards/P-002-trial-gates.md
+  - /home/user/Model-Lab/docs/briefs/267-critic.md
+- I searched /home/user/ml-fixed-268/specs/S-002.md for its stop rule (line 193).
+- I compared every figure on the card by hand with line-output.txt and E-004.md.
+- I have no shell, so I ran no command.
+
+**Undone.**
+- I did not run `git show ce7556d`. I compared the card with round 1's quotations instead, as the brief allows.
+- I did not re-derive any figure; they rest on the Reviewer's round 3.
+- I took the copies in /home/user/ml-cards to be the cards at 964da47 and 3ae1268, as the brief describes them.
+
+**Needed outside my surface.**
+- Chief of Staff: findings 1 to 6, ideally before the card is put. At least finding 5, so that the card records this round.
+- Orchestrator: record this return verbatim in reviews/P-002-two-look-line/critic.md as round 2.
+- Triage: note the D-050 flag on finding 1. Round 1 accepted the Part 7 bullet as verbatim when part of it is not.
+
+**Open questions.**
+1. Finding 1: should the card say plainly that "a card of its own" is how the ruling was carried out, not the owner's own words? Or is citing the P18 bullet enough?
