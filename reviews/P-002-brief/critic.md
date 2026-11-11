@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Critic on P-002's brief (docs/projects/P-002.md, Part 1) before the Design gate: round 1 (FAIL), brief 246; round 2 (FAIL), brief 247; round 3 (FAIL), brief 249, the last before the stop rule. Each round a fresh session on a different model from the plan's writer, started by the Chief of Staff (session_01QBwHGJRsdA6DND96m5Z9xE), 2026-11-11, on fixed copies Model-Lab@d96a853 (round 1) and Model-Lab@6397b75 (round 2) and Model-Lab@0d37028 (round 3). Rounds 2 and 3's second-level headings are recorded one level lower, so they nest under their round. Recorded verbatim by the Orchestrator from the helper's return; the round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
+*The Critic on P-002's brief (docs/projects/P-002.md, Part 1) before the Design gate: round 1 (FAIL), brief 246; round 2 (FAIL), brief 247; round 3 (FAIL), brief 249, the last before the stop rule; round 4 (PASS), brief 251, the one focused confirmation review the owner ruled (decisions/questions/P-002-brief-stop.md). Each round a fresh session on a different model from the plan's writer, started by the Chief of Staff (session_01QBwHGJRsdA6DND96m5Z9xE), 2026-11-11, on fixed copies Model-Lab@d96a853 (round 1) and Model-Lab@6397b75 (round 2) Model-Lab@0d37028 (round 3) and Model-Lab@dc39b95 (round 4). Rounds 2 to 4's second-level headings are recorded one level lower, so they nest under their round. Recorded verbatim by the Orchestrator from the helper's return; the round's own verdict line is recorded as "The round's verdict was …" (LL-68). The verdict above is the latest round's.*
 
 ## Round 1 (brief 246)
 
@@ -230,3 +230,60 @@ One blocking finding, on section 6's last bullet and the lines that rest on it. 
 - **Plainness.** Acceptable for a phone. Section 8's constraint list is long but each bullet is a plain pair.
 
 File read: /home/user/ml-fixed-249/docs/projects/P-002.md and the records named above, all under /home/user/ml-fixed-249/. The two card files are in /home/user/ml-fixed-249-cards/.
+
+## Round 4, the one focused confirmation review the owner ruled (brief 251)
+
+The round's verdict was PASS.
+
+Scope: I read docs/projects/P-002.md Part 1, the three earlier rounds, the round 3 triage, both decision records, both cards as put, and both intake files. I also spot-checked Q-017 §1, the odds Reviewer record, OPERATING_MODEL §5 and the role files. I ran nothing, and I did not read docs/handoff, docs/briefs or sessions. I found no blocking finding. Eight non-blocking findings follow, so the ruled-or-proposed labels hold and a FAIL is not warranted. Findings 1 to 5 are on item 1 (the labels), finding 6 is on item 2 (round 3's findings) and findings 7 and 8 are on item 3 (new claims).
+
+### Item 1: the ruled and proposed labels in sections 3, 4 and 6
+
+**Ruled items.** I checked each against its record.
+- The target is "halve the share", the 1 in 10 line, and one confirmed source to try a method. These are value-target.md parts 1, 2 and 4, and the brief labels them ruled.
+- The two approvals (entry card and results card), "every result comes to the owner", and "nothing dropped automatically" are labelled ruled. The ruling line of trial-gates.md holds all three.
+- "Two looks planned per trial" is labelled ruled. The ruling line of trial-gates.md holds it.
+- The 12-month check and the miss rule (the owner re-aims or closes) are labelled ruled. The value-target record, "What was put", says part 1's question named them.
+- The 30-pieces-each-way size and the shuffled draws are labelled as "the terms of the cards the owner answered". They are in the trial-gates card's Words, which option A covers. This is the less certain of the ruled items, as the triage said, but it is accurately labelled.
+
+**Section 6, last bullet.** I checked each item under "On the two cards ... as proposals".
+- Each item is on a card under a "Proposed under every option" heading. The value-target card holds the date (judged 30 days after the last piece), the summary after five trials, the stop under 6 of 60, the stop-at-once and void rules, the review date and re-check, one method per kind, and the prompt-engine guard. The trial-gates card holds the two cards and 5 short reads, the cap of 3 entry cards, and results cards within two weeks.
+- Under "The Chief of Staff's own", the two-look line (odds intake round 4) and "no method entering the operating model while the prompt engine counts the kind" appear on neither card, and the bullet places them correctly.
+- Nothing unruled is presented as ruled, and nothing ruled is presented as only proposed, apart from the two points under findings 1 and 2 below.
+
+**Other places.** Section 4 now says "as proposed for the Design gate" for the short reads. Section 6's cost line says "as proposed". Section 3 Dependencies marks the pre-M9 conditions as "the Chief of Staff's own design" and marks the prompt-engine guards as "Proposed". The remaining items below are non-blocking.
+
+1. **Non-blocking. Section 6, last bullet: "two cards per trial".** It sits in the not-ruled list, but the owner's ruling is an entry card plus a results card for every method (trial-gates.md ruling line; section 6 line 183 and section 4 row 1 say so). Only the card's cost framing was proposed, and no reader of the brief is misled about the approvals, but the label is loose. A fix would be to list only "5 short reads per look" and say the two cards are the ruled approvals.
+
+2. **Non-blocking. Section 6, "How a method is tried and kept (the owner's design ...)".** The bullet attributes the following to the owner's design.
+   - It says each entry card carries "its fixed trial plan". The trial-gates card marks that as "*Added by the Chief of Staff*", and the ruling line does not name it.
+   - It says the results card carries "the Critic's view". The card also marks that "Added", though the trial-gates record's "How it is carried out" does hold the Critic's view.
+   - Option A was answered on the card as put, and a frozen plan is also the experiment playbook's rule, so this is defensible. The attribution is still wider than the ruling line.
+
+3. **Non-blocking. Section 6, last bullet, the "ruling makes them so" ambiguity.** The trial-gates card says its time proposals are made so by the owner's ruling, and the owner answered A. The decision record names only the approvals and two looks, and the value-target record says the other proposals are "not yet ruled one by one". The brief follows the records and treats these as proposals for the gate. That is the conservative and supportable reading, and the gate will settle it.
+
+4. **Non-blocking. Section 6, last bullet, "the cards as put in the session are in intake/...".** The value-target intake file holds only the owner's words. It does not hold the card's parts, options or proposals. The trial-gates intake holds a short summary plus the option names, not the proposals list. The proposals are readable only in the two card files and commits. The brief's phrasing follows the value-target record's own claim ("What was put"), but it overstates what the intake files hold. The commits and card files are also cited, so the owner can still check.
+
+5. **Non-blocking. Section 7, R7 (outside the three sections you named).** It says "proposed here: outside code, prompts and skills are checked before use". Part 4's ruling record ("How it is carried out") states that check as a condition of trying a method, so it was ruled. Section 6 itself states it correctly as ruled.
+
+### Item 2: round 3's findings 1 to 6
+
+- **Finding 1 (blocking): answered.** The 5 short reads are now in the proposed list, section 4 and the cost line. The last bullet no longer says every item was on a card, and splits "on a card" from "the Chief of Staff's own". See findings 1 to 3 above for the residual looseness.
+- **Finding 2: answered, with a residual.** The brief now cites the two intake files and no longer says the cards were "removed". See finding 4 above for what the intake files hold.
+- **Finding 3: mostly answered.** Section 4 now says the Researcher answers from what the Input reader returns, "not by reading outside pages itself" (OPERATING_MODEL §5 and D-064, line 242, support this). The row for the Source checker still says only that it "opens and confirms the source". It does not say how outside text reaches it. This is a residual, non-blocking.
+- **Finding 4: answered.** M9 now reads "the owner can see the trial set down in a registered experiment before any piece is assigned", which is a state achieved. This is the same form that passed for M10.
+- **Finding 5: answered.** U3 now uses "all within the 60 days before it and most in October". Q-017 line 286 gives the 60-day window, and the per-month table shows 245 of 312 Service Desk pull requests in October. The counts 124, 150, 55 and 90 in the Service Desk, and the single-kind counts 1, 8 and 1, match the by-kind table (lines 52 to 54).
+- **Finding 6: answered.** Link 4 now says "fall on either side by chance, not by choice", with U5 after it.
+
+### Item 3: new claims in the redraft
+
+6. **Non-blocking, no new unsupported claim found.** The figures the redraft touched hold up.
+   - The odds figures (0.093 and 0.099, up to about 0.106, 0.53 and 0.54) match the odds Reviewer record (exact 0.5321 and 0.5362; maximum 0.1062).
+   - The "Service Desk's build" remark in U3 is supported by the per-month table.
+   - The M9 why ("the cards they answered set each trial at 30 pieces each way with one planned second look") matches the cards and is worded as the cards' terms.
+
+7. **Non-blocking, M7 row, section 4.** It cites the Reviewer's round-3 pass. I read the sweep figures in that record but did not re-read every round, so I take the pass itself from round 3's check.
+
+8. **Non-blocking, process.** The triage's D-050 flags on rounds 1 and 2 (the U5 omission, the "about seven weeks" figure, the short reads and the M9 wording) are all now answered in the brief. I raise no new self-implication.
+
+Files: /home/user/ml-fixed-251/docs/projects/P-002.md; /home/user/ml-fixed-251/decisions/questions/P-002-value-target.md; /home/user/ml-fixed-251/decisions/questions/P-002-trial-gates.md; /home/user/ml-fixed-249-cards/P-002-value-target-at-964da47.md; /home/user/ml-fixed-249-cards/P-002-trial-gates-at-3ae1268.md; /home/user/ml-fixed-251/intake/P-002-owner-value-target-answers-2026-11-10.md; /home/user/ml-fixed-251/intake/P-002-owner-trial-gates-answer-2026-11-11.md.
