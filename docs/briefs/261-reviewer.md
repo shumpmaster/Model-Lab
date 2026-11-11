@@ -1,0 +1,10 @@
+# Brief 261 — reviewer — the independent run of the line at two looks (P-002, P18), both versions
+
+session: session_01QBwHGN6YeYid8ERiP8HY5Z
+model: the Reviewer runs in a fresh session on a different model from the script's writer, the Definer (D-056). Model names are kept out of this record by this session's standing instructions (LL-70).
+start: Model-Lab@e9f1f2f5aa51fb8a217fe0ee2a6371dbd08b9adc, fixed copy /home/user/ml-fixed-261
+manifest: the fixed copy: experiments/E-004/line.py, experiments/E-004/line-output.txt, experiments/E-004.md, specs/S-002.md, docs/projects/P-002.md, intake/P-002-value-target-odds-2026-11-10.md, reviews/P-002-value-target-odds/reviewer.md, decisions/questions/P-002-design-gate.md
+recorded: at hand-out, 2026-11-11
+
+## Brief
+The owner ruled that both versions of the line at two looks are computed in the trial design and run by someone other than their writer, then put to the owner on a card of their own before the design freezes (decisions/questions/P-002-design-gate.md, Part 7, C; "How it is carried out", P18). Reproduce every figure in experiments/E-004/line-output.txt by running line.py, and check each a second way you write yourself (for example exact sums or a simulation), for version (a), the line as worked out so far, and version (b), held at most 1 in 10 at every starting share: the chance a method that does nothing passes, how often a true halving passes, and the chance of a second look, across starting shares 1 in 10 to 9 in 10, and the worst cases named. Check that line.py's assumptions (A1 to A8) are stated and are the ones E-004 and the brief's section 6 rest on, and that version (a) agrees with the earlier run (reviews/P-002-value-target-odds/reviewer.md). Say whether each figure is fairly stated in E-004 and S-002. Recommend neither line. Write nothing in the copy (PYTHONDONTWRITEBYTECODE=1); scratch work under /tmp/claude-0/-home-user/050cc2ca-c3a4-5015-8eb5-9c67e3cf5108/scratchpad/rv261/. Return `Verdict: PASS` or `Verdict: FAIL` first, numbered findings each blocking or not with command and output, then the six-part contract.

@@ -624,3 +624,10 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** as LL-43: the tools read a project's approval only from pipeline records; and the sprint rule assumes every sprint's pull request had a Reviewer, which a records-only pull request (R0) does not need.
 - **Correction proposed:** with LL-43's model part: a conversation-run gate's ruling record reaches the checks; for the sprint rule, either a Reviewer's record of the sprint's pull request (made after merge, and saying so) or a rule that a records-only sprint's own check (here reviews/P-002-value-target-odds/reviewer.md) stands in. Until then M7's line waits, as P-001's M1 does.
 - **Status:** open; with LL-43.
+
+### LL-83 The trial design's figures failed their independent run twice on how a range or a ceiling was stated, not on any figure
+- **What happened:** the Reviewer reproduced every figure of both versions of the line at two looks, by exact sums and a simulation, and failed the trial design twice (reviews/P-002-two-look-line/reviewer.md): round 1, version (a)'s excess over 1 in 10 was given as one range when it is two bands, making (a) look worse; round 2, the stricter version's extra second looks were given as a ceiling "up to about 3 in 100" taken over the nine starting shares printed, when the ceiling over all shares is about 4 in 100, making (b) look cheaper.
+- **Caught by:** the Reviewer, rounds 1 and 2.
+- **Cause:** as LL-77: a summary figure was written from the printed table, not from the whole range the sentence claims; the script printed the nine shares and the extremes of one quantity, not of every quantity the text summarises.
+- **Correction proposed:** a sentence that states a range, a ceiling or a worst case states it over what the script computed for that quantity, and the script prints every such figure the text uses; read each "up to" and "from … to" against its own printed line. For the model, with LL-77: a figure-bearing plan's script prints every summary figure its text states.
+- **Status:** open; the third round is the last before the stop rule.
