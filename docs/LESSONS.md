@@ -584,3 +584,10 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** a figure written for a choice still open was not re-read once the choice was made; and a non-blocking numerical note in a passing check was not applied to the record that makes the figure.
 - **Correction proposed:** when a ruling picks one option, re-read every figure carried forward from the card and restate it at the option chosen; apply a passing check's numerical notes to the script or record they name, or say why not. For the model: a figure that drives a ruling is run by someone other than its writer before the ruling, not after (as here, M7).
 - **Status:** fixed here (the plan and the intake item corrected, round 4); model change open.
+
+### LL-78 The plan's boundary with the prompt engine guarded trials only, and left the screener step without an owner
+- **What happened:** the first draft of P-002's brief said the project "changes nothing the prompt engine is testing or counting", but guarded only trials; the prompt engine's second target counts the first 30 pieces of each kind under its change to the operating model, in any project, and the draft's own milestone puts approved methods into that same model with no guard. It also gave the owner's "screeners" to no role on the roster, so no one picked leads or wrote their research questions.
+- **Caught by:** the Critic, round 1 (reviews/P-002-brief/critic.md, findings 1 and 2).
+- **Cause:** the boundary was drafted from the screening's own rulings (decisions/questions/P-002-route.md) without reading the prompt engine's value targets; and the owner's word "screener" was carried into the plan as if it were a role.
+- **Correction proposed:** before a plan claims to keep clear of another project, read that project's value targets and every count it runs, and pair each with what this plan changes; map each step of the owner's design onto a roster role before writing the owners table. For the model: the definition of ready asks a plan sharing a repository to name the other items' counts it could touch.
+- **Status:** fixed here (redrafted for round 2); model change open.
