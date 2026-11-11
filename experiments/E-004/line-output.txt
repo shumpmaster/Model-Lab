@@ -23,3 +23,23 @@ BY STARTING SHARE, before the hold-up checks
 WORST DOES-NOTHING PASS OVER EVERY SHARE ON THE GRID (0.001 to 0.999), refined by 0.0001
  (a) worst 0.1063 at 0.632; above 0.10 at shares from 0.307 to 0.429 and from 0.571 to 0.693 (246 grid shares)
  (b) worst 0.0982 at 0.6684; never above 0.10
+
+THE RANGE OF LINES THAT DECIDE AS (a) DOES
+ (a) any line from 0.09616 up to, not including, 0.09725 gives the same decisions as 0.097
+
+EACH WORST CASE AT ITS STARTING SHARE AND THE MIRROR SHARE (one minus it)
+ (a) 0.097: does-nothing pass 0.1063 at 0.632, 0.1063 at 0.368
+ (b) 0.09227: does-nothing pass 0.0982 at 0.6684, 0.0982 at 0.3316
+ next line up 0.09359: does-nothing pass 0.1009 at 0.343, 0.1009 at 0.657
+
+HOW MUCH MORE OFTEN (b) TAKES THE SECOND LOOK THAN (a), at the nine starting shares 1 in 10 to 9 in 10
+ does nothing: 0.1: +0.000000 ((a) 0.380029, (b) 0.380029); 0.2: +0.000014 ((a) 0.382353, (b) 0.382367); 0.3: +0.002264 ((a) 0.382709, (b) 0.384973); 0.4: +0.012351 ((a) 0.380756, (b) 0.393106); 0.5: +0.011429 ((a) 0.389048, (b) 0.400477); 0.6: +0.012351 ((a) 0.380756, (b) 0.393106); 0.7: +0.002264 ((a) 0.382709, (b) 0.384973); 0.8: +0.000014 ((a) 0.382353, (b) 0.382367); 0.9: +0.000000 ((a) 0.380029, (b) 0.380029)
+   largest 0.0124 (0.012351), at 0.4
+ true halving: 0.1: +0.000000 ((a) 0.579959, (b) 0.579959); 0.2: +0.000000 ((a) 0.543109, (b) 0.543109); 0.3: +0.000220 ((a) 0.477943, (b) 0.478163); 0.4: +0.007029 ((a) 0.379310, (b) 0.386339); 0.5: +0.031237 ((a) 0.269315, (b) 0.300552); 0.6: +0.031439 ((a) 0.190730, (b) 0.222169); 0.7: +0.019050 ((a) 0.108200, (b) 0.127251); 0.8: +0.009289 ((a) 0.035444, (b) 0.044734); 0.9: +0.000247 ((a) 0.006591, (b) 0.006838)
+   largest 0.0314 (0.031439), at 0.6
+
+HOW MUCH MORE OFTEN (b) TAKES THE SECOND LOOK THAN (a), at every share from 0.0001 to 0.9999 by 0.0001
+ does nothing: largest 0.0131 (0.013113), at 0.5734 ((a) 0.3833, (b) 0.3964); within 0.000005 of it at 0.4244 to 0.4289 and 0.5711 to 0.5756
+   smallest +0.000000, at 0.0001; negative (below -1e-12) at any share: no
+ true halving: largest 0.0367 (0.036673), at 0.5482 ((a) 0.2284, (b) 0.2651); within 0.000005 of it at 0.5468 to 0.5496
+   smallest +0.000000, at 0.0001; negative (below -1e-12) at any share: no

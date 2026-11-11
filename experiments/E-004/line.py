@@ -171,3 +171,67 @@ for name, R, line in (("(a)", Ra, 0.097), ("(b)", Rb, b_low)):
             + f" ({len(over)} grid shares)") if over else "never above 0.10"
     w, at = worst_null_refined(line)
     print(f" {name} worst {w:.4f} at {at}; {span}")
+
+# --- Printed only, for E-004's text: (a)'s range of lines, each worst case at both of its starting
+#     shares, and the gap in how often the second look is taken, over every share by 0.0001.
+a_low = max(c for c in cands if c <= 0.097)
+a_next = min(c for c in cands if c > 0.097)
+print()
+print("THE RANGE OF LINES THAT DECIDE AS (a) DOES")
+print(f" (a) any line from {a_low:.5f} up to, not including, {a_next:.5f} gives the same decisions as 0.097")
+
+print()
+print("EACH WORST CASE AT ITS STARTING SHARE AND THE MIRROR SHARE (one minus it)")
+Rn = rules(b_next) if b_next is not None else None
+for name, R, at in (("(a) 0.097", Ra, a_at), (f"(b) {b_low:.5f}", Rb, b_at), (f"next line up {b_next:.5f}", Rn, n_at)):
+    if R is None:
+        continue
+    m = round(1 - at, 4)
+    print(f" {name}: does-nothing pass {passes(*R, at, at)[0]:.4f} at {at}, {passes(*R, m, m)[0]:.4f} at {m}")
+
+
+def second_look(R1, p_with, p_without):
+    """The chance the trial takes its second look: the same sum as passes(...)[1], look 1 only."""
+    W = np.outer(pmf(N1, p_with), pmf(N1, p_without))
+    return float((W * ((~R1) & GO_ON)).sum())
+
+
+for p in SHARES:                           # the same figures as passes(...)[1] in the table above
+    for R in (Ra, Rb):
+        assert abs(second_look(R[0], p, p) - passes(*R, p, p)[1]) < 1e-12
+        assert abs(second_look(R[0], p / 2, p) - passes(*R, p / 2, p)[1]) < 1e-12
+
+print()
+print("HOW MUCH MORE OFTEN (b) TAKES THE SECOND LOOK THAN (a), at the nine starting shares 1 in 10 to 9 in 10")
+for name, half in (("does nothing", False), ("true halving", True)):
+    nine = []
+    for p in SHARES:
+        pw = p / 2 if half else p
+        sa, sb = second_look(Ra[0], pw, p), second_look(Rb[0], pw, p)
+        nine.append((sb - sa, p, sa, sb))
+    print(f" {name}: " + "; ".join(f"{p:.1f}: {g:+.6f} ((a) {sa:.6f}, (b) {sb:.6f})" for g, p, sa, sb in nine))
+    top = max(nine)
+    print(f"   largest {top[0]:.4f} ({top[0]:.6f}), at {top[1]:.1f}")
+
+FINE = [i / 10000 for i in range(1, 10000)]
+print()
+print("HOW MUCH MORE OFTEN (b) TAKES THE SECOND LOOK THAN (a), at every share from 0.0001 to 0.9999 by 0.0001")
+for name, half in (("does nothing", False), ("true halving", True)):
+    rows = []
+    for p in FINE:
+        pw = p / 2 if half else p
+        sa, sb = second_look(Ra[0], pw, p), second_look(Rb[0], pw, p)
+        rows.append((sb - sa, p, sa, sb))
+    top, top_at, top_a, top_b = max(rows)
+    low, low_at = min(rows)[:2]
+    near = [p for g, p, _, _ in rows if g >= top - 0.000005]     # within 0.000005 of the largest
+    runs = []
+    for p in near:
+        if runs and round(p * 10000) == round(runs[-1][1] * 10000) + 1:
+            runs[-1][1] = p
+        else:
+            runs.append([p, p])
+    where = " and ".join(f"{a}" if a == b else f"{a} to {b}" for a, b in runs)
+    print(f" {name}: largest {top:.4f} ({top:.6f}), at {top_at} ((a) {top_a:.4f}, (b) {top_b:.4f});"
+          f" within 0.000005 of it at {where}")
+    print(f"   smallest {low:+.6f}, at {low_at}; negative (below -1e-12) at any share: {'yes' if low < -1e-12 else 'no'}")
