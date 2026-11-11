@@ -1,6 +1,6 @@
 Verdict: PASS
 
-*The Critic's milestone-line check of M7's reworded line, brief 257, part B; a session on a different model from the writer. Recorded verbatim by the orchestrator, 2026-11-11. The six-part contract of the whole return is in reviews/P-002-design-gate-brief/critic.md, round 1. Orchestrator's confirmation asked for in finding 4: `git show --stat 9513e98` lists intake/P-002-value-target-odds-2026-11-10.md and reviews/P-002-value-target-odds/reviewer.md, so pull request #93 holds M7's work. In round 2, the words "Verdict: PASS" quoted mid-line are written "[its verdict line] PASS", the one change from verbatim, because the review lint reads a verdict only at the start of a line.*
+*The Critic's milestone-line check of M7's reworded line, brief 257, part B; a session on a different model from the writer. Recorded verbatim by the orchestrator, 2026-11-11. The six-part contract of the whole return is in reviews/P-002-design-gate-brief/critic.md, round 1. Orchestrator's confirmation asked for in finding 4: `git show --stat 9513e98` lists intake/P-002-value-target-odds-2026-11-10.md and reviews/P-002-value-target-odds/reviewer.md, so pull request #93 holds M7's work. In round 2, the verdict words quoted mid-line in finding 5 are written "[its verdict line] PASS", the one change from verbatim, because the review lint reads a verdict only at the start of a line.*
 
 ## Round 1
 
