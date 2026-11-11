@@ -106,7 +106,7 @@ The Reviewer re-ran every figure printed for your target and the trial, agreed a
 RECOMMENDATION: A, medium confidence: the check this milestone asked for was done and passed. *Reversible:* yes.
 
 WHO HAS CHECKED IT: the Critic, on a different AI model from the writer: round 1 failed this card, and this redraft is checked at round 2 (record: reviews/P-002-design-gate/critic.md); the gate Critic's view of each case is its own record (case 1, then case 2).
-RISK CLASS: R3 (a phase gate that also rules the rest of a value target's trial terms)   REVERSIBILITY: reversible, except Part 1, D   BLAST RADIUS: this project's next phase, its spend, the owner's time, and how its trials run
+RISK CLASS: R3 (a phase gate that also rules the rest of a value target's trial terms)   REVERSIBILITY: reversible   BLAST RADIUS: (every part reversible except Part 1, D) this project's next phase, its spend, the owner's time, and how its trials run
 DEFAULT: none — a phase gate, its ceilings and a value target's terms are never ruled by default or by proxy   TIMEOUT: none
 
 ## Context
