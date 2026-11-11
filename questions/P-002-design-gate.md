@@ -9,11 +9,11 @@ WHY: The screening is the project that looks for better ways of running your tea
 ## Part 1: the gate
 The plan carries six small faults its last check found and left, so the passed text stands: the cards called their proposals made so by your ruling, while your record says they are not yet ruled one by one (this card rules them); it lists the two cards per trial as proposed though you ruled them; it gives the fixed trial plan and the Critic's view on the results card to your design, though the card marked both as added by the Chief of Staff; it says more of the cards is saved than is; it calls one check you ruled "proposed"; and it does not say how outside text reaches the Source checker, the agent that confirms sources. Each is carried in the case. You are the plan's user, so no one plays a user. If a trial would ever need three or more of the project's agents at once, that comes to you first, as a question of the project's tier.
 OPTIONS:
-  A. proceed — Design starts, and you approve the plan as it stands: the target; its milestones (M7 to M15, the project's own, and the standard steps every project takes in Discovery and Design); its tier, T1, as this repository's charter sets; and its intent, your purposes and preferences as drafted from your words. *Gain:* the counting rules, the trial and the sources get written and reviewed. *Cost:* the six faults stand until a later change. *Reversible:* yes.
+  A. proceed — Design starts, and you approve the plan as it stands: the target; its milestones (M7 to M15, the project's own, and the standard steps every project takes in Discovery and Design); its tier, T1, the level of checking this repository's charter sets; and its intent, your purposes and preferences as drafted from your words. *Gain:* the counting rules, the trial and the sources get written and reviewed. *Cost:* the six faults stand until a later change. *Reversible:* yes.
   B. hold — the case is updated with what you ask and comes back to you. *Gain:* the six faults, or anything else, fixed first. *Cost:* nothing moves meanwhile.
   C. recycle into Discovery — say what to redo and why. *Gain:* any part you doubt is redone first. *Cost:* Discovery runs again before any design.
   D. kill — the project closes; its lessons still go to the operating model. *Gain:* no more of your time or spend on it. *Cost:* restarting it would be new work for you to approve.
-RECOMMENDATION: A, medium confidence: the plan passed its check, and none of the six faults changes a term you have ruled or are asked to rule here. What would change it: wanting the faults fixed first (B).
+RECOMMENDATION: A, medium confidence: the plan passed its check, and none of the six faults changes the content of any term; Parts 4 and 5 correct how the terms they touch are labelled. What would change it: wanting the faults fixed first (B).
 
 ## Part 2: the spend ceiling
   A. **your existing AI plan only**: no paid services, data, tools or extra usage, as for the prompt engine. *Gain:* no new spend. *Cost:* a method that needs a paid tool cannot be tried without coming back to you.
@@ -23,13 +23,13 @@ RECOMMENDATION: A, medium confidence: nothing in the plan needs a paid extra yet
 ## Part 3: your time
 Your hours are not recorded, so this counts what reaches you. Each trial brings one entry card, one results card and its short reads (Part 6). There is no recommendation anywhere in this part; it is your time.
 
-The ceiling:
-  A. **at most 2 entry cards, 2 results cards and 10 short reads a month.** 10 reads covers two looks at 5 reads each: two trials judged once, or one trial that takes its second look. *Gain:* the least of your time. *Cost:* trials wait more.
+The ceiling (answer as 3a):
+  A. **at most 2 entry cards, 2 results cards and 10 short reads a month.** At 5 reads per look (Part 6, A), 10 reads covers two looks: two trials judged once, or one trial that takes its second look. *Gain:* the least of your time. *Cost:* trials wait more.
   B. **at most 4 of each card and 20 short reads a month.** *Gain:* up to twice as many trials move each month. *Cost:* up to twice the time.
   C. **no cap.** *Gain:* nothing waits on a cap. *Cost:* no limit on what reaches you.
-At a cap, the next entry card waits, and a look whose reads would pass the cap waits, which delays that trial's judgement. How many trials will run at once is not yet known.
+The cap does not count P4's summary card (Part 5). At a cap, the next entry card waits, and a look whose reads would pass the cap waits, which delays that trial's judgement. How many trials will run at once is not yet known.
 
-Three proposals from your cards on what reaches you (list P15, P16 and P17), each kept or dropped:
+Three proposals from your cards on what reaches you (list P15, P16 and P17), each kept or dropped (answer as 3b):
 - P15 "At most 3 entry cards wait on you at once; the next waits in a queue the desk shows." *Gain:* a short pile. *Cost:* leads wait.
 - P16 "Results cards are never held back, and reach you within two weeks of a trial being judged; there are never more of them than the entry cards you approved." *Gain:* no result is sat on. *Cost:* if you keep it with a cap, a results card goes past that month's cap and counts against the next.
 - P17 Each status update reports your touches, and counts the cards waiting and answered, with the spend. *Gain:* you see your load. *Cost:* a longer update.
@@ -71,7 +71,7 @@ From your cards, not yet ruled one by one (list P1 to P11):
   A. **all eleven as written.** *Gain:* each trial has its stops, its review dates and its wait for late faults set before it starts. *Cost:* stops and voids end some trials early, and P4 adds one card.
   B. **as A, with the changes you name.** *Gain:* any you would not keep goes. *Cost:* the trial design changes to match.
   C. **one by one**, on a card of their own before Design's plan is frozen. *Gain:* each gets its own look. *Cost:* another card.
-RECOMMENDATION: A, low confidence: each was on a card you answered, and the plan relies on P5 for one fallback (Part 9). What would change it: any one you would not keep (B).
+RECOMMENDATION: A, low confidence: each was on a card you answered, and the plan relies on P5 for one fallback (Part 9). P4 adds a card to your time, so whether to keep it is also your own call. What would change it: any one you would not keep (B).
 *Reversible:* yes, until the first trial starts.
 
 ## Part 6: your short reads
@@ -85,18 +85,18 @@ At each look, you read some of the trial's pieces, chosen at random and unlabell
 With a second look, each look uses a slightly stricter line, so that a method that does nothing still passes about 1 time in 10 overall. The line is fixed once the starting share is counted. As worked out so far, it gives 0.093 and 0.099 at the two starting shares computed (half of pieces needing you, and 3 in 10), up to about 0.106 near 4 and 6 in 10, and less at low shares (about 0.07 at 1 in 10); a true halving passes about 9 and 7 times in 10 at the two shares computed, before the held-up checks. Your cards said such a method passes "no more often" than at one look; the up to about 0.106 is the correction.
   A. **keep it as worked out**, about 1 in 10. *Gain:* the most chance of passing a method that helps. *Cost:* slightly above 1 in 10 near starting shares of 4 to 6 in 10.
   B. **set it so it is at most 1 in 10 at every starting share.** *Gain:* your 1 in 10 holds at every share. *Cost:* a little stricter, so a true halving passes a little less often; how much less has not been computed.
-  C. **leave it to the trial design**, where both are computed and checked by someone other than their writer, and you rule it at the next gate, before the trial design is frozen. *Gain:* you rule on checked figures. *Cost:* one more choice at that gate.
+  C. **leave it to the trial design**, where both are computed and checked by someone other than their writer, and you rule it on a card of its own during Design, before the trial design is frozen. *Gain:* you rule on checked figures. *Cost:* one more card, and the stricter line's cost stays unknown until then.
 RECOMMENDATION: C, medium confidence: B's cost is not yet worked out, and a figure should be checked before you rule on it. *Reversible:* yes, until the first trial starts.
 
 ## Part 8: beside the prompt engine
 Your order was "first the prompting idea, then the cutting edge idea". This part assumes Design starts (Part 1, A); to hold everything instead, choose Part 1, B. It settles four proposals: P12 and P13 from your cards, and P19 and P20, the Chief of Staff's own.
-  A. **the count of touches from the start of Build, and trials with guards**: no method that could change how often work passes its first check is tried on a kind of work while the prompt engine tests or counts that kind (P12, from your cards); this ruling is the one P13 asked for (from your cards); no method enters the operating model while the prompt engine counts the kind it changes, unless you rule otherwise on its results card (P19, the Chief of Staff's own); and no trial runs before the trial design is frozen, the starting count is on record and the ceilings are set (P20, the Chief of Staff's own). *Gain:* the screening moves while the prompt engine runs; designing and counting change nothing it tests or counts. *Cost:* your order is kept only for trials that could touch its measure.
+  A. **the count of touches from the start of this project's Build, and trials with guards**: no method that could change how often work passes its first check is tried on a kind of work while the prompt engine tests or counts that kind (P12, from your cards); this ruling is the one P13 asked for (from your cards); no method enters the operating model while the prompt engine is testing or counting the kind it changes, unless you rule otherwise on its results card (P19, the Chief of Staff's own); and no trial runs before the trial design is frozen, the starting count is on record and the ceilings are set (P20, the Chief of Staff's own). *Gain:* the screening moves while the prompt engine runs; designing and counting change nothing it tests or counts. *Cost:* your order is kept only for trials that could touch its measure.
   B. **the count from the start of Build, but no trial until the prompt engine finishes**, with P20 as in A. *Gain:* your order kept for every trial. *Cost:* the first trial waits for the prompt engine's whole test and its counts, which are not dated.
 RECOMMENDATION: A, medium confidence. What would change it: wanting your order kept for every trial (B). *Reversible:* yes.
 
 ## Part 9: five unknowns to carry into Design
 Each has a test and a fallback in the plan:
-- **U1** whether your touches can be counted from the records. Test: the counting rules applied by hand to past pieces. Fallback: touches logged by hand as they happen.
+- **U1** whether your touches can be counted from the records. Test: the counting rules applied by hand to past pieces. Fallback: touches logged by hand as they happen, and the target put to you again if even that cannot be kept.
 - **U2** how often pieces need you today. Test: the starting count of 60 pieces. Fallback: the stop in Part 5, P5, so this fallback holds only if you keep P5.
 - **U3** whether enough work of one kind arrives for a trial in good time. Test: the trial design sets each kind's expected length from the count's first weeks. Fallback: you choose fewer kinds, a longer wait or a narrower target.
 - **U4** whether outside code, prompts and skills can be checked with no data out. Test: tried on one harmless sample. Fallback: only methods that need none are tried.
