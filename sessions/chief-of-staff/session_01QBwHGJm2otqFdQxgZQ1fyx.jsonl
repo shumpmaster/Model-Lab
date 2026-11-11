@@ -1,3 +1,4 @@
 {"event": "start", "session": "session_01QBwHGJm2otqFdQxgZQ1fyx", "time": "2026-11-11T20:27:00Z", "doing": "P-002: round 3 of the line at two looks (the Definer on brief 265, then a Reviewer), then the owner's card if it passes"}
 {"event": "helper", "session": "session_01QBwHGJm2otqFdQxgZQ1fyx", "role": "definer", "started": "2026-11-11T20:26:00Z", "ended": "2026-11-11T20:30:00Z", "reported": {"tokens": 110260, "tool_uses": 12, "duration_ms": 197366}}
 {"event": "helper", "session": "session_01QBwHGJm2otqFdQxgZQ1fyx", "role": "reviewer", "started": "2026-11-11T20:30:00Z", "ended": "2026-11-11T20:34:00Z", "reported": {"tokens": 69687, "tool_uses": 19, "duration_ms": 199498}}
+{"event": "helper", "session": "session_01QBwHGJm2otqFdQxgZQ1fyx", "role": "critic", "started": "2026-11-11T20:40:00Z", "ended": "2026-11-11T20:42:00Z", "reported": {"tokens": 72123, "tool_uses": 12, "duration_ms": 106306}}
