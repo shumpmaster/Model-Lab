@@ -7,13 +7,13 @@ WHY: The screening is the project that looks for better ways of running your tea
 **Words.** A **piece** is a merged pull request that changes built work, a plan or research. A **touch** is a time you stepped in on a piece before it merged (a question, a fix of yours, a send-back). A **trial** tries one method on 30 new pieces of one kind against 30 without, assigned by shuffled draws, with a planned **second look** of 30 more each way if the first leaned the right way. A **look** is a point where a trial is judged. The **entry card** is your approval before a trial; the **results card** is your decision after it. The **prompt engine** is this repository's first project, which is testing changes to how agents are briefed and counting first-time passes; it is in its building phase.
 
 ## Part 1: the gate
-The plan carries five small faults its last check found and left, so the passed text stands: it lists the two cards per trial as proposed though you ruled them; it gives the fixed trial plan and the Critic's view on the results card to your design, though the card marked both as added by the Chief of Staff; it says more of the cards is saved than is; it calls one check you ruled "proposed"; and it does not say how outside text reaches the Source checker. Each is carried in the case, and Parts 4 and 5 rule the terms they touch. You are the plan's user, so no one plays a user. If a trial would ever need three or more of the project's agents at once, that comes to you first as a question of the project's trust level.
+The plan carries six small faults its last check found and left, so the passed text stands: the cards called their proposals made so by your ruling, while your record says they are not yet ruled one by one (this card rules them); it lists the two cards per trial as proposed though you ruled them; it gives the fixed trial plan and the Critic's view on the results card to your design, though the card marked both as added by the Chief of Staff; it says more of the cards is saved than is; it calls one check you ruled "proposed"; and it does not say how outside text reaches the Source checker. Each is carried in the case, and Parts 4 and 5 rule the terms they touch. You are the plan's user, so no one plays a user. If a trial would ever need three or more of the project's agents at once, that comes to you first as a question of the project's trust level.
 OPTIONS:
-  A. proceed — Design starts, and approves the plan as it stands: the target, the milestones, the standard steps, the trust level and the intent. *Gain:* the counting rules, the trial and the sources get written and reviewed. *Cost:* the five faults stand until a later change. *Reversible:* yes.
-  B. hold — the case is updated with what you ask and comes back to you. *Gain:* the five faults, or anything else, fixed first. *Cost:* nothing moves meanwhile.
+  A. proceed — Design starts, and approves the plan as it stands: the target, the milestones, the standard steps, the trust level and the intent. *Gain:* the counting rules, the trial and the sources get written and reviewed. *Cost:* the six faults stand until a later change. *Reversible:* yes.
+  B. hold — the case is updated with what you ask and comes back to you. *Gain:* the six faults, or anything else, fixed first. *Cost:* nothing moves meanwhile.
   C. recycle into Discovery — say what to redo and why. *Cost:* Discovery runs again before any design.
   D. kill — the project closes; its lessons still go to the operating model. *Cost:* restarting it would be new work for you to approve.
-RECOMMENDATION: A, medium confidence: the plan passed its check, and the five faults change no term (Parts 4 and 5 rule those). What would change it: wanting the faults fixed first (B).
+RECOMMENDATION: A, medium confidence: the plan passed its check, and the six faults change no term (Parts 4 and 5 rule those). What would change it: wanting the faults fixed first (B).
 
 ## Part 2: the spend ceiling
   A. **your existing AI plan only**: no paid services, data, tools or extra usage, as for the prompt engine. *Cost:* a method that needs a paid tool cannot be tried without coming back to you.
@@ -27,17 +27,21 @@ Your hours are not recorded, so the ceiling counts what reaches you. Each trial 
   C. **no cap.**
 At a cap, the next entry card waits in a queue, and a look whose reads would pass the cap waits, which delays that trial's judgement. A results card is never held back if you keep that proposal (Part 5, P16); it then counts against the next month. How many trials will run at once is not yet known. RECOMMENDATION: none; it is your time. *Reversible:* yes.
 
-## Part 4: eight terms to confirm
-These were in the text of the cards you answered, but not in the words of your answers, so they are confirmed here, not assumed (list T23 to T30):
+## Part 4: twelve terms to confirm
+These were in the text of the cards you answered, but not in the words of your answers, so they are confirmed here, not assumed (list T16, T23 to T30, T32 to T34):
 - trials assign pieces by shuffled draws, 30 each way, in the same weeks;
 - a trial passes when its pieces needed you less often by more than chance at your 1 in 10 line, and its work held up;
 - held up means no worse, at the same line, at passing the first independent check and at not being reopened for a fault within 30 days, a reopening marked by the reviewer of the later change;
 - every trial piece still passes its usual checks and your merge, and can be undone;
 - the entry card says what its assessment rests on, and carries the trial's plan, which is then fixed (added by the Chief of Staff);
 - the results card carries the Critic's view and a recommendation (added by the Chief of Staff);
-- each piece's draw is logged, and each result is worked out by the Reviewer, not by whoever ran the trial;
-- only a method that can be switched on and off piece by piece is tried this way.
-  A. **confirm all eight.**
+- each piece's draw is logged, and each result is worked out by the Reviewer, not by whoever ran the trial; your questions in conversation are logged by hand, so only your short reads are unlabelled;
+- only a method that can be switched on and off piece by piece is tried this way;
+- the second look: 30 more pieces each way only if the first look leaned the right way, all judged together on a slightly stricter line (Part 7);
+- for the target, holding up means the latest 60 pieces do no worse than the starting 60 on the same two checks, with all kinds of work counted together;
+- the log of touches reads records and changes nothing in the prompt engine's work;
+- the target can be changed until the first trial starts; after that, a change discards the starting count and makes a new target.
+  A. **confirm all twelve.**
   B. **confirm them except those you name.**
 RECOMMENDATION: A, medium confidence: the plan already rests on them, and the cards put them to you. *Reversible:* yes, until the first trial starts.
 
@@ -96,23 +100,24 @@ Each has a test and a fallback in the plan:
 RECOMMENDATION: A, medium confidence: none can be closed without Design's work. *Reversible:* yes.
 
 ## Part 10: the re-run sums (M7)
-The Reviewer re-ran every figure printed for your target and the trial, agreed a second way, failed two rounds on how figures were worded, and passed once three were restated. It rests on assumptions no one has tested (pieces independent of each other, and a guessed rate for the held-up checks), and the target's figure leaves out the held-up half.
+The Reviewer re-ran every figure printed for your target and the trial, agreed a second way, failed two rounds on how figures were worded, and passed once three were restated. It rests on assumptions no one has tested (pieces independent of each other, and a guessed rate for the held-up checks), and the target's figure leaves out the held-up half. Two figures on the cards you answered were corrected only in the plan: a true halving shows on the count about 5 times in 10, not 4 to 5, and the held-up checks turn away a harmless method up to 0.22 of the time with two looks, not 1 in 5. Its records were merged in pull request 93; if you accept, that pull request is named as the milestone's work, after the Critic checks the line.
   A. **accept M7 as reached.** *Cost:* those assumptions stay untested until real counts exist.
   B. **not yet**: say what is missing.
 RECOMMENDATION: A, medium confidence: the check this milestone asked for was done and passed. *Reversible:* yes.
 
-WHO HAS CHECKED IT: the Critic, on a different AI model from the writer: round 1 failed this card, and this redraft is checked at round 2 (record: reviews/P-002-design-gate/critic.md); the gate Critic's view of the case is its own record.
+WHO HAS CHECKED IT: the Critic, on a different AI model from the writer: round 1 failed this card, and this redraft is checked at round 2 (record: reviews/P-002-design-gate/critic.md); the gate Critic's view of each case is its own record (case 1, then case 2).
 RISK CLASS: R3 (a phase gate that also rules the rest of a value target's trial terms)   REVERSIBILITY: reversible, except Part 1, D   BLAST RADIUS: this project's next phase, its spend, the owner's time, and how its trials run
 DEFAULT: none — a phase gate, its ceilings and a value target's terms are never ruled by default or by proxy   TIMEOUT: none
 
 ## Context
-- The case for going on, the gate Critic's view, and every trial term marked ruled or proposed (source: docs/gates/P-002/design-gate-1-case.md; reviews/P-002/_design-gate-1-critic.md; docs/gates/P-002/trial-terms.md)
+- The case for going on, the gate Critic's view, and every trial term marked ruled or proposed (source: docs/gates/P-002/design-gate-2-case.md; reviews/P-002/_design-gate-1-critic.md and _design-gate-2-critic.md; docs/gates/P-002/trial-terms.md)
 - The plan failed rounds 1 to 3, the owner ruled one focused check, and round 4 passed with five non-blocking findings (source: reviews/P-002-brief/critic.md; decisions/questions/P-002-brief-stop.md)
 - The re-run: FAIL, FAIL, PASS, with its assumptions, the two-look figures and the sweep across starting shares (source: reviews/P-002-value-target-odds/reviewer.md)
 - The owner left time and money to the Design gate (source: decisions/questions/P-002-groundwork-shortlist.md, answer 8)
 - The prompt engine's spend ceiling is the owner's existing AI plan (source: decisions/questions/P-001-spend-ceiling.md)
 - The value-target record leaves the cards' other proposals "not yet ruled one by one" for the Design gate (source: decisions/questions/P-002-value-target.md, "What was put")
 - The two cards as put, with their proposals (source: questions/P-002-value-target.md at commit 964da47; questions/P-002-trial-gates.md at commit 3ae1268)
+- The odds records merged in pull request 93 (source: Model-Lab merge commit 9513e98)
 - The owner passed the prompt engine's Build gate (source: decisions/questions/P-001-build-gate.md)
 - The open unknowns U1 to U5, the guards beside the prompt engine, and the tier trigger at three or more agents (source: docs/projects/P-002.md, sections 5, 7 and 8)
 - The owner's order, "first the prompting idea, then the cutting edge idea" (source: portfolio ideas/IDEAS.md, 2026-11-01, as quoted in docs/projects/P-002.md, Part 2, "Order")
