@@ -167,7 +167,7 @@ class Repo:
         """For every path, the commit time of the first commit on the default branch (at the cut-off) that adds it."""
         out = {}
         cur = None
-        for line in git(self.path, "log", self.cut, "--diff-filter=A", "--no-renames", "--name-only", "--format=%x1e%cI").split("\n"):
+        for line in git(self.path, "log", self.cut, "--full-history", "--diff-filter=A", "--no-renames", "--name-only", "--format=%x1e%cI").split("\n"):
             if line.startswith("\x1e"): cur = utc(line[1:])
             elif line and cur and (line not in out or cur < out[line]): out[line] = cur   # the earliest commit time that adds it
         return out
@@ -320,36 +320,42 @@ def first_check(R, kind_files, specs, n):
 # Every field below is added beside the fields above, which are kept as they were; none is used by the draw.
 STD_MS = re.compile(r"(?<![\w-])((?:Discovery|Design|Build|Launch)-\d+)(?![\w-])")
 GATE_MS = {"Discovery-2", "Discovery-8", "Design-6", "Launch-3", "Launch-5"}
-OWNER_WORD_LINE = re.compile(r"^[\s>*_-]*(Ruling|Answer|Decision)(\*\*)?\s*:")
-NAMING_LINE = re.compile(r"(?i)owner's words|\banswer|\bnotes?\b|\bruling")
+FORM1 = re.compile(r"(?<![A-Za-z0-9_`-])(Ruling|Answer|Decision):")
+QUOTED = re.compile(r'^\s*(?:>|(?:(?:[-*+]|\d+[.)])\s*)?["\u201c])')
+NAMING_LINE = re.compile(r"(?i)owner's words|(?<![\w])(?:answer|answers|ruling|rulings|note|notes)(?![\w])")
+FORM3 = re.compile(r'["\u201c].*["\u201d]')
 RT5_NAME = re.compile(r"(?:^|-)(design-gate|build-gate|launch-gate|value-target)(?:-|$)")
 
 def qd_history(R, path):
-    """Every commit reachable from the default branch at the cut-off that adds lines to `path` (merges' own diffs
-    are not read), as (hash, commit time, [added line numbers, 1-based]), oldest commit time first."""
+    """Every commit the default branch at the cut-off reaches (full history) that adds lines to `path` (merges' own
+    diffs are not read), as (hash, commit time, [added line numbers], [removed line numbers], both 1-based)."""
     out = []; cur = None
     for line in git(R.path, "log", R.cut, "--full-history", "--no-renames", "--format=%x1e%H %cI", "-p", "--unified=0", "--", path).split("\n"):
         if line.startswith("\x1e"):
-            h, t = line[1:].split(); cur = [h, utc(t), []]; out.append(cur)
+            h, t = line[1:].split(); cur = [h, utc(t), [], []]; out.append(cur)
         elif line.startswith("@@") and cur:
-            m = re.match(r"@@ -\S+ \+(\d+)(?:,(\d+))? @@", line)
+            m = re.match(r"@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@", line)
             if m:
-                a, k = int(m.group(1)), int(m.group(2)) if m.group(2) is not None else 1
-                cur[2].extend(range(a, a + k))
+                ra, rk = int(m.group(1)), int(m.group(2)) if m.group(2) is not None else 1
+                a, k = int(m.group(3)), int(m.group(4)) if m.group(4) is not None else 1
+                cur[3].extend(range(ra, ra + rk)); cur[2].extend(range(a, a + k))
     return sorted((tuple(x) for x in out if x[2]), key=lambda x: (x[1], x[0]))
 
-def owner_word_counts(lines, added):
-    """RT1(a)'s owner words among the added lines: (a `Ruling:`, `Answer:` or `Decision:` line; a quoted line whose
-    nearest line above that is neither quoted nor blank names the owner's words, an answer, a note or a ruling)."""
-    a = b = 0
-    for i in added:
+def owner_word_keys(lines, idxs, form3):
+    """S-002 RT1(a), *The owner's words*: for each of the given lines (1-based) that holds one of the three forms,
+    its matching key (form 1 by the first label it holds; forms 2 and 3 as a quoted line) and its form."""
+    out = []
+    for i in idxs:
         l = lines[i - 1] if 0 < i <= len(lines) else ""
-        if OWNER_WORD_LINE.match(l): a += 1; continue
-        if l.lstrip().startswith(">"):
+        m = FORM1.search(l)
+        if m: out.append((("label", m.group(1)), "1", l.strip())); continue
+        if QUOTED.match(l):
             j = i - 2
-            while j >= 0 and (lines[j].lstrip().startswith(">") or not lines[j].strip()): j -= 1
-            if j >= 0 and NAMING_LINE.search(lines[j]): b += 1
-    return a, b
+            while j >= 0 and (QUOTED.match(lines[j]) or not lines[j].strip()): j -= 1
+            if j >= 0 and (NAMING_LINE.search(lines[j]) or (re.search(r"(?i)(?<![\w])verbatim(?![\w])", lines[j]) and re.search(r"(?i)(?<![\w])owner(?:'s)?(?![\w])", lines[j]))):
+                out.append((("quoted",), "2", l.strip())); continue
+        if form3 and FORM3.search(l): out.append((("quoted",), "3", l.strip()))
+    return out
 
 def asked_class(text):
     """RT5's class from a decision record's `Asked:` line (its first): the words before the colon of the sentence
@@ -357,9 +363,10 @@ def asked_class(text):
     for l in (text or "").splitlines():
         m = re.match(r"^[\s*_]*Asked(?:\*\*)?:(?:\*\*)?\s*(.*)$", l)
         if not m: continue
-        mm = re.search(r": the owner's own \w+, never a default(?: or a proxy)?", l)
+        body = m.group(1)
+        mm = re.search(r": the owner's own \w+, never a default(?: or a proxy)?", body)
         if not mm: return None
-        pre = l[:mm.start()]; k = pre.rfind(". ")
+        pre = body[:mm.start()]; k = pre.rfind(". ")
         return pre[k + 2:].strip() if k >= 0 else pre.strip()
     return None
 
@@ -400,17 +407,57 @@ def naming(text, n, briefs, specs, repo):
     if any(re.search(rf"(?<![\w-]){re.escape(s)}(?![\w-])", text) for s in sp): parts.append("spec")
     return parts
 
-def qd_files_full(R):
-    """As qd_files, with every commit the default branch at the cut-off reaches, a merged pull request's own commits
-    included, even where a pull request adds a file and deletes it again (S-002 'What a touch is'; brief 296)."""
-    log = git(R.path, "log", R.cut, "--full-history", "--diff-filter=A", "--no-renames", "--name-only", "--format=%x1e%H %cI", "--", "questions/", "decisions/")
+def answer_path(repo, p):
+    """S-002 RT1(a), *Owner-answer paths*: 'question', 'decision' or 'answer record' (an owner-answer path outside
+    questions/ and decisions/), or None."""
+    if p.startswith("questions/"): return "question"
+    if p.startswith("decisions/"): return "decision"
+    if repo == "Service-Desk" and re.fullmatch(r"docs/design/references/owner-answers-[^/]*\.md", p): return "answer record"
+    if repo == "Personal-Org-Operating-Model" and re.fullmatch(r"reviews/[^/]+/_owner-answer[^/]*\.md", p): return "answer record"
+    return None
+
+def listed_kind(repo, p):
+    """Items S-002 lists only (RT1(a), *Owner-answer paths*; Open question 15 for the ledger)."""
+    b = p.split("/")[-1]
+    if "_owner-instruction-" in b or (p.startswith("intake/") and "-owner-instruction-" in b): return "instruction file"
+    if repo == "Model-Lab" and re.fullmatch(r"intake/[^/]*-owner-[^/]*", p):
+        return "intake copy of an answer" if re.search(r"-answers?-\d{4}-\d\d-\d\d", b) else "intake item"
+    if repo == "Service-Desk" and re.fullmatch(r"docs/design/references/owner-[^/]*", p) and not b.startswith("owner-answers-"): return "other reference file"
+    return None
+
+def first_adds_full(R, pathspecs, keep):
+    log = git(R.path, "log", R.cut, "--full-history", "--diff-filter=A", "--no-renames", "--name-only", "--format=%x1e%H %cI", "--", *pathspecs)
     cur = None; first = {}
     for line in log.split("\n"):
         if line.startswith("\x1e"): cur = line[1:].split()
-        elif line and cur and (line.startswith("questions/") or line.startswith("decisions/")):
+        elif line and cur and keep(line):
             t = utc(cur[1])
             if line not in first or (t, cur[0]) < (first[line][1], first[line][0]): first[line] = (cur[0], t)
+    return first
+
+def qd_files_full(R):
+    """Every question file, decision record and other owner-answer record first added by a commit the default branch
+    at the cut-off reaches (full history, so a file a pull request adds and deletes again is read)."""
+    specs = {"Model-Lab": ["questions/", "decisions/"], "Service-Desk": ["questions/", "decisions/", "docs/design/references/"],
+             "Personal-Org-Operating-Model": ["questions/", "decisions/", "reviews/"]}[R.name]
+    first = first_adds_full(R, specs, lambda p: answer_path(R.name, p) is not None)
     return [{"path": p, "time": t, "hash": h, "text": R.show(h, p) or ""} for p, (h, t) in sorted(first.items(), key=lambda kv: (kv[1][1], kv[0]))]
+
+def listed_items(R):
+    """Owner items S-002 lists only, each with its first-add time and text (never written); and, in
+    Personal-Org-Operating-Model, each ledger entry whose added `decided_by:` line quotes the owner."""
+    first = first_adds_full(R, ["intake/", "docs/design/references/", "reviews/"], lambda p: listed_kind(R.name, p) is not None)
+    out = [{"kind": listed_kind(R.name, p), "label": lab(p), "time": t, "text": R.show(h, p) or ""} for p, (h, t) in first.items()]
+    if R.name == "Personal-Org-Operating-Model":
+        for h, t, added, _ in qd_history(R, "docs/LEDGER.md"):
+            lines = (R.show(h, "docs/LEDGER.md") or "").split("\n")
+            for i in added:
+                l = lines[i - 1] if 0 < i <= len(lines) else ""
+                if re.match(r"^decided_by:\s*owner\b", l) and re.search(r'["\u201c]', l):
+                    a = next((k for k in range(i - 1, -1, -1) if lines[k].startswith("#")), 0)
+                    z = next((k for k in range(i, len(lines)) if lines[k].startswith("#")), len(lines))
+                    out.append({"kind": "ledger entry quoting the owner", "label": lab("docs/LEDGER.md#" + lines[a]), "time": t, "text": "\n".join(lines[a:z])})
+    return sorted(out, key=lambda d: (d["time"], d["label"]))
 
 class QD_:
     """Every question file and decision record first added on the default branch by the cut-off (deleted ones included),
@@ -422,21 +469,43 @@ class QD_:
             hist = [x for x in hist if (x[1], x[0]) >= (q["time"], q["hash"])]
             first_hash = q["hash"]
             commits = []
-            for h, t, added in hist:
+            f3 = answer_path(R.name, path) == "answer record"
+            for h, t, added, removed in hist:
                 txt = R.show(h, path) or ""; lines = txt.split("\n")
-                a, b = owner_word_counts(lines, added)
+                ak = owner_word_keys(lines, added, f3)
+                rk = owner_word_keys((R.show(h + "^", path) or "").split("\n"), removed, f3) if removed and h != first_hash else []
+                left = collections.Counter(k for k, _, _ in ak) - collections.Counter(k for k, _, _ in rk)
+                pairs = changed = 0      # removed-and-matched pairs, in order within each key, and those whose text differs
+                for key in {k for k, _, _ in ak} & {k for k, _, _ in rk}:
+                    xa = [t for k, _, t in ak if k == key]; xr = [t for k, _, t in rk if k == key]
+                    for u, v in zip(xa, xr): pairs += 1; changed += u != v
+                qids = sorted({m for i in added if owner_word_keys(lines, [i], f3)
+                               for m in re.findall(r"(?<![\w-])(Q-\d{3})(?![\w])", lines[i - 1]) + re.findall(r"questions/(Q-\d{3})-[\w.-]*\.md", lines[i - 1])}) if f3 else []
                 commits.append({"hash": h, "time": t, "first_add": h == first_hash, "added": "\n".join(lines[i - 1] for i in added if 0 < i <= len(lines)),
-                                "n_added": len(added), "owner_word_lines": a, "quoted_lines_under_a_naming_line": b})
+                                "n_added": len(added), "owner_word_lines": len(ak),
+                                "owner_word_lines_by_form": {f: sum(1 for _, x, _ in ak if x == f) for f in "123"},
+                                "matched_pairs": pairs, "matched_pairs_with_changed_text": changed,
+                                "removed_owner_word_lines": len(rk), "unmatched_owner_word_lines": sum(left.values()),
+                                "question_ids_in_owner_word_lines": qids})
             self.recs.append({"path": path, "time": q["time"], "text": q["text"], "first_hash": first_hash, "commits": commits})
         self.by_path = {r["path"]: r for r in self.recs}
     def pair(self, path):
+        if self.R.name == "Personal-Org-Operating-Model":
+            m = re.fullmatch(r"questions/(Q-\d{3})-.+\.md", path) or re.fullmatch(r"reviews/[^/]+/_owner-answer-q(\d{3})\.md", path)
+            if m: return m.group(1) if m.group(1).startswith("Q-") else "Q-" + m.group(1)
         m = re.fullmatch(r"(?:questions|decisions/questions)/(.+\.md)", path)
         return m.group(1) if m else None
     def rt5(self, path):
         """The class, where it came from, and the milestone, for the question a record belongs to."""
         name = self.pair(path)
-        dec = self.by_path.get("decisions/questions/" + name) if name else (self.by_path.get(path) if path.startswith("decisions/") else None)
-        que = self.by_path.get("questions/" + name) if name else None
+        if name and name.startswith("Q-") and self.R.name == "Personal-Org-Operating-Model":
+            que = next((r for r in self.recs if self.pair(r["path"]) == name and r["path"].startswith("questions/")), None)
+            dec = next((r for r in self.recs if self.pair(r["path"]) == name and not r["path"].startswith("questions/")), None)
+        elif answer_path(self.R.name, path) == "answer record":
+            dec, que = self.by_path.get(path), None
+        else:
+            dec = self.by_path.get("decisions/questions/" + name) if name else (self.by_path.get(path) if path.startswith("decisions/") else None)
+            que = self.by_path.get("questions/" + name) if name else None
         cls, src = None, "none"
         if dec and asked_class(dec["text"]) is not None: cls, src = asked_class(dec["text"]), "decision record's Asked: line, as first added"
         elif que and risk_class(que["text"]) is not None: cls, src = risk_class(que["text"]), "question file's RISK CLASS: line, as first added"
@@ -466,16 +535,20 @@ class QD_:
             if not parts: continue
             cands = [c for c in (names_from, own_start) if c is not None]
             start = min(cands, key=lambda c: (c["time"], c["hash"])) if cands else None
-            row = {"label": lab(r["path"]), "kind": "question" if r["path"].startswith("questions/") else "decision",
+            row = {"label": lab(r["path"]), "kind": answer_path(self.R.name, r["path"]),
                    "question_label": lab(self.pair(r["path"])) if self.pair(r["path"]) else None,
                    "notes_file": r["path"].endswith("-notes.md"), "first_added": r["time"],
                    "first_added_in_pieces_first_commit": r["first_hash"] == first_hash,
-                   "names_by": parts, "names_from": None if start is None else ("first add" if start["first_add"] else ("own commit" if start is own_start else "append")),
+                   "names_by": parts, "names_only_by_spec": parts == ["spec"], "names_from": None if start is None else ("first add" if start["first_add"] else ("own commit" if start is own_start else "append")),
                    "names_from_time": None if start is None else start["time"]}
             row.update(self.rt5(r["path"]))
             row["window_commits"] = [{"commit_time": c["time"], "first_add": c["first_add"], "read_for_piece": start is not None and (c["time"], c["hash"]) >= (start["time"], start["hash"]),
-                                      "added_lines": c["n_added"], "owner_word_lines": c["owner_word_lines"],
-                                      "quoted_lines_under_a_naming_line": c["quoted_lines_under_a_naming_line"]}
+                                      "added_lines": c["n_added"], "owner_word_lines": c["owner_word_lines"], "owner_word_lines_by_form": c["owner_word_lines_by_form"],
+                                      "removed_owner_word_lines": c["removed_owner_word_lines"], "unmatched_owner_word_lines": c["unmatched_owner_word_lines"],
+                                      "not_an_append": (not c["first_add"]) and c["owner_word_lines"] > 0 and c["unmatched_owner_word_lines"] == 0,
+                                      "only_form_2_or_3": c["owner_word_lines"] > 0 and c["owner_word_lines_by_form"]["1"] == 0,
+                                      "matched_pairs": c["matched_pairs"], "matched_pairs_with_changed_text": c["matched_pairs_with_changed_text"],
+                                      "question_ids_in_owner_word_lines": c["question_ids_in_owner_word_lines"]}
                                      for c in r["commits"] if dispatch and dispatch < c["time"] < merged_at]
             out.append(row)
         return out
@@ -540,7 +613,7 @@ def statements(text):
     L = text.split("\n")
     for l in L:
         if re.match(r"(?i)^[\s*_]*(reviewed|read:)", l): return [l]
-    def skip(t): return not t or t.startswith("#") or re.match(r"(?i)^[*_]*verdict", t) or re.fullmatch(r"-{3,}", t)
+    def skip(t): return not t or t.startswith("#") or re.match(r"(?i)^[*_]*verdict(?![\w]).*:", t) or re.fullmatch(r"-{3,}", t)
     def para(start):
         out, at = [], None
         for k in range(start, len(L)):
@@ -565,9 +638,24 @@ def own_kind_segments(line, kind):
     return [line[a:(hits[i + 1][0] if i + 1 < len(hits) else len(line))] for i, (a, k) in enumerate(hits) if k == kind]
 
 VLINE = re.compile(r"^[\s>*_-]*(?i:verdict)(?:\*\*)?:(?:\*\*)?\s*(?:\*\*)?(PASS|FAIL)\b")
+def other_kind_lines(L, kind):
+    """Lines inside a heading that names another kind's check (and not the record's own), up to the next heading of
+    its level or higher: that kind's words, which give no verdict for the record's own kind (C1)."""
+    out = set(); k = 0
+    while k < len(L):
+        m = re.match(r"^(#+)\s", L[k])
+        names = {kk for kk, rx in KIND_WORDS.items() if re.search("(?i)" + rx, L[k])} if m else set()
+        if m and names - {kind} and kind not in names:
+            lev = len(m.group(1)); z = k + 1
+            while z < len(L) and not (re.match(r"^(#+)\s", L[z]) and len(re.match(r"^(#+)", L[z]).group(1)) <= lev): z += 1
+            out.update(range(k, z)); k = z; continue
+        k += 1
+    return out
+
 def first_round(text, path, kind):
     """C1's readings (i) to (iv), in that order: (reading, verdict, rounds, notes)."""
     L = text.split("\n"); notes = []
+    blocked = other_kind_lines(L, kind)
     nums = [int(x) for x in re.findall(r"(?i)\brounds? (\d+)", text)] + [int(x) for x in re.findall(r"(?i)\brounds \d+ to (\d+)", text)]
     nr = name_round(path)
     rounds = max(nums + ([nr] if nr else []), default=0)
@@ -575,11 +663,12 @@ def first_round(text, path, kind):
         return ("none: a later round, which gives no round 1", "none found", rounds, notes)
     # (i)
     if nr == 1:
-        for l in L:
+        for k, l in enumerate(L):
+            if k in blocked: continue
             m = re.match(r"^(?i:verdict): (PASS|FAIL)\b", l)
             if m: return ("(i)", m.group(1), rounds, notes)
     # (ii)
-    heads = [(i, len(re.match(r"#+", l).group())) for i, l in enumerate(L) if re.match(r"^#+\s*Round 1(?:\s*$| \(|:| at |, part \d+)", l)]
+    heads = [(i, len(re.match(r"#+", l).group())) for i, l in enumerate(L) if i not in blocked and re.match(r"^#+\s*Round 1(?:\s*$| \(|:| at |, part \d+)", l)]
     if heads:
         vs = []
         for i, lev in heads:
@@ -587,9 +676,10 @@ def first_round(text, path, kind):
             m = re.search(r"(?i:verdict):?\s*(PASS|FAIL)\b", L[i])
             if m: v = m.group(1)
             else:
-                for l in L[i + 1:]:
+                for k2, l in enumerate(L[i + 1:], i + 1):
                     hm = re.match(r"^(#+)\s", l)
                     if hm and len(hm.group(1)) <= lev: break
+                    if k2 in blocked: continue
                     m = VLINE.match(l) or re.search(r"The (?:round's|part's|round-1) verdict was (PASS|FAIL)", l)
                     if m: v = m.group(1); break
             vs.append(v)
@@ -605,7 +695,7 @@ def first_round(text, path, kind):
         for k, l in enumerate(L):
             if re.match(r"^#+\s", l) or l.startswith("#"):
                 sec = k == first or bool(re.search(r"(?i)(?<![\w])rounds?(?![\w])", l)); continue
-            if sec: acct.add(k)
+            if sec and k not in blocked: acct.add(k)
         for i, l in enumerate(L):
             for seg in (own_kind_segments(l, kind) if i in acct else []):
                 best = None
@@ -613,7 +703,7 @@ def first_round(text, path, kind):
                     m = re.search(p, seg)
                     if m and (best is None or m.start() < best[0]): best = (m.start(), m.group(1))
                 if best: return ("(iii)", best[1], rounds, notes)
-            if l.lstrip().startswith("|"):
+            if l.lstrip().startswith("|") and i not in blocked:
                 cells = [c.strip() for c in l.strip().strip("|").split("|")]
                 col = next((j for j, c in enumerate(cells) if re.match(r"Round 1(?!\d)", c)), None)
                 if col is not None:
@@ -625,6 +715,11 @@ def first_round(text, path, kind):
                             if m: return ("(iii)", m.group(1), rounds, notes)
     # (iv)
     top = next((l for l in L if l.strip()), "")
+    tk = {kk for kk, rx in KIND_WORDS.items() if re.search("(?i)" + rx, top)}
+    if tk - {kind}:
+        seg = " ".join(own_kind_segments(top, kind)) if kind in tk else ""
+        top = top if seg and re.match(r"^(?i:verdict): (PASS|FAIL)\b", top) and re.search(r"\b(PASS|FAIL)\b", seg) else ""
+        if not top: notes.append("top-line verdict names another kind's check")
     m = re.match(r"^(?i:verdict): (PASS|FAIL)\b", top)
     if m:
         other = [x for x in nums if x != 1] or (nr not in (None, 1))
@@ -706,6 +801,26 @@ class C1:
                         "reading": r["reading"], "verdict": r["verdict"], "rounds": r["rounds"], "notes": r["notes"], "undecided": und})
         return out
 
+SHORT_FORMS = {"def": "definer", "tb": "tools-builder"}     # S-002 K2's short forms
+def k2_roles(R, hs):
+    """Per brief the piece's trailers name: its role as the trailer's role name gives it, or else as K2's short-form
+    table reads a short form between hyphens (`-def-`, `-tb-`), or, in Service-Desk, its control file's role."""
+    out = {}
+    for h in hs:
+        for v in R.commits[h]["sess"]:
+            role, bid, kind = parse_trailer(v, R.name)
+            if kind is None: continue
+            if kind == "control": role, _, _ = control_file(R, bid); b = "control:" + lab(bid); frm = "control file" if role else None
+            elif kind == "brief-file":
+                b = resolve_brief_file(R, bid)[0]; frm = "trailer role name" if role else None
+                if role is None:
+                    rest = re.sub(r"^session_[A-Za-z0-9]+[/\-]?", "", v.strip())
+                    sf = next((SHORT_FORMS[x] for x in re.split(r"-", rest) if x in SHORT_FORMS), None)
+                    if sf: role, frm = sf, "K2 short form"
+            else: b = bid; frm = "trailer role name" if role else None
+            out.setdefault(b, {"brief": b, "role": role, "role_from": frm})
+    return sorted(out.values(), key=lambda d: str(d["brief"]))
+
 def comment_records(R):
     """Lines in records-class files (K1) at the cut-off that name a comment on a pull request: per number,
     the labels of files whose line says 'reviewer comment' and of files whose line says 'comment' otherwise."""
@@ -761,7 +876,7 @@ def build(clones, ghdir, outdir):
         U = [p for p in R.gh if not p["merged_at"] and p["closed_at"] and WIN0 <= T(p["closed_at"]) < CUT]
         U_open_or_late = [p for p in R.gh if not p["merged_at"] and p["closed_at"] and T(p["closed_at"]) >= CUT]
         QD = qd_files(R)
-        QDN = QD_(R); CK = C1(R, merged, own); CR = comment_records(R)
+        QDN = QD_(R); CK = C1(R, merged, own); CR = comment_records(R); LI = listed_items(R)
         def crec(n): return {k: sorted(v) for k, v in CR[n].items()} if n in CR else {"reviewer_comment": [], "other_wording": []}
         # frame U, with its brief ids for RT3(b) matching
         Urows = []
@@ -822,15 +937,24 @@ def build(clones, ghdir, outdir):
             spec_files = {m.group(1) for x in agg for m in [re.match(r"specs/(S-\d+)", x)] if m}
             ids = {m.group(1) for x in agg for m in [re.match(r"((?:Q|E|EXP)-\d+)(?=[.-]|$)", x.split("/")[-1])] if m}
             qids = {m.group(1) for x in agg for m in [re.fullmatch(r"research/(Q-\d+)(?:-memo)?\.md", x)] if m}
-            own_c = [(R.commits[h]["ad"], h, R.commits[h]["cd"], {f["path"] for f in R.commits[h]["files"]}) for h in hs]
+            own_c = [(R.commits[h]["ad"], h, R.commits[h]["cd"], {f["path"] for f in R.commits[h]["files"] if f["status"] != "deleted"}) for h in hs]
             qdn = QDN.for_piece(n, bids, specs, own_c, first_hash, dispatch[0], p["merged_at"])
             c1r = CK.for_piece(n, sorted(set(specs) | spec_files), ids, qids)
+            listed = [{"kind": it["kind"], "label": it["label"], "commit_time": it["time"], "names_by": naming(it["text"], n, bids, specs, name)}
+                      for it in LI if dispatch[0] and dispatch[0] < it["time"] < p["merged_at"]]
+            kinds = {r["kind"] for r in c1r}
+            c1_sum = ("no record at C1's paths" if not c1r else "has records of a check kind (plan, build or research)" if kinds & {"plan", "build", "research"}
+                      else "only records of another kind or unclassed: undecided, listed")
+            memo = sorted({m.group(1) for x in agg for m in [re.fullmatch(r"research/(Q-\d+)-memo\.md", x)] if m})
+            rq = sorted({m.group(1) for x in agg for m in [re.fullmatch(r"research/(Q-\d+)\.md", x)] if m})
             Ms.append({"repository": name, "number": n, "created": p["created_at"], "merged_at": p["merged_at"], "closed": p["closed_at"], "merged": True,
                        "merge_commit": p["_merge"], "merging_account_class": merger_class(mc["an"], mc["ae"]),
                        "head_prefix": branch_prefix(p["head_ref"]), "head_label": lab(p["head_ref"]),
                        "dispatch": dispatch[0], "dispatch_from": dispatch[1], "briefs": br, "commits": cf, "files": files,
                        "questions_decisions": qd, "first_check": first_check(R, kind_files, specs, n), "rt3b_matches": rt3b,
                        "questions_decisions_named": qdn, "c1_records": c1r, "comment_records": crec(n),
+                       "c1_summary": c1_sum, "k2_roles": k2_roles(R, hs), "research_memos": memo, "research_questions": rq, "has_memo": bool(memo),
+                       "owner_items_listed_in_window": listed,
                        "after_merge": {"days30_complete": t0 + DAY30 <= CUT, "later_prs_sharing_a_file": later_prs,
                                        "later_commits_naming_it": later_named, "reverts_naming_it": reverts, "reopens_marks": marks}})
         # frame D
