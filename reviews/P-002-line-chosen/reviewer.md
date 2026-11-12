@@ -1,6 +1,6 @@
 Verdict: PASS
 
-*The Reviewer on brief 269 and its addendum, the owner's line at two looks (0.097) as written into experiments/E-004.md and specs/S-002.md (P-002), brief 270, at commit 608bc0c; a fresh session on a different model from the writer, the Definer. Recorded verbatim by the orchestrator, 2026-11-12.*
+*The Reviewer on brief 269 and its addendum, the owner's line at two looks (0.097) as written into experiments/E-004.md and specs/S-002.md (P-002), brief 270, at commit 608bc0c; a fresh session on a different model from the writer, the Definer. Recorded verbatim by the orchestrator, 2026-11-12, with one change: in finding 3, a verdict quoted mid-line is written "its PASS verdict line", which the review lint requires.*
 
 The Definer did what brief 269 and its addendum asked, and I could not refute it. The owner's line, 0.097, is now written into the trial plan and the spec, with the owner's exact words, the date and the ruling cited. Both versions keep their figures, with (a) marked as the one the owner ruled and (b) as not chosen. The trial record now copies the line, not a starting share. The results card now gives the line and, inside (a)'s two bands, says a method that does nothing would pass a little more than 1 in 10 of the time there. No figure changed. Only two passages still read as undecided, and the addendum kept both on purpose. Neither file is frozen, and the spec is still a draft. The surface guard passes on the Definer's two commits. One governance check fails: the merges check, on the Orchestrator's own commits at the branch tip. Earlier reviews (69, 39, 71) recorded this as a known false failure on branch tips, so it does not block. Nothing here is irreversible.
 
@@ -25,7 +25,7 @@ The Definer did what brief 269 and its addendum asked, and I could not refute it
    - Output, line 28: `any line from 0.09616 up to, not including, 0.09725 gives the same decisions as 0.097`
    - So "about 0.31 to 0.43 and about 0.57 to 0.69" and "a little more than 1 in 10" are both supported, with 0.1063 the worst case.
    - The ruling quote "A: line of 0.097" and the date 2026-11-11 are the same everywhere they appear: E-004:10 and :121, and S-002:10, :87 and :196.
-   - S-002:87 says the owner ruled "after the independent run passed" and cites reviews/P-002-two-look-line/reviewer.md. That file opens with `Verdict: PASS` and "Round 1 FAIL ..., round 2 FAIL ..., round 3 PASS", so the citation holds.
+   - S-002:87 says the owner ruled "after the independent run passed" and cites reviews/P-002-two-look-line/reviewer.md. That file opens with its PASS verdict line and "Round 1 FAIL ..., round 2 FAIL ..., round 3 PASS", so the citation holds.
 
 4. Not blocking. The trial record and the results card carry what the ruling's "How it is carried out" says, in the places E-004 already lists them.
    - Trial record: E-004.md:43, Step 1 *Per trial*, adds "the trial record copies the line, not a starting share".
