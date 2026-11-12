@@ -69,3 +69,45 @@ On check 3: the random part (lines 390–400), the order (line 369) and the edge
 - **Open questions:**
   - Should Personal-Org-Operating-Model's `Spec:` trailer be allowed to name a brief? That is the owner's or Definer's call; it changes S-002.
   - For a control trailer, is S-002's dispatch the control file's first add or the line's `dispatched_at` / `time`? S-002 says commit time; the record also holds the dispatch time itself.
+
+## Round 2 (brief 284: round 1's findings 1 to 8 only, on Model-Lab@ec88454)
+Verdict: FAIL
+
+In short: seven of round 1's eight findings are fixed. One gap is left under finding 3 (frame M can be shaped by the input). The extract now checks that every merged pull request in the GitHub list gets a row in frame M. It does not check the other direction: that every pull request GitHub merged appears in that list. The list is the Orchestrator's own hand-made file, and frames.json's "GitHub merged" counts are taken from it, so they cannot catch a pull request left out of it. A left-out pull request would fall into frame D without anyone seeing. That gap is in the fix I asked for in round 1, so this finding implicates my own earlier check (D-050 flag). I wrote nothing.
+
+## Findings
+
+1. **Blocking (round 1 finding 3, not closed; implicates my round-1 check, D-050): nothing checks that GitHub's list is complete.** extract.py lines 328–343 and 419–421; README.md lines 9–10.
+   - `github_merged_in_window` and `github_merged_all` are counted from `<github dir>/<repo>.list.jsonl`. That is the same input frame M is built from, so it is not an independent check.
+   - If a merged pull request is missing from the list, its merge commit is not in `in_pr`. That merge commit, which GitHub committed with two parents, and the pull request's own commits then fall into frame D (line 413) with nothing reported. Frame D in Service-Desk holds 566 commits, so this would not stand out.
+   - Fix: extract.py already builds `by_head` from git. Count every first-parent default-branch commit committed by GitHub with two parents and merged in the window, and stop (or list in frames.json) on any whose second parent matches no listed pull request's `head_sha`. Write that count in frames.json beside `M`.
+
+2. **Round 1 finding 1: closed.** README.md line 19 and extract.py lines 190–191 and 211–227 now name `reviews/<item>/_control/*.json` (and `reviews/<spec>/_control/…` for a builder). A value is linked to the file by its `session`, the role comes from the file's `role`, and the time is the file's earliest first add. The dispatch-log line is kept as a cross-check only. frames.json lists 17 values: 16 differ by 1 to 6 seconds, and 1 (`control:48ef806e`) has no dispatch-log line. That matches README line 19.
+   - Non-blocking: line 218 uses `idx.setdefault`. A session with control files in both `reviews/<item>/_control/` and `reviews/<spec>/_control/` (a builder's) therefore takes the time of whichever path is listed first. Fix: keep every path for a session and take the earliest first add among them.
+   - Non-blocking: line 226 appends to `CTRL_CHECK` on every call. Today the 17 entries are all different, but a value carried by two commits would be listed twice. Fix: key the list by value.
+
+3. **Round 1 finding 2: closed.** extract.py lines 254 and 261–262 now give a control trailer the role from its control file, so the E-K2 filter (line 442) sees `researcher`, `builder` and so on.
+   - Non-blocking: a control value with no control file still gets role `None`, which matches E-K2. Fix: list such values in frames.json (today, by the cross-check, there may be none).
+
+4. **Round 1 finding 4: closed.** extract.py lines 129–133 and 199–207, README.md line 22: the record is now the longest suffixed `s-NNN-<suffix>.md` whose suffix the value holds, else `s-NNN.md`. Values that match no suffixed file are listed (frames.json: none in all three).
+
+5. **Round 1 finding 5: closed.** README.md line 22 and extract.py lines 127–128 now name `adopt-v3-stamp` and `adopt-v3`, the longer one tested first.
+
+6. **Round 1 finding 6: closed.** extract.py line 119 uses the loop's own patterns, `[PQE]-[0-9]+` and `[a-z][a-z0-9-]*`. README.md line 19 says so.
+
+7. **Round 1 finding 7: closed.** Each first add is now the earliest commit time, not the first in git's listing: `_first_adds` (line 171), `control_line` (line 244, `min`) and `qd_files` (line 281). README.md line 23 says so.
+
+8. **Round 1 finding 8: closed.** frames.json gives `"github_records": "read"` per repository (extract.py line 419; README.md line 57).
+
+Also checked, no finding:
+- The Model-Lab zero-padding fallback (extract.py line 186; README.md line 17) is right.
+- The merge commit is now found from git (lines 328–341), and the run stops on an in-window merged pull request with no row (lines 342–343). frames.json shows M equal to GitHub's in-window count in each repository: 98/98, 322/322 and 43/43, with no pull request lacking a row.
+- The draw code (lines 449–476) is unchanged and matches S-002 step 2.
+
+## Six-part contract
+- **Changed:** nothing (no write tool).
+- **Why:** brief 284, a round-2 re-check of round 1's findings 1 to 8.
+- **Verified:** read in full research/Q-018-extract/README.md, extract.py and frames.json. Checked Service-Desk governance/checks/session_runner.py lines 775–814: a `checks` session has its own session value and its own control file, so it does not collide with a builder's. Read docs/briefs/284-critic.md. Commits and git objects could not be read, so frames.json's figures are taken as the run's output and were not re-derived.
+- **Undone:** I could not count GitHub-committed merge commits in the window myself (no shell, git objects not readable). That is why finding 1 asks extract.py to do it.
+- **Needed outside my surface:** the Orchestrator fixes finding 1, plus the non-blocking points under findings 2 and 3 if it wishes, and returns them for a re-check of finding 1 only. The sample stays undrawn until then.
+- **Open questions:** none new. Round 1's open questions (whether Personal-Org-Operating-Model's `Spec:` trailer may name a brief; which time S-002 means for a control file) are still with the Definer and the owner.
