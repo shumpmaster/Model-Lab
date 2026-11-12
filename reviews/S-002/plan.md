@@ -1,6 +1,6 @@
 Verdict: PASS
 
-The Critic's plan review of specs/S-002.md and experiments/E-004.md (P-002, M8 to M10), in a fresh session on a different model from the writer, the Definer. Round 1 (brief: docs/briefs/271-critic.md, at Model-Lab 51bc87c, read from a fixed copy): FAIL, eight blocking findings. Recorded verbatim by the orchestrator, session session_01QBwHGNPKhVy6fgoUjKtW6q, 2026-11-12. Correction to the brief: it said a FAIL stops work before another round; the stop rule's limit for plan rounds is three (docs/LESSONS.md LL-55; reviews/S-001/plan.md, FAIL at rounds 1 and 2 and PASS at round 3), so round 1's findings go back to the Definer, and round 2 counts as the second of three. Round 2 (brief: docs/briefs/273-critic.md, at Model-Lab 1316988, after the Definer's change on brief 272, commit 015ba8f): FAIL, two blocking findings; the Critic flags its own round 1 for missing findings 3 and 4 and part of 6 (D-050). Round 3 (brief: docs/briefs/275-critic.md, at Model-Lab 23d27c1, after the Definer's change on brief 274, commit 749c3c9): PASS, nine non-blocking findings; the Critic flags rounds 1 and 2 for missing its findings 3 to 5 (D-050).
+The Critic's plan review of specs/S-002.md and experiments/E-004.md (P-002, M8 to M10), in a fresh session on a different model from the writer, the Definer. Round 1 (brief: docs/briefs/271-critic.md, at Model-Lab 51bc87c, read from a fixed copy): FAIL, eight blocking findings. Recorded verbatim by the orchestrator, session session_01QBwHGNPKhVy6fgoUjKtW6q, 2026-11-12. Correction to the brief: it said a FAIL stops work before another round; the stop rule's limit for plan rounds is three (docs/LESSONS.md LL-55; reviews/S-001/plan.md, FAIL at rounds 1 and 2 and PASS at round 3), so round 1's findings go back to the Definer, and round 2 counts as the second of three. Round 2 (brief: docs/briefs/273-critic.md, at Model-Lab 1316988, after the Definer's change on brief 272, commit 015ba8f): FAIL, two blocking findings; the Critic flags its own round 1 for missing findings 3 and 4 and part of 6 (D-050). Round 3 (brief: docs/briefs/275-critic.md, at Model-Lab 23d27c1, after the Definer's change on brief 274, commit 749c3c9): PASS, nine non-blocking findings; the Critic flags rounds 1 and 2 for missing its findings 3 to 5 (D-050). Re-check after round 3 (brief: docs/briefs/277-critic.md, at Model-Lab 05a71c3 plus a session-lines commit, after the Definer's change on brief 276, commit f833d70): FAIL, two blocking findings, both in that change's new rule for an entry and its pull requests; the plan stands as round 3 passed it until the owner rules under the stop rule (as reviews/S-001/plan.md, round 4). The header verdict stays round 3's PASS for the plan as it stood at round 3.
 
 ## Round 1
 Verdict: FAIL
@@ -335,3 +335,111 @@ Result: the join-up review is clear, with no blocking difference. The non-blocki
 - **Open questions:**
   1. Should an entered brief that merges as a non-piece, or a pull request that carries two entered briefs, be left out and listed, or counted once on the first entry's side? (Finding 3.)
   2. Should the 7-day figure for starting a withdrawal check be the owner's to set on the card? (Finding 8.)
+
+## Re-check after round 3
+Verdict: FAIL
+
+Brief 277: re-check after round 3, of the changes on brief 276 (commit f833d70). I read only /home/user/ml-fixed-277, plus briefs 276 and 277. I wrote nothing. This is not a new round, and I judged the files as they stand, because I had no diff. Findings 1 and 2 are blocking and both come from the new "entry and its pull requests" design. Findings 3 to 9 are not blocking.
+
+## Round 3's findings 1 to 8, checked
+- **1 (glosses for the Researcher): fixed.** S-002:98 now glosses M, U, D, "the fields of step 3", "step 1 below", "(step 5)", ruled T25, T32 and P14, and V1. The glosses match trial-terms.md lines 56, 63 and 84. Three small gaps are in finding 3 below.
+- **2 (frame D): fixed**, with one gap, in finding 4 below.
+- **3 (unit of entry against unit of count): the design is in place at E-004:123 to 129 and J2.** Both chosen cases are marked "this plan's design". I found faults in the text, in findings 1, 2, 6 and 7 below.
+- **4 (entry time): fixed in the field name.** J2 now has `entered_at`, and E-004:69 agrees. A new double meaning of "dispatch" is in finding 5 below.
+- **5 (AC7): fixed.** S-002:158 now carries the sides of places 1 to 60.
+- **6 (areas touched): fixed.** I read `areas_touched` in v3_checks.py:332-344. It takes only comma-split tokens with no whitespace, so the prose lines at S-002:186 to 194 add no stray globs. The Definer's paths stay in the list, as before.
+- **7 (shortfall wording): fixed** at S-002:10 and 157.
+- **8 (7-day check): consistent** across E-004:16 and 120, J2, Open question 8 and "Needed outside".
+
+## Findings
+
+1. **BLOCKING. experiments/E-004.md:78, 80, 84 and 128; specs/S-002.md:176.** Item 4 of your brief: a place left empty leaves the plan's decision rules undefined, and the plan does not state the shortfall truly enough.
+   - What the plan says is true as far as it goes. E-004:128 says the look "is judged on the pieces it has" and that the results card "says so", because the figures are for 30 each way.
+   - Line 78 defines "leaned the right way" as "strictly fewer of the method's 30 pieces than of the other 30". That becomes false or undefined when a side has 29. Fewer touched pieces on a smaller side proves nothing.
+   - Line 78 decides whether the second look runs, so the missing rule is a decision rule.
+   - Nothing caps empty places, and nothing says the one-sided Fisher test or the line's size changes with uneven sides.
+   - E-004:152 and the "What the figures assume" list omit "30 each way".
+   - T23 (ruled) says each side gets 30. Empty places depart from it, and no Open question puts that to the owner.
+   - **Answer to your question: a stated limit alone is not enough. The void case needs a reserve place.**
+   - **Fix:** let a void entry open the next reserve place (61, 62, 63) and take the void entry's side, as a withdrawal does (E-004:120). That restores 30 each way with no new mechanism.
+   - Count voids and withdrawals toward one cap. The Definer states the cap; the owner's card shows it.
+   - Reword E-004:78, 84, 128 and J2 to match.
+   - If a place can still end up empty, for example when the reserve places run out, then:
+     - say in E-004:78 that "lean" compares shares, not counts;
+     - say that the test is run on the actual counts;
+     - have the Reviewer report the result with each empty place counted both ways, and say the result decides only if it is the same either way;
+     - add "30 each way" to E-004:152.
+   - Add an Open question 9 to S-002 for the scenario card (see finding 8).
+
+2. **BLOCKING. experiments/E-004.md:124 and 129; specs/S-002.md:176.** Merging two entered briefs into one pull request lets the sides be steered after they are known, and the plan's reason for it is partly wrong.
+   - The later entry is void and its place stays empty, with no cap. A session that can read the sides chooses which later entry is dropped by choosing to merge two works into one pull request.
+   - E-004:124 says the rule avoids a place being "left out by a choice to merge the two works". The rule does exactly that to the later entry.
+   - The claim that a leak "shrinks the difference" holds only for the method's text. When the later, touch-heavy "with" work is merged under an earlier "without" entry, its touches land on "without". That widens the gap in the method's favour.
+   - A deliberate duplicate entry for one brief (void, place left empty, E-004:69 and 129) also burns a place. It lets the dispatcher shift which side the next piece gets, uncapped.
+   - The "sides are known ahead" limit (E-004:150, 67; S-002:221) names choosing the next brief and delaying a dispatch, but not these levers.
+   - **Fix:**
+     - the reserve-place fix in finding 1, which makes the merge-lever useless, because the voided side is refilled;
+     - the same cap for duplicate entries;
+     - add "merging two entered briefs into one pull request, or entering a brief twice" to the limit in E-004:150, S-002:221 and the entry and results cards;
+     - correct the "shrinks" sentence at E-004:124.
+
+3. **Not blocking. specs/S-002.md:98 (the glosses) against the quoted span.**
+   - Three terms in the quoted lines are still not glossed: "ruled T1" in RP2, "U3" in the K2 heading, and "pre-mortem R<n>" in the naming sentence at line 18.
+   - Fix: add one clause each to the pointer list in line 98, outside the quoted span.
+
+4. **Not blocking. specs/S-002.md:74 (frame D, E-RP1).**
+   - The exclusion works for merge and squash commits. A rebase merge adds several commits, and GitHub's record gives only the tip, so the others would enter frame D as "no pull request".
+   - Fix: say "every commit a rebase merge adds" and give the method, for example walking back from the merge commit to the pull request's base. Say that where this cannot be done, the repository's frame D is "untested" for E-RP1.
+
+5. **Not blocking. experiments/E-004.md:67 and 70 against specs/S-002.md:39 and 176.** "Dispatch" now has two meanings.
+   - E-004:67 says an entered piece is "dispatched at its entry's time".
+   - J2 and S-002:39 say dispatch is the commit time of the brief record, joined at judging. E-004:70 orders entries "by the brief records' times".
+   - The 60-day clock and the withdrawal check's "dispatch time" (E-004:120) depend on which one applies. An entry with no brief record ever written has no dispatch time under J2's reading, so its 60 days never start.
+   - Fix: state that order is entry order and that the Reviewer checks the brief records follow in the same order. The 60-day clock starts at the brief record's commit time, or at `entered_at` if no brief record exists.
+
+6. **Not blocking. experiments/E-004.md:126 and 127; specs/S-002.md:176.** The owner's close of a piece is not covered by any touch rule.
+   - E-004:126 says RT3(b) counts the close of a pull request as a send-back "on the one that merges". RT3(b) holds only when the owner closed it, and says nothing for a piece that never merges.
+   - E-004:122 says an owner-closed piece "needed the owner (a send-back, RT3)". Line 127 reads "its merge" as the settle date. But RT3(b) counts a close only on a later piece, and RT3(a) needs a review.
+   - Fix: add to line 127 that the owner's close counts as an RT3 send-back on the piece itself, and add "closed by the owner" to the line-126 sentence.
+
+7. **Not blocking. specs/S-002.md:176 (J4) and the results-card list at E-004:99.** Neither names voided entries, places left empty by side, entries counted from non-piece pull requests, or pieces with two pull requests, though E-004:128 says the card says so. Fix: add them to the Reviewer's record and the card.
+
+8. **Not blocking. specs/S-002.md:231-239.** E-004:123 says the unit-of-entry design is "for the owner's scenario card", but the Open questions list holds no question on it. Fix: add Open question 9 in plain words: a piece in two entries counts once on the first entry's side and the later place is refilled or left empty, and the cap on voids. Fix also S-002:10 to say so.
+
+9. **Not blocking. experiments/E-004.md:128 and 76.** "Judged on the pieces it has" does not say how the "30 days after the last piece" clock works for a void place. This goes away with the reserve-place fix in finding 1.
+
+## Items 2 and 3 of your brief
+- **E-RP1 and RP1 against frame D (item 2):** they agree, except for the rebase gap in finding 4.
+  - E-RP1's "every commit" in frame D fits the frame as written.
+  - The "untested" rule at line 74 matches line 68.
+  - The line-98 gloss matches line 74.
+- **The new Exclusions entry, the void entries and J2 (item 3):**
+  - They agree with each other: E-004:123 to 129, J2's awkward cases and E-004:69 and 70.
+  - The "first entry" and "later entry" wording is the same in both files.
+  - The J2 judging join (first pull request to merge, touches up to that merge) matches E-004:126.
+  - Findings 1, 2, 5 and 6 are where they fail, and finding 2 is the steering route.
+
+## Six-part contract
+- **Changed:** nothing. I wrote no file.
+- **Why:** brief 277 asked for the re-check of the Definer's change on brief 276 (commit f833d70) after the round 3 PASS.
+- **Verified:**
+  - Round 3's findings 1 to 8 against the files as they stand.
+  - The frame D wording against RP1 and E-RP1.
+  - E-004:123 to 129 and J2 end to end against each other, and against the 60-day rule and withdrawal rules.
+  - The Areas touched parser, v3_checks.py:332-344.
+  - The glosses against trial-terms.md lines 33, 56, 63 and 84.
+  - Every figure in E-004 lines 137 to 139 against line-output.txt, which was not changed by the Definer.
+- **Undone:**
+  - I did not open the diff of f833d70, so I cannot say that no other sentence changed.
+  - I did not re-run line.py, because the figures are unchanged.
+  - I did not open the Q-017 memo, the P-002-value-target-odds review or Q-013, which are outside the manifest.
+  - I did not read any extract, and the hand check has not run.
+  - I did not re-check P14's "ruled" status in the gloss. Line 84 of trial-terms.md marks it "Proposed, card". The design gate decision may have ruled it, but I did not open that.
+- **Needed outside your surface:**
+  - The Orchestrator records this return verbatim in reviews/S-002/plan.md as the re-check after round 3.
+  - The Definer fixes findings 1 and 2 and brings the changed lines back for a re-check. Findings 3 to 9 can go in the same change.
+  - If the span in S-002:98 changes, the quoted commit changes. The Critic re-checks only the changed lines.
+  - The owner rules on the reserve places for voids and the cap on the scenario card.
+- **Open questions:**
+  1. Should a void entry open a reserve place under the same cap of 3 as withdrawals, or have places of its own? (Findings 1 and 2.)
+  2. Should a duplicate entry for one brief refill its place or be capped separately? (Finding 2.)
