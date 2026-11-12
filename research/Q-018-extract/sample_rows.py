@@ -14,14 +14,25 @@ for r in ["Model-Lab", "Service-Desk", "Personal-Org-Operating-Model"]:
             with open(p, "w") as fh:
                 for u in L: fh.write(json.dumps(u, sort_keys=True) + "\n")
         for x in L: rows[(r, f, x["hash"] if f == "D" else x["number"])] = x
+MARK = {"footer": "footer", "session link": "session link", "none": "none"}
+def session_shown(x, n_owner):
+    """Whether a session's records show the comment posted (S-002 RT1(b)), from the extract's comment_records."""
+    cr = x.get("comment_records") or {"reviewer_comment": [], "other_wording": []}
+    if cr["reviewer_comment"] and n_owner == 1: return "yes"
+    if cr["reviewer_comment"]: return "undecided: a record names the reviewer comment on this pull request, but it has more than one comment under the owner's account and the record does not say which"
+    if cr["other_wording"]: return "undecided: a record's line names a comment on this pull request in other words, which do not show who posted it"
+    return "no record found"
 def gh(r, x, f):
     if f == "D": return x
     end = x.get("merged_at") or x.get("closed")
     cs = G["comments"].get(r, {}).get(str(x["number"]), [])
-    oc = [t for a, t in cs if cls(a) == "owner"]
-    x = dict(x, reviews=[], owner_comments={"on_pull_request": {"before_merge_or_close": sum(1 for t in oc if t < end), "after": sum(1 for t in oc if t >= end)},
+    oc = [c for c in cs if cls(c[0]) == "owner"]
+    x = dict(x, reviews=[], owner_comments={"on_pull_request": {"before_merge_or_close": sum(1 for c in oc if c[1] < end), "after": sum(1 for c in oc if c[1] >= end)},
                                            "on_lines": {"before_merge_or_close": 0, "after": 0}},
-             other_comments=len(cs) - len(oc))
+             other_comments=len(cs) - len(oc),
+             owner_account_comments=[{"time": c[1], "when": "before merge or close" if c[1] < end else "after merge or close",
+                                      "agent_mark": MARK[c[2]] if len(c) > 2 else "not read",
+                                      "session_records_show_it_posted": session_shown(x, len(oc))} for c in oc])
     return x
 out = []
 for r, ns in S["random_part"].items():

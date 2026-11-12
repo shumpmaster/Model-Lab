@@ -14,7 +14,110 @@
   "github_merged_all": 103,
   "github_merged_in_window": 98,
   "github_records": "read",
-  "merged_with_no_row": []
+  "merged_with_no_row": [],
+  "widened": {
+   "c1_branches_heading_more_than_one_merged_pull_request": [
+    {
+     "head_label": "ed96a368",
+     "numbers": [
+      29,
+      31,
+      33,
+      34,
+      35
+     ]
+    },
+    {
+     "head_label": "a1efd2c8",
+     "numbers": [
+      39,
+      40,
+      41,
+      42,
+      43,
+      44
+     ]
+    },
+    {
+     "head_label": "33528900",
+     "numbers": [
+      55,
+      61
+     ]
+    },
+    {
+     "head_label": "89221424",
+     "numbers": [
+      66,
+      67,
+      68,
+      69,
+      70
+     ]
+    },
+    {
+     "head_label": "202df9d8",
+     "numbers": [
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      88,
+      89
+     ]
+    },
+    {
+     "head_label": "5fe22ccf",
+     "numbers": [
+      90,
+      91,
+      92
+     ]
+    },
+    {
+     "head_label": "99c95374",
+     "numbers": [
+      93,
+      94
+     ]
+    },
+    {
+     "head_label": "4944336e",
+     "numbers": [
+      95,
+      96
+     ]
+    },
+    {
+     "head_label": "01445a69",
+     "numbers": [
+      97,
+      98
+     ]
+    }
+   ],
+   "c1_check_records_at_cutoff_by_kind": {
+    "another kind": 70,
+    "build": 9,
+    "plan": 1,
+    "research": 26,
+    "unclassed": 8
+   },
+   "merged_by_cutoff": 98,
+   "question_and_decision_records_first_added_by_cutoff": 95
+  }
  },
  "Personal-Org-Operating-Model": {
   "D": 0,
@@ -31,7 +134,69 @@
   "github_merged_all": 55,
   "github_merged_in_window": 43,
   "github_records": "read",
-  "merged_with_no_row": []
+  "merged_with_no_row": [],
+  "widened": {
+   "c1_branches_heading_more_than_one_merged_pull_request": [
+    {
+     "head_label": "90fc5cf4",
+     "numbers": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    {
+     "head_label": "3b7a7201",
+     "numbers": [
+      6,
+      7,
+      8,
+      9,
+      10
+     ]
+    },
+    {
+     "head_label": "0397e2a5",
+     "numbers": [
+      37,
+      38
+     ]
+    },
+    {
+     "head_label": "06f22140",
+     "numbers": [
+      40,
+      41,
+      42
+     ]
+    },
+    {
+     "head_label": "1ac170c9",
+     "numbers": [
+      48,
+      49
+     ]
+    },
+    {
+     "head_label": "ee090fcd",
+     "numbers": [
+      53,
+      54
+     ]
+    }
+   ],
+   "c1_check_records_at_cutoff_by_kind": {
+    "another kind": 53,
+    "build": 61,
+    "plan": 101,
+    "research": 1,
+    "unclassed": 29
+   },
+   "merged_by_cutoff": 53,
+   "question_and_decision_records_first_added_by_cutoff": 17
+  }
  },
  "Service-Desk": {
   "D": 566,
@@ -134,6 +299,195 @@
   "github_merged_all": 340,
   "github_merged_in_window": 322,
   "github_records": "read",
-  "merged_with_no_row": []
+  "merged_with_no_row": [],
+  "widened": {
+   "c1_branches_heading_more_than_one_merged_pull_request": [
+    {
+     "head_label": "0397e2a5",
+     "numbers": [
+      217,
+      218,
+      219,
+      220,
+      221,
+      222,
+      223,
+      224,
+      225,
+      226,
+      227,
+      228,
+      229,
+      230,
+      231,
+      232,
+      233,
+      234,
+      235,
+      236,
+      237,
+      238,
+      239,
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247,
+      248,
+      249,
+      250,
+      251,
+      252,
+      253,
+      254,
+      255,
+      256,
+      257,
+      258,
+      259,
+      260
+     ]
+    },
+    {
+     "head_label": "7440c252",
+     "numbers": [
+      264,
+      265,
+      266
+     ]
+    },
+    {
+     "head_label": "967401b9",
+     "numbers": [
+      268,
+      269,
+      271
+     ]
+    },
+    {
+     "head_label": "c2616d28",
+     "numbers": [
+      273,
+      275
+     ]
+    },
+    {
+     "head_label": "f03c0765",
+     "numbers": [
+      283,
+      284,
+      289,
+      290,
+      292
+     ]
+    },
+    {
+     "head_label": "b0af4436",
+     "numbers": [
+      300,
+      310
+     ]
+    },
+    {
+     "head_label": "1ac170c9",
+     "numbers": [
+      304,
+      305,
+      306
+     ]
+    },
+    {
+     "head_label": "b7997667",
+     "numbers": [
+      311,
+      314,
+      318,
+      321
+     ]
+    },
+    {
+     "head_label": "2dfcee83",
+     "numbers": [
+      312,
+      315,
+      316,
+      319
+     ]
+    },
+    {
+     "head_label": "036dc755",
+     "numbers": [
+      327,
+      328,
+      329
+     ]
+    },
+    {
+     "head_label": "1d778fd0",
+     "numbers": [
+      330,
+      331
+     ]
+    },
+    {
+     "head_label": "63f48f0e",
+     "numbers": [
+      332,
+      334
+     ]
+    },
+    {
+     "head_label": "e8a6c6be",
+     "numbers": [
+      335,
+      337
+     ]
+    },
+    {
+     "head_label": "4286674b",
+     "numbers": [
+      339,
+      341
+     ]
+    },
+    {
+     "head_label": "ee090fcd",
+     "numbers": [
+      343,
+      345,
+      346
+     ]
+    },
+    {
+     "head_label": "f388baf6",
+     "numbers": [
+      348,
+      350,
+      353,
+      354,
+      355
+     ]
+    },
+    {
+     "head_label": "f12cc2c7",
+     "numbers": [
+      351,
+      352
+     ]
+    }
+   ],
+   "c1_check_records_at_cutoff_by_kind": {
+    "another kind": 303,
+    "build": 232,
+    "plan": 97,
+    "research": 40,
+    "unclassed": 16
+   },
+   "merged_by_cutoff": 323,
+   "question_and_decision_records_first_added_by_cutoff": 514
+  }
  }
 }
