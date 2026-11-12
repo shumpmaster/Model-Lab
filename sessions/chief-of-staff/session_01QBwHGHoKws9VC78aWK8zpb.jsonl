@@ -12,3 +12,4 @@
 {"event": "helper", "session": "session_01QBwHGHoKws9VC78aWK8zpb", "role": "critic", "started": "2026-11-12T18:14:00Z", "ended": "2026-11-12T18:25:00Z", "reported": {"tokens": 296970, "tool_uses": 88, "duration_ms": 656233}}
 {"event": "helper", "session": "session_01QBwHGHoKws9VC78aWK8zpb", "role": "definer", "started": "2026-11-12T18:26:00Z", "ended": "2026-11-12T18:41:00Z", "reported": {"tokens": 259056, "tool_uses": 69, "duration_ms": 877813}}
 {"event": "helper", "session": "session_01QBwHGHoKws9VC78aWK8zpb", "role": "critic", "started": "2026-11-12T18:42:00Z", "ended": "2026-11-12T18:49:00Z", "reported": {"tokens": 225588, "tool_uses": 51, "duration_ms": 409580}}
+{"event": "helper", "session": "session_01QBwHGHoKws9VC78aWK8zpb", "role": "orchestrator", "started": "2026-11-12T18:42:00Z", "ended": "2026-11-12T18:56:00Z", "reported": {"tokens": 404526, "tool_uses": 34, "duration_ms": 847036}}
