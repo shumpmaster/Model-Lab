@@ -14,3 +14,4 @@
 {"event": "helper", "session": "session_01QBwHGHoKws9VC78aWK8zpb", "role": "critic", "started": "2026-11-12T18:42:00Z", "ended": "2026-11-12T18:49:00Z", "reported": {"tokens": 225588, "tool_uses": 51, "duration_ms": 409580}}
 {"event": "helper", "session": "session_01QBwHGHoKws9VC78aWK8zpb", "role": "orchestrator", "started": "2026-11-12T18:42:00Z", "ended": "2026-11-12T18:56:00Z", "reported": {"tokens": 404526, "tool_uses": 34, "duration_ms": 847036}}
 {"event": "helper", "session": "session_01QBwHGHoKws9VC78aWK8zpb", "role": "researcher", "started": "2026-11-12T18:57:00Z", "ended": "2026-11-12T19:07:00Z", "reported": {"tokens": 238451, "tool_uses": 51, "duration_ms": 585314}}
+{"event": "helper", "session": "session_01QBwHGHoKws9VC78aWK8zpb", "role": "critic", "started": "2026-11-12T19:08:00Z", "ended": "2026-11-12T19:15:00Z", "reported": {"tokens": 260624, "tool_uses": 64, "duration_ms": 459083}}
