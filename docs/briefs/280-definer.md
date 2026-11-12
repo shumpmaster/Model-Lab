@@ -1,0 +1,14 @@
+# Brief 280 — definer — S-002 and E-004: the focused fix the owner chose at the plan stop (P-002, M9)
+
+session: session_01QBwHGNPKhVy6fgoUjKtW6q
+model: the Definer runs in a fresh session; its change is checked by the Critic on a different model from it (D-056). Model names are kept out of this record by this session's standing instructions (LL-70).
+start: Model-Lab@4bfc6e074aad5e81e66396fdc21d14c74d06488f (branch build/definer/p002-plan-stop-fix, in its own worktree /home/user/wt/ml-definer-280)
+manifest: the worktree; the owner's answer, intake/P-002-owner-plan-stop-answer-2026-11-12.md, and the card, questions/P-002-plan-stop.md (option A); the Critic's re-check after round 3, reviews/S-002/plan.md
+recorded: at hand-out, 2026-11-12
+
+## Brief
+The owner chose option A at the plan stop: "A: focused fix (Recommended)" (intake/P-002-owner-plan-stop-answer-2026-11-12.md). In specs/S-002.md and experiments/E-004.md only:
+1. Fix the re-check's blocking findings 1 and 2 as option A states them: a void entry and a duplicate entry each open the next spare place (61 to 63) and take the voided entry's side, as a withdrawal does; withdrawals, void entries and duplicate entries count toward one limit of three a look, and a fourth stops the trial and brings it to the owner. Reword E-004's "leaned the right way", the second-look rule, the judging clock, J2 and AC8 to match; say what holds if a place still ends up empty, as the Critic's fix says; add "30 each way" to what the figures assume; add "merging two entered briefs into one pull request, or entering a brief twice" to the stated limit on sides known ahead, in E-004, S-002's risks and the entry and results cards; correct the "shrinks the difference" sentence.
+2. Fix the re-check's non-blocking findings 3 to 9 as the Critic states them. Finding 8's Open question 9 states, in plain words, how a piece in two entries is counted and refilled, and the shared limit.
+3. Keep changes to S-002 lines 18 to 54 and the table at lines 76 to 95 to the fewest needed, and list every changed rule and case id. Change no figure from line-output.txt. Check every changed sentence against the record it states (LL-55), and re-read the entry, void, withdrawal, reserve, wait and count rules end to end for any sentence the change makes false.
+Do not freeze either file. Run Python as `python3 -I -B` (LL-84). Commit as `definer <definer@agents.invalid>` with the trailers `Agent-Session: session_01QBwHGNPKhVy6fgoUjKtW6q/definer-280` and `Spec: S-002` in one paragraph; do not push or merge. Run `governance/checks/check_all.sh . 4bfc6e074aad5e81e66396fdc21d14c74d06488f` and `python3 -I -B governance/checks/surface_guard.py diff --range 4bfc6e074aad5e81e66396fdc21d14c74d06488f..build/definer/p002-plan-stop-fix --branch build/definer/p002-plan-stop-fix`. Return the six-part contract with a table: finding number, the fix, the file and lines changed, and the rule and case ids changed.
