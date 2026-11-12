@@ -1,0 +1,26 @@
+{
+ "Model-Lab": {
+  "D": 4,
+  "M": 98,
+  "M_30_days_complete": 0,
+  "U": 0,
+  "closed_unmerged_after_cutoff_left_out": 0,
+  "default_branch_at_cutoff": "da3d5d2a4da334f5b3cf95455c88e1b07bf478d1"
+ },
+ "Personal-Org-Operating-Model": {
+  "D": 0,
+  "M": 43,
+  "M_30_days_complete": 15,
+  "U": 0,
+  "closed_unmerged_after_cutoff_left_out": 0,
+  "default_branch_at_cutoff": "30f6d30061fd436099add80f69fe61d532ca055a"
+ },
+ "Service-Desk": {
+  "D": 566,
+  "M": 322,
+  "M_30_days_complete": 57,
+  "U": 7,
+  "closed_unmerged_after_cutoff_left_out": 0,
+  "default_branch_at_cutoff": "73e1e1cfab259591d86e1ae2bb4dad1f0a2e00b1"
+ }
+}
