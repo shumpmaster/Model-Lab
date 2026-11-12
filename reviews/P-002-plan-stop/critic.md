@@ -1,6 +1,6 @@
-Verdict: FAIL
+Verdict: PASS
 
-*The Critic's cold read of questions/P-002-plan-stop.md, the owner's card on the plan stop (P-002, M9), in a fresh session on a different model from the writer, the Chief of Staff's session. Round 1: brief docs/briefs/278-critic.md, FAIL, two blocking findings. Recorded verbatim by the orchestrator, session session_01QBwHGNPKhVy6fgoUjKtW6q, 2026-11-12.*
+*The Critic's cold read of questions/P-002-plan-stop.md, the owner's card on the plan stop (P-002, M9), in a fresh session on a different model from the writer, the Chief of Staff's session. Round 1: brief docs/briefs/278-critic.md, FAIL, two blocking findings. Round 2: brief docs/briefs/279-critic.md, PASS, five non-blocking findings, applied to the card after it. Recorded verbatim by the orchestrator, session session_01QBwHGNPKhVy6fgoUjKtW6q, 2026-11-12.*
 
 ## Round 1
 Verdict: FAIL
@@ -67,3 +67,57 @@ Six-part contract
 - Open questions:
   1. Does the stop rule allow "restore the passed plan and carry the open question" as a fixed option, or is it a form of one focused confirmation review? The Chief of Staff should cite the rule line.
   2. Is no default for a reversible R0 stop-rule choice an agreed exception to AGENTS.md section 5? If so, cite it.
+
+## Round 2
+Verdict: PASS
+
+*Critic's cold read, round 2, of questions/P-002-plan-stop.md (brief 279, which builds on brief 278). I read only /home/user/ml-fixed-279 plus the two briefs, and I wrote nothing. This is a re-check of the Chief of Staff's rewrite, so no finding implicates an earlier check of mine (D-050). Round 1's findings 2, 4 and 9 rested on earlier Critic records, as round 1 noted.*
+
+**Round 1 findings, checked**
+- 1 (blocking, options not the stop rule's fixed ones): fixed. The card now offers A (one focused confirmation review), B (re-scope), C (re-specify) and D (drop). These are the four options its Context line 44 lists. Line 7 says plainly that accepting the change despite its failed check is not an option. B says its question is "open, not settled" and is carried to the scenario card. Finding 2 below is a residual point on B.
+- 2 (blocking, newcomer terms): fixed in the main. Lines 5 and 7 now explain the trial, piece, side, place, the second look, withdrawal and its limit of three, the hand check and (in B) the scenario card. Finding 1 below lists what is left.
+- 3 (the gain overclaimed): fixed. Line 13 now reads "no new route without a limit: at most three pieces a look can be dropped by any route, and the plan states that as a limit".
+- 4 (cost understated): fixed. Lines 14 and 31 now name the shared cap, the added wait per refill and the S-001 precedent. The precedent matches reviews/S-001/plan.md line 3 and P-001-plan-stop-2.md.
+- 5 (B called "harmless"): fixed. Line 19 quotes "mostly conservative" and adds that the later check found a merge can favour the method. This matches the re-check's finding 2.
+- 6 (three spare places per trial or per look): fixed. Lines 5 and 41 say each look holds three. This matches E-004:120.
+- 7 (the WHY citation): fixed. Line 9 cites reviews/S-002/plan.md round 1 finding 7 and the re-check's finding 2, both of which exist.
+- 8 (default and timeout): answered soundly. Line 34 says "none, deliberately" and gives the P-001 precedent (Context line 43, decisions/questions/P-001-plan-stop.md). It still does not name the AGENTS.md section 5 exception in words; see finding 4.
+- 9 (who has checked it): fixed. Line 32 lists the plan review and this cold read, and says the recommendation has no other check.
+- 10 (what would change the recommendation): fixed. Line 31 adds "the check failing again, which brings it back to you".
+
+**Made-nothing-false check.** I checked the rewrite against the records it cites:
+- Plan history, nine non-blocking points, and the two blocking re-check findings: match reviews/S-002/plan.md lines 339 to 384.
+- "Seven smaller points": correct. These are re-check findings 3 to 9.
+- Spare places, the cap of three, and the fourth drop stopping the trial: match E-004:120.
+- Refill wait: matches E-004:121.
+- Counting a merged pull request once, on the first entry's side, with the later place empty: matches E-004:123 to 129.
+- S-001 precedent: matches.
+- Value target in trial terms: matches decisions/questions/P-002-value-target.md.
+- Risk class R0, reversible, blast radius and "nothing is frozen": consistent.
+
+I found nothing false.
+
+**Findings**
+1. Not blocking. Card lines 5 and 7 (the opening paragraphs). "Piece" is defined as a merged pull request, but line 7 then says "a piece and a pull request do not match one to one" and "two pieces handed out ... merged as one pull request". A newcomer will stumble here. The record's own terms are an entry (one brief handed out for the trial) and a piece (a pull request that counts). "No longer needed" at line 5 also loosens the withdrawal conditions in E-004:120: no owner touch, work not merged, and its work ended or 60 days passed. "Look", "the stop rule", "the Critic", "the writer" and "frozen" are not glossed, and "R0" is bare.
+   Fix: add one clause saying a piece is handed out as an entry (one brief) and counts once it is a merged pull request. Gloss "look" as one round of 30 each way. Reword "no longer needed" to "dropped under set conditions".
+2. Not blocking. Option B, lines 16 to 20. The card still does not say in plain words why taking the late change back counts as the stop rule's "re-scope" and not as accepting a failed change. Line 17 says the question stays open, which is the right substance.
+   Fix: add one sentence, such as "this removes the failed change from the plan's scope and defers its question to the scenario card".
+3. Not blocking. Line 13, "every side stays at 30". This holds only while no fourth drop stops the trial, and the re-check (finding 1) says a place can still end up empty if the spare places run out. Line 14 half-states the stop. Fix: "stays at 30 while the limit of three is not passed".
+4. Not blocking. Line 34 (default and timeout none). The precedent is cited, but AGENTS.md section 5 says reversible questions adopt the recommendation at timeout. Fix: add "this departs from AGENTS.md section 5 because the stop rule makes the choice the owner's own".
+5. Not blocking. Line 32. It lists "this card, the Critic's cold read" as a check. The recorded verdict was FAIL at round 1, and this is round 2. Fix: say "round 2 (round 1 failed and the card was rewritten)".
+
+**Six-part contract**
+- Changed: nothing. I wrote no file.
+- Why: brief 279 asked for a round 2 cold read of the owner's card on the plan stop (P-002, M9), checking the round 1 fixes and that the rewrite made nothing false.
+- Verified:
+  - All ten round 1 findings against the rewritten card (above).
+  - The card's statements against reviews/S-002/plan.md (re-check lines 339 to 384), E-004:119 to 129, reviews/S-001/plan.md line 3, decisions/questions/P-001-plan-stop-2.md, decisions/questions/P-002-value-target.md and questions/_TEMPLATE.md.
+  - The option set against the four options in Context line 44 and the triage records that quote the rule.
+- Undone:
+  - Personal-Org-Operating-Model OPERATING_MODEL.md §4 is not in the fixed copy. The stop rule's four options and its no-default rule are checked only through the card, the triage records, and the S-001 and P-001 records.
+  - I did not open brief 276's diff, so I cannot say whether the Definer changed anything the card does not mention. This includes the card's claim that the hand check's rules are untouched; I checked it only against docs/projects/P-002.md:146 and the S-002 mentions.
+- Needed outside your surface:
+  - The Orchestrator records this return verbatim in reviews/P-002-plan-stop/critic.md as round 2.
+  - The Chief of Staff may fix findings 1 to 5 before the card goes to the owner. None blocks.
+- Open questions:
+  1. Does the stop rule treat "restore the passed plan and carry the question" as re-scope? The card now labels it so. The rule text was not available to me.
