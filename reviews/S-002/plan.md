@@ -1,6 +1,6 @@
 Verdict: FAIL
 
-The Critic's plan review of specs/S-002.md and experiments/E-004.md (P-002, M8 to M10), in a fresh session on a different model from the writer, the Definer. Round 1 (brief: docs/briefs/271-critic.md, at Model-Lab 51bc87c, read from a fixed copy): FAIL, eight blocking findings. Recorded verbatim by the orchestrator, session session_01QBwHGNPKhVy6fgoUjKtW6q, 2026-11-12. Correction to the brief: it said a FAIL stops work before another round; the stop rule's limit for plan rounds is three (docs/LESSONS.md LL-55; reviews/S-001/plan.md, FAIL at rounds 1 and 2 and PASS at round 3), so round 1's findings go back to the Definer, and round 2 counts as the second of three.
+The Critic's plan review of specs/S-002.md and experiments/E-004.md (P-002, M8 to M10), in a fresh session on a different model from the writer, the Definer. Round 1 (brief: docs/briefs/271-critic.md, at Model-Lab 51bc87c, read from a fixed copy): FAIL, eight blocking findings. Recorded verbatim by the orchestrator, session session_01QBwHGNPKhVy6fgoUjKtW6q, 2026-11-12. Correction to the brief: it said a FAIL stops work before another round; the stop rule's limit for plan rounds is three (docs/LESSONS.md LL-55; reviews/S-001/plan.md, FAIL at rounds 1 and 2 and PASS at round 3), so round 1's findings go back to the Definer, and round 2 counts as the second of three. Round 2 (brief: docs/briefs/273-critic.md, at Model-Lab 1316988, after the Definer's change on brief 272, commit 015ba8f): FAIL, two blocking findings; the Critic flags its own round 1 for missing findings 3 and 4 and part of 6 (D-050).
 
 ## Round 1
 Verdict: FAIL
@@ -128,3 +128,104 @@ Result: the join-up review is not clear while findings 5 and 8 stand. I carry th
   1. Should T5 stay in the count, given the owner's open question 3?
   2. Should the draw be seeded in the frozen trial record, or fixed some other way?
   3. Should withdrawals be decided by the Reviewer or by the owner?
+
+## Round 2
+Verdict: FAIL
+
+Brief 273, plan review round 2 of S-002 and E-004 (P-002, M8 to M10). I read only from /home/user/ml-fixed-273, plus the card /home/user/ml-cards/P-002-value-target.md. I wrote nothing. I read round 1 (reviews/S-002/plan.md), the files as they now stand, SURFACES.md, v3_checks.py (only for the paths concerned), trial-terms.md and line-output.txt. This is round 2 of three. Findings 3 and 4 and part of finding 6 are faults I did not raise in round 1. They implicate my own earlier check (D-050), and the Orchestrator should weigh that.
+
+## Round 1 findings, checked
+All sixteen findings and the four leftovers are fixed as stated or by a sound alternative, except finding 7, whose fix has two faults (findings 1 and 2 below).
+
+- **Finding 1 (rule ids)** is fixed. The ids are K1 to K4, RP1 and RP2, RT1 to RT7, C1 and RR1 to RR3. Awkward cases are E-RP, E-K, E-RT and E-RR. A search of both files found no stale old ids. Ruled terms are written "ruled T<n>" or "ruled P<n>". E-004 line 12 and J1 and J9 agree.
+- **Finding 2 (fields)** is fixed. Step 3 now holds dispatch time and its source, question and decision times, the first-check verdict and rounds, closed-unmerged matches by branch label and brief number, the "untested" rule (line 68) and the naming patterns (line 39). The intake field is dropped.
+- **Finding 3 (K2)** is fixed. K2 maps by role alone. Chief of Staff and Orchestrator briefs go to K3. K4 makes a piece with no K2 kind ineligible for a trial.
+- **Finding 4 (edge cases)** is fixed. Each filter is in the table at lines 76 to 95. E-RP1 has frame D and E-RP2 has frame U. E-RT4, E-RT5, E-RT6, E-RR1 and E-RR3 are marked not sampled and checked by the Critic. The "README records the filters" loophole is closed.
+- **Finding 5 (RT5)** is fixed. RT5 is outside the count, has no J1 or J9 code, and AC2 and Open question 3 agree.
+- **Finding 6 (draw)** is fixed. Sides come from SHA-256 of `E-004:<trial id>:<look>:<place>`, in blocks of 10 with 5 each way. The imbalance bound of 5 holds, and the Reviewer re-derives every side. See finding 2 for reserve places.
+- **Finding 7 (withdrawal)** is partly fixed. The decider (a fresh Reviewer session), the cap of 3, the 60-day rule and the touch-log timing (line 123) are all there. Findings 1 and 2 below are the faults in it.
+- **Finding 8 (paths)** is fixed. The logs and count are in `status/E-004/**`, the Orchestrator's lane (SURFACES.md lines 33 and 50). The touch log is `intake/touches/<yyyy-mm>.jsonl` in the Chief of Staff's lane (line 81). The v3 checks restrict nothing there: the only `status/` pattern is `status/[PQE]-nnn.toml`, which a directory does not match. Trial records are in `experiments/**` (Definer). `tests/E-004/` is the Builder's.
+- **Findings 9 to 16** are done. The plain-words section matches the body and the figures. I checked 0.0097, 0.0367, 0.0131, 0.0124, 0.0314 and 0.0312 against line-output.txt lines 36 to 44. "What this trial cannot catch" exists, and its quotes match the card, lines 20 and 21. The re-run line is at E-004:44. The line is now "copied". The marker is stripped from the short reads including merged files. AC8 has the figure 5. The scenario heading is corrected. The four leftovers are cleared or reworded.
+
+## Findings
+
+1. BLOCKING. experiments/E-004.md:118 and 119, with specs/S-002.md:111 and 176. The withdrawal conditions contradict the 60-day rule.
+   - Condition (ii) requires the pull request to be "closed unmerged, or never opened". A piece that is open and unmerged at 60 days with no owner touch fails (ii). The withdrawal check must then answer "no", so the piece stays, and the look waits for it with no limit.
+   - Line 119 ("goes to the withdrawal check, under (iii)") and S-002:111 ("so no look waits on it for ever") promise the opposite. J2 says such a piece "is withdrawn".
+   - This is the stall that round 1 finding 7 was about.
+   - Fix: reword (ii) to "its work has not merged: its pull request was closed unmerged, never opened, or is still open". Keep (iii)'s 60-day alternative.
+
+2. BLOCKING. experiments/E-004.md:68 and 118 against specs/S-002.md:159 (AC8) and 176 (J2). Reserve places 61 to 63 have no side fixed in the trial record.
+   - The record holds the sides of places 1 to 60 only (E-004:46 and 68). A reserve place "takes the withdrawn piece's side" (line 118).
+   - J2 gives `place (1 to 63)` and says the side is "the one the frozen trial record fixes for that place". AC8 says the same. The Reviewer "recomputes every place's side by the rule above" (E-004:70), and J2 says a side that differs from the record's for its place stops the trial and sends it to the owner. That would fire on every reserve piece.
+   - E-004:119's claim that no look waits longer than "60 days after dispatch, plus the 30 days" is also untrue. A reserve piece must still be dispatched after the withdrawal and merged, or be settled at its own 60 days.
+   - Fix: say that reserve sides are not in the trial record and are the withdrawn piece's side. Give the Reviewer's check for them (the log's withdrawal line names the side taken over). Reword J2 and AC8 to match. Correct the 60+30 sentence to say the bound holds for places 1 to 60, and that a reserve piece adds its own wait.
+
+3. Not blocking. specs/S-002.md:74, the hand check's seed. The seed is "the full id of the start commit of the Orchestrator's extract brief", a hash the Orchestrator creates. That is the same grinding route as round 1 finding 6, and it conflicts with "the Orchestrator chooses nothing". The cut-off date is also the Orchestrator's day. Fix: fix the seed as a string in the spec (for example `S-002-handcheck`), or take it from a commit that the Critic's PASS record names, and state the cut-off rule. (Implicates my round 1 check, which missed it.)
+
+4. Not blocking. specs/S-002.md:186 against 188. Areas touched lists `reviews/E-004/**`, which is the Orchestrator's lane, while line 188 says the same path is outside the Builder's areas. The builder brief gives "the areas touched" as its scope. Fix: drop `reviews/E-004/**` from line 186, or list the areas by writer. (Implicates my round 1 check.)
+
+5. Not blocking. specs/S-002.md:98 (what the Researcher gets verbatim). The quoted rules point to things the Researcher is not given: "(below)" at RT1 and E-RT6, "Open question 3" and "J1 or J9" at RT5, and "the table above" at E-RT6. Fix: say in the research question what each reference means, or reword those sentences so they stand alone.
+
+6. Not blocking. specs/S-002.md:39. Brief records for the other two repositories are "named in the extract's README before the extract is built". That is a choice left to the Orchestrator. Fix: name the files in the spec, or say the README states them and the Critic checks them before the sample is drawn.
+
+7. Not blocking. experiments/E-004.md:118 and 20. The withdrawal check is said to be "not told the side", but it is given the brief record for (iii). A "with" brief carries the method's fenced block, so the side shows. Its Reviewer pack would also hold the trial records unless a separate pack is made. Fix: give it only the ending record and the touch records, not the brief. List a second per-task pack for the withdrawal check under "Needed outside this spec's lane" that keeps `status/E-004/trials/**` and `experiments/E-004/trials/**` out (D-006). Today only the analysis pack is listed (S-002:237).
+
+8. Not blocking. experiments/E-004.md:123 and 124, and S-002:70. Late touch-log lines (committed after the piece merged but before judging) are counted. They are listed, but they can still be added retrospectively on one side. Fix: have the Reviewer report each look's result with and without late lines, and the card state both.
+
+9. Not blocking. experiments/E-004.md:67 and 76, and S-002:176. "Every eligible piece is entered; none is skipped" conflicts with "No new piece is drawn while look 1 waits". "The look's weeks" is undefined, so the Reviewer's list of unentered pieces cannot be applied. Fix: define the look's weeks as from the entry of place 1 to the entry of place 60 and any reserves, and say that pieces dispatched while a look waits are outside the trial and listed.
+
+10. Not blocking. specs/S-002.md:233 (Open question 8). It is right to ask, but it is not yet plain. It omits that a fourth withdrawal stops the trial. "Withdrawn" is not explained (the piece is left out and its place is refilled). Fix: add "a fourth stops the trial and brings the result to you", and say plainly that a withdrawn piece is left out and replaced.
+
+11. Not blocking. specs/S-002.md:10 (plain words). It says each side is fixed "by a shuffle no one can steer", which is true. It does not say that the sides are readable ahead, which the owner would want to weigh. Fix: add one plain clause (see the open point on sides below).
+
+12. Not blocking. E-004.md:5 and the S-002 header. Revision, `status: draft` and `<commit>` placeholders are to be settled at freeze. Nothing is wrong now.
+
+## The Definer's two open points
+- **Open question 8.** It is right to ask the owner. The cap of 3 per look matches the three reserve places (E-004:68 and 118). The 60-day rule and the Reviewer check are labelled "this plan's figures", and the question is worded for the owner's choice. It needs the wording fixes in finding 10 and the logic fixes in findings 1 and 2.
+- **Sides fixed ahead, as a stated limit.** It is acceptable as a stated limit on three conditions.
+  - The wording at E-004:142 and S-002:215 must also cover choosing which brief takes the next place. It says only that "a dispatch delayed on purpose is not caught", and E-004:67 says "none is skipped or chosen", which overclaims. The dispatcher also knows the side when it picks which brief goes next.
+  - The limit goes on the entry card and the results card, and in the plain-words section (finding 11).
+  - The Reviewer's checks stay as written (every entry against brief times, unentered pieces listed).
+  - Fixing the sides ahead does remove the round 1 hole of drawing sides after the fact. Hash-grinding is not possible. The remaining risk is timing and choice by the dispatcher, which the hold-up checks only partly catch.
+
+## Other checks that passed
+- **Header and milestones.** The header names M8, M9 and M10, matching P-002.md section 3 (lines 126 to 128). The standard Discovery and Design lines are in the project document. E-004's M13 was already in place.
+- **Ruled terms and figures.** Quoted terms match trial-terms.md (T16, T23, T24, T25, T29, P6, P7, P8, P14 and others). The figures match line-output.txt.
+- **Hand check and re-run.** The hand check is fixed before any extract (sample, strata, filters and fields), apart from finding 3's seed. E-004 is not a re-run (line 44 added; D-047).
+- **Acceptance criteria.** AC1 to AC21 are testable scenarios and trace to V1, apart from the AC8 reserve-side wording (finding 2).
+
+## Join-up review (docs/design/JOIN_UP_REVIEW.md form; Design, 2026-11-12)
+Screens checked: none. This item has no screens or views of its own (P-002.md Design-5). The Service Desk's queue and missed-round views are filed as new work, so no screen rows were compared.
+
+Hand-offs checked side by side, J1 to J9 against the rules, E-004 and SURFACES.md:
+- **J1, J2, J9, J4, paths.** J1 and J2 write to `status/E-004/**` (Orchestrator lane). J9's `intake/touches/` is the Chief of Staff's. J4's `reviews/E-004/<trial id>/reviewer.md` is the Orchestrator's. J1's rule codes match RT1 to RT3 and RT7, with RT5 and RT6 correctly uncoded. J3 matches E-004 Step 1 and Step 3.
+- **J2 and E-004 Step 4.** Blocking, same as finding 2: J2 and AC8 say reserve places 61 to 63 have a side from the record, and the record has none.
+- **J2 and E-004 Exclusions.** Blocking, same as finding 1: J2 says a piece unmerged at 60 days with no touch is withdrawn, and E-004:118 (ii) forbids it.
+- **S-002:186 against 188.** Not blocking, finding 4.
+
+Result: the join-up review is not clear while findings 1 and 2 stand. Findings 3 to 11 are carried into the gate's case as risks.
+
+## Six-part contract
+- **Changed:** nothing. I wrote no file.
+- **Why:** brief 273 asked for round 2 of the plan review after the Definer's change 015ba8f.
+- **Verified:**
+  - Every round 1 finding against the files as they now stand.
+  - The renamed rule ids across both files.
+  - The E-004 figures against line-output.txt, and the cannot-catch quotes against the card.
+  - The new paths against SURFACES.md and v3_checks.py.
+  - The withdrawal rules end to end.
+- **Undone:**
+  - I did not open the diff, so I did not confirm that the plain-words and body edits are the only sentences changed. I judged the two files as they stand.
+  - I did not re-run line.py.
+  - I did not open reviews/P-002-value-target-odds/ or research/Q-013-memo.md, which are outside the manifest.
+  - Round 1's quoted Q-017 line numbers were not re-checked, since they were not changed.
+- **Needed outside your surface:**
+  - The Orchestrator records this return verbatim as round 2 in reviews/S-002/plan.md.
+  - The Definer fixes findings 1 and 2, and should fix 3 to 11 in the same change.
+  - The Chief of Staff or Orchestrator adds the second per-task Reviewer pack (finding 7).
+  - The owner rules the sides-known-ahead limit and question 8 on the scenario card, after the plan passes.
+- **Open questions:**
+  1. Should the reserve side be the withdrawn piece's side, or a fixed hash-derived side per reserve place? (Finding 2.)
+  2. Should the hand-check seed be a fixed string or a named commit? (Finding 3.)
+  3. Should late touch-log lines count at all, or be shown only in a with-and-without report? (Finding 8.)
