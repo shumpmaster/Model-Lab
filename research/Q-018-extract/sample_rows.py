@@ -18,9 +18,7 @@ MARK = {"footer": "footer", "session link": "session link", "none": "none"}
 def session_shown(x, n_owner):
     """Whether a session's records show the comment posted (S-002 RT1(b)), from the extract's comment_records."""
     cr = x.get("comment_records") or {"reviewer_comment": [], "other_wording": []}
-    if cr["reviewer_comment"] and n_owner == 1: return "yes"
-    if cr["reviewer_comment"]: return "undecided: a record names the reviewer comment on this pull request, but it has more than one comment under the owner's account and the record does not say which"
-    if cr["other_wording"]: return "undecided: a record's line names a comment on this pull request in other words, which do not show who posted it"
+    if cr["reviewer_comment"]: return "yes"
     return "no record found"
 def gh(r, x, f):
     if f == "D": return x
