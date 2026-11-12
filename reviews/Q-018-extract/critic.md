@@ -111,3 +111,31 @@ Also checked, no finding:
 - **Undone:** I could not count GitHub-committed merge commits in the window myself (no shell, git objects not readable). That is why finding 1 asks extract.py to do it.
 - **Needed outside my surface:** the Orchestrator fixes finding 1, plus the non-blocking points under findings 2 and 3 if it wishes, and returns them for a re-check of finding 1 only. The sample stays undrawn until then.
 - **Open questions:** none new. Round 1's open questions (whether Personal-Org-Operating-Model's `Spec:` trailer may name a brief; which time S-002 means for a control file) are still with the Definer and the owner.
+
+## Round 3 (brief 285: round 2's finding 1 and the non-blocking points under its findings 2 and 3, on Model-Lab@feacfa3)
+Verdict: PASS
+
+In short: round 2's one blocking finding is closed. extract.py now counts GitHub's merge commits from git itself, without using the Orchestrator's list, and stops if any of them matches no listed pull request. Its counts equal frame M in all three repositories (98, 322 and 43), with none unmatched. The non-blocking points under round 2's findings 2 and 3 are closed as well. Nothing left in the extract lets the draw be steered or gives a wrong dispatch time as far as these checks reach, so the sample may be drawn. I wrote nothing.
+
+## Findings
+
+1. **Round 2 finding 1 (no check that GitHub's list is complete): closed.**
+   - extract.py lines 346–352 take every first-parent commit on the default branch that GitHub committed, that has two parents and whose commit time falls in the window. They read these from git (`fp`, line 330), not from the list. If any one's second parent is not a listed pull request's head commit, the run stops.
+   - frames.json gives `git_github_merge_commits_in_window` as 98, 322 and 43, equal to `M` in each repository, and `git_merge_commits_matching_no_listed_pull_request` as empty in all three. README.md line 10 says the same.
+   - A merged pull request left out of the list can no longer fall into frame D unseen.
+   - Non-blocking, for the record only: the check covers merge commits that GitHub committed, which README.md line 10 says is how all 498 merged. A pull request merged some other way would already have stopped the forward check at lines 337–345 if it was listed. If it was not listed, it looks the same as a local merge, which S-002 puts in frame D under E-RP1 anyway. No fix needed.
+
+2. **Round 2 finding 2, both non-blocking points: closed.**
+   - Sessions with more than one control file: line 219 now keeps every control file a session has, and line 225 takes the earliest first add among them. README.md line 19 says so.
+   - Repeated cross-check entries: `CTRL_CHECK` is now keyed by value (lines 210 and 228), so a value carried by two commits is listed once.
+   - Non-blocking, cosmetic: line 211 carries a stray copy of the old `CTRL_CHECK` comment after the `NO_CONTROL` comment. Fix: delete the second comment.
+
+3. **Round 2 finding 3, non-blocking point: closed.** A control-form value with no control file is now added to `NO_CONTROL` (line 223) and listed in frames.json as `control_values_with_no_control_file`. That list is empty in all three repositories, so no such value reaches the E-K2 filter with role `None`.
+
+## Six-part contract
+- **Changed:** nothing (no write tool).
+- **Why:** brief 285, round 3: round 2's finding 1 and the non-blocking points under its findings 2 and 3.
+- **Verified:** read docs/briefs/285-critic.md; extract.py lines 205–234 and 324–355, plus a grep for the new frames.json keys (lines 210–211, 219–229, 330–352, 431–434); README.md lines 9–19; frames.json keys `M`, `D`, `git_github_merge_commits_in_window`, `git_merge_commits_matching_no_listed_pull_request` and `control_values_with_no_control_file` for all three repositories. Commits could not be read (no shell, git objects not readable), so frames.json's figures are taken as the run's output and were not re-derived.
+- **Undone:** none within this brief.
+- **Needed outside my surface:** none beyond what is already routed: the Orchestrator may draw the sample (`python3 -I -B extract.py draw <this folder>`); round 1's finding 9 is with the Definer and finding 10 goes to the memo.
+- **Open questions:** none new. Round 1's open questions (whether a Personal-Org-Operating-Model `Spec:` trailer may name a brief, and which time S-002 means for a control file) are still with the Definer and the owner.
