@@ -11,7 +11,7 @@ OPTIONS:
      Cost: your ruling on unasked instructions would not reach them.
   B. Count a note under the unasked-instruction code when all of its lines sit under a line naming your note or notes, and none under a line naming an answer or a ruling; list each one so coded for the Critic's check.
      Gain: one code for one kind of touch, kept in view in past records.
-     Cost: one more reading rule, and a check of each one coded.
+     Cost: one more reading rule, and a check of each one coded. Notes whose heading line also names an answer stay counted as questions (notes 15 to 18, and 25 to 27, whose heading names the Orchestrator's answer, not yours).
   C. Leave such notes to the touch log alone.
      Gain: simplest.
      Cost: it drops them from past records, where the touch log holds nothing.
