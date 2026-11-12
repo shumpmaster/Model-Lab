@@ -7,7 +7,10 @@
   "brief_values_with_unmatched_suffix": [],
   "closed_unmerged_after_cutoff_left_out": 0,
   "control_values_whose_dispatch_log_time_differs": [],
+  "control_values_with_no_control_file": [],
   "default_branch_at_cutoff": "da3d5d2a4da334f5b3cf95455c88e1b07bf478d1",
+  "git_github_merge_commits_in_window": 98,
+  "git_merge_commits_matching_no_listed_pull_request": [],
   "github_merged_all": 103,
   "github_merged_in_window": 98,
   "github_records": "read",
@@ -21,7 +24,10 @@
   "brief_values_with_unmatched_suffix": [],
   "closed_unmerged_after_cutoff_left_out": 0,
   "control_values_whose_dispatch_log_time_differs": [],
+  "control_values_with_no_control_file": [],
   "default_branch_at_cutoff": "30f6d30061fd436099add80f69fe61d532ca055a",
+  "git_github_merge_commits_in_window": 43,
+  "git_merge_commits_matching_no_listed_pull_request": [],
   "github_merged_all": 55,
   "github_merged_in_window": 43,
   "github_records": "read",
@@ -36,59 +42,19 @@
   "closed_unmerged_after_cutoff_left_out": 0,
   "control_values_whose_dispatch_log_time_differs": [
    {
-    "control": "control:0961dbf6",
-    "dispatch_log_line_first_added": "2026-10-01T12:28:43Z",
-    "file_first_added": "2026-10-01T12:28:44Z"
-   },
-   {
-    "control": "control:e82f5a4a",
-    "dispatch_log_line_first_added": "2026-10-04T15:14:53Z",
-    "file_first_added": "2026-10-04T15:14:54Z"
-   },
-   {
-    "control": "control:8ff63ba3",
-    "dispatch_log_line_first_added": "2026-11-03T01:33:41Z",
-    "file_first_added": "2026-11-03T01:33:47Z"
-   },
-   {
     "control": "control:08af1bc0",
     "dispatch_log_line_first_added": "2026-10-01T10:51:02Z",
     "file_first_added": "2026-10-01T10:51:03Z"
    },
    {
-    "control": "control:530d02b1",
+    "control": "control:0961dbf6",
+    "dispatch_log_line_first_added": "2026-10-01T12:28:43Z",
+    "file_first_added": "2026-10-01T12:28:44Z"
+   },
+   {
+    "control": "control:0b72791e",
     "dispatch_log_line_first_added": "2026-10-01T12:23:40Z",
     "file_first_added": "2026-10-01T12:23:41Z"
-   },
-   {
-    "control": "control:48ef806e",
-    "dispatch_log_line_first_added": null,
-    "file_first_added": "2026-10-04T01:28:22Z"
-   },
-   {
-    "control": "control:f13379d9",
-    "dispatch_log_line_first_added": "2026-10-08T12:46:06Z",
-    "file_first_added": "2026-10-08T12:46:07Z"
-   },
-   {
-    "control": "control:d107d18f",
-    "dispatch_log_line_first_added": "2026-11-03T03:32:46Z",
-    "file_first_added": "2026-11-03T03:32:47Z"
-   },
-   {
-    "control": "control:a58ce621",
-    "dispatch_log_line_first_added": "2026-10-01T02:21:52Z",
-    "file_first_added": "2026-10-01T02:21:54Z"
-   },
-   {
-    "control": "control:fc81bd3a",
-    "dispatch_log_line_first_added": "2026-10-08T12:32:40Z",
-    "file_first_added": "2026-10-08T12:32:41Z"
-   },
-   {
-    "control": "control:b1f89eee",
-    "dispatch_log_line_first_added": "2026-10-01T11:32:56Z",
-    "file_first_added": "2026-10-01T11:32:57Z"
    },
    {
     "control": "control:23485857",
@@ -96,9 +62,9 @@
     "file_first_added": "2026-10-04T10:48:44Z"
    },
    {
-    "control": "control:5ed00afc",
-    "dispatch_log_line_first_added": "2026-10-01T02:21:52Z",
-    "file_first_added": "2026-10-01T02:21:53Z"
+    "control": "control:2f72e5db",
+    "dispatch_log_line_first_added": "2026-10-01T16:28:01Z",
+    "file_first_added": "2026-10-01T16:28:02Z"
    },
    {
     "control": "control:34d9ac0f",
@@ -106,22 +72,65 @@
     "file_first_added": "2026-10-08T12:20:47Z"
    },
    {
+    "control": "control:48ef806e",
+    "dispatch_log_line_first_added": null,
+    "file_first_added": "2026-10-04T01:28:22Z"
+   },
+   {
+    "control": "control:530d02b1",
+    "dispatch_log_line_first_added": "2026-10-01T12:23:40Z",
+    "file_first_added": "2026-10-01T12:23:41Z"
+   },
+   {
+    "control": "control:5ed00afc",
+    "dispatch_log_line_first_added": "2026-10-01T02:21:52Z",
+    "file_first_added": "2026-10-01T02:21:53Z"
+   },
+   {
+    "control": "control:8ff63ba3",
+    "dispatch_log_line_first_added": "2026-11-03T01:33:41Z",
+    "file_first_added": "2026-11-03T01:33:47Z"
+   },
+   {
+    "control": "control:a58ce621",
+    "dispatch_log_line_first_added": "2026-10-01T02:21:52Z",
+    "file_first_added": "2026-10-01T02:21:54Z"
+   },
+   {
+    "control": "control:b1f89eee",
+    "dispatch_log_line_first_added": "2026-10-01T11:32:56Z",
+    "file_first_added": "2026-10-01T11:32:57Z"
+   },
+   {
     "control": "control:c19c8b42",
     "dispatch_log_line_first_added": "2026-11-03T01:33:41Z",
     "file_first_added": "2026-11-03T01:33:44Z"
    },
    {
-    "control": "control:2f72e5db",
-    "dispatch_log_line_first_added": "2026-10-01T16:28:01Z",
-    "file_first_added": "2026-10-01T16:28:02Z"
+    "control": "control:d107d18f",
+    "dispatch_log_line_first_added": "2026-11-03T03:32:46Z",
+    "file_first_added": "2026-11-03T03:32:47Z"
    },
    {
-    "control": "control:0b72791e",
-    "dispatch_log_line_first_added": "2026-10-01T12:23:40Z",
-    "file_first_added": "2026-10-01T12:23:41Z"
+    "control": "control:e82f5a4a",
+    "dispatch_log_line_first_added": "2026-10-04T15:14:53Z",
+    "file_first_added": "2026-10-04T15:14:54Z"
+   },
+   {
+    "control": "control:f13379d9",
+    "dispatch_log_line_first_added": "2026-10-08T12:46:06Z",
+    "file_first_added": "2026-10-08T12:46:07Z"
+   },
+   {
+    "control": "control:fc81bd3a",
+    "dispatch_log_line_first_added": "2026-10-08T12:32:40Z",
+    "file_first_added": "2026-10-08T12:32:41Z"
    }
   ],
+  "control_values_with_no_control_file": [],
   "default_branch_at_cutoff": "73e1e1cfab259591d86e1ae2bb4dad1f0a2e00b1",
+  "git_github_merge_commits_in_window": 322,
+  "git_merge_commits_matching_no_listed_pull_request": [],
   "github_merged_all": 340,
   "github_merged_in_window": 322,
   "github_records": "read",

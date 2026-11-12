@@ -207,7 +207,8 @@ def resolve_brief_file(R, bid):
     return (base, f"docs/briefs/{base}.md")
 
 _CF = {}
-CTRL_CHECK = collections.defaultdict(list)   # control values whose dispatch-log line time differs from the file's first add
+CTRL_CHECK = collections.defaultdict(dict)
+NO_CONTROL = collections.defaultdict(set)   # control-form values with no control file   # control values whose dispatch-log line time differs from the file's first add
 def control_file(R, value):
     if R.name not in _CF:
         idx = {}
@@ -215,15 +216,16 @@ def control_file(R, value):
             if re.fullmatch(r"reviews/[^/]+/_control/[^/]+\.json", p):
                 try: d = json.loads(R.show(R.cut, p) or "")
                 except ValueError: continue
-                if isinstance(d, dict) and d.get("session"): idx.setdefault(d["session"], (d.get("role"), p))
+                if isinstance(d, dict) and d.get("session"): idx.setdefault(d["session"], []).append((d.get("role"), p))
         _CF[R.name] = idx
-    hit = _CF[R.name].get(value)
-    if not hit: return (None, None, None)
-    role, p = hit
-    t = R.first_add.get(p)
+    hits = _CF[R.name].get(value)
+    if not hits:
+        NO_CONTROL[R.name].add("control:" + lab(value)); return (None, None, None)
+    # every control file a session has; the earliest first add among them, and its role
+    role, p, t = min(((r, q, R.first_add.get(q)) for r, q in hits), key=lambda x: (x[2] is None, x[2] or ""))
     item, route, tm = value.split(":", 2)
     _, lt, _ = control_line(R, item, route, tm)
-    if lt != t: CTRL_CHECK[R.name].append({"control": "control:" + lab(value), "file_first_added": t, "dispatch_log_line_first_added": lt})
+    if lt != t: CTRL_CHECK[R.name]["control:" + lab(value)] = {"control": "control:" + lab(value), "file_first_added": t, "dispatch_log_line_first_added": lt}
     return (role, t, p)
 
 _CTRL = {}
@@ -341,6 +343,13 @@ def build(clones, ghdir, outdir):
             if mc in R.on_main: merged.append(p)
         if any(WIN0 <= T(x["merged_at"]) < CUT for x in no_row):
             raise SystemExit(f"{name}: merged pull requests in the window with no frame M row: {no_row}")
+        # independent of GitHub's list: every GitHub merge commit on the default branch's first-parent line with a
+        # commit time in the window must be the merge commit of a listed pull request
+        listed_heads = {p["head_sha"] for p in gh_merged}
+        git_merges = [(h, par.split()[1]) for h, par, cn in fp if cn == "GitHub" and len(par.split()) == 2 and h in R.on_main and WIN0 <= T(R.commits[h]["cd"]) < CUT]
+        unlisted = [h for h, second in git_merges if second not in listed_heads]
+        if unlisted:
+            raise SystemExit(f"{name}: GitHub merge commits in the window matching no listed pull request: {unlisted}")
         own = {p["number"]: own_commits(R, p) for p in merged}
         in_pr = {h for v in own.values() for h in v} | {p["_merge"] for p in merged}
         U = [p for p in R.gh if not p["merged_at"] and p["closed_at"] and WIN0 <= T(p["closed_at"]) < CUT]
@@ -419,8 +428,10 @@ def build(clones, ghdir, outdir):
         summary[name] = {"default_branch_at_cutoff": R.cut, "github_records": "read", "M": len(Ms), "U": len(Urows), "D": len(Ds),
                          "github_merged_in_window": sum(1 for p in gh_merged if WIN0 <= T(p["merged_at"]) < CUT),
                          "github_merged_all": len(gh_merged), "merged_with_no_row": no_row,
+                         "git_github_merge_commits_in_window": len(git_merges), "git_merge_commits_matching_no_listed_pull_request": unlisted,
+                         "control_values_with_no_control_file": sorted(NO_CONTROL[name]),
                          "brief_values_with_unmatched_suffix": sorted(UNMATCHED[name]),
-                         "control_values_whose_dispatch_log_time_differs": CTRL_CHECK[name],
+                         "control_values_whose_dispatch_log_time_differs": sorted(CTRL_CHECK[name].values(), key=lambda d: d["control"]),
                          "M_30_days_complete": sum(1 for m in Ms if m["after_merge"]["days30_complete"]),
                          "closed_unmerged_after_cutoff_left_out": len(U_open_or_late)}
     json.dump(summary, open(os.path.join(outdir, "frames.json"), "w"), indent=1, sort_keys=True)
