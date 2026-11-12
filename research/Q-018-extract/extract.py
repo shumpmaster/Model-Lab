@@ -116,7 +116,7 @@ def parse_trailer(v, repo):
     'control', or None (no brief named)."""
     v = v.strip()
     rest = re.sub(r"^session_[A-Za-z0-9]+[/\-]?", "", v)
-    m = re.fullmatch(r"((?:Q|P)-\d+):([a-z\-]+):(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ)", rest)
+    m = re.fullmatch(r"([PQE]-[0-9]+):([a-z][a-z0-9-]*):(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ)", rest)
     if m and repo == "Service-Desk": return (None, rest, "control")
     if repo == "Model-Lab":
         m = re.fullmatch(r"([a-z\-]+)-(\d+)", rest)
@@ -124,8 +124,13 @@ def parse_trailer(v, repo):
     if not rest or rest.startswith("gha-"): return (None, None, None)
     toks = rest
     role = next((r for r in ROLES if re.search(r"(^|-)" + re.escape(r) + r"($|-)", toks)), None)
+    for special in ("adopt-v3-stamp", "adopt-v3"):
+        if special in toks: return (role, special, "brief-file")
     m = re.search(r"(?:^|-)s-?(\d{3})(?=$|-)", toks)
-    return (role, ("s-" + m.group(1)) if m else None, "brief-file" if m else None)
+    if not m: return (role, None, None)
+    # a suffixed brief record s-NNN-<suffix>.md is named when the value holds its suffix; the longest such wins
+    after = toks[m.end():]
+    return (role, ("s-" + m.group(1)) + ("\x00" + after if after else ""), "brief-file")
 
 class Repo:
     def __init__(self, name, clones, ghdir):
@@ -161,9 +166,9 @@ class Repo:
         """For every path, the commit time of the first commit on the default branch (at the cut-off) that adds it."""
         out = {}
         cur = None
-        for line in git(self.path, "log", self.cut, "--reverse", "--diff-filter=A", "--no-renames", "--name-only", "--format=%x1e%cI").split("\n"):
+        for line in git(self.path, "log", self.cut, "--diff-filter=A", "--no-renames", "--name-only", "--format=%x1e%cI").split("\n"):
             if line.startswith("\x1e"): cur = utc(line[1:])
-            elif line and cur and line not in out: out[line] = cur
+            elif line and cur and (line not in out or cur < out[line]): out[line] = cur   # the earliest commit time that adds it
         return out
     def show(self, rev, path):
         try: return git(self.path, "show", f"{rev}:{path}")
@@ -177,17 +182,49 @@ def brief_records(R, commits):
             role, bid, kind = parse_trailer(v, R.name)
             if kind is None: continue
             if kind == "ml-brief":
-                rec = f"docs/briefs/{bid}-{role}.md"; t = R.first_add.get(rec)
+                rec = f"docs/briefs/{bid}-{role}.md"
+                if rec not in R.first_add and len(bid) == 1: rec = f"docs/briefs/0{bid}-{role}.md"
+                t = R.first_add.get(rec)
             elif kind == "brief-file":
-                rec = f"docs/briefs/{bid}.md"; t = R.first_add.get(rec)
-            else:  # control: the dispatch-log line with this item, route and time
-                item, route, tm = bid.split(":", 2)
-                role, t, rec = control_line(R, item, route, tm)
+                bid, rec = resolve_brief_file(R, bid); t = R.first_add.get(rec)
+            else:  # control: the reviews/<id>/_control/*.json file whose "session" is this value
+                role, t, rec = control_file(R, bid)
             key = (kind, bid)
             if key not in out:
                 out[key] = {"brief": bid if kind != "control" else "control:" + lab(bid), "from": {"ml-brief": "brief record", "brief-file": "brief record", "control": "control file"}[kind],
                             "role": role, "record_exists": t is not None, "record_first_added": t}
     return list(out.values())
+
+UNMATCHED = collections.defaultdict(set)   # values with text after the brief number that matched no suffixed file
+def resolve_brief_file(R, bid):
+    base, _, after = bid.partition("\x00")
+    if after:
+        names = [p for p in R.first_add if p.startswith(f"docs/briefs/{base}-") and p.endswith(".md")]
+        hits = [p for p in names if p[len(f"docs/briefs/{base}-"):-3] in after]
+        if hits:
+            p = max(hits, key=len); return (p[len("docs/briefs/"):-3], p)
+        UNMATCHED[R.name].add(base + after)
+    return (base, f"docs/briefs/{base}.md")
+
+_CF = {}
+CTRL_CHECK = collections.defaultdict(list)   # control values whose dispatch-log line time differs from the file's first add
+def control_file(R, value):
+    if R.name not in _CF:
+        idx = {}
+        for p in git(R.path, "ls-tree", "-r", "--name-only", R.cut, "reviews/").split():
+            if re.fullmatch(r"reviews/[^/]+/_control/[^/]+\.json", p):
+                try: d = json.loads(R.show(R.cut, p) or "")
+                except ValueError: continue
+                if isinstance(d, dict) and d.get("session"): idx.setdefault(d["session"], (d.get("role"), p))
+        _CF[R.name] = idx
+    hit = _CF[R.name].get(value)
+    if not hit: return (None, None, None)
+    role, p = hit
+    t = R.first_add.get(p)
+    item, route, tm = value.split(":", 2)
+    _, lt, _ = control_line(R, item, route, tm)
+    if lt != t: CTRL_CHECK[R.name].append({"control": "control:" + lab(value), "file_first_added": t, "dispatch_log_line_first_added": lt})
+    return (role, t, p)
 
 _CTRL = {}
 def control_line(R, item, route, tm):
@@ -203,8 +240,8 @@ def control_line(R, item, route, tm):
     if not hit: return (None, None, None)
     role, prev, f = hit
     # the commit time of the first commit that adds the line (found by its unique "prev" hash)
-    log = git(R.path, "log", R.cut, "--reverse", "--format=%cI", "-S", prev, "--", f).split()
-    return (role, utc(log[0]) if log else None, f)
+    log = git(R.path, "log", R.cut, "--format=%cI", "-S", prev, "--", f).split()
+    return (role, min(utc(x) for x in log) if log else None, f)
 
 # ---------------- fields --------------------------------------------------------------------------
 def commit_fields(R, h, with_files=True):
@@ -214,12 +251,17 @@ def commit_fields(R, h, with_files=True):
     d = {"hash": h, "parents": len(c["parents"]), "author_class": author_class(c["an"], c["ae"]),
          "committer_class": committer_class(c["cn"], c["ce"]), "author_time": c["ad"], "commit_time": c["cd"],
          "agent_session": bool(c["sess"]),
-         "trailer_briefs": [{"role": r, "brief": (("control:" + lab(b)) if k == "control" else b)} for r, b, k in tr if k],
+         "trailer_briefs": [trailer_brief(R, r, b, k) for r, b, k in tr if k],
          "spec": c["spec"], "revert_subject": c["subj"].startswith("Revert"), "reverts_commits": reverts,
          "subject_names_prs": sorted({int(x) for x in re.findall(r"#(\d+)\b", c["subj"])})}
     if with_files:
         d["files"] = [{"label": lab(f["path"]), "class": k1(f["path"], R.name), "status": f["status"], "added": f["added"], "removed": f["removed"]} for f in c["files"]]
     return d
+
+def trailer_brief(R, role, bid, kind):
+    if kind == "control": return {"role": control_file(R, bid)[0], "brief": "control:" + lab(bid)}
+    if kind == "brief-file": return {"role": role, "brief": resolve_brief_file(R, bid)[0]}
+    return {"role": role, "brief": bid}
 
 def own_commits(R, pr):
     """A merged pull request's own commits: reachable from its head and not from the merge commit's first parent."""
@@ -230,12 +272,15 @@ QD_RX = None
 def qd_files(R):
     """Every question file and decision record first added on the default branch, with its text as first added (never written)."""
     out = []
-    log = git(R.path, "log", R.cut, "--reverse", "--diff-filter=A", "--no-renames", "--name-only", "--format=%x1e%H %cI", "--", "questions/", "decisions/")
-    cur = None; seen = set()
+    log = git(R.path, "log", R.cut, "--diff-filter=A", "--no-renames", "--name-only", "--format=%x1e%H %cI", "--", "questions/", "decisions/")
+    cur = None; first = {}
     for line in log.split("\n"):
         if line.startswith("\x1e"): cur = line[1:].split()
-        elif line and cur and line not in seen and (line.startswith("questions/") or line.startswith("decisions/")):
-            seen.add(line); out.append({"path": line, "time": utc(cur[1]), "text": R.show(cur[0], line) or ""})
+        elif line and cur and (line.startswith("questions/") or line.startswith("decisions/")):
+            t = utc(cur[1])
+            if line not in first or t < first[line][1]: first[line] = (cur[0], t)   # the earliest commit time that adds it
+    for path, (h, t) in sorted(first.items(), key=lambda kv: kv[1][1]):
+        out.append({"path": path, "time": t, "text": R.show(h, path) or ""})
     return out
 
 def names_piece(text, n, briefs, specs, paths):
@@ -278,10 +323,24 @@ def build(clones, ghdir, outdir):
             if m: reopen_marks.append((m.group(1).split("/")[-1], int(m.group(2)), cur))
     summary = {}
     for name, R in repos.items():
-        merge = json.load(open(os.path.join(ghdir, name + ".merge.json")))
-        merged = [p for p in R.gh if p["merged_at"] and str(p["number"]) in merge]
-        for p in merged: p["_merge"] = merge[str(p["number"])][1][0]
-        merged = [p for p in merged if p["_merge"] in R.on_main]
+        # each merged pull request's merge commit: the first-parent default-branch commit (at the cut-off, or after
+        # it for a pull request merged after it) committed by GitHub whose second parent is GitHub's head commit
+        fp = [l.split("|") for l in git(R.path, "log", "--first-parent", "--format=%H|%P|%cn", "HEAD").split("\n") if l]
+        by_head = {}
+        for h, par, cn in fp:
+            ps = par.split()
+            if cn == "GitHub" and len(ps) == 2: by_head.setdefault(ps[1], h)
+        gh_merged = [p for p in R.gh if p["merged_at"]]
+        merged, no_row = [], []
+        for p in gh_merged:
+            mc = by_head.get(p["head_sha"])
+            if mc is None or (T(p["merged_at"]) < CUT and mc not in R.on_main):
+                no_row.append({"number": p["number"], "merged_at": p["merged_at"], "why": "no merge commit found" if mc is None else "merge commit not on the default branch at the cut-off"})
+                continue
+            p["_merge"] = mc
+            if mc in R.on_main: merged.append(p)
+        if any(WIN0 <= T(x["merged_at"]) < CUT for x in no_row):
+            raise SystemExit(f"{name}: merged pull requests in the window with no frame M row: {no_row}")
         own = {p["number"]: own_commits(R, p) for p in merged}
         in_pr = {h for v in own.values() for h in v} | {p["_merge"] for p in merged}
         U = [p for p in R.gh if not p["merged_at"] and p["closed_at"] and WIN0 <= T(p["closed_at"]) < CUT]
@@ -357,7 +416,11 @@ def build(clones, ghdir, outdir):
         for frame, rows in (("M", Ms), ("U", Urows), ("D", Ds)):
             with open(os.path.join(outdir, f"{name}.{frame}.jsonl"), "w") as fh:
                 for row in rows: fh.write(json.dumps(row, sort_keys=True) + "\n")
-        summary[name] = {"default_branch_at_cutoff": R.cut, "M": len(Ms), "U": len(Urows), "D": len(Ds),
+        summary[name] = {"default_branch_at_cutoff": R.cut, "github_records": "read", "M": len(Ms), "U": len(Urows), "D": len(Ds),
+                         "github_merged_in_window": sum(1 for p in gh_merged if WIN0 <= T(p["merged_at"]) < CUT),
+                         "github_merged_all": len(gh_merged), "merged_with_no_row": no_row,
+                         "brief_values_with_unmatched_suffix": sorted(UNMATCHED[name]),
+                         "control_values_whose_dispatch_log_time_differs": CTRL_CHECK[name],
                          "M_30_days_complete": sum(1 for m in Ms if m["after_merge"]["days30_complete"]),
                          "closed_unmerged_after_cutoff_left_out": len(U_open_or_late)}
     json.dump(summary, open(os.path.join(outdir, "frames.json"), "w"), indent=1, sort_keys=True)
