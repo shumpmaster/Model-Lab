@@ -328,7 +328,7 @@ def qd_history(R, path):
     """Every commit reachable from the default branch at the cut-off that adds lines to `path` (merges' own diffs
     are not read), as (hash, commit time, [added line numbers, 1-based]), oldest commit time first."""
     out = []; cur = None
-    for line in git(R.path, "log", R.cut, "--no-renames", "--format=%x1e%H %cI", "-p", "--unified=0", "--", path).split("\n"):
+    for line in git(R.path, "log", R.cut, "--full-history", "--no-renames", "--format=%x1e%H %cI", "-p", "--unified=0", "--", path).split("\n"):
         if line.startswith("\x1e"):
             h, t = line[1:].split(); cur = [h, utc(t), []]; out.append(cur)
         elif line.startswith("@@") and cur:
@@ -357,9 +357,9 @@ def asked_class(text):
     for l in (text or "").splitlines():
         m = re.match(r"^[\s*_]*Asked(?:\*\*)?:(?:\*\*)?\s*(.*)$", l)
         if not m: continue
-        body = m.group(1); mm = re.search(r": the owner's own \w+, never a default(?: or a proxy)?", body)
+        mm = re.search(r": the owner's own \w+, never a default(?: or a proxy)?", l)
         if not mm: return None
-        pre = body[:mm.start()]; k = pre.rfind(". ")
+        pre = l[:mm.start()]; k = pre.rfind(". ")
         return pre[k + 2:].strip() if k >= 0 else pre.strip()
     return None
 
@@ -385,32 +385,42 @@ def rt5_reading(cls, name_word):
     return "d (no class; name holds a gate or value-target word)" if name_word else "d (no class; name holds no gate or value-target word)"
 
 def naming(text, n, briefs, specs, repo):
-    """S-002 'What a touch is': which parts of the naming rule a text matches, and matches it is not settled whether
-    the rule's words cover (each with its reason), on text that is never written."""
-    parts, und = [], []
-    num = [rf"(?<![\w])#{n}(?![\w])", rf"(?<![\w])PR {n}(?![\w])", rf"(?<![\w])pull request {n}(?![\w])"]
-    if any(re.search(x, text) for x in num): parts.append("number")
-    else:
-        if re.search(rf"(?<=[\w])#{n}(?![\w])", text): und.append({"part": "number", "why": "`#<n>` joined to a word before it (such as a repository name): whether that is a whole word is not settled"})
-        if re.search(rf"(?i)(?<![\w])(?:pr|pull request) {n}(?![\w])", text): und.append({"part": "number", "why": "`PR <n>` or `pull request <n>` in another letter case: the rule gives no letter case"})
+    """S-002 'What a touch is': which parts of the naming rule a text matches (the text is never written)."""
+    parts = []
+    hit = False
+    for m in re.finditer(rf"#{n}(?![\w])", text):
+        pre = text[:m.start()]
+        own_repo = pre.endswith("shumpmaster/" + repo) or (pre.endswith(repo) and (len(pre) == len(repo) or not re.match(r"[A-Za-z0-9_/-]", pre[-len(repo) - 1])))
+        if not pre or not re.match(r"[A-Za-z0-9_]", pre[-1]) or own_repo:
+            hit = True; break
+    if hit or re.search(rf"(?i)(?<![\w])(?:pr|pull request) {n}(?![\w])", text): parts.append("number")
     bs = [b for b in briefs if b and not b.startswith("control:")]
-    if any(re.search(rf"(?<![\w])brief {re.escape(b)}(?![\w-])", text) or ("briefs/" + b + "-") in text for b in bs): parts.append("brief")
-    else:
-        if any(re.search(rf"(?<![\w])Brief {re.escape(b)}(?![\w-])", text) for b in bs): und.append({"part": "brief", "why": "`Brief <b>` with a capital: the rule gives no letter case"})
-        if any(re.search(rf"briefs/{re.escape(b)}\.md", text) for b in bs): und.append({"part": "brief", "why": "the brief record's path `briefs/<b>.md`, which the rule's form `briefs/<b>-` does not hold"})
+    if any(re.search(rf"(?i)(?<![\w])brief {re.escape(b)}(?![\w-])", text) or ("briefs/" + b + "-") in text or ("briefs/" + b + ".md") in text for b in bs): parts.append("brief")
     sp = [s for s in specs if not (repo == "Service-Desk" and s == "S-001")]
     if any(re.search(rf"(?<![\w-]){re.escape(s)}(?![\w-])", text) for s in sp): parts.append("spec")
-    return parts, und
+    return parts
+
+def qd_files_full(R):
+    """As qd_files, with every commit the default branch at the cut-off reaches, a merged pull request's own commits
+    included, even where a pull request adds a file and deletes it again (S-002 'What a touch is'; brief 296)."""
+    log = git(R.path, "log", R.cut, "--full-history", "--diff-filter=A", "--no-renames", "--name-only", "--format=%x1e%H %cI", "--", "questions/", "decisions/")
+    cur = None; first = {}
+    for line in log.split("\n"):
+        if line.startswith("\x1e"): cur = line[1:].split()
+        elif line and cur and (line.startswith("questions/") or line.startswith("decisions/")):
+            t = utc(cur[1])
+            if line not in first or (t, cur[0]) < (first[line][1], first[line][0]): first[line] = (cur[0], t)
+    return [{"path": p, "time": t, "hash": h, "text": R.show(h, p) or ""} for p, (h, t) in sorted(first.items(), key=lambda kv: (kv[1][1], kv[0]))]
 
 class QD_:
     """Every question file and decision record first added on the default branch by the cut-off (deleted ones included),
     each read as S-002 'What a touch is' says: as first added, then each later commit's added lines."""
     def __init__(self, R):
         self.R = R; self.recs = []
-        for q in qd_files(R):
+        for q in qd_files_full(R):
             path = q["path"]; hist = qd_history(R, path)
-            hist = [x for x in hist if x[1] >= q["time"]]
-            first_hash = next((h for h, t, _ in hist if t == q["time"]), None)
+            hist = [x for x in hist if (x[1], x[0]) >= (q["time"], q["hash"])]
+            first_hash = q["hash"]
             commits = []
             for h, t, added in hist:
                 txt = R.show(h, path) or ""; lines = txt.split("\n")
@@ -435,29 +445,35 @@ class QD_:
         elif que and milestone_line(que["text"]) is not None: ms, msrc = milestone_line(que["text"]), "question file, as first added"
         stem = path.split("/")[-1][:-3] if path.endswith(".md") else path.split("/")[-1]
         nw = bool(RT5_NAME.search(stem))
-        return {"rt5_class": cls, "rt5_class_from": src, "rt5_name_holds_word": nw, "rt5_reading": rt5_reading(cls, nw),
+        rd = rt5_reading(cls, nw)
+        other = rd.startswith("b") and cls.strip().lower() not in ("a phase gate", "a value target", "part of a value target")
+        return {"rt5_class": cls, "rt5_class_from": src, "rt5_name_holds_word": nw, "rt5_reading": rd, "rt5_names_other_rulings": other,
                 "standard_milestones": ms, "milestone_from": msrc, "gate_or_value_target_milestone": bool(ms and set(ms) & GATE_MS)}
-    def for_piece(self, n, briefs, specs, own_paths, first_hash, dispatch, merged_at):
+    def for_piece(self, n, briefs, specs, own, first_hash, dispatch, merged_at):
+        """`own`: the piece's own commits, as (author time, hash, commit time, set of paths)."""
         out = []
         for r in self.recs:
-            own = r["path"] in own_paths
-            names_from, parts, und = None, [], []
+            mine = sorted((a, h, c) for a, h, c, ps in own if r["path"] in ps)
+            names_from, parts = None, []
             for c in r["commits"]:
-                p, u = naming(r["text"] if c["first_add"] else c["added"], n, briefs, specs, self.R.name)
-                if p and names_from is None: names_from, parts = c, p
-                if not p and names_from is None and u: und.extend(dict(x, commit_time=c["time"]) for x in u)
-            if own: parts = parts + ["own file"]
-            if not parts and not und: continue
-            start = r["commits"][0] if own and r["commits"] else names_from
+                p = naming(r["text"] if c["first_add"] else c["added"], n, briefs, specs, self.R.name)
+                if p: names_from, parts = c, p; break
+            own_start = None
+            if mine:
+                parts = parts + ["own file"]
+                a, h, ct = mine[0]
+                own_start = next((c for c in r["commits"] if c["hash"] == h), None) or {"hash": h, "time": ct, "first_add": h == r["first_hash"]}
+            if not parts: continue
+            cands = [c for c in (names_from, own_start) if c is not None]
+            start = min(cands, key=lambda c: (c["time"], c["hash"])) if cands else None
             row = {"label": lab(r["path"]), "kind": "question" if r["path"].startswith("questions/") else "decision",
                    "question_label": lab(self.pair(r["path"])) if self.pair(r["path"]) else None,
                    "notes_file": r["path"].endswith("-notes.md"), "first_added": r["time"],
                    "first_added_in_pieces_first_commit": r["first_hash"] == first_hash,
-                   "names_by": parts, "names_from": None if start is None else ("first add" if start["first_add"] else "append"),
-                   "names_from_time": None if start is None else start["time"], "naming_undecided": und}
+                   "names_by": parts, "names_from": None if start is None else ("first add" if start["first_add"] else ("own commit" if start is own_start else "append")),
+                   "names_from_time": None if start is None else start["time"]}
             row.update(self.rt5(r["path"]))
-            st = start["time"] if start else None
-            row["window_commits"] = [{"commit_time": c["time"], "first_add": c["first_add"], "read_for_piece": st is not None and (c["time"], c["hash"]) >= (st, start["hash"]),
+            row["window_commits"] = [{"commit_time": c["time"], "first_add": c["first_add"], "read_for_piece": start is not None and (c["time"], c["hash"]) >= (start["time"], start["hash"]),
                                       "added_lines": c["n_added"], "owner_word_lines": c["owner_word_lines"],
                                       "quoted_lines_under_a_naming_line": c["quoted_lines_under_a_naming_line"]}
                                      for c in r["commits"] if dispatch and dispatch < c["time"] < merged_at]
@@ -517,21 +533,29 @@ def name_round(path):
         if m: return int(m.group(1))
     return None
 
-def statement(text):
-    """C1: the record's statement of what it reviews."""
+def statements(text):
+    """C1: the record's statement of what it reviews, as a list read in turn: its first line starting `Reviewed` or
+    `Read:`; else its opening (its first paragraph that is not a heading, a `Verdict:` line or a `---` rule, with the
+    headings above it), then, where the opening names no subject, its first heading with the first such paragraph after it."""
     L = text.split("\n")
     for l in L:
-        if re.match(r"(?i)^[\s*_]*(reviewed|read:)", l): return l
+        if re.match(r"(?i)^[\s*_]*(reviewed|read:)", l): return [l]
+    def skip(t): return not t or t.startswith("#") or re.match(r"(?i)^[*_]*verdict", t) or re.fullmatch(r"-{3,}", t)
     def para(start):
-        out = []
-        for l in L[start:]:
-            t = l.strip()
-            if not out and (not t or t.startswith("#") or re.match(r"(?i)^[*_]*verdict", t) or re.fullmatch(r"-{3,}", t)): continue
+        out, at = [], None
+        for k in range(start, len(L)):
+            t = L[k].strip()
+            if not out and skip(t): continue
             if out and (not t or t.startswith("#")): break
-            out.append(l)
-        return "\n".join(out)
-    h = next((i for i, l in enumerate(L) if l.lstrip().startswith("#")), None)
-    return (L[h] + "\n" + para(h + 1)) if h is not None else para(0)
+            if at is None: at = k
+            out.append(L[k])
+        return at, "\n".join(out)
+    at, body = para(0)
+    heads = [l for l in L[:at if at is not None else len(L)] if l.lstrip().startswith("#")]
+    out = ["\n".join(heads + [body])]
+    h = next((k for k, l in enumerate(L) if l.lstrip().startswith("#")), None)
+    if h is not None: out.append(L[h] + "\n" + para(h + 1)[1])
+    return out
 
 KIND_WORDS = {"plan": r"plan review", "build": r"build review", "research": r"source check"}
 def own_kind_segments(line, kind):
@@ -553,7 +577,7 @@ def first_round(text, path, kind):
     if nr == 1:
         for l in L:
             m = re.match(r"^(?i:verdict): (PASS|FAIL)\b", l)
-            if m: return ("(i)", m.group(1), max(rounds, 1), notes)
+            if m: return ("(i)", m.group(1), rounds, notes)
     # (ii)
     heads = [(i, len(re.match(r"#+", l).group())) for i, l in enumerate(L) if re.match(r"^#+\s*Round 1(?:\s*$| \(|:| at |, part \d+)", l)]
     if heads:
@@ -570,20 +594,25 @@ def first_round(text, path, kind):
                     if m: v = m.group(1); break
             vs.append(v)
             if not re.search(r", part \d+", L[i]): break      # a round not in parts: its first heading
-        if "FAIL" in vs: return ("(ii)", "FAIL", max(rounds, 1), notes)
-        if vs and all(v == "PASS" for v in vs): return ("(ii)", "PASS", max(rounds, 1), notes)
+        if "FAIL" in vs: return ("(ii)", "FAIL", rounds, notes)
+        if vs and all(v == "PASS" for v in vs): return ("(ii)", "PASS", rounds, notes)
         if any(vs): notes.append("a round in parts with a part that gives no verdict")
     else:
         # (iii)
         pats = [r"(?i:\bround) 1(?!\d)(?:(?!(?i:round) \d)[^\n])*?:\s*\**(PASS|FAIL)\b", r"(?i:\bround) 1:? (PASS|FAIL)\b",
                 r"\b(FAIL) (?i:round) 1(?!\d)", r"\b(FAIL) (?i:rounds) 1 to \d+"]
+        acct = set(); sec = True; first = next((k for k, l in enumerate(L) if l.strip()), None)
+        for k, l in enumerate(L):
+            if re.match(r"^#+\s", l) or l.startswith("#"):
+                sec = k == first or bool(re.search(r"(?i)(?<![\w])rounds?(?![\w])", l)); continue
+            if sec: acct.add(k)
         for i, l in enumerate(L):
-            for seg in own_kind_segments(l, kind):
+            for seg in (own_kind_segments(l, kind) if i in acct else []):
                 best = None
                 for p in pats:
                     m = re.search(p, seg)
                     if m and (best is None or m.start() < best[0]): best = (m.start(), m.group(1))
-                if best: return ("(iii)", best[1], max(rounds, 1), notes)
+                if best: return ("(iii)", best[1], rounds, notes)
             if l.lstrip().startswith("|"):
                 cells = [c.strip() for c in l.strip().strip("|").split("|")]
                 col = next((j for j, c in enumerate(cells) if re.match(r"Round 1(?!\d)", c)), None)
@@ -593,7 +622,7 @@ def first_round(text, path, kind):
                         c2 = [c.strip() for c in l2.strip().strip("|").split("|")]
                         if c2 and re.search(r"(?i)verdict", c2[0]) and col < len(c2):
                             m = re.search(r"\b(PASS|FAIL)\b", c2[col])
-                            if m: return ("(iii)", m.group(1), max(rounds, 1), notes)
+                            if m: return ("(iii)", m.group(1), rounds, notes)
     # (iv)
     top = next((l for l in L if l.strip()), "")
     m = re.match(r"^(?i:verdict): (PASS|FAIL)\b", top)
@@ -605,7 +634,7 @@ def first_round(text, path, kind):
         if re.search(r"(?i)round-1 finding", text): why.append("names a round-1 finding")
         if re.search(r"(?i)\bre-?check", text): why.append("names a re-check")
         if re.search(r"(?i)\bearlier round", text): why.append("names an earlier round")
-        if not why: return ("(iv)", m.group(1), max(rounds, 1), notes)
+        if not why: return ("(iv)", m.group(1), rounds, notes)
         notes.append("top-line verdict not read as round 1's: " + "; ".join(why))
     return ("none", "none found", rounds, notes)
 
@@ -628,27 +657,28 @@ class C1:
             if f is None: continue
             c1_form_cache[p] = f[0]
             text = R.show(R.cut, p) or ""
-            st = statement(text)
-            toks = []
-            for m in re.finditer(r"(?i)(?<![\w])(?:pull request |pr #?|#)(\d+)(?![\w])", st): toks.append((m.start(), "number", m.group(1)))
-            for m in re.finditer(r"(?<![\w/-])([0-9a-f]{7,40})(?![\w/-])", st): toks.append((m.start(), "hash", m.group(1)))
-            for h in heads:
-                for m in re.finditer(re.escape(h), st):
-                    a, z = m.start(), m.end(); pre = st[:a]
-                    if pre.endswith("origin/"): pre = pre[:-7]
-                    if (pre and re.match(r"[\w/-]", pre[-1])) or (z < len(st) and re.match(r"[\w/-]", st[z])): continue
-                    toks.append((a, "branch", h))
             subject, skipped = None, []
-            for _, kind, v in sorted(toks):
-                if kind == "number":
-                    if int(v) in nums: subject = {"by": "number", "number": int(v)}; break
-                elif kind == "branch":
-                    if len(heads[v]) == 1: subject = {"by": "head branch", "number": next(iter(heads[v]))}; break
-                    skipped.append({"token": "head branch", "head_label": lab(v), "heads": sorted(heads[v])})
-                else:
-                    prs = set().union(*[cprs[h] for h in cprs if h.startswith(v)]) if any(h.startswith(v) for h in cprs) else set()
-                    if len(prs) == 1: subject = {"by": "commit hash", "number": next(iter(prs))}; break
-                    if len(prs) > 1: skipped.append({"token": "commit hash", "hash": v, "own_commit_of": sorted(prs)})
+            for st in statements(text):
+                toks = []
+                for m in re.finditer(r"(?i)(?<![\w])(?:pull request |pr #?|#)(\d+)(?![\w])", st): toks.append((m.start(), "number", m.group(1)))
+                for m in re.finditer(r"(?<![\w/-])([0-9a-f]{7,40})(?![\w/-])", st): toks.append((m.start(), "hash", m.group(1)))
+                for h in heads:
+                    for m in re.finditer(re.escape(h), st):
+                        a, z = m.start(), m.end(); pre = st[:a]
+                        if pre.endswith("origin/"): pre = pre[:-7]
+                        if (pre and re.match(r"[\w/-]", pre[-1])) or (z < len(st) and re.match(r"[\w/-]", st[z])): continue
+                        toks.append((a, "branch", h))
+                for _, kind, v in sorted(toks):
+                    if kind == "number":
+                        if int(v) in nums: subject = {"by": "number", "number": int(v)}; break
+                    elif kind == "branch":
+                        if len(heads[v]) == 1: subject = {"by": "head branch", "number": next(iter(heads[v]))}; break
+                        skipped.append({"token": "head branch", "head_label": lab(v), "heads": sorted(heads[v])})
+                    else:
+                        prs = set().union(*[cprs[h] for h in cprs if h.startswith(v)]) if any(h.startswith(v) for h in cprs) else set()
+                        if len(prs) == 1: subject = {"by": "commit hash", "number": next(iter(prs))}; break
+                        if len(prs) > 1: skipped.append({"token": "commit hash", "hash": v, "own_commit_of": sorted(prs)})
+                if subject: break
             kind = f[1]
             reading = first_round(text, p, kind) if kind in ("plan", "build", "research") else ("not read: a record of another kind or unclassed gives no result", "none found", None, [])
             s = p.split("/")
@@ -670,7 +700,6 @@ class C1:
                 q = re.match(r"research/(Q-\d+)-", r["path"]).group(1)
                 if q in qids:
                     why.append("question id of the piece's own question or memo file")
-                    if self.R.name != "Model-Lab": und.append("S-002 gives this keying of research/Q-<n>-source-check.md for Model-Lab only")
             if r["subject"] and r["subject"]["number"] == n: why.append("the record's statement of what it reviews (" + r["subject"]["by"] + ")")
             if not why: continue
             out.append({"label": r["label"], "path_form": r["path_form"], "kind": r["kind"], "piece_by": why, "statement_skipped": r["statement_skipped"],
@@ -793,7 +822,8 @@ def build(clones, ghdir, outdir):
             spec_files = {m.group(1) for x in agg for m in [re.match(r"specs/(S-\d+)", x)] if m}
             ids = {m.group(1) for x in agg for m in [re.match(r"((?:Q|E|EXP)-\d+)(?=[.-]|$)", x.split("/")[-1])] if m}
             qids = {m.group(1) for x in agg for m in [re.fullmatch(r"research/(Q-\d+)(?:-memo)?\.md", x)] if m}
-            qdn = QDN.for_piece(n, bids, specs, own_paths, first_hash, dispatch[0], p["merged_at"])
+            own_c = [(R.commits[h]["ad"], h, R.commits[h]["cd"], {f["path"] for f in R.commits[h]["files"]}) for h in hs]
+            qdn = QDN.for_piece(n, bids, specs, own_c, first_hash, dispatch[0], p["merged_at"])
             c1r = CK.for_piece(n, sorted(set(specs) | spec_files), ids, qids)
             Ms.append({"repository": name, "number": n, "created": p["created_at"], "merged_at": p["merged_at"], "closed": p["closed_at"], "merged": True,
                        "merge_commit": p["_merge"], "merging_account_class": merger_class(mc["an"], mc["ae"]),
