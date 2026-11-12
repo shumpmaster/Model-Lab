@@ -1,0 +1,170 @@
+{
+ "seed": "S-002-handcheck",
+ "cut_off": "2026-11-12T00:00:00Z",
+ "random_part": {
+  "Model-Lab": [
+   61,
+   43,
+   29,
+   58,
+   92,
+   64,
+   93,
+   13,
+   25,
+   47,
+   73,
+   77,
+   55,
+   59,
+   42,
+   56,
+   81,
+   27,
+   78,
+   32
+  ],
+  "Service-Desk": [
+   233,
+   230,
+   105,
+   76,
+   237,
+   150,
+   109,
+   341,
+   93,
+   329,
+   22,
+   51,
+   21,
+   61,
+   26,
+   57,
+   25,
+   6,
+   31,
+   47
+  ],
+  "Personal-Org-Operating-Model": [
+   35,
+   11,
+   47,
+   19,
+   32,
+   52,
+   30,
+   48,
+   53,
+   50,
+   49,
+   27,
+   15,
+   24,
+   23,
+   14,
+   25,
+   18,
+   22,
+   20
+  ]
+ },
+ "shortfall": {
+  "Model-Lab": 0,
+  "Service-Desk": 0,
+  "Personal-Org-Operating-Model": 0
+ },
+ "edge_case_part": {
+  "E-RP1": [
+   {
+    "repository": "Service-Desk",
+    "frame": "D",
+    "key": "9e46dd841aa3ad2333c08756e195b4f41bb1d139"
+   },
+   {
+    "repository": "Service-Desk",
+    "frame": "D",
+    "key": "04511022f1a3b328a29c751d982f98d446e0bf66"
+   }
+  ],
+  "E-RP2": [
+   {
+    "repository": "Service-Desk",
+    "frame": "U",
+    "key": 147
+   },
+   {
+    "repository": "Service-Desk",
+    "frame": "U",
+    "key": 174
+   }
+  ],
+  "E-RP3": [
+   {
+    "repository": "Service-Desk",
+    "frame": "M",
+    "key": 316
+   },
+   {
+    "repository": "Model-Lab",
+    "frame": "M",
+    "key": 69
+   }
+  ],
+  "E-RP4": [
+   {
+    "repository": "Model-Lab",
+    "frame": "M",
+    "key": 98
+   }
+  ],
+  "E-RP5": "not seen",
+  "E-RP6": "not seen",
+  "E-K1": [
+   {
+    "repository": "Service-Desk",
+    "frame": "M",
+    "key": 78
+   },
+   {
+    "repository": "Service-Desk",
+    "frame": "M",
+    "key": 148
+   }
+  ],
+  "E-K2": [
+   {
+    "repository": "Service-Desk",
+    "frame": "M",
+    "key": 36
+   }
+  ],
+  "E-K3": "not seen",
+  "E-RT1": "not seen",
+  "E-RT2": [
+   {
+    "repository": "Service-Desk",
+    "frame": "M",
+    "key": 319
+   },
+   {
+    "repository": "Service-Desk",
+    "frame": "M",
+    "key": 300
+   }
+  ],
+  "E-RT3": "not seen",
+  "E-RR2": [
+   {
+    "repository": "Service-Desk",
+    "frame": "M",
+    "key": 52
+   },
+   {
+    "repository": "Service-Desk",
+    "frame": "M",
+    "key": 11
+   }
+  ]
+ }
+}
