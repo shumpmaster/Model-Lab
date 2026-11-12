@@ -1,6 +1,6 @@
 Verdict: PASS
 
-The Critic's plan review of specs/S-002.md and experiments/E-004.md (P-002, M8 to M10), in a fresh session on a different model from the writer, the Definer. Round 1 (brief: docs/briefs/271-critic.md, at Model-Lab 51bc87c, read from a fixed copy): FAIL, eight blocking findings. Recorded verbatim by the orchestrator, session session_01QBwHGNPKhVy6fgoUjKtW6q, 2026-11-12. Correction to the brief: it said a FAIL stops work before another round; the stop rule's limit for plan rounds is three (docs/LESSONS.md LL-55; reviews/S-001/plan.md, FAIL at rounds 1 and 2 and PASS at round 3), so round 1's findings go back to the Definer, and round 2 counts as the second of three. Round 2 (brief: docs/briefs/273-critic.md, at Model-Lab 1316988, after the Definer's change on brief 272, commit 015ba8f): FAIL, two blocking findings; the Critic flags its own round 1 for missing findings 3 and 4 and part of 6 (D-050). Round 3 (brief: docs/briefs/275-critic.md, at Model-Lab 23d27c1, after the Definer's change on brief 274, commit 749c3c9): PASS, nine non-blocking findings; the Critic flags rounds 1 and 2 for missing its findings 3 to 5 (D-050). Re-check after round 3 (brief: docs/briefs/277-critic.md, at Model-Lab 05a71c3 plus a session-lines commit, after the Definer's change on brief 276, commit f833d70): FAIL, two blocking findings, both in that change's new rule for an entry and its pull requests; the plan stands as round 3 passed it until the owner rules under the stop rule (as reviews/S-001/plan.md, round 4). The header verdict stays round 3's PASS for the plan as it stood at round 3.
+The Critic's plan review of specs/S-002.md and experiments/E-004.md (P-002, M8 to M10), in a fresh session on a different model from the writer, the Definer. Round 1 (brief: docs/briefs/271-critic.md, at Model-Lab 51bc87c, read from a fixed copy): FAIL, eight blocking findings. Recorded verbatim by the orchestrator, session session_01QBwHGNPKhVy6fgoUjKtW6q, 2026-11-12. Correction to the brief: it said a FAIL stops work before another round; the stop rule's limit for plan rounds is three (docs/LESSONS.md LL-55; reviews/S-001/plan.md, FAIL at rounds 1 and 2 and PASS at round 3), so round 1's findings go back to the Definer, and round 2 counts as the second of three. Round 2 (brief: docs/briefs/273-critic.md, at Model-Lab 1316988, after the Definer's change on brief 272, commit 015ba8f): FAIL, two blocking findings; the Critic flags its own round 1 for missing findings 3 and 4 and part of 6 (D-050). Round 3 (brief: docs/briefs/275-critic.md, at Model-Lab 23d27c1, after the Definer's change on brief 274, commit 749c3c9): PASS, nine non-blocking findings; the Critic flags rounds 1 and 2 for missing its findings 3 to 5 (D-050). Re-check after round 3 (brief: docs/briefs/277-critic.md, at Model-Lab 05a71c3 plus a session-lines commit, after the Definer's change on brief 276, commit f833d70): FAIL, two blocking findings, both in that change's new rule for an entry and its pull requests; the plan stands as round 3 passed it until the owner rules under the stop rule (as reviews/S-001/plan.md, round 4). The header verdict stays round 3's PASS for the plan as it stood at round 3. The owner chose option A, a focused fix (intake/P-002-owner-plan-stop-answer-2026-11-12.md); the focused confirmation review (brief: docs/briefs/281-critic.md, at the Definer's commit 4a03208 on brief 280): PASS, three non-blocking findings. The header verdict is PASS for the plan as it now stands. The orchestrator confirmed with `git diff 4bfc6e0 4a03208 -- specs/S-002.md` that the change has no hunk in S-002 lines 18 to 54 or 76 to 95, which the Critic could not diff.
 
 ## Round 1
 Verdict: FAIL
@@ -443,3 +443,99 @@ Brief 277: re-check after round 3, of the changes on brief 276 (commit f833d70).
 - **Open questions:**
   1. Should a void entry open a reserve place under the same cap of 3 as withdrawals, or have places of its own? (Findings 1 and 2.)
   2. Should a duplicate entry for one brief refill its place or be capped separately? (Finding 2.)
+
+## Focused confirmation review, after the owner's ruling at the plan stop
+Verdict: PASS
+
+Focused confirmation review of the Definer's change on brief 280 (commit 4a03208), the one check the owner's option A allows. Brief 281, S-002 and E-004 (P-002, M9). I read only /home/user/ml-fixed-281, plus briefs 280 and 281, and wrote nothing. I had no shell and no diff, so I judged the files as they stand against the re-check's findings in reviews/S-002/plan.md. No finding blocks. The three non-blocking findings are below.
+
+## 1. The re-check's findings 1 to 9, checked against option A
+- **Finding 1 (void and duplicate entries refilled): fixed.**
+  - A void entry opens the next spare place (61 to 63) and takes the void entry's side. This is stated in E-004:46, 68, 69, 70, 120 and 128, and in S-002:110, 111, 159, 160 and 176 (J2).
+  - The side is copied from the void entry's own draw line. The Reviewer checks it (E-004:70).
+- **One limit of three a look: fixed and consistent.** Withdrawals and void entries together make three, and a fourth stops the trial and brings it to the owner. This is stated in E-004:120 and 128, S-002:111, AC8, J2 and Open questions 8 and 9.
+- **"A place left empty": fixed.** E-004:129 and J2 define it as a void entry with no void line when the look is judged, or a fourth void entry. For such a look:
+  - "Leaned" compares shares, not counts (E-004:78).
+  - The tests run on the actual counts.
+  - The Reviewer also works the result with each empty place filled in every way, and the result decides only if it is the same every way. Otherwise the trial stops and the results card says so (E-004:129; J4).
+- **Finding 2 (the stated limit on sides known ahead): fixed.** "Merging two entered briefs into one pull request, or entering a brief twice" now appears in:
+  - E-004:39 (entry card), 101 (results card) and 150;
+  - S-002:10, 110, 177 (J3), 178 (J4) and 221.
+- **The "shrinks the difference" sentence (E-004:124): corrected and true.** A leak of the method's text shrinks the difference. A touch-heavy later "with" work merged under an earlier "without" entry widens it in the method's favour. The sentence now says a merge can move the result either way.
+- **Finding 3 (glosses at S-002:98): fixed.** "ruled T1", "U3" and "pre-mortem R<n>" are glossed outside the quoted span.
+- **Finding 4 (rebase merges, frame D at S-002:74): fixed.** It now covers every commit a rebase merge adds, with the walk-back method and an "untested" fallback.
+- **Finding 5 (the two meanings of "dispatch", E-004:67): fixed.**
+  - Order is entry order, and the Reviewer checks the brief records follow in the same order.
+  - The 60 days run from the brief record's commit time, or from `entered_at` if no brief record exists.
+- **Finding 6 (an owner-closed piece, E-004:126 and 127): fixed.**
+  - A close counts as an RT3 send-back on the piece itself.
+  - "Closed by the owner" is added to the line-126 sentence.
+- **Finding 7 (J4 and Step 8): fixed.** Void entries by side, the reserve place each opened, places left empty with the result worked both ways, entries from non-piece pull requests and entries merged in two or more pull requests are all listed.
+- **Finding 8 (Open question 9 and S-002:10): fixed.** Open question 9 states in plain words how a piece in two entries is counted and refilled. It also states the shared limit and that deliberate use "could" steer, with the cap not catching it.
+- **Finding 9 (the 30-day clock for an empty place): fixed.** E-004:129 says the 30 days run from the last piece the look has.
+- **"30 each way" in what the figures assume:** it is in E-004:140 ("exactly 30 pieces fall each way", A2) and 152.
+
+## 2. Is anything else made false, and is there a new route to steer?
+I re-read the entry, void, withdrawal, reserve, wait and count rules end to end across E-004 Steps 4 and 5, Exclusions, S-002:110 and 111, AC8, AC9, J2, J4 and Open questions 8 and 9. They agree with each other.
+- **Reserve places:** one per withdrawal or void line, filled in order by the next eligible piece dispatched after both the entry of place 60 and the line. Each takes its refilled side.
+- **Side balance:** with refill, each side still ends at 30, so the bound of 5 in AC8 holds.
+- **Place left empty:** the "same result every way, else stop" rule can only make a look not pass or stop. It cannot make a method pass on an unchosen fill, so it opens no route to a pass.
+- **Duplicates and merges:** these can only move which side later pieces fall on. They are capped at three, listed, and now stated as a limit.
+- **Void-line timing (finding 1 below):** it is a timing lever, not a new route to a pass.
+
+The hand check is untouched by the change. I found no way to steer it.
+
+## 3. Unchanged parts and figures
+- **Unchanged parts:** with no diff I cannot prove S-002 lines 18 to 54 and the table at lines 76 to 95 are unchanged. I read them and found no sentence about voids, reserves or the limit that the change would have had to touch, and no sentence the change makes false. They read as round 3 and the re-check described them.
+- **Figures:** I compared E-004 lines 137 to 139 and S-002:10 with line-output.txt (figures not recomputed, line.py not re-run). All agree:
+  - 0.1063 at 0.632 and 0.368.
+  - The bands 0.307 to 0.429 and 0.571 to 0.693.
+  - The gaps 0.0097, 0.0124, 0.0131, 0.0314 and 0.0367.
+  - The nine-share rows.
+  - The ranges 0.09616 to 0.09725 and 0.09227 to 0.09359.
+
+## 4. The Definer's two open points
+- **A result that changes with how an empty place is filled stops the trial and goes to the owner.** This is acceptable as the plan's own design. It is labelled "this plan's design" in E-004:129, asked in Open question 9, and carried in J4 and the results card. It cannot produce a pass by a choice, only a stop.
+- **The Orchestrator writing void lines itself.**
+  - The line carries no judgement, since both facts are in the records.
+  - The script copies the side from the draw line.
+  - The judging Reviewer checks the 7-day timing, each void line against the entries, and each reserve side (E-004:70 and 128).
+  - This is acceptable, with finding 1 below as a non-blocking limit.
+
+## Findings (none blocking)
+1. **Not blocking. experiments/E-004.md:128 and 150; specs/S-002.md:221.**
+   - The Orchestrator knows the sides and picks when to write a void line within the 7 days.
+   - That timing decides which later piece takes the reserve place, and which later pieces count as outside the look's weeks (E-004:67).
+   - A late or missing line is only listed. This is the same timing lever the plan already accepts for withdrawal checks (round 3 finding 8), but the "cannot catch" text does not name it for void lines.
+   - Fix: add "or the time a void line or a withdrawal check is started within the 7 days" to the limit's list of choices, in E-004:150 and S-002:221. Optionally add it to the J3 and J4 lists.
+2. **Not blocking. experiments/E-004.md:129 with 121, and Step 5 item 1.**
+   - "A place is left empty only when…" does not cover a reserve place that is opened but not filled because no eligible piece has been dispatched yet.
+   - Line 121 says only that the reserve piece "adds its own wait". Step 5 item 1 does not say whether the look waits for an open reserve place.
+   - Fix: say that a look with an open reserve place waits for it, or is judged as a place left empty after a stated time. This predates the change, but void entries now open more reserve places.
+3. **Not blocking. experiments/E-004.md:5.**
+   - The `revision: 3 (draft, after … rounds 1 and 2 …)` line is stale: it does not mention round 3, the re-check or this change.
+   - Fix: update it at the freeze, with the other placeholders left for the freeze (S-002 header, E-004:152).
+
+## Six-part contract
+- **Changed:** nothing. I wrote no file.
+- **Why:** brief 281 asked for the one focused confirmation review the owner chose at the plan stop (option A).
+- **Verified:**
+  - Re-check findings 1 to 9 against both files as they stand.
+  - The entry, void, withdrawal, reserve, wait and count rules end to end, including AC8, AC9, J2, J3, J4 and Open questions 8 and 9.
+  - The figures in E-004 lines 137 to 139 and S-002:10 against line-output.txt, which I read.
+  - The glosses at S-002:98 and the frame D wording at S-002:74.
+- **Undone:**
+  - I did not open the diff of commit 4a03208, so "unchanged in content" for S-002 lines 18 to 54 and the table at 76 to 95 rests on reading them, not on a comparison.
+  - I did not re-run line.py or recompute any figure.
+  - I did not re-read S-002 lines 100 to 150 beyond M9's text and the acceptance criteria.
+  - I did not open the Q-017 memo or the other records outside the manifest, and the hand check has not run.
+- **Needed outside your surface:**
+  - The Orchestrator records this return verbatim in reviews/S-002/plan.md as the focused confirmation review.
+  - The Definer settles non-blocking findings 1 to 3 at or before the freeze, with the other placeholders. Neither finding touches S-002 lines 18 to 54 or the table at 76 to 95.
+  - The Chief of Staff adds the two per-task Reviewer packs, with the owner's approval.
+  - The owner rules the scenario card after the freeze, including the sides-known-ahead limit and Open questions 2 to 9.
+- **Open questions:**
+  1. Should the 7-day timing of void lines and withdrawal checks be named in the limit on the entry and results cards (finding 1)?
+  2. Should a look wait for an open reserve place, or be judged as a place left empty after a stated time (finding 2)?
+
+This is my first check of this change. It implicates no earlier check of mine (D-050).
