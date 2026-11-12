@@ -1,0 +1,4 @@
+Verdict: FAIL
+Reviewed: research/Q-018-memo-2.md (brief 298) against the records, S-002 as settled by brief 295, brief 299, the hand check's step 5 again
+
+Full return verbatim in reviews/Q-018-recode/_critic-verbatim.md, because it quotes the verdict line mid-line (reviews/README.md). Two blocking findings, both in RT1(a), not in the coding: the owner-words test misses Service-Desk's in-line `Answer:` and double-quoted form (Service-Desk #78's 15 in-window appends coded as holding none); and Personal-Org-Operating-Model keeps the owner's answers in reviews/<folder>/_owner-answer*.md, outside the folders RT1(a) reads, so three of its pieces (#25, #27, #30) are counted as needing no touch. Non-blocking: an edited Ruling line counted as new words (Service-Desk #26); a comment count in the memo; three undecided cases routed (a rule fault, two extract gaps, none for the owner). A D-050 flag (finding 8) on the owner-words wording its earlier checks passed.
