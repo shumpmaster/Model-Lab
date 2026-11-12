@@ -52,7 +52,7 @@ for i, l in enumerate(open(D + "/sample.jsonl"), 1):
             rec = f"{P}/records2/{r}--{c['label']}.md"
             if p != "?" and not os.path.exists(rec):
                 open(rec, "w").write(f"<!-- {r}:{p} at the cut-off {cut[r]} -->\n" + git(r, "show", f"{cut[r]}:{p}"))
-    for k in ("owner_account_comments", "comment_records"):
+    for k in ("owner_account_comments", "comment_records", "owner_items_listed_in_window", "k2_roles", "research_questions", "research_memos", "has_memo", "c1_summary"):
         if x.get(k): out.append(f"\n## Widened: {k}: {json.dumps(x[k])}")
     if out:
         open(fn, "a").write("\n".join(out) + "\n"); n += 1
