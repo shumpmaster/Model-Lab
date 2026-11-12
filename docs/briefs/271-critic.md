@@ -1,0 +1,16 @@
+# Brief 271 — critic — plan review of S-002 and E-004 (P-002, M8 to M10), round 1
+
+session: session_01QBwHGNPKhVy6fgoUjKtW6q
+model: the Critic runs on a different model from the plan's writer, the Definer (D-056), in a fresh session. Model names are kept out of this record by this session's standing instructions (LL-70).
+start: Model-Lab@51bc87cca28a83938d7617245f69705c551132ea, read from a fixed copy at /home/user/ml-fixed-271
+manifest: the fixed copy; specs/S-002.md; experiments/E-004.md, experiments/E-004/line.py and line-output.txt; docs/projects/P-002.md (sections 3 to 8); docs/gates/P-002/trial-terms.md; decisions/questions/P-002-value-target.md, P-002-trial-gates.md, P-002-design-gate.md, P-002-two-look-line.md, P-002-q017-stop.md, P-002-q017-decide.md and P-002-q017-next.md; research/Q-017-memo.md and research/Q-017-extract/README.md; reviews/P-002-two-look-line/ and reviews/P-002-line-chosen/; docs/LEDGER.md L-0008; docs/design/JOIN_UP_REVIEW.md; the cards as put, /home/user/ml-cards/P-002-value-target.md and /home/user/ml-cards/P-002-trial-gates.md
+recorded: at hand-out, 2026-11-12
+
+## Brief
+You are the Critic, plan review (D-043; your role file .claude/agents/critic.md). Read everything from the fixed copy only; write nothing. Your return is recorded verbatim in reviews/S-002/plan.md. Every plan-review round counts; a FAIL stops work before another round.
+
+Check S-002 and E-004 against their standard before they freeze, and before the hand check runs on S-002's rules (S-002, "The hand check": it runs on the rules as this review passes them). In particular: the header names the milestones it delivers, each a milestone in section 3 of docs/projects/P-002.md; every ruled term is quoted in its ruled words and matches docs/gates/P-002/trial-terms.md and the decision records; each acceptance criterion is a testable scenario traced to the project document; the counting rules (pieces, touches, reopenings, kinds) and their awkward cases E-P1 to E-R3 are complete enough for the hand check to apply them from an extract holding no free text, and the hand check's sample, draw and fields are fixed before any extract exists; E-004 is a fixed plan with no choice left open that would let a trial be tuned after it starts, and its figures match line-output.txt and the owner's choice of 0.097; E-004 is not a re-run of an earlier experiment (D-047); "what it cannot catch" is on record; the plain-words section is plain and true of the body. Add a join-up review section in the docs/design/JOIN_UP_REVIEW.md form (this project item has no screens or views; say so if true).
+
+Known leftovers, already logged for the plan's next change (rate them, do not re-find them): S-002's "Needed outside this spec's lane" still lists the line script's independent run, which passed at round 3; S-002 line 10's "before it freezes"; E-004 line 3's "draft for the Critic's plan review"; line.py's A7 could name the 0.0001 second-look sweep.
+
+Return first a column-0 line `Verdict: PASS` or `Verdict: FAIL`, then numbered findings each marked blocking or not, each with file, line and a fix, then the join-up section, then the six-part contract (changed · why · verified · undone · needed outside your surface · open questions).
