@@ -1,11 +1,11 @@
-# Orchestrator helper: builds the Critic's step-5 records pack (free text; never committed). Run: P=<out dir> python3 -I -B pack.py
+# Orchestrator helper: builds the Critic's step-5 records pack (free text; never committed). Run: P=<out dir> HC=<clones dir> python3 -I -B pack.py
 import json, os, sys, subprocess, hashlib, re
 sys.argv=[sys.argv[0],"x"]
-sys.path.insert(0,"/home/user/Model-Lab/research/Q-018-extract")
 import importlib.util
 spec=importlib.util.spec_from_file_location("ex",os.path.join(os.path.dirname(os.path.abspath(__file__)),"extract.py")); ex=importlib.util.module_from_spec(spec); spec.loader.exec_module(ex)
 P=os.environ["P"]; D=os.path.dirname(os.path.abspath(__file__))
-def git(r,*a): return subprocess.run(["git","-C","/home/user/hc/"+r,*a],capture_output=True,text=True).stdout
+HC=os.environ.get("HC","/home/user/hc")
+def git(r,*a): return subprocess.run(["git","-C",os.path.join(HC,r),*a],capture_output=True,text=True).stdout
 cut={r:v["default_branch_at_cutoff"] for r,v in json.load(open(D+"/frames.json")).items()}
 labels={}
 for r in ex.REPOS:
@@ -42,5 +42,5 @@ for i,l in enumerate(open(D+"/sample.jsonl"),1):
     for k in ("dispatch","dispatch_from","merged_at","closed","merging_account_class","closing_account_class","head_prefix","owner_comments"):
         if k in x: out.append(f"- {k}: {x[k]}")
     fn=f"{P}/L{i:02d}-{r}-{key}.md"; open(fn,"w").write("\n".join(out)+"\n"); idx.append(os.path.basename(fn))
-open(P+"/INDEX.md","w").write("# Records pack for the Critic's step 5 (Q-018)\n\nOne file per sample.jsonl line; question and decision records as first added are in records/<repo>--<label>.md. Built by the Orchestrator from the clones at the cut-off; no coding or results in it. The repositories themselves are at /home/user/hc/<repo> (working tree at origin/main).\n\n"+"\n".join("- "+n for n in idx)+"\n")
+open(P+"/INDEX.md","w").write("# Records pack for the Critic's step 5 (Q-018)\n\nOne file per sample.jsonl line; question and decision records as first added are in records/<repo>--<label>.md. Built by the Orchestrator from the clones at the cut-off; no coding or results in it. The repositories themselves are at "+HC+"/<repo> (working tree at the commits README.md names).\n\n"+"\n".join("- "+n for n in idx)+"\n")
 print(len(idx))

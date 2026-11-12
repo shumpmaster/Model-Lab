@@ -56,6 +56,10 @@ def k1(p, repo):
     # change (ii): in Personal-Org-Operating-Model the operating model's own text is built work
     if repo == "Personal-Org-Operating-Model" and (p == "OPERATING_MODEL.md" or "/playbooks/" in "/" + p):
         return "built"
+    # change (iii) (brief 305): a file at one of the repository's owner-answer paths (RT1(a)), and in Service-Desk every
+    # other file directly in docs/design/references/ whose name starts owner-, is owner question or answer, by rule 1
+    if answer_path(repo, p) is not None or (repo == "Service-Desk" and re.fullmatch(r"docs/design/references/owner-[^/]*", p)):
+        return "owner_qa"
     l = _label_of(p)
     if l == "qa": return "owner_qa"
     if l == "rec": return "records"
@@ -495,6 +499,11 @@ class QD_:
             if m: return m.group(1) if m.group(1).startswith("Q-") else "Q-" + m.group(1)
         m = re.fullmatch(r"(?:questions|decisions/questions)/(.+\.md)", path)
         return m.group(1) if m else None
+    def qid(self, path):
+        """S-002 step 3: for a Personal-Org-Operating-Model question file questions/Q-<nnn>-<name>.md or answer record
+        _owner-answer-q<nnn>.md, its Q-<nnn> in clear (an id, not path text); else None."""
+        q = self.pair(path) if self.R.name == "Personal-Org-Operating-Model" else None
+        return q if q and re.fullmatch(r"Q-\d{3}", q) else None
     def rt5(self, path):
         """The class, where it came from, and the milestone, for the question a record belongs to."""
         name = self.pair(path)
@@ -537,6 +546,7 @@ class QD_:
             start = min(cands, key=lambda c: (c["time"], c["hash"])) if cands else None
             row = {"label": lab(r["path"]), "kind": answer_path(self.R.name, r["path"]),
                    "question_label": lab(self.pair(r["path"])) if self.pair(r["path"]) else None,
+                   "question_id": self.qid(r["path"]),
                    "notes_file": r["path"].endswith("-notes.md"), "first_added": r["time"],
                    "first_added_in_pieces_first_commit": r["first_hash"] == first_hash,
                    "names_by": parts, "names_only_by_spec": parts == ["spec"], "names_from": None if start is None else ("first add" if start["first_add"] else ("own commit" if start is own_start else "append")),
