@@ -1,0 +1,4 @@
+Verdict: FAIL
+Reviewed: specs/S-002.md and experiments/E-004.md as changed by briefs 318 (6df531d) and 319 (d8c9fa7), brief 320
+
+Full return verbatim in reviews/S-002-rulings-3/_critic-verbatim.md. Brief 317's findings are closed; ruling 19 is written in with the card's words, and reading "every question" as every question and note is supported by the card. Nothing blocks the re-count in the text. One blocking finding, for the freeze: the Chief of Staff, who knows the sides, keeps the touch log and alone decides whether a conversation touch is logged and against which piece, which no list of what a trial cannot catch says (a disclosure for the Definer; options for the owner). Non-blocking: J1's `trial` match by brief; the records pack lacks ledger entries (needed before the coding); "not tilted" says more than the card; a different ruling with the same short words is skipped; ruling 19's decision record is in PR #110. D-050 flags (findings 1, 4, 7).
