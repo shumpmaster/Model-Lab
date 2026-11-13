@@ -1,0 +1,4 @@
+Verdict: PASS
+Reviewed: specs/S-002.md and experiments/E-004.md as changed by brief 329 (d2f0543, merged at 4a8df07), brief 331
+
+Full return verbatim in reviews/S-002-rulings-7/_critic-verbatim.md. Brief 327's findings 2, 3, 4 (a) to (g) and 5 are closed in the text; no branch is left without a result; nothing found blocks the freeze. Non-blocking, a clause each or a stated limit: the unstrike line has no named check between the two looks (the closest call); the chain bracket should say "withdrawn or void"; the withdrawn-piece key has no time condition; E-004 :86 omits "out of the hold-up measures". For the owner's scenario card, as this plan's design: the stop at look 1, the settled case's single other-way result, strikes and their undoing. The plan review is still to re-run on the changed lines before the freeze. D-050 flags (findings 5 and 6 (b)).
