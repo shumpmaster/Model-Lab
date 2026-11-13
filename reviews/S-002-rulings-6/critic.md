@@ -1,0 +1,4 @@
+Verdict: FAIL
+Reviewed: specs/S-002.md and experiments/E-004.md as changed by brief 326 (deb78d1, merged at bb91a8e), brief 327
+
+Full return verbatim in reviews/S-002-rulings-6/_critic-verbatim.md. Brief 325's findings 1, 2, 3, 4, 6 and 7 are closed in the text; nothing in the text blocks the re-count. Two blocking findings, for the freeze, each a sentence: the both-ways result for a withdrawn piece runs only on a touch the owner adds, not on one the keeper logs after the withdrawal; and a first look whose two ways differ while its deciding result is "go on" has no defined result. Non-blocking, for the same pass: J3's limits, AC12's start conditions, which "place left empty" reading is meant, the list check's wording, strikes between looks, the same-commit rule across monthly files, and J2's `brief` form. D-050 flags (findings 2 and 3).
