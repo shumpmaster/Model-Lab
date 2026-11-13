@@ -42,5 +42,5 @@ for i,l in enumerate(open(D+"/sample.jsonl"),1):
     for k in ("dispatch","dispatch_from","merged_at","closed","merging_account_class","closing_account_class","head_prefix","owner_comments"):
         if k in x: out.append(f"- {k}: {x[k]}")
     fn=f"{P}/L{i:02d}-{r}-{key}.md"; open(fn,"w").write("\n".join(out)+"\n"); idx.append(os.path.basename(fn))
-open(P+"/INDEX.md","w").write("# Records pack for the Critic's step 5 (Q-018)\n\nOne file per sample.jsonl line; question and decision records as first added are in records/<repo>--<label>.md. Built by the Orchestrator from the clones at the cut-off; no coding or results in it. The repositories themselves are at "+HC+"/<repo> (working tree at the commits README.md names).\n\n"+"\n".join("- "+n for n in idx)+"\n")
+open(P+"/INDEX.md","w").write("# Records pack for the Critic's step 5 (Q-018)\n\nOne file per sample.jsonl line; question and decision records as first added are in records/<repo>--<label>.md. Built by the Orchestrator from the clones at the cut-off; no coding or results in it. The Critic codes from this pack, not from the full clones, which hold docs/briefs/** and docs/reports/** (S-002 step 3, *Later work*; governance/PACKS.toml [roles.critic]); brief 323.\n\n"+"\n".join("- "+n for n in idx)+"\n")
 print(len(idx))

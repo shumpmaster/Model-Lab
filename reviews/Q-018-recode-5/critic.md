@@ -1,0 +1,4 @@
+Verdict: PASS
+Reviewed: research/Q-018-memo-5.md (brief 333), its changed items as S-002's item (6) names them, brief 334
+
+Full return verbatim in reviews/Q-018-recode-5/_critic-verbatim.md. Every count and skip holds: the own-file records, each ledger entry counted or skipped, the four notes under RT7's code, and both figures (22 touches taken off; 2 pieces moved to not needing the owner, 0 back). Shares stand at 14 of 33 (random part 11 of 26). Non-blocking: three labelling slips in the memo that change no count (689b54b0's matching entry is d4f9e0fe; rows 54 to 58 are on #48, not #53; 5b4e82a7 is 10-12, not 11-12); a seen case of step 6 (r) on #30's aa4bb0c6; for the Definer, step 6's list lacks the limit that several answers in one first add or commit count once, and which brief record dispatches a piece with two briefs; for the owner's listing, Personal-Org-Operating-Model #49's yes-or-no rests on one "not said" code.

@@ -27,6 +27,13 @@ def history(r, p):
         fa = ex.first_adds_full(R, [p], lambda q: q == p).get(p)
         _hist[(r, p)] = (fa, [(h, t) for h, t, _, _ in ex.qd_history(R, p) if fa and (t, h) >= (fa[1], fa[0])])
     return _hist[(r, p)]
+# brief 323: the ledger entries the widened `ledger_entries` field lists, each as the commit that first adds it left it
+LX = {}
+class _RL: pass
+_RLx = _RL(); _RLx.path = os.path.join(HC, "Personal-Org-Operating-Model"); _RLx.cut = cut.get("Personal-Org-Operating-Model"); _RLx.name = "Personal-Org-Operating-Model"
+_RLx.show = lambda rev, path: subprocess.run(["git", "-C", _RLx.path, "show", f"{rev}:{path}"], capture_output=True, text=True).stdout or None
+if _RLx.cut: LX = ex.ledger_index(_RLx)
+coding = []   # (line, repository, key, kind, label, commit) for every first add and append the Critic codes (later_work)
 shown = {}
 n = 0
 for i, l in enumerate(open(D + "/sample.jsonl"), 1):
@@ -53,12 +60,28 @@ for i, l in enumerate(open(D + "/sample.jsonl"), 1):
                 assert [t for _, t in win] == [w.get("commit_time") for w in wc], (r, key, p)
                 if wc: body.append(f"\n<!-- the window of sample.jsonl line {i} ({r} #{key}): {len(wc)} commit(s) -->")
                 for (h, t), w in zip(win, wc):
+                    what = "first add" if w.get("first_add") else ("append, listed as not an append" if w.get("not_an_append") else "append")
+                    coding.append((i, r, key, what + ("" if w.get("read_for_piece") else " (before the record names the piece: read_for_piece false)"), q["label"], h))
                     if h in shown[rec]:
                         body.append(f"\n<!-- in-window commit {h} at {t} : {json.dumps(w)} ; its diff is shown above -->")
                     else:
                         shown[rec].add(h)
                         body.append(f"\n<!-- in-window commit {h} at {t} : {json.dumps(w)} -->\n```diff\n" + git(r, "show", "--format=", h, "--", p) + "\n```")
                 if body: open(rec, "a").write("\n".join(body) + "\n")
+    le = x.get("ledger_entries") or []
+    if le:
+        out.append("\n## Widened (brief 323): ledger entries quoting the owner first added in its window (records2/ holds each as first added)")
+        for e in le:
+            out.append(f"- {e['label']} → docs/LEDGER.md entry: {json.dumps(e)}")
+            fx = LX.get(e["label"])
+            rec = f"{P}/records2/{r}--ledger-{e['label']}.md"
+            if fx and not os.path.exists(rec):
+                open(rec, "w").write(f"<!-- {r}:docs/LEDGER.md, the entry as first added in {fx['hash']} at {fx['time']} -->\n" + fx["text"] + "\n")
+            coding.append((i, r, key, "ledger entry, first add", e["label"], fx["hash"] if fx else "?"))
+    if x["frame"] != "D":
+        bn = sorted({b["brief"] for b in x.get("briefs") or []})
+        sp = sorted({s for c in x.get("commits") or [] for s in c.get("spec") or []})
+        out.append(f"\n## Widened (brief 323): the brief numbers its trailers name: {json.dumps(bn)}; the spec ids its `Spec:` trailers give: {json.dumps(sp)}")
     c1 = x.get("c1_records") or []
     if c1:
         out.append("\n## Widened: C1 check records (records2/ holds each as at the cut-off)")
@@ -72,4 +95,7 @@ for i, l in enumerate(open(D + "/sample.jsonl"), 1):
         if x.get(k): out.append(f"\n## Widened: {k}: {json.dumps(x[k])}")
     if out:
         open(fn, "a").write("\n".join(out) + "\n"); n += 1
-print(n)
+with open(P + "/CODING.md", "w") as fh:
+    fh.write("# What the Critic codes for `later_work` (S-002 step 3, *Later work*; brief 323)\n\nOne line per record's first add or append that the extract's *Questions and decisions* (`questions_decisions_named`, its in-window `window_commits`) and *Ledger entries* (`ledger_entries`) fields list for a sampled piece: the sample.jsonl line, the piece, what it is, the record's label and the commit. The piece's file L<nn>-… gives the fields; records2/ gives the text.\n\n")
+    for c in coding: fh.write(f"- L{c[0]:02d} {c[1]} #{c[2]}: {c[3]}, {c[4]}, {c[5]}\n")
+print(n, len(coding))

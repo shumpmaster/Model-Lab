@@ -179,6 +179,7 @@ class Repo:
         try: return git(self.path, "show", f"{rev}:{path}")
         except subprocess.CalledProcessError: return None
 
+BRIEF_PATH = {}   # (repository, brief as written in `briefs`) -> its record's path (brief 323; never written)
 def brief_records(R, commits):
     """The briefs a set of commits names by trailer, each with its role, record and first-add time."""
     out = {}
@@ -195,6 +196,7 @@ def brief_records(R, commits):
             else:  # control: the reviews/<id>/_control/*.json file whose "session" is this value
                 role, t, rec = control_file(R, bid)
             key = (kind, bid)
+            if rec: BRIEF_PATH[(R.name, bid if kind != "control" else "control:" + lab(bid))] = rec   # brief 323: the dispatch commit's hash
             if key not in out:
                 out[key] = {"brief": bid if kind != "control" else "control:" + lab(bid), "from": {"ml-brief": "brief record", "brief-file": "brief record", "control": "control file"}[kind],
                             "role": role, "record_exists": t is not None, "record_first_added": t}
@@ -361,6 +363,30 @@ def owner_word_keys(lines, idxs, form3):
         if form3 and FORM3.search(l): out.append((("quoted",), "3", l.strip()))
     return out
 
+NOTE_WORD = re.compile(r"(?i)(?<![\w])(?:note|notes)(?![\w])")
+NOT_NOTE_WORD = re.compile(r"(?i)(?<![\w])(?:answer|answers|ruling|rulings)(?![\w])")
+def notes_only(lines, added, form3, removed_keys):
+    """S-002 step 3 `notes_only` (RT7; brief 323): true when the commit's added lines of the owner's words left unmatched
+    by the lines it removes (matched in order within each key, as `matched_pairs` pairs them) are each a quoted line of
+    form (2) whose line above it, as form (2) reads that line, holds the whole word "note" or "notes" and none of the whole
+    words "answer", "answers", "ruling" or "rulings"; false otherwise, and false when none is left unmatched."""
+    ak = []
+    for i in added:
+        k = owner_word_keys(lines, [i], form3)
+        if k: ak.append((i, k[0][0], k[0][1]))
+    taken = collections.Counter(k for k, _, _ in removed_keys)
+    left = []
+    for i, key, form in ak:
+        if taken[key] > 0: taken[key] -= 1
+        else: left.append((i, form))
+    if not left: return False
+    for i, form in left:
+        if form != "2": return False
+        j = i - 2
+        while j >= 0 and (QUOTED.match(lines[j]) or not lines[j].strip()): j -= 1
+        if j < 0 or not NOTE_WORD.search(lines[j]) or NOT_NOTE_WORD.search(lines[j]): return False
+    return True
+
 def asked_class(text):
     """RT5's class from a decision record's `Asked:` line (its first): the words before the colon of the sentence
     holding ': the owner's own <word>, never a default' (or '..., never a default or a proxy')."""
@@ -463,6 +489,38 @@ def listed_items(R):
                     out.append({"kind": "ledger entry quoting the owner", "label": lab("docs/LEDGER.md#" + lines[a]), "time": t, "text": "\n".join(lines[a:z])})
     return sorted(out, key=lambda d: (d["time"], d["label"]))
 
+PASSAGE = re.compile(r'["\u201c]([^"\u201d]*)["\u201d]')
+DECIDED_OWNER = re.compile(r"^decided_by:\s*owner\b")
+def ledger_index(R):
+    """S-002 RT1(a), *Ledger entries that quote the owner*, and step 3 *Ledger entries* (brief 323): every entry of
+    Personal-Org-Operating-Model's docs/LEDGER.md (its lines from its heading to the next heading), keyed by its heading's
+    label, with the commit that first adds it (the earliest commit, full history, whose added lines hold its heading line),
+    its text as that commit left it, and every commit whose added lines hold its heading line. Kept are the entries
+    whose `decided_by: owner` line, as first added, holds a double-quoted passage. Text is never written."""
+    ents = {}
+    for h, t, added, _ in qd_history(R, "docs/LEDGER.md"):
+        lines = (R.show(h, "docs/LEDGER.md") or "").split("\n")
+        for i in added:
+            if not (0 < i <= len(lines)) or not lines[i - 1].startswith("#"): continue
+            a = i - 1
+            z = next((k for k in range(i, len(lines)) if lines[k].startswith("#")), len(lines))
+            key = lab("docs/LEDGER.md#" + lines[a])
+            e = ents.get(key)
+            if e is None:
+                ents[key] = e = {"label": key, "hash": h, "time": t, "lines": lines[a:z], "adders": []}
+            e["adders"].append(h)
+    out = {}
+    for key, e in ents.items():
+        dec = next((l for l in e["lines"] if DECIDED_OWNER.match(l)), None)
+        if dec is None or not PASSAGE.search(dec): continue
+        asked = next((l for l in e["lines"] if re.match(r"^asked:", l)), "")
+        qs = []
+        for m in re.finditer(r"(?<![\w-])(Q-\d{3})(?![\w])|questions/(Q-\d{3})-[^\s)]*\.md", asked):
+            q = m.group(1) or m.group(2)
+            if q not in qs: qs.append(q)
+        out[key] = dict(e, text="\n".join(e["lines"]), passages=PASSAGE.findall(dec), asked_q=qs[0] if len(qs) == 1 else (qs or None))
+    return out
+
 class QD_:
     """Every question file and decision record first added on the default branch by the cut-off (deleted ones included),
     each read as S-002 'What a touch is' says: as first added, then each later commit's added lines."""
@@ -490,7 +548,9 @@ class QD_:
                                 "owner_word_lines_by_form": {f: sum(1 for _, x, _ in ak if x == f) for f in "123"},
                                 "matched_pairs": pairs, "matched_pairs_with_changed_text": changed,
                                 "removed_owner_word_lines": len(rk), "unmatched_owner_word_lines": sum(left.values()),
-                                "question_ids_in_owner_word_lines": qids})
+                                "question_ids_in_owner_word_lines": qids,
+                                "ow_texts": [lines[i - 1] for i in added if 0 < i <= len(lines) and owner_word_keys(lines, [i], f3)],
+                                "notes_only": notes_only(lines, added, f3, rk)})
             self.recs.append({"path": path, "time": q["time"], "text": q["text"], "first_hash": first_hash, "commits": commits})
         self.by_path = {r["path"]: r for r in self.recs}
     def pair(self, path):
@@ -547,6 +607,9 @@ class QD_:
             row = {"label": lab(r["path"]), "kind": answer_path(self.R.name, r["path"]),
                    "question_label": lab(self.pair(r["path"])) if self.pair(r["path"]) else None,
                    "question_id": self.qid(r["path"]),
+                   # brief 323 (S-002 step 3: "for an answer record's first add and each append to it"): the ids its first add's lines of the owner's words name, wherever that first add falls
+                   "question_ids_in_first_add_owner_word_lines": (r["commits"][0]["question_ids_in_owner_word_lines"] if r["commits"] and r["commits"][0]["first_add"] else [])
+                                                                  if answer_path(self.R.name, r["path"]) == "answer record" else None,
                    "notes_file": r["path"].endswith("-notes.md"), "first_added": r["time"],
                    "first_added_in_pieces_first_commit": r["first_hash"] == first_hash,
                    "names_by": parts, "names_only_by_spec": parts == ["spec"], "names_from": None if start is None else ("first add" if start["first_add"] else ("own commit" if start is own_start else "append")),
@@ -558,10 +621,53 @@ class QD_:
                                       "not_an_append": (not c["first_add"]) and c["owner_word_lines"] > 0 and c["unmatched_owner_word_lines"] == 0,
                                       "only_form_2_or_3": c["owner_word_lines"] > 0 and c["owner_word_lines_by_form"]["1"] == 0,
                                       "matched_pairs": c["matched_pairs"], "matched_pairs_with_changed_text": c["matched_pairs_with_changed_text"],
-                                      "question_ids_in_owner_word_lines": c["question_ids_in_owner_word_lines"]}
+                                      "question_ids_in_owner_word_lines": c["question_ids_in_owner_word_lines"], "notes_only": c["notes_only"]}
                                      for c in r["commits"] if dispatch and dispatch < c["time"] < merged_at]
             out.append(row)
         return out
+
+def dispatch_commit(R, br, first_hash, dispatch):
+    """The commit that gave the piece's dispatch (RT4): its first commit, or the commit that first adds the brief record
+    or control file that gave it (earliest, full history)."""
+    if dispatch[1] == "first commit": return first_hash
+    for b in br:
+        if b["record_first_added"] == dispatch[0] and (R.name, b["brief"]) in BRIEF_PATH:
+            rec = BRIEF_PATH[(R.name, b["brief"])]
+            fa = first_adds_full(R, [rec], lambda q: q == rec).get(rec)
+            if fa and fa[1] == dispatch[0]: return fa[0]
+    return None
+
+def ledger_for_piece(R, LX, QDN, qdn, n, briefs, specs, br, hs, first_hash, dispatch, merged_at):
+    """S-002 step 3 *Ledger entries* (brief 323), for one piece: each entry of ledger_index first added inside the
+    piece's window, with no text."""
+    if not dispatch[0]: return []
+    own = set(hs); dh = dispatch_commit(R, br, first_hash, dispatch)
+    # the records that are the ruling that started the piece (RT4): every owner-answer record, and every ledger entry
+    # quoting the owner, first added in the dispatch commit; each with its lines of the owner's words as first added
+    start = []
+    if dh:
+        for r in QDN.recs:
+            if r["first_hash"] == dh and r["commits"] and r["commits"][0]["first_add"]:
+                start.append(("record", lab(r["path"]), r["commits"][0]["ow_texts"]))
+        for e in LX.values():
+            if e["hash"] == dh: start.append(("ledger", e["label"], e["passages"]))
+    # the decision and answer records (not ledger entries) naming the piece, with each in-window commit's added lines of the owner's words
+    named = {q["label"] for q in qdn if q["kind"] in ("decision", "answer record")}
+    win = [(lab(r["path"]), c["time"], c["ow_texts"]) for r in QDN.recs if lab(r["path"]) in named
+           for c in r["commits"] if dispatch[0] < c["time"] < merged_at]
+    out = []
+    for e in sorted(LX.values(), key=lambda e: (e["time"], e["label"])):
+        if not (dispatch[0] < e["time"] < merged_at): continue
+        mine = [h for h in e["adders"] if h in own]
+        ps = []
+        for w in e["passages"]:
+            same = sorted({(lb, t) for lb, t, ls in win if any(w in l for l in ls)}, key=lambda x: (x[1], x[0]))
+            st = sorted({lb for k, lb, ls in start if lb != e["label"] and any(w in l for l in ls)})
+            ps.append({"same_words_in": [{"label": lb, "commit_time": t} for lb, t in same], "same_words_in_start": st})
+        out.append({"label": e["label"], "first_added": e["time"], "names_by": naming(e["text"], n, briefs, specs, R.name),
+                    "own_file": bool(mine), "first_added_in_pieces_first_commit": e["hash"] == first_hash,
+                    "passage_count": len(e["passages"]), "passages": ps, "asked_q": e["asked_q"]})
+    return out
 
 # ---- C1: check records at the cut-off, by S-002's check-record paths -----------------------------------------
 V = r"(?:-[A-Za-z0-9-]+)?-verbatim\.md"     # a name may carry a suffix before -verbatim
@@ -887,6 +993,7 @@ def build(clones, ghdir, outdir):
         U_open_or_late = [p for p in R.gh if not p["merged_at"] and p["closed_at"] and T(p["closed_at"]) >= CUT]
         QD = qd_files(R)
         QDN = QD_(R); CK = C1(R, merged, own); CR = comment_records(R); LI = listed_items(R)
+        LX = ledger_index(R) if name == "Personal-Org-Operating-Model" else {}
         def crec(n): return {k: sorted(v) for k, v in CR[n].items()} if n in CR else {"reviewer_comment": [], "other_wording": []}
         # frame U, with its brief ids for RT3(b) matching
         Urows = []
@@ -950,6 +1057,9 @@ def build(clones, ghdir, outdir):
             own_c = [(R.commits[h]["ad"], h, R.commits[h]["cd"], {f["path"] for f in R.commits[h]["files"] if f["status"] != "deleted"}) for h in hs]
             qdn = QDN.for_piece(n, bids, specs, own_c, first_hash, dispatch[0], p["merged_at"])
             c1r = CK.for_piece(n, sorted(set(specs) | spec_files), ids, qids)
+            ledger = None
+            if name == "Personal-Org-Operating-Model":
+                ledger = ledger_for_piece(R, LX, QDN, qdn, n, bids, specs, br, hs, first_hash, dispatch, p["merged_at"])
             listed = [{"kind": it["kind"], "label": it["label"], "commit_time": it["time"], "names_by": naming(it["text"], n, bids, specs, name)}
                       for it in LI if dispatch[0] and dispatch[0] < it["time"] < p["merged_at"]]
             kinds = {r["kind"] for r in c1r}
@@ -964,7 +1074,7 @@ def build(clones, ghdir, outdir):
                        "questions_decisions": qd, "first_check": first_check(R, kind_files, specs, n), "rt3b_matches": rt3b,
                        "questions_decisions_named": qdn, "c1_records": c1r, "comment_records": crec(n),
                        "c1_summary": c1_sum, "k2_roles": k2_roles(R, hs), "research_memos": memo, "research_questions": rq, "has_memo": bool(memo),
-                       "owner_items_listed_in_window": listed,
+                       "owner_items_listed_in_window": listed, "ledger_entries": ledger,
                        "after_merge": {"days30_complete": t0 + DAY30 <= CUT, "later_prs_sharing_a_file": later_prs,
                                        "later_commits_naming_it": later_named, "reverts_naming_it": reverts, "reopens_marks": marks}})
         # frame D

@@ -1,0 +1,11 @@
+# Brief 339 — critic — the "later work" codes re-read under the owner's ruling on a plan a piece's own work wrote (P-002, M8)
+
+session: session_01QBwHGLKYvyVZk199qdegcJ
+model: the Critic runs in a fresh session, on a different model from S-002's writer (D-056), apart from the Critics of briefs 328, 330, 334 and 338. Model names are kept out of this record by this session's standing instructions (LL-70).
+start: Model-Lab@d2f31b097167c78f3901be692f64f7dbfa5f3f5d (local branch orch/p002-fix-4)
+manifest, and nothing else: specs/S-002.md, "What a touch is" (line 46), RT4, RT7 and step 3 (*Later work*, line 109), as brief 337 left them; questions/P-002-plan-written-by-piece.md (the card) and intake/P-002-owner-answers-2026-11-13.md (the owner's words: "A: yes, it's #49's (Recommended)"); the records pack at /tmp/claude-0/-home-user/3bf22eb7-3034-5300-9273-72fad23a7eb4/scratchpad/q018-pack-323 (INDEX.md, CODING.md, the L<nn> files, records/ and records2/); the codes, reviews/Q-018-later-work/_critic-coder-verbatim.md and _critic-check-verbatim.md. Not the full clones, not docs/briefs/** (other than this brief), docs/reports/** or docs/handoff/**, not research/Q-018-memo*.md and no other file in reviews/**.
+recorded: at hand-out, 2026-11-13
+
+## Brief
+You are the Critic. Read only; write nothing. The owner ruled, on the card's option A: "a plan the piece's own work wrote is work the piece carries, whatever its label says". The 131 codes were made before that ruling. For each of the 61 rows coded "later work", read the record in the pack and the piece's own commits and files as its L<nn> file gives them, and say whether the record asks about a plan (a spec or brief) that the piece's own commits drafted or plan-reviewed outside its `Spec:` trailers; if so, its code becomes "this piece". Rows 60 and 61 (Personal-Org-Operating-Model #49) already read "this piece" under the ruling: confirm that too.
+Return, first, exactly one line `Changed: <n> of 61`, then a table with one row for every code that changes (row, piece, label, commit, the old code, the new code, a reason of at most 20 words quoting no more than 6 of the record's words), then your reading of rows 60 and 61, then the six-part contract. Give no count of touches or pieces.
