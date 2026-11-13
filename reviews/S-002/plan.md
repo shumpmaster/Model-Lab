@@ -1,6 +1,6 @@
 Verdict: PASS
 
-The Critic's plan review of specs/S-002.md and experiments/E-004.md (P-002, M8 to M10), in a fresh session on a different model from the writer, the Definer. Round 1 (brief: docs/briefs/271-critic.md, at Model-Lab 51bc87c, read from a fixed copy): FAIL, eight blocking findings. Recorded verbatim by the orchestrator, session session_01QBwHGNPKhVy6fgoUjKtW6q, 2026-11-12. Correction to the brief: it said a FAIL stops work before another round; the stop rule's limit for plan rounds is three (docs/LESSONS.md LL-55; reviews/S-001/plan.md, FAIL at rounds 1 and 2 and PASS at round 3), so round 1's findings go back to the Definer, and round 2 counts as the second of three. Round 2 (brief: docs/briefs/273-critic.md, at Model-Lab 1316988, after the Definer's change on brief 272, commit 015ba8f): FAIL, two blocking findings; the Critic flags its own round 1 for missing findings 3 and 4 and part of 6 (D-050). Round 3 (brief: docs/briefs/275-critic.md, at Model-Lab 23d27c1, after the Definer's change on brief 274, commit 749c3c9): PASS, nine non-blocking findings; the Critic flags rounds 1 and 2 for missing its findings 3 to 5 (D-050). Re-check after round 3 (brief: docs/briefs/277-critic.md, at Model-Lab 05a71c3 plus a session-lines commit, after the Definer's change on brief 276, commit f833d70): FAIL, two blocking findings, both in that change's new rule for an entry and its pull requests; the plan stands as round 3 passed it until the owner rules under the stop rule (as reviews/S-001/plan.md, round 4). The header verdict stays round 3's PASS for the plan as it stood at round 3. The owner chose option A, a focused fix (intake/P-002-owner-plan-stop-answer-2026-11-12.md); the focused confirmation review (brief: docs/briefs/281-critic.md, at the Definer's commit 4a03208 on brief 280): PASS, three non-blocking findings. The header verdict is PASS for the plan as it now stands. The orchestrator confirmed with `git diff 4bfc6e0 4a03208 -- specs/S-002.md` that the change has no hunk in S-002 lines 18 to 54 or 76 to 95, which the Critic could not diff. Re-run on the lines changed by briefs 321 to 335, before the freeze (brief: docs/briefs/336-critic.md, at Model-Lab bcac71f, with the files as at 7bdf340 and the diff given as a fixed copy): FAIL, one blocking finding, in brief 335's new dispatch clause as it bears on trial pieces; the header verdict stays the focused confirmation review's PASS for the plan as it stood then. The orchestrator confirmed with `git diff -U0 7bdf340 8f0ca72` and `git diff -U0 8f0ca72 f95d0f7` on specs/S-002.md that lines 82 and 114 changed before memo 5's commit and only lines 46 and 112 of the hand check's section after it.
+The Critic's plan review of specs/S-002.md and experiments/E-004.md (P-002, M8 to M10), in a fresh session on a different model from the writer, the Definer. Round 1 (brief: docs/briefs/271-critic.md, at Model-Lab 51bc87c, read from a fixed copy): FAIL, eight blocking findings. Recorded verbatim by the orchestrator, session session_01QBwHGNPKhVy6fgoUjKtW6q, 2026-11-12. Correction to the brief: it said a FAIL stops work before another round; the stop rule's limit for plan rounds is three (docs/LESSONS.md LL-55; reviews/S-001/plan.md, FAIL at rounds 1 and 2 and PASS at round 3), so round 1's findings go back to the Definer, and round 2 counts as the second of three. Round 2 (brief: docs/briefs/273-critic.md, at Model-Lab 1316988, after the Definer's change on brief 272, commit 015ba8f): FAIL, two blocking findings; the Critic flags its own round 1 for missing findings 3 and 4 and part of 6 (D-050). Round 3 (brief: docs/briefs/275-critic.md, at Model-Lab 23d27c1, after the Definer's change on brief 274, commit 749c3c9): PASS, nine non-blocking findings; the Critic flags rounds 1 and 2 for missing its findings 3 to 5 (D-050). Re-check after round 3 (brief: docs/briefs/277-critic.md, at Model-Lab 05a71c3 plus a session-lines commit, after the Definer's change on brief 276, commit f833d70): FAIL, two blocking findings, both in that change's new rule for an entry and its pull requests; the plan stands as round 3 passed it until the owner rules under the stop rule (as reviews/S-001/plan.md, round 4). The header verdict stays round 3's PASS for the plan as it stood at round 3. The owner chose option A, a focused fix (intake/P-002-owner-plan-stop-answer-2026-11-12.md); the focused confirmation review (brief: docs/briefs/281-critic.md, at the Definer's commit 4a03208 on brief 280): PASS, three non-blocking findings. The header verdict is PASS for the plan as it now stands. The orchestrator confirmed with `git diff 4bfc6e0 4a03208 -- specs/S-002.md` that the change has no hunk in S-002 lines 18 to 54 or 76 to 95, which the Critic could not diff. Re-run on the lines changed by briefs 321 to 335, before the freeze (brief: docs/briefs/336-critic.md, at Model-Lab bcac71f, with the files as at 7bdf340 and the diff given as a fixed copy): FAIL, one blocking finding, in brief 335's new dispatch clause as it bears on trial pieces; the header verdict stays the focused confirmation review's PASS for the plan as it stood then. The orchestrator confirmed with `git diff -U0 7bdf340 8f0ca72` and `git diff -U0 8f0ca72 f95d0f7` on specs/S-002.md that lines 82 and 114 changed before memo 5's commit and only lines 46 and 112 of the hand check's section after it. The owner chose option A at the second plan stop, "A: focused fix (Recommended)" (questions/P-002-plan-stop-2.md; saved on receipt in intake/P-002-owner-answers-2026-11-13.md); the focused confirmation review at the second plan stop (brief: docs/briefs/338-critic.md, at Model-Lab 50de6a7, after the Definer's change on brief 337, commit da1fce4): PASS, six non-blocking findings. The header verdict is PASS for the plan as it now stands.
 
 ## Round 1
 Verdict: FAIL
@@ -619,3 +619,87 @@ One thing blocks the freeze, and it is small to fix. The change that settled how
 - **Open questions:**
   - Whether finding 1's remaining import (touches naming a non-entered brief after the entry) should also be closed, by treating a trial pull request that carries a non-entered brief as listed and brought to the owner, or left as a stated limit. That is the owner's to see on the scenario card.
   - Whether a re-check of finding 1's clause alone is enough before the freeze; I think it is, since nothing else blocks.
+
+## Focused confirmation review, at the second plan stop (brief 338)
+
+Verdict: PASS
+
+The focused fix does what the owner chose, and nothing in the changed lines blocks the freeze, but one claim is only partly confirmed. Not confirmed in full: the plan now says the second ruling leaves the hand check at 14 of 33. That is shown for #49 only. The new rule is general, and the 61 codes that both earlier Critics gave as "later work" were coded without it; nothing I may read shows whether any of them is a question about a plan its piece's own work wrote. If one is, a touch count moves, and for two pieces the 14 would move. That needs one re-read of those codes before the figure is put to the owner; it is not a change to the plan's rules. Otherwise: the route found last time is closed. A trial piece's counting now starts at its own entered brief, whatever other work its pull request carries, in every place the start time is given, and the Reviewer lists such pieces. What is left (questions on the other work after the start still count) is stated wherever the limits are listed. The six smaller points are each fixed or stated as a limit. The second ruling is written in as the card's option A says and no wider. The remaining findings are wording, or small gaps that can be stated as limits. Nothing here is irreversible.
+
+## Findings
+
+1. **Non-blocking for the plan's rules; a check is needed before the figure is relied on. "No count of memo 5 changes" is shown for #49 only.**
+   - Where: `/home/user/Model-Lab/specs/S-002.md`:268 (Open question 22: "so no count of memo 5 changes and the hand check's figure stays 14 of 33"); :109 (step 3, *Later work*), whose own sentence is scoped to rows 60 and 61 and is right.
+   - Confirmed: `/home/user/Model-Lab/research/Q-018-memo-5.md`:128 and :160 give #49 one touch, Q-031's first add at 568cd6e0, coded "not said" with both readings; :137 gives 14 of 33. "This piece" counts as "not said" does, so #49 does not move.
+   - Not confirmed: memo 5 :163 gives 61 "later work" codes, and :143 to :144 say they take off 22 touches (Model-Lab #73: 1; #29: 1; Service-Desk #230: 4; Personal-Org-Operating-Model #30: 2, #27: 6, #25: 8) and turn 2 pieces (#73, #230) from needing the owner to not. The rule at :46 and :109 now applies to all of them. Any one that asks about a plan its piece's own commits drafted or plan-reviewed, outside its `Spec:` trailers, would now read "this piece". On #25, #27, #29 or #30 that moves touch totals and the 22; on #73 or #230 it moves 14 of 33. No record in my manifest says whether such a case exists; the codes file is outside it.
+   - Fix: a fresh Critic with the records pack re-reads the "later work" codes against option A (at the least those on #73 and #230, which decide the yes-or-no figure). Until then, word :268 as :109 is worded: #49's rows change no count, and the other codes are re-read before the freeze.
+   - Stated limit instead? No: it is a check to run, not a limit. It can be carried on the scenario card only as "not yet re-read".
+   - Self-implication (D-050): the codes were made and checked by my role's earlier sessions. This finding does not fault them; they coded before the ruling.
+
+2. **Non-blocking. "After the entry" and "after the dispatch" are used for the same boundary, and they are two different times.**
+   - Where: "after the entry" / "before its entry" at S-002.md:46, :191 (J3), :192 (J4), :235 (Risks) and `/home/user/Model-Lab/experiments/E-004.md`:39, :102, :151; "after the dispatch" at E-004.md:67, S-002.md:190 (J2 awkward case) and :267.
+   - The rule itself is clear: the window starts at the commit that first adds the entered brief's record, which comes after the entry (E-004.md:67). A touch on the other work between the entry and that commit does not count, though the limit's words say it does.
+   - Steering: the session that dispatches chooses when the brief record lands, so on a folded piece it can put a foreseen answer inside or outside the window. That is the same choice as "delaying a dispatch", already a stated limit, so it is not a new route.
+   - Fix: "after its dispatch" throughout, or one clause under "The sides are known ahead" saying the time between entry and brief record is the dispatcher's. Can be a stated limit.
+   - Self-implication (D-050): brief 336's finding 1 used "after the entry" in its own fix wording, and the Definer followed it.
+
+3. **Non-blocking. The Reviewer's list catches a fold only when the other work's commits name a brief.**
+   - Where: E-004.md:67, :100, :151; S-002.md:46, :190, :192.
+   - A trial brief's work folded into a pull request whose other commits name no brief (work with no brief, K3) is not listed, yet a touch after the dispatch that names the pull request by number still counts on it. Touches before the dispatch are shut out by the window either way, so finding 1 of brief 336 stays closed.
+   - Fix: also list a trial piece whose first own commit is earlier than its entry, or state it with the fold limit. Can be a stated limit.
+   - Also: "with that brief and its side" does not say whose side; the other brief has none. Fix: "and the trial piece's side".
+
+4. **Non-blocking. J2's recount of an entry no count line carries does not say it uses the new start time.**
+   - Where: S-002.md:190 ("recounting its RT1a, RT1c and RT7 touches with every question and note 'not said'"), against :46, which makes such an entry a trial piece whose dispatch is its entered brief's.
+   - For that piece the count line's `dispatched_at` (:189) follows the general rule, so it can be an older, non-entered brief's. :46 gives the right answer, but J2's procedure names only the three coded touch types, not comments, fixes or send-backs before the entry.
+   - It is narrow (the entered brief's number must be unreadable in the trailers, and the piece is listed on the results card), so I do not rate it a route. Fix: one clause in J2, "reading every touch on it from its entered brief's dispatch". 
+
+5. **Non-blocking. The new pointers in "What a touch is" are not in step 4's list of what each pointer means.**
+   - Where: S-002.md:110, against :46, which now points to "J2", "step 6 (v)" and E-004's "Exclusions" and "The sides are known ahead". :110 explains "J1", "J9" and "step 6" only in RT1's lines, and says the quoted lines stand alone.
+   - Fix: add the three to :110 when research/Q-018.md is re-quoted.
+
+6. **Non-blocking. The limit from brief 336's finding 6 is stated in full but not in the card lists.**
+   - Where: stated at E-004.md:153 and S-002.md:233, each ending "on the entry card and the results card". The card summaries at E-004.md:39 and :102 and J3, J4 (S-002.md:191, :192) do not hold the clause that a session can hold a look unjudged.
+   - Fix: one clause in each, or carry it on the scenario card.
+
+7. **Item 1 of the brief: brief 336's finding 1 is closed as option A states it. No finding.**
+   - The clause stands at S-002.md:46, :189 (J1 `dispatched_at`), :190 (J2, and a new awkward case) and E-004.md:67, with the first entry's dispatch where two entered briefs merge, and option A quoted word for word from `/home/user/Model-Lab/questions/P-002-plan-stop-2.md`:10.
+   - The Reviewer's list is at E-004.md:67 and :100 and S-002.md:192.
+   - The remainder is stated at S-002.md:10, :191, :192, :235, :267 and E-004.md:39, :102, :151, including that a fold voids no entry and is not capped.
+
+8. **Item 2: findings 2 to 7 of brief 336. No finding beyond 6 above.**
+   - Finding 2: fixed at :46 and stated as limit (v) at :112, which agrees with memo 5 :9 as brief 336 read it.
+   - Finding 3: fixed ("or untimed" at E-004.md:121; "or its withdrawal line" at S-002.md:197).
+   - Finding 4: fixed at S-002.md:174.
+   - Finding 5: fixed. The added start condition is marked as this plan's at E-004.md:30 and S-002.md:10, :177; `/home/user/Model-Lab/docs/gates/P-002/trial-terms.md`:90 does name only the other three. The reason for no time limit now quotes the ruling line (E-004.md:86, S-002.md:197), and the quote is part of the line J9 gives in full. The cost is in the plain words at :10.
+   - Finding 6: stated as a limit.
+   - Finding 7: fixed (E-004.md:5, :50, :51; S-002.md:266). AC10 is not added to :266; it holds no word of the confirmation, so that part of brief 336's finding 7 was wrong (D-050: my role's).
+
+9. **Item 3: the second ruling is written in as option A says and no wider. No finding beyond 1 above.**
+   - Option A is quoted word for word at S-002.md:46 and :109 and cited at :197 and :268; the owner's words match `/home/user/Model-Lab/intake/P-002-owner-answers-2026-11-13.md`:10.
+   - "Drafting it or adding its plan review" follows the card's own description ("drafted and reviewed").
+   - :46 says it reads what a question asks about and does not widen which records name a piece. On a trial piece no code is read, so the ruling reaches no trial.
+   - The window change moves no figure of memo 5: no sampled piece is a trial piece.
+
+10. **Item 4: no new route found.** Read end to end on the changed lines, the only choices left to a session that knows the sides are the fold (stated), the entry-to-record timing (finding 2, equal to a stated limit) and holding a look unjudged (stated, changes no result). The hand check's rules changed only by the listing at :46 and (v), and the plan-written-by-piece reading.
+
+## Six-part contract
+- **Changed:** nothing; I am read only and wrote no file.
+- **Why:** brief 338, the one focused confirmation review the owner chose at the second plan stop.
+- **Verified:** Read and Grep only; no shell, no git.
+  - Read in full: `/home/user/Model-Lab/AGENTS.md`, my charter, `/home/user/Model-Lab/docs/briefs/338-critic.md`, `/home/user/Model-Lab/docs/briefs/337-definer.md`, both cards, the intake item, and `/home/user/Model-Lab/reviews/S-002/plan.md` lines 543 to 622.
+  - `/tmp/claude-0/-home-user/3bf22eb7-3034-5300-9273-72fad23a7eb4/scratchpad/before-338/change.diff`: every line, 1 to 186.
+  - The files as they stand: phrase searches of `/home/user/Model-Lab/specs/S-002.md` and `/home/user/Model-Lab/experiments/E-004.md` put each changed phrase at the lines cited above, matching the diff.
+  - `/home/user/Model-Lab/research/Q-018-memo-5.md`: lines 28, 72, 101, 111, 127 to 130, 137 to 144, 148 to 167, 180, 186, by search. `/home/user/Model-Lab/docs/gates/P-002/trial-terms.md`: rows P11 and P20.
+- **Undone:**
+  - The before-copies of the two files were not opened apart from the diff.
+  - Unchanged text was read only as the diff's context lines; E-004's "An entry and its pull requests" sub-bullets (:125 on) were not read.
+  - The quote of the touch-log ruling line rests on J9's own quotation and brief 336; `decisions/questions/P-002-touch-log-check.md` is outside my manifest.
+  - Rows 60 and 61 rest on memo 5; `reviews/Q-018-later-work/_critic-check-verbatim.md` is outside my manifest.
+- **Needed outside my surface:**
+  - The Orchestrator: dispatch the re-read of the "later work" codes under option A (finding 1) before 14 of 33 goes on the scenario card; re-quote the changed lines in research/Q-018.md (carried from brief 336, with finding 5).
+  - The Definer: the wording of S-002.md:268 (finding 1), and whichever of findings 2 to 6 are taken.
+  - The Chief of Staff: carry on the scenario card the fold limit, and findings 2, 3 and 6 if stated rather than fixed.
+- **Open questions:**
+  - Whether the owner wants the re-read of finding 1 done before the freeze or only before the scenario card. I rated it non-blocking because the plan's rule is right and no trial or hand check can be steered through it; if an unconfirmed figure in the plan counts as the plan being wrong, this is the one finding that would change the verdict.
+  - Whether a pull request that carries both a trial brief and other work should come to the owner rather than only be listed (left open by brief 336; still the owner's to see on the scenario card).
