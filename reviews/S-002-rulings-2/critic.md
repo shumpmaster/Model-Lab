@@ -1,0 +1,4 @@
+Verdict: FAIL
+Reviewed: specs/S-002.md as changed by brief 316 (commit e89aa2c), the two rulings of 2026-11-13 written in and brief 315's findings fixed, brief 317
+
+Full return verbatim in reviews/S-002-rulings-2/_critic-verbatim.md. Brief 315's three blocking findings are closed, both rulings match the cards, and the re-count can start on these rules. One blocking finding, for the freeze, not the re-count: in live trials the Chief of Staff, who knows each piece's side, codes `later_work` unchecked, and no list of what a trial cannot catch says so (a disclosure for the Definer; options for the owner). Non-blocking: the two decision records are not yet on this branch; J1's "reads no record's text" is wrong; POOM #20 goes from 0 to 4, not 2; whether a ledger entry can skip another; the starting ruling for brief-dispatched pieces; a record asking about both the piece and other work; the coder's pack is the records pack. D-050 flags (findings 7, 8, 9).
