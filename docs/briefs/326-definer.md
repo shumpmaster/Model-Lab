@@ -1,0 +1,17 @@
+# Brief 326 — definer — S-002 and E-004: brief 325's findings fixed (P-002, M9)
+
+session: session_01QBwHGLKYvyVZk199qdegcJ
+model: the Definer runs in a fresh session, apart from the Definers of briefs 321 and 324. Model names are kept out of this record by this session's standing instructions (LL-70).
+start: Model-Lab@fabeff79834c7dcfea50ca2b3b8248ab2fa2d028 (branch build/definer/p002-fix-6, in its own worktree /home/user/wt/ml-definer-326, made from the commit that adds this brief)
+manifest: the worktree; specs/S-002.md; experiments/E-004.md; docs/briefs/324-definer.md; decisions/questions/P-002-touch-log-check.md; reviews/S-002-rulings-5/_critic-verbatim.md (brief 325's findings)
+recorded: at hand-out, 2026-11-13
+
+## Brief
+In specs/S-002.md and experiments/E-004.md only, with brief 321's limits, all marked as this plan's design where they go past the card's option B:
+1. Brief 325 finding 1, closed by its fix: the desk's record of the owner's answer holds the list as shown; the Reviewer checks that list against the trial's log and the touch log before judging; a touch line on a piece the look is judged on counts only if it stands on a list the owner's answer confirms, any other being listed and sent back, as a line after the confirm line is.
+2. Finding 2: look 2's list holds all 120 pieces' entries, with the look-1 pieces' lines and strikes since look 1's confirm line, so no line counts at either look unless a confirmed list holds it. Use "the look's pieces" in one sense throughout.
+3. Finding 3 (a) and (b): a line in the same commit as the confirm line, above it, is before it; after a second confirmation the Reviewer checks the log against all the look's answers together.
+4. Finding 4: move "shown without the sides" out of the owner's choice into the design half at S-002 :10, :174, :233 and E-004 :153; add the after-confirm rule to the bracketed lists of what is this plan's (S-002 :197; E-004 :86).
+5. Finding 6: state in the plain words, Open question 20 and the limits lists the two cases where the owner's correction changes no count (a withdrawn piece that gets an added touch; a settled piece whose every touch is struck); the Reviewer gives the result both ways (the first counted as needing the owner; the second left out, worked as E-004 :130 works a place left empty), and a difference brings the trial to the owner. Fix the wording at S-002 :197 (the untimed added touch is the exception to "until the log and the answer agree"; say whether an out-of-window added touch is written).
+6. Finding 7: J9 says what the desk's record must hold at least (the trial and look; the list as shown; each strike by the struck line's identity; each added touch with its piece, type and the time or "while under way"; the confirmation), and that the owner records it, not a session acting for the owner; E-004 Step 0 makes the record a condition of starting a trial.
+Do not touch the hand check's rules, and do not freeze. Return a table (place, change, lines). Re-read each changed sentence against the record it states (LL-55). Run Python as `python3 -I -B` (LL-84). Commit as `definer <definer@agents.invalid>` with the trailers `Agent-Session: session_01QBwHGLKYvyVZk199qdegcJ/definer-326` and `Spec: S-002` in one paragraph; do not push or merge. Run `governance/checks/check_all.sh . <the commit that adds this brief>` and `python3 -I -B governance/checks/surface_guard.py diff --range <that commit>..build/definer/p002-fix-6 --branch build/definer/p002-fix-6`. Return the six-part contract.
