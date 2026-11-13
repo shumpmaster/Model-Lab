@@ -1,0 +1,11 @@
+# Brief 303 — researcher — Q-018 re-coded on the counting rules as brief 300 left them (P-002, M8)
+
+session: session_01QBwHGHoKws9VC78aWK8zpb
+model: the Researcher runs in a fresh session, apart from the plan's writer and its checker, and apart from the Researchers of briefs 286 and 298. Model names are kept out of this record by this session's standing instructions (LL-70).
+start: Model-Lab@a4062c0c088c30ae28fa3fc37bfe5c81a5036a3f (branch claude/sweet-hawking-kk0z5t)
+manifest: research/Q-018.md; research/Q-018-extract/ (README.md, sample.json, sample.jsonl, and the frame files if needed). Nothing else: not the spec, the reviews, the briefs, the earlier memos or the owner's records.
+recorded: at hand-out, 2026-11-12
+
+## Brief
+Answer research question Q-018 (research/Q-018.md) from the extract alone, as the question says, and return the memo. The question carries the counting rules verbatim, as corrected and checked, and what their pointers mean; no share is hoped for. Do not use the web. Write nothing; your return is recorded verbatim as research/Q-018-memo-3.md.
+The memo opens with one plain paragraph on what it found and what it could not decide, then lists every one of the 74 drawn items (sample.jsonl, by repository and number or commit hash, with how it was drawn) with its result under each rule, then the cases it could not decide and why, then the sampled awkward cases seen and not seen, and every record the rules say to list. Where a rule turns on an open question to the owner, give the result under the rules as they read today and name the question. For each piece's question touches, give the count as the rules read today and, beside it, the count without records that name it only by a spec id (`names_only_by_spec`) and without commits whose only owner-word lines are forms (2) or (3) (`only_form_2_or_3`), and say whether "at least one touch" changes. Give the share of pieces with at least one owner touch before merging, under the rules as they read today. Say where a field you need is absent or "not read". End with the six-part contract.

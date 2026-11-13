@@ -1,0 +1,16 @@
+# Brief 300 — definer — S-002: RT1(a)'s owner-words test and answer paths, after step 5 again (P-002, M8)
+
+session: session_01QBwHGHoKws9VC78aWK8zpb
+model: the Definer runs in a fresh session. Model names are kept out of this record by this session's standing instructions (LL-70).
+start: Model-Lab@3c505001654722a8609a873cff89b1141cd703c6 (branch build/definer/p002-rule-fixes-5, in its own worktree /home/user/wt/ml-definer-300, made from the commit that adds this brief)
+manifest: the worktree; reviews/Q-018-recode/_critic-verbatim.md (findings 1 to 3, 7 and 10); reviews/Q-018-extract-widened/_critic-verbatim.md (findings 2, 4, 5); specs/S-002.md; research/Q-018-memo-2.md; full clones with history at /tmp/claude-0/-home-user/b9b3c098-5ac2-5fab-85c9-5ae65240ab9c/scratchpad/hc/<repository> (read only); the records pack at /tmp/claude-0/-home-user/b9b3c098-5ac2-5fab-85c9-5ae65240ab9c/scratchpad/q018-pack2 (read only)
+recorded: at hand-out, 2026-11-12
+
+## Brief
+The hand check's step 5, run again on the re-coding, failed with two blocking findings, both in RT1(a) (reviews/Q-018-recode/). In specs/S-002.md only, with the same limits as brief 295 (no change to the draw, sample, seed, cut-off or any edge-case filter's text; no rule the findings do not touch):
+1. Finding 1 (blocking): widen the owner-words test so it reads the forms the records use: a line holding `Answer:`, `Ruling:` or `Decision:` anywhere in it, and a double-quoted passage under a line naming the owner's words, answer, note or ruling, as well as `>` quotes. Test it on Service-Desk's P-001-trial-view-notes-2 (d38d8364) appends in #78's window, and say how many it now counts, and check it does not count agent text in the other sampled records.
+2. Finding 2 (blocking): name each repository's owner-answer paths for RT1(a), as C1 names its check-record paths. For Personal-Org-Operating-Model, `reviews/<folder>/_owner-answer*.md`; check the clones for any other place that repository keeps owner answers. Say whether ledger lines that quote the owner count; if that is a choice for the owner, add it as an open question with options and a recommendation, changing no rule for it. Say how such a record names a piece (its spec folder, its own file, or text), and how each append is timed.
+3. Finding 3: an append counts only for owner-word lines that the same commit does not remove in another form.
+4. Finding 7(a): a piece whose only check record is unclassed is undecided and listed, as one of another kind.
+5. Brief 297's findings 2, 4 and 5: a deletion is not a change for "names the piece by being its own file"; the Verdict-line skip; the own-kind split in every reading.
+Return the same table as brief 295 (finding, fix, lines, cases to re-check, the extract field and rows the fix changes). Re-read each changed sentence against the record it states (LL-55). Do not freeze. Run Python as `python3 -I -B` (LL-84). Commit as `definer <definer@agents.invalid>` with the trailers `Agent-Session: session_01QBwHGHoKws9VC78aWK8zpb/definer-300` and `Spec: S-002` in one paragraph; do not push or merge. Run `governance/checks/check_all.sh . <the commit that adds this brief>` and `python3 -I -B governance/checks/surface_guard.py diff --range <that commit>..build/definer/p002-rule-fixes-5 --branch build/definer/p002-rule-fixes-5`. Return the six-part contract.
