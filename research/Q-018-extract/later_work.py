@@ -8,6 +8,10 @@
 # or `ledger_entries` entry it names by sample line, label and commit, and checks that every code is placed once.
 # It writes no text: per entry, `later_work` holds the code taken, the commit, the row of the two records and both
 # Critics' codes.
+# Since brief 340: rows 60 and 61 (Personal-Org-Operating-Model #49, de17627b at 568cd6e0 and 0e57b841), "not said"
+# when the second Critic did not confirm them, take "this piece" under the owner's ruling on a plan a piece's own work
+# wrote (decisions/questions/P-002-plan-written-by-piece.md), as the third record, _critic-reread-verbatim.md (brief
+# 339), confirms; it changes none of the other codes. Those two entries also hold `reread`, the re-read's code.
 import json, os, sys, subprocess, hashlib, importlib.util
 D = os.path.abspath(sys.argv[1]); HC = os.environ["HC"]
 REV = os.path.join(D, "..", "..", "reviews", "Q-018-later-work")
@@ -28,6 +32,13 @@ notconf = {int(c[0]): c for c in check}
 for n, c in notconf.items():
     k = coder[n - 1]
     assert (c[1], c[2], c[3]) == (k[4], k[5], k[6]) and c[4] in CODES and c[4] != c[3], n
+# The re-read (brief 339): no code of the table changes, and rows 60 and 61 read "this piece".
+REREAD = {60: "this piece", 61: "this piece"}
+_rr = open(os.path.join(REV, "_critic-reread-verbatim.md")).read()
+assert "Changed: 0 of 61" in _rr and "| (none) |" in _rr
+assert '**Rows 60 and 61 (Personal-Org-Operating-Model #49, label de17627b, commits 568cd6e0 and 0e57b841): confirmed "this piece".**' in _rr
+for n in REREAD:
+    assert n in notconf and coder[n - 1][4] == "de17627b" and coder[n - 1][6] == "later work" and notconf[n][4] == "this piece", n
 KIND = {"first add": "first add", "append": "append", "append (listed as not an append)": "append, listed as not an append",
         "append (before the record names the piece)": "append, before the record names the piece", "ledger": "ledger entry, first add"}
 def git(r, *a): return subprocess.run(["git", "-C", os.path.join(HC, r), *a], capture_output=True, text=True).stdout
@@ -73,10 +84,11 @@ for s, c in zip(seq, coder):
     assert (f"L{i:02d}", f"{r} #{key}", label) == (c[1], c[2], c[4]) and h.startswith(c[5]) and KIND[c[3]] == what, (n, s[:6], c[:6])
     second = notconf[n][4] if n in notconf else "confirmed"
     ent["later_work"] = {"code": "not said" if n in notconf else c[6], "commit": h, "row": n, "first_critic": c[6], "second_critic": second}
+    if n in REREAD: ent["later_work"].update(code=REREAD[n], reread=REREAD[n])
     placed += 1
 assert len({(s[0], s[4], s[5]) for s in seq}) == len(seq), "a code is placed twice"
 with open(os.path.join(D, "sample.jsonl"), "w") as fh:
     for x in S: fh.write(json.dumps(x, sort_keys=True) + "\n")
 left = sum(1 for x in S for q in x.get("questions_decisions_named") or [] for w in q.get("window_commits") or [] if "later_work" not in w) + \
        sum(1 for x in S for e in x.get("ledger_entries") or [] if "later_work" not in e)
-print(placed, "codes placed;", len(notconf), "not confirmed, taken as not said;", left, "listed entries without a code")
+print(placed, "codes placed;", len(notconf), "not confirmed, of which", len(REREAD), "read \"this piece\" on the re-read and", len(set(notconf) - set(REREAD)), "taken as not said;", left, "listed entries without a code")
