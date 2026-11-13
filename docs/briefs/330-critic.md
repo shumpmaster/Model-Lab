@@ -1,0 +1,11 @@
+# Brief 330 — critic — a second, fresh check of every `later_work` code (P-002, M8; S-002 step 3, *Later work*)
+
+session: session_01QBwHGLKYvyVZk199qdegcJ
+model: the Critic runs in a fresh session, on a different model from brief 328's coder and from S-002's writer (D-056), apart from every earlier Critic and Definer of S-002. Model names are kept out of this record by this session's standing instructions (LL-70).
+start: Model-Lab@fc7d3c9e92cb4bf9f6097b56aaee869e7215881b (local branch orch/p002-fix-4)
+manifest, and nothing else: specs/S-002.md, its "What a touch is" paragraph, RT4, RT7 and step 3 (*Later work*); decisions/questions/P-002-later-work-questions.md and P-002-later-work-coder.md; the records pack at /tmp/claude-0/-home-user/3bf22eb7-3034-5300-9273-72fad23a7eb4/scratchpad/q018-pack-323 (INDEX.md, CODING.md, the L<nn> files, records/ and records2/); the codes to check, reviews/Q-018-later-work/_critic-coder-verbatim.md. Not the full clones, not docs/briefs/** (other than this brief), docs/reports/** or docs/handoff/**, not research/Q-018-memo*.md and no other file in reviews/**.
+recorded: at hand-out, 2026-11-13
+
+## Brief
+You are the second Critic. Read only; write nothing. For each of the 131 codes, read the record in the pack for that commit yourself and say whether you confirm the code. Read every added line of each commit, not a sample (the coder read some redrafts in part: rows 15 to 19, 126 to 128 and 130 to 131; and two ledger `asked:` lines, rows 86 and 87, unread). Answer the coder's three open questions against S-002's words and the owner's rulings: (1) an append is coded from the lines its commit adds; (2) a line that only relays an earlier decision on the piece's spec, or names it as the next step, is not a part that asks about the piece (rows 70, 71, 74, 92, 97); (3) a notes file is coded from its own words (row 35). Where your answer to one of them differs, say which rows it moves.
+Return, first, exactly one line `Confirmed: <n> of 131`, then a table with one row for every code you do not confirm (row, label, commit, the coder's code, your code, a reason of at most 20 words quoting no more than 6 of the record's words), then your answers to the three questions, then the six-part contract. Give no count of touches or pieces.
