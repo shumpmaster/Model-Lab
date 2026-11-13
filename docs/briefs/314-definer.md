@@ -1,0 +1,15 @@
+# Brief 314 — definer — S-002 revised to the owner's seven rulings on open questions 10 to 16 (P-002, M8)
+
+session: session_01QBwHGLHPCVt3NpHNqhuahM
+model: the Definer runs in a fresh session. Model names are kept out of this record by this session's standing instructions (LL-70).
+start: Model-Lab@237427188d2c15fbac98d32a49e9d270921db7c3 (branch build/definer/p002-rulings, in its own worktree /home/user/wt/ml-definer-314, made from the commit that adds this brief)
+manifest: the worktree; decisions/questions/P-002-milestone-only-order.md, P-002-later-work-questions.md, P-002-check-of-other-kind.md, P-002-readiness-rulings.md, P-002-milestone-only-questions.md, P-002-ledger-answers.md, P-002-unasked-notes.md (each ruling and the owner's words); specs/S-002.md; research/Q-018-memo-4.md; research/Q-018-extract/ (README.md, sample.jsonl); reviews/Q-018-recode-4/_critic-verbatim.md; full clones with history at /tmp/claude-0/-home-user/48846bdd-45a4-59bb-b690-7e716cd073d8/scratchpad/hc/<repository> (read only)
+recorded: at hand-out, 2026-11-13
+
+## Brief
+The owner ruled on S-002's open questions 10 to 16 (the seven decision records above, each the recommended option). In specs/S-002.md only:
+1. Write each ruling into the rule it settles, in the ruled option's words, citing its decision record, and close the open question (keep its number and a one-line pointer to the ruling, so later references still resolve). Rulings 12, 13 and 14 keep the rules as they read today; say so and change nothing else for them. Ruling 10 fixes E-RT4's order as the draw's hash order.
+2. Rulings 11, 15 and 16 change what is counted. For each: the rule text; whether the extract carries the fields it needs or must be widened (name the field, codable with no text written; ruling 11's judgement "where the record does not say, it is listed for you rather than guessed"); and which sampled pieces' results you expect to change (for 15, Personal-Org-Operating-Model #20 and #22 and the pieces whose ledger entries repeat an answer file; for 11, Service-Desk #230 and the other own-file-only cases memo 4 lists; for 16, Service-Desk #78). Do not change the draw, sample, seed, cut-off or any edge-case filter's text.
+3. Step 6's list: keep (b) and any item a ruling settles, marked as settled by that ruling.
+4. Say what the hand check needs next for these rulings (re-extract, re-code, Critic step 5 on the changed items only) in step 3's or step 5's words, without doing it.
+Return a table (ruling, rule and lines, fields needed, sampled results expected to change). Re-read each changed sentence against the record it states (LL-55). Do not freeze. Run Python as `python3 -I -B` (LL-84). Commit as `definer <definer@agents.invalid>` with the trailers `Agent-Session: session_01QBwHGLHPCVt3NpHNqhuahM/definer-314` and `Spec: S-002` in one paragraph; do not push or merge. Run `governance/checks/check_all.sh . <the commit that adds this brief>` and `python3 -I -B governance/checks/surface_guard.py diff --range <that commit>..build/definer/p002-rulings --branch build/definer/p002-rulings`. Return the six-part contract.
