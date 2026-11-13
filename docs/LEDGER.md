@@ -120,3 +120,17 @@ licenses_next: The screening files its project request with its own plan, docs/p
 decided_by: owner (ruled on 2026-11-08 in session_01QBwHGNSLmSrYQgS6BPjV8p; merges this pull request)
 proposed_by: chief-of-staff
 reversibility: reversible
+
+## L-0009 — The holdouts check judges a merge by its first parent
+date: 2026-11-09
+type: ruling
+supersedes: []
+scope: P-001
+expires: never
+asked: The first weekly landing of the built-work work session read to `v3_checks holdouts` as a change to governance/HOLDOUTS.md, though the file is unchanged on main, because the work session's branch starts before pull request #69 and `--full-history` lists a merge that differs from any parent; it would recur every week.
+decision: The owner chose to fix the check (decisions/questions/P-001-holdouts-check-merges.md): `check_holdouts` follows the first-parent line, each commit against its first parent, and still compares the file at the base and at HEAD.
+licenses_next: The weekly landings of the built-work work session, under brief 124.
+options_considered: fix the check; let the work session bring main into its branch once (one failing landing).
+decided_by: owner
+proposed_by: claude-opus-5-5 (the Chief of Staff)
+reversibility: reversible

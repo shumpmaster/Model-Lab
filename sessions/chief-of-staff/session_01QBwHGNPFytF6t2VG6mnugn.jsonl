@@ -12,3 +12,4 @@
 {"event": "helper", "session": "session_01QBwHGNPFytF6t2VG6mnugn", "role": "critic", "started": "2026-11-07T23:30:00Z", "ended": "2026-11-07T23:34:00Z", "reported": {"tokens": 143330, "tool_uses": 37, "duration_ms": 238515}}
 {"event": "helper", "session": "session_01QBwHGNPFytF6t2VG6mnugn", "role": "critic", "started": "2026-11-08T00:05:00Z", "ended": "2026-11-08T00:05:45Z", "reported": {"tokens": 157689, "tool_uses": 5, "duration_ms": 42203}}
 {"event": "helper", "session": "session_01QBwHGNPFytF6t2VG6mnugn", "role": "critic", "started": "2026-11-08T00:10:00Z", "ended": "2026-11-08T00:11:30Z", "reported": {"tokens": 163873, "tool_uses": 8, "duration_ms": 87515}}
+{"event": "helper", "session": "session_01QBwHGNPFytF6t2VG6mnugn", "role": "reviewer", "started": "2026-11-09T21:05:00Z", "ended": "2026-11-09T21:13:00Z", "reported": {"tokens": 112007, "tool_uses": 32, "duration_ms": 474830}}
