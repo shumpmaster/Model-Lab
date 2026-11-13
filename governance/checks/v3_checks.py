@@ -67,9 +67,10 @@ specs/*.md file as spec_check reads it; "frozen" is its status word.
             holds reviews/<spec id>/plan.md whose verdict, read as review_check
             reads verdicts, is PASS. Its facts are checked by `spec_check facts`,
             which a v3 project enforces at every tier.
-  holdouts  (AC8, D-054) when governance/HOLDOUTS.md changes in REF..HEAD (any
-            commit touches it, or it differs between REF and HEAD), a ledger
-            entry added in REF..HEAD has the field `holdouts: changed`.
+  holdouts  (AC8, D-054) when governance/HOLDOUTS.md changes in REF..HEAD (a
+            commit on the first-parent line changes it against its first
+            parent, or it differs between REF and HEAD), a ledger entry added
+            in REF..HEAD has the field `holdouts: changed`.
 
 model S-023 adds the project's milestones (Part 1 section 3, one per line:
 `<name> (M<id>) · done when <what is achieved> · phase: <phase>`, optionally
@@ -1896,7 +1897,9 @@ def check_freeze(root, base, milestones=False):
 def check_holdouts(root, base):
     g.verify_commit(root, base)
     g.verify_commit(root, "HEAD", "HEAD")
-    touched = g.rev_list(root, ["--full-history", "%s..HEAD" % base, "--", "./" + HOLDOUTS_REL])
+    # The first-parent line, each commit against its first parent: a merge counts only if it changes the file on
+    # the line it lands on, so a branch started before a holdouts change does not read as changing it (P-001).
+    touched = g.rev_list(root, ["--first-parent", "%s..HEAD" % base, "--", "./" + HOLDOUTS_REL])
     changed = bool(touched) or g.git_blob(root, base, HOLDOUTS_REL) != g.git_blob(root, "HEAD", HOLDOUTS_REL)
     if not changed:
         return [], ["NOTE: %s unchanged in %s..HEAD" % (HOLDOUTS_REL, base)]

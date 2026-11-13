@@ -1,5 +1,5 @@
 # DIGEST — generated from docs/LEDGER.md; do not edit by hand
-As of 2026-11-08: 3 active rulings and 0 kills, from 8 ledger entries.
+As of 2026-11-09: 4 active rulings and 0 kills, from 9 ledger entries.
 
 ## Active rulings
 
@@ -7,6 +7,7 @@ As of 2026-11-08: 3 active rulings and 0 kills, from 8 ledger entries.
 | ID | Decision | Since | Expires |
 | --- | --- | --- | --- |
 | L-0006 | Proceed at size A: the plan's criteria are approved, and the fair test (specs/S-001.md, experiments/E-003.md) runs at 60 pieces of each kind, built work first, … | 2026-11-04 | never |
+| L-0009 | The owner chose to fix the check (decisions/questions/P-001-holdouts-check-merges.md): `check_holdouts` follows the first-parent line, each commit against its first parent, and still compares the file at … | 2026-11-09 | never |
 
 ### project
 | ID | Decision | Since | Expires |
