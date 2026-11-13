@@ -1,0 +1,11 @@
+# Brief 328 — critic — the `later_work` codes for the re-count (P-002, M8; S-002 step 3, *Later work*, hand check item (2))
+
+session: session_01QBwHGLKYvyVZk199qdegcJ
+model: the Critic runs in a fresh session, on a different model from S-002's writer (D-056), apart from every earlier Critic and Definer of S-002 and from the helper of brief 323. Model names are kept out of this record by this session's standing instructions (LL-70).
+start: Model-Lab@37892ff588f5ad52b130d92b21b5539c2d5e8c5e (local branch orch/p002-fix-4)
+manifest, and nothing else: specs/S-002.md, its "What a touch is" paragraph, RT4, RT7 and step 3 (*Later work*); decisions/questions/P-002-later-work-questions.md and P-002-later-work-coder.md (the owner's rulings); the records pack at /tmp/claude-0/-home-user/3bf22eb7-3034-5300-9273-72fad23a7eb4/scratchpad/q018-pack-323 (INDEX.md, CODING.md, the L<nn> files, records/ and records2/). Not the full clones, not docs/briefs/**, docs/reports/** or docs/handoff/**, not research/Q-018-memo*.md and not reviews/** (they hold expected results).
+recorded: at hand-out, 2026-11-13
+
+## Brief
+You are the Critic, coding `later_work`. Read only; write nothing. For each of the 131 lines of CODING.md (a record's first add or append, or a ledger entry's first add, listed for a sampled piece), read the record as the pack gives it for that commit and code what it asks for, as S-002 step 3's *Later work* defines it: "this piece" (it asks about the piece under way, in any of its parts, a spec or brief whose work the piece carries included, as the pack's brief numbers and spec ids give them), "later work" (a change to be made after the piece lands, or other work than the piece) or "not said" (the record does not say). Code the lines CODING.md marks as not an append, or as before the record names the piece, too, and say they are so marked. Code from the record's words only; do not guess which pieces need the owner, and give no count.
+Return, first, exactly one line `Coded: 131` (or the number you coded, with why any is missing), then a table with one row per CODING.md line in its order: sample line, piece, kind (first add, append, ledger), label, commit (8 hex digits), code, and a reason of at most 15 words that quotes no more than 6 of the record's words. Then the lines you found hardest, and the six-part contract.
