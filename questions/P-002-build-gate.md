@@ -18,14 +18,14 @@ RECOMMENDATION: A, medium confidence. The plan passed its review, and the gate C
 
 ## Part 2: the plan's open questions 2 to 9
 For each question, the plan's current answer comes first.
-- **2.** An instruction you give unasked, on a piece already under way, counts as stepping in, under a code of its own. The other choice: it does not count.
-- **3.** Rulings the operating model requires of you (gates, value targets) are left out of the count, since no method can remove them. The other choice: count them, after a new revision says which pieces each one lands on.
+- **2.** An instruction you give unasked, in conversation, on a piece already under way, counts as stepping in, under a code of its own. Your earlier ruling puts your unasked notes written into a decision record under the same code, so your answer here reaches them too. The other choice: it does not count.
+- **3.** Rulings the operating model requires of you (gates, value targets) are left out of the count, the hand check and every trial, since no method can remove them and no record says which pieces a ruling lands on. The other choice: count them; then a new revision must say which pieces each one lands on before any is counted.
 - **4.** After 26 weeks without enough work of one kind for its first look, that kind comes back to you. The other choice: another figure.
 - **5.** The four chosen feeds are read every 14 days. The other choice: other feeds, or another rhythm.
 - **6.** The Reviewer may read outside code in the empty place. This is an exception to the model's rule that only the Input reader reads untrusted text. The other choice: only methods that need no outside code are tried.
 - **7.** A trial's pieces may also be in the prompt engine's paired test, with only a method that cannot change how often work passes its first check (your rule P12). The other choice: keep them out of that test altogether.
-- **8.** At most 3 withdrawals a look, with dropped entries counted in the same limit. A piece still unmerged at 60 days is settled by rule. A withdrawal check starts within 7 days. The other choice: other figures.
-- **9.** A piece handed out twice, or two merged as one, is counted once, and the dropped place is refilled on the same side. A look waits at most 60 days for a spare place. The other choice: the look waits however long the kind's pace takes, or another rule.
+- **8.** At most 3 withdrawals a look, shared with question 9's dropped entries; a fourth of either stops the trial and brings it to you. A piece still unmerged 60 days after it was handed out is settled by rule. A withdrawal check starts within 7 days of a piece meeting the conditions. The other choice: other figures.
+- **9.** A piece handed out twice, or two merged as one, is counted once, and the dropped place is refilled on the same side, within the shared limit of three. A look waits at most 60 days for a spare place; a place left empty is judged filled in every way, and decides only if every way agrees, or the trial stops and comes to you. Whoever hands out the work could do this on purpose to move later pieces' sides; the refill and the limit cap that, but do not catch it. The other choice: the look waits however long the kind's pace takes, or another rule.
   A. **keep all eight as the plan has them.**
   B. **keep all but those you name**, with your answer for each.
 RECOMMENDATION: A, low confidence. Each is the plan's choice and passed its review. Questions 3 and 6 are judgements about what counts and what risk you accept, so they are most your own. *Reversible:* yes, until the plan freezes; after that, only through a new plan.
@@ -35,7 +35,7 @@ RECOMMENDATION: A, low confidence. Each is the plan's choice and passed its revi
   A. **is listed by the Reviewer, as a limit the plan states.** *Gain:* no extra card for you. *Cost:* any touches on the other work, given after the trial piece's entry, still count on the trial piece.
   B. **comes to you**, for you to rule how it counts. *Gain:* you see each one. *Cost:* more of your time, and another way the plan can be held up.
 RECOMMENDATION: A, low confidence. The checks catch what they can, and the result is reported both ways.
-3b. A fold into work whose commits name no brief, all made after the entry, is not listed. Should that limit be:
+3b. A fold into work whose commits name no brief, begun after the entry, is not listed (a fold begun before it is). Should that limit be:
   A. **named on the entry and results cards in its own words**, as the trial's own registration says it is. *Gain:* you see it when you rule. *Cost:* one more line on each card.
   B. **left only in the plan.**
 RECOMMENDATION: A, medium confidence. The trial registration already says this limit is on both cards, but the cards' lists leave it out. If you choose A, the Definer adds it before the freeze. *Reversible:* yes, until the plan freezes.
@@ -51,7 +51,7 @@ RISK CLASS: R0 (questions/**; a phase gate, which only you rule)   REVERSIBILITY
 DEFAULT: none (irreversible; a phase gate is never ruled by default or by proxy)   TIMEOUT: none
 
 ## Context
-- The case for going on, and the gate Critic's independent view of it (source: docs/gates/P-002/build-gate-3-case.md; reviews/P-002/_build-gate-3-critic.md)
+- The case for going on, and the gate Critic's independent view of it, recommending proceed with wording corrections (source: docs/gates/P-002/build-gate-3-case.md; reviews/P-002/_build-gate-3-critic.md)
 - The plan passed its review, with four failed rounds and two plan stops on the way (source: reviews/S-002/plan.md, its opening paragraph; decisions/questions/P-002-plan-stop.md; decisions/questions/P-002-plan-stop-2.md)
 - The hand check found three counting rules wrong in four places, and the rewritten rules passed their recheck (source: reviews/Q-018/critic.md; reviews/Q-018-rules/critic.md)
 - The owner's ruling of 2026-11-14 is written into the plan, and its check and the check of its wording points passed (source: reviews/S-002/plan.md, the checks of briefs 349 and 352)
