@@ -814,3 +814,51 @@ No self-implication (D-050): this is a fresh session, and I made none of the ear
 - /home/user/Model-Lab/experiments/E-004.md (searches only)
 
 *Orchestrator's note: the card at f71cbca was confirmed this session (`git show f71cbca --stat`: it adds questions/P-002-check-named-by-statement.md, the card as put).*
+
+## Check of the lines changed by brief 351, brief 349's two wording points (brief 352, Check 1)
+
+*A fresh session, at Model-Lab f206b5c, on the change 4ea1325 (merged at e80acc9). Recorded verbatim by the Orchestrator, session session_01QBwHGJ2r2y9re3AuyKDzEi, 2026-11-14. The same return also held Check 2, recorded in reviews/P-002-standard-lines/critic.md; the one six-part contract is copied in both records.*
+
+**Check 1: plan review (D-043) of the lines brief 351 changed in specs/S-002.md (:46, :109, :197)**
+
+Verdict: PASS
+
+Brief 351 fixes both of brief 349's findings and makes no other change. At all three places, the clause "a piece's work is what its own commits add or change" is now limited to the question the owner ruled, which plan a question asks about. It also keeps the reading by trailers: "with the briefs and specs its trailers give". The sentence after it at :46 now says the rule "does not widen nor narrow which records name it". At :109, the "So" before #49's rows 60 and 61 now reads "Under that first ruling,". That points back to the plan-written-by-piece ruling, which is the true reason, and not to the own-files ruling or to #25. The owner's words are unchanged in every place: "A: own files only (Recommended)", "A: yes, it's #49's (Recommended)", and the card's option A. So are the date 2026-11-14, the decision records, the cards at f71cbca and d231a51, the intake copies, and the figure of 14 of 33 (research/Q-018-memo-5.md:137). No rule changes its meaning. The trailer reading already stood in step 3, so the added words only restate it, and the plan-written-by-piece rule ("whatever its `Spec:` trailers give") is untouched. No route opens to steer a trial: the count reads no code on a trial piece (J1; decisions/questions/P-002-live-later-work-check.md), and the hand check's codes are already fixed. Open question 23 (:271) still states the clause in its general form. It should get the same limit when the text is next opened, but leaving it is not blocking. I have two non-blocking findings.
+
+1. **Non-blocking. specs/S-002.md:271 (open question 23).** It still says "written into … J9: a piece's work is what its own commits add or change, so a review record …". It does need the same limit. It now describes the written rule more widely than the rule at :46, :109 and :197 reads. It is not false: it matches the decision record's `Ruling:` line (decisions/questions/P-002-check-named-by-statement.md:1). It also sits outside the lines step 4 quotes to the Researcher (from "How rules and terms are named" at :18 to the E-RR rows at :105 to :107). It governs no coding, because the rule text at :46, :109 and :197 does. Brief 351 forbade the Definer to change open questions' text, so leaving it was right for that brief. **Fix:** at the next pass, or by a superseding entry if S-002 is frozen first, read "… J9: for which plan a question asks about, a piece's work is what its own commits add or change, with the briefs and specs its trailers give, so a review record …".
+2. **Non-blocking, wording. specs/S-002.md:46.** "does not widen nor narrow which records name it" is awkward English, although it is the wording brief 351 asked for. **Fix (optional):** "neither widens nor narrows which records name it". The meaning does not change.
+
+Self-implication (D-050): flagged. The new words at :46, :109 and :197 are the Critic role's own suggested fix from brief 349's findings 1 and 2, nearly word for word. So the Critic role is judging its own earlier suggestion. This session is fresh and made none of the earlier checks. I judged the wording against the decision record and the rest of S-002, not against that suggestion.
+
+**Six-part contract** (one for both checks)
+- **Changed (by file):** nothing. I hold no write tool.
+- **Why:** brief 352 asks, before the Build gate's ruling, for two things. First, a plan review of brief 351's change to S-002 (D-043). Second, the standard-line check of the reworded Launch-3 and Launch-5 (critic charter, last duty; P-002 section 3).
+- **Verified:** by reading and searching only, with no shell.
+  - I read both diffs in full and compared each changed line before and after.
+  - At :46 the only changes are "for which plan a question asks about, … with the briefs and specs its trailers give" and "nor narrow".
+  - At :109 the only changes are "For which plan a question asks about, … with the briefs and specs its trailers give" and "So" replaced by "Under that first ruling,".
+  - At :197 the only changes are "for which plan a question asks about, … with the briefs and specs its trailers give".
+  - The owner's words, the date, f71cbca, d231a51, the intake paths and "14 of 33" are unchanged in each version.
+  - I searched S-002 for "work the piece carries", "piece's work" and "whose work it carries". The trailer readings at :46 and :109 now agree with the limited clause. The general form is left only at :271, and at :270, where it describes the re-read.
+  - The quoted range in step 4 runs from :18 to :105–107, so :46 is quoted to the Researcher and :271 is not.
+  - Decision records: P-002-check-named-by-statement.md:1, :9 and :12; P-001-work-repo.md:1 and :13.
+- **Undone:**
+  - I could not run a word-level diff without a shell. My comparison of the long lines is by reading, helped by searches.
+  - I did not read research/Q-018-memo-5.md or reviews/Q-018-later-work/_critic-reread-verbatim.md, which are not in my manifest. So I did not confirm that #25's `Spec:` trailers do not give S-023. My judgement that "with the briefs and specs its trailers give" changes no code rests on that reading already standing in step 3 when the codes were made and checked.
+  - I did not re-check Launch-5's unchanged facts about the lessons.
+- **Needed outside my surface:** the Orchestrator records Check 1 verbatim in reviews/S-002/plan.md, and Check 2 under brief 347's record in reviews/P-002-standard-lines/critic.md. The Chief of Staff may commit the two Launch lines as checked. The Definer, if dispatched, may take up Check 1's findings 1 and 2. Neither is needed before the freeze or the gate.
+- **Open questions:** whether S-002 is frozen before the next pass. If it is, Check 1's finding 1 needs a superseding entry rather than an edit (AGENTS.md §1). That is for the Orchestrator.
+
+**Files read**
+- /home/user/Model-Lab/AGENTS.md
+- /home/user/Model-Lab/.claude/agents/critic.md
+- /home/user/Model-Lab/docs/briefs/352-critic.md
+- /tmp/claude-0/-home-user/93707dce-1a9e-58fe-b386-0565a8518ddc/scratchpad/before-352/s002-change.diff
+- /tmp/claude-0/-home-user/93707dce-1a9e-58fe-b386-0565a8518ddc/scratchpad/before-352/launch-lines.diff
+- /home/user/Model-Lab/docs/briefs/351-definer.md
+- /home/user/Model-Lab/decisions/questions/P-002-check-named-by-statement.md
+- /home/user/Model-Lab/reviews/S-002/plan.md (headings, then from :765 "## Check of the lines changed by brief 348" to the end)
+- /home/user/Model-Lab/specs/S-002.md (:244 to :275, plus searches of the whole file)
+- /home/user/Model-Lab/docs/projects/P-002.md (by search: lines 19, 96, 141 to 147, 254, 274)
+- /home/user/Model-Lab/reviews/P-002-standard-lines/critic.md
+- /home/user/Model-Lab/decisions/questions/P-001-work-repo.md
