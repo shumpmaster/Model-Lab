@@ -2,12 +2,12 @@
 
 ## 1. The ask
 
-Case 1 was held by the gate Critic; this case answers its findings [reviews/P-002/_build-gate-1-critic.md].
-In Design, four counting rules proved wrong on past work and were corrected; the plan failed three review rounds and two stops before passing [reviews/Q-018/critic.md] [reviews/S-002/plan.md:1].
-Approve the plan's 21 criteria as its scenarios give them, with the plan's own additions, and Build's and Launch's lines; answer its open questions; the plan then freezes, as the prompt engine's did [docs/gates/P-002/build-gate-2-proposal.md] [decisions/questions/P-001-build-gate.md].
-After the freeze, a change needs a superseding plan; the target is reversible until the first trial starts [docs/gates/P-002/trial-terms.md:65].
+Case 1 was held; this answers it [reviews/P-002/_build-gate-1-critic.md].
+Four counting rules proved wrong and were corrected; the plan failed three rounds before passing [reviews/Q-018/critic.md] [reviews/S-002/plan.md:1].
+Approve the 21 criteria as the scenarios give them, with the plan's additions and the standard lines, and answer the open questions; the plan then freezes [docs/gates/P-002/build-gate-2-proposal.md] [decisions/questions/P-001-build-gate.md].
+After it, changes need a new plan; the target is reversible until the first trial [docs/gates/P-002/trial-terms.md:65].
 
-**The proposer's recommendation:** proceed — the plan passed review and the hand check ran, once today's ruling is written in and checked [reviews/S-002/plan.md:1] [research/Q-018-memo-5.md:137] [decisions/questions/P-002-check-named-by-statement.md].
+**The proposer's recommendation:** proceed — the plan passed review; today's ruling is written in and checked first [reviews/S-002/plan.md:1] [research/Q-018-memo-5.md:137] [decisions/questions/P-002-check-named-by-statement.md].
 
 ```mermaid
 flowchart LR
@@ -19,7 +19,6 @@ Where the screening stands [decisions/questions/P-002-design-gate.md] [reviews/S
 ## 2. The vision
 
 Halve the share of pieces needing you, the work holding up, checked 12 months after the first trial [docs/projects/P-002.md:192].
-You approve each method before its trial and rule on it after [docs/projects/P-002.md:138].
 
 ```mermaid
 flowchart LR
@@ -38,7 +37,7 @@ Your way of working today, against the change [docs/gates/P-002/design-gate-2-ca
 ## 3. What this phase taught us
 
 The hand check: 14 of 33 past pieces needed you, 16 of 33 without the later-work codes; several rules could not be tested [research/Q-018-memo-5.md:137] [research/Q-018-memo-5.md:140] [research/Q-018-memo-5.md:193].
-The log's keeper knows each piece's side, so you confirm each look's lines [decisions/questions/P-002-touch-log-check.md].
+The log's keeper knows the sides, so you confirm each look [decisions/questions/P-002-touch-log-check.md].
 The join-up review found no blocking difference; the smaller ones were fixed [reviews/S-002/plan.md:311] [reviews/S-002/plan.md:347] [reviews/S-002/plan.md:351].
 
 ## 4. The plan for the next phase
@@ -58,17 +57,17 @@ How Build's work depends on each other [docs/projects/P-002.md:104] [docs/projec
 
 ## 5. The risks
 
-Too little work of one kind: trials take months; past 26 weeks, it comes back to you [docs/projects/P-002.md:233] [docs/gates/P-002/build-gate-2-proposal.md].
+Work of one kind may arrive slowly; past 26 weeks, it comes back to you [docs/projects/P-002.md:233] [docs/gates/P-002/build-gate-2-proposal.md].
 A true halving shows about 5 times in 10, less once work must hold up [docs/projects/P-002.md:196].
-Sides are known ahead: work can be picked, held or folded; checks catch some, the rest is listed on the cards [reviews/S-002/plan.md:599] [reviews/S-002/plan.md:668].
+Known sides let work be picked, held or folded; checks catch some [reviews/S-002/plan.md:599] [reviews/S-002/plan.md:668].
 No trial on a kind the prompt engine is testing [docs/projects/P-002.md:198].
-No trial until the desk keeps your confirmation, filed there for your approval [docs/projects/P-002.md:166].
+No trial until the desk keeps your confirmation [docs/projects/P-002.md:166].
 
 ## 6. Cost and limits
 
 Your existing AI plan; no cap on your time [docs/projects/P-002.md:175] [docs/projects/P-002.md:176].
 Each trial: two cards, then five short reads and a confirmation a look [docs/projects/P-002.md:197] [decisions/questions/P-002-touch-log-check.md].
-Your hours: not recorded; usage so far: not recorded [docs/projects/P-002.md:197].
+Hours and usage so far: not recorded [docs/projects/P-002.md:197].
 
 ```mermaid
 flowchart LR
@@ -90,7 +89,7 @@ Look 1 failing the hold-up checks stops its trial [docs/gates/P-002/build-gate-2
 The 21 criteria, frozen after this ruling, with the plan's additions and limits [docs/gates/P-002/build-gate-2-proposal.md] [reviews/S-002/plan.md:574] [reviews/S-002/plan.md:575].
 The target as ruled, tier T1, your existing AI plan as ceiling [docs/projects/P-002.md:192] [docs/projects/P-002.md:185] [docs/projects/P-002.md:175].
 The trial line you ruled, 0.097 [decisions/questions/P-002-two-look-line.md].
-Your answers to the open questions still yours, on the gate card [reviews/P-002/_build-gate-1-critic.md].
+Your answers to the open questions left, on the gate card [reviews/P-002/_build-gate-1-critic.md].
 Build's and Launch's lines, all taken on [docs/projects/P-002.md:131] [reviews/P-002-standard-lines/critic.md].
 You are the user: no user representative step [docs/projects/P-002.md:260].
 
@@ -123,7 +122,7 @@ Limits stated in the plan: the Orchestrator, knowing the sides, picks when withi
 
 The freeze follows the ruling, as at the prompt engine's gate; the plan review's notes put it first, and this case follows the ruled precedent [decisions/questions/P-001-build-gate.md] [reviews/S-002/plan.md:536].
 
-The proposal's label is the form's fixed line; no user representative read it [docs/gates/_PROPOSAL.md] [docs/projects/P-002.md:260].
+The proposal's label is the form's fixed line; no user representative read it [docs/projects/P-002.md:260].
 
 Rulings in Design: the hand check's open points, the plan stops, every trial question counted, your confirmation of each look, and a piece's work read from its own files [decisions/questions/P-002-later-work-coder.md] [decisions/questions/P-002-plan-stop.md] [decisions/questions/P-002-plan-stop-2.md] [decisions/questions/P-002-live-later-work-check.md] [decisions/questions/P-002-touch-log-check.md] [decisions/questions/P-002-check-named-by-statement.md].
 
