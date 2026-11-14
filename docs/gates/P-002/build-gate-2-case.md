@@ -44,7 +44,7 @@ The join-up review found no blocking difference; the smaller ones were fixed [re
 
 Build: locked checks, then the count, the reading rhythm, methods ruled, kept methods in the model [docs/projects/P-002.md:131] [docs/projects/P-002.md:136] [docs/projects/P-002.md:139].
 The Builder builds and runs; the Reviewer judges each look [docs/projects/P-002.md:158] [docs/projects/P-002.md:163].
-No dates are recorded [docs/projects/P-002.md:104].
+No dates recorded [docs/projects/P-002.md:104].
 
 ```mermaid
 flowchart LR
