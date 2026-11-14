@@ -51,3 +51,49 @@ The note at :96 matches section 3's rule (:94) that Build's and Launch's lines a
 - /home/user/Model-Lab/docs/handoff/2026-11-12-chief-of-staff-p002-14.md
 - /home/user/Model-Lab/governance/checks/v3_checks.py (lines 540 to 574)
 - /home/user/Model-Lab/.claude/agents/critic.md (my charter, as given to this session)
+
+---
+
+# The Critic on the five reworded lines, verbatim
+
+*Brief 347 (docs/briefs/347-critic.md), at Model-Lab 2497728; a fresh session. Recorded verbatim by the Orchestrator, 2026-11-14. Note on the order (the Critic's open question): the five rewordings were committed on the session's branch (60af4b0) before this check, not on the default branch; section 3 asks for the check before a reworded line is committed, so that order was not kept, and this record says so.*
+
+Verdict: PASS
+
+I checked the five standard lines the Chief of Staff reworded after the last check. All five now fix what that check found. Build-4 no longer holds the Build gate until every trial the screening ever runs is finished. It now covers only the first trials. Launch-4 says "may fall after", as the record does, and "by the Launch gate". Launch-3 says the repository is archived only once the prompt engine's results are in too. Launch-5 now gives the reason the screening must leave the desk and run on its own. Build-5 says the desk takes part only once it is ready to keep your confirmation. Each why is still plain, about this project, and true of the records I could read. Two small wording points remain, and neither blocks. Launch-3 says "this repository's results" where it means this project's, so "too" reads oddly. Launch-5 says the repository "is archived" when that has not happened yet. Nothing here is irreversible, and you rule all five with the Build gate. One flag: the new Build-4 wording is the text the earlier Critic check proposed, so here I am judging that check's own fix (noted below).
+
+**Each line, quoted whole** (docs/projects/P-002.md)
+
+- :134 `- Build-4 (standard) · taken on · why: each of the first methods the owner lets through (M13) is a registered trial, and each must end with a recorded result and the owner's ruling on its results card before anything enters the operating model`. Finding 1 of brief 345 is fixed. The line now covers M13's trials, "up to the number the stop rule sets before its summary" (:138; E-004 Step 7, P4, :96), not every later trial. The form is right, and the line is about this project and plain. It is true of the records. Each trial is a frozen copy of E-004 (E-004:8). A results card comes after a trial is "judged, or stopped, or voided" (E-004:99), so every trial does end with a recorded result. A method enters the model only after its results card (E-004:108, T13 and T17). It matches the model's Build-4, "each registered experiment has a recorded result" (v3_checks.py:554). "(M13)" comes after the words it supports, as a cross-reference, which is allowed.
+- :135 `- Build-5 (standard) · taken on · why: the count, the touch log, the draw, each trial's log, the owner's confirmation on the desk, once the desk is ready to keep it, and the reading rounds must work together on real merged work, not one at a time`. Finding 5 is fixed. It agrees with E-004 Step 0 (:30), where no trial starts until the desk can keep the owner's answer, and with S-002, "Needed outside this spec's lane" (:274), where that record is filed in the Service Desk as new work. Form right, about this project, plain, true.
+- :144 `- Launch-3 (standard) · taken on · why: the owner ruled that this repository's results move into the operating model repository, after which, once the prompt engine's are in too, this repository is archived`. Finding 3 is fixed. It is true: P-001-work-repo.md:1 says "Model-Lab is archived once both are in", and :13 says "once both are in, the work repo is archived". Form right, about this project. See finding 1 for a small wording point.
+- :145 `- Launch-4 (standard) · taken on · why: the target is checked 12 months after the first trial starts, which may fall after this project leaves the desk, so the count and its status updates must be running and reporting on their own by the Launch gate`. Finding 2 is fixed. "May fall after" matches :104, and "by the Launch gate" matches the model's "confirmed running at, or just before, the Launch gate" (v3_checks.py:559 to :561). The status updates are P17 (:176), and the 12-month check is V1 (:192). Form right, about this project, plain, true. M15's approved why (:147) still says "likely". It is not one of the five lines, and changing it would be a rewording that needs its own check. That is not a finding here.
+- :146 `- Launch-5 (standard) · taken on · why: the screening must leave the desk and run on its own, since this repository is archived, and the hand check found the first counting rules wrong in four places and the Critic flagged its own earlier misses, so those lessons must be recorded at handover for the operating model to correct`. Finding 4 is fixed. The why now covers both parts of the model's Launch-5, leaving the desk to own its running and recording the lessons at handover (v3_checks.py:562 to :564). The new clause is true: the archiving is at P-001-work-repo.md:1, and M15 at :147 needs "nothing needed from this repository". The two facts about the lessons are unchanged from the line brief 345 checked against the handoff and reviews/S-002/plan.md. Those files are not in my manifest, so I rely on that check for them. Form right, about this project, plain. See finding 2.
+
+The other five lines (:131, :132, :133, :142, :143) are word for word as brief 345 quoted them. No reason contains ` · `. No why was removed, only changed, as section 3 allows (:94).
+
+**Findings**
+
+1. Not blocking. docs/projects/P-002.md:144 (Launch-3). "This repository's results" covers both projects' results, so "once the prompt engine's are in too" reads as if the prompt engine's results were not among them. The ruling speaks of each project's result (P-001-work-repo.md:1, "each result moves fully into the operating model repository"). Fix: "the owner ruled that this project's results move into the operating model repository, after which, once the prompt engine's are in too, this repository is archived".
+2. Not blocking. docs/projects/P-002.md:146 (Launch-5). "Since this repository is archived" states as a fact something still to come. Model-Lab is temporary and is archived only once both results are in (AGENTS.md:46 to :49). Fix: "since this repository will be archived".
+
+**Self-implication (D-050):** flagged. The new Build-4 wording is the fix that the Critic's own earlier check proposed, nearly word for word (reviews/P-002-standard-lines/critic.md, finding 1: "each of the first methods the owner lets through (M13) is a registered trial, and each must end with …"). So here the Critic role is judging its own earlier suggestion. This session is fresh and has not checked these lines before. I checked the new wording against E-004 and v3_checks.py, not against that suggestion, and found it sound. Brief 345's open question still stands, and it is for the owner: should Build-4 cover only the first trials, or should the Build gate pass with Build-4 not reached? This wording takes the first answer.
+
+**Six-part contract**
+- Changed: nothing. I hold no write tool.
+- Why: brief 347 asked for the Critic's check of the five standard lines reworded after brief 345's findings, before they are committed (section 3, :94; model S-032).
+- Verified: I compared each line with brief 345's quote and its finding, then checked each why against the model's standard milestone text (v3_checks.py:549 to :565), section 3's form rule (:94), the facts in P-002 (:104, :138, :147, :176, :192), E-004 (:8, :30, :96, :99, :108), S-002 "Needed outside this spec's lane" (:274) and P-001-work-repo.md (:1, :13). I checked that the five unchanged lines match brief 345's quotes, and I checked every reason for ` · `.
+- Undone: I did not re-check Launch-5's unchanged facts (the four wrong rules, the Critic's own flags) against the handoff or reviews/S-002/plan.md, because neither is in my manifest. I rely on brief 345's check of them. I could not see whether the reworded lines are already committed to the default branch, since this is not a git checkout.
+- Needed outside my surface: the Orchestrator records this return verbatim under brief 345's record in reviews/P-002-standard-lines/critic.md. The Chief of Staff decides whether to take up findings 1 and 2. Either rewording needs the Critic's check again (:94).
+- Open questions: section 3 (:94) asks for a reworded line's check "before it is committed". If these rewordings are already on the default branch at the start commit, that order was not kept. The Orchestrator can confirm it from the branch history. Brief 345's Build-4 question is still for the owner at the gate.
+
+**Files read**
+- /home/user/Model-Lab/docs/briefs/347-critic.md
+- /home/user/Model-Lab/.claude/agents/critic.md
+- /home/user/Model-Lab/AGENTS.md
+- /home/user/Model-Lab/docs/projects/P-002.md
+- /home/user/Model-Lab/reviews/P-002-standard-lines/critic.md
+- /home/user/Model-Lab/experiments/E-004.md
+- /home/user/Model-Lab/specs/S-002.md (only the "Needed outside this spec's lane" section and the lines near it, by search)
+- /home/user/Model-Lab/decisions/questions/P-001-work-repo.md
+- /home/user/Model-Lab/governance/checks/v3_checks.py (lines 545 to 569)
