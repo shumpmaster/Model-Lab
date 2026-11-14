@@ -2,7 +2,7 @@
 
 ## 1. The ask
 
-Approve the plan's 21 criteria as its scenarios give them, with this plan's own additions to your confirmation of each look, and Build's and Launch's standard lines; the plan then freezes [docs/gates/P-002/build-gate-1-proposal.md] [reviews/S-002/plan.md:574] [docs/projects/P-002.md:131].
+Approve the plan's 21 criteria as its scenarios give them, with the plan's additions to your look confirmation, and Build's and Launch's standard lines; the plan then freezes [docs/gates/P-002/build-gate-1-proposal.md] [reviews/S-002/plan.md:574] [docs/projects/P-002.md:131].
 
 **The proposer's recommendation:** proceed — the plan passed review, its last changed lines passed their check, and the hand check of the counting rules ran [reviews/S-002/plan.md:1] [reviews/S-002/plan.md:709] [research/Q-018-memo-5.md:137].
 
@@ -27,14 +27,14 @@ The hand check's figure and the target [research/Q-018-memo-5.md:137] [research/
 
 ## 3. What this phase taught us
 
-Tried by hand on past work, the first counting rules gave wrong answers in four places; they were corrected and re-coded [reviews/Q-018/critic.md] [research/Q-018-memo-5.md].
+Tried on past work, four counting rules proved wrong; they were corrected and re-coded [reviews/Q-018/critic.md] [research/Q-018-memo-5.md].
 The touch log's keeper knows each piece's side, so by your ruling you confirm each look's conversation lines [decisions/questions/P-002-touch-log-check.md].
 The join-up review found no blocking difference; its smaller ones were fixed [reviews/S-002/plan.md:311] [reviews/S-002/plan.md:346].
 
 ## 4. The plan for the next phase
 
 Build's milestones: the count running, the reading rhythm, the first methods ruled, what you kept in the model [docs/projects/P-002.md:136] [docs/projects/P-002.md:137] [docs/projects/P-002.md:138] [docs/projects/P-002.md:139].
-The Builder builds the count and the draw, the Orchestrator runs them, and the Reviewer judges each look [docs/projects/P-002.md:158] [docs/projects/P-002.md:163].
+The Builder builds the count and draw; the Orchestrator runs them; the Reviewer judges each look [docs/projects/P-002.md:158] [docs/projects/P-002.md:163].
 No dates are recorded [docs/projects/P-002.md:104].
 
 ```mermaid
@@ -48,16 +48,16 @@ How Build's milestones depend on each other [docs/projects/P-002.md:104]
 
 ## 5. The risks
 
-A true halving shows only about 5 times in 10; a miss is weak evidence [docs/projects/P-002.md:196].
-The sides are known ahead, so work can be picked or folded; the checks catch it in part, as stated limits [reviews/S-002/plan.md:599] [reviews/S-002/plan.md:642].
+A true halving shows only about 5 times in 10 [docs/projects/P-002.md:196].
+Sides are known ahead, so work can be picked or folded; checks catch this in part, as stated limits [reviews/S-002/plan.md:599] [reviews/S-002/plan.md:642].
 A fold into work naming no brief, begun after its entry, is not listed [reviews/S-002/plan.md:716].
 A session knowing the sides can hold a look unjudged, changing no result [reviews/S-002/plan.md:584].
-No trial starts until the desk can keep your confirmation, work filed there for your approval [reviews/S-002/plan.md:578].
+No trial starts until the desk keeps your confirmation, filed there for your approval [reviews/S-002/plan.md:578].
 
 ## 6. Cost and limits
 
 The ceiling is your existing AI plan; no cap on your time [docs/projects/P-002.md:175] [docs/projects/P-002.md:176].
-Each trial: two cards, five short reads a look, and your confirmation of each look [docs/projects/P-002.md:197] [decisions/questions/P-002-touch-log-check.md].
+Each trial: two cards, then five short reads and a confirmation a look [docs/projects/P-002.md:197] [decisions/questions/P-002-touch-log-check.md].
 Usage so far and your hours: not recorded [docs/projects/P-002.md:197].
 
 ```mermaid
