@@ -761,3 +761,56 @@ Nothing failed, and nothing in the changed lines makes the plan wrong or opens a
 - **Open questions:** 1. The re-read's own open question stands and is now on record at S-002.md:268: whether a check record matched to a piece by its statement alone makes the plan it reviews the piece's work, which would send Personal-Org-Operating-Model #25's rows 92 to 99 back for re-reading. That is the owner's to rule, on the scenario card or before it. 2. Whether the unlisted fold (finding 1) should be on the entry and results cards in its own words, as E-004.md:151's last sentence implies, or only in the plan.
 
 Files read: /home/user/wt/ml-answers/AGENTS.md; /home/user/wt/ml-answers/.claude/agents/critic.md; /home/user/wt/ml-answers/docs/briefs/343-critic.md, 341-definer.md and 342-definer.md; /home/user/wt/ml-answers/specs/S-002.md; /home/user/wt/ml-answers/experiments/E-004.md; /home/user/wt/ml-answers/reviews/S-002/plan.md (:623 to :682); /home/user/wt/ml-answers/decisions/questions/P-002-plan-stop-2.md and P-002-plan-written-by-piece.md; /home/user/wt/ml-answers/reviews/Q-018-later-work/_critic-reread-verbatim.md; /home/user/wt/ml-answers/research/Q-018-memo-5.md (:9, :137); /tmp/claude-0/-home-user/3bf22eb7-3034-5300-9273-72fad23a7eb4/scratchpad/before-343/change.diff, /tmp/claude-0/-home-user/3bf22eb7-3034-5300-9273-72fad23a7eb4/scratchpad/before-343/S-002.md and /tmp/claude-0/-home-user/3bf22eb7-3034-5300-9273-72fad23a7eb4/scratchpad/before-343/E-004.md.
+
+## Check of the lines changed by brief 348, the owner's ruling of 2026-11-14 written in (brief 349)
+
+*A fresh session, at Model-Lab 9b32302, on the change e9840a3 (merged at c7d0606). Recorded verbatim by the Orchestrator, session session_01QBwHGJyHFoAkyeCseVWzup, 2026-11-14.*
+
+Verdict: PASS
+
+Brief 348 writes the owner's ruling of 2026-11-14 into S-002 as ruled. The owner's words, "A: own files only (Recommended)", appear unchanged, with the right date, the right decision record and the right intake copy, in "What a touch is", step 3's *Later work*, J9 and the new question 23. No count changes. The rule matches how the re-read already coded Personal-Org-Operating-Model #25: its rows 92 to 99 stay "later work", and the hand check stays at 14 of 33, as memo 5 gives at :137. The new sentence at the head of the open questions is true of the list. Only questions 2 to 9 lack "answered", and questions 1 and 10 to 23 each have it. The only place that still carried the re-read's open question as open, question 22, now marks it answered. The change opens no way to steer a trial. The code it governs is never read on a trial piece, which J1 and decisions/questions/P-002-live-later-work-check.md take as "not said", and E-004 states no such rule, so it needed no change. The hand check's codes are already fixed and the rule only describes them. I have two non-blocking findings: one general clause reads wider than the question that was ruled, and one inserted passage leaves a following "So" pointing at the wrong reason.
+
+**Findings**
+
+1. **Non-blocking. specs/S-002.md:46, :109 and :197: the general clause reads wider than the question that was ruled.** The text says "a piece's work is what its own commits add or change". That matches the decision record's `Ruling:` line, which is the Chief of Staff's summary. The owner's words are only "own files only". The question put was narrower: whether a review record that names a piece only in its own text makes the plan it reviews that piece's work (decisions/questions/P-002-check-named-by-statement.md:12). Read on its own, the clause could also seem to narrow "work the piece carries" elsewhere in S-002:
+   - the naming rule's "`brief <b>` … for a brief b whose work the piece carries" (:46);
+   - step 3's "a ruling on a spec or brief whose work the piece carries reads as about the piece" (:109). This is given by trailer, for example #20's S-017 and L-0124.
+   
+   Those are given by `Agent-Session:` and `Spec:` trailers, not by files the piece's commits change. Step 3's field "Per brief whose work it carries (by trailer)" keeps the extract right, and the codes are fixed, so no count moves. This is why it is not blocking. But a later coder, or the Chief of Staff coding under J9 outside trials, could read it the narrow way. **Fix:** limit the clause to the plan a question asks about, and keep the trailer reading. For example: "for which plan a question asks about, a piece's work is what its own commits add or change, with the briefs and specs its trailers give". Also, the following "this reads what a question that names the piece asks about, and does not widen which records name it" could add "nor narrow".
+
+2. **Non-blocking. specs/S-002.md:109: the following "So" now points at the wrong reason.** The new passage was inserted between the citation of the plan-written-by-piece ruling and "So Personal-Org-Operating-Model #49's rows 60 and 61 … read 'this piece'". That "So" now follows the #25 sentence ("… stays 14 of 33"). It reads as though #49's "this piece" follows from the own-files ruling or from #25, when it follows from the earlier ruling. **Fix:** move the new passage, from "A piece's work is what its own commits add or change" to "(research/Q-018-memo-5.md:137)", to after "… as one coded 'this piece' does." Or change the "So" that follows to "Under that first ruling,".
+
+No self-implication (D-050): this is a fresh session, and I made none of the earlier checks cited (the coding, its check, the re-read or the gate Critic's findings).
+
+**Six-part contract**
+- **Changed (by file):** nothing. I have read access only and wrote no file.
+- **Why:** brief 349 asks for a plan review (D-043) of the lines brief 348 changed before the freeze, in S-002 at :46, :109, :197, :247 to :248, :270 and :271.
+- **Verified:** by reading and searching only; I ran no command.
+  - The owner's words, date and record match decisions/questions/P-002-check-named-by-statement.md:1, :6 and :9.
+  - The #25 reading matches reviews/Q-018-later-work/_critic-reread-verbatim.md:14 and :39 (open question 1).
+  - 14 of 33 matches research/Q-018-memo-5.md:137.
+  - Searching S-002 for "answered" shows questions 2 to 9 without it and 1 and 10 to 23 with it (:249 to :271).
+  - A search for "statement alone" and "open question 1" finds the open question only at :270, now marked answered.
+  - Searches of E-004 for "own files", "plan-written-by-piece", "check-named-by-statement" and "later work" find no rule saying which plan is a piece's work. Its "later work" lines (:39, :102, :111, :152, :153) concern trial pieces, which read no code.
+  - Question 23 follows the form of questions 10 to 22.
+- **Undone:**
+  - I did not check that commit f71cbca holds the card as put. The decision record cites PR #117, not the commit, and the card at that commit was not in my manifest.
+  - I did not check whether questions 2 to 9 are really due at the Build gate rather than before the freeze. I checked only that the head sentence's numbering matches the list.
+  - I did not read research/Q-018-memo-5.md beyond lines 130 to 141.
+- **Needed outside my surface:** the Orchestrator records this verdict verbatim in reviews/S-002/plan.md. The Definer, if dispatched, applies the fixes in findings 1 and 2. Neither is required for the freeze.
+- **Open questions:** whether questions 2 to 9, left open at the Build gate, can still be ruled into a frozen S-002 without a superseding entry (AGENTS.md §1, "Specs are frozen…"). This is for the Orchestrator or the owner, not this check.
+
+**Files read**
+- /home/user/Model-Lab/docs/briefs/349-critic.md
+- /home/user/Model-Lab/.claude/agents/critic.md
+- /home/user/Model-Lab/AGENTS.md
+- /tmp/claude-0/-home-user/31272d24-c01d-5ae7-b4a8-6328a1e0e9ff/scratchpad/before-349/change.diff
+- /home/user/Model-Lab/docs/briefs/348-definer.md
+- /home/user/Model-Lab/decisions/questions/P-002-check-named-by-statement.md
+- /home/user/Model-Lab/decisions/questions/P-002-plan-written-by-piece.md
+- /home/user/Model-Lab/reviews/Q-018-later-work/_critic-reread-verbatim.md
+- /home/user/Model-Lab/research/Q-018-memo-5.md (lines 130 to 141)
+- /home/user/Model-Lab/specs/S-002.md (lines 244 to 271, plus searches of the whole file)
+- /home/user/Model-Lab/experiments/E-004.md (searches only)
+
+*Orchestrator's note: the card at f71cbca was confirmed this session (`git show f71cbca --stat`: it adds questions/P-002-check-named-by-statement.md, the card as put).*
