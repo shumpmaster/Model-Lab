@@ -7,7 +7,7 @@ Four counting rules proved wrong and were corrected; the plan failed three round
 Approve the 21 criteria as the scenarios give them, with the plan's additions and the standard lines, and answer the open questions; the plan then freezes [docs/gates/P-002/build-gate-2-proposal.md] [decisions/questions/P-001-build-gate.md].
 After it, changes need a new plan; the target is reversible until the first trial [docs/gates/P-002/trial-terms.md:65].
 
-**The proposer's recommendation:** proceed — the plan passed review; today's ruling is written in and checked first [reviews/S-002/plan.md:1] [research/Q-018-memo-5.md:137] [decisions/questions/P-002-check-named-by-statement.md].
+**The proposer's recommendation:** proceed — the plan passed review; today's ruling is written in and passed its check [reviews/S-002/plan.md:1] [reviews/S-002/plan.md:769] [research/Q-018-memo-5.md:137].
 
 ```mermaid
 flowchart LR
@@ -89,7 +89,7 @@ Look 1 failing the hold-up checks stops its trial [docs/gates/P-002/build-gate-2
 The 21 criteria, frozen after this ruling, with additions and limits [docs/gates/P-002/build-gate-2-proposal.md] [reviews/S-002/plan.md:574] [reviews/S-002/plan.md:575].
 The target as ruled, tier T1, your existing AI plan as ceiling [docs/projects/P-002.md:192] [docs/projects/P-002.md:185] [docs/projects/P-002.md:175].
 The trial line you ruled, 0.097 [decisions/questions/P-002-two-look-line.md].
-Your answers to the open questions left, on the gate card [reviews/P-002/_build-gate-1-critic.md].
+Your answers to open questions 2 to 9, on the gate card [reviews/S-002/plan.md:771].
 Build's and Launch's lines, all taken on [docs/projects/P-002.md:131] [reviews/P-002-standard-lines/critic.md].
 You are the user: no user representative step [docs/projects/P-002.md:260].
 
@@ -109,8 +109,8 @@ The block is left as the gate check gives it for this project, run from a conver
 | Design-3 Every unknown has a test | Not recorded by the model; the hand check tested the counting rules (U1); U3 to U5 are tested in Build [research/Q-018-memo-5.md:137] [docs/projects/P-002.md:233] |
 | Design-4 Every fact is backed by evidence | Not recorded by the model; the plan's facts were read in its review rounds [reviews/S-002/plan.md:1] |
 | Design-5 The design fits together | Not recorded by the model; the join-up review, no blocking difference [reviews/S-002/plan.md:311] |
-| Design-6 A plan that passed review | Passed, with today's ruling still to be written in and checked; you are asked to proceed on that condition, and the freeze follows [reviews/S-002/plan.md:1] [decisions/questions/P-002-check-named-by-statement.md] |
-| M8 Touches and reopenings can be counted | Rules written and hand-checked; settled once today's ruling is written in; for you to accept at the freeze [research/Q-018-memo-5.md:137] [docs/projects/P-002.md:126] |
+| Design-6 A plan that passed review | Passed; today's ruling written in and its check passed; the freeze follows this ruling [reviews/S-002/plan.md:1] [reviews/S-002/plan.md:769] |
+| M8 Touches and reopenings can be counted | Rules written and hand-checked, today's ruling written in; for you to accept at the freeze [research/Q-018-memo-5.md:137] [reviews/S-002/plan.md:769] [docs/projects/P-002.md:126] |
 | M9 A fair trial is set down before any is run | The trial plan reviewed with the plan; for you to accept at the freeze [reviews/S-002/plan.md:1] [docs/projects/P-002.md:127] |
 | M10 The sources and how they are read are chosen | Feeds, rhythm and checks of outside code in the plan; for you to accept at the freeze [reviews/S-002/plan.md:1] [docs/projects/P-002.md:128] |
 
@@ -119,6 +119,8 @@ The hand check's limits: rules RT1(c), RT2(b), RT3(c), RT7's log part, RR1(b) an
 The plan's own additions to your confirmation ruling, each marked in the plan: the list shown without the sides; striking and unstriking, with the unstrike check; the withdrawn-piece exception; the stop at look 1; the Reviewer's check of the list and the log against the desk's record; counting a line only when a confirmed list holds it; the cut at the confirm line; results worked the other way; and the desk keeping your answer as a start condition [reviews/S-002/plan.md:574] [reviews/S-002/plan.md:575] [reviews/S-002/plan.md:674].
 
 Limits stated in the plan: the Orchestrator, knowing the sides, picks when within 7 days to log a drop or start a withdrawal check; a look waits for an open spare place at most 60 days; touches naming other work in a folded piece still count on it; a fold into work naming no brief, begun after its entry, is not listed; a session knowing the sides can hold a look unjudged, changing no result [reviews/S-002/plan.md:507] [reviews/S-002/plan.md:512] [reviews/S-002/plan.md:620] [reviews/S-002/plan.md:716] [reviews/S-002/plan.md:584].
+
+Two wording points from the last check are fixed before the freeze; neither changes a count [reviews/S-002/plan.md:775] [reviews/S-002/plan.md:781].
 
 The freeze follows the ruling, as at the prompt engine's gate; the plan review's notes put it first, and this case follows the ruled precedent [decisions/questions/P-001-build-gate.md] [reviews/S-002/plan.md:536].
 
