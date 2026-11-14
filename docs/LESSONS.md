@@ -640,3 +640,12 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** `-I` implies `-E`, which ignores every `PYTHON*` variable, so the variable meant to stop bytecode had no effect.
 - **Correction proposed:** briefs for read-only checks give `python3 -I -B`, not the variable. The card check in the same session also showed the question check catching a field this session's first draft got wrong (REVERSIBILITY written with a trailing comma), unseen because only one failing check was read from the full run: read every FAIL line of check_all, not the one expected.
 - **Status:** open, until the next reviewer brief uses `-I -B`.
+
+## 2026-11-14 — the screening's Build gate (P-002), session_01QBwHGJ2r2y9re3AuyKDzEi
+
+### LL-85 A gate case passed its check against a base the clone does not have, and went to its Critic over the word limit
+- **What happened:** case 3 of P-002's Build gate was checked with `v3_checks gates --base main` in a clone that has no local `main`; the check printed OK. Against `origin/main` it failed: 461 counted words of 350, and citations to the plan, the charter and the proposal form, none of which the gate Critic's pack holds for a project run from a conversation (it has no status record naming its spec). The gate Critic had already been dispatched (brief 353); the Orchestrator stopped it before it returned, the case was corrected (docs/gates/P-002/build-gate-quotes.md holds the plan's lines verbatim), and brief 354 replaced it.
+- **Caught by:** the Chief of Staff, running check_all, whose other checks failed loudly on the same base.
+- **Cause:** the gate check reads only the cases changed between the base and HEAD; with a base it cannot resolve as the session expected, it found nothing wrong to report.
+- **Correction proposed:** in a cloud clone, run every check with `--base origin/main` after `git fetch origin main`, and read the NOTE line's count of cases checked before trusting an OK; the gate check could fail on a base that does not resolve.
+- **Status:** open, until the gate check refuses an unknown base or the session mechanics say `origin/main`.
