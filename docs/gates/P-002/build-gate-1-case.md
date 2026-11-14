@@ -34,7 +34,7 @@ The join-up review found no blocking difference; its smaller ones were fixed [re
 ## 4. The plan for the next phase
 
 Build's milestones: the count running, the reading rhythm, the first methods ruled, what you kept in the model [docs/projects/P-002.md:136] [docs/projects/P-002.md:137] [docs/projects/P-002.md:138] [docs/projects/P-002.md:139].
-The Builder builds the count and draw; the Orchestrator runs them; the Reviewer judges each look [docs/projects/P-002.md:158] [docs/projects/P-002.md:163].
+The Builder builds the count and the draw and runs each trial; the Reviewer judges each look [docs/projects/P-002.md:158] [docs/projects/P-002.md:163].
 No dates are recorded [docs/projects/P-002.md:104].
 
 ```mermaid
@@ -78,7 +78,7 @@ Look 1 failing the hold-up checks stops its trial [docs/gates/P-002/build-gate-1
 The 21 criteria, frozen, with this plan's marked additions and stated limits [docs/gates/P-002/build-gate-1-proposal.md] [reviews/S-002/plan.md:574].
 Your answers to the plan's open questions 2 to 9, on the gate card [reviews/S-002/plan.md:709].
 Build's and Launch's standard lines, all taken on [docs/projects/P-002.md:131] [docs/projects/P-002.md:142].
-You are the user: no user representative step [docs/projects/P-002.md:270].
+You are the user: no user representative step [docs/projects/P-002.md:260].
 
 ## 9. Appendix: the phase record
 <details>
@@ -105,7 +105,7 @@ Rulings in Design: the hand check's open points, the plan stops, every trial que
 
 This plan's own additions to your confirmation ruling, marked in the plan for you here: the list shown without the sides, the unstrike check, a struck line not counting, the withdrawn-piece exception and the stop at look 1 [reviews/S-002/plan.md:574].
 
-Words used. Piece: a merged pull request that changes built work, a plan or research [docs/projects/P-002.md:191].
+Words used. Piece: a merged pull request that changes built work, a plan or research [docs/projects/P-002.md:190].
 Look: one of a trial's two planned points of judging [docs/gates/P-002/trial-terms.md].
 Fold: a trial piece's work carried in a pull request with other work [reviews/S-002/plan.md:642].
 

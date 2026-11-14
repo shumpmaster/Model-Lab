@@ -38,9 +38,9 @@ Each method comes first on an entry card the owner approves, and its result on a
 
 ## 4. What it looks like
 
-No screens: the screening has no screens of its own; the owner sees cards, status updates and the desk's existing views, and the desk's new views are filed there as new work [reviews/S-002/plan.md:302].
+No screens: the screening has no screens of its own; the owner sees cards, status updates and the desk's existing views, and nothing new is drawn for it [docs/projects/P-002.md:124].
 
 ## 5. What it asks of you
 
 AI usage within the owner's existing plan, with no paid services, data or tools [docs/projects/P-002.md:175].
-The owner's time, with no cap: two cards a trial, five short reads a look, and a confirmation of each look's conversation lines on the desk [docs/projects/P-002.md:197] [docs/projects/P-002.md:176].
+The owner's time, with no cap: two cards a trial and five short reads a look [docs/projects/P-002.md:197] [docs/projects/P-002.md:176].
