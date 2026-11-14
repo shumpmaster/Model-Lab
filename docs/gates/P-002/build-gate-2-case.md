@@ -42,7 +42,7 @@ The join-up review found no blocking difference; the smaller ones were fixed [re
 
 ## 4. The plan for the next phase
 
-Build: the locked checks first, then the count, the reading rhythm, the first methods ruled, what you kept in the model [docs/projects/P-002.md:131] [docs/projects/P-002.md:136] [docs/projects/P-002.md:139].
+Build: locked checks, then the count, the reading rhythm, methods ruled, kept methods in the model [docs/projects/P-002.md:131] [docs/projects/P-002.md:136] [docs/projects/P-002.md:139].
 The Builder builds and runs; the Reviewer judges each look [docs/projects/P-002.md:158] [docs/projects/P-002.md:163].
 No dates are recorded [docs/projects/P-002.md:104].
 
@@ -86,7 +86,7 @@ Look 1 failing the hold-up checks stops its trial [docs/gates/P-002/build-gate-2
 
 ## 8. What the owner is agreeing to
 
-The 21 criteria, frozen after this ruling, with the plan's additions and limits [docs/gates/P-002/build-gate-2-proposal.md] [reviews/S-002/plan.md:574] [reviews/S-002/plan.md:575].
+The 21 criteria, frozen after this ruling, with additions and limits [docs/gates/P-002/build-gate-2-proposal.md] [reviews/S-002/plan.md:574] [reviews/S-002/plan.md:575].
 The target as ruled, tier T1, your existing AI plan as ceiling [docs/projects/P-002.md:192] [docs/projects/P-002.md:185] [docs/projects/P-002.md:175].
 The trial line you ruled, 0.097 [decisions/questions/P-002-two-look-line.md].
 Your answers to the open questions left, on the gate card [reviews/P-002/_build-gate-1-critic.md].
