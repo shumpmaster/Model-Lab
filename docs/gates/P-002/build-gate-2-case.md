@@ -67,7 +67,7 @@ No trial until the desk keeps your confirmation [docs/projects/P-002.md:166].
 
 Your existing AI plan; no cap on your time [docs/projects/P-002.md:175] [docs/projects/P-002.md:176].
 Each trial: two cards, then five short reads and a confirmation a look [docs/projects/P-002.md:197] [decisions/questions/P-002-touch-log-check.md].
-Hours and usage so far: not recorded [docs/projects/P-002.md:197].
+Hours and usage: not recorded [docs/projects/P-002.md:197].
 
 ```mermaid
 flowchart LR
