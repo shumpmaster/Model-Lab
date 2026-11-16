@@ -640,3 +640,12 @@ Status: `open` (correction not yet made) · `fixed here` (fixed in this project;
 - **Cause:** `-I` implies `-E`, which ignores every `PYTHON*` variable, so the variable meant to stop bytecode had no effect.
 - **Correction proposed:** briefs for read-only checks give `python3 -I -B`, not the variable. The card check in the same session also showed the question check catching a field this session's first draft got wrong (REVERSIBILITY written with a trailing comma), unseen because only one failing check was read from the full run: read every FAIL line of check_all, not the one expected.
 - **Status:** open, until the next reviewer brief uses `-I -B`.
+
+## 2026-11-16 — Build of P-001, session_01QBwHGNPFytF6t2VG6mnugn
+
+### LL-85 An owner's verdict file was added blank, and the pull request merged with it blank
+- **What happened:** for pull request #87 (R3), the Orchestrator added reviews/87/owner.md holding `Verdict: ` with nothing after it, for the owner to fill in on GitHub, as the owner had asked for #69. #87 was merged with the line still blank, and main's `review_check lint` now refuses that file; every later check run on main fails it until the owner writes the verdict.
+- **Caught by:** the full governance check on the next weekly landing's test merge.
+- **Cause:** a blank verdict file passes nothing yet changes nothing either, so the pull request looked ready; an agent cannot write the owner's verdict, and the blank form gave no sign it was still missing.
+- **Correction proposed:** never commit an owner's verdict file blank: give the owner the file's exact text to add, and keep the pull request's owner task unticked until the owner's commit is on the branch. For the model: a pull request needing the owner's verdict should name it in its Tasks, so the pr-body check keeps it red until it exists.
+- **Status:** open, until the owner's verdict on #87 is on main.
