@@ -24,3 +24,9 @@ Three options: (1) carry on with both sessions; (2) this session takes over the 
 1. The owner's verdict in reviews/87/owner.md on #119's branch; then merge #119.
 2. Record any answer the owner gave on the three options, verbatim, in its own pull request (question file first, AGENTS.md §5, unless it was given unasked).
 3. If (1): nothing to do until the 23 November landing; the comparison moves only when built work is handed out in the Service Desk or Model-Lab. If (3): a superseding ledger entry for the stop, then disable both scheduled tasks.
+
+## Later the same day
+- The owner filled in the #87 verdict on #119's branch (commit 5136ac5, `Verdict: PASS`) and ticked #119's last task; pr-body passes. Governance still fails, now on reviews/119/reviewer.md (lines 26 and 27 quote `Verdict:` mid-line; `review_check pr 119`).
+- The owner's answer on how to fix it, verbatim, "First" (ask the Orchestrator now), is saved in intake/P-001-owner-answer-2026-11-18.md. A message was sent to session_01QBwHGNPFytF6t2VG6mnugn and delivered.
+- The desk shows no cards in its Model-Lab section, though #119 is Model-Lab's only open pull request and the desk's own rules (src/public/lib/j22.js, src/lib/records.js), run on #119's data, give it a card. Not filed: it waits on the owner's say-so, as a Service Desk item.
+- The three options are still open.
