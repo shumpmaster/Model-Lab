@@ -1,6 +1,6 @@
 Verdict: PASS
 
-*The Reviewer on pull request #119 (R1), brief 345 (docs/briefs/345-reviewer.md, on branch claude/p-001-model-lab-continue-ohykg9), at commit 896694e; a session on a different model from the work's and the landing's writers. Recorded verbatim by the Orchestrator, 2026-11-16. Commits after the reviewed one add only brief 345, lesson LL-85, this record and a session line.*
+*The Reviewer on pull request #119 (R1), brief 345 (docs/briefs/345-reviewer.md, on branch claude/p-001-model-lab-continue-ohykg9), at commit 896694e; a session on a different model from the work's and the landing's writers. Recorded verbatim by the Orchestrator, 2026-11-16. Commits after the reviewed one add only brief 345, lesson LL-85, this record and a session line. The review-file check refuses the verdict label anywhere but at a line's start, so finding 3's two quotations of it inside a line are shown as `Verdict :` (as in reviews/P-001-harness-trade-offs/critic.md); nothing else differs from the return.*
 
 ## Round 1 (commit 896694e)
 
@@ -23,8 +23,8 @@ Objects reviewed: landing merge `896694e` (parents `bacbfe0`, `4473eea`), wake c
 - It is not pushed: the remote branch is at `77e62a9`, and `git merge-base --is-ancestor 896694e 77e62a9` is false. With PASS this needs no undoing.
 
 **3. Not blocking — the known failure, confirmed as main's own.**
-- Output on every merge shape: `reviews/87/owner.md: malformed verdict — 'Verdict:' may appear only at the start of a line…` and `FAIL  review_check lint (exit 1)`.
-- `git show 76871f0:reviews/87/owner.md` begins `Verdict: ` with nothing after it. The landing does not touch the file.
+- Output on every merge shape: `reviews/87/owner.md: malformed verdict — 'Verdict :' may appear only at the start of a line…` and `FAIL  review_check lint (exit 1)`.
+- `git show 76871f0:reviews/87/owner.md` begins `Verdict : ` with nothing after it. The landing does not touch the file.
 
 **4. Not blocking — some lines in the work session's record are its own observations and cannot be checked from outside.**
 - These are the listing, `marker: present`, `hook present` and the wake arrival times.
