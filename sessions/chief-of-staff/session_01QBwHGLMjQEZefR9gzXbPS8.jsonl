@@ -1,3 +1,3 @@
 {"event": "helper", "session": "session_01QBwHGLMjQEZefR9gzXbPS8", "role": "critic", "started": "2026-11-22T21:51:00Z", "ended": "2026-11-22T21:52:00Z", "reported": {"tokens": 34643, "tool_uses": 14, "duration_ms": 50506}}
 {"event": "helper", "session": "session_01QBwHGLMjQEZefR9gzXbPS8", "role": "critic", "started": "2026-11-22T21:51:00Z", "ended": "2026-11-22T21:54:00Z", "reported": {"tokens": 89639, "tool_uses": 34, "duration_ms": 137716}}
-{"event": "helper", "session": "session_01QBwHGLMjQEZefR9gzXbPS8", "role": "critic", "started": "2026-11-22T21:54:00Z", "ended": "2026-11-22T21:58:00Z", "reported": {"tokens": null, "tool_uses": null, "duration_ms": null}}
+{"event": "helper", "session": "session_01QBwHGLMjQEZefR9gzXbPS8", "role": "critic", "started": "2026-11-22T21:54:00Z", "ended": "2026-11-22T21:58:00Z", "reported": {"tokens": 70728, "tool_uses": 17, "duration_ms": 75713}}
