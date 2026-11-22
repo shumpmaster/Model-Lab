@@ -42,6 +42,7 @@ No trial before the freeze, the starting count, and the desk's record of your co
 
 Your design to approve: the confirmation shown without sides, your strikes, both looks listed, results worked both ways [docs/gates/P-002/build-gate-1-proposal.md:25].
 Stated limits: sides known ahead, folded work listed or missed, a look held unjudged [reviews/S-002/plan.md:461] [reviews/S-002/plan.md:715] [reviews/S-002/plan.md:584].
+Trial counts run a little high, toward a miss; the log's keeper knows the sides; the work is not blind [reviews/P-002-build-gate/critic.md:19] [reviews/P-002-build-gate/critic.md:20] [reviews/P-002-build-gate/critic.md:21].
 The join-up review's four small differences [reviews/S-002/plan.md:313].
 Trials may take months where work arrives slowly [docs/gates/P-002/build-gate-1-proposal.md:30].
 
@@ -58,7 +59,7 @@ A trial stops on a failed first look, or when it breaks work you rely on [docs/g
 ## 8. What the owner is agreeing to
 
 The scenarios, frozen, with the plan's own design and limits [docs/gates/P-002/build-gate-1-proposal.md].
-The terms card's answers [specs/S-002.md:246].
+The terms card's answers: the plan's eight open questions and three smaller points [reviews/P-002-build-gate/critic.md:41].
 Build's and Launch's standard lines, all taken on [docs/projects/P-002.md:131] [docs/projects/P-002.md:142].
 Service Desk work keeping your confirmations, filed for you [docs/gates/P-002/build-gate-1-proposal.md:28].
 You are the user: no user representative step [docs/projects/P-002.md:260].
