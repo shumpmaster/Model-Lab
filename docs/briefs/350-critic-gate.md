@@ -1,7 +1,7 @@
 # Brief 350 — critic-gate — the Build gate case 2 for P-002
 
 session: session_01QBwHGLMjQEZefR9gzXbPS8
-model: claude-sonnet-5-5 (the case's writer, the Chief of Staff, runs on claude-opus-5-5; D-056). A fresh session.
+model: a fresh session on a different model from the writer, the Chief of Staff (D-056). Model names are kept out of this record (LL-70); the session lines hold no model either.
 recorded: at dispatch, 2026-11-22 (LL-04, LL-24)
 
 ## Brief
