@@ -1,0 +1,19 @@
+# Brief 350 — critic-gate — the Build gate case 2 for P-002
+
+session: session_01QBwHGLMjQEZefR9gzXbPS8
+model: claude-sonnet-5-5 (the case's writer, the Chief of Staff, runs on claude-opus-5-5; D-056). A fresh session.
+recorded: at dispatch, 2026-11-22 (LL-04, LL-24)
+
+## Brief
+
+You are the Critic in its gate role (your role file: .claude/agents/critic.md). Today is 2026-11-22. Read-only; your return is recorded verbatim by the Orchestrator as reviews/P-002/_build-gate-2-critic.md. Read everything from the fixed copy /tmp/claude-0/-home-user/46a16990-6c77-5cf3-ac0a-e9b9f3fdee4e/scratchpad/ml-gate-350 (Model-Lab at the commit after this brief's), never from another checkout.
+
+1. **The gate view.** Read the case docs/gates/P-002/build-gate-2-case.md in the form of docs/gates/_GATE.md, and every record it cites. As at the prompt engine's Build gate (docs/gates/P-001/build-gate-4-case.md), the twenty-one criteria are copied word for word in the proposal docs/gates/P-002/build-gate-2-proposal.md (form docs/gates/_PROPOSAL.md), which the case cites, since the case's citations must be records your pack holds; no user representative reads it, since the owner is the user. Write only the form's Critic section: your independent view and recommendation (`**The Critic's recommendation:** <proceed, hold, recycle into <Phase>, or kill> — <why>`); the citation check (each claim that cites no record, or a record that does not say it, by section and line, or "Every claim cites a record that supports it"); and the milestones findings (the case's milestones block is empty, as the gates check prints it for this project, run from a conversation; judge whether the case says enough about Design's standard milestones and M8 to M10). Check every visual against its text alternative and records.
+2. **The proposal's copy.** Check that each of the proposal's twenty-one scenario lines is the whole of its criterion in specs/S-002.md (lines 166 to 186), not cut short, and that its other lines are true of their records.
+3. **Fairness to the plan.** You may read specs/S-002.md, experiments/E-004.md, reviews/S-002/plan.md, research/Q-018-memo-5.md and decisions/questions/** to judge whether the case is fair to the plan and to the owner's earlier rulings; say where a claim rests on the spec only. Do not read the Chief of Staff's notes, docs/briefs/** other than this file, docs/reports/**, or questions/**.
+
+Return first the line `**The Critic's recommendation:** …` (no verdict line), then the Critic section beginning `## The Critic's independent view`, then a section "The proposal's copy" with numbered findings, then the six-part contract.
+
+## For case 2
+
+Case 2 answers the gate view of case 1, reviews/P-002/_build-gate-1-critic.md (in your copy; recommendation proceed, with seven points on the case and three on the proposal). Say for each of those points whether case 2 fixes it or fairly leaves it, then give your view of case 2 as a whole. The case's word count is checked by script (`v3_checks gates`, OK at this commit), so count only if you think the script is wrong, and say how you counted. Where a claim's real source is specs/S-002.md, the case cites a review record quoting it, since specs/S-002.md is not in your pack; check the quoted spec line too.
