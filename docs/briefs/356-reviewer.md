@@ -1,7 +1,7 @@
-# Brief 352 — reviewer — the third weekly landing of the built-work work session (R1)
+# Brief 356 — reviewer — the third weekly landing of the built-work work session (R1)
 
 session: session_01QBwHGNPFytF6t2VG6mnugn
-model: claude-fable-5-1 asked (the work's writer, the work session's builder, and the landing's, the Orchestrator, run on claude-opus-5-5; D-056). A new Reviewer session.
+model: claude-fable-5-1 asked; served claude-fable-5-2, as the Reviewer reported (the work's writer, the work session's builder, and the landing's, the Orchestrator, run on claude-opus-5-5; D-056). A new Reviewer session.
 start: Model-Lab@3f8d1fc6903ba333efa4a9294b37c142227e6f8c (fixed copy /tmp/claude-0/-home-user/9a06fe22-60e0-580d-8926-30c8a46558b9/scratchpad/fix-w3, branch claude/p-001-model-lab-continue-ohykg9), against main at 32f1010910ca0bc3cf60c6689f8770c50a0ae2b6
 manifest: none. This brief records no pack manifest of its own, so neither S001_BLIND_MANIFEST (J8) nor S001_ANALYSIS_MANIFEST (J7) is set for it.
 recorded: at hand-out, 2026-11-23 (LL-04, LL-24)
