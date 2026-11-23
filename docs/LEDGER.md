@@ -134,3 +134,17 @@ options_considered: fix the check; let the work session bring main into its bran
 decided_by: owner
 proposed_by: claude-opus-5-5 (the Chief of Staff)
 reversibility: reversible
+
+## L-0010 — Build gate passed for P-002: proceed, with the terms as recommended
+date: 2026-11-22
+type: ruling
+supersedes: []
+scope: P-002
+expires: never
+asked: The Build gate for the screening (questions/P-002-build-gate.md, case docs/gates/P-002/build-gate-3-case.md), with the plan's open terms (questions/P-002-build-gate-terms.md).
+decision: Proceed: the plan's criteria are approved as its scenarios give them (specs/S-002.md AC1 to AC21, with experiments/E-004.md), with the plan's own design and stated limits, and Build's and Launch's standard lines all taken on. The terms are ruled as recommended (A for terms 1 to 4, the proposed answer for 5 to 11). The owner's words are recorded verbatim in decisions/questions/P-002-build-gate.md and decisions/questions/P-002-build-gate-terms.md.
+licenses_next: The Definer's write-in of the terms, the Critic's check of the changed lines, and the freeze of S-002 and E-004 through the freeze gate's check; then the Check author's locked checks. No trial before the freeze, the starting count and the Service Desk's record of the owner's confirmations.
+options_considered: proceed; hold; recycle into Design; kill.
+decided_by: owner
+proposed_by: chief-of-staff
+reversibility: irreversible
