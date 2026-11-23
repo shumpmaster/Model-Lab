@@ -22,3 +22,6 @@
 2026-11-16T20:44:59Z listing: shumpmaster/Personal-Org-Operating-Model, shumpmaster/Service-Desk, shumpmaster/portfolio, shumpmaster/Model-Lab (shumpmaster/secret-marking absent)
 2026-11-16T20:44:59Z wake: scheduled for 2026-11-16T20:43:00Z, queued 20:44:02Z, this turn ran
 2026-11-16T20:44:59Z marker: present (machine not new); fetched Model-Lab
+2026-11-23T20:44:58Z listing: shumpmaster/Personal-Org-Operating-Model, shumpmaster/Service-Desk, shumpmaster/portfolio, shumpmaster/Model-Lab (shumpmaster/secret-marking absent)
+2026-11-23T20:44:58Z wake: scheduled for 2026-11-23T20:43:00Z, queued 20:44:05Z, this turn ran
+2026-11-23T20:44:58Z marker: present (machine not new); fetched Model-Lab
