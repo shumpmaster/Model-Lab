@@ -86,3 +86,7 @@
 2026-11-25T18:41:33Z wake: scheduled wake for 2026-11-25T18:40:00Z arrived 2026-11-25T18:40:57Z and this turn ran
 2026-11-25T18:41:33Z marker: present (machine not new); fetched Model-Lab and Service-Desk; hook present
 2026-11-25T18:41:33Z scan: 0 new records since the last scan; runs 0, tokens 0
+2026-11-26T18:41:07Z listing: shumpmaster/Service-Desk, shumpmaster/Model-Lab
+2026-11-26T18:41:21Z wake: scheduled wake for 2026-11-26T18:40:00Z arrived 2026-11-26T18:40:51Z and this turn ran
+2026-11-26T18:41:21Z marker: present (machine not new); fetched Model-Lab and Service-Desk; hook present
+2026-11-26T18:41:21Z scan: 0 new records since the last scan; runs 0, tokens 0
